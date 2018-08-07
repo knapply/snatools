@@ -1,0 +1,32 @@
+---
+output: 
+  github_document:
+    html_preview: false
+---
+
+<!-- README.Rmd generates README.md. -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE, 
+  fig.align = "center",
+  comment = "#>",
+  fig.path = "man/figures/"
+)
+
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+<!-- # snatools <img src="man/figures/logo.png" align="right" height="243px" width="211px" /> -->
+
+[![](https://img.shields.io/badge/devel%20version-0.1.1-green.svg)](https://github.com/knapply/snatools)
+
+<br>
+
+
+```{r}
+devtools::test()
+```
+
+
