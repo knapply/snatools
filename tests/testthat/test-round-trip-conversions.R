@@ -36,7 +36,7 @@ ig_bipart <- build_test_graph("ig", bipart = TRUE) %>%
   sna_standardize_graph()
 
 target_url <- "http://vlado.fmf.uni-lj.si/pub/networks/data/2mode/divorce.net"
-nw_bipart <- snatools::divorce_nw
+nw_bipart <- snatools::divorce_nw %>% 
   sna_standardize_graph()
 
 test_that("undirected igraph makes round trip unchanged", {

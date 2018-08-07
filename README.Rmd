@@ -25,7 +25,7 @@ knitr::opts_chunk$set(echo = TRUE)
 <br>
 
 
-```{r}
+```{r, results='asis'}
 devtools::test()
 ```
 
