@@ -1,6 +1,8 @@
+#' @export
 sna_get_vert_attrs <- function(x) {
   UseMethod("sna_get_vert_attrs")
 }
+
 
 sna_get_vert_attrs.igraph <- function(ig) {
   out <- igraph::vertex_attr(ig)
@@ -11,6 +13,7 @@ sna_get_vert_attrs.igraph <- function(ig) {
   
   out[order(names(out))]
 }
+
 
 sna_get_vert_attrs.network <- function(nw) {
   out <- lapply(nw$val, `[`)

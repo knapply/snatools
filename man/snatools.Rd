@@ -6,8 +6,18 @@
 \alias{snatools-package}
 \title{snatools: An R toolkit to bridge graph classes and streamline network analytic workflows.}
 \description{
+\if{html}{\figure{logo.png}{options: align='right'}}
+
 What the package does (one paragraph).
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://knapply.github.io/snatools/}
+  \item Report bugs at \url{https://github.com/knapply/snatools/issues}
+}
+
+}
 \author{
-Brendan Knapp <brendan.g.knapp@gmail.com>
+Brendan Knapp \href{mailto:brendan.g.knapp@gmail.com}{brendan.g.knapp@gmail.com}
 }

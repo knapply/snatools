@@ -1,3 +1,4 @@
+#' @export
 build_test_graph <- function(ig_or_nw, direct = TRUE, bipart = FALSE,
                              n = 30, p = 0.25, ...) {
   if(ig_or_nw == "ig"){
@@ -23,14 +24,7 @@ build_test_graph <- function(ig_or_nw, direct = TRUE, bipart = FALSE,
       igraph::set_edge_attr("edge_integer", 
                             value = sample(seq_len(1000), igraph::ecount(.), 
                                            replace = TRUE)) %>% 
-      igraph::set_edge_attr("edge_double", value = runif(igraph::ecount(.), 0, 1000)) #%>% 
-      # igraph::delete_graph_attr("loops")
-    # names_graph_attrs <- igraph::graph_attr_names(graph)
-    # if(length(names_graph_attrs)){
-      # for(attr in names_graph_attrs){
-        # graph <- igraph::delete_graph_attr(graph, attr)
-      # }
-    # }
+      igraph::set_edge_attr("edge_double", value = runif(igraph::ecount(.), 0, 1000))
   }
   if(ig_or_nw == "nw"){
     if(!bipart){

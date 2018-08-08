@@ -1,6 +1,8 @@
+#' @export
 sna_get_graph_attrs <- function(x) {
   UseMethod("sna_get_graph_attrs")
 }
+
 
 sna_get_graph_attrs.igraph <- function(ig) {
   out <- igraph::graph_attr(ig)
@@ -8,6 +10,7 @@ sna_get_graph_attrs.igraph <- function(ig) {
   
   out[order(names(out))]
 }
+
 
 sna_get_graph_attrs.network <- function(nw) {
   attr_names <- names(nw$gal)

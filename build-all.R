@@ -14,9 +14,9 @@ devtools::document(".")
 
 devtools::install(".", dependencies = FALSE, upgrade_dependencies = FALSE)
 
-# source("data-raw/logo.R")
+source("inst/logo.R")
 
 rmarkdown::render("README.Rmd", output_format = "github_document")
 
-# pkgdown::build_site()
+pkgdown::build_site()
 

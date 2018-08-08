@@ -1,6 +1,8 @@
+#' @export
 sna_as_igraph <- function(x) {
   UseMethod("sna_as_igraph")
 }
+
 
 sna_as_igraph.network <- function(nw) {
   if (nw$gal$hyper) {

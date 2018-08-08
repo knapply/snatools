@@ -1,6 +1,8 @@
+#' @export
 sna_standardize_graph <- function(x) {
   UseMethod("sna_standardize_graph")
 }
+
 
 sna_standardize_graph.igraph <- function(ig) {
   graph_attrs <- sna_get_graph_attrs(ig)
@@ -14,6 +16,7 @@ sna_standardize_graph.igraph <- function(ig) {
   
   ig
 }
+
 
 sna_standardize_graph.network <- function(nw) {
   vert_attrs <- sna_get_vert_attrs(nw)

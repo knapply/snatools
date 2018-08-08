@@ -1,6 +1,8 @@
+#' @export
 sna_as_network <- function(x) {
   UseMethod("sna_as_network")
 }
+
 
 sna_as_network.igraph <- function(ig) {
   graph_attrs <- sna_get_graph_attrs(ig)

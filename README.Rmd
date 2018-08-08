@@ -18,12 +18,29 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-<!-- # snatools <img src="man/figures/logo.png" align="right" height="243px" width="211px" /> -->
+# snatools <img src="man/figures/logo.png" align="right" height="243px" width="211px" />
 
-[![](https://img.shields.io/badge/devel%20version-0.1.1-green.svg)](https://github.com/knapply/snatools)
+[![](https://img.shields.io/badge/devel%20version-0.1-red.svg)](https://github.com/knapply/snatools)
 
 <br>
 
+```{r, echo=FALSE}
+`%>%` <- magrittr::`%>%`
+```
+
+
+```{r}
+network_obj <- snatools:::build_test_graph("nw") %>% 
+  snatools:::sna_standardize_graph.network()
+
+identical(
+  snatools:::sna_as_network.igraph(snatools:::sna_as_igraph.network(network_obj)),
+  network_obj
+  )
+```
+
+
+# {`testthat`}!
 
 ```{r}
 devtools::test()
