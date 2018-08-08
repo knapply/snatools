@@ -1,9 +1,16 @@
+#' Convert a graph object into a `network` object.
+#' 
+#' @param x A graph object.`igraph` objects are supported.
+#' 
+#' @return A `network` object.
+#' 
 #' @export
 sna_as_network <- function(x) {
   UseMethod("sna_as_network")
 }
 
-
+#' @rdname sna_as_network
+#' 
 sna_as_network.igraph <- function(ig) {
   graph_attrs <- sna_get_graph_attrs(ig)
   vert_attrs <- sna_get_vert_attrs(ig)

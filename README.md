@@ -1,8 +1,9 @@
 
 <!-- README.Rmd generates README.md. -->
-snatools <img src="man/figures/logo.png" align="right" height="243px" width="211px" />
-======================================================================================
+snatools
+========
 
+<!-- <img src="http://res.cloudinary.com/syknapptic/image/upload/v1516468904/logo_rd5ifq.png" align="right" height="160px" width="240px" /> -->
 [![](https://img.shields.io/badge/devel%20version-0.1-red.svg)](https://github.com/knapply/snatools)
 
 <br>

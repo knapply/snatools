@@ -9,4 +9,22 @@
   <url>
     <loc>https://knapply.github.io/snatools//reference/snatools.html</loc>
   </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/sna_as_edgelist.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/sna_as_network.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/sna_get_edge_attrs.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/sna_get_graph_attrs.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/sna_get_vert_attrs.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/sna_standardize_graph.html</loc>
+  </url>
 </urlset>

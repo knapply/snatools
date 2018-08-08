@@ -6,8 +6,6 @@
 \alias{snatools-package}
 \title{snatools: An R toolkit to bridge graph classes and streamline network analytic workflows.}
 \description{
-\if{html}{\figure{logo.png}{options: align='right'}}
-
 What the package does (one paragraph).
 }
 \seealso{

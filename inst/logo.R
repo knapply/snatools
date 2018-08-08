@@ -1,36 +1,39 @@
-library(hexSticker)
-library(magick)
-
-img_url <- "http://res.cloudinary.com/syknapptic/image/upload/v1533688420/spatial-net_zhmhez.png"
-
-logo_path <- "man/figures/logo.png"
-# site_logo_path <- "docs/logo.png"
-# favicon_path <- "docs/favicon.ico"
-
-if(!dir.exists("man/figures")) {
-  dir.create("man/figures")
-} 
-# if(!dir.exists("docs")) {
-  # dir.create("docs")
-# } 
-
-# logo ====
-logo <- image_read(img_url)
-
-res_x <- image_info(logo)[["width"]] / 1000
-res_y <- image_info(logo)[["height"]] / 1000
-
-sticker(subplot = logo,
-  s_x = 1,
-  s_y = 1,
-  s_width = 0.00001,
-  s_height = 0.00001,
-  package = "snatools",
-  p_y = 1.6, p_size = 18,
-  p_color = "black",
-  # h_color = "#3b3b3b",
-  h_fill = "white",
-  u_size = 5,
-  u_color = "black",
-  url = "knapply.github.io/snatools",
-  filename = logo_path)
+# library(hexSticker)
+# library(magick)
+# 
+# img_url <- "http://res.cloudinary.com/syknapptic/image/upload/v1516468904/logo_rd5ifq.png"
+# 
+# img_raw <- img_url %>% 
+#   image_read() %>% 
+#   image_crop("8000x8000+2000+0") %>% 
+#   image_resize("5%x5%")
+# 
+# # 
+# # logo <- image_read("man/figures/logo-plot.png") %>% 
+# #   image_background(color = "transparent", flatten = FALSE)
+# # hex sticker ====
+# sticker(subplot = img_raw,
+#   # s_x = 1,
+#   # s_y = 1,
+#   # s_width = 1,
+#   # s_height = 1,
+#   package = "snatools",
+#   p_y = 1.625,
+#   p_size = 30,
+#   p_color = "#00471a",
+#   h_color = "#056d21",
+#   h_fill = "white",
+#   u_size = 8,
+#   u_color = "black",
+#   # spotlight = TRUE,  #l_width = 5,
+#   # l_height = 1,
+#   # l_alpha = 0.9,l_y = 0.25,
+#   url = "knapply.github.io/snatools",
+#   filename = "man/figures/logo.png")
+# #   
+# # ggsave(width = 43.9 * 1.5, height = 50.8 * 1.5, dpi = 600,
+# #        filename = "man/figures/logo.png", 
+# #        bg = "transparent", units = "mm")
+# # 
+# # 
+# # 

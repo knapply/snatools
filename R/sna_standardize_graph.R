@@ -1,9 +1,15 @@
+#' Clean a graph object's attributes in a standardized fashion.
+#' 
+#' @param x An `igraph` or `network` object.
+#' 
+#' @return A cleaned version of `x`.
+#' 
 #' @export
 sna_standardize_graph <- function(x) {
   UseMethod("sna_standardize_graph")
 }
 
-
+#' @describeIn sna_standardize_graph
 sna_standardize_graph.igraph <- function(ig) {
   graph_attrs <- sna_get_graph_attrs(ig)
   edge_attrs <- sna_get_edge_attrs(ig)
@@ -17,7 +23,7 @@ sna_standardize_graph.igraph <- function(ig) {
   ig
 }
 
-
+#' @describeIn sna_standardize_graph
 sna_standardize_graph.network <- function(nw) {
   vert_attrs <- sna_get_vert_attrs(nw)
   names(vert_attrs)[names(vert_attrs) == "name"] <- "vertex.names"

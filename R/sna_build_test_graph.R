@@ -1,4 +1,3 @@
-#' @export
 build_test_graph <- function(ig_or_nw, direct = TRUE, bipart = FALSE,
                              n = 30, p = 0.25, ...) {
   if(ig_or_nw == "ig"){
