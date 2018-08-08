@@ -24,14 +24,13 @@ identical(
 ``` r
 devtools::test()
 #> Loading snatools
-#> Loading required package: testthat
 #> Testing snatools
 #> v | OK F W S | Context
 #> 
 / |  0       | Round trip conversion: undirected graphs
 - |  1       | Round trip conversion: undirected graphs
 \ |  2       | Round trip conversion: undirected graphs
-v |  2       | Round trip conversion: undirected graphs [0.2 s]
+v |  2       | Round trip conversion: undirected graphs
 #> 
 / |  0       | Round trip conversion: directed graphs
 - |  1       | Round trip conversion: directed graphs
@@ -44,12 +43,10 @@ v |  2       | Round trip conversion: directed graphs
 v |  2       | Round trip conversion: bipartite graphs
 #> 
 #> == Results =====================================================================
-#> Duration: 0.4 s
+#> Duration: 0.2 s
 #> 
 #> OK:       6
 #> Failed:   0
 #> Warnings: 0
 #> Skipped:  0
-#> 
-#> You are a coding rockstar!
 ```
