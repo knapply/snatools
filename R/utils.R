@@ -1,27 +1,41 @@
-# TODO bring in {knapply} functions or readapt them to {purrr}?
+#' @importFrom magrittr %>%
+#' 
+#' @export
+#' 
+magrittr::`%>%`
 
-# Code defensively, or R will stab you in the back.
-`%>%` <- magrittr:::pipe()
 
+#' Test if objects are `identical`.
+#' 
+#' This infix operator provides a stricter method of comparing objects while preventing
+#' surprise type conversions.
+#' 
+#' @param lhs left-hand side
+#' @param rhs right-hand side
+#' 
+#' @return `logical` Whether `lhs` and `rhs` are `identical()`.
+#' 
+#' @seealso [`base::identical()`]
+#' 
+#' @author Brendan Knapp \email{brendan.g.knapp@@gmail.com}
+#' 
+#' @examples 
+#' 
+#' TRUE == 1L
+#' TRUE == 1.0000000000000001
+#' TRUE %==% 1L
+#' TRUE %==% 1.0000000000000001
+#' 
+#' NA == NA_character_
+#' NA %==% NA_character_
+#' 
+#' NULL == NA_integer_
+#' NULL %==% NA_integer_
+#' 
+#' NA == "NA"
+#' NA %==% "NA"
+#' 
+#' @export
 `%==%` <- function(lhs, rhs) {
   identical(lhs, rhs)
 }
-
-ifelse(NULL == "NULL", "samesies", "no more samesies")
-is.null(list())
-is.null(pairlist())
-list(a = NULL, list(b = NULL)) %>% is.null()
-list(a = NULL, list(b = NULL)) %>% unlist(use.names = TRUE) %>% is.null()
-NULL %==% pairlist()
-
-TRUE == TRUE
-TRUE == 1
-TRUE == 1L
-TRUE %==% 1
-
-is.na(NA) == is.na(NA_real_)
-NA == NA_complex_
-NA_integer_ == NA_real_
-NA_integer_ == NA_real_ %>% isFALSE()
-NA_integer_ == NA_real_ %>% isTRUE()
-any(NA %==% NA_real_, NA_real_ %==% NA_character_, NA_integer_ %==% NA_complex_)
