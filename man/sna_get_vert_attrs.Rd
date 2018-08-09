@@ -21,3 +21,6 @@ A named \code{list} of \code{x}'s vertex attributes.
 \description{
 Extract vertex attributes from a graph.
 }
+\author{
+Brendan Knapp \email{brendan.g.knapp@gmail.com}
+}

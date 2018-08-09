@@ -46,7 +46,7 @@ v |  2       | Round trip conversion: directed graphs
 v |  2       | Round trip conversion: bipartite graphs
 #> 
 #> == Results =====================================================================
-#> Duration: 0.3 s
+#> Duration: 0.2 s
 #> 
 #> OK:       6
 #> Failed:   0

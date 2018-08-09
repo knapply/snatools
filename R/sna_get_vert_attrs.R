@@ -3,6 +3,8 @@
 #' @param x An `igraph` or `network` object.
 #' 
 #' @return A named `list` of `x`'s vertex attributes.
+#' 
+#' @author Brendan Knapp \email{brendan.g.knapp@@gmail.com}
 #'
 #' @export
 sna_get_vert_attrs <- function(x) {

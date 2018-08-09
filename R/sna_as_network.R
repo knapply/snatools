@@ -17,7 +17,7 @@ sna_as_network.igraph <- function(ig) {
   graph_attrs <- sna_get_graph_attrs(ig)
   vert_attrs <- sna_get_vert_attrs(ig)
   edge_attrs <- sna_get_edge_attrs(ig)
-  el <- sna_as_edgelist(ig)
+  el <- sna_get_edgelist(ig)
   
   if("type" %in% names(vert_attrs)) {
     bipartite_arg <- length(which(!igraph::V(ig)$type))

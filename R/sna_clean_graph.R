@@ -50,7 +50,7 @@ sna_clean_graph.network <- function(nw) {
   names(vert_attrs)[names(vert_attrs) == "name"] <- "vertex.names"
   graph_attrs <- sna_get_graph_attrs(nw)
   edge_attrs <- sna_get_edge_attrs(nw)
-  el <- sna_as_edgelist(nw)
+  el <- sna_get_edgelist(nw)
   
   args <- list(n = nw$gal$n,
                directed = nw$gal$directed,
