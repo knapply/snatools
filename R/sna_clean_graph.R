@@ -4,17 +4,32 @@
 #' 
 #' @return A cleaned version of `x`.
 #' 
+#' @author Brendan Knapp \email{brendan.g.knapp@@gmail.com}
+#' 
+#' @examples 
+#' library(snatools)
+#' 
+#' data("Koenigsberg", package = "igraphdata")
+#' 
+#' Koenigsberg %>% sna_get_vert_attrs()
+#' 
+#' Koenigsberg %>% sna_clean_graph() %>% sna_get_vert_attrs()
+#' 
+#' 
 #' @export
-sna_standardize_graph <- function(x) {
-  UseMethod("sna_standardize_graph")
+sna_clean_graph <- function(x) {
+  UseMethod("sna_clean_graph")
 }
 
-#' @describeIn sna_standardize_graph
-sna_standardize_graph.igraph <- function(ig) {
+#' @rdname sna_clean_graph
+#' 
+#' @export
+#' 
+sna_clean_graph.igraph <- function(ig) {
   graph_attrs <- sna_get_graph_attrs(ig)
   edge_attrs <- sna_get_edge_attrs(ig)
   vert_attrs <- sna_get_vert_attrs(ig)
-  names(vert_attrs)[names(vert_attrs) == "vertex.names"] <- "name"
+  # names(vert_attrs)[names(vert_attrs) == "vertex.names"] <- "name"
   
   igraph::graph_attr(ig) <- graph_attrs
   igraph::edge_attr(ig) <- edge_attrs
@@ -23,8 +38,14 @@ sna_standardize_graph.igraph <- function(ig) {
   ig
 }
 
-#' @describeIn sna_standardize_graph
-sna_standardize_graph.network <- function(nw) {
+#' @rdname sna_clean_graph
+#' 
+#' @export
+#' 
+sna_clean_graph.network <- function(nw) {
+  if(is.null(nw$gal$bipartite)) { # may not exist
+    nw$gal$bipartite <- FALSE
+  }
   vert_attrs <- sna_get_vert_attrs(nw)
   names(vert_attrs)[names(vert_attrs) == "name"] <- "vertex.names"
   graph_attrs <- sna_get_graph_attrs(nw)

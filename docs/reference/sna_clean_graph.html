@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Clean a graph object's attributes in a standardized fashion. — sna_standardize_graph • snatools</title>
+<title>Clean a graph object's attributes in a standardized fashion. — sna_clean_graph • snatools</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,7 +30,7 @@
 
 
 
-<meta property="og:title" content="Clean a graph object's attributes in a standardized fashion. — sna_standardize_graph" />
+<meta property="og:title" content="Clean a graph object's attributes in a standardized fashion. — sna_clean_graph" />
 
 <meta property="og:description" content="Clean a graph object's attributes in a standardized fashion." />
 <meta name="twitter:card" content="summary" />
@@ -45,6 +45,16 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115043043-6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115043043-6');
+</script>
 
   </head>
 
@@ -103,7 +113,7 @@
     <div class="page-header">
     <h1>Clean a graph object's attributes in a standardized fashion.</h1>
     
-    <div class="hidden name"><code>sna_standardize_graph.Rd</code></div>
+    <div class="hidden name"><code>sna_clean_graph.Rd</code></div>
     </div>
 
     <div class="ref-description">
@@ -112,7 +122,13 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>sna_standardize_graph</span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>sna_clean_graph</span>(<span class='no'>x</span>)
+
+<span class='co'># S3 method for igraph</span>
+<span class='fu'>sna_clean_graph</span>(<span class='no'>ig</span>)
+
+<span class='co'># S3 method for network</span>
+<span class='fu'>sna_clean_graph</span>(<span class='no'>nw</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -128,6 +144,30 @@
     <p>A cleaned version of <code>x</code>.</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>snatools</span>)
+
+<span class='fu'>data</span>(<span class='st'>"Koenigsberg"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"igraphdata"</span>)
+
+<span class='no'>Koenigsberg</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='sna_get_vert_attrs.html'>sna_get_vert_attrs</a></span>()</div><div class='output co'>#&gt; $Euler_letter
+#&gt; [1] "B" "A" "C" "D"
+#&gt; 
+#&gt; $vertex.names
+#&gt; [1] "Altstadt-Loebenicht" "Kneiphof"            "Vorstadt-Haberberg" 
+#&gt; [4] "Lomse"              
+#&gt; </div><div class='input'>
+<span class='no'>Koenigsberg</span> <span class='kw'>%&gt;%</span> <span class='fu'>sna_clean_graph</span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='sna_get_vert_attrs.html'>sna_get_vert_attrs</a></span>()</div><div class='output co'>#&gt; $Euler_letter
+#&gt; [1] "B" "A" "C" "D"
+#&gt; 
+#&gt; $vertex.names
+#&gt; [1] "Altstadt-Loebenicht" "Kneiphof"            "Vorstadt-Haberberg" 
+#&gt; [4] "Lomse"              
+#&gt; 
+#&gt; $vertex.names
+#&gt; [1] 1 2 3 4
+#&gt; </div><div class='input'>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -135,7 +175,13 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
+
+    <h2>Author</h2>
+    
+Brendan Knapp <a href='mailto:brendan.g.knapp@gmail.com'>brendan.g.knapp@gmail.com</a>
 
   </div>
 </div>

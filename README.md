@@ -9,12 +9,14 @@ snatools
 <br>
 
 ``` r
+library(snatools)
+
 network_obj <- snatools:::build_test_graph("nw") %>% 
-  snatools:::sna_standardize_graph.network()
+  sna_clean_graph()
 
 identical(
-  snatools:::sna_as_network.igraph(snatools:::sna_as_igraph.network(network_obj)),
-  network_obj
+  network_obj,
+  sna_as_network(sna_as_igraph(network_obj))
   )
 #> [1] TRUE
 ```

@@ -2,9 +2,15 @@
 % Please edit documentation in R/sna_get_vert_attrs.R
 \name{sna_get_vert_attrs}
 \alias{sna_get_vert_attrs}
+\alias{sna_get_vert_attrs.igraph}
+\alias{sna_get_vert_attrs.network}
 \title{Extract vertex attributes from a graph.}
 \usage{
 sna_get_vert_attrs(x)
+
+\method{sna_get_vert_attrs}{igraph}(ig)
+
+\method{sna_get_vert_attrs}{network}(nw)
 }
 \arguments{
 \item{x}{An \code{igraph} or \code{network} object.}
