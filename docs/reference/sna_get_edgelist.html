@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Build an edge list of a graph — sna_get_edgelist • snatools</title>
+<title>Build a graph's edge list representation. — sna_get_edgelist • snatools</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Build an edge list of a graph — sna_get_edgelist" />
+<meta property="og:title" content="Build a graph's edge list representation. — sna_get_edgelist" />
 
-<meta property="og:description" content="Build an edge list of a graph" />
+<meta property="og:description" content="sna_get_edgelist() creates edge lists in a consistent format across graph classes." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -111,14 +111,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Build an edge list of a graph</h1>
+    <h1>Build a graph's edge list representation.</h1>
     
     <div class="hidden name"><code>sna_get_edgelist.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Build an edge list of a graph</p>
+    <p><code>sna_get_edgelist()</code> creates edge lists in a consistent format across graph classes.</p>
     
     </div>
 
@@ -139,16 +139,33 @@
     </tr>
     <tr>
       <th>use_names</th>
-      <td><p><code>logical</code> Whether the returned edge list should use vertex names
-instead of their indices. <br />
+      <td><p><code>logical</code> Whether the returned edge list should use vertex names instead of their
+indices. <br />
 Default: <code>FALSE</code></p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A 2 column <code>matrix</code>. If graph is directed, the first column is always
-the source of a tie.</p>
+    <p><code>matrix</code> <br /></p><ul>
+<li><p><code>mode()</code>:</p><ul>
+<li><p><code>numeric</code> if <code>use_names</code> is <code>FALSE</code>.</p></li>
+<li><p><code>character</code> if <code>use_names</code> is <code>TRUE</code>.</p></li>
+</ul></li>
+<li><p><code>dim()</code></p><ul>
+<li><p><code><a href='http://www.rdocumentation.org/packages/igraph/topics/gsize'>igraph::ecount(x)</a></code> by 2 if <code>x</code> is an <code>igraph</code> object.</p></li>
+<li><p><code><a href='http://www.rdocumentation.org/packages/network/topics/network.edgecount'>network::network.edgecount(x)</a></code> by 2 if <code>x</code> is a <code>network</code> object.</p></li>
+</ul></li>
+</ul>
+
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <ul>
+<li><p>If <code>x</code> is a directed graph, columns are named <code>"from"</code> and <code>"to"</code> to indicate the
+tie's direction.</p></li>
+<li><p>If <code>x</code> is an undirected graph, columns are named <code>"vert1"</code> and <code>"vert2"</code>.</p></li>
+</ul>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -159,8 +176,19 @@ the source of a tie.</p>
     <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>snatools</span>)
 
 <span class='co'># igraph ==============================================================================</span>
-<span class='fu'>data</span>(<span class='st'>"karate"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"igraphdata"</span>)
-
+<span class='fu'>data</span>(<span class='st'>"karate"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"igraphdata"</span>) <span class='co'># loads "Zachary's Karate Club" as `karate`</span>
+<span class='no'>karate</span></div><div class='output co'>#&gt; IGRAPH 4b458a1 UNW- 34 78 -- Zachary's karate club network
+#&gt; + attr: name (g/c), Citation (g/c), Author (g/c), Faction (v/n), name
+#&gt; | (v/c), label (v/c), color (v/n), weight (e/n)
+#&gt; + edges from 4b458a1 (vertex names):
+#&gt;  [1] Mr Hi  --Actor 2  Mr Hi  --Actor 3  Mr Hi  --Actor 4  Mr Hi  --Actor 5 
+#&gt;  [5] Mr Hi  --Actor 6  Mr Hi  --Actor 7  Mr Hi  --Actor 8  Mr Hi  --Actor 9 
+#&gt;  [9] Mr Hi  --Actor 11 Mr Hi  --Actor 12 Mr Hi  --Actor 13 Mr Hi  --Actor 14
+#&gt; [13] Mr Hi  --Actor 18 Mr Hi  --Actor 20 Mr Hi  --Actor 22 Mr Hi  --Actor 32
+#&gt; [17] Actor 2--Actor 3  Actor 2--Actor 4  Actor 2--Actor 8  Actor 2--Actor 14
+#&gt; [21] Actor 2--Actor 18 Actor 2--Actor 20 Actor 2--Actor 22 Actor 2--Actor 31
+#&gt; [25] Actor 3--Actor 4  Actor 3--Actor 8  Actor 3--Actor 9  Actor 3--Actor 10
+#&gt; + ... omitted several edges</div><div class='input'>
 <span class='no'>karate</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>sna_get_edgelist</span>() <span class='kw'>%&gt;%</span>
   <span class='fu'>head</span>()</div><div class='output co'>#&gt;      vert1 vert2
@@ -180,8 +208,22 @@ the source of a tie.</p>
 #&gt; [5,] "Mr Hi" "Actor 6"
 #&gt; [6,] "Mr Hi" "Actor 7"</div><div class='input'>
 <span class='co'># network =============================================================================</span>
-<span class='fu'>data</span>(<span class='st'>"sampson"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"ergm"</span>)
-
+<span class='fu'>data</span>(<span class='st'>"sampson"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"ergm"</span>) <span class='co'># loads "Sampson's Monks" as `samplike`</span>
+<span class='no'>samplike</span></div><div class='output co'>#&gt;  Network attributes:
+#&gt;   vertices = 18 
+#&gt;   directed = TRUE 
+#&gt;   hyper = FALSE 
+#&gt;   loops = FALSE 
+#&gt;   multiple = FALSE 
+#&gt;   total edges= 88 
+#&gt;     missing edges= 0 
+#&gt;     non-missing edges= 88 
+#&gt; 
+#&gt;  Vertex attribute names: 
+#&gt;     cloisterville group vertex.names 
+#&gt; 
+#&gt;  Edge attribute names: 
+#&gt;     nominations </div><div class='input'>
 <span class='no'>samplike</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>sna_get_edgelist</span>() <span class='kw'>%&gt;%</span>
   <span class='fu'>head</span>()</div><div class='output co'>#&gt;      from to
@@ -208,6 +250,8 @@ the source of a tie.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
       

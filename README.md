@@ -45,10 +45,22 @@ v |  2       | Round trip conversion: directed graphs
 \ |  2       | Round trip conversion: bipartite graphs
 v |  2       | Round trip conversion: bipartite graphs
 #> 
-#> == Results =====================================================================
-#> Duration: 0.2 s
+/ |  0       | Build edge lists: igraph
+- |  1       | Build edge lists: igraph
+\ |  2       | Build edge lists: igraph
+| |  3       | Build edge lists: igraph
+/ |  4       | Build edge lists: igraph
+v |  4       | Build edge lists: igraph
 #> 
-#> OK:       6
+/ |  0       | Build edge lists: network
+- |  1       | Build edge lists: network
+\ |  2       | Build edge lists: network
+v |  2       | Build edge lists: network
+#> 
+#> == Results =====================================================================
+#> Duration: 0.3 s
+#> 
+#> OK:       12
 #> Failed:   0
 #> Warnings: 0
 #> Skipped:  0

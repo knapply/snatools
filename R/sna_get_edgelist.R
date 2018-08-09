@@ -1,12 +1,25 @@
-#' Build an edge list of a graph
+#' Build a graph's edge list representation.
+#' 
+#' `sna_get_edgelist()` creates edge lists in a consistent format across graph classes.
 #' 
 #' @param x An `igraph` or `network` object.
-#' @param use_names `logical` Whether the returned edge list should use vertex names 
-#'     instead of their indices. \cr
-#'     Default: `FALSE`
+#' @param use_names 
+#' `logical` Whether the returned edge list should use vertex names instead of their
+#'  indices. \cr
+#'  Default: `FALSE`
+#'
+#' @details 
+#' * If `x` is a directed graph, columns are named `"from"` and `"to"` to indicate the
+#' tie's direction.
+#' * If `x` is an undirected graph, columns are named `"vert1"` and `"vert2"`.
 #' 
-#' @return A 2 column `matrix`. If graph is directed, the first column is always
-#' the source of a tie.
+#' @return `matrix` \cr
+#' * `mode()`:
+#'     + `numeric` if `use_names` is `FALSE`.
+#'     + `character` if `use_names` is `TRUE`.
+#' * `dim()`
+#'     + `igraph::ecount(x)` by 2 if `x` is an `igraph` object.
+#'     + `network::network.edgecount(x)` by 2 if `x` is a `network` object.
 #' 
 #' @seealso [`igraph::as_edgelist()`], [`network::as.edgelist()`]
 #' 
@@ -16,7 +29,8 @@
 #' library(snatools)
 #' 
 #' # igraph ==============================================================================
-#' data("karate", package = "igraphdata")
+#' data("karate", package = "igraphdata") # loads "Zachary's Karate Club" as `karate`
+#' karate
 #' 
 #' karate %>% 
 #'   sna_get_edgelist() %>% 
@@ -27,7 +41,8 @@
 #'   head()
 #' 
 #' # network =============================================================================
-#' data("sampson", package = "ergm")
+#' data("sampson", package = "ergm") # loads "Sampson's Monks" as `samplike`
+#' samplike
 #' 
 #' samplike %>% 
 #'   sna_get_edgelist() %>% 
@@ -78,22 +93,3 @@ sna_get_edgelist.network <- function(nw, use_names = FALSE) {
   vert_names <- vapply(nw$val, function(x) x[["vertex.names"]], character(1))
   matrix(vert_names[out], ncol = 2, dimnames = list(NULL, colnames(out)))
 }
-
-# sna_as_edgelist.network <- function(nw) {
-#   if(!nw$gal$directed) {
-#     return(cbind(vapply(nw$mel, function(x) x[["inl"]], numeric(1)),
-#                  vapply(nw$mel, function(x) x[["outl"]], numeric(1))))
-#     }
-#   cbind(vapply(nw$mel, function(x) x[["outl"]], numeric(1)),
-#         vapply(nw$mel, function(x) x[["inl"]], numeric(1))) 
-# }
-
-# vrt_names <- vapply(nw$val, function(x) x[["vertex.names"]], character(1))
-# 
-# nw <- build_test_graph("nw")
-# out <- cbind(vapply(nw$mel, function(x) x[["inl"]], numeric(1)),
-#              vapply(nw$mel, function(x) x[["outl"]], numeric(1)))
-# 
-# matrix(vrt_names[out], ncol = 2) %>% head()
-# vrt_names %>% head()
-# nw %>% network::as.matrix.network.edgelist() %>% head()
