@@ -6,7 +6,7 @@
 #' the source of a tie.
 #' 
 #' @export
-sna_as_edgelist <- function(x) {
+sna_as_edgelist <- function(x, use_names = FALSE) {
   UseMethod("sna_as_edgelist")
 }
 
@@ -14,23 +14,29 @@ sna_as_edgelist <- function(x) {
 #' 
 #' @export
 #' 
-sna_as_edgelist.igraph <- function(ig) {
-  igraph::as_edgelist(ig, names = FALSE)
+sna_as_edgelist.igraph <- function(ig, use_names = FALSE) {
+  igraph::as_edgelist(ig, names = use_names)
 }
 
 #' @rdname sna_as_edgelist
 #' 
 #' @export
 #' 
-sna_as_edgelist.network <- function(nw) {
+sna_as_edgelist.network <- function(nw, use_names = FALSE) {
   outl <- lapply(nw$mel, `[[`, "outl")
   outl <- unlist(outl)
   inl <- lapply(nw$mel, `[[`, "inl")
   inl <- unlist(inl)
   if(nw$gal$directed) {
-    return(cbind(outl, inl))
+    out <- cbind(outl, inl)
+  } else {
+    out <- cbind(inl, outl)
   }
-  cbind(inl, outl)
+  if(!use_names) {
+    return(out)
+  }
+  vert_names <- vapply(nw$val, function(x) x[["vertex.names"]], character(1))
+  matrix(vert_names[out], ncol = 2)
 }
 
 # sna_as_edgelist.network <- function(nw) {

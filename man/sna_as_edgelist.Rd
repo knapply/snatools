@@ -6,11 +6,11 @@
 \alias{sna_as_edgelist.network}
 \title{Build an edge list of a graph}
 \usage{
-sna_as_edgelist(x)
+sna_as_edgelist(x, use_names = FALSE)
 
-\method{sna_as_edgelist}{igraph}(ig)
+\method{sna_as_edgelist}{igraph}(ig, use_names = FALSE)
 
-\method{sna_as_edgelist}{network}(nw)
+\method{sna_as_edgelist}{network}(nw, use_names = FALSE)
 }
 \arguments{
 \item{x}{An \code{igraph} or \code{network} object.}
