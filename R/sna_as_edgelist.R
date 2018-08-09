@@ -23,13 +23,24 @@ sna_as_edgelist.igraph <- function(ig) {
 #' @export
 #' 
 sna_as_edgelist.network <- function(nw) {
-  if(!nw$gal$directed) {
-    return(cbind(vapply(nw$mel, function(x) x[["inl"]], numeric(1)),
-                 vapply(nw$mel, function(x) x[["outl"]], numeric(1))))
-    }
-  cbind(vapply(nw$mel, function(x) x[["outl"]], numeric(1)),
-        vapply(nw$mel, function(x) x[["inl"]], numeric(1))) 
+  outl <- lapply(nw$mel, `[[`, "outl")
+  outl <- unlist(outl)
+  inl <- lapply(nw$mel, `[[`, "inl")
+  inl <- unlist(inl)
+  if(nw$gal$directed) {
+    return(cbind(outl, inl))
+  }
+  cbind(inl, outl)
 }
+
+# sna_as_edgelist.network <- function(nw) {
+#   if(!nw$gal$directed) {
+#     return(cbind(vapply(nw$mel, function(x) x[["inl"]], numeric(1)),
+#                  vapply(nw$mel, function(x) x[["outl"]], numeric(1))))
+#     }
+#   cbind(vapply(nw$mel, function(x) x[["outl"]], numeric(1)),
+#         vapply(nw$mel, function(x) x[["inl"]], numeric(1))) 
+# }
 
 # vrt_names <- vapply(nw$val, function(x) x[["vertex.names"]], character(1))
 # 
