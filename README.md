@@ -27,13 +27,19 @@ identical(
 ``` r
 devtools::test()
 #> Loading snatools
+#> Loading required package: testthat
+#> 
+#> Attaching package: 'testthat'
+#> The following objects are masked from 'package:magrittr':
+#> 
+#>     equals, is_less_than, not
 #> Testing snatools
 #> v | OK F W S | Context
 #> 
 / |  0       | Round trip conversion: undirected graphs
 - |  1       | Round trip conversion: undirected graphs
 \ |  2       | Round trip conversion: undirected graphs
-v |  2       | Round trip conversion: undirected graphs
+v |  2       | Round trip conversion: undirected graphs [0.2 s]
 #> 
 / |  0       | Round trip conversion: directed graphs
 - |  1       | Round trip conversion: directed graphs
@@ -46,7 +52,7 @@ v |  2       | Round trip conversion: directed graphs
 v |  2       | Round trip conversion: bipartite graphs
 #> 
 #> == Results =====================================================================
-#> Duration: 0.2 s
+#> Duration: 0.3 s
 #> 
 #> OK:       6
 #> Failed:   0

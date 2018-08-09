@@ -30,10 +30,22 @@ sna_get_vert_attrs.igraph <- function(ig) {
 sna_get_vert_attrs.network <- function(nw) {
   out <- lapply(nw$val, `[`)
   out <- do.call(rbind, out)
-  out <- apply(out, 2, as.list) 
-  out <- lapply(out, unlist)
+  out_names <- colnames(out)
+  out <- lapply(seq_len(ncol(out)), function(x) unlist(out[, x]))
+  names(out) <- out_names
   out$na <- NULL
   names(out)[names(out) == "vertex.names"] <- "name"
   
   out[order(names(out))]
 }
+ 
+# sna_get_vert_attrs.network <- function(nw) {
+#   out <- lapply(nw$val, `[`)
+#   out <- do.call(rbind, out)
+#   out <- apply(out, 2, as.list) 
+#   out <- lapply(out, unlist)
+#   out$na <- NULL
+#   names(out)[names(out) == "vertex.names"] <- "name"
+#   
+#   out[order(names(out))]
+# }
