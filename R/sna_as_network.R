@@ -11,6 +11,8 @@ sna_as_network <- function(x) {
 
 #' @rdname sna_as_network
 #' 
+#' @export
+#' 
 sna_as_network.igraph <- function(ig) {
   graph_attrs <- sna_get_graph_attrs(ig)
   vert_attrs <- sna_get_vert_attrs(ig)

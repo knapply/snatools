@@ -9,7 +9,10 @@ sna_get_vert_attrs <- function(x) {
   UseMethod("sna_get_vert_attrs")
 }
 
-#' @describeIn sna_get_vert_attrs
+#' @rdname sna_get_vert_attrs
+#' 
+#' @export
+#' 
 sna_get_vert_attrs.igraph <- function(ig) {
   out <- igraph::vertex_attr(ig)
   if(!"name" %in% names(out)) {
@@ -20,7 +23,10 @@ sna_get_vert_attrs.igraph <- function(ig) {
   out[order(names(out))]
 }
 
-
+#' @rdname sna_get_vert_attrs
+#' 
+#' @export
+#' 
 sna_get_vert_attrs.network <- function(nw) {
   out <- lapply(nw$val, `[`)
   out <- do.call(rbind, out)

@@ -2,9 +2,15 @@
 % Please edit documentation in R/sna_get_edge_attrs.R
 \name{sna_get_edge_attrs}
 \alias{sna_get_edge_attrs}
+\alias{sna_get_edge_attrs.igraph}
+\alias{sna_get_edge_attrs.network}
 \title{Extract edge attributes from a graph.}
 \usage{
 sna_get_edge_attrs(x)
+
+\method{sna_get_edge_attrs}{igraph}(ig)
+
+\method{sna_get_edge_attrs}{network}(nw)
 }
 \arguments{
 \item{x}{An \code{igraph} or \code{network} object.}

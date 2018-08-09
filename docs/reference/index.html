@@ -43,6 +43,16 @@
 <![endif]-->
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115043043-6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115043043-6');
+</script>
+
   </head>
 
   <body>
@@ -131,9 +141,21 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="sna_as_igraph.html">sna_as_igraph()</a></code> </p>
+        </td>
+        <td><p>Convert <code>network</code> objects to <code>igraph</code>.</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="sna_as_network.html">sna_as_network()</a></code> </p>
         </td>
         <td><p>Convert a graph object into a <code>network</code> object.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sna_clean_graph.html">sna_clean_graph()</a></code> </p>
+        </td>
+        <td><p>Clean a graph object's attributes in a standardized fashion.</p></td>
       </tr><tr>
         
         <td>
@@ -152,12 +174,6 @@
           <p><code><a href="sna_get_vert_attrs.html">sna_get_vert_attrs()</a></code> </p>
         </td>
         <td><p>Extract vertex attributes from a graph.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sna_standardize_graph.html">sna_standardize_graph()</a></code> </p>
-        </td>
-        <td><p>Clean a graph object's attributes in a standardized fashion.</p></td>
       </tr>
     </tbody>
     </table>

@@ -1,9 +1,15 @@
+#' Convert `network` objects to `igraph`.
+#' 
 #' @export
+#' 
 sna_as_igraph <- function(x) {
   UseMethod("sna_as_igraph")
 }
 
-
+#' @rdname sna_as_igraph
+#' 
+#' @export
+#' 
 sna_as_igraph.network <- function(nw) {
   if (nw$gal$hyper) {
     stop("Hypergraphs are not supported.", call. = FALSE)
@@ -26,5 +32,5 @@ sna_as_igraph.network <- function(nw) {
   igraph::edge_attr(out) <- edge_attrs
   igraph::vertex_attr(out) <- vert_attrs
   
-  sna_standardize_graph(out)
+  sna_clean_graph(out)
 }

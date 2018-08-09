@@ -2,9 +2,15 @@
 % Please edit documentation in R/sna_get_graph_attrs.R
 \name{sna_get_graph_attrs}
 \alias{sna_get_graph_attrs}
+\alias{sna_get_graph_attrs.igraph}
+\alias{sna_get_graph_attrs.network}
 \title{Extract graph-level attributes from a graph.}
 \usage{
 sna_get_graph_attrs(x)
+
+\method{sna_get_graph_attrs}{igraph}(ig)
+
+\method{sna_get_graph_attrs}{network}(nw)
 }
 \arguments{
 \item{x}{An \code{igraph} or \code{network} object.}
