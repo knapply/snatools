@@ -25,7 +25,7 @@ sna_as_igraph.network <- function(nw) {
   }
   vert_attrs <- sna_get_vert_attrs(nw)
   edge_attrs <- sna_get_edge_attrs(nw)
-  el <- sna_as_edgelist(nw)
+  el <- sna_get_edgelist(nw)
  
   out <- igraph::graph_from_edgelist(el, directed = nw$gal$directed)
   igraph::graph_attr(out) <- graph_attrs

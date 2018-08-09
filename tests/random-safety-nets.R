@@ -1,35 +1,42 @@
+# sna_as_edgelist.network <- function(nw) {
+#   if(!nw$gal$directed) {
+#     return(cbind(vapply(nw$mel, function(x) x[["inl"]], numeric(1)),
+#                  vapply(nw$mel, function(x) x[["outl"]], numeric(1))))
+#     }
+#   cbind(vapply(nw$mel, function(x) x[["outl"]], numeric(1)),
+#         vapply(nw$mel, function(x) x[["inl"]], numeric(1))) 
+# }
+
+# vrt_names <- vapply(nw$val, function(x) x[["vertex.names"]], character(1))
+# 
+# nw <- build_test_graph("nw")
+# out <- cbind(vapply(nw$mel, function(x) x[["inl"]], numeric(1)),
+#              vapply(nw$mel, function(x) x[["outl"]], numeric(1)))
+# 
+# matrix(vrt_names[out], ncol = 2) %>% head()
+# vrt_names %>% head()
+# nw %>% network::as.matrix.network.edgelist() %>% head()
+
 #' Clean a graph object's attributes in a standardized fashion.
 #' 
 #' @param x An `igraph` or `network` object.
 #' 
 #' @return A cleaned version of `x`.
 #' 
-#' @author Brendan Knapp \email{brendan.g.knapp@@gmail.com}
-#' 
-#' @examples 
-#' library(snatools)
-#' 
-#' data("Koenigsberg", package = "igraphdata")
-#' 
-#' Koenigsberg %>% sna_get_vert_attrs()
-#' 
-#' Koenigsberg %>% sna_clean_graph() %>% sna_get_vert_attrs()
-#' 
-#' 
 #' @export
-sna_clean_graph <- function(x) {
-  UseMethod("sna_clean_graph")
+sna_standardize_graph <- function(x) {
+  UseMethod("sna_standardize_graph")
 }
 
-#' @rdname sna_clean_graph
+#' @rdname sna_standardize_graph
 #' 
 #' @export
 #' 
-sna_clean_graph.igraph <- function(ig) {
+sna_standardize_graph.igraph <- function(ig) {
   graph_attrs <- sna_get_graph_attrs(ig)
   edge_attrs <- sna_get_edge_attrs(ig)
   vert_attrs <- sna_get_vert_attrs(ig)
-  # names(vert_attrs)[names(vert_attrs) == "vertex.names"] <- "name"
+  names(vert_attrs)[names(vert_attrs) == "vertex.names"] <- "name"
   
   igraph::graph_attr(ig) <- graph_attrs
   igraph::edge_attr(ig) <- edge_attrs
@@ -38,19 +45,16 @@ sna_clean_graph.igraph <- function(ig) {
   ig
 }
 
-#' @rdname sna_clean_graph
+#' @rdname sna_standardize_graph
 #' 
 #' @export
 #' 
-sna_clean_graph.network <- function(nw) {
-  if(is.null(nw$gal$bipartite)) { # may not exist
-    nw$gal$bipartite <- FALSE
-  }
+sna_standardize_graph.network <- function(nw) {
   vert_attrs <- sna_get_vert_attrs(nw)
   names(vert_attrs)[names(vert_attrs) == "name"] <- "vertex.names"
   graph_attrs <- sna_get_graph_attrs(nw)
   edge_attrs <- sna_get_edge_attrs(nw)
-  el <- sna_get_edgelist(nw)
+  el <- sna_as_edgelist(nw)
   
   args <- list(n = nw$gal$n,
                directed = nw$gal$directed,
