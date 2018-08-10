@@ -13,6 +13,10 @@ development:
   mode: unreleased
 
 reference:
+  - title: snatools
+    contents: 
+    - snatools-package
+
   - title: Conversion
     desc: Safely convert objects from one graph class to another.
     contents:
@@ -26,7 +30,7 @@ reference:
     - sna_get_graph_attrs
     - sna_get_vert_attrs
 
-  - title: Representation
+  - title: Representations
     desc: Obtain graph representations in consistent formats.
     contents:
     - sna_get_edgelist
@@ -36,8 +40,7 @@ reference:
     contents:
     - sna_clean_graph
 
-  - title: Utilities
-    desc: Functions for more effective code.
+  - title: Operators
     contents:
     - "%>%"
     - "%==%"
