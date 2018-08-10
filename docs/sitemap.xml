@@ -4,10 +4,7 @@
     <loc>https://knapply.github.io/snatools//index.html</loc>
   </url>
   <url>
-    <loc>https://knapply.github.io/snatools//reference/grapes-equals-grapes.html</loc>
-  </url>
-  <url>
-    <loc>https://knapply.github.io/snatools//reference/reexports.html</loc>
+    <loc>https://knapply.github.io/snatools//reference/pipe.html</loc>
   </url>
   <url>
     <loc>https://knapply.github.io/snatools//reference/snatools.html</loc>
@@ -32,5 +29,8 @@
   </url>
   <url>
     <loc>https://knapply.github.io/snatools//reference/sna_get_vert_attrs.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/strict-compare.html</loc>
   </url>
 </urlset>

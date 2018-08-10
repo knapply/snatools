@@ -33,12 +33,12 @@ devtools::test()
 / |  0       | Round trip conversion: undirected graphs
 - |  1       | Round trip conversion: undirected graphs
 \ |  2       | Round trip conversion: undirected graphs
-v |  2       | Round trip conversion: undirected graphs [0.1 s]
+v |  2       | Round trip conversion: undirected graphs
 #> 
 / |  0       | Round trip conversion: directed graphs
 - |  1       | Round trip conversion: directed graphs
 \ |  2       | Round trip conversion: directed graphs
-v |  2       | Round trip conversion: directed graphs
+v |  2       | Round trip conversion: directed graphs [0.5 s]
 #> 
 / |  0       | Round trip conversion: bipartite graphs
 - |  1       | Round trip conversion: bipartite graphs
@@ -58,7 +58,7 @@ v |  4       | Build edge lists: igraph
 v |  2       | Build edge lists: network
 #> 
 #> == Results =====================================================================
-#> Duration: 0.3 s
+#> Duration: 0.7 s
 #> 
 #> OK:       12
 #> Failed:   0
