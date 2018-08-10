@@ -11,24 +11,24 @@
 #' 
 #' data("Koenigsberg", package = "igraphdata")
 #' 
-#' Koenigsberg %>% sna_get_vert_attrs()
+#' Koenigsberg %>% vrt_get_attrs()
 #' 
-#' Koenigsberg %>% sna_clean_graph() %>% sna_get_vert_attrs()
+#' Koenigsberg %>% strictify() %>% strictify()
 #' 
 #' 
 #' @export
-sna_clean_graph <- function(x) {
-  UseMethod("sna_clean_graph")
+strictify <- function(x) {
+  UseMethod("strictify")
 }
 
-#' @rdname sna_clean_graph
+#' @rdname strictify
 #' 
 #' @export
 #' 
-sna_clean_graph.igraph <- function(ig) {
-  graph_attrs <- sna_get_graph_attrs(ig)
-  edge_attrs <- sna_get_edge_attrs(ig)
-  vert_attrs <- sna_get_vert_attrs(ig)
+strictify.igraph <- function(ig) {
+  graph_attrs <- net_get_attrs(ig)
+  edge_attrs <- edg_get_attrs(ig)
+  vert_attrs <- vrt_get_attrs(ig)
   # names(vert_attrs)[names(vert_attrs) == "vertex.names"] <- "name"
   
   igraph::graph_attr(ig) <- graph_attrs
@@ -38,19 +38,19 @@ sna_clean_graph.igraph <- function(ig) {
   ig
 }
 
-#' @rdname sna_clean_graph
+#' @rdname strictify
 #' 
 #' @export
 #' 
-sna_clean_graph.network <- function(nw) {
+strictify.network <- function(nw) {
   if(is.null(nw$gal$bipartite)) { # may not exist
     nw$gal$bipartite <- FALSE
   }
-  vert_attrs <- sna_get_vert_attrs(nw)
+  vert_attrs <- vrt_get_attrs(nw)
   names(vert_attrs)[names(vert_attrs) == "name"] <- "vertex.names"
-  graph_attrs <- sna_get_graph_attrs(nw)
-  edge_attrs <- sna_get_edge_attrs(nw)
-  el <- sna_get_edgelist(nw)
+  graph_attrs <- net_get_attrs(nw)
+  edge_attrs <- edg_get_attrs(nw)
+  el <- rep_as_edgelist(nw)
   
   args <- list(n = nw$gal$n,
                directed = nw$gal$directed,

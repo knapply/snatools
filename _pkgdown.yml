@@ -17,39 +17,48 @@ reference:
     contents: 
     - snatools-package
 
-  - title: Conversion
-    desc: Safely convert objects from one graph class to another.
+  - title: Class Conversion
+    desc: Safely convert objects between `igraph` and `network` classes.
     contents:
-    - sna_as_igraph
-    - sna_as_network
+    - starts_with("as_igraph")
+    - starts_with("as_network")
   
   - title: Attributes
-    desc: Obtain graph, vertex, and edge attributes in consistent formats.
+    desc: Obtain network, vertex, and edge attributes in consistent formats.
     contents:
-    - sna_get_edge_attrs
-    - sna_get_graph_attrs
-    - sna_get_vert_attrs
+    - starts_with("edg_get_attrs")
+    - starts_with("net_get_attrs")
+    - starts_with("vrt_get_attrs")
 
   - title: Representations
-    desc: Obtain graph representations in consistent formats.
+    desc: Obtain network representations in consistent formats.
     contents:
-    - sna_get_edgelist
+    - starts_with("rep_as_edgelist")
 
-  - title: Cleaning
-    desc: Clean graph internals to enforce stricter attribute data types and accurate metadata.
+  - title: Carpentry
+    desc: Clean network internals to enforce stricter attribute data types and accurate metadata.
     contents:
-    - sna_clean_graph
+    - strictify
+    
+  - title: Foreign File Formats
+    contents:
+    - read_ucinet
 
   - title: Operators
     contents:
     - "%>%"
     - "%==%"
+    
+  - title: Miscellaneous
+    desc: Helper functions exported for convenience.
+    contents:
+    - starts_with("txt_")
 
 navbar:
   type: default
   left:
     - icon: fa-file-code-o 
-      text: "Functions"
+      text: "Documentation"
       href: reference/index.html
   right:
     - icon: fa-twitter

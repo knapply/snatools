@@ -12,59 +12,69 @@ snatools
 library(snatools)
 
 network_obj <- snatools:::build_test_graph("nw") %>% 
-  sna_clean_graph()
+  strictify()
 
 igraph_obj <- snatools:::build_test_graph("ig") %>% 
-  sna_clean_graph()
+  strictify()
 
-network_obj %==% sna_as_network(sna_as_igraph(network_obj))
+network_obj %==% as_network(as_igraph(network_obj)) # identical?
 #> [1] TRUE
 
-igraph_obj %==% sna_as_igraph(sna_as_network(igraph_obj))
+igraph_obj %==% as_igraph(as_network(igraph_obj)) # identical?
 #> [1] TRUE
 ```
 
-{`testthat`}!
-=============
+Definitions
+===========
+
+-   graph
+    -   intentionally generic reference to graph/network objects of *any class*
+-   `igraph`
+    -   objects of class `igraph`
+-   `network`
+    -   objects of class `network`
+
+Test Results
+============
 
 ``` r
-devtools::test()
-#> Loading snatools
-#> Testing snatools
-#> v | OK F W S | Context
-#> 
-/ |  0       | Round trip conversion: undirected graphs
-- |  1       | Round trip conversion: undirected graphs
-\ |  2       | Round trip conversion: undirected graphs
-v |  2       | Round trip conversion: undirected graphs [0.1 s]
-#> 
-/ |  0       | Round trip conversion: directed graphs
-- |  1       | Round trip conversion: directed graphs
-\ |  2       | Round trip conversion: directed graphs
-v |  2       | Round trip conversion: directed graphs
-#> 
-/ |  0       | Round trip conversion: bipartite graphs
-- |  1       | Round trip conversion: bipartite graphs
-\ |  2       | Round trip conversion: bipartite graphs
-v |  2       | Round trip conversion: bipartite graphs
+test_res <- suppressMessages(capture.output(devtools::test()))
+
+for(i in test_res) cat(i, "\n")
+#> v | OK F W S | Context 
 #> 
 / |  0       | Build edge lists: igraph
 - |  1       | Build edge lists: igraph
 \ |  2       | Build edge lists: igraph
 | |  3       | Build edge lists: igraph
 / |  4       | Build edge lists: igraph
-v |  4       | Build edge lists: igraph
+v |  4       | Build edge lists: igraph 
 #> 
 / |  0       | Build edge lists: network
 - |  1       | Build edge lists: network
 \ |  2       | Build edge lists: network
-v |  2       | Build edge lists: network
+v |  2       | Build edge lists: network 
 #> 
-#> == Results =====================================================================
-#> Duration: 0.3 s
+/ |  0       | Round trip conversion: undirected graphs
+- |  1       | Round trip conversion: undirected graphs
+\ |  2       | Round trip conversion: undirected graphs
+v |  2       | Round trip conversion: undirected graphs 
 #> 
-#> OK:       12
-#> Failed:   0
-#> Warnings: 0
+/ |  0       | Round trip conversion: directed graphs
+- |  1       | Round trip conversion: directed graphs
+\ |  2       | Round trip conversion: directed graphs
+v |  2       | Round trip conversion: directed graphs 
+#> 
+/ |  0       | Round trip conversion: bipartite graphs
+- |  1       | Round trip conversion: bipartite graphs
+\ |  2       | Round trip conversion: bipartite graphs
+v |  2       | Round trip conversion: bipartite graphs 
+#>  
+#> == Results ===================================================================== 
+#> Duration: 0.2 s 
+#>  
+#> OK:       12 
+#> Failed:   0 
+#> Warnings: 0 
 #> Skipped:  0
 ```
