@@ -89,10 +89,13 @@
 network_obj &lt;-<span class="st"> </span>snatools<span class="op">:::</span><span class="kw">build_test_graph</span>(<span class="st">"nw"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="reference/sna_clean_graph.html">sna_clean_graph</a></span>()
 
-<span class="kw">identical</span>(
-  network_obj,
-  <span class="kw"><a href="reference/sna_as_network.html">sna_as_network</a></span>(<span class="kw"><a href="reference/sna_as_igraph.html">sna_as_igraph</a></span>(network_obj))
-  )
+igraph_obj &lt;-<span class="st"> </span>snatools<span class="op">:::</span><span class="kw">build_test_graph</span>(<span class="st">"ig"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="reference/sna_clean_graph.html">sna_clean_graph</a></span>()
+
+network_obj <span class="op">%==%</span><span class="st"> </span><span class="kw"><a href="reference/sna_as_network.html">sna_as_network</a></span>(<span class="kw"><a href="reference/sna_as_igraph.html">sna_as_igraph</a></span>(network_obj))
+<span class="co">#&gt; [1] TRUE</span>
+
+igraph_obj <span class="op">%==%</span><span class="st"> </span><span class="kw"><a href="reference/sna_as_igraph.html">sna_as_igraph</a></span>(<span class="kw"><a href="reference/sna_as_network.html">sna_as_network</a></span>(igraph_obj))
 <span class="co">#&gt; [1] TRUE</span></code></pre></div>
 </div>
 <div id="testthat" class="section level1">
@@ -131,15 +134,13 @@ v <span class="op">|</span><span class="st">  </span><span class="dv">4</span>  
 \ <span class="op">|</span><span class="st">  </span><span class="dv">2</span>       <span class="op">|</span><span class="st"> </span>Build edge lists<span class="op">:</span><span class="st"> </span>network
 v <span class="op">|</span><span class="st">  </span><span class="dv">2</span>       <span class="op">|</span><span class="st"> </span>Build edge lists<span class="op">:</span><span class="st"> </span>network
 <span class="co">#&gt; </span>
-<span class="co">#&gt; == Results ============================================================</span>
+<span class="co">#&gt; == Results ===========================================================</span>
 <span class="co">#&gt; Duration: 0.4 s</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; OK:       12</span>
 <span class="co">#&gt; Failed:   0</span>
 <span class="co">#&gt; Warnings: 0</span>
-<span class="co">#&gt; Skipped:  0</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; AH - top-notch code.</span></code></pre></div>
+<span class="co">#&gt; Skipped:  0</span></code></pre></div>
 </div>
   </div>
 

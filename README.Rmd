@@ -36,10 +36,12 @@ library(snatools)
 network_obj <- snatools:::build_test_graph("nw") %>% 
   sna_clean_graph()
 
-identical(
-  network_obj,
-  sna_as_network(sna_as_igraph(network_obj))
-  )
+igraph_obj <- snatools:::build_test_graph("ig") %>% 
+  sna_clean_graph()
+
+network_obj %==% sna_as_network(sna_as_igraph(network_obj))
+
+igraph_obj %==% sna_as_igraph(sna_as_network(igraph_obj))
 ```
 
 
