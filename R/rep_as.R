@@ -1,6 +1,6 @@
-#' Build a graph's edge list representation.
+#' Build a networks's edge list representation.
 #' 
-#' `sna_get_edgelist()` creates edge lists in a consistent format across graph classes.
+#' `rep_as_edgelist()` creates edge lists in a _consistent_ format across classes.
 #' 
 #' @param x An `igraph` or `network` object.
 #' @param use_names 
@@ -9,9 +9,9 @@
 #'  Default: `FALSE`
 #'
 #' @details 
-#' * If `x` is a directed graph, columns are named `"from"` and `"to"` to indicate the
+#' * If `x` is _directed_, columns are named `"from"` and `"to"` to indicate the
 #' tie's direction.
-#' * If `x` is an undirected graph, columns are named `"vert1"` and `"vert2"`.
+#' * If `x` is _undirected_, columns are named `"vert1"` and `"vert2"`.
 #' 
 #' @return `matrix` \cr
 #' * `mode()`:
@@ -33,11 +33,11 @@
 #' karate
 #' 
 #' karate %>% 
-#'   sna_get_edgelist() %>% 
+#'   rep_as_edgelist() %>% 
 #'   head()
 #'   
 #' karate %>% 
-#'   sna_get_edgelist(use_names = TRUE) %>% 
+#'   rep_as_edgelist(use_names = TRUE) %>% 
 #'   head()
 #' 
 #' # network =============================================================================
@@ -45,23 +45,23 @@
 #' samplike
 #' 
 #' samplike %>% 
-#'   sna_get_edgelist() %>% 
+#'   rep_as_edgelist() %>% 
 #'   head()
 #'   
 #' samplike %>% 
-#'   sna_get_edgelist(use_names = TRUE) %>% 
+#'   rep_as_edgelist(use_names = TRUE) %>% 
 #'   head()
 #' 
 #' @export
-sna_get_edgelist <- function(x, use_names = FALSE) {
-  UseMethod("sna_get_edgelist")
+rep_as_edgelist <- function(x, use_names = FALSE) {
+  UseMethod("rep_as_edgelist")
 }
 
-#' @rdname sna_get_edgelist
+#' @rdname rep_as_edgelist
 #' 
 #' @export
 #' 
-sna_get_edgelist.igraph <- function(ig, use_names = FALSE) {
+rep_as_edgelist.igraph <- function(ig, use_names = FALSE) {
   out <- igraph::as_edgelist(ig, names = use_names)
   if(igraph::is_directed(ig)) {
     colnames(out) <- c("from", "to")
@@ -71,11 +71,11 @@ sna_get_edgelist.igraph <- function(ig, use_names = FALSE) {
   out
 }
 
-#' @rdname sna_get_edgelist
+#' @rdname rep_as_edgelist
 #' 
 #' @export
 #' 
-sna_get_edgelist.network <- function(nw, use_names = FALSE) {
+rep_as_edgelist.network <- function(nw, use_names = FALSE) {
   outl <- lapply(nw$mel, `[[`, "outl")
   outl <- unlist(outl)
   inl <- lapply(nw$mel, `[[`, "inl")

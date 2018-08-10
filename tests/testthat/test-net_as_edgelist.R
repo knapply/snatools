@@ -14,22 +14,20 @@ ig_make_el <- function(ig, use_names = FALSE) {
 }
 
 test_that("igraph: undirected unnamed el is as expected", {
-  expect_equal(sna_get_edgelist(ig_undir), 
-               ig_make_el(ig_undir))
+  expect_true(rep_as_edgelist(ig_undir) %==% ig_make_el(ig_undir))
 })
 
 test_that("igraph: undirected named el is as expected", {
-  expect_equal(sna_get_edgelist(ig_undir, use_names = TRUE), 
-               ig_make_el(ig_undir, use_names = TRUE))
+  expect_true(rep_as_edgelist(ig_undir, use_names = TRUE) %==%
+                ig_make_el(ig_undir, use_names = TRUE))
 })
 
 test_that("igraph: directed unnamed el is as expected", {
-  expect_equal(sna_get_edgelist(ig_undir), 
-               ig_make_el(ig_undir))
+  expect_true(rep_as_edgelist(ig_undir) %==% ig_make_el(ig_undir))
 })
 
 test_that("directed igraph named el is as expected", {
-  expect_equal(sna_get_edgelist(ig_dir, use_names = TRUE), 
+  expect_true(rep_as_edgelist(ig_dir, use_names = TRUE) %==%
                ig_make_el(ig_dir, use_names = TRUE))
 })
 
@@ -54,13 +52,11 @@ nw_make_el <- function(nw, use_names = FALSE) {
 }
 
 test_that("network: undirected unnamed el is as expected", {
-  expect_equal(sna_get_edgelist(nw_undir), 
-               nw_make_el(nw_undir))
+  expect_true(rep_as_edgelist(nw_undir) %==% nw_make_el(nw_undir))
 })
 
 test_that("network: directed unnamed el is as expected", {
-  expect_equal(sna_get_edgelist(nw_dir), 
-               nw_make_el(nw_dir))
+  expect_true(rep_as_edgelist(nw_dir) %==% nw_make_el(nw_dir))
 })
 
 # TODO there's no way to get a named edgelist from a `network` object?

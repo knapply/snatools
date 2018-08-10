@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Extract vertex attributes from a graph. — sna_get_vert_attrs • snatools</title>
+<title>Convert a graph object into a <code>network</code> object. — as_network • snatools</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Extract vertex attributes from a graph. — sna_get_vert_attrs" />
+<meta property="og:title" content="Convert a graph object into a <code>network</code> object. — as_network" />
 
-<meta property="og:description" content="Extract vertex attributes from a graph." />
+<meta property="og:description" content="Convert a graph object into a network object." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -81,7 +81,7 @@
   <a href="../reference/index.html">
     <span class="fa fa-file-code-o"></span>
      
-    Functions
+    Documentation
   </a>
 </li>
       </ul>
@@ -111,37 +111,40 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Extract vertex attributes from a graph.</h1>
+    <h1>Convert a graph object into a <code>network</code> object.</h1>
     
-    <div class="hidden name"><code>sna_get_vert_attrs.Rd</code></div>
+    <div class="hidden name"><code>as_network.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Extract vertex attributes from a graph.</p>
+    <p>Convert a graph object into a <code>network</code> object.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>sna_get_vert_attrs</span>(<span class='no'>x</span>)
+    <pre class="usage"><span class='fu'>as_network</span>(<span class='no'>x</span>)
 
 <span class='co'># S3 method for igraph</span>
-<span class='fu'>sna_get_vert_attrs</span>(<span class='no'>ig</span>)
+<span class='fu'>as_network</span>(<span class='no'>x</span>)
+
+<span class='co'># S3 method for default</span>
+<span class='fu'>as_network</span>(<span class='no'>x</span>)
 
 <span class='co'># S3 method for network</span>
-<span class='fu'>sna_get_vert_attrs</span>(<span class='no'>nw</span>)</pre>
+<span class='fu'>as_network</span>(<span class='no'>x</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>An <code>igraph</code> or <code>network</code> object.</p></td>
+      <td><p>A graph object.<code>igraph</code> objects are supported.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A named <code>list</code> of <code>x</code>'s vertex attributes.</p>
+    <p>A <code>network</code> object.</p>
     
 
   </div>
@@ -152,10 +155,6 @@
       
       <li><a href="#value">Value</a></li>
           </ul>
-
-    <h2>Author</h2>
-    
-Brendan Knapp <a href='mailto:brendan.g.knapp@gmail.com'>brendan.g.knapp@gmail.com</a>
 
   </div>
 </div>

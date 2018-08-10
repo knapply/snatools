@@ -7,15 +7,15 @@
 #' @author Brendan Knapp \email{brendan.g.knapp@@gmail.com}
 #'
 #' @export
-sna_get_vert_attrs <- function(x) {
-  UseMethod("sna_get_vert_attrs")
+vrt_get_attrs <- function(x) {
+  UseMethod("vrt_get_attrs")
 }
 
-#' @rdname sna_get_vert_attrs
+#' @rdname vrt_get_attrs
 #' 
 #' @export
 #' 
-sna_get_vert_attrs.igraph <- function(ig) {
+vrt_get_attrs.igraph <- function(ig) {
   out <- igraph::vertex_attr(ig)
   if(!"name" %in% names(out)) {
     out$name <- seq_len(igraph::vcount(ig))
@@ -25,11 +25,11 @@ sna_get_vert_attrs.igraph <- function(ig) {
   out[order(names(out))]
 }
 
-#' @rdname sna_get_vert_attrs
+#' @rdname vrt_get_attrs
 #' 
 #' @export
 #' 
-sna_get_vert_attrs.network <- function(nw) {
+vrt_get_attrs.network <- function(nw) {
   out <- lapply(nw$val, `[`)
   out <- do.call(rbind, out)
   out_names <- colnames(out)

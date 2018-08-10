@@ -78,7 +78,7 @@
   <a href="../reference/index.html">
     <span class="fa fa-file-code-o"></span>
      
-    Functions
+    Documentation
   </a>
 </li>
       </ul>
@@ -136,20 +136,20 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-conversion" class="hasAnchor"><a href="#section-conversion" class="anchor"></a>Conversion</h2>
-          <p class="section-desc"><p>Safely convert objects from one graph class to another.</p></p>
+          <h2 id="section-class-conversion" class="hasAnchor"><a href="#section-class-conversion" class="anchor"></a>Class Conversion</h2>
+          <p class="section-desc"><p>Safely convert objects between <code>igraph</code> and <code>network</code> classes.</p></p>
         </th>
       </tr>
       <tr>
         
         <td>
-          <p><code><a href="sna_as_igraph.html">sna_as_igraph()</a></code> </p>
+          <p><code><a href="as_igraph.html">as_igraph()</a></code> </p>
         </td>
-        <td><p>Convert <code>network</code> objects to <code>igraph</code>.</p></td>
+        <td><p>Convert graph objects to <code>igraph</code>.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="sna_as_network.html">sna_as_network()</a></code> </p>
+          <p><code><a href="as_network.html">as_network()</a></code> </p>
         </td>
         <td><p>Convert a graph object into a <code>network</code> object.</p></td>
       </tr>
@@ -157,25 +157,25 @@
       <tr>
         <th colspan="2">
           <h2 id="section-attributes" class="hasAnchor"><a href="#section-attributes" class="anchor"></a>Attributes</h2>
-          <p class="section-desc"><p>Obtain graph, vertex, and edge attributes in consistent formats.</p></p>
+          <p class="section-desc"><p>Obtain network, vertex, and edge attributes in consistent formats.</p></p>
         </th>
       </tr>
       <tr>
         
         <td>
-          <p><code><a href="sna_get_edge_attrs.html">sna_get_edge_attrs()</a></code> </p>
+          <p><code><a href="edg_get_attrs.html">edg_get_attrs()</a></code> </p>
         </td>
-        <td><p>Extract edge attributes from a graph.</p></td>
+        <td><p>Extract edge attributes.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="sna_get_graph_attrs.html">sna_get_graph_attrs()</a></code> </p>
+          <p><code><a href="net_get_attrs.html">net_get_attrs()</a></code> </p>
         </td>
-        <td><p>Extract graph-level attributes from a graph.</p></td>
+        <td><p>Extract graph attributes.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="sna_get_vert_attrs.html">sna_get_vert_attrs()</a></code> </p>
+          <p><code><a href="vrt_get_attrs.html">vrt_get_attrs()</a></code> </p>
         </td>
         <td><p>Extract vertex attributes from a graph.</p></td>
       </tr>
@@ -183,29 +183,43 @@
       <tr>
         <th colspan="2">
           <h2 id="section-representations" class="hasAnchor"><a href="#section-representations" class="anchor"></a>Representations</h2>
-          <p class="section-desc"><p>Obtain graph representations in consistent formats.</p></p>
+          <p class="section-desc"><p>Obtain network representations in consistent formats.</p></p>
         </th>
       </tr>
       <tr>
         
         <td>
-          <p><code><a href="sna_get_edgelist.html">sna_get_edgelist()</a></code> </p>
+          <p><code><a href="rep_as_edgelist.html">rep_as_edgelist()</a></code> </p>
         </td>
-        <td><p>Build a graph's edge list representation.</p></td>
+        <td><p>Build a networks's edge list representation.</p></td>
       </tr>
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-cleaning" class="hasAnchor"><a href="#section-cleaning" class="anchor"></a>Cleaning</h2>
-          <p class="section-desc"><p>Clean graph internals to enforce stricter attribute data types and accurate metadata.</p></p>
+          <h2 id="section-carpentry" class="hasAnchor"><a href="#section-carpentry" class="anchor"></a>Carpentry</h2>
+          <p class="section-desc"><p>Clean network internals to enforce stricter attribute data types and accurate metadata.</p></p>
         </th>
       </tr>
       <tr>
         
         <td>
-          <p><code><a href="sna_clean_graph.html">sna_clean_graph()</a></code> </p>
+          <p><code><a href="strictify.html">strictify()</a></code> </p>
         </td>
         <td><p>Clean a graph object's attributes in a standardized fashion.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-foreign-file-formats" class="hasAnchor"><a href="#section-foreign-file-formats" class="anchor"></a>Foreign File Formats</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="read_ucinet.html">read_ucinet()</a></code> </p>
+        </td>
+        <td><p>Read UCINET's .dl files</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -227,6 +241,20 @@
         </td>
         <td><p>Strict object comparison.</p></td>
       </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-miscellaneous" class="hasAnchor"><a href="#section-miscellaneous" class="anchor"></a>Miscellaneous</h2>
+          <p class="section-desc"><p>Helper functions exported for convenience.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="character-manipulation-tools.html">txt_detect()</a></code> <code><a href="character-manipulation-tools.html">txt_extract()</a></code> <code><a href="character-manipulation-tools.html">txt_extract_all()</a></code> <code><a href="character-manipulation-tools.html">txt_replace()</a></code> <code><a href="character-manipulation-tools.html">txt_replace_all()</a></code> <code><a href="character-manipulation-tools.html">txt_remove()</a></code> <code><a href="character-manipulation-tools.html">txt_remove_all()</a></code> <code><a href="character-manipulation-tools.html">txt_split()</a></code> <code><a href="character-manipulation-tools.html">txt_trim()</a></code> <code><a href="character-manipulation-tools.html">txt_squish()</a></code> <code><a href="character-manipulation-tools.html">txt_to_lower()</a></code> <code><a href="character-manipulation-tools.html">txt_to_upper()</a></code> <code><a href="character-manipulation-tools.html">txt_sub()</a></code> <code><a href="character-manipulation-tools.html">txt_subset()</a></code> <code><a href="character-manipulation-tools.html">txt_which()</a></code> <code><a href="character-manipulation-tools.html">txt_to_title()</a></code> </p>
+        </td>
+        <td><p>Text manipulation tools.</p></td>
+      </tr>
     </tbody>
     </table>
   </div>
@@ -235,11 +263,13 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#section-snatools">snatools</a></li>
-      <li><a href="#section-conversion">Conversion</a></li>
+      <li><a href="#section-class-conversion">Class Conversion</a></li>
       <li><a href="#section-attributes">Attributes</a></li>
       <li><a href="#section-representations">Representations</a></li>
-      <li><a href="#section-cleaning">Cleaning</a></li>
+      <li><a href="#section-carpentry">Carpentry</a></li>
+      <li><a href="#section-foreign-file-formats">Foreign File Formats</a></li>
       <li><a href="#section-operators">Operators</a></li>
+      <li><a href="#section-miscellaneous">Miscellaneous</a></li>
     </ul>
   </div>
 </div>

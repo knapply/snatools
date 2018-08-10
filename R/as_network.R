@@ -5,32 +5,32 @@
 #' @return A `network` object.
 #' 
 #' @export
-sna_as_network <- function(x) {
-  UseMethod("sna_as_network")
+as_network <- function(x) {
+  UseMethod("as_network")
 }
 
-#' @rdname sna_as_network
+#' @rdname as_network
 #' 
 #' @export
 #' 
-sna_as_network.igraph <- function(ig) {
-  graph_attrs <- sna_get_graph_attrs(ig)
-  vert_attrs <- sna_get_vert_attrs(ig)
-  edge_attrs <- sna_get_edge_attrs(ig)
-  el <- sna_get_edgelist(ig)
+as_network.igraph <- function(x) {
+  graph_attrs <- net_get_attrs(x)
+  vert_attrs <- vrt_get_attrs(x)
+  edge_attrs <- edg_get_attrs(x)
+  el <- rep_as_edgelist(x)
   
   if("type" %in% names(vert_attrs)) {
-    bipartite_arg <- length(which(!igraph::V(ig)$type))
+    bipartite_arg <- length(which(!igraph::V(x)$type))
     vert_attrs$type <- NULL
   } else {
     bipartite_arg <- FALSE
   }
   
   args <- list(n = unique(vapply(vert_attrs, length, integer(1), USE.NAMES = FALSE)),
-               igraph::is_directed(ig),
+               igraph::is_directed(x),
                hyper = FALSE,
-               loops = any(igraph::is.loop(ig)),
-               multiple = any(igraph::is.multiple(ig)),
+               loops = any(igraph::is.loop(x)),
+               multiple = any(igraph::is.multiple(x)),
                bipartite = bipartite_arg)
   
   out <- do.call(network::network.initialize, args)
@@ -57,4 +57,22 @@ sna_as_network.igraph <- function(ig) {
   out
 }
 
+#' @rdname as_network
+#' 
+#' @export
+#' 
+as_network.default <- function (x) {
+    tryCatch({
+        network::as.network(x)
+      }, error = function(e) stop("Objects of ", class(x)[[1]],
+        " are not supported at this time.", call. = FALSE))
+}
+
+#' @rdname as_network
+#' 
+#' @export
+#' 
+as_network.network <- function(x) {
+  x
+}
 

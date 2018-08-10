@@ -34,21 +34,31 @@ knitr::opts_chunk$set(echo = TRUE)
 library(snatools)
 
 network_obj <- snatools:::build_test_graph("nw") %>% 
-  sna_clean_graph()
+  strictify()
 
 igraph_obj <- snatools:::build_test_graph("ig") %>% 
-  sna_clean_graph()
+  strictify()
 
-network_obj %==% sna_as_network(sna_as_igraph(network_obj))
+network_obj %==% as_network(as_igraph(network_obj)) # identical?
 
-igraph_obj %==% sna_as_igraph(sna_as_network(igraph_obj))
+igraph_obj %==% as_igraph(as_network(igraph_obj)) # identical?
 ```
 
+# Definitions
 
-# {`testthat`}!
+* graph
+    + intentionally generic reference to graph/network objects of _any class_
+* `igraph`
+    + objects of class `igraph`
+* `network`
+    + objects of class `network`
+
+# Test Results
 
 ```{r}
-devtools::test()
+test_res <- suppressMessages(capture.output(devtools::test()))
+
+for(i in test_res) cat(i, "\n")
 ```
 
 
