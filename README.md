@@ -4,7 +4,7 @@ snatools
 ========
 
 <!-- <img src="http://res.cloudinary.com/syknapptic/image/upload/v1516468904/logo_rd5ifq.png" align="right" height="160px" width="240px" /> -->
-[![](https://img.shields.io/badge/devel%20version-0.1-red.svg)](https://github.com/knapply/snatools)
+[![](https://img.shields.io/badge/devel%20version-0.0.0.9-red.svg)](https://github.com/knapply/snatools)
 
 <br>
 
@@ -12,10 +12,10 @@ snatools
 library(snatools)
 
 network_obj <- snatools:::build_test_graph("nw") %>% 
-  strictify()
+  clean_graph()
 
 igraph_obj <- snatools:::build_test_graph("ig") %>% 
-  strictify()
+  clean_graph()
 
 network_obj %==% as_network(as_igraph(network_obj)) # identical?
 #> [1] TRUE
@@ -71,7 +71,7 @@ v |  2       | Round trip conversion: directed graphs
 v |  2       | Round trip conversion: bipartite graphs 
 #>  
 #> == Results ===================================================================== 
-#> Duration: 0.2 s 
+#> Duration: 0.1 s 
 #>  
 #> OK:       12 
 #> Failed:   0 

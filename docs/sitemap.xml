@@ -13,10 +13,31 @@
     <loc>https://knapply.github.io/snatools//reference/character-manipulation-tools.html</loc>
   </url>
   <url>
-    <loc>https://knapply.github.io/snatools//reference/edg_get_attrs.html</loc>
+    <loc>https://knapply.github.io/snatools//reference/clean_graph.html</loc>
   </url>
   <url>
-    <loc>https://knapply.github.io/snatools//reference/net_get_attrs.html</loc>
+    <loc>https://knapply.github.io/snatools//reference/edg_attrs.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/edg_attr_names.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/florence.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/mix_ei_index.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/mix_mixing_matrix.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/monastery.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/net_attrs.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/net_attr_names.html</loc>
   </url>
   <url>
     <loc>https://knapply.github.io/snatools//reference/pipe.html</loc>
@@ -25,18 +46,24 @@
     <loc>https://knapply.github.io/snatools//reference/read_ucinet.html</loc>
   </url>
   <url>
+    <loc>https://knapply.github.io/snatools//reference/rep_as_adjacency_matrix.html</loc>
+  </url>
+  <url>
     <loc>https://knapply.github.io/snatools//reference/rep_as_edgelist.html</loc>
   </url>
   <url>
     <loc>https://knapply.github.io/snatools//reference/snatools.html</loc>
   </url>
   <url>
+    <loc>https://knapply.github.io/snatools//reference/southern_women.html</loc>
+  </url>
+  <url>
     <loc>https://knapply.github.io/snatools//reference/strict-compare.html</loc>
   </url>
   <url>
-    <loc>https://knapply.github.io/snatools//reference/strictify.html</loc>
+    <loc>https://knapply.github.io/snatools//reference/vrt_attrs.html</loc>
   </url>
   <url>
-    <loc>https://knapply.github.io/snatools//reference/vrt_get_attrs.html</loc>
+    <loc>https://knapply.github.io/snatools//reference/vrt_attr_names.html</loc>
   </url>
 </urlset>

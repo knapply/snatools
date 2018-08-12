@@ -5,13 +5,13 @@
 \alias{as_network.igraph}
 \alias{as_network.default}
 \alias{as_network.network}
-\title{Convert a graph object into a \code{network} object.}
+\title{Convert a \code{igraph} objects to \code{network}.}
 \usage{
-as_network(x)
+as_network(x, ...)
 
 \method{as_network}{igraph}(x)
 
-\method{as_network}{default}(x)
+\method{as_network}{default}(x, ...)
 
 \method{as_network}{network}(x)
 }
@@ -22,5 +22,5 @@ as_network(x)
 A \code{network} object.
 }
 \description{
-Convert a graph object into a \code{network} object.
+Convert a \code{igraph} objects to \code{network}.
 }

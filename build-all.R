@@ -3,6 +3,7 @@ if("snatools" %in% installed.packages()[, "Package"]) {
 }
 
 if(dir.exists("docs")) {
+  pkgdown::clean_site()
   unlink("docs", recursive = TRUE, force = TRUE)
 }
 

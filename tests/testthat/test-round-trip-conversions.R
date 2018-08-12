@@ -1,9 +1,9 @@
 context("Round trip conversion: undirected graphs")
 
 ig_undir <- build_test_graph("ig", direct = FALSE) %>% 
-  strictify()
+  clean_graph()
 nw_undir <- build_test_graph("nw", direct = FALSE) %>% 
-  strictify()
+  clean_graph()
 
 test_that("undirected igraph makes round trip unchanged", {
   expect_true(ig_undir %==% as_igraph(as_network(ig_undir)))
@@ -16,9 +16,9 @@ test_that("undirected network makes round trip unchanged", {
 context("Round trip conversion: directed graphs")
 
 ig_dir <- build_test_graph("ig") %>% 
-  strictify()
+  clean_graph()
 nw_dir <- build_test_graph("nw") %>% 
-  strictify()
+  clean_graph()
 
 test_that("undirected igraph makes round trip unchanged", {
   expect_true(ig_dir %==% as_igraph(as_network(ig_dir)))
@@ -31,11 +31,11 @@ test_that("undirected network makes round trip unchanged", {
 context("Round trip conversion: bipartite graphs")
 
 ig_bipart <- build_test_graph("ig", bipart = TRUE) %>% 
-  strictify()
+  clean_graph()
 
 target_url <- "http://vlado.fmf.uni-lj.si/pub/networks/data/2mode/divorce.net"
 nw_bipart <- snatools::divorce_nw %>% 
-  strictify()
+  clean_graph()
 
 test_that("undirected igraph makes round trip unchanged", {
   expect_true(ig_bipart %==% as_igraph(as_network(ig_bipart)))

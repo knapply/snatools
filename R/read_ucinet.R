@@ -88,19 +88,19 @@ read_ucinet <- function(path, directed = NULL) {
 
 
 
-# "http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/sampson.dat" %>% 
-#   read_ucinet() %>% 
-#   as_igraph()
-# 
-# 
+# "http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/sampson.dat" %>%
+  # read_ucinet() %>%
+  # as_igraph()
+
+
 # "http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/davis.dat" %>% 
 #   read_ucinet() %>% 
 #   as_igraph()
-# 
+
 # "http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/newfrat.dat" %>% 
 #   read_ucinet() %>% 
 #   as_igraph()
-# 
+
 # "http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/wiring.dat" %>% 
 #   read_ucinet() %>% 
 #   as_igraph()

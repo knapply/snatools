@@ -145,13 +145,13 @@
         <td>
           <p><code><a href="as_igraph.html">as_igraph()</a></code> </p>
         </td>
-        <td><p>Convert graph objects to <code>igraph</code>.</p></td>
+        <td><p>Convert <code>network</code> objects to <code>igraph</code>.</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="as_network.html">as_network()</a></code> </p>
         </td>
-        <td><p>Convert a graph object into a <code>network</code> object.</p></td>
+        <td><p>Convert a <code>igraph</code> objects to <code>network</code>.</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -163,21 +163,59 @@
       <tr>
         
         <td>
-          <p><code><a href="edg_get_attrs.html">edg_get_attrs()</a></code> </p>
-        </td>
-        <td><p>Extract edge attributes.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="net_get_attrs.html">net_get_attrs()</a></code> </p>
+          <p><code><a href="net_attrs.html">net_attrs()</a></code> </p>
         </td>
         <td><p>Extract graph attributes.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="vrt_get_attrs.html">vrt_get_attrs()</a></code> </p>
+          <p><code><a href="net_attr_names.html">net_attr_names()</a></code> </p>
+        </td>
+        <td><p>List a network/graph's attribute names.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="edg_attrs.html">edg_attrs()</a></code> </p>
+        </td>
+        <td><p>Extract edge attributes.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="edg_attr_names.html">edg_attr_names()</a></code> </p>
+        </td>
+        <td><p>List edge attribute names.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="vrt_attrs.html">vrt_attrs()</a></code> </p>
         </td>
         <td><p>Extract vertex attributes from a graph.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="vrt_attr_names.html">vrt_attr_names()</a></code> </p>
+        </td>
+        <td><p>List vertex attribute names.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-mixing" class="hasAnchor"><a href="#section-mixing" class="anchor"></a>Mixing</h2>
+          <p class="section-desc"><p>Procedures addressing mixing patterns, homophily/heterophily, and integration/segregation.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="mix_mixing_matrix.html">mix_mixing_matrix()</a></code> </p>
+        </td>
+        <td><p>Build a network/graph's mixing matrix.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="mix_ei_index.html">mix_ei_index()</a></code> </p>
+        </td>
+        <td><p>Krackhardt's E-I Index</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -187,6 +225,12 @@
         </th>
       </tr>
       <tr>
+        
+        <td>
+          <p><code><a href="rep_as_adjacency_matrix.html">rep_as_adjacency_matrix()</a></code> </p>
+        </td>
+        <td><p>Build a network's adjacency matrix representation</p></td>
+      </tr><tr>
         
         <td>
           <p><code><a href="rep_as_edgelist.html">rep_as_edgelist()</a></code> </p>
@@ -203,9 +247,9 @@
       <tr>
         
         <td>
-          <p><code><a href="strictify.html">strictify()</a></code> </p>
+          <p><code><a href="clean_graph.html">clean_graph()</a></code> </p>
         </td>
-        <td><p>Clean a graph object's attributes in a standardized fashion.</p></td>
+        <td><p>Clean a graph object's internals and standardize attributes.</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -220,6 +264,32 @@
           <p><code><a href="read_ucinet.html">read_ucinet()</a></code> </p>
         </td>
         <td><p>Read UCINET's .dl files</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-data" class="hasAnchor"><a href="#section-data" class="anchor"></a>Data</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="florence.html">florence</a></code> </p>
+        </td>
+        <td><p>Padgett's Florentine Families</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="monastery.html">monastery</a></code> </p>
+        </td>
+        <td><p>Sampson's Monastery</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="southern_women.html">southern_women</a></code> </p>
+        </td>
+        <td><p>Davis' Southern Women</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -265,9 +335,11 @@
       <li><a href="#section-snatools">snatools</a></li>
       <li><a href="#section-class-conversion">Class Conversion</a></li>
       <li><a href="#section-attributes">Attributes</a></li>
+      <li><a href="#section-mixing">Mixing</a></li>
       <li><a href="#section-representations">Representations</a></li>
       <li><a href="#section-carpentry">Carpentry</a></li>
       <li><a href="#section-foreign-file-formats">Foreign File Formats</a></li>
+      <li><a href="#section-data">Data</a></li>
       <li><a href="#section-operators">Operators</a></li>
       <li><a href="#section-miscellaneous">Miscellaneous</a></li>
     </ul>

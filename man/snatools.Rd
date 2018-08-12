@@ -6,11 +6,16 @@
 \alias{snatools-package}
 \title{snatools: An R toolkit to bridge graph classes and streamline network analytic workflows.}
 \description{
-What the package does (one paragraph).
+A collection of functions and data sets to simplify programmatic network analyis.
+It conveniently bridges \code{igraph} and the \code{network} classes in in a way that is more robust
+\emph{and} more flexible than other available methods. The goals are to simplify network-centric
+workflows, improve analyst efficiency, and reduce the cognitive load of network newcomers
+and those instructing them.
 }
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://github.com/knapply/snatools}
   \item \url{https://knapply.github.io/snatools/}
   \item Report bugs at \url{https://github.com/knapply/snatools/issues}
 }

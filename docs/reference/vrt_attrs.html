@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Strict object comparison. — %==% • snatools</title>
+<title>Extract vertex attributes from a graph. — vrt_attrs • snatools</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,15 +30,9 @@
 
 
 
-<meta property="og:title" content="Strict object comparison. — %==%" />
+<meta property="og:title" content="Extract vertex attributes from a graph. — vrt_attrs" />
 
-<meta property="og:description" content="
-This infix operator
-provides stricter comparisons than ==.
-prevents silent type conversions.
-offers a method to easily compare igraph objects.
-
-" />
+<meta property="og:description" content="Extract vertex attributes from a graph." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -117,61 +111,43 @@ offers a method to easily compare igraph objects.
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Strict object comparison.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/operators.R'><code>R/operators.R</code></a></small>
-    <div class="hidden name"><code>strict-compare.Rd</code></div>
+    <h1>Extract vertex attributes from a graph.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/vrt_.R'><code>R/vrt_.R</code></a></small>
+    <div class="hidden name"><code>vrt_attrs.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <ul>
-<li><p>This infix operator</p><ul>
-<li><p>provides stricter comparisons than <code>==</code>.</p></li>
-<li><p>prevents silent type conversions.</p></li>
-<li><p>offers a method to easily compare <code>igraph</code> objects.</p></li>
-</ul></li>
-</ul>
+    <p>Extract vertex attributes from a graph.</p>
     
     </div>
 
-    <pre class="usage">lhs %==% rhs
+    <pre class="usage"><span class='fu'>vrt_attrs</span>(<span class='no'>x</span>, <span class='kw'>enforce_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>exclude_na</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-# S3 method for default
-%==%(lhs, rhs)
+<span class='co'># S3 method for igraph</span>
+<span class='fu'>vrt_attrs</span>(<span class='no'>ig</span>, <span class='kw'>enforce_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>exclude_na</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-# S3 method for igraph
-%==%(lhs, rhs)</pre>
+<span class='co'># S3 method for network</span>
+<span class='fu'>vrt_attrs</span>(<span class='no'>x</span>, <span class='kw'>enforce_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>exclude_na</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>lhs</th>
-      <td><p>left-hand side</p></td>
+      <th>x</th>
+      <td><p>An <code>igraph</code> or <code>network</code> object.</p></td>
     </tr>
     <tr>
-      <th>rhs</th>
-      <td><p>right-hand side</p></td>
+      <th>exclude_na</th>
+      <td></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>logical</code> Whether <code>lhs</code> and <code>rhs</code> are identical.</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/base/topics/identical'>base::identical()</a></code></p></div>
+    <p>A named <code>list</code> of <code>x</code>'s vertex attributes.</p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='fl'>TRUE</span> <span class='kw'>==</span> <span class='fl'>1</span></div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fl'>TRUE</span> <span class='kw'>%==%</span> <span class='fl'>1</span></div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
-<span class='fl'>NA</span> <span class='kw'>==</span> <span class='fl'>NA_character_</span></div><div class='output co'>#&gt; [1] NA</div><div class='input'><span class='fl'>NA</span> <span class='kw'>%==%</span> <span class='fl'>NA_character_</span></div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
-<span class='kw'>NULL</span> <span class='kw'>==</span> <span class='fl'>NA_integer_</span></div><div class='output co'>#&gt; logical(0)</div><div class='input'><span class='kw'>NULL</span> <span class='kw'>%==%</span> <span class='fl'>NA_integer_</span></div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
-<span class='fl'>NA</span> <span class='kw'>==</span> <span class='st'>"NA"</span></div><div class='output co'>#&gt; [1] NA</div><div class='input'><span class='fl'>NA</span> <span class='kw'>%==%</span> <span class='st'>"NA"</span></div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
-<span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/make_graph'>graph</a></span>(<span class='st'>"Zachary"</span>) <span class='kw'>%==%</span> <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/make_graph'>graph</a></span>(<span class='st'>"Zachary"</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -179,11 +155,7 @@ offers a method to easily compare igraph objects.
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+          </ul>
 
     <h2>Author</h2>
     

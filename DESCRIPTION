@@ -11,9 +11,9 @@ Imports:
     network
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
-URL: https://knapply.github.io/snatools/
+URL: https://github.com/knapply/snatools, https://knapply.github.io/snatools/
 BugReports: https://github.com/knapply/snatools/issues
 LazyData: true
 Suggests: testthat
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.0.9000
 Roxygen: list(markdown = TRUE)

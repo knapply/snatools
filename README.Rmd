@@ -21,7 +21,7 @@ knitr::opts_chunk$set(echo = TRUE)
 # snatools
 <!-- <img src="http://res.cloudinary.com/syknapptic/image/upload/v1516468904/logo_rd5ifq.png" align="right" height="160px" width="240px" /> -->
 
-[![](https://img.shields.io/badge/devel%20version-0.1-red.svg)](https://github.com/knapply/snatools)
+[![](https://img.shields.io/badge/devel%20version-0.0.0.9-red.svg)](https://github.com/knapply/snatools)
 
 <br>
 
@@ -34,10 +34,10 @@ knitr::opts_chunk$set(echo = TRUE)
 library(snatools)
 
 network_obj <- snatools:::build_test_graph("nw") %>% 
-  strictify()
+  clean_graph()
 
 igraph_obj <- snatools:::build_test_graph("ig") %>% 
-  strictify()
+  clean_graph()
 
 network_obj %==% as_network(as_igraph(network_obj)) # identical?
 
