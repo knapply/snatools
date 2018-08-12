@@ -6,11 +6,11 @@
 \alias{mix_mixing_matrix.network}
 \title{Build a network/graph's mixing matrix.}
 \usage{
-mix_mixing_matrix(x, vrt_attr)
+mix_mixing_matrix(x, vrt_attr, drop_loops = FALSE)
 
-\method{mix_mixing_matrix}{igraph}(x, vrt_attr)
+\method{mix_mixing_matrix}{igraph}(x, vrt_attr, drop_loops = FALSE)
 
-\method{mix_mixing_matrix}{network}(x, vrt_attr)
+\method{mix_mixing_matrix}{network}(x, vrt_attr, drop_loops = FALSE)
 }
 \arguments{
 \item{x}{An \code{igraph} or \code{network} object.}

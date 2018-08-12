@@ -25,9 +25,9 @@ net_attrs.igraph <- function(x) {
 #' 
 #' @export
 #' 
-net_attrs.network <- function(x) {
-  attr_names <- net_attr_names(x)
-  out <- lapply(attr_names, function(x) x$gal[[x]])
+net_attrs.network <- function(nw) {
+  attr_names <- names(nw$gal)
+  out <- lapply(attr_names, function(x) nw$gal[[x]])
   names(out) <- attr_names
   metadata <- c("n", "directed", "hyper", "multiple", "bipartite", "mnext")
   out <- out[!names(out) %in% metadata]
@@ -35,19 +35,23 @@ net_attrs.network <- function(x) {
     return(NULL)
   }
   out
+  # out[order(names(out))]
 }
 
-# net_attrs.network <- function(nw) {
-#   attr_names <- names(nw$gal)
-#   out <- lapply(attr_names, function(x) nw$gal[[x]])
+# net_attrs.network <- function(x) {
+#   attr_names <- net_attr_names(x)
+#   if(length(attr_names) > 1L){
+#     out <- lapply(attr_names, function(x) x$gal[[x]])
+#   } else {
+#     out <- x$gal[[attr_names]]
+#   }
 #   names(out) <- attr_names
-#   junk_attrs <- c("n", "directed", "hyper", "multiple", "bipartite", "mnext")
-#   out <- out[!names(out) %in% junk_attrs]
-#   
+#   metadata <- c("n", "directed", "hyper", "multiple", "bipartite", "mnext")
+#   out <- out[!names(out) %in% metadata]
 #   if(length(unlist(out)) == 0L) {
 #     return(NULL)
 #   }
-#   out[order(names(out))]
+#   out
 # }
 
 
@@ -104,4 +108,3 @@ net_attr_names.network <- function(x, exclude_metadata = TRUE) {
   metadata <- c("n", "directed", "hyper", "multiple", "bipartite", "mnext")
   out[!out %in% metadata]
 }
-

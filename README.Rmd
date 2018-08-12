@@ -56,9 +56,7 @@ igraph_obj %==% as_igraph(as_network(igraph_obj)) # identical?
 # Test Results
 
 ```{r}
-test_res <- suppressMessages(capture.output(devtools::test()))
-
-for(i in test_res) cat(i, "\n")
+devtools::test()
 ```
 
 
