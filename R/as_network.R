@@ -1,11 +1,11 @@
-#' Convert a graph object into a `network` object.
+#' Convert a `igraph` objects to `network`.
 #' 
 #' @param x A graph object.`igraph` objects are supported.
 #' 
 #' @return A `network` object.
 #' 
 #' @export
-as_network <- function(x) {
+as_network <- function(x, ...) {
   UseMethod("as_network")
 }
 
@@ -14,9 +14,28 @@ as_network <- function(x) {
 #' @export
 #' 
 as_network.igraph <- function(x) {
-  graph_attrs <- net_get_attrs(x)
-  vert_attrs <- vrt_get_attrs(x)
-  edge_attrs <- edg_get_attrs(x)
+  vert_attr_names <- vrt_attr_names(x)
+  if("vertex.names" %in% vert_attr_names){
+    if("name" %in% vert_attr_names) {
+      stop('\n`x` is an `igraph` object, but has vertex attributes "vertex.names".\n\n',
+         'For `igraph` objects, the attribute name that refers to vertex names should be "name".\n\n',
+         'For `network` objects, the attribute name that refers to vertex names should be "vertex.names".\n\n',
+         'Since `x` has both, it is ambiguous which attribute should be used for vertex names.\n\n',
+         'See `?igraph::set_vertex_attr` and `?igraph::delete_vertex_attr` to remove the ambiguity.',
+         call. = FALSE)
+    } else {
+      warning('\n`x` is an `igraph` object, but has vertex attributes "vertex.names" AND "name".\n\n',
+            'For `igraph` objects, the attribute name that refers to vertex names should be "name".\n\n',
+            'For `network` objects, the attribute name that refers to vertex names should be "vertex.names".\n\n',
+            'Since `x` does not contain a "name" vertex attribute, "vertex.names" is assumed to be intentional.\n\n',
+            'See `?igraph::set_vertex_attr` and `?igraph::delete_vertex_attr` to remove the ambiguity and prevent this warning.',
+            call. = FALSE)
+    }
+  }
+  graph_attrs <- net_attrs(x)
+  vert_attrs <- vrt_attrs(x)
+  names(vert_attrs)[names(vert_attrs) == "name"] <- "vertex.names"
+  edge_attrs <- edg_attrs(x)
   el <- rep_as_edgelist(x)
   
   if("type" %in% names(vert_attrs)) {
@@ -61,11 +80,17 @@ as_network.igraph <- function(x) {
 #' 
 #' @export
 #' 
-as_network.default <- function (x) {
+as_network.default <- function(x, ...) {
+  message("A method has not been implemented for `", class(x)[[1]], "` objects...\n",
+          "\ttrying `network::as.network()`...\n")
     tryCatch({
-        network::as.network(x)
-      }, error = function(e) stop("Objects of ", class(x)[[1]],
-        " are not supported at this time.", call. = FALSE))
+        network::as.network(x, ...)
+      },
+      error = function(e) {
+        stop("Objects of `", class(x)[[1]], "` are not supported.\n\n",
+             "Use ?igraph::`igraph-package` or ?network::`network-package` to learn about supported objects.",
+             call. = FALSE)
+      })
 }
 
 #' @rdname as_network

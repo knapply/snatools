@@ -93,3 +93,48 @@ rep_as_edgelist.network <- function(nw, use_names = FALSE) {
   vert_names <- vapply(nw$val, function(x) x[["vertex.names"]], character(1))
   matrix(vert_names[out], ncol = 2, dimnames = list(NULL, colnames(out)))
 }
+
+#' Build a network's adjacency matrix representation
+#' 
+#' @param x
+#' @param edg_attr
+#' @param sparse
+#' @param ...
+#' 
+#' @return `matrix` or `dgCMatrix`
+#' 
+#' @export
+#' 
+rep_as_adjacency_matrix <- function(x, edg_attr = NULL, sparse = FALSE, ...) {
+  UseMethod("rep_as_adjacency_matrix")
+}
+
+#' @rdname rep_as_adjacency_matrix
+#' 
+#' @export
+#' 
+rep_as_adjacency_matrix.igraph <- function(x, edg_attr = NULL, sparse = FALSE, ...) {
+  igraph::as_adjacency_matrix(x, attr = edg_attr, sparse = sparse, ...)
+}
+
+#' @rdname rep_as_adjacency_matrix
+#' 
+#' @export
+#' 
+rep_as_adjacency_matrix.network <- function(x, edg_attr = NULL, sparse = FALSE) {
+  out <- network::as.matrix.network.adjacency(x, attrname = edg_attr, ...)
+  if(!sparse) {
+    return(out)
+  }
+  Matrix::Matrix(out)
+}
+
+# rep_as_incidence_matrix <- function(x, edg_attr = NULL, sparse = FALSE, ...) {
+#   UseMethod("rep_as_incidence_matrix")
+# }
+# 
+# rep_as_incidence_matrix.igraph <- function(x, edg_attr = NULL, sparse = FALSE, ...) {
+#   igraph::as_incidence_matrix(attr = edg_attr, sparse = FALSE, ...)
+# }
+
+

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Strict object comparison. — %==% • snatools</title>
+<title>Padgett's Florentine Families — florence • snatools</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,15 +30,9 @@
 
 
 
-<meta property="og:title" content="Strict object comparison. — %==%" />
+<meta property="og:title" content="Padgett's Florentine Families — florence" />
 
-<meta property="og:description" content="
-This infix operator
-provides stricter comparisons than ==.
-prevents silent type conversions.
-offers a method to easily compare igraph objects.
-
-" />
+<meta property="og:description" content="Padgett's Florentine Families" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -117,77 +111,83 @@ offers a method to easily compare igraph objects.
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Strict object comparison.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/operators.R'><code>R/operators.R</code></a></small>
-    <div class="hidden name"><code>strict-compare.Rd</code></div>
+    <h1>Padgett's Florentine Families</h1>
+    <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/data.R'><code>R/data.R</code></a></small>
+    <div class="hidden name"><code>florence.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <ul>
-<li><p>This infix operator</p><ul>
-<li><p>provides stricter comparisons than <code>==</code>.</p></li>
-<li><p>prevents silent type conversions.</p></li>
-<li><p>offers a method to easily compare <code>igraph</code> objects.</p></li>
-</ul></li>
-</ul>
+    <p>Padgett's Florentine Families</p>
     
     </div>
 
-    <pre class="usage">lhs %==% rhs
+    <pre class="usage"><span class='no'>florence</span></pre>
+        
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-# S3 method for default
-%==%(lhs, rhs)
-
-# S3 method for igraph
-%==%(lhs, rhs)</pre>
+    <p><code>igraph</code></p>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>lhs</th>
-      <td><p>left-hand side</p></td>
-    </tr>
-    <tr>
-      <th>rhs</th>
-      <td><p>right-hand side</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
-    <p><code>logical</code> Whether <code>lhs</code> and <code>rhs</code> are identical.</p>
+    <p><a href='http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/ucidata.htm'>http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/ucidata.htm</a></p>
     
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/base/topics/identical'>base::identical()</a></code></p></div>
+    <p><strong>Background</strong>, <em>as described in UCINET IV's manual</em></p><ul>
+<li><p>Breiger &amp; Pattison (1986), in their discussion of local role analysis, use a
+subset of data on the social relations among Renaissance Florentine families
+(person aggregates) collected by John Padgett from historical documents. The two
+relations are business ties (PADGB - specifically, recorded financial ties such as
+loans, credits and joint partnerships) and marriage alliances (PADGM).</p></li>
+<li><p>As Breiger &amp; Pattison point out, the original data are symmetrically coded. This is
+acceptable perhaps for marital ties, but is unfortunate for the financial ties (which
+are almost certainly directed). To remedy this, the financial ties can be recoded as
+directed relations using some external measure of power - for instance, a measure of
+wealth. PADGW provides information on (1) each family's net wealth in 1427 (in
+thousands of lira); (2) the number of priorates (seats on the civic council) held
+between 1282- 1344; and (3) the total number of business or marriage ties in the
+total dataset of 116 families (see Breiger &amp; Pattison (1986), p 239).</p></li>
+</ul>
+    
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <ul>
+<li><p>Breiger R. and Pattison P. (1986). Cumulated social roles: The duality of persons and
+their algebras. Social Networks, 8, 215-256.</p></li>
+<li><p>Kent D. (1978). The rise of the Medici: Faction in Florence, 1426-1434. Oxford:
+Oxford University Press.</p></li>
+</ul>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='fl'>TRUE</span> <span class='kw'>==</span> <span class='fl'>1</span></div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fl'>TRUE</span> <span class='kw'>%==%</span> <span class='fl'>1</span></div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
-<span class='fl'>NA</span> <span class='kw'>==</span> <span class='fl'>NA_character_</span></div><div class='output co'>#&gt; [1] NA</div><div class='input'><span class='fl'>NA</span> <span class='kw'>%==%</span> <span class='fl'>NA_character_</span></div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
-<span class='kw'>NULL</span> <span class='kw'>==</span> <span class='fl'>NA_integer_</span></div><div class='output co'>#&gt; logical(0)</div><div class='input'><span class='kw'>NULL</span> <span class='kw'>%==%</span> <span class='fl'>NA_integer_</span></div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
-<span class='fl'>NA</span> <span class='kw'>==</span> <span class='st'>"NA"</span></div><div class='output co'>#&gt; [1] NA</div><div class='input'><span class='fl'>NA</span> <span class='kw'>%==%</span> <span class='st'>"NA"</span></div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
-<span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/make_graph'>graph</a></span>(<span class='st'>"Zachary"</span>) <span class='kw'>%==%</span> <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/make_graph'>graph</a></span>(<span class='st'>"Zachary"</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>snatools</span>)
+<span class='fu'>library</span>(<span class='no'>ggraph</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='fu'>data</span>(<span class='st'>"florence"</span>)
+
+<span class='no'>florence</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggraph/topics/ggraph'>ggraph</a></span>(<span class='kw'>layout</span> <span class='kw'>=</span> <span class='st'>"fr"</span>) +
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggraph/topics/geom_edge_fan'>geom_edge_fan</a></span>(<span class='fu'>aes</span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>type</span>)) +
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggraph/topics/geom_node_point'>geom_node_point</a></span>() +
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggraph/topics/geom_node_text'>geom_node_text</a></span>(<span class='fu'>aes</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>name</span>), <span class='kw'>repel</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>) +
+  <span class='fu'>theme_void</span>()</div><div class='img'><img src='florence-1.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
+      <li><a href="#format">Format</a></li>
 
-      <li><a href="#see-also">See also</a></li>
+      <li><a href="#source">Source</a></li>
+
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#references">References</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
-
-    <h2>Author</h2>
-    
-Brendan Knapp <a href='mailto:brendan.g.knapp@gmail.com'>brendan.g.knapp@gmail.com</a>
 
   </div>
 </div>

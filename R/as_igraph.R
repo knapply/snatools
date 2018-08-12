@@ -1,4 +1,4 @@
-#' Convert graph objects to `igraph`.
+#' Convert `network` objects to `igraph`.
 #' 
 #' @export
 #' 
@@ -11,10 +11,10 @@ as_igraph <- function(x, ...) {
 #' @export
 #' 
 as_igraph.network <- function(x) {
-  if (x$gal$hyper) {
+  if(x$gal$hyper) {
     stop("Hypergraphs are not supported.", call. = FALSE)
   }
-  graph_attrs <- net_get_attrs(x)
+  graph_attrs <- net_attrs(x)
   
   if(is.numeric(x$gal$bipartite)) {
     graph_attrs$loops <- NULL
@@ -23,8 +23,9 @@ as_igraph.network <- function(x) {
     network::set.vertex.attribute(x, "type", value = FALSE, v = false_nodes)
     network::set.vertex.attribute(x, "type", value = TRUE, v = true_nodes)
   }
-  vert_attrs <- vrt_get_attrs(x)
-  edge_attrs <- edg_get_attrs(x)
+  vert_attrs <- vrt_attrs(x)
+  names(vert_attrs)[names(vert_attrs) == "vertex.names"] <- "name"
+  edge_attrs <- edg_attrs(x)
   el <- rep_as_edgelist(x)
  
   out <- igraph::graph_from_edgelist(el, directed = x$gal$directed)
@@ -32,18 +33,24 @@ as_igraph.network <- function(x) {
   igraph::edge_attr(out) <- edge_attrs
   igraph::vertex_attr(out) <- vert_attrs
   
-  strictify(out)
+  clean_graph(out)
 }
 
 #' @rdname as_igraph
 #' 
 #' @export
 #' 
-as_igraph.default <- function (x, ...) {
+as_igraph.default <- function(x, ...) {
+  message("A method has not been implemented for `", class(x)[[1]], "` objects...\n",
+          "\ttrying `igraph::as.igraph()`...\n")
     tryCatch({
         igraph::as.igraph(x, ...)
-      }, error = function(e) stop("Objects of ", class(x)[[1]],
-        " are not supported at this time.", call. = FALSE))
+      },
+      error = function(e) {
+        stop("Objects of `", class(x)[[1]], "` are not supported.\n\n",
+             "Use ?igraph::`igraph-package` or ?network::`network-package` to learn about supported objects.",
+             call. = FALSE)
+      })
 }
 
 #' @rdname as_igraph
@@ -77,7 +84,6 @@ as_igraph.ucinet <- function(x, ...) {
                                                             mode = graph_mode[[i]],
                                                             weighted = is_weighted[[i]])
           } else {
-            message("here")
             out[[i]] <- igraph::graph_from_adjacency_matrix(adjmatrix = x[[i]],
                                                             mode = graph_mode[[i]])
           }
@@ -110,5 +116,5 @@ as_igraph.ucinet <- function(x, ...) {
       igraph::graph_from_incidence_matrix(incidence = x, weighted = is_weighted)
       )
   }
-  igraph::graph_from_incidence_matrix(incidence = x, weighted = is_weighted)
+  igraph::graph_from_incidence_matrix(incidence = x)
 }

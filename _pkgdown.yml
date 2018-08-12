@@ -26,23 +26,36 @@ reference:
   - title: Attributes
     desc: Obtain network, vertex, and edge attributes in consistent formats.
     contents:
-    - starts_with("edg_get_attrs")
-    - starts_with("net_get_attrs")
-    - starts_with("vrt_get_attrs")
+    - starts_with("net_")
+    - starts_with("edg_")
+    - starts_with("vrt_")
+    
+  - title: Mixing
+    desc: Procedures addressing mixing patterns, homophily/heterophily, and integration/segregation.
+    contents:
+    - mix_mixing_matrix
+    - mix_ei_index
 
   - title: Representations
     desc: Obtain network representations in consistent formats.
     contents:
-    - starts_with("rep_as_edgelist")
+    - rep_as_adjacency_matrix
+    - rep_as_edgelist
 
   - title: Carpentry
     desc: Clean network internals to enforce stricter attribute data types and accurate metadata.
     contents:
-    - strictify
+    - clean_graph
     
   - title: Foreign File Formats
     contents:
     - read_ucinet
+  
+  - title: Data
+    contents:
+    - florence
+    - monastery
+    - southern_women
 
   - title: Operators
     contents:

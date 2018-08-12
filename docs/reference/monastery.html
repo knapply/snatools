@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Extract edge attributes. — edg_get_attrs • snatools</title>
+<title>Sampson's Monastery — monastery • snatools</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Extract edge attributes. — edg_get_attrs" />
+<meta property="og:title" content="Sampson's Monastery — monastery" />
 
-<meta property="og:description" content="Extract edge attributes." />
+<meta property="og:description" content="Sampson's Monastery" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -111,47 +111,58 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Extract edge attributes.</h1>
-    
-    <div class="hidden name"><code>edg_get_attrs.Rd</code></div>
+    <h1>Sampson's Monastery</h1>
+    <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/data.R'><code>R/data.R</code></a></small>
+    <div class="hidden name"><code>monastery.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Extract edge attributes.</p>
+    <p>Sampson's Monastery</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>edg_get_attrs</span>(<span class='no'>x</span>)
+    <pre class="usage"><span class='no'>monastery</span></pre>
+        
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-<span class='co'># S3 method for igraph</span>
-<span class='fu'>edg_get_attrs</span>(<span class='no'>ig</span>)
-
-<span class='co'># S3 method for network</span>
-<span class='fu'>edg_get_attrs</span>(<span class='no'>nw</span>)</pre>
+    <p><code>list</code> of <code>igraph</code> objects</p>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>x</th>
-      <td><p>An <code>igraph</code> or <code>network</code> object.</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
-    <p>A named <code>list</code> of <code>x</code>'s edge attributes.</p>
+    <p><a href='http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/ucidata.htm'>http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/ucidata.htm</a></p>
+    
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <ul>
+<li><p>Breiger R., Boorman S. and Arabie P. (1975). An algorithm for clustering relational
+data with applications to social network analysis and comparison with
+multidimensional scaling. Journal of Mathematical Psychology, 12, 328-383.</p></li>
+<li><p>Sampson, S. (1969). Crisis in a cloister. Unpublished doctoral dissertation, Cornell
+University.</p></li>
+</ul>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>par</span>(<span class='kw'>mfrow</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>2</span>, <span class='fl'>5</span>))
+
+<span class='kw pkg'>snatools</span><span class='kw ns'>::</span><span class='no'><a href='https://knapply.github.io/snatools//reference/monastery.html'>monastery</a></span> <span class='kw'>%&gt;%</span>
+  <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/purrr/topics/imap'>iwalk</a></span>(~ <span class='fu'>plot</span>(<span class='no'>.x</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='no'>.y</span>, <span class='kw'>asp</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>edge.arrow.size</span> <span class='kw'>=</span> <span class='fl'>0.25</span>,
+               <span class='kw'>layout</span> <span class='kw'>=</span> <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/igraph/topics/layout_with_fr'>layout_with_fr</a></span>))</div><div class='img'><img src='monastery-1.png' alt='' width='700' height='433' /></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-          </ul>
+      <li><a href="#format">Format</a></li>
+
+      <li><a href="#source">Source</a></li>
+
+      <li><a href="#references">References</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Extract vertex attributes from a graph. — vrt_get_attrs • snatools</title>
+<title>List vertex attribute names. — vrt_attr_names • snatools</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Extract vertex attributes from a graph. — vrt_get_attrs" />
+<meta property="og:title" content="List vertex attribute names. — vrt_attr_names" />
 
-<meta property="og:description" content="Extract vertex attributes from a graph." />
+<meta property="og:description" content="List vertex attribute names." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -111,24 +111,24 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Extract vertex attributes from a graph.</h1>
-    
-    <div class="hidden name"><code>vrt_get_attrs.Rd</code></div>
+    <h1>List vertex attribute names.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/vrt_.R'><code>R/vrt_.R</code></a></small>
+    <div class="hidden name"><code>vrt_attr_names.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Extract vertex attributes from a graph.</p>
+    <p>List vertex attribute names.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>vrt_get_attrs</span>(<span class='no'>x</span>)
+    <pre class="usage"><span class='fu'>vrt_attr_names</span>(<span class='no'>x</span>, <span class='kw'>exclude_na</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'># S3 method for igraph</span>
-<span class='fu'>vrt_get_attrs</span>(<span class='no'>ig</span>)
+<span class='fu'>vrt_attr_names</span>(<span class='no'>x</span>, <span class='kw'>exclude_na</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
 <span class='co'># S3 method for network</span>
-<span class='fu'>vrt_get_attrs</span>(<span class='no'>nw</span>)</pre>
+<span class='fu'>vrt_attr_names</span>(<span class='no'>x</span>, <span class='kw'>exclude_na</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -137,11 +137,24 @@
       <th>x</th>
       <td><p>An <code>igraph</code> or <code>network</code> object.</p></td>
     </tr>
+    <tr>
+      <th>exclude_na</th>
+      <td><p><code>network</code> objects include a <code>"na"</code> attribute indicating whether
+a vertex is "missing" from the network. <code>exclude_na</code> determines whether or not to include
+this <code>"na"</code> attribute in returned names. <br /></p><ul>
+<li><p>Default: <code>TRUE</code></p></li>
+<li><p>If <code>exclude_na</code> is provided when <code>x</code> is an <code>igraph</code> object, it is ignored with a <code>warning</code>.</p></li>
+</ul></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A named <code>list</code> of <code>x</code>'s vertex attributes.</p>
+    <p><code>character</code> <code>vector</code>of <code>x</code>'s vertex attribute names.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/igraph/topics/vertex_attr_names'>igraph::vertex_attr_names()</a></code>, <code><a href='http://www.rdocumentation.org/packages/network/topics/attribute.methods'>network::list.vertex.attributes()</a></code></p></div>
     
 
   </div>
@@ -151,6 +164,8 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#see-also">See also</a></li>
           </ul>
 
     <h2>Author</h2>

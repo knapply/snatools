@@ -6,7 +6,7 @@
 \alias{as_igraph.default}
 \alias{as_igraph.igraph}
 \alias{as_igraph.ucinet}
-\title{Convert graph objects to \code{igraph}.}
+\title{Convert \code{network} objects to \code{igraph}.}
 \usage{
 as_igraph(x, ...)
 
@@ -19,5 +19,5 @@ as_igraph(x, ...)
 \method{as_igraph}{ucinet}(x, ...)
 }
 \description{
-Convert graph objects to \code{igraph}.
+Convert \code{network} objects to \code{igraph}.
 }
