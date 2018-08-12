@@ -8,7 +8,7 @@
 \usage{
 net_attrs(x)
 
-\method{net_attrs}{igraph}(ig)
+\method{net_attrs}{igraph}(x)
 
 \method{net_attrs}{network}(nw)
 }

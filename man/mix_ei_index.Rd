@@ -4,7 +4,7 @@
 \alias{mix_ei_index}
 \title{Krackhardt's E-I Index}
 \usage{
-mix_ei_index(x, vrt_attr)
+mix_ei_index(x, vrt_attr, drop_loops = FALSE)
 }
 \arguments{
 \item{x}{An \code{igraph} or \code{network} object.}
