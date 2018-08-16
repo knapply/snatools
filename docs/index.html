@@ -93,30 +93,151 @@
   <span class="kw">install.packages</span>(<span class="st">"devtools"</span>)
 }
 
-## Install {snatools} from GitHub.
+<span class="co"># Install {snatools} from GitHub.</span>
 devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"knapply/snatools"</span>)
 
-## Load {snatools}.
+<span class="co"># Load {snatools}.</span>
 <span class="kw">library</span>(snatools)</code></pre></div>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
+<div id="conversion" class="section level3">
+<h3 class="hasAnchor">
+<a href="#conversion" class="anchor"></a>Conversion</h3>
+<p>Here’s are example <code>igraph</code> and <code>network</code> objects. They are both fairly complicated and contain vertex and edge attributes of several storage types.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(snatools)
 
-network_obj &lt;-<span class="st"> </span>snatools<span class="op">:::</span><span class="kw">build_test_graph</span>(<span class="st">"nw"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="reference/clean_graph.html">clean_graph</a></span>()
+<span class="co"># igraph =================================================================================</span>
+ig_initial &lt;-<span class="st"> </span>snatools<span class="op">:::</span><span class="kw">build_test_graph</span>(<span class="st">"ig"</span>) 
+ig_initial
+<span class="co">#&gt; IGRAPH 40028e1 DN-- 30 201 -- Erdos renyi (gnp) graph</span>
+<span class="co">#&gt; + attr: name (g/c), type (g/c), loops (g/l), p (g/n), name (v/c),</span>
+<span class="co">#&gt; | node_character (v/c), node_integer (v/n), node_double (v/n),</span>
+<span class="co">#&gt; | edge_character (e/c), edge_integer (e/n), edge_double (e/n)</span>
+<span class="co">#&gt; + edges from 40028e1 (vertex names):</span>
+<span class="co">#&gt;  [1] vrt16-&gt;vrt1  vrt21-&gt;vrt1  vrt22-&gt;vrt1  vrt23-&gt;vrt1  vrt30-&gt;vrt1 </span>
+<span class="co">#&gt;  [6] vrt5 -&gt;vrt2  vrt13-&gt;vrt2  vrt20-&gt;vrt2  vrt21-&gt;vrt2  vrt27-&gt;vrt2 </span>
+<span class="co">#&gt; [11] vrt11-&gt;vrt3  vrt13-&gt;vrt3  vrt15-&gt;vrt3  vrt21-&gt;vrt3  vrt25-&gt;vrt3 </span>
+<span class="co">#&gt; [16] vrt27-&gt;vrt3  vrt28-&gt;vrt3  vrt29-&gt;vrt3  vrt1 -&gt;vrt4  vrt3 -&gt;vrt4 </span>
+<span class="co">#&gt; [21] vrt4 -&gt;vrt30 vrt6 -&gt;vrt4  vrt8 -&gt;vrt4  vrt10-&gt;vrt4  vrt16-&gt;vrt4 </span>
+<span class="co">#&gt; [26] vrt20-&gt;vrt4  vrt21-&gt;vrt4  vrt24-&gt;vrt4  vrt26-&gt;vrt4  vrt27-&gt;vrt4 </span>
+<span class="co">#&gt; + ... omitted several edges</span>
 
-<span class="co"># identical?</span>
-network_obj <span class="op">%==%</span><span class="st"> </span><span class="kw"><a href="reference/as_network.html">as_network</a></span>(<span class="kw"><a href="reference/as_igraph.html">as_igraph</a></span>(network_obj))
+<span class="co"># network ================================================================================</span>
+nw_initial &lt;-<span class="st"> </span>snatools<span class="op">:::</span><span class="kw">build_test_graph</span>(<span class="st">"nw"</span>) 
+nw_initial
+<span class="co">#&gt;  Network attributes:</span>
+<span class="co">#&gt;   vertices = 30 </span>
+<span class="co">#&gt;   directed = TRUE </span>
+<span class="co">#&gt;   hyper = FALSE </span>
+<span class="co">#&gt;   loops = FALSE </span>
+<span class="co">#&gt;   multiple = FALSE </span>
+<span class="co">#&gt;   bipartite = FALSE </span>
+<span class="co">#&gt;   total edges= 207 </span>
+<span class="co">#&gt;     missing edges= 0 </span>
+<span class="co">#&gt;     non-missing edges= 207 </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;  Vertex attribute names: </span>
+<span class="co">#&gt;     node_character node_double node_integer vertex.names </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;  Edge attribute names: </span>
+<span class="co">#&gt;     edge_character edge_double edge_integer</span></code></pre></div>
+<p>In order to confirm that an <code>igraph</code> or <code>network</code> object can make a round-trip conversion with its internal data remaining intact, we want to standardize its contents. We do this using <code><a href="reference/clean_graph.html">clean_graph()</a></code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># igraph =================================================================================</span>
+ig_clean &lt;-<span class="st"> </span><span class="kw"><a href="reference/clean_graph.html">clean_graph</a></span>(ig_initial)
+
+ig_clean
+<span class="co">#&gt; IGRAPH 40028e1 DN-- 30 201 -- Erdos renyi (gnp) graph</span>
+<span class="co">#&gt; + attr: loops (g/l), name (g/c), p (g/n), type (g/c), name (v/c),</span>
+<span class="co">#&gt; | node_character (v/c), node_double (v/n), node_integer (v/n),</span>
+<span class="co">#&gt; | edge_character (e/c), edge_integer (e/n), edge_double (e/n)</span>
+<span class="co">#&gt; + edges from 40028e1 (vertex names):</span>
+<span class="co">#&gt;  [1] vrt16-&gt;vrt1  vrt21-&gt;vrt1  vrt22-&gt;vrt1  vrt23-&gt;vrt1  vrt30-&gt;vrt1 </span>
+<span class="co">#&gt;  [6] vrt5 -&gt;vrt2  vrt13-&gt;vrt2  vrt20-&gt;vrt2  vrt21-&gt;vrt2  vrt27-&gt;vrt2 </span>
+<span class="co">#&gt; [11] vrt11-&gt;vrt3  vrt13-&gt;vrt3  vrt15-&gt;vrt3  vrt21-&gt;vrt3  vrt25-&gt;vrt3 </span>
+<span class="co">#&gt; [16] vrt27-&gt;vrt3  vrt28-&gt;vrt3  vrt29-&gt;vrt3  vrt1 -&gt;vrt4  vrt3 -&gt;vrt4 </span>
+<span class="co">#&gt; [21] vrt4 -&gt;vrt30 vrt6 -&gt;vrt4  vrt8 -&gt;vrt4  vrt10-&gt;vrt4  vrt16-&gt;vrt4 </span>
+<span class="co">#&gt; [26] vrt20-&gt;vrt4  vrt21-&gt;vrt4  vrt24-&gt;vrt4  vrt26-&gt;vrt4  vrt27-&gt;vrt4 </span>
+<span class="co">#&gt; + ... omitted several edges</span>
+
+<span class="co"># network ================================================================================</span>
+nw_clean &lt;-<span class="st"> </span><span class="kw"><a href="reference/clean_graph.html">clean_graph</a></span>(nw_initial)
+
+nw_clean
+<span class="co">#&gt;  Network attributes:</span>
+<span class="co">#&gt;   vertices = 30 </span>
+<span class="co">#&gt;   directed = TRUE </span>
+<span class="co">#&gt;   hyper = FALSE </span>
+<span class="co">#&gt;   loops = FALSE </span>
+<span class="co">#&gt;   multiple = FALSE </span>
+<span class="co">#&gt;   bipartite = FALSE </span>
+<span class="co">#&gt;   total edges= 207 </span>
+<span class="co">#&gt;     missing edges= 0 </span>
+<span class="co">#&gt;     non-missing edges= 207 </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;  Vertex attribute names: </span>
+<span class="co">#&gt;     node_character node_double node_integer vertex.names </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;  Edge attribute names: </span>
+<span class="co">#&gt;     edge_character edge_double edge_integer</span></code></pre></div>
+<p>If you didn’t notice any changes, don’t worry. <code><a href="reference/clean_graph.html">clean_graph()</a></code> is simply ensuring that metadata not strictly required by <code>igraph</code> or <code>network</code> is present and that attribute names are sorted alphabetically. It’s very possible there will be no changes.</p>
+<p>Once an object is clean, we can easily convert it using <code><a href="reference/as_igraph.html">as_igraph()</a></code> and <code><a href="reference/as_network.html">as_network()</a></code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># igraph to network ======================================================================</span>
+<span class="kw"><a href="reference/as_network.html">as_network</a></span>(ig_clean) 
+<span class="co">#&gt;  Network attributes:</span>
+<span class="co">#&gt;   vertices = 30 </span>
+<span class="co">#&gt;   directed = TRUE </span>
+<span class="co">#&gt;   hyper = FALSE </span>
+<span class="co">#&gt;   loops = FALSE </span>
+<span class="co">#&gt;   multiple = FALSE </span>
+<span class="co">#&gt;   bipartite = FALSE </span>
+<span class="co">#&gt;   name = Erdos renyi (gnp) graph </span>
+<span class="co">#&gt;   p = 0.25 </span>
+<span class="co">#&gt;   type = gnp </span>
+<span class="co">#&gt;   total edges= 201 </span>
+<span class="co">#&gt;     missing edges= 0 </span>
+<span class="co">#&gt;     non-missing edges= 201 </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;  Vertex attribute names: </span>
+<span class="co">#&gt;     node_character node_double node_integer vertex.names </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;  Edge attribute names: </span>
+<span class="co">#&gt;     edge_character edge_double edge_integer</span>
+
+<span class="co"># network to igraph ======================================================================</span>
+<span class="kw"><a href="reference/as_igraph.html">as_igraph</a></span>(nw_clean)
+<span class="co">#&gt; IGRAPH 401e617 DN-- 30 207 -- </span>
+<span class="co">#&gt; + attr: loops (g/l), name (v/c), node_character (v/c), node_double</span>
+<span class="co">#&gt; | (v/n), node_integer (v/n), edge_character (e/c), edge_double</span>
+<span class="co">#&gt; | (e/n), edge_integer (e/n)</span>
+<span class="co">#&gt; + edges from 401e617 (vertex names):</span>
+<span class="co">#&gt;  [1] node_5 -&gt;node_1 node_9 -&gt;node_1 node_12-&gt;node_1 node_13-&gt;node_1</span>
+<span class="co">#&gt;  [5] node_25-&gt;node_1 node_30-&gt;node_1 node_7 -&gt;node_2 node_11-&gt;node_2</span>
+<span class="co">#&gt;  [9] node_13-&gt;node_2 node_16-&gt;node_2 node_24-&gt;node_2 node_26-&gt;node_2</span>
+<span class="co">#&gt; [13] node_27-&gt;node_2 node_2 -&gt;node_3 node_7 -&gt;node_3 node_9 -&gt;node_3</span>
+<span class="co">#&gt; [17] node_11-&gt;node_3 node_17-&gt;node_3 node_18-&gt;node_3 node_24-&gt;node_3</span>
+<span class="co">#&gt; [21] node_26-&gt;node_3 node_27-&gt;node_3 node_2 -&gt;node_4 node_3 -&gt;node_4</span>
+<span class="co">#&gt; + ... omitted several edges</span></code></pre></div>
+</div>
+<div id="testing-for-successful-conversion" class="section level3">
+<h3 class="hasAnchor">
+<a href="#testing-for-successful-conversion" class="anchor"></a>Testing for Successful Conversion</h3>
+<p>If you’re concerned that <code><a href="reference/as_igraph.html">as_igraph()</a></code> or <code><a href="reference/as_network.html">as_network()</a></code> will mangle your graph’s contents, you can test its original state against the result of a round-trip conversion using <code>identical()</code>.</p>
+<p>Note that there’s a <em>small</em> catch with <code>igraph</code> objects. <code>igraph</code> objects store an environment pointer that cannot be duplicated. You can inspect it like so:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unclass</span>(ig_clean)[[<span class="dv">10</span>]]
+<span class="co">#&gt; &lt;environment: 0x0000000018657818&gt;</span></code></pre></div>
+<p>In order to test that two <code>igraph</code> objects are identical, we need to omit that pointer from the object.</p>
+<p>To simplify things, {<code>snatools</code>} includes the <code>%==%</code> operator to test that objects are <code>identical()</code>. It is equipped with an <code>igraph</code> method to handle pointer omission for you.</p>
+<p>Finally, we can test round-trip conversions against their original graphs.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># igraph =================================================================================</span>
+ig_clean <span class="op">%==%</span><span class="st"> </span><span class="kw"><a href="reference/as_igraph.html">as_igraph</a></span>(<span class="kw"><a href="reference/as_network.html">as_network</a></span>(ig_clean))
 <span class="co">#&gt; [1] TRUE</span>
 
-igraph_obj &lt;-<span class="st"> </span>snatools<span class="op">:::</span><span class="kw">build_test_graph</span>(<span class="st">"ig"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="reference/clean_graph.html">clean_graph</a></span>()
-
-<span class="co"># identical?</span>
-igraph_obj <span class="op">%==%</span><span class="st"> </span><span class="kw"><a href="reference/as_igraph.html">as_igraph</a></span>(<span class="kw"><a href="reference/as_network.html">as_network</a></span>(igraph_obj)) 
+<span class="co"># network ================================================================================</span>
+nw_clean <span class="op">%==%</span><span class="st"> </span><span class="kw"><a href="reference/as_network.html">as_network</a></span>(<span class="kw"><a href="reference/as_igraph.html">as_igraph</a></span>(nw_clean))
 <span class="co">#&gt; [1] TRUE</span></code></pre></div>
+</div>
 </div>
 <div id="development-test-results" class="section level2">
 <h2 class="hasAnchor">
@@ -151,7 +272,7 @@ v <span class="op">|</span><span class="st">  </span><span class="dv">2</span>  
 <span class="op">/</span><span class="st"> </span><span class="er">|</span><span class="st">  </span><span class="dv">0</span>       <span class="op">|</span><span class="st"> </span>Round trip conversion<span class="op">:</span><span class="st"> </span>directed graphs
 <span class="op">-</span><span class="st"> </span><span class="er">|</span><span class="st">  </span><span class="dv">1</span>       <span class="op">|</span><span class="st"> </span>Round trip conversion<span class="op">:</span><span class="st"> </span>directed graphs
 \ <span class="op">|</span><span class="st">  </span><span class="dv">2</span>       <span class="op">|</span><span class="st"> </span>Round trip conversion<span class="op">:</span><span class="st"> </span>directed graphs
-v <span class="op">|</span><span class="st">  </span><span class="dv">2</span>       <span class="op">|</span><span class="st"> </span>Round trip conversion<span class="op">:</span><span class="st"> </span>directed graphs [<span class="fl">0.1</span> s]
+v <span class="op">|</span><span class="st">  </span><span class="dv">2</span>       <span class="op">|</span><span class="st"> </span>Round trip conversion<span class="op">:</span><span class="st"> </span>directed graphs
 <span class="co">#&gt; </span>
 <span class="op">/</span><span class="st"> </span><span class="er">|</span><span class="st">  </span><span class="dv">0</span>       <span class="op">|</span><span class="st"> </span>Round trip conversion<span class="op">:</span><span class="st"> </span>bipartite graphs
 <span class="op">-</span><span class="st"> </span><span class="er">|</span><span class="st">  </span><span class="dv">1</span>       <span class="op">|</span><span class="st"> </span>Round trip conversion<span class="op">:</span><span class="st"> </span>bipartite graphs
@@ -169,7 +290,7 @@ v <span class="op">|</span><span class="st">  </span><span class="dv">2</span>  
 v <span class="op">|</span><span class="st">  </span><span class="dv">2</span>       <span class="op">|</span><span class="st"> </span>E<span class="op">-</span>I Index<span class="op">:</span><span class="st"> </span>undirected
 <span class="co">#&gt; </span>
 <span class="co">#&gt; == Results ============================================================</span>
-<span class="co">#&gt; Duration: 0.5 s</span>
+<span class="co">#&gt; Duration: 0.4 s</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; OK:       17</span>
 <span class="co">#&gt; Failed:   0</span>
