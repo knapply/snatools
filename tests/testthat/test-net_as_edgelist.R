@@ -1,7 +1,7 @@
 context("Build edge lists: igraph")
 
-ig_undir <- build_test_graph("ig", direct = FALSE)
-ig_dir <- build_test_graph("ig", direct = TRUE)
+ig_undir <- snatools:::build_test_graph("ig", direct = FALSE)
+ig_dir <- snatools:::build_test_graph("ig", direct = TRUE)
 
 ig_make_el <- function(ig, use_names = FALSE) {
   out <- igraph::as_edgelist(ig, names = use_names)
@@ -33,8 +33,8 @@ test_that("directed igraph named el is as expected", {
 
 context("Build edge lists: network")
 
-nw_undir <- build_test_graph("nw", direct = FALSE)
-nw_dir <- build_test_graph("nw", direct = TRUE)
+nw_undir <- snatools:::build_test_graph("nw", direct = FALSE)
+nw_dir <- snatools:::build_test_graph("nw", direct = TRUE)
 
 nw_make_el <- function(nw, use_names = FALSE) {
   out <- network::as.matrix.network.edgelist(nw)

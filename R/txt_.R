@@ -10,7 +10,8 @@
 #' @param ignore_case `logical`. Whether case matching should be strict.
 #' @param start `integer`. Position of first character.
 #' @param end `integer`. Position of last character.
-#' @param ... Additional arguments to be passed to or from `{base}` methods listed in \href{#see-also}{__See Also__}.
+#' @param ... Additional arguments to be passed to or from `{base}` methods listed in
+#' \href{#see-also}{__See Also__}.
 #' 
 #' @name txt_
 #' 

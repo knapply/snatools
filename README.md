@@ -1,13 +1,11 @@
 
 <!-- README.Rmd generates README.md. -->
-snatools
-========
+snatools <a href="man/figures/logo.png"> <img src="man/figures/logo.png" align="right" height="40%" width="40%" href="man/figures/logo.png"/> </a>
+==================================================================================================================================================
 
-<!-- <img src="http://res.cloudinary.com/syknapptic/image/upload/v1516468904/logo_rd5ifq.png" align="right" height="160px" width="240px" /> -->
 [![](https://img.shields.io/badge/devel%20version-0.0.0.9-red.svg)](https://github.com/knapply/snatools)
 
-<br>
-
+<!-- <br><br><br><br><br><br><br><br><br><br><br><br><br> -->
 ``` r
 library(snatools)
 
@@ -40,7 +38,6 @@ Test Results
 ``` r
 devtools::test()
 #> Loading snatools
-#> Loading required package: testthat
 #> Testing snatools
 #> v | OK F W S | Context
 #> 
@@ -82,10 +79,12 @@ v |  2       | E-I Index: directed
 v |  2       | E-I Index: undirected
 #> 
 #> == Results =====================================================================
-#> Duration: 0.3 s
+#> Duration: 0.2 s
 #> 
 #> OK:       16
 #> Failed:   0
 #> Warnings: 0
 #> Skipped:  0
+#> 
+#> Your tests are striking!
 ```

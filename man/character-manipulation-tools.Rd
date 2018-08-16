@@ -59,7 +59,8 @@ txt_to_title(text)
 
 \item{ignore_case}{\code{logical}. Whether case matching should be strict.}
 
-\item{...}{Additional arguments to be passed to or from \code{{base}} methods listed in \href{#see-also}{\strong{See Also}}.}
+\item{...}{Additional arguments to be passed to or from \code{{base}} methods listed in
+\href{#see-also}{\strong{See Also}}.}
 
 \item{replacement}{\code{character}. Object to replace matched \code{pattern}.}
 

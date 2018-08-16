@@ -1,6 +1,15 @@
-#' Convert a `igraph` objects to `network`.
+#' Convert `igraph` objects to `network`.
 #' 
-#' @param x A graph object.`igraph` objects are supported.
+#' @param x An graph object.`igraph` objects are currently supported.
+#' @param actor_type `logical`. The vertex `"type"` specifying which
+#' vertices in `x` are to be treated as "actors". See \href{#details}{__Details__} \cr
+#' 
+#' @details `actor_type`. By default, `igraph` represents bipartite graphs using vertex 
+#' attribute named `"type"`. `network` represents bipratite graphs through a count of the 
+#' vertices in the "actors" partition. `actor_type` provides a way to specify whether the
+#' preceding `igraph` object's `TRUE` or `FALSE` nodes should be represented as the "actors" 
+#' in the resulting `network` object (as opposed to the vertices of the second partition,
+#' e.g. "events").
 #' 
 #' @return A `network` object.
 #' 
@@ -13,7 +22,7 @@ as_network <- function(x, ...) {
 #' 
 #' @export
 #' 
-as_network.igraph <- function(x) {
+as_network.igraph <- function(x, actor_type = TRUE) {
   vert_attr_names <- vrt_attr_names(x)
   if("vertex.names" %in% vert_attr_names){
     if("name" %in% vert_attr_names) {
@@ -39,7 +48,11 @@ as_network.igraph <- function(x) {
   el <- rep_as_edgelist(x)
   
   if("type" %in% names(vert_attrs)) {
-    bipartite_arg <- length(which(!igraph::V(x)$type))
+    if(actor_type) {
+      bipartite_arg <- length(which(igraph::V(x)$type))
+    } else {
+      bipartite_arg <- length(which(!igraph::V(x)$type))
+    }
     vert_attrs$type <- NULL
   } else {
     bipartite_arg <- FALSE
