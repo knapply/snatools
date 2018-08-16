@@ -129,12 +129,37 @@ rep_as_adjacency_matrix.network <- function(x, edg_attr = NULL, sparse = FALSE) 
   Matrix::Matrix(out)
 }
 
-# rep_as_incidence_matrix <- function(x, edg_attr = NULL, sparse = FALSE, ...) {
-#   UseMethod("rep_as_incidence_matrix")
-# }
+#' @export
+rep_as_incidence_matrix <- function(x, edg_attr = NULL, sparse = FALSE, ...) {
+  UseMethod("rep_as_incidence_matrix")
+}
+
+#' @rdname rep_as_incidence_matrix
+#' 
+#' @export
+#' 
+rep_as_incidence_matrix.igraph <- function(x, edg_attr = NULL, sparse = FALSE, ...) {
+  igraph::as_incidence_matrix(attr = edg_attr, sparse = FALSE, ...)
+}
+
+
+#' @rdname rep_as_incidence_matrix
+#' 
+#' @export
+#' 
+rep_as_incidence_matrix.network <- function(x, edg_attr = NULL, sparse = FALSE, ...) {
+  igraph::as_incidence_matrix(attr = edg_attr, sparse = FALSE, ...)
+}
+
+# nw <- 
+# agilenet::southern_women %>%
+#   # as_data_frame("vertices") %>% 
+#   # dplyr::filter(type)
+#   # igraph::set_vertex_attr("type", value = ifelse(V(.)$type, FALSE, TRUE)) %>%
+#   # as_data_frame("vertices")
+#   as_network(actor_type = TRUE)
 # 
-# rep_as_incidence_matrix.igraph <- function(x, edg_attr = NULL, sparse = FALSE, ...) {
-#   igraph::as_incidence_matrix(attr = edg_attr, sparse = FALSE, ...)
-# }
-
-
+# nw %>% plot(label = "vertex.names")
+# 
+# nw %>% 
+#   network::as.matrix.network.adjacency(expand.bipartite = FALSE)

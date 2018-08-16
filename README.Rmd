@@ -18,12 +18,11 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-# snatools
-<!-- <img src="http://res.cloudinary.com/syknapptic/image/upload/v1516468904/logo_rd5ifq.png" align="right" height="160px" width="240px" /> -->
+# snatools <a href="man/figures/logo.png"> <img src="man/figures/logo.png" align="right" height="40%" width="40%" href="man/figures/logo.png"/> </a>
 
 [![](https://img.shields.io/badge/devel%20version-0.0.0.9-red.svg)](https://github.com/knapply/snatools)
 
-<br>
+<!-- <br><br><br><br><br><br><br><br><br><br><br><br><br> -->
 
 ```{r, echo=FALSE}
 `%>%` <- magrittr::`%>%`

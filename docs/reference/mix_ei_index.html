@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Krackhardt's E-I Index — mix_ei_index • snatools</title>
+<title>E-I Index — mix_ei_index • snatools</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,11 @@
 
 
 
-<meta property="og:title" content="Krackhardt's E-I Index — mix_ei_index" />
+<meta property="og:title" content="E-I Index — mix_ei_index" />
 
-<meta property="og:description" content="Krackhardt's E-I Index" />
+<meta property="og:description" content="The global ratio of external to internal ties." />
+
+<meta property="og:image" content="https://knapply.github.io/snatools/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -111,18 +113,27 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Krackhardt's E-I Index</h1>
+    <h1>E-I Index</h1>
     <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/mix_.R'><code>R/mix_.R</code></a></small>
     <div class="hidden name"><code>mix_ei_index.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Krackhardt's E-I Index</p>
+    <p>The global ratio of external to internal ties.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>mix_ei_index</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>, <span class='kw'>drop_loops</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>mix_ei_index</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>, <span class='kw'>drop_loops</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='co'># S3 method for igraph</span>
+<span class='fu'>mix_ei_index</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>, <span class='kw'>drop_loops</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='co'># S3 method for network</span>
+<span class='fu'>mix_ei_index</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>, <span class='kw'>drop_loops</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='co'># S3 method for attr_el</span>
+<span class='fu'>mix_ei_index</span>(<span class='no'>attr_el</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -133,17 +144,60 @@
     </tr>
     <tr>
       <th>vrt_attr</th>
-      <td><p><code>character</code> representing a vertex attribute</p></td>
+      <td><p><code>character</code> representing the name of a categorical vertex attribute present in <code>x</code>.</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p><code>numeric</code> of length 1,  with <code>-1</code> suggesting homophilous tendencies and <code>+1</code> suggesting heterophilous tendencies.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>$$E-I~Index = \frac{EL-IL}{EL+IL}$$</p><ul>
+<li><p>\(EL\) = the number of external ties.</p></li>
+<li><p>\(IL\) = the number of inteneral ties.</p></li>
+</ul>
+    
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>Krackhardt, David, and Robert N. Stern. "Informal Networks and
+Organizational Crises: An Experimental Simulation." Social Psychology Quarterly 51, no.
+2 (1988): 123-40. <a href='http://www.jstor.org/stable/2786835'>http://www.jstor.org/stable/2786835</a>.</p>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>snatools</span>)
+
+<span class='co'># igraph ==========================================================================</span>
+<span class='fu'>data</span>(<span class='st'>"UKfaculty"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"igraphdata"</span>)
+
+<span class='no'>UKfaculty</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>mix_ei_index</span>(<span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='st'>"Group"</span>)</div><div class='output co'>#&gt; [1] -0.627907</div><div class='input'>
+<span class='co'># network =========================================================================</span>
+<span class='fu'>data</span>(<span class='st'>"sampson"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"ergm"</span>)
+
+<span class='no'>samplike</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>mix_ei_index</span>(<span class='st'>"group"</span>)</div><div class='output co'>#&gt; [1] -0.4318182</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#references">References</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
+
+    <h2>Author</h2>
+    
+Brendan Knapp <a href='mailto:brendan.g.knapp@gmail.com'>brendan.g.knapp@gmail.com</a>
 
   </div>
 </div>

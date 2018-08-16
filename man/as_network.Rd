@@ -5,22 +5,33 @@
 \alias{as_network.igraph}
 \alias{as_network.default}
 \alias{as_network.network}
-\title{Convert a \code{igraph} objects to \code{network}.}
+\title{Convert \code{igraph} objects to \code{network}.}
 \usage{
 as_network(x, ...)
 
-\method{as_network}{igraph}(x)
+\method{as_network}{igraph}(x, actor_type = TRUE)
 
 \method{as_network}{default}(x, ...)
 
 \method{as_network}{network}(x)
 }
 \arguments{
-\item{x}{A graph object.\code{igraph} objects are supported.}
+\item{x}{An graph object.\code{igraph} objects are currently supported.}
+
+\item{actor_type}{\code{logical}. The vertex \code{"type"} specifying which
+vertices in \code{x} are to be treated as "actors". See \href{#details}{\strong{Details}} \cr}
 }
 \value{
 A \code{network} object.
 }
 \description{
-Convert a \code{igraph} objects to \code{network}.
+Convert \code{igraph} objects to \code{network}.
+}
+\details{
+\code{actor_type}. By default, \code{igraph} represents bipartite graphs using vertex
+attribute named \code{"type"}. \code{network} represents bipratite graphs through a count of the
+vertices in the "actors" partition. \code{actor_type} provides a way to specify whether the
+preceding \code{igraph} object's \code{TRUE} or \code{FALSE} nodes should be represented as the "actors"
+in the resulting \code{network} object (as opposed to the vertices of the second partition,
+e.g. "events").
 }

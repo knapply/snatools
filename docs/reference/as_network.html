@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Convert a <code>igraph</code> objects to <code>network</code>. — as_network • snatools</title>
+<title>Convert <code>igraph</code> objects to <code>network</code>. — as_network • snatools</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,11 @@
 
 
 
-<meta property="og:title" content="Convert a <code>igraph</code> objects to <code>network</code>. — as_network" />
+<meta property="og:title" content="Convert <code>igraph</code> objects to <code>network</code>. — as_network" />
 
-<meta property="og:description" content="Convert a igraph objects to network." />
+<meta property="og:description" content="Convert igraph objects to network." />
+
+<meta property="og:image" content="https://knapply.github.io/snatools/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -111,21 +113,21 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Convert a <code>igraph</code> objects to <code>network</code>.</h1>
+    <h1>Convert <code>igraph</code> objects to <code>network</code>.</h1>
     <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/as_network.R'><code>R/as_network.R</code></a></small>
     <div class="hidden name"><code>as_network.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Convert a <code>igraph</code> objects to <code>network</code>.</p>
+    <p>Convert <code>igraph</code> objects to <code>network</code>.</p>
     
     </div>
 
     <pre class="usage"><span class='fu'>as_network</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for igraph</span>
-<span class='fu'>as_network</span>(<span class='no'>x</span>)
+<span class='fu'>as_network</span>(<span class='no'>x</span>, <span class='kw'>actor_type</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'># S3 method for default</span>
 <span class='fu'>as_network</span>(<span class='no'>x</span>, <span class='no'>...</span>)
@@ -138,13 +140,27 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A graph object.<code>igraph</code> objects are supported.</p></td>
+      <td><p>An graph object.<code>igraph</code> objects are currently supported.</p></td>
+    </tr>
+    <tr>
+      <th>actor_type</th>
+      <td><p><code>logical</code>. The vertex <code>"type"</code> specifying which
+vertices in <code>x</code> are to be treated as "actors". See <a href='#details'><strong>Details</strong></a> <br /></p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code>network</code> object.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p><code>actor_type</code>. By default, <code>igraph</code> represents bipartite graphs using vertex
+attribute named <code>"type"</code>. <code>network</code> represents bipratite graphs through a count of the
+vertices in the "actors" partition. <code>actor_type</code> provides a way to specify whether the
+preceding <code>igraph</code> object's <code>TRUE</code> or <code>FALSE</code> nodes should be represented as the "actors"
+in the resulting <code>network</code> object (as opposed to the vertices of the second partition,
+e.g. "events").</p>
     
 
   </div>
@@ -154,6 +170,8 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
           </ul>
 
   </div>
