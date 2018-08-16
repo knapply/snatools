@@ -32,30 +32,86 @@ if (!requireNamespace("devtools", quietly = TRUE)) {
   install.packages("devtools")
 }
 
-## Install {snatools} from GitHub.
+# Install {snatools} from GitHub.
 devtools::install_github("knapply/snatools")
 
-## Load {snatools}.
+# Load {snatools}.
 library(snatools)
 ```
 
+```{r, echo=FALSE}
+library(snatools)
+```
+
+
 ## Usage
+
+### Conversion
+
+Here's are example `igraph` and `network` objects. They are both fairly complicated and contain vertex and edge attributes of several storage types.
 
 ```{r}
 library(snatools)
 
-network_obj <- snatools:::build_test_graph("nw") %>% 
-  clean_graph()
+# igraph =================================================================================
+ig_initial <- snatools:::build_test_graph("ig") 
+ig_initial
 
-# identical?
-network_obj %==% as_network(as_igraph(network_obj))
-
-igraph_obj <- snatools:::build_test_graph("ig") %>% 
-  clean_graph()
-
-# identical?
-igraph_obj %==% as_igraph(as_network(igraph_obj)) 
+# network ================================================================================
+nw_initial <- snatools:::build_test_graph("nw") 
+nw_initial
 ```
+
+In order to confirm that an `igraph` or `network` object can make a round-trip conversion with its internal data remaining intact, we want to standardize its contents. We do this using `clean_graph()`.
+
+```{r}
+# igraph =================================================================================
+ig_clean <- clean_graph(ig_initial)
+
+ig_clean
+
+# network ================================================================================
+nw_clean <- clean_graph(nw_initial)
+
+nw_clean
+```
+
+If you didn't notice any changes, don't worry. `clean_graph()` is simply ensuring that metadata not strictly required by `igraph` or `network` is present and that attribute names are sorted alphabetically. It's very possible there will be no changes.
+
+Once an object is clean, we can easily convert it using `as_igraph()` and `as_network()`.
+
+```{r}
+# igraph to network ======================================================================
+as_network(ig_clean) 
+
+# network to igraph ======================================================================
+as_igraph(nw_clean)
+```
+
+### Testing for Successful Conversion
+
+If you're concerned that `as_igraph()` or `as_network()` will mangle your graph's contents, you can test its original state against the result of a round-trip conversion using `identical()`.
+
+Note that there's a _small_ catch with `igraph` objects. `igraph` objects store an environment pointer that cannot be duplicated. You can inspect it like so:
+
+```{r}
+unclass(ig_clean)[[10]]
+```
+
+In order to test that two `igraph` objects are identical, we need to omit that pointer from the object.
+
+To simplify things, {`snatools`} includes the `%==%` operator to test that objects are `identical()`. It is equipped with an `igraph` method to handle pointer omission for you.
+
+Finally, we can test round-trip conversions against their original graphs.
+
+```{r}
+# igraph =================================================================================
+ig_clean %==% as_igraph(as_network(ig_clean))
+
+# network ================================================================================
+nw_clean %==% as_network(as_igraph(nw_clean))
+```
+
 
 ## Development Test Results
 

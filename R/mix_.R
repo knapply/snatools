@@ -51,6 +51,9 @@ mix_mixing_matrix.network <- function(x, vrt_attr, drop_loops = FALSE) {
   attrs <- network::get.vertex.attribute(x, vrt_attr)
   cats <- sort(unique(attrs))
   el <- network::as.matrix.network.edgelist(x)
+  if(nrow(el) == 0L) {
+    message("`x` does not have any edges.")
+  }
   from <- factor(attrs[el[, 1]], levels = cats)
   to <- factor(attrs[el[, 2]], levels = cats)
   
