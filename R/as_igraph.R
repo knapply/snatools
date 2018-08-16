@@ -29,10 +29,16 @@ as_igraph.network <- function(x) {
   el <- rep_as_edgelist(x)
  
   out <- igraph::graph_from_edgelist(el, directed = x$gal$directed)
-  igraph::graph_attr(out) <- graph_attrs
-  igraph::edge_attr(out) <- edge_attrs
-  igraph::vertex_attr(out) <- vert_attrs
-  
+  if(length(graph_attrs)) {
+    igraph::graph_attr(out) <- graph_attrs
+  }
+  if(length(edge_attrs)) {
+    igraph::edge_attr(out) <- edge_attrs
+  }
+  if(length(vert_attrs)) {
+    igraph::vertex_attr(out) <- vert_attrs
+  }
+  # out
   clean_graph(out)
 }
 
