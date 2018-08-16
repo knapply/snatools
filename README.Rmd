@@ -18,16 +18,28 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-# snatools <a href="man/figures/logo.png"> <img src="man/figures/logo.png" align="right" height="40%" width="40%" href="man/figures/logo.png"/> </a>
+# snatools <a href="man/figures/logo.png"> <img src="man/figures/logo.png" align="right" height="45%" width="45%" href="man/figures/logo.png"/> </a>
 
 [![](https://img.shields.io/badge/devel%20version-0.0.0.9-red.svg)](https://github.com/knapply/snatools)
 
-<!-- <br><br><br><br><br><br><br><br><br><br><br><br><br> -->
+An R toolkit to bridge graph classes and streamline network analytic workflows.
 
-```{r, echo=FALSE}
-`%>%` <- magrittr::`%>%`
+## Installation
+
+```{r, eval=FALSE}
+# Install {devtools} if you haven't already.
+if (!requireNamespace("devtools", quietly = TRUE)) {
+  install.packages("devtools")
+}
+
+## Install {snatools} from GitHub.
+devtools::install_github("knapply/snatools")
+
+## Load {snatools}.
+library(snatools)
 ```
 
+## Usage
 
 ```{r}
 library(snatools)
@@ -35,24 +47,17 @@ library(snatools)
 network_obj <- snatools:::build_test_graph("nw") %>% 
   clean_graph()
 
+# identical?
+network_obj %==% as_network(as_igraph(network_obj))
+
 igraph_obj <- snatools:::build_test_graph("ig") %>% 
   clean_graph()
 
-network_obj %==% as_network(as_igraph(network_obj)) # identical?
-
-igraph_obj %==% as_igraph(as_network(igraph_obj)) # identical?
+# identical?
+igraph_obj %==% as_igraph(as_network(igraph_obj)) 
 ```
 
-# Definitions
-
-* graph
-    + intentionally generic reference to graph/network objects of _any class_
-* `igraph`
-    + objects of class `igraph`
-* `network`
-    + objects of class `network`
-
-# Test Results
+## Development Test Results
 
 ```{r}
 devtools::test()

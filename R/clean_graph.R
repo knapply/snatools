@@ -29,15 +29,24 @@ clean_graph <- function(x) {
 #' 
 clean_graph.igraph <- function(x) {
   graph_attrs <- net_attrs(x)
+  if(!"loops" %in% names(graph_attrs)) {
+    graph_attrs$loops <- any(igraph::is.loop(x))
+  }
   graph_attrs <- graph_attrs[order(names(graph_attrs))]
   edge_attrs <- edg_attrs(x)
   vert_attrs <- vrt_attrs(x)
   vert_attrs <- vert_attrs[order(names(vert_attrs))]
   names(vert_attrs)[names(vert_attrs) == "vertex.names"] <- "name"
   
-  igraph::graph_attr(x) <- graph_attrs
-  igraph::edge_attr(x) <- edge_attrs
-  igraph::vertex_attr(x) <- vert_attrs
+  if(length(graph_attrs)) {
+    igraph::graph_attr(x) <- graph_attrs
+  }
+  if(length(edge_attrs)) {
+    igraph::edge_attr(x) <- edge_attrs
+  }
+  if(length(vert_attrs)) {
+    igraph::vertex_attr(x) <- vert_attrs
+  }
   
   x
 }

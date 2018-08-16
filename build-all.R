@@ -7,9 +7,9 @@ if(dir.exists("docs")) {
   unlink("docs", recursive = TRUE, force = TRUE)
 }
 
-# if(dir.exists("man")) {
-# unlink("man", recursive = TRUE, force = TRUE)
-# }
+if(dir.exists("man")) {
+  unlink("man", recursive = TRUE, force = TRUE)
+}
 
 devtools::document(".")
 

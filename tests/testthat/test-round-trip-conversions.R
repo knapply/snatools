@@ -1,3 +1,12 @@
+context("Round trip conversion: simple graph")
+
+zachary <- igraph::graph("Zachary") %>% 
+  clean_graph()
+
+test_that("simple igraph makes round trip unchanged", {
+  expect_true(zachary %==% as_igraph(as_network(zachary)))
+})
+
 context("Round trip conversion: undirected graphs")
 
 ig_undir <- snatools:::build_test_graph("ig", direct = FALSE) %>% 
