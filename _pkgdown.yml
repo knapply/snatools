@@ -71,13 +71,21 @@ reference:
     desc: Helper functions exported for convenience.
     contents:
     - starts_with("txt_")
+    
+articles:
+  - title: Vignettes
+    contents:
+    - Converting Graph Classes
 
 navbar:
-  type: default
-  left:
-    - icon: fa-file-code-o 
-      text: "Documentation"
-      href: reference/index.html
+# type: default
+# left:
+#   - icon: fa-file-code-o 
+#     text: "Documentation"
+#     href: reference/index.html
+#   - icon: fa-file-code-o 
+#     text: "Vignettes"
+#     href: articles/index.html
   right:
     - icon: fa-twitter
       href: https://twitter.com/knapply_

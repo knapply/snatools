@@ -39,11 +39,33 @@ test_that("undirected network makes round trip unchanged", {
 
 context("Round trip conversion: bipartite graphs")
 
-ig_bipart <- snatools:::build_test_graph("ig", bipart = TRUE) %>% 
+sw_matrix <- matrix(
+  c(1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0,
+    1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 
+    1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 
+    0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,
+    1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 
+    1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1,
+    1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 
+    0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0,
+    0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0),
+  nrow = 14L, ncol = 18L,
+  dimnames = list(
+    c("E1", "E2", "E3", "E4", "E5", "E6", "E7",
+      "E8", "E9", "E10", "E11", "E12", "E13", "E14"),
+    c("EVELYN", "LAURA", "THERESA", "BRENDA", "CHARLOTTE", "FRANCES",
+      "ELEANOR", "PEARL", "RUTH", "VERNE", "MYRNA", "KATHERINE", 
+      "SYLVIA", "NORA", "HELEN", "DOROTHY", "OLIVIA", "FLORA")))
+
+ig_bipart <- igraph::graph_from_incidence_matrix(sw_matrix) %>% 
   clean_graph()
 
-# target_url <- "http://vlado.fmf.uni-lj.si/pub/networks/data/2mode/divorce.net"
-nw_bipart <- snatools::divorce_nw %>%
+nw_bipart <- network::as.network.matrix(t(sw_matrix), bipartite = TRUE) %>% 
   clean_graph()
  
 test_that("bipartite igraph makes round trip unchanged", {
@@ -51,7 +73,6 @@ test_that("bipartite igraph makes round trip unchanged", {
 })
 
 test_that("bipartite network makes round trip unchanged with corrected `actor_type`", {
-  expect_true(nw_bipart %==% as_network(as_igraph(nw_bipart), actor_type = FALSE))
+  expect_true(nw_bipart %==% as_network(as_igraph(nw_bipart)))
 })
-
 
