@@ -44,13 +44,6 @@ library(snatools)
 ```
 
 
-## Usage
-
-### Conversion
-
-
-
-
 ## Development Test Results
 
 ```{r}

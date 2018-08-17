@@ -23,29 +23,12 @@ devtools::install_github("knapply/snatools")
 library(snatools)
 ```
 
-Usage
------
-
-### Conversion
-
 Development Test Results
 ------------------------
 
 ``` r
 devtools::test()
 #> Loading snatools
-#> Loading required package: testthat
-#> 
-#> Attaching package: 'testthat'
-#> The following object is masked from 'package:dplyr':
-#> 
-#>     matches
-#> The following object is masked from 'package:purrr':
-#> 
-#>     is_null
-#> The following object is masked from 'package:igraph':
-#> 
-#>     compare
 #> Testing snatools
 #> v | OK F W S | Context
 #> 
@@ -91,7 +74,7 @@ v |  2       | E-I Index: directed
 v |  2       | E-I Index: undirected
 #> 
 #> == Results =====================================================================
-#> Duration: 0.3 s
+#> Duration: 0.2 s
 #> 
 #> OK:       17
 #> Failed:   0
