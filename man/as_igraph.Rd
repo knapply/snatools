@@ -10,7 +10,7 @@
 \usage{
 as_igraph(x, ...)
 
-\method{as_igraph}{network}(x)
+\method{as_igraph}{network}(x, actor_type = TRUE)
 
 \method{as_igraph}{default}(x, ...)
 

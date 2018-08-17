@@ -10,7 +10,7 @@ as_igraph <- function(x, ...) {
 #' 
 #' @export
 #' 
-as_igraph.network <- function(x) {
+as_igraph.network <- function(x, actor_type = TRUE) {
   if(x$gal$hyper) {
     stop("Hypergraphs are not supported.", call. = FALSE)
   }
@@ -18,10 +18,17 @@ as_igraph.network <- function(x) {
   
   if(is.numeric(x$gal$bipartite)) {
     graph_attrs$loops <- NULL
-    false_nodes <- seq_len(x$gal$bipartite)
-    true_nodes <- seq.int(x$gal$bipartite + 1, x$gal$n)
-    network::set.vertex.attribute(x, "type", value = FALSE, v = false_nodes)
-    network::set.vertex.attribute(x, "type", value = TRUE, v = true_nodes)
+    all_n <- x$gal$n
+    actors_n <- x$gal$bipartite
+    types <- c(rep(TRUE, actors_n), rep(FALSE, all_n - actors_n))
+    if(actors_n > all_n - actors_n) {
+      types <- rev(types)
+    }
+    if(actor_type) {
+      network::set.vertex.attribute(x, "type", value = types)
+    } else {
+      network::set.vertex.attribute(x, "type", value = rev(types))
+    }
   }
   vert_attrs <- vrt_attrs(x)
   names(vert_attrs)[names(vert_attrs) == "vertex.names"] <- "name"
@@ -38,7 +45,6 @@ as_igraph.network <- function(x) {
   if(length(vert_attrs)) {
     igraph::vertex_attr(out) <- vert_attrs
   }
-  # out
   clean_graph(out)
 }
 
