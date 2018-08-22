@@ -63,6 +63,7 @@ sw_matrix <- matrix(
       "SYLVIA", "NORA", "HELEN", "DOROTHY", "OLIVIA", "FLORA")))
 
 ig_bipart <- igraph::graph_from_incidence_matrix(sw_matrix) %>% 
+  igraph::permute.vertices(sample(igraph::V(.))) %>% 
   clean_graph()
 
 nw_bipart <- network::as.network.matrix(t(sw_matrix), bipartite = TRUE) %>% 

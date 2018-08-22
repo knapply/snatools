@@ -12,9 +12,7 @@ Installation
 
 ``` r
 # Install {devtools} if you haven't already.
-if (!requireNamespace("devtools", quietly = TRUE)) {
-  install.packages("devtools")
-}
+# install.packages("devtools")
 
 # Install {snatools} from GitHub.
 devtools::install_github("knapply/snatools")
@@ -29,6 +27,18 @@ Development Test Results
 ``` r
 devtools::test()
 #> Loading snatools
+#> Loading required package: testthat
+#> 
+#> Attaching package: 'testthat'
+#> The following object is masked from 'package:dplyr':
+#> 
+#>     matches
+#> The following object is masked from 'package:purrr':
+#> 
+#>     is_null
+#> The following object is masked from 'package:igraph':
+#> 
+#>     compare
 #> Testing snatools
 #> v | OK F W S | Context
 #> 
@@ -37,7 +47,7 @@ devtools::test()
 \ |  2       | Build edge lists: igraph
 | |  3       | Build edge lists: igraph
 / |  4       | Build edge lists: igraph
-v |  4       | Build edge lists: igraph
+v |  4       | Build edge lists: igraph [0.2 s]
 #> 
 / |  0       | Build edge lists: network
 - |  1       | Build edge lists: network
@@ -51,7 +61,7 @@ v |  1       | Round trip conversion: simple graph
 / |  0       | Round trip conversion: undirected graphs
 - |  1       | Round trip conversion: undirected graphs
 \ |  2       | Round trip conversion: undirected graphs
-v |  2       | Round trip conversion: undirected graphs
+v |  2       | Round trip conversion: undirected graphs [0.1 s]
 #> 
 / |  0       | Round trip conversion: directed graphs
 - |  1       | Round trip conversion: directed graphs
@@ -74,7 +84,7 @@ v |  2       | E-I Index: directed
 v |  2       | E-I Index: undirected
 #> 
 #> == Results =====================================================================
-#> Duration: 0.2 s
+#> Duration: 0.5 s
 #> 
 #> OK:       17
 #> Failed:   0

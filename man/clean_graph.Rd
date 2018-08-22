@@ -6,11 +6,11 @@
 \alias{clean_graph.network}
 \title{Clean a graph object's internals and standardize attributes.}
 \usage{
-clean_graph(x)
+clean_graph(x, ...)
 
-\method{clean_graph}{igraph}(x)
+\method{clean_graph}{igraph}(x, actor_type = TRUE)
 
-\method{clean_graph}{network}(x)
+\method{clean_graph}{network}(x, ...)
 }
 \arguments{
 \item{x}{An \code{igraph} or \code{network} object.}

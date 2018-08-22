@@ -92,7 +92,7 @@
       <h1>Converting Graph Classes</h1>
                         <h4 class="author">Brendan Knapp</h4>
             
-            <h4 class="date">2018-08-17</h4>
+            <h4 class="date">2018-08-22</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/knapply/snatools/blob/master/vignettes/conversion.Rmd"><code>vignettes/conversion.Rmd</code></a></small>
       <div class="hidden name"><code>conversion.Rmd</code></div>
@@ -154,12 +154,12 @@ edges_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span 
 <p>We’ll also set a graph-level attribute noting its <code>"original class"</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">graph_attr</span>(ig_initial, <span class="st">"original class"</span>) &lt;-<span class="st"> "igraph"</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ig_initial
-<span class="co">#&gt; IGRAPH cfd5f4c DN-- 30 1000 -- </span>
+<span class="co">#&gt; IGRAPH ad2d5bf DN-- 30 1000 -- </span>
 <span class="co">#&gt; + attr: net_chr (g/c), is_wow (g/l), net_int (g/n), net_dbl (g/n),</span>
 <span class="co">#&gt; | original class (g/c), name (v/c), vrt_chr (v/c), vrt_int (v/n),</span>
 <span class="co">#&gt; | vrt_dbl (v/n), vrt_lgl (v/l), edg_chr (e/c), edg_int (e/n),</span>
 <span class="co">#&gt; | edg_dbl (e/n), edg_lgl (e/l)</span>
-<span class="co">#&gt; + edges from cfd5f4c (vertex names):</span>
+<span class="co">#&gt; + edges from ad2d5bf (vertex names):</span>
 <span class="co">#&gt;  [1] vrt_2 -&gt;vrt_13 vrt_4 -&gt;vrt_4  vrt_17-&gt;vrt_11 vrt_3 -&gt;vrt_5 </span>
 <span class="co">#&gt;  [5] vrt_11-&gt;vrt_18 vrt_5 -&gt;vrt_21 vrt_24-&gt;vrt_16 vrt_1 -&gt;vrt_3 </span>
 <span class="co">#&gt;  [9] vrt_18-&gt;vrt_10 vrt_13-&gt;vrt_23 vrt_20-&gt;vrt_13 vrt_3 -&gt;vrt_27</span>
@@ -279,12 +279,12 @@ nw_initial
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ig_clean &lt;-<span class="st"> </span><span class="kw"><a href="../reference/clean_graph.html">clean_graph</a></span>(ig_initial)
 
 ig_clean
-<span class="co">#&gt; IGRAPH cfd5f4c DN-- 30 1000 -- </span>
+<span class="co">#&gt; IGRAPH ad2d5bf DN-- 30 1000 -- </span>
 <span class="co">#&gt; + attr: is_wow (g/l), loops (g/l), net_chr (g/c), net_dbl (g/n),</span>
 <span class="co">#&gt; | net_int (g/n), original class (g/c), name (v/c), vrt_chr (v/c),</span>
 <span class="co">#&gt; | vrt_dbl (v/n), vrt_int (v/n), vrt_lgl (v/l), edg_chr (e/c),</span>
-<span class="co">#&gt; | edg_int (e/n), edg_dbl (e/n), edg_lgl (e/l)</span>
-<span class="co">#&gt; + edges from cfd5f4c (vertex names):</span>
+<span class="co">#&gt; | edg_dbl (e/n), edg_int (e/n), edg_lgl (e/l)</span>
+<span class="co">#&gt; + edges from ad2d5bf (vertex names):</span>
 <span class="co">#&gt;  [1] vrt_2 -&gt;vrt_13 vrt_4 -&gt;vrt_4  vrt_17-&gt;vrt_11 vrt_3 -&gt;vrt_5 </span>
 <span class="co">#&gt;  [5] vrt_11-&gt;vrt_18 vrt_5 -&gt;vrt_21 vrt_24-&gt;vrt_16 vrt_1 -&gt;vrt_3 </span>
 <span class="co">#&gt;  [9] vrt_18-&gt;vrt_10 vrt_13-&gt;vrt_23 vrt_20-&gt;vrt_13 vrt_3 -&gt;vrt_27</span>
@@ -355,12 +355,12 @@ nw_clean
 </h2>
 <p>Going the other direction, we can convert <code>nw_clean</code> to an <code>igraph</code> object using <code><a href="../reference/as_igraph.html">as_igraph()</a></code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/as_igraph.html">as_igraph</a></span>(nw_clean)
-<span class="co">#&gt; IGRAPH d01dbeb DN-- 30 1000 -- </span>
+<span class="co">#&gt; IGRAPH ad798e4 DN-- 30 1000 -- </span>
 <span class="co">#&gt; + attr: is_wow (g/l), loops (g/l), net_chr (g/c), net_dbl (g/n),</span>
 <span class="co">#&gt; | net_int (g/n), original class (g/c), name (v/c), vrt_chr (v/c),</span>
 <span class="co">#&gt; | vrt_dbl (v/n), vrt_int (v/n), vrt_lgl (v/l), edg_chr (e/c),</span>
 <span class="co">#&gt; | edg_dbl (e/n), edg_int (e/n), edg_lgl (e/l)</span>
-<span class="co">#&gt; + edges from d01dbeb (vertex names):</span>
+<span class="co">#&gt; + edges from ad798e4 (vertex names):</span>
 <span class="co">#&gt;  [1] vrt_2 -&gt;vrt_13 vrt_4 -&gt;vrt_4  vrt_17-&gt;vrt_11 vrt_3 -&gt;vrt_5 </span>
 <span class="co">#&gt;  [5] vrt_11-&gt;vrt_18 vrt_5 -&gt;vrt_21 vrt_24-&gt;vrt_16 vrt_1 -&gt;vrt_3 </span>
 <span class="co">#&gt;  [9] vrt_18-&gt;vrt_10 vrt_13-&gt;vrt_23 vrt_20-&gt;vrt_13 vrt_3 -&gt;vrt_27</span>
@@ -377,9 +377,9 @@ nw_clean
 <span class="co">#&gt; [1] FALSE</span></code></pre></div>
 <p>This is because <code>igraph</code> objects store a pointer that <em>should not</em> be duplicated. We can inspect it like so.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unclass</span>(ig_clean)[[<span class="dv">10</span>]]
-<span class="co">#&gt; &lt;environment: 0x000000001866ea88&gt;</span>
+<span class="co">#&gt; &lt;environment: 0x0000000018b34140&gt;</span>
 <span class="kw">unclass</span>(<span class="kw"><a href="../reference/as_igraph.html">as_igraph</a></span>(<span class="kw"><a href="../reference/as_network.html">as_network</a></span>(ig_clean)))[[<span class="dv">10</span>]]
-<span class="co">#&gt; &lt;environment: 0x000000001720e948&gt;</span></code></pre></div>
+<span class="co">#&gt; &lt;environment: 0x0000000017673790&gt;</span></code></pre></div>
 <p>In order to test that two <code>igraph</code> objects are identical, we need to omit that pointer from the object.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">identical</span>(<span class="kw">unclass</span>(ig_clean)[<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>], <span class="kw">unclass</span>(<span class="kw"><a href="../reference/as_igraph.html">as_igraph</a></span>(<span class="kw"><a href="../reference/as_network.html">as_network</a></span>(ig_clean)))[<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>])
 <span class="co">#&gt; [1] TRUE</span></code></pre></div>
@@ -392,7 +392,7 @@ nw_clean
 <span class="co">#&gt; {</span>
 <span class="co">#&gt;     identical(lhs, rhs)</span>
 <span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x000000001f1464e0&gt;</span>
+<span class="co">#&gt; &lt;bytecode: 0x000000001edd67e0&gt;</span>
 <span class="co">#&gt; &lt;environment: namespace:snatools&gt;</span></code></pre></div>
 <p>The exception is for <code>igraph</code> objects, for which it is equipped to automatically exclude the pointer that we don’t need.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">snatools<span class="op">:::</span><span class="st">`</span><span class="dt">%==%.igraph</span><span class="st">`</span>
@@ -400,7 +400,7 @@ nw_clean
 <span class="co">#&gt; {</span>
 <span class="co">#&gt;     identical(unclass(lhs)[seq_len(9)], unclass(rhs)[seq_len(9)])</span>
 <span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x0000000017028328&gt;</span>
+<span class="co">#&gt; &lt;bytecode: 0x0000000022a9b318&gt;</span>
 <span class="co">#&gt; &lt;environment: namespace:snatools&gt;</span></code></pre></div>
 <p>For <code>network</code> objects, you can still use <code>identical()</code> if desired.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">identical</span>(nw_clean, <span class="kw"><a href="../reference/as_network.html">as_network</a></span>(<span class="kw"><a href="../reference/as_igraph.html">as_igraph</a></span>(nw_clean)))
@@ -484,17 +484,17 @@ sw_matrix
 <span class="st">  </span><span class="kw"><a href="../reference/clean_graph.html">clean_graph</a></span>()
 
 southern_women_ig
-<span class="co">#&gt; IGRAPH d06458c UN-B 32 93 -- </span>
+<span class="co">#&gt; IGRAPH adda520 UN-B 32 93 -- </span>
 <span class="co">#&gt; + attr: loops (g/l), name (v/c), type (v/l)</span>
-<span class="co">#&gt; + edges from d06458c (vertex names):</span>
-<span class="co">#&gt;  [1] E1--EVELYN    E1--LAURA     E1--BRENDA    E2--EVELYN    E2--LAURA    </span>
-<span class="co">#&gt;  [6] E2--THERESA   E3--EVELYN    E3--LAURA     E3--THERESA   E3--BRENDA   </span>
-<span class="co">#&gt; [11] E3--CHARLOTTE E3--FRANCES   E4--EVELYN    E4--THERESA   E4--BRENDA   </span>
-<span class="co">#&gt; [16] E4--CHARLOTTE E5--EVELYN    E5--LAURA     E5--THERESA   E5--BRENDA   </span>
-<span class="co">#&gt; [21] E5--CHARLOTTE E5--FRANCES   E5--ELEANOR   E5--RUTH      E6--EVELYN   </span>
-<span class="co">#&gt; [26] E6--LAURA     E6--THERESA   E6--BRENDA    E6--FRANCES   E6--ELEANOR  </span>
-<span class="co">#&gt; [31] E6--PEARL     E6--NORA      E7--LAURA     E7--THERESA   E7--BRENDA   </span>
-<span class="co">#&gt; [36] E7--CHARLOTTE E7--ELEANOR   E7--RUTH      E7--VERNE     E7--SYLVIA   </span>
+<span class="co">#&gt; + edges from adda520 (vertex names):</span>
+<span class="co">#&gt;  [1] EVELYN   --E1 LAURA    --E1 BRENDA   --E1 EVELYN   --E2 LAURA    --E2</span>
+<span class="co">#&gt;  [6] THERESA  --E2 EVELYN   --E3 LAURA    --E3 THERESA  --E3 BRENDA   --E3</span>
+<span class="co">#&gt; [11] CHARLOTTE--E3 FRANCES  --E3 EVELYN   --E4 THERESA  --E4 BRENDA   --E4</span>
+<span class="co">#&gt; [16] CHARLOTTE--E4 EVELYN   --E5 LAURA    --E5 THERESA  --E5 BRENDA   --E5</span>
+<span class="co">#&gt; [21] CHARLOTTE--E5 FRANCES  --E5 ELEANOR  --E5 RUTH     --E5 EVELYN   --E6</span>
+<span class="co">#&gt; [26] LAURA    --E6 THERESA  --E6 BRENDA   --E6 FRANCES  --E6 ELEANOR  --E6</span>
+<span class="co">#&gt; [31] PEARL    --E6 NORA     --E6 LAURA    --E7 THERESA  --E7 BRENDA   --E7</span>
+<span class="co">#&gt; [36] CHARLOTTE--E7 ELEANOR  --E7 RUTH     --E7 VERNE    --E7 SYLVIA   --E7</span>
 <span class="co">#&gt; + ... omitted several edges</span></code></pre></div>
 <p><code>igraph</code> tracks the two modes via the vertex attribute <code>"type"</code>. Here is one of the methods to obtain vertex attributes.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_vrt_attrs &lt;-<span class="st"> </span><span class="kw">as_data_frame</span>(southern_women_ig, <span class="st">"vertices"</span>)</code></pre></div>
@@ -625,17 +625,17 @@ southern_women_nw
 <span class="st">  </span><span class="kw"><a href="../reference/clean_graph.html">clean_graph</a></span>()
 
 swapped_types_ig
-<span class="co">#&gt; IGRAPH d08ae90 UN-B 32 93 -- </span>
+<span class="co">#&gt; IGRAPH ae011e9 UN-B 32 93 -- </span>
 <span class="co">#&gt; + attr: loops (g/l), name (v/c), type (v/l)</span>
-<span class="co">#&gt; + edges from d08ae90 (vertex names):</span>
-<span class="co">#&gt;  [1] EVELYN   --E1 EVELYN   --E2 EVELYN   --E3 EVELYN   --E4 EVELYN   --E5</span>
-<span class="co">#&gt;  [6] EVELYN   --E6 EVELYN   --E8 EVELYN   --E9 LAURA    --E1 LAURA    --E2</span>
-<span class="co">#&gt; [11] LAURA    --E3 LAURA    --E5 LAURA    --E6 LAURA    --E7 LAURA    --E8</span>
-<span class="co">#&gt; [16] THERESA  --E2 THERESA  --E3 THERESA  --E4 THERESA  --E5 THERESA  --E6</span>
-<span class="co">#&gt; [21] THERESA  --E7 THERESA  --E8 THERESA  --E9 BRENDA   --E1 BRENDA   --E3</span>
-<span class="co">#&gt; [26] BRENDA   --E4 BRENDA   --E5 BRENDA   --E6 BRENDA   --E7 BRENDA   --E8</span>
-<span class="co">#&gt; [31] CHARLOTTE--E3 CHARLOTTE--E4 CHARLOTTE--E5 CHARLOTTE--E7 FRANCES  --E3</span>
-<span class="co">#&gt; [36] FRANCES  --E5 FRANCES  --E6 FRANCES  --E8 ELEANOR  --E5 ELEANOR  --E6</span>
+<span class="co">#&gt; + edges from ae011e9 (vertex names):</span>
+<span class="co">#&gt;  [1] E1--EVELYN    E2--EVELYN    E3--EVELYN    E4--EVELYN    E5--EVELYN   </span>
+<span class="co">#&gt;  [6] E6--EVELYN    E8--EVELYN    E9--EVELYN    E1--LAURA     E2--LAURA    </span>
+<span class="co">#&gt; [11] E3--LAURA     E5--LAURA     E6--LAURA     E7--LAURA     E8--LAURA    </span>
+<span class="co">#&gt; [16] E2--THERESA   E3--THERESA   E4--THERESA   E5--THERESA   E6--THERESA  </span>
+<span class="co">#&gt; [21] E7--THERESA   E8--THERESA   E9--THERESA   E1--BRENDA    E3--BRENDA   </span>
+<span class="co">#&gt; [26] E4--BRENDA    E5--BRENDA    E6--BRENDA    E7--BRENDA    E8--BRENDA   </span>
+<span class="co">#&gt; [31] E3--CHARLOTTE E4--CHARLOTTE E5--CHARLOTTE E7--CHARLOTTE E3--FRANCES  </span>
+<span class="co">#&gt; [36] E5--FRANCES   E6--FRANCES   E8--FRANCES   E5--ELEANOR   E6--ELEANOR  </span>
 <span class="co">#&gt; + ... omitted several edges</span></code></pre></div>
 <p>We can see that the events <code>"type"</code> is now <code>TRUE</code>, while the <code>"type"</code> of the “Southern Women” is <code>FALSE</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">swapped_vrt_attrs &lt;-<span class="st"> </span><span class="kw">as_data_frame</span>(swapped_types_ig, <span class="st">"vertices"</span>)

@@ -19,7 +19,7 @@
 #' 
 #' 
 #' @export
-clean_graph <- function(x) {
+clean_graph <- function(x, ...) {
   UseMethod("clean_graph")
 }
 
@@ -27,16 +27,31 @@ clean_graph <- function(x) {
 #' 
 #' @export
 #' 
-clean_graph.igraph <- function(x) {
+clean_graph.igraph <- function(x, actor_type = TRUE) {
   graph_attrs <- net_attrs(x)
   if(!"loops" %in% names(graph_attrs)) {
     graph_attrs$loops <- any(igraph::is.loop(x))
   }
+  if("type" %in% vrt_attr_names(x)) {
+    true_nodes <- which(igraph::V(x)$type)
+    false_nodes <- which(!igraph::V(x)$type)
+    if(actor_type) {
+      new_node_order <- c(true_nodes, false_nodes)
+    } else {
+      new_node_order <- c(false_nodes, true_nodes)
+    }
+    x <- igraph::permute(x, match(seq_along(new_node_order), new_node_order))
+  }
   graph_attrs <- graph_attrs[order(names(graph_attrs))]
   edge_attrs <- edg_attrs(x)
+  if(length(edge_attrs)) {
+    edge_attrs <- edge_attrs[order(names(edge_attrs))]
+  }
   vert_attrs <- vrt_attrs(x)
-  vert_attrs <- vert_attrs[order(names(vert_attrs))]
-  names(vert_attrs)[names(vert_attrs) == "vertex.names"] <- "name"
+  if(length(vrt_attrs)) {
+    vert_attrs <- vert_attrs[order(names(vert_attrs))]
+    names(vert_attrs)[names(vert_attrs) == "vertex.names"] <- "name"
+  }
   
   if(length(graph_attrs)) {
     igraph::graph_attr(x) <- graph_attrs
@@ -55,7 +70,7 @@ clean_graph.igraph <- function(x) {
 #' 
 #' @export
 #' 
-clean_graph.network <- function(x) {
+clean_graph.network <- function(x, ...) {
   if(is.null(x$gal$bipartite)) { # may not exist
     x$gal$bipartite <- FALSE
   }
@@ -67,7 +82,7 @@ clean_graph.network <- function(x) {
   edge_attrs <- edg_attrs(x)
   edge_attrs <- edge_attrs[order(names(edge_attrs))]
   # out[order(names(out))]
-  el <- rep_as_edgelist(x)
+  el <- rep_edgelist(x)
   
   args <- list(n = x$gal$n,
                directed = x$gal$directed,

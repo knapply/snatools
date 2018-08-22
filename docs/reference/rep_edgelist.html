@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Build a networks's edge list representation. — rep_as_edgelist • snatools</title>
+<title>Build a networks's edge list representation. — rep_edgelist • snatools</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Build a networks's edge list representation. — rep_as_edgelist" />
+<meta property="og:title" content="Build a networks's edge list representation. — rep_edgelist" />
 
-<meta property="og:description" content="rep_as_edgelist() creates edge lists in a consistent format across classes." />
+<meta property="og:description" content="rep_edgelist() creates edge lists in a consistent format across classes." />
 
 <meta property="og:image" content="https://knapply.github.io/snatools/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -128,23 +128,23 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Build a networks's edge list representation.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/rep_as.R'><code>R/rep_as.R</code></a></small>
-    <div class="hidden name"><code>rep_as_edgelist.Rd</code></div>
+    <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/rep_.R'><code>R/rep_.R</code></a></small>
+    <div class="hidden name"><code>rep_edgelist.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>rep_as_edgelist()</code> creates edge lists in a <em>consistent</em> format across classes.</p>
+    <p><code>rep_edgelist()</code> creates edge lists in a <em>consistent</em> format across classes.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>rep_as_edgelist</span>(<span class='no'>x</span>, <span class='kw'>use_names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>rep_edgelist</span>(<span class='no'>x</span>, <span class='kw'>use_names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='co'># S3 method for igraph</span>
-<span class='fu'>rep_as_edgelist</span>(<span class='no'>ig</span>, <span class='kw'>use_names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>rep_edgelist</span>(<span class='no'>ig</span>, <span class='kw'>use_names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='co'># S3 method for network</span>
-<span class='fu'>rep_as_edgelist</span>(<span class='no'>nw</span>, <span class='kw'>use_names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+<span class='fu'>rep_edgelist</span>(<span class='no'>nw</span>, <span class='kw'>use_names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -206,7 +206,7 @@ tie's direction.</p></li>
 #&gt; [25] Actor 3--Actor 4  Actor 3--Actor 8  Actor 3--Actor 9  Actor 3--Actor 10
 #&gt; + ... omitted several edges</div><div class='input'>
 <span class='no'>karate</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>rep_as_edgelist</span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'>rep_edgelist</span>() <span class='kw'>%&gt;%</span>
   <span class='fu'>head</span>()</div><div class='output co'>#&gt;      vert1 vert2
 #&gt; [1,]     1     2
 #&gt; [2,]     1     3
@@ -215,7 +215,7 @@ tie's direction.</p></li>
 #&gt; [5,]     1     6
 #&gt; [6,]     1     7</div><div class='input'>
 <span class='no'>karate</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>rep_as_edgelist</span>(<span class='kw'>use_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>rep_edgelist</span>(<span class='kw'>use_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>head</span>()</div><div class='output co'>#&gt;      vert1   vert2    
 #&gt; [1,] "Mr Hi" "Actor 2"
 #&gt; [2,] "Mr Hi" "Actor 3"
@@ -241,7 +241,7 @@ tie's direction.</p></li>
 #&gt;  Edge attribute names: 
 #&gt;     nominations </div><div class='input'>
 <span class='no'>samplike</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>rep_as_edgelist</span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'>rep_edgelist</span>() <span class='kw'>%&gt;%</span>
   <span class='fu'>head</span>()</div><div class='output co'>#&gt;      from to
 #&gt; [1,]    5  1
 #&gt; [2,]    7  1
@@ -250,7 +250,7 @@ tie's direction.</p></li>
 #&gt; [5,]   12  2
 #&gt; [6,]   15  2</div><div class='input'>
 <span class='no'>samplike</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>rep_as_edgelist</span>(<span class='kw'>use_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>rep_edgelist</span>(<span class='kw'>use_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>head</span>()</div><div class='output co'>#&gt;      from          to          
 #&gt; [1,] "Bonaventure" "John Bosco"
 #&gt; [2,] "Mark"        "John Bosco"

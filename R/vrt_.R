@@ -98,7 +98,57 @@ vrt_attr_names.network <- function(x, exclude_na = TRUE) {
 }
 
 
+#' @export
+#' 
+vrt_attr <- function(x, vrt_attr) {
+  UseMethod("vrt_attr")
+}
 
+#' @export
+#' 
+vrt_attr.igraph <- function(x, vrt_attr) {
+  igraph::vertex_attr(x, vrt_attr)
+}
 
+#' @export
+#' 
+vrt_attr.network <- function(x, vrt_attr) {
+  unlist(lapply(x$val, `[[`, vrt_attr))
+}
 
+#' @export
+#' 
+vrt_names <- function(x) {
+  UseMethod("vrt_names")
+}
+
+#' @export
+#' 
+vrt_names.igraph <- function(x) {
+  out <- vrt_attr(x, "name")
+  if(!length(out)) {
+    warning("Vertices do not have a 'name' attribute. Trying 'Name' instead.")
+    out <- vrt_attr(x, "Name")
+    if(!length(out)) {
+      warning("Can't find `Name` either. Using vertex indices instead.")
+      out <- seq_len(igraph::vcount(x))
+    }
+  }
+  out
+}
+
+#' @export
+#' 
+vrt_names.network <- function(x) {
+  out <- vrt_attr(x, "vertex.names")
+  if(!length(out)) {
+    warning("Vertices do not have a 'vertex.names' attribute. Trying 'name' instead.")
+    out <- vrt_attr(x, "name")
+    if(!length(out)) {
+      warning("Can't find `name` either. Using vertex indices instead.")
+      out <- seq_len(x$gal$n)
+    }
+  }
+  out
+}
 

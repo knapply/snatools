@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Build a network/graph's mixing matrix. — mix_mixing_matrix • snatools</title>
+<title>Build a network's adjacency matrix representation — rep_adjacency_matrix • snatools</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Build a network/graph's mixing matrix. — mix_mixing_matrix" />
+<meta property="og:title" content="Build a network's adjacency matrix representation — rep_adjacency_matrix" />
 
-<meta property="og:description" content="Build a network/graph's mixing matrix." />
+<meta property="og:description" content="Build a network's adjacency matrix representation" />
 
 <meta property="og:image" content="https://knapply.github.io/snatools/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -127,37 +127,39 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Build a network/graph's mixing matrix.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/mix_.R'><code>R/mix_.R</code></a></small>
-    <div class="hidden name"><code>mix_mixing_matrix.Rd</code></div>
+    <h1>Build a network's adjacency matrix representation</h1>
+    <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/rep_.R'><code>R/rep_.R</code></a></small>
+    <div class="hidden name"><code>rep_adjacency_matrix.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Build a network/graph's mixing matrix.</p>
+    <p>Build a network's adjacency matrix representation</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>mix_mixing_matrix</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>, <span class='kw'>drop_loops</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>rep_adjacency_matrix</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for igraph</span>
-<span class='fu'>mix_mixing_matrix</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>, <span class='kw'>drop_loops</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>rep_adjacency_matrix</span>(<span class='no'>x</span>, <span class='kw'>edg_attr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>sparse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for network</span>
-<span class='fu'>mix_mixing_matrix</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>, <span class='kw'>drop_loops</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+<span class='fu'>rep_adjacency_matrix</span>(<span class='no'>x</span>, <span class='kw'>edg_attr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>sparse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>An <code>igraph</code> or <code>network</code> object.</p></td>
-    </tr>
-    <tr>
-      <th>vrt_attr</th>
-      <td><p><code>character</code> representing a vertex attribute.</p></td>
+      <th>...</th>
+      <td></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p><code>matrix</code> or <code>dgCMatrix</code></p>
     
 
   </div>
@@ -165,7 +167,9 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
 
   </div>
 </div>

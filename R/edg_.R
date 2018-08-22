@@ -75,7 +75,7 @@ edg_attr_names.igraph <- function(x, exclude_na = NULL) {
 #' @export
 #' 
 edg_attr_names.network <- function(x, exclude_na = TRUE) {
-  out <- lapply(nw$mel, `[[`, "atl")
+  out <- lapply(x$mel, `[[`, "atl")
   out <- unique(unlist(lapply(out, names)))
   if(!exclude_na) {
     return(out)

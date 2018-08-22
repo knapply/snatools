@@ -28,9 +28,7 @@ An R toolkit to bridge graph classes and streamline network analytic workflows.
 
 ```{r, eval=FALSE}
 # Install {devtools} if you haven't already.
-if (!requireNamespace("devtools", quietly = TRUE)) {
-  install.packages("devtools")
-}
+# install.packages("devtools")
 
 # Install {snatools} from GitHub.
 devtools::install_github("knapply/snatools")

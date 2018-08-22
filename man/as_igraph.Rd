@@ -6,18 +6,36 @@
 \alias{as_igraph.default}
 \alias{as_igraph.igraph}
 \alias{as_igraph.ucinet}
-\title{Convert \code{network} objects to \code{igraph}.}
+\alias{as_igraph.tbl_graph}
+\title{Conversion to \code{igraph} objects.}
 \usage{
 as_igraph(x, ...)
 
-\method{as_igraph}{network}(x, actor_type = TRUE)
+\method{as_igraph}{network}(x, clean_graph = TRUE, actor_type = TRUE)
 
 \method{as_igraph}{default}(x, ...)
 
 \method{as_igraph}{igraph}(x)
 
 \method{as_igraph}{ucinet}(x, ...)
+
+\method{as_igraph}{tbl_graph}(x)
+}
+\arguments{
+\item{x}{\code{\link[network:network]{network::network}} object.}
+
+\item{...}{Additional arguments on to other methods (\code{clean_graph}, \code{actor_type}).}
+
+\item{clean_graph}{logical. Whether to automatically call \code{clean_graph()} before converting x. \cr
+Default: \code{TRUE}}
+
+\item{actor_type}{logical. For bipartite graphs, the \code{"type"} (vertex attribute) that
+"actor" vertices are to be assigned. \cr
+Default: \code{TRUE}}
+}
+\value{
+An \code{igraph} (\code{\link[igraph:graph]{igraph::graph}}) object.
 }
 \description{
-Convert \code{network} objects to \code{igraph}.
+Conversion to \code{igraph} objects.
 }

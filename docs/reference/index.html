@@ -154,7 +154,7 @@
       <tr>
         <th colspan="2">
           <h2 id="section-class-conversion" class="hasAnchor"><a href="#section-class-conversion" class="anchor"></a>Class Conversion</h2>
-          <p class="section-desc"><p>Safely convert objects between <code>igraph</code> and <code>network</code> classes.</p></p>
+          <p class="section-desc"><p>Safely convert objects between common network classes.</p></p>
         </th>
       </tr>
       <tr>
@@ -162,13 +162,13 @@
         <td>
           <p><code><a href="as_igraph.html">as_igraph()</a></code> </p>
         </td>
-        <td><p>Convert <code>network</code> objects to <code>igraph</code>.</p></td>
+        <td><p>Conversion to <code>igraph</code> objects.</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="as_network.html">as_network()</a></code> </p>
         </td>
-        <td><p>Convert <code>igraph</code> objects to <code>network</code>.</p></td>
+        <td><p>Conversion to <code>network</code> objects.</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -217,42 +217,98 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-mixing" class="hasAnchor"><a href="#section-mixing" class="anchor"></a>Mixing</h2>
-          <p class="section-desc"><p>Procedures addressing mixing patterns, homophily, and integration.</p></p>
+          <h2 id="section-representations" class="hasAnchor"><a href="#section-representations" class="anchor"></a>Representations</h2>
+          <p class="section-desc"><p>Construct various network representations.</p></p>
         </th>
       </tr>
       <tr>
         
         <td>
-          <p><code><a href="mix_ei_index.html">mix_ei_index()</a></code> </p>
+          <p><code><a href="rep_adjacency_matrix.html">rep_adjacency_matrix()</a></code> </p>
         </td>
-        <td><p>E-I Index</p></td>
+        <td><p>Build a network's adjacency matrix representation</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="mix_mixing_matrix.html">mix_mixing_matrix()</a></code> </p>
+          <p><code><a href="rep_attr_adj_mat.html">rep_attr_adj_mat()</a></code> </p>
+        </td>
+        <td><p>Build a graphs's adjacency matrix, using an attribute category in place of vertex names.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="rep_edgelist.html">rep_edgelist()</a></code> </p>
+        </td>
+        <td><p>Build a networks's edge list representation.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="rep_attr_el.html">rep_attr_el()</a></code> </p>
+        </td>
+        <td><p>Build a graphs's edge list, using an attribute categories instead of vertex names.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="rep_two_mode_matrix.html">rep_two_mode_matrix()</a></code> </p>
+        </td>
+        <td><p>rep_two_mode_matrix</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="rep_biadjacency_matrix.html">rep_biadjacency_matrix()</a></code> </p>
+        </td>
+        <td><p>rep_biadjacency_matrix</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="rep_mixing_matrix.html">rep_mixing_matrix()</a></code> </p>
         </td>
         <td><p>Build a network/graph's mixing matrix.</p></td>
       </tr>
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-representations" class="hasAnchor"><a href="#section-representations" class="anchor"></a>Representations</h2>
-          <p class="section-desc"><p>Obtain network representations in consistent formats.</p></p>
+          <h2 id="section-homophily" class="hasAnchor"><a href="#section-homophily" class="anchor"></a>Homophily</h2>
+          <p class="section-desc"><p>Procedures addressing homophily and mixing patterns.</p></p>
         </th>
       </tr>
       <tr>
         
         <td>
-          <p><code><a href="rep_as_adjacency_matrix.html">rep_as_adjacency_matrix()</a></code> </p>
+          <p><code><a href="ei_index.html">ei_index()</a></code> </p>
         </td>
-        <td><p>Build a network's adjacency matrix representation</p></td>
+        <td><p>E-I Index</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="rep_as_edgelist.html">rep_as_edgelist()</a></code> </p>
+          <p><code><a href="ei_index_global.html">ei_index_global()</a></code> </p>
         </td>
-        <td><p>Build a networks's edge list representation.</p></td>
+        <td><p>Global E-I Index</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ei_index_global_permute.html">ei_index_global_permute()</a></code> </p>
+        </td>
+        <td><p>E-I Index Permutation Test</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="rep_mixing_matrix.html">rep_mixing_matrix()</a></code> </p>
+        </td>
+        <td><p>Build a network/graph's mixing matrix.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-quadratic-assignment-procedure" class="hasAnchor"><a href="#section-quadratic-assignment-procedure" class="anchor"></a>Quadratic Assignment Procedure</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="qap_cor.html">qap_cor()</a></code> </p>
+        </td>
+        <td><p>Quadratic Assignment Procedure (Correlation)</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -366,8 +422,9 @@
       <li><a href="#section-snatools">snatools</a></li>
       <li><a href="#section-class-conversion">Class Conversion</a></li>
       <li><a href="#section-attributes">Attributes</a></li>
-      <li><a href="#section-mixing">Mixing</a></li>
       <li><a href="#section-representations">Representations</a></li>
+      <li><a href="#section-homophily">Homophily</a></li>
+      <li><a href="#section-quadratic-assignment-procedure">Quadratic Assignment Procedure</a></li>
       <li><a href="#section-carpentry">Carpentry</a></li>
       <li><a href="#section-visualization">Visualization</a></li>
       <li><a href="#section-foreign-file-formats">Foreign File Formats</a></li>

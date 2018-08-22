@@ -1,17 +1,96 @@
-#' Convert `igraph` objects to `network`.
+#' Conversion to `network` objects.
 #' 
-#' @param x An graph object.`igraph` objects are currently supported.
-#' @param actor_type `logical`. The vertex `"type"` specifying which
-#' vertices in `x` are to be treated as "actors". See \href{#details}{__Details__} \cr
+#' @param x 
+#'     `igraph` ([`igraph::graph`]) or [`tidygraph::tbl_graph`] object.
+#' @param ... 
+#'     Additional arguments on to other methods (`clean_graph`, `actor_type`).
+#' @param clean_graph 
+#'     `logical`. Whether to automatically call `clean_graph()` before converting `x`. \cr
+#'     Default: `TRUE`
+#' @param actor_type 
+#'     `logical`. For bipartite graphs, the vertex `"type"` specifying which vertices in 
+#'     `x` are to be treated as "actors" in returned `network` object. See __Details__. \cr
 #' 
-#' @details `actor_type`. By default, `igraph` represents bipartite graphs using vertex 
-#' attribute named `"type"`. `network` represents bipratite graphs through a count of the 
-#' vertices in the "actors" partition. `actor_type` provides a way to specify whether the
-#' preceding `igraph` object's `TRUE` or `FALSE` nodes should be represented as the "actors" 
-#' in the resulting `network` object (as opposed to the vertices of the second partition,
-#' e.g. "events").
+#' @return A [`network::network`] object.
 #' 
-#' @return A `network` object.
+#' @details `actor_type`
+#' * By default, `igraph` represents bipartite graphs using a `logical` vertex attribute named `type`. 
+#' * `network` represents bipartite graphs through a count of the vertices in the "actors" 
+#' partition. 
+#' * `actor_type` provides a way to specify which vertices of an `igraph` object should be
+#' represented as the "actors" in the resulting `network` object (as opposed to the vertices 
+#' of the second mode, e.g. "events").
+#' 
+#' @seealso [clean_graph()]
+#' 
+#' @author Brendan Knapp \email{brendan.g.knapp@@gmail.com}
+#' 
+#' @examples 
+#' library(snatools)
+#' 
+#' # `igraph` to `network` ===============================================================
+#' ## undirected =========================================================================
+#' data("karate", package = "igraphdata")
+#' karate
+#' 
+#' as_network(karate)
+#' 
+#' ## directed ===========================================================================
+#' data("USairports", package = "igraphdata")
+#' 
+#' USairports
+#' 
+#' as_network(USairports)
+#' 
+#' ## bipartite ==========================================================================
+#' southern_women_matrix <- matrix(
+#'   c(1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0,
+#'     1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 
+#'     1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 
+#'     0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+#'     1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,
+#'     1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0,
+#'     0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0,
+#'     0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+#'     0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 
+#'     1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1,
+#'     1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 
+#'     0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0,
+#'     0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 
+#'     1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0),
+#'   nrow = 14L, ncol = 18L,
+#'   dimnames = list(
+#'     c("E1", "E2", "E3", "E4", "E5", "E6", "E7",
+#'       "E8", "E9", "E10", "E11", "E12", "E13", "E14"),
+#'     c("EVELYN", "LAURA", "THERESA", "BRENDA", "CHARLOTTE", "FRANCES",
+#'       "ELEANOR", "PEARL", "RUTH", "VERNE", "MYRNA", "KATHERINE", 
+#'       "SYLVIA", "NORA", "HELEN", "DOROTHY", "OLIVIA", "FLORA"))
+#'  )
+#' 
+#' southern_women_ig <- igraph::graph_from_incidence_matrix(southern_women_matrix)
+#' 
+#' southern_women_ig
+#' 
+#' vrt_attrs(southern_women_ig)
+#' 
+#' as_network(southern_women_ig)
+#' 
+#' ## using `actor_type` to specify bipartite mapping ====================================
+#' 
+#' sw_transposed <- t(southern_women_matrix)
+#' 
+#' southern_women_with_actors_false <- igraph::graph_from_incidence_matrix(sw_transposed)
+#' 
+#' vrt_attrs(southern_women_with_actors_false)
+#' 
+#' as_network(southern_women_with_actors_false, actor_type = FALSE)
+#' 
+#' # `tbl_graph` to `network` ============================================================
+#' tidy_g <- tidygraph::create_notable("Zachary")
+#' 
+#' tidy_g
+#' 
+#' as_network(tidy_g)
 #' 
 #' @export
 as_network <- function(x, ...) {
@@ -22,7 +101,19 @@ as_network <- function(x, ...) {
 #' 
 #' @export
 #' 
-as_network.igraph <- function(x, actor_type = TRUE) {
+as_network.network <- function(x, ...) {
+  message("`x` is already a `network` object.")
+  x
+}
+
+#' @rdname as_network
+#' 
+#' @export
+#' 
+as_network.igraph <- function(x, clean_graph = TRUE, actor_type = TRUE) {
+  if(clean_graph) {
+    x <- clean_graph(x, actor_type)
+  }
   vert_attr_names <- vrt_attr_names(x)
   if("vertex.names" %in% vert_attr_names){
     if("name" %in% vert_attr_names) {
@@ -45,7 +136,7 @@ as_network.igraph <- function(x, actor_type = TRUE) {
   vert_attrs <- vrt_attrs(x)
   names(vert_attrs)[names(vert_attrs) == "name"] <- "vertex.names"
   edge_attrs <- edg_attrs(x)
-  el <- rep_as_edgelist(x)
+  el <- rep_edgelist(x)
   
   if("type" %in% names(vert_attrs)) {
     if(actor_type) {
@@ -106,11 +197,11 @@ as_network.default <- function(x, ...) {
       })
 }
 
+
 #' @rdname as_network
 #' 
 #' @export
 #' 
-as_network.network <- function(x) {
-  x
+as_network.tbl_graph <- function(x, ...) {
+  as_network(as_igraph(x, ...))
 }
-
