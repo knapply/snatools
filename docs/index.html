@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>An R toolkit to bridge graph classes and streamline network analytic workflows. • snatools</title>
+<title>A toolkit to streamline network analytic workflows R. • snatools</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="An R toolkit to bridge graph classes and streamline network analytic workflows.">
-<meta property="og:description" content="What the package does (one paragraph).">
+<script src="pkgdown.js"></script><meta property="og:title" content="A toolkit to streamline network analytic workflows R.">
+<meta property="og:description" content="">
 <meta property="og:image" content="https://knapply.github.io/snatools/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
@@ -103,9 +103,7 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Install {devtools} if you haven't already.</span>
-<span class="cf">if</span> (<span class="op">!</span><span class="kw">requireNamespace</span>(<span class="st">"devtools"</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>)) {
-  <span class="kw">install.packages</span>(<span class="st">"devtools"</span>)
-}
+<span class="co"># install.packages("devtools")</span>
 
 <span class="co"># Install {snatools} from GitHub.</span>
 devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"knapply/snatools"</span>)
@@ -116,60 +114,248 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <div id="development-test-results" class="section level2">
 <h2 class="hasAnchor">
 <a href="#development-test-results" class="anchor"></a>Development Test Results</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/test">test</a></span>()
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">printed &lt;-<span class="st"> </span><span class="kw">capture.output</span>(res &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/test">test</a></span>()))
 <span class="co">#&gt; Loading snatools</span>
 <span class="co">#&gt; Loading required package: testthat</span>
-<span class="co">#&gt; Testing snatools</span>
-<span class="co">#&gt; v | OK F W S | Context</span>
-<span class="co">#&gt; </span>
-<span class="op">/</span><span class="st"> </span><span class="er">|</span><span class="st">  </span><span class="dv">0</span>       <span class="op">|</span><span class="st"> </span>Build edge lists<span class="op">:</span><span class="st"> </span>igraph
-<span class="op">-</span><span class="st"> </span><span class="er">|</span><span class="st">  </span><span class="dv">1</span>       <span class="op">|</span><span class="st"> </span>Build edge lists<span class="op">:</span><span class="st"> </span>igraph
-\ <span class="op">|</span><span class="st">  </span><span class="dv">2</span>       <span class="op">|</span><span class="st"> </span>Build edge lists<span class="op">:</span><span class="st"> </span>igraph
-<span class="op">|</span><span class="st"> </span><span class="er">|</span><span class="st">  </span><span class="dv">3</span>       <span class="op">|</span><span class="st"> </span>Build edge lists<span class="op">:</span><span class="st"> </span>igraph
-<span class="op">/</span><span class="st"> </span><span class="er">|</span><span class="st">  </span><span class="dv">4</span>       <span class="op">|</span><span class="st"> </span>Build edge lists<span class="op">:</span><span class="st"> </span>igraph
-v <span class="op">|</span><span class="st">  </span><span class="dv">4</span>       <span class="op">|</span><span class="st"> </span>Build edge lists<span class="op">:</span><span class="st"> </span>igraph
-<span class="co">#&gt; </span>
-<span class="op">/</span><span class="st"> </span><span class="er">|</span><span class="st">  </span><span class="dv">0</span>       <span class="op">|</span><span class="st"> </span>Build edge lists<span class="op">:</span><span class="st"> </span>network
-<span class="op">-</span><span class="st"> </span><span class="er">|</span><span class="st">  </span><span class="dv">1</span>       <span class="op">|</span><span class="st"> </span>Build edge lists<span class="op">:</span><span class="st"> </span>network
-\ <span class="op">|</span><span class="st">  </span><span class="dv">2</span>       <span class="op">|</span><span class="st"> </span>Build edge lists<span class="op">:</span><span class="st"> </span>network
-v <span class="op">|</span><span class="st">  </span><span class="dv">2</span>       <span class="op">|</span><span class="st"> </span>Build edge lists<span class="op">:</span><span class="st"> </span>network
-<span class="co">#&gt; </span>
-<span class="op">/</span><span class="st"> </span><span class="er">|</span><span class="st">  </span><span class="dv">0</span>       <span class="op">|</span><span class="st"> </span>Round trip conversion<span class="op">:</span><span class="st"> </span>simple graph
-<span class="op">-</span><span class="st"> </span><span class="er">|</span><span class="st">  </span><span class="dv">1</span>       <span class="op">|</span><span class="st"> </span>Round trip conversion<span class="op">:</span><span class="st"> </span>simple graph
-v <span class="op">|</span><span class="st">  </span><span class="dv">1</span>       <span class="op">|</span><span class="st"> </span>Round trip conversion<span class="op">:</span><span class="st"> </span>simple graph
-<span class="co">#&gt; </span>
-<span class="op">/</span><span class="st"> </span><span class="er">|</span><span class="st">  </span><span class="dv">0</span>       <span class="op">|</span><span class="st"> </span>Round trip conversion<span class="op">:</span><span class="st"> </span>undirected graphs
-<span class="op">-</span><span class="st"> </span><span class="er">|</span><span class="st">  </span><span class="dv">1</span>       <span class="op">|</span><span class="st"> </span>Round trip conversion<span class="op">:</span><span class="st"> </span>undirected graphs
-\ <span class="op">|</span><span class="st">  </span><span class="dv">2</span>       <span class="op">|</span><span class="st"> </span>Round trip conversion<span class="op">:</span><span class="st"> </span>undirected graphs
-v <span class="op">|</span><span class="st">  </span><span class="dv">2</span>       <span class="op">|</span><span class="st"> </span>Round trip conversion<span class="op">:</span><span class="st"> </span>undirected graphs
-<span class="co">#&gt; </span>
-<span class="op">/</span><span class="st"> </span><span class="er">|</span><span class="st">  </span><span class="dv">0</span>       <span class="op">|</span><span class="st"> </span>Round trip conversion<span class="op">:</span><span class="st"> </span>directed graphs
-<span class="op">-</span><span class="st"> </span><span class="er">|</span><span class="st">  </span><span class="dv">1</span>       <span class="op">|</span><span class="st"> </span>Round trip conversion<span class="op">:</span><span class="st"> </span>directed graphs
-\ <span class="op">|</span><span class="st">  </span><span class="dv">2</span>       <span class="op">|</span><span class="st"> </span>Round trip conversion<span class="op">:</span><span class="st"> </span>directed graphs
-v <span class="op">|</span><span class="st">  </span><span class="dv">2</span>       <span class="op">|</span><span class="st"> </span>Round trip conversion<span class="op">:</span><span class="st"> </span>directed graphs
-<span class="co">#&gt; </span>
-<span class="op">/</span><span class="st"> </span><span class="er">|</span><span class="st">  </span><span class="dv">0</span>       <span class="op">|</span><span class="st"> </span>Round trip conversion<span class="op">:</span><span class="st"> </span>bipartite graphs
-<span class="op">-</span><span class="st"> </span><span class="er">|</span><span class="st">  </span><span class="dv">1</span>       <span class="op">|</span><span class="st"> </span>Round trip conversion<span class="op">:</span><span class="st"> </span>bipartite graphs
-\ <span class="op">|</span><span class="st">  </span><span class="dv">2</span>       <span class="op">|</span><span class="st"> </span>Round trip conversion<span class="op">:</span><span class="st"> </span>bipartite graphs
-v <span class="op">|</span><span class="st">  </span><span class="dv">2</span>       <span class="op">|</span><span class="st"> </span>Round trip conversion<span class="op">:</span><span class="st"> </span>bipartite graphs
-<span class="co">#&gt; </span>
-<span class="op">/</span><span class="st"> </span><span class="er">|</span><span class="st">  </span><span class="dv">0</span>       <span class="op">|</span><span class="st"> </span>E<span class="op">-</span>I Index<span class="op">:</span><span class="st"> </span>directed
-<span class="op">-</span><span class="st"> </span><span class="er">|</span><span class="st">  </span><span class="dv">1</span>       <span class="op">|</span><span class="st"> </span>E<span class="op">-</span>I Index<span class="op">:</span><span class="st"> </span>directed
-\ <span class="op">|</span><span class="st">  </span><span class="dv">2</span>       <span class="op">|</span><span class="st"> </span>E<span class="op">-</span>I Index<span class="op">:</span><span class="st"> </span>directed
-v <span class="op">|</span><span class="st">  </span><span class="dv">2</span>       <span class="op">|</span><span class="st"> </span>E<span class="op">-</span>I Index<span class="op">:</span><span class="st"> </span>directed
-<span class="co">#&gt; </span>
-<span class="op">/</span><span class="st"> </span><span class="er">|</span><span class="st">  </span><span class="dv">0</span>       <span class="op">|</span><span class="st"> </span>E<span class="op">-</span>I Index<span class="op">:</span><span class="st"> </span>undirected
-<span class="op">-</span><span class="st"> </span><span class="er">|</span><span class="st">  </span><span class="dv">1</span>       <span class="op">|</span><span class="st"> </span>E<span class="op">-</span>I Index<span class="op">:</span><span class="st"> </span>undirected
-\ <span class="op">|</span><span class="st">  </span><span class="dv">2</span>       <span class="op">|</span><span class="st"> </span>E<span class="op">-</span>I Index<span class="op">:</span><span class="st"> </span>undirected
-v <span class="op">|</span><span class="st">  </span><span class="dv">2</span>       <span class="op">|</span><span class="st"> </span>E<span class="op">-</span>I Index<span class="op">:</span><span class="st"> </span>undirected
-<span class="co">#&gt; </span>
-<span class="co">#&gt; == Results ============================================================</span>
-<span class="co">#&gt; Duration: 0.4 s</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; OK:       17</span>
-<span class="co">#&gt; Failed:   0</span>
-<span class="co">#&gt; Warnings: 0</span>
-<span class="co">#&gt; Skipped:  0</span></code></pre></div>
+<span class="co">#&gt; Testing snatools</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res<span class="op">$</span>success &lt;-<span class="st"> </span><span class="kw">ifelse</span>(res<span class="op">$</span>failed <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)
+
+<span class="kw">cat</span>(<span class="st">"Test Success Rate:"</span>, scales<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/scales/topics/number_format">percent</a></span>(<span class="kw">mean</span>(<span class="kw">as.numeric</span>(res<span class="op">$</span>success))))
+<span class="co">#&gt; Test Success Rate: 100%</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res<span class="op">$</span>test &lt;-<span class="st"> </span><span class="kw"><a href="reference/character-manipulation-tools.html">txt_replace_all</a></span>(res<span class="op">$</span>test, <span class="st">"</span><span class="ch">\\</span><span class="st">s+"</span>, <span class="st">" "</span>)
+res<span class="op">$</span>success &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">"`"</span>, res<span class="op">$</span>success, <span class="st">"`"</span>)
+
+res[, <span class="kw">c</span>(<span class="st">"context"</span>, <span class="st">"success"</span>)] <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/knitr/topics/kable">kable</a></span>(<span class="dt">caption =</span> <span class="st">"Test Details"</span>)</code></pre></div>
+<table class="table table">
+<caption>Test Details</caption>
+<thead><tr class="header">
+<th align="left">context</th>
+<th align="left">success</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Undirected Edge Lists</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td align="left">Undirected Edge Lists</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Undirected Edge Lists</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td align="left">Undirected Edge Lists</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Undirected Edge Lists</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td align="left">Undirected Edge Lists</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Undirected Edge Lists</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td align="left">Undirected Edge Lists</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Directed Edge Lists</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td align="left">Directed Edge Lists</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Directed Edge Lists</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td align="left">Directed Edge Lists</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Directed Edge Lists</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td align="left">Directed Edge Lists</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Directed Edge Lists</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td align="left">Directed Edge Lists</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Undirected Adjacency Matrices</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td align="left">Undirected Adjacency Matrices</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Undirected Adjacency Matrices</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td align="left">Undirected Adjacency Matrices</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Undirected Adjacency Matrices</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td align="left">Directed Adjacency Matrices</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Directed Adjacency Matrices</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td align="left">Directed Adjacency Matrices</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Directed Adjacency Matrices</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td align="left">Directed Adjacency Matrices</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Undirected Attribute Edge Lists</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td align="left">Undirected Attribute Edge Lists</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Directed Attribute Edge Lists</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td align="left">Directed Attribute Edge Lists</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Undirected Attribute Adjacency Matrices</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td align="left">Undirected Attribute Adjacency Matrices</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Directed Attribute Adjacency Matrices</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td align="left">Directed Attribute Adjacency Matrices</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Undirected <code>attr_el</code>s from <code>attr_adj_mats</code>
+</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td align="left">Undirected <code>attr_el</code>s from <code>attr_adj_mats</code>
+</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Directed <code>attr_el</code>s from <code>attr_adj_mats</code>
+</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td align="left">Directed <code>attr_el</code>s from <code>attr_adj_mats</code>
+</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Undirected Mixing Matrices</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td align="left">Undirected Mixing Matrices</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Directed Mixing Matrices</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td align="left">Directed Mixing Matrices</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Round trip conversion: simple graph</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td align="left">Round trip conversion: undirected graphs</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Round trip conversion: undirected graphs</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td align="left">Round trip conversion: directed graphs</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Round trip conversion: directed graphs</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td align="left">Round trip conversion: bipartite graphs</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Round trip conversion: bipartite graphs</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td align="left">Round trip conversion: bipartite graphs</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td align="left">E-I Index: directed</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td align="left">E-I Index: directed</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td align="left">E-I Index: undirected</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td align="left">E-I Index: undirected</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
   </div>

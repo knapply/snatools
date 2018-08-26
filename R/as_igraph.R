@@ -1,4 +1,14 @@
-#' Convert `network` objects to `igraph`.
+#' Conversion to `igraph` objects.
+#' 
+#' @param x [`network::network`] object.
+#' @param ... Additional arguments on to other methods (`clean_graph`, `actor_type`).
+#' @param clean_graph logical. Whether to automatically call `clean_graph()` before converting x. \cr
+#' Default: `TRUE`
+#' @param actor_type logical. For bipartite graphs, the `"type"` (vertex attribute) that
+#' "actor" vertices are to be assigned. \cr
+#' Default: `TRUE`
+#' 
+#' @return An `igraph` ([`igraph::graph`]) object.
 #' 
 #' @export
 #' 
@@ -10,42 +20,52 @@ as_igraph <- function(x, ...) {
 #' 
 #' @export
 #' 
-as_igraph.network <- function(x, actor_type = TRUE) {
+as_igraph.network <- function(x, clean_graph = TRUE, actor_type = TRUE) {
   if(x$gal$hyper) {
     stop("Hypergraphs are not supported.", call. = FALSE)
   }
-  graph_attrs <- net_attrs(x)
+  # if(clean_graph) {
+    # x <- clean_graph(x)
+  # }
+  net_attrs <- net_get_attrs(x)
+  
+  vrt_attrs <- vrt_get_attrs(x)
   
   if(is.numeric(x$gal$bipartite)) {
-    graph_attrs$loops <- NULL
-    all_n <- x$gal$n
-    actors_n <- x$gal$bipartite
-    types <- c(rep(TRUE, actors_n), rep(FALSE, all_n - actors_n))
-    if(actors_n > all_n - actors_n) {
-      types <- rev(types)
+    names(vrt_attrs) <- txt_replace(names(vrt_attrs), "is_actor", "type")
+    # net_attrs$loops <- NULL
+    # all_n <- x$gal$n
+    # actors_n <- x$gal$bipartite
+    # types <- c(rep(TRUE, actors_n), rep(FALSE, all_n - actors_n))
+    # if(actor_type) {
+    #   network::set.vertex.attribute(x, "type", value = types)
+    # } else {
+    #   network::set.vertex.attribute(x, "type", value = rev(types))
+    # }
+  }
+  # vrt_attrs <- vrt_get_attrs(x)
+  if("vertex.names" %in% names(vrt_attrs)) {
+    names(vrt_attrs)[names(vrt_attrs) == "vertex.names"] <- "name"
+  }
+  edg_attrs <- edg_get_attrs(x)
+  vectorized_el <- as.vector(t(rep_edgelist(x)))
+  
+  out <- igraph::graph.empty(n = x$gal$n, directed = x$gal$directed)
+  out <- igraph::add_edges(out, edges = vectorized_el)
+  if(length(vrt_attrs)) {
+    igraph::vertex_attr(out) <- vrt_attrs
     }
-    if(actor_type) {
-      network::set.vertex.attribute(x, "type", value = types)
-    } else {
-      network::set.vertex.attribute(x, "type", value = rev(types))
+  if(length(net_attrs)) {
+    igraph::graph_attr(out) <- net_attrs
     }
+  if(length(edg_attrs)) {
+    igraph::edge_attr(out) <- edg_attrs
+    }
+  if(length(vrt_attrs)) {
+    igraph::vertex_attr(out) <- vrt_attrs
   }
-  vert_attrs <- vrt_attrs(x)
-  names(vert_attrs)[names(vert_attrs) == "vertex.names"] <- "name"
-  edge_attrs <- edg_attrs(x)
-  el <- rep_as_edgelist(x)
- 
-  out <- igraph::graph_from_edgelist(el, directed = x$gal$directed)
-  if(length(graph_attrs)) {
-    igraph::graph_attr(out) <- graph_attrs
-  }
-  if(length(edge_attrs)) {
-    igraph::edge_attr(out) <- edge_attrs
-  }
-  if(length(vert_attrs)) {
-    igraph::vertex_attr(out) <- vert_attrs
-  }
-  clean_graph(out)
+  out
+  # clean_graph(out)
 }
 
 #' @rdname as_igraph
@@ -130,3 +150,14 @@ as_igraph.ucinet <- function(x, ...) {
   }
   igraph::graph_from_incidence_matrix(incidence = x)
 }
+
+#' @rdname as_igraph
+#' 
+#' @export
+#' 
+as_igraph.tbl_graph <- function(x) {
+  attributes(x) <- NULL
+  class(x) <- "igraph"
+  x
+}
+

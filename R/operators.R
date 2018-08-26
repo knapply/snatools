@@ -53,11 +53,37 @@
 #' @export
 #' 
 `%==%.igraph` <- function(lhs, rhs) {
-  identical(unclass(lhs)[seq_len(9)], unclass(rhs)[seq_len(9)])
+  if(class(rhs) != "igraph") {
+    stop("`lhs` and `rhs` are not both `igraph` objects.")
+  }
+  lhs_net_attrs <- net_get_attrs(lhs)
+  lhs_net_attrs <- lhs_net_attrs[order(names(lhs_net_attrs))]
+  rhs_net_attrs <- net_get_attrs(rhs)
+  rhs_net_attrs <- rhs_net_attrs[order(names(rhs_net_attrs))]
+  for(i in names(lhs_net_attrs)) {
+    lhs <- igraph::delete_graph_attr(lhs, i)
+  }
+  for(i in names(rhs_net_attrs)) {
+    rhs <- igraph::delete_graph_attr(rhs, i)
+  }
+  tests <- c(identical(lhs_net_attrs, rhs_net_attrs),
+             identical(unclass(lhs)[seq_len(9)], unclass(rhs)[seq_len(9)]))
+  
+  all(tests)
 }
 
-# %l0%` <- function(x, y) if (length(x) == 0) y else x
 
+#' @rdname strict-compare
+#' 
+#' @export
+#' 
+`%==%.network` <- function(lhs, rhs) {
+  if(class(rhs) != "network") {
+    stop("`lhs` and `rhs` are not both `network` objects.")
+  }
 
-
-
+  lhs <- clean_network_metadata(lhs)
+  rhs <- clean_network_metadata(rhs)
+  
+  identical(lhs, rhs)
+}

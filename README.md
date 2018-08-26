@@ -12,9 +12,7 @@ Installation
 
 ``` r
 # Install {devtools} if you haven't already.
-if (!requireNamespace("devtools", quietly = TRUE)) {
-  install.packages("devtools")
-}
+# install.packages("devtools")
 
 # Install {snatools} from GitHub.
 devtools::install_github("knapply/snatools")
@@ -27,57 +25,79 @@ Development Test Results
 ------------------------
 
 ``` r
-devtools::test()
+printed <- capture.output(res <- as.data.frame(devtools::test()))
 #> Loading snatools
 #> Testing snatools
-#> v | OK F W S | Context
-#> 
-/ |  0       | Build edge lists: igraph
-- |  1       | Build edge lists: igraph
-\ |  2       | Build edge lists: igraph
-| |  3       | Build edge lists: igraph
-/ |  4       | Build edge lists: igraph
-v |  4       | Build edge lists: igraph
-#> 
-/ |  0       | Build edge lists: network
-- |  1       | Build edge lists: network
-\ |  2       | Build edge lists: network
-v |  2       | Build edge lists: network
-#> 
-/ |  0       | Round trip conversion: simple graph
-- |  1       | Round trip conversion: simple graph
-v |  1       | Round trip conversion: simple graph
-#> 
-/ |  0       | Round trip conversion: undirected graphs
-- |  1       | Round trip conversion: undirected graphs
-\ |  2       | Round trip conversion: undirected graphs
-v |  2       | Round trip conversion: undirected graphs
-#> 
-/ |  0       | Round trip conversion: directed graphs
-- |  1       | Round trip conversion: directed graphs
-\ |  2       | Round trip conversion: directed graphs
-v |  2       | Round trip conversion: directed graphs
-#> 
-/ |  0       | Round trip conversion: bipartite graphs
-- |  1       | Round trip conversion: bipartite graphs
-\ |  2       | Round trip conversion: bipartite graphs
-v |  2       | Round trip conversion: bipartite graphs
-#> 
-/ |  0       | E-I Index: directed
-- |  1       | E-I Index: directed
-\ |  2       | E-I Index: directed
-v |  2       | E-I Index: directed
-#> 
-/ |  0       | E-I Index: undirected
-- |  1       | E-I Index: undirected
-\ |  2       | E-I Index: undirected
-v |  2       | E-I Index: undirected
-#> 
-#> == Results =====================================================================
-#> Duration: 0.2 s
-#> 
-#> OK:       17
-#> Failed:   0
-#> Warnings: 0
-#> Skipped:  0
 ```
+
+``` r
+res$success <- ifelse(res$failed == 0, TRUE, FALSE)
+
+cat("Test Success Rate:", scales::percent(mean(as.numeric(res$success))))
+#> Test Success Rate: 100%
+```
+
+``` r
+res$test <- txt_replace_all(res$test, "\\s+", " ")
+res$success <- paste0("`", res$success, "`")
+
+res[, c("context", "success")] %>% 
+  knitr::kable(caption = "Test Details")
+```
+
+| context                                    | success |
+|:-------------------------------------------|:--------|
+| Undirected Edge Lists                      | `TRUE`  |
+| Undirected Edge Lists                      | `TRUE`  |
+| Undirected Edge Lists                      | `TRUE`  |
+| Undirected Edge Lists                      | `TRUE`  |
+| Undirected Edge Lists                      | `TRUE`  |
+| Undirected Edge Lists                      | `TRUE`  |
+| Undirected Edge Lists                      | `TRUE`  |
+| Undirected Edge Lists                      | `TRUE`  |
+| Directed Edge Lists                        | `TRUE`  |
+| Directed Edge Lists                        | `TRUE`  |
+| Directed Edge Lists                        | `TRUE`  |
+| Directed Edge Lists                        | `TRUE`  |
+| Directed Edge Lists                        | `TRUE`  |
+| Directed Edge Lists                        | `TRUE`  |
+| Directed Edge Lists                        | `TRUE`  |
+| Directed Edge Lists                        | `TRUE`  |
+| Undirected Adjacency Matrices              | `TRUE`  |
+| Undirected Adjacency Matrices              | `TRUE`  |
+| Undirected Adjacency Matrices              | `TRUE`  |
+| Undirected Adjacency Matrices              | `TRUE`  |
+| Undirected Adjacency Matrices              | `TRUE`  |
+| Directed Adjacency Matrices                | `TRUE`  |
+| Directed Adjacency Matrices                | `TRUE`  |
+| Directed Adjacency Matrices                | `TRUE`  |
+| Directed Adjacency Matrices                | `TRUE`  |
+| Directed Adjacency Matrices                | `TRUE`  |
+| Undirected Attribute Edge Lists            | `TRUE`  |
+| Undirected Attribute Edge Lists            | `TRUE`  |
+| Directed Attribute Edge Lists              | `TRUE`  |
+| Directed Attribute Edge Lists              | `TRUE`  |
+| Undirected Attribute Adjacency Matrices    | `TRUE`  |
+| Undirected Attribute Adjacency Matrices    | `TRUE`  |
+| Directed Attribute Adjacency Matrices      | `TRUE`  |
+| Directed Attribute Adjacency Matrices      | `TRUE`  |
+| Undirected `attr_el`s from `attr_adj_mats` | `TRUE`  |
+| Undirected `attr_el`s from `attr_adj_mats` | `TRUE`  |
+| Directed `attr_el`s from `attr_adj_mats`   | `TRUE`  |
+| Directed `attr_el`s from `attr_adj_mats`   | `TRUE`  |
+| Undirected Mixing Matrices                 | `TRUE`  |
+| Undirected Mixing Matrices                 | `TRUE`  |
+| Directed Mixing Matrices                   | `TRUE`  |
+| Directed Mixing Matrices                   | `TRUE`  |
+| Round trip conversion: simple graph        | `TRUE`  |
+| Round trip conversion: undirected graphs   | `TRUE`  |
+| Round trip conversion: undirected graphs   | `TRUE`  |
+| Round trip conversion: directed graphs     | `TRUE`  |
+| Round trip conversion: directed graphs     | `TRUE`  |
+| Round trip conversion: bipartite graphs    | `TRUE`  |
+| Round trip conversion: bipartite graphs    | `TRUE`  |
+| Round trip conversion: bipartite graphs    | `TRUE`  |
+| E-I Index: directed                        | `TRUE`  |
+| E-I Index: directed                        | `TRUE`  |
+| E-I Index: undirected                      | `TRUE`  |
+| E-I Index: undirected                      | `TRUE`  |

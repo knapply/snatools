@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Convert <code>network</code> objects to <code>igraph</code>. — as_igraph • snatools</title>
+<title>Conversion to <code>igraph</code> objects. — as_igraph • snatools</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Convert <code>network</code> objects to <code>igraph</code>. — as_igraph" />
+<meta property="og:title" content="Conversion to <code>igraph</code> objects. — as_igraph" />
 
-<meta property="og:description" content="Convert network objects to igraph." />
+<meta property="og:description" content="Conversion to igraph objects." />
 
 <meta property="og:image" content="https://knapply.github.io/snatools/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -127,21 +127,21 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Convert <code>network</code> objects to <code>igraph</code>.</h1>
+    <h1>Conversion to <code>igraph</code> objects.</h1>
     <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/as_igraph.R'><code>R/as_igraph.R</code></a></small>
     <div class="hidden name"><code>as_igraph.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Convert <code>network</code> objects to <code>igraph</code>.</p>
+    <p>Conversion to <code>igraph</code> objects.</p>
     
     </div>
 
     <pre class="usage"><span class='fu'>as_igraph</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for network</span>
-<span class='fu'>as_igraph</span>(<span class='no'>x</span>, <span class='kw'>actor_type</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>as_igraph</span>(<span class='no'>x</span>, <span class='kw'>clean_graph</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>actor_type</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'># S3 method for default</span>
 <span class='fu'>as_igraph</span>(<span class='no'>x</span>, <span class='no'>...</span>)
@@ -150,14 +150,48 @@
 <span class='fu'>as_igraph</span>(<span class='no'>x</span>)
 
 <span class='co'># S3 method for ucinet</span>
-<span class='fu'>as_igraph</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
-        
+<span class='fu'>as_igraph</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for tbl_graph</span>
+<span class='fu'>as_igraph</span>(<span class='no'>x</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p><code><a href='http://www.rdocumentation.org/packages/network/topics/network'>network::network</a></code> object.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Additional arguments on to other methods (<code>clean_graph</code>, <code>actor_type</code>).</p></td>
+    </tr>
+    <tr>
+      <th>clean_graph</th>
+      <td><p>logical. Whether to automatically call <code>clean_graph()</code> before converting x. <br />
+Default: <code>TRUE</code></p></td>
+    </tr>
+    <tr>
+      <th>actor_type</th>
+      <td><p>logical. For bipartite graphs, the <code>"type"</code> (vertex attribute) that
+"actor" vertices are to be assigned. <br />
+Default: <code>TRUE</code></p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>An <code>igraph</code> (<code><a href='http://www.rdocumentation.org/packages/igraph/topics/make_graph'>igraph::graph</a></code>) object.</p>
+    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-                </ul>
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
 
   </div>
 </div>

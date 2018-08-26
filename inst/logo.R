@@ -43,16 +43,16 @@ directed_triads <- list(
 )
 
 plotter <- function(x, lab) {
-  coords <- matrix(c(0, 0.9,
-                     -0.4, 0.2,
-                     0.4, 0.2), ncol = 2, byrow = TRUE)
+  coords <- matrix(c(0, 0.8,
+                     -0.4, 0.1,
+                     0.4, 0.1), ncol = 2, byrow = TRUE)
   shape <- str_remove(lab, "^triad_")
   out <- ggraph(x, layout = coords)
   if(igraph::is_directed(x)) {
     out <- out +
       geom_edge_link(arrow = arrow(angle = 35, length = unit(6, "mm"), type = "closed"),
-                     start_cap = circle(5, "mm"),
-                     end_cap = circle(5, "mm"), color = "white") +
+                     start_cap = circle(8, "mm"),
+                     end_cap = circle(8, "mm"), color = "white", width = 1.75) +
       NULL
   }
   if(!igraph::is_directed(x)) {
@@ -61,10 +61,10 @@ plotter <- function(x, lab) {
   }
   out + 
     scale_x_continuous(limits = c(-0.5, 0.5), expand = c(0, 0)) +
-    scale_y_continuous(limits = c(0, 1), expand = c(0, 0)) +
-    geom_node_point(color = "white", size = 8) +
+    scale_y_continuous(limits = c(0, 0.9), expand = c(0, 0)) +
+    geom_node_point(color = "white", size = 12) +
     # geom_node_point(color = "#1d479b", size = 6) +
-    geom_node_point(color = "green", size = 6) +
+    geom_node_point(color = "green", size = 10) +
     labs(x = NULL, y = NULL) +
     theme_void() +
     theme_transparent() +
@@ -72,10 +72,10 @@ plotter <- function(x, lab) {
 }
 
 # plot ====
-triads_gg <- directed_triads %>% 
+triads_gg <- directed_triads[c(3, 5, 7, 10, 13, 16)] %>% 
   imap(plotter)
 
-triads_gg <- cowplot::plot_grid(plotlist = triads_gg)
+triads_gg <- cowplot::plot_grid(plotlist = triads_gg, nrow = 2)
 
 
 if(!dir.exists("man/figures")) {

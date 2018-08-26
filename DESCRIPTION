@@ -1,9 +1,9 @@
 Package: snatools
-Title: An R toolkit to bridge graph classes and streamline network analytic workflows.
+Title: A toolkit to streamline network analytic workflows R.
 Version: 0.0.0.9000
 Authors@R: person("Brendan", "Knapp", email = "brendan.g.knapp@gmail.com", role = c("aut", "cre"),
                   comment = c(ORCID = "0000-0003-3284-4972"))
-Description: What the package does (one paragraph).
+Description: 
 Depends: R (>= 3.5.1)
 Imports:
     igraph,
@@ -15,10 +15,14 @@ URL: https://github.com/knapply/snatools, https://knapply.github.io/snatools/
 BugReports: https://github.com/knapply/snatools/issues
 LazyData: true
 Suggests:
+    igraphdata,
+    ergm,
     ggplot2,
-    testthat,
     knitr,
-    rmarkdown
+    rmarkdown,
+    sna,
+    testthat,
+    tidygraph
 RoxygenNote: 6.1.0.9000
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr

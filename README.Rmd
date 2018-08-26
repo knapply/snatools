@@ -2,6 +2,8 @@
 output: 
   github_document:
     html_preview: false
+editor_options: 
+  chunk_output_type: console
 ---
 
 <!-- README.Rmd generates README.md. -->
@@ -28,9 +30,7 @@ An R toolkit to bridge graph classes and streamline network analytic workflows.
 
 ```{r, eval=FALSE}
 # Install {devtools} if you haven't already.
-if (!requireNamespace("devtools", quietly = TRUE)) {
-  install.packages("devtools")
-}
+# install.packages("devtools")
 
 # Install {snatools} from GitHub.
 devtools::install_github("knapply/snatools")
@@ -47,7 +47,23 @@ library(snatools)
 ## Development Test Results
 
 ```{r}
-devtools::test()
+printed <- capture.output(res <- as.data.frame(devtools::test()))
 ```
+
+```{r}
+res$success <- ifelse(res$failed == 0, TRUE, FALSE)
+
+cat("Test Success Rate:", scales::percent(mean(as.numeric(res$success))))
+```
+
+
+```{r}
+res$test <- txt_replace_all(res$test, "\\s+", " ")
+res$success <- paste0("`", res$success, "`")
+
+res[, c("context", "success")] %>% 
+  knitr::kable(caption = "Test Details")
+```
+
 
 

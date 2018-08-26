@@ -15,7 +15,7 @@ devtools::document(".")
 
 devtools::install(".", dependencies = FALSE, upgrade_dependencies = FALSE)
 
-source("inst/logo.R")
+source("inst/logo.R", local = TRUE)
 
 rmarkdown::render("README.Rmd", output_format = "github_document")
 

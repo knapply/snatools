@@ -2,36 +2,118 @@
 % Please edit documentation in R/as_network.R
 \name{as_network}
 \alias{as_network}
+\alias{as_network.network}
 \alias{as_network.igraph}
 \alias{as_network.default}
-\alias{as_network.network}
-\title{Convert \code{igraph} objects to \code{network}.}
+\alias{as_network.tbl_graph}
+\title{Conversion to \code{network} objects.}
 \usage{
 as_network(x, ...)
+
+\method{as_network}{network}(x, ...)
 
 \method{as_network}{igraph}(x, actor_type = TRUE)
 
 \method{as_network}{default}(x, ...)
 
-\method{as_network}{network}(x)
+\method{as_network}{tbl_graph}(x, ...)
 }
 \arguments{
-\item{x}{An graph object.\code{igraph} objects are currently supported.}
+\item{x}{\code{igraph} (\code{\link[igraph:graph]{igraph::graph}}) or \code{\link[tidygraph:tbl_graph]{tidygraph::tbl_graph}} object.}
 
-\item{actor_type}{\code{logical}. The vertex \code{"type"} specifying which
-vertices in \code{x} are to be treated as "actors". See \href{#details}{\strong{Details}} \cr}
+\item{...}{Additional arguments passed on to other methods (currently \code{actor_type}).}
+
+\item{actor_type}{\code{logical}. For bipartite graphs, the vertex \code{"type"} specifying which vertices in
+\code{x} are to be treated as "actors" in returned \code{network} object. See \strong{Details}. \cr}
 }
 \value{
-A \code{network} object.
+A \code{\link[network:network]{network::network}} object.
 }
 \description{
-Convert \code{igraph} objects to \code{network}.
+Conversion to \code{network} objects.
 }
 \details{
-\code{actor_type}. By default, \code{igraph} represents bipartite graphs using vertex
-attribute named \code{"type"}. \code{network} represents bipratite graphs through a count of the
-vertices in the "actors" partition. \code{actor_type} provides a way to specify whether the
-preceding \code{igraph} object's \code{TRUE} or \code{FALSE} nodes should be represented as the "actors"
-in the resulting \code{network} object (as opposed to the vertices of the second partition,
-e.g. "events").
+\code{actor_type}
+\itemize{
+\item By default, \code{igraph} represents bipartite graphs using a \code{logical} vertex attribute named \code{type}.
+\item \code{network} represents bipartite graphs through a count of the vertices in the "actors"
+partition.
+\item \code{actor_type} provides a way to specify which vertices of an \code{igraph} object should be
+represented as the "actors" in the resulting \code{network} object (as opposed to the vertices
+of the second mode, e.g. "events").
+}
+}
+\examples{
+library(snatools)
+
+# `igraph` to `network` ===============================================================
+## undirected =========================================================================
+data("karate", package = "igraphdata")
+karate
+
+as_network(karate)
+
+## directed ===========================================================================
+data("USairports", package = "igraphdata")
+
+USairports
+
+as_network(USairports)
+
+## bipartite ==========================================================================
+southern_women_matrix <- matrix(
+  c(1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0,
+    1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 
+    1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 
+    0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,
+    1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 
+    1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1,
+    1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 
+    0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0,
+    0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0),
+  nrow = 14L, ncol = 18L,
+  dimnames = list(
+    c("E1", "E2", "E3", "E4", "E5", "E6", "E7",
+      "E8", "E9", "E10", "E11", "E12", "E13", "E14"),
+    c("EVELYN", "LAURA", "THERESA", "BRENDA", "CHARLOTTE", "FRANCES",
+      "ELEANOR", "PEARL", "RUTH", "VERNE", "MYRNA", "KATHERINE", 
+      "SYLVIA", "NORA", "HELEN", "DOROTHY", "OLIVIA", "FLORA"))
+ )
+
+southern_women_ig <- igraph::graph_from_incidence_matrix(southern_women_matrix)
+
+southern_women_ig
+
+vrt_get_attrs(southern_women_ig)
+
+as_network(southern_women_ig)
+
+## using `actor_type` to specify bipartite mapping ====================================
+
+sw_transposed <- t(southern_women_matrix)
+
+southern_women_with_actors_false <- igraph::graph_from_incidence_matrix(sw_transposed)
+
+vrt_get_attrs(southern_women_with_actors_false)
+
+as_network(southern_women_with_actors_false, actor_type = FALSE)
+
+# `tbl_graph` to `network` ============================================================
+tidy_g <- tidygraph::create_notable("Zachary")
+
+tidy_g
+
+as_network(tidy_g)
+
+}
+\seealso{
+\code{\link[=clean_graph]{clean_graph()}}
+}
+\author{
+Brendan Knapp \email{brendan.g.knapp@gmail.com}
 }

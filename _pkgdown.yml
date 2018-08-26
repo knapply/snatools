@@ -18,35 +18,64 @@ reference:
     - snatools-package
 
   - title: Class Conversion
-    desc: Safely convert objects between `igraph` and `network` classes.
+    desc: Safely convert objects between common network classes.
     contents:
     - starts_with("as_igraph")
     - starts_with("as_network")
   
-  - title: Attributes
-    desc: Obtain network, vertex, and edge attributes in consistent formats.
+  - title: Vertices
+    desc: Operations targeting vertices.
     contents:
-    - starts_with("edg_")
-    - starts_with("net_")
-    - starts_with("vrt_")
+    - starts_with("vrt_get_")
     
-  - title: Mixing
-    desc: Procedures addressing mixing patterns, homophily, and integration.
+  - title: Edges
+    desc: Operations targeting edges.
     contents:
-    - mix_ei_index
-    - mix_mixing_matrix
+    - starts_with("edg_get_")
+    - ends_with("parallel")
+  
+  - title: Network
+    desc: Operations targeting graph-level attributes and metadata.
+    contents:
+    - starts_with("net_get_")
+    - starts_with("net_is_")
 
   - title: Representations
-    desc: Obtain network representations in consistent formats.
+    desc: Construct various network representations.
     contents:
-    - rep_as_adjacency_matrix
-    - rep_as_edgelist
-    - rep_as_incidence_matrix
+    - rep_adjacency_matrix
+    - rep_attr_adj_mat
+    - rep_edgelist
+    - rep_attr_el
+    - rep_two_mode_matrix
+    - rep_biadjacency_matrix
+    - rep_mixing_matrix
+  
+  - title: Bipartite
+    desc: Operations to assist bipartite network handling.
+    contents:
+    - bip_clarify_actors
+    - bip_swap_modes
+    
+  - title: Homophily
+    desc: Procedures addressing homophily and mixing patterns.
+    contents:
+    - ei_index
+    - ei_index_global
+    - ei_index_grp
+    - ei_index_vrt
+    - ei_index_global_permute
+    - rep_mixing_matrix
+    
+  - title: Quadratic Assignment Procedure
+    contents:
+    - qap_cor
+    - qap_ei
 
-  - title: Carpentry
-    desc: Clean network internals to enforce stricter attribute data types and accurate metadata.
-    contents:
-    - clean_graph
+#  - title: Carpentry
+#    desc: Clean network internals to enforce stricter attribute data types and accurate metadata.
+#    contents:
+#    - clean_graph
     
   - title: Visualization
     contents:

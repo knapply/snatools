@@ -92,7 +92,7 @@
       <h1>Converting Graph Classes</h1>
                         <h4 class="author">Brendan Knapp</h4>
             
-            <h4 class="date">2018-08-17</h4>
+            <h4 class="date">2018-08-26</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/knapply/snatools/blob/master/vignettes/conversion.Rmd"><code>vignettes/conversion.Rmd</code></a></small>
       <div class="hidden name"><code>conversion.Rmd</code></div>
@@ -154,12 +154,12 @@ edges_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span 
 <p>We’ll also set a graph-level attribute noting its <code>"original class"</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">graph_attr</span>(ig_initial, <span class="st">"original class"</span>) &lt;-<span class="st"> "igraph"</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ig_initial
-<span class="co">#&gt; IGRAPH cfd5f4c DN-- 30 1000 -- </span>
+<span class="co">#&gt; IGRAPH 432d038 DN-- 30 1000 -- </span>
 <span class="co">#&gt; + attr: net_chr (g/c), is_wow (g/l), net_int (g/n), net_dbl (g/n),</span>
 <span class="co">#&gt; | original class (g/c), name (v/c), vrt_chr (v/c), vrt_int (v/n),</span>
 <span class="co">#&gt; | vrt_dbl (v/n), vrt_lgl (v/l), edg_chr (e/c), edg_int (e/n),</span>
 <span class="co">#&gt; | edg_dbl (e/n), edg_lgl (e/l)</span>
-<span class="co">#&gt; + edges from cfd5f4c (vertex names):</span>
+<span class="co">#&gt; + edges from 432d038 (vertex names):</span>
 <span class="co">#&gt;  [1] vrt_2 -&gt;vrt_13 vrt_4 -&gt;vrt_4  vrt_17-&gt;vrt_11 vrt_3 -&gt;vrt_5 </span>
 <span class="co">#&gt;  [5] vrt_11-&gt;vrt_18 vrt_5 -&gt;vrt_21 vrt_24-&gt;vrt_16 vrt_1 -&gt;vrt_3 </span>
 <span class="co">#&gt;  [9] vrt_18-&gt;vrt_10 vrt_13-&gt;vrt_23 vrt_20-&gt;vrt_13 vrt_3 -&gt;vrt_27</span>
@@ -218,9 +218,9 @@ nw_initial
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list</span>(<span class="dt">n =</span> <span class="kw">c</span>(<span class="st">`</span><span class="dt"># Vertices</span><span class="st">`</span> =<span class="st"> </span><span class="kw">vcount</span>(ig_initial), <span class="st">`</span><span class="dt"># Edges</span><span class="st">`</span> =<span class="st"> </span><span class="kw">ecount</span>(ig_initial)),
      <span class="dt">Edges =</span> <span class="kw">c</span>(<span class="st">`</span><span class="dt">Is Multiplex?</span><span class="st">`</span> =<span class="st"> </span><span class="kw">any</span>(<span class="kw">is.multiple</span>(ig_initial)),
                <span class="st">`</span><span class="dt">Has Loops?</span><span class="st">`</span> =<span class="st"> </span><span class="kw">any</span>(<span class="kw">is.loop</span>(ig_initial))),
-     <span class="st">`</span><span class="dt">Graph Attributes</span><span class="st">`</span> =<span class="st"> </span><span class="kw">vapply</span>(<span class="kw"><a href="../reference/net_attrs.html">net_attrs</a></span>(ig_initial), typeof, <span class="kw">character</span>(<span class="dv">1</span>)),
-     <span class="st">`</span><span class="dt">Vertex Attributes</span><span class="st">`</span> =<span class="st"> </span><span class="kw">vapply</span>(<span class="kw"><a href="../reference/vrt_attrs.html">vrt_attrs</a></span>(ig_initial), typeof, <span class="kw">character</span>(<span class="dv">1</span>)),
-     <span class="st">`</span><span class="dt">Edge Attributes</span><span class="st">`</span> =<span class="st"> </span><span class="kw">vapply</span>(<span class="kw"><a href="../reference/edg_attrs.html">edg_attrs</a></span>(ig_initial), typeof, <span class="kw">character</span>(<span class="dv">1</span>)))
+     <span class="st">`</span><span class="dt">Graph Attributes</span><span class="st">`</span> =<span class="st"> </span><span class="kw">vapply</span>(<span class="kw"><a href="../reference/extract-network-attributes.html">net_get_attrs</a></span>(ig_initial), typeof, <span class="kw">character</span>(<span class="dv">1</span>)),
+     <span class="st">`</span><span class="dt">Vertex Attributes</span><span class="st">`</span> =<span class="st"> </span><span class="kw">vapply</span>(<span class="kw"><a href="../reference/extract-vertex-attributes.html">vrt_get_attrs</a></span>(ig_initial), typeof, <span class="kw">character</span>(<span class="dv">1</span>)),
+     <span class="st">`</span><span class="dt">Edge Attributes</span><span class="st">`</span> =<span class="st"> </span><span class="kw">vapply</span>(<span class="kw"><a href="../reference/extract-edge-attributes.html">edg_get_attrs</a></span>(ig_initial), typeof, <span class="kw">character</span>(<span class="dv">1</span>)))
 <span class="co">#&gt; $n</span>
 <span class="co">#&gt; # Vertices    # Edges </span>
 <span class="co">#&gt;         30       1000 </span>
@@ -245,9 +245,9 @@ nw_initial
            <span class="st">`</span><span class="dt"># Edges</span><span class="st">`</span> =<span class="st"> </span><span class="kw">network.edgecount</span>(nw_initial)),
      <span class="dt">Edges =</span> <span class="kw">c</span>(<span class="st">`</span><span class="dt">Is Multiplex?</span><span class="st">`</span> =<span class="st"> </span><span class="kw">is.multiplex</span>(nw_initial),
                <span class="st">`</span><span class="dt">Has Loops?</span><span class="st">`</span> =<span class="st"> </span><span class="kw">has.loops</span>(nw_initial)),
-     <span class="st">`</span><span class="dt">Graph Attributes</span><span class="st">`</span> =<span class="st"> </span><span class="kw">vapply</span>(<span class="kw"><a href="../reference/net_attrs.html">net_attrs</a></span>(nw_initial), typeof, <span class="kw">character</span>(<span class="dv">1</span>)),
-     <span class="st">`</span><span class="dt">Vertex Attributes</span><span class="st">`</span> =<span class="st"> </span><span class="kw">vapply</span>(<span class="kw"><a href="../reference/vrt_attrs.html">vrt_attrs</a></span>(nw_initial), typeof, <span class="kw">character</span>(<span class="dv">1</span>)),
-     <span class="st">`</span><span class="dt">Edge Attributes</span><span class="st">`</span> =<span class="st"> </span><span class="kw">vapply</span>(<span class="kw"><a href="../reference/edg_attrs.html">edg_attrs</a></span>(nw_initial), typeof, <span class="kw">character</span>(<span class="dv">1</span>)))
+     <span class="st">`</span><span class="dt">Graph Attributes</span><span class="st">`</span> =<span class="st"> </span><span class="kw">vapply</span>(<span class="kw"><a href="../reference/extract-network-attributes.html">net_get_attrs</a></span>(nw_initial), typeof, <span class="kw">character</span>(<span class="dv">1</span>)),
+     <span class="st">`</span><span class="dt">Vertex Attributes</span><span class="st">`</span> =<span class="st"> </span><span class="kw">vapply</span>(<span class="kw"><a href="../reference/extract-vertex-attributes.html">vrt_get_attrs</a></span>(nw_initial), typeof, <span class="kw">character</span>(<span class="dv">1</span>)),
+     <span class="st">`</span><span class="dt">Edge Attributes</span><span class="st">`</span> =<span class="st"> </span><span class="kw">vapply</span>(<span class="kw"><a href="../reference/extract-edge-attributes.html">edg_get_attrs</a></span>(nw_initial), typeof, <span class="kw">character</span>(<span class="dv">1</span>)))
 <span class="co">#&gt; $n</span>
 <span class="co">#&gt; # Vertices    # Edges </span>
 <span class="co">#&gt;         30       1000 </span>
@@ -269,433 +269,165 @@ nw_initial
 <span class="co">#&gt; $`Edge Attributes`</span>
 <span class="co">#&gt;     edg_chr     edg_int     edg_dbl     edg_lgl </span>
 <span class="co">#&gt; "character"   "integer"    "double"   "logical"</span></code></pre></div>
-</div>
-</div>
-<div id="graph-cleaning" class="section level1">
-<h1 class="hasAnchor">
-<a href="#graph-cleaning" class="anchor"></a>Graph Cleaning</h1>
-<p>In order to confirm that an <code>igraph</code> or <code>network</code> object can make a round-trip conversion with its internal data remaining intact, we want to standardize its contents. This is the purpose of <code><a href="../reference/clean_graph.html">clean_graph()</a></code>, which is equipped with <code><a href="../reference/clean_graph.html">clean_graph.igraph()</a></code> and <code><a href="../reference/clean_graph.html">clean_graph.network()</a></code> methods.</p>
-<p>Here, we clean <code>ig_initial</code> to create <code>ig_clean</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ig_clean &lt;-<span class="st"> </span><span class="kw"><a href="../reference/clean_graph.html">clean_graph</a></span>(ig_initial)
-
-ig_clean
-<span class="co">#&gt; IGRAPH cfd5f4c DN-- 30 1000 -- </span>
-<span class="co">#&gt; + attr: is_wow (g/l), loops (g/l), net_chr (g/c), net_dbl (g/n),</span>
-<span class="co">#&gt; | net_int (g/n), original class (g/c), name (v/c), vrt_chr (v/c),</span>
-<span class="co">#&gt; | vrt_dbl (v/n), vrt_int (v/n), vrt_lgl (v/l), edg_chr (e/c),</span>
-<span class="co">#&gt; | edg_int (e/n), edg_dbl (e/n), edg_lgl (e/l)</span>
-<span class="co">#&gt; + edges from cfd5f4c (vertex names):</span>
-<span class="co">#&gt;  [1] vrt_2 -&gt;vrt_13 vrt_4 -&gt;vrt_4  vrt_17-&gt;vrt_11 vrt_3 -&gt;vrt_5 </span>
-<span class="co">#&gt;  [5] vrt_11-&gt;vrt_18 vrt_5 -&gt;vrt_21 vrt_24-&gt;vrt_16 vrt_1 -&gt;vrt_3 </span>
-<span class="co">#&gt;  [9] vrt_18-&gt;vrt_10 vrt_13-&gt;vrt_23 vrt_20-&gt;vrt_13 vrt_3 -&gt;vrt_27</span>
-<span class="co">#&gt; [13] vrt_9 -&gt;vrt_6  vrt_8 -&gt;vrt_28 vrt_24-&gt;vrt_30 vrt_8 -&gt;vrt_10</span>
-<span class="co">#&gt; [17] vrt_9 -&gt;vrt_1  vrt_7 -&gt;vrt_8  vrt_10-&gt;vrt_22 vrt_23-&gt;vrt_22</span>
-<span class="co">#&gt; + ... omitted several edges</span></code></pre></div>
-<p>Similarly, we clean <code>nw_initial</code> to create <code>nw_clean</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nw_clean &lt;-<span class="st"> </span><span class="kw"><a href="../reference/clean_graph.html">clean_graph</a></span>(nw_initial)
-
-nw_clean
-<span class="co">#&gt;  Network attributes:</span>
-<span class="co">#&gt;   vertices = 30 </span>
-<span class="co">#&gt;   directed = TRUE </span>
-<span class="co">#&gt;   hyper = FALSE </span>
-<span class="co">#&gt;   loops = TRUE </span>
-<span class="co">#&gt;   multiple = TRUE </span>
-<span class="co">#&gt;   bipartite = FALSE </span>
-<span class="co">#&gt;   is_wow = TRUE </span>
-<span class="co">#&gt;   net_chr = Much Graph. Many Attributes </span>
-<span class="co">#&gt;   net_dbl = 3.14 </span>
-<span class="co">#&gt;   net_int = 1 </span>
-<span class="co">#&gt;   original class = network </span>
-<span class="co">#&gt;   total edges= 1000 </span>
-<span class="co">#&gt;     missing edges= 0 </span>
-<span class="co">#&gt;     non-missing edges= 1000 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Vertex attribute names: </span>
-<span class="co">#&gt;     vertex.names vrt_chr vrt_dbl vrt_int vrt_lgl </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Edge attribute names: </span>
-<span class="co">#&gt;     edg_chr edg_dbl edg_int edg_lgl</span></code></pre></div>
-<p>If you don’t notice any changes, don’t worry. <code><a href="../reference/clean_graph.html">clean_graph()</a></code> is simply ensuring that metadata not strictly required by <code>igraph</code> or <code>network</code> is present and that attribute names are sorted alphabetically. The changes will usually be subtle if they occur at all.</p>
-</div>
-<div id="conversion" class="section level1">
-<h1 class="hasAnchor">
-<a href="#conversion" class="anchor"></a>Conversion</h1>
-<div id="igraph-to-network" class="section level2">
-<h2 class="hasAnchor">
-<a href="#igraph-to-network" class="anchor"></a><code>igraph</code> to <code>network</code>
-</h2>
-<p>Once clean, we can safely convert <code>ig_clean</code> to a <code>network</code> object using <code><a href="../reference/as_network.html">as_network()</a></code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/as_network.html">as_network</a></span>(ig_clean) 
-<span class="co">#&gt;  Network attributes:</span>
-<span class="co">#&gt;   vertices = 30 </span>
-<span class="co">#&gt;   directed = TRUE </span>
-<span class="co">#&gt;   hyper = FALSE </span>
-<span class="co">#&gt;   loops = TRUE </span>
-<span class="co">#&gt;   multiple = TRUE </span>
-<span class="co">#&gt;   bipartite = FALSE </span>
-<span class="co">#&gt;   is_wow = TRUE </span>
-<span class="co">#&gt;   net_chr = Much Graph. Many Attributes </span>
-<span class="co">#&gt;   net_dbl = 3.14 </span>
-<span class="co">#&gt;   net_int = 1 </span>
-<span class="co">#&gt;   original class = igraph </span>
-<span class="co">#&gt;   total edges= 1000 </span>
-<span class="co">#&gt;     missing edges= 0 </span>
-<span class="co">#&gt;     non-missing edges= 1000 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Vertex attribute names: </span>
-<span class="co">#&gt;     vertex.names vrt_chr vrt_dbl vrt_int vrt_lgl </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Edge attribute names: </span>
-<span class="co">#&gt;     edg_chr edg_dbl edg_int edg_lgl</span></code></pre></div>
-</div>
-<div id="network-to-igraph" class="section level2">
-<h2 class="hasAnchor">
-<a href="#network-to-igraph" class="anchor"></a><code>network</code> to <code>igraph</code>
-</h2>
-<p>Going the other direction, we can convert <code>nw_clean</code> to an <code>igraph</code> object using <code><a href="../reference/as_igraph.html">as_igraph()</a></code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/as_igraph.html">as_igraph</a></span>(nw_clean)
-<span class="co">#&gt; IGRAPH d01dbeb DN-- 30 1000 -- </span>
-<span class="co">#&gt; + attr: is_wow (g/l), loops (g/l), net_chr (g/c), net_dbl (g/n),</span>
-<span class="co">#&gt; | net_int (g/n), original class (g/c), name (v/c), vrt_chr (v/c),</span>
-<span class="co">#&gt; | vrt_dbl (v/n), vrt_int (v/n), vrt_lgl (v/l), edg_chr (e/c),</span>
-<span class="co">#&gt; | edg_dbl (e/n), edg_int (e/n), edg_lgl (e/l)</span>
-<span class="co">#&gt; + edges from d01dbeb (vertex names):</span>
-<span class="co">#&gt;  [1] vrt_2 -&gt;vrt_13 vrt_4 -&gt;vrt_4  vrt_17-&gt;vrt_11 vrt_3 -&gt;vrt_5 </span>
-<span class="co">#&gt;  [5] vrt_11-&gt;vrt_18 vrt_5 -&gt;vrt_21 vrt_24-&gt;vrt_16 vrt_1 -&gt;vrt_3 </span>
-<span class="co">#&gt;  [9] vrt_18-&gt;vrt_10 vrt_13-&gt;vrt_23 vrt_20-&gt;vrt_13 vrt_3 -&gt;vrt_27</span>
-<span class="co">#&gt; [13] vrt_9 -&gt;vrt_6  vrt_8 -&gt;vrt_28 vrt_24-&gt;vrt_30 vrt_8 -&gt;vrt_10</span>
-<span class="co">#&gt; [17] vrt_9 -&gt;vrt_1  vrt_7 -&gt;vrt_8  vrt_10-&gt;vrt_22 vrt_23-&gt;vrt_22</span>
-<span class="co">#&gt; + ... omitted several edges</span></code></pre></div>
-</div>
-<div id="testing-conversion" class="section level2">
-<h2 class="hasAnchor">
-<a href="#testing-conversion" class="anchor"></a>Testing Conversion</h2>
-<p>If you’re concerned that <code><a href="../reference/as_igraph.html">as_igraph()</a></code> or <code><a href="../reference/as_network.html">as_network()</a></code> will mangle your graph’s contents, you can test its original state against the result of a round-trip conversion using <code>identical()</code>. <code>identical()</code> is the <strong>strictest way to compare objects in R</strong> and only returns <code>TRUE</code> if two objects are <em>exactly</em> equal.</p>
-<p>Note that there’s a <em>small</em> catch with <code>igraph</code> objects. By itself, <code>identical()</code> will never return <code>TRUE</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">identical</span>(ig_clean, <span class="kw"><a href="../reference/as_igraph.html">as_igraph</a></span>(<span class="kw"><a href="../reference/as_network.html">as_network</a></span>(ig_clean)))
-<span class="co">#&gt; [1] FALSE</span></code></pre></div>
-<p>This is because <code>igraph</code> objects store a pointer that <em>should not</em> be duplicated. We can inspect it like so.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unclass</span>(ig_clean)[[<span class="dv">10</span>]]
-<span class="co">#&gt; &lt;environment: 0x000000001866ea88&gt;</span>
-<span class="kw">unclass</span>(<span class="kw"><a href="../reference/as_igraph.html">as_igraph</a></span>(<span class="kw"><a href="../reference/as_network.html">as_network</a></span>(ig_clean)))[[<span class="dv">10</span>]]
-<span class="co">#&gt; &lt;environment: 0x000000001720e948&gt;</span></code></pre></div>
-<p>In order to test that two <code>igraph</code> objects are identical, we need to omit that pointer from the object.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">identical</span>(<span class="kw">unclass</span>(ig_clean)[<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>], <span class="kw">unclass</span>(<span class="kw"><a href="../reference/as_igraph.html">as_igraph</a></span>(<span class="kw"><a href="../reference/as_network.html">as_network</a></span>(ig_clean)))[<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>])
-<span class="co">#&gt; [1] TRUE</span></code></pre></div>
-<p>To simplify things, {<code>snatools</code>} includes the <code>%==%</code> infix operator to test that objects are <code>identical()</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ig_clean <span class="op">%==%</span><span class="st"> </span><span class="kw"><a href="../reference/as_igraph.html">as_igraph</a></span>(<span class="kw"><a href="../reference/as_network.html">as_network</a></span>(ig_clean))
-<span class="co">#&gt; [1] TRUE</span></code></pre></div>
-<p>Underneath the hood, <code>%==%</code> uses <code>identical()</code> and can test the stict equality of any objects.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">snatools<span class="op">:::</span><span class="st">`</span><span class="dt">%==%.default</span><span class="st">`</span>
-<span class="co">#&gt; function (lhs, rhs) </span>
-<span class="co">#&gt; {</span>
-<span class="co">#&gt;     identical(lhs, rhs)</span>
-<span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x000000001f1464e0&gt;</span>
-<span class="co">#&gt; &lt;environment: namespace:snatools&gt;</span></code></pre></div>
-<p>The exception is for <code>igraph</code> objects, for which it is equipped to automatically exclude the pointer that we don’t need.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">snatools<span class="op">:::</span><span class="st">`</span><span class="dt">%==%.igraph</span><span class="st">`</span>
-<span class="co">#&gt; function (lhs, rhs) </span>
-<span class="co">#&gt; {</span>
-<span class="co">#&gt;     identical(unclass(lhs)[seq_len(9)], unclass(rhs)[seq_len(9)])</span>
-<span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x0000000017028328&gt;</span>
-<span class="co">#&gt; &lt;environment: namespace:snatools&gt;</span></code></pre></div>
-<p>For <code>network</code> objects, you can still use <code>identical()</code> if desired.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">identical</span>(nw_clean, <span class="kw"><a href="../reference/as_network.html">as_network</a></span>(<span class="kw"><a href="../reference/as_igraph.html">as_igraph</a></span>(nw_clean)))
-<span class="co">#&gt; [1] TRUE</span>
-nw_clean <span class="op">%==%</span><span class="st"> </span><span class="kw"><a href="../reference/as_network.html">as_network</a></span>(<span class="kw"><a href="../reference/as_igraph.html">as_igraph</a></span>(nw_clean))
-<span class="co">#&gt; [1] TRUE</span></code></pre></div>
-<p>Now you can be <strong>absolutely certain</strong> that something did not go wrong when converting between graph classes.</p>
-</div>
-</div>
-<div id="bipartite-graphs" class="section level1">
-<h1 class="hasAnchor">
-<a href="#bipartite-graphs" class="anchor"></a>Bipartite Graphs</h1>
-<div id="example-data" class="section level2">
-<h2 class="hasAnchor">
-<a href="#example-data" class="anchor"></a>Example Data</h2>
-<p><code><a href="../reference/as_igraph.html">as_igraph()</a></code> and <code><a href="../reference/as_network.html">as_network()</a></code> also handle bipartite graphs. The process is <em>slightly</em> more complicated due to the different ways that <code>igraph</code> and <code>network</code> handle such graphs.</p>
-<p>To demonstrate, we’ll construct the Southern Women network from scratch using its affiliation matrix.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sw_matrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(
-  <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>,
-    <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, 
-    <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, 
-    <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>,
-    <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>,
-    <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>,
-    <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>,
-    <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>,
-    <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, 
-    <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>,
-    <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, 
-    <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>,
-    <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, 
-    <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),
-  <span class="dt">nrow =</span> 14L, <span class="dt">ncol =</span> 18L,
-  <span class="dt">dimnames =</span> <span class="kw">list</span>(
-    <span class="kw">c</span>(<span class="st">"E1"</span>, <span class="st">"E2"</span>, <span class="st">"E3"</span>, <span class="st">"E4"</span>, <span class="st">"E5"</span>, <span class="st">"E6"</span>, <span class="st">"E7"</span>,
-      <span class="st">"E8"</span>, <span class="st">"E9"</span>, <span class="st">"E10"</span>, <span class="st">"E11"</span>, <span class="st">"E12"</span>, <span class="st">"E13"</span>, <span class="st">"E14"</span>),
-    <span class="kw">c</span>(<span class="st">"EVELYN"</span>, <span class="st">"LAURA"</span>, <span class="st">"THERESA"</span>, <span class="st">"BRENDA"</span>, <span class="st">"CHARLOTTE"</span>, <span class="st">"FRANCES"</span>,
-      <span class="st">"ELEANOR"</span>, <span class="st">"PEARL"</span>, <span class="st">"RUTH"</span>, <span class="st">"VERNE"</span>, <span class="st">"MYRNA"</span>, <span class="st">"KATHERINE"</span>, 
-      <span class="st">"SYLVIA"</span>, <span class="st">"NORA"</span>, <span class="st">"HELEN"</span>, <span class="st">"DOROTHY"</span>, <span class="st">"OLIVIA"</span>, <span class="st">"FLORA"</span>)))
-
-sw_matrix
-<span class="co">#&gt;     EVELYN LAURA THERESA BRENDA CHARLOTTE FRANCES ELEANOR PEARL RUTH VERNE</span>
-<span class="co">#&gt; E1       1     1       0      1         0       0       0     0    0     0</span>
-<span class="co">#&gt; E2       1     1       1      0         0       0       0     0    0     0</span>
-<span class="co">#&gt; E3       1     1       1      1         1       1       0     0    0     0</span>
-<span class="co">#&gt; E4       1     0       1      1         1       0       0     0    0     0</span>
-<span class="co">#&gt; E5       1     1       1      1         1       1       1     0    1     0</span>
-<span class="co">#&gt; E6       1     1       1      1         0       1       1     1    0     0</span>
-<span class="co">#&gt; E7       0     1       1      1         1       0       1     0    1     1</span>
-<span class="co">#&gt; E8       1     1       1      1         0       1       1     1    1     1</span>
-<span class="co">#&gt; E9       1     0       1      0         0       0       0     1    1     1</span>
-<span class="co">#&gt; E10      0     0       0      0         0       0       0     0    0     0</span>
-<span class="co">#&gt; E11      0     0       0      0         0       0       0     0    0     0</span>
-<span class="co">#&gt; E12      0     0       0      0         0       0       0     0    0     1</span>
-<span class="co">#&gt; E13      0     0       0      0         0       0       0     0    0     0</span>
-<span class="co">#&gt; E14      0     0       0      0         0       0       0     0    0     0</span>
-<span class="co">#&gt;     MYRNA KATHERINE SYLVIA NORA HELEN DOROTHY OLIVIA FLORA</span>
-<span class="co">#&gt; E1      0         0      0    0     0       0      0     0</span>
-<span class="co">#&gt; E2      0         0      0    0     0       0      0     0</span>
-<span class="co">#&gt; E3      0         0      0    0     0       0      0     0</span>
-<span class="co">#&gt; E4      0         0      0    0     0       0      0     0</span>
-<span class="co">#&gt; E5      0         0      0    0     0       0      0     0</span>
-<span class="co">#&gt; E6      0         0      0    1     0       0      0     0</span>
-<span class="co">#&gt; E7      0         0      1    1     1       0      0     0</span>
-<span class="co">#&gt; E8      1         1      1    0     1       1      0     0</span>
-<span class="co">#&gt; E9      1         1      1    1     0       1      1     1</span>
-<span class="co">#&gt; E10     1         1      1    1     1       1      0     0</span>
-<span class="co">#&gt; E11     0         0      0    1     1       0      1     1</span>
-<span class="co">#&gt; E12     1         1      1    1     1       1      0     0</span>
-<span class="co">#&gt; E13     0         1      1    1     1       0      0     0</span>
-<span class="co">#&gt; E14     0         1      1    1     1       0      0     0</span></code></pre></div>
-<p>Notice that the “Southern Women” are represented by columns while the events are represented by the rows.</p>
-</div>
-<div id="bipartite-graphs-in-igraph" class="section level2">
-<h2 class="hasAnchor">
-<a href="#bipartite-graphs-in-igraph" class="anchor"></a>Bipartite Graphs in <code>igraph</code>
-</h2>
-<p>To convert <code>sw_matrix</code> to an <code>igraph</code> object, we use <code>graph_from_incidence_matrix()</code>. We’ll also immediately call <code><a href="../reference/clean_graph.html">clean_graph()</a></code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">southern_women_ig &lt;-<span class="st"> </span>sw_matrix <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">graph_from_incidence_matrix</span>() <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/clean_graph.html">clean_graph</a></span>()
-
-southern_women_ig
-<span class="co">#&gt; IGRAPH d06458c UN-B 32 93 -- </span>
-<span class="co">#&gt; + attr: loops (g/l), name (v/c), type (v/l)</span>
-<span class="co">#&gt; + edges from d06458c (vertex names):</span>
-<span class="co">#&gt;  [1] E1--EVELYN    E1--LAURA     E1--BRENDA    E2--EVELYN    E2--LAURA    </span>
-<span class="co">#&gt;  [6] E2--THERESA   E3--EVELYN    E3--LAURA     E3--THERESA   E3--BRENDA   </span>
-<span class="co">#&gt; [11] E3--CHARLOTTE E3--FRANCES   E4--EVELYN    E4--THERESA   E4--BRENDA   </span>
-<span class="co">#&gt; [16] E4--CHARLOTTE E5--EVELYN    E5--LAURA     E5--THERESA   E5--BRENDA   </span>
-<span class="co">#&gt; [21] E5--CHARLOTTE E5--FRANCES   E5--ELEANOR   E5--RUTH      E6--EVELYN   </span>
-<span class="co">#&gt; [26] E6--LAURA     E6--THERESA   E6--BRENDA    E6--FRANCES   E6--ELEANOR  </span>
-<span class="co">#&gt; [31] E6--PEARL     E6--NORA      E7--LAURA     E7--THERESA   E7--BRENDA   </span>
-<span class="co">#&gt; [36] E7--CHARLOTTE E7--ELEANOR   E7--RUTH      E7--VERNE     E7--SYLVIA   </span>
-<span class="co">#&gt; + ... omitted several edges</span></code></pre></div>
-<p><code>igraph</code> tracks the two modes via the vertex attribute <code>"type"</code>. Here is one of the methods to obtain vertex attributes.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_vrt_attrs &lt;-<span class="st"> </span><span class="kw">as_data_frame</span>(southern_women_ig, <span class="st">"vertices"</span>)</code></pre></div>
-<p>Notice that the “Southern Women” were assigned <code>TRUE</code> for their <code>"type"</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_vrt_attrs[all_vrt_attrs<span class="op">$</span>type, ]
-<span class="co">#&gt;                name type</span>
-<span class="co">#&gt; EVELYN       EVELYN TRUE</span>
-<span class="co">#&gt; LAURA         LAURA TRUE</span>
-<span class="co">#&gt; THERESA     THERESA TRUE</span>
-<span class="co">#&gt; BRENDA       BRENDA TRUE</span>
-<span class="co">#&gt; CHARLOTTE CHARLOTTE TRUE</span>
-<span class="co">#&gt; FRANCES     FRANCES TRUE</span>
-<span class="co">#&gt; ELEANOR     ELEANOR TRUE</span>
-<span class="co">#&gt; PEARL         PEARL TRUE</span>
-<span class="co">#&gt; RUTH           RUTH TRUE</span>
-<span class="co">#&gt; VERNE         VERNE TRUE</span>
-<span class="co">#&gt; MYRNA         MYRNA TRUE</span>
-<span class="co">#&gt; KATHERINE KATHERINE TRUE</span>
-<span class="co">#&gt; SYLVIA       SYLVIA TRUE</span>
-<span class="co">#&gt; NORA           NORA TRUE</span>
-<span class="co">#&gt; HELEN         HELEN TRUE</span>
-<span class="co">#&gt; DOROTHY     DOROTHY TRUE</span>
-<span class="co">#&gt; OLIVIA       OLIVIA TRUE</span>
-<span class="co">#&gt; FLORA         FLORA TRUE</span></code></pre></div>
-<p>The events were assigned <code>FALSE</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_vrt_attrs[<span class="op">!</span>all_vrt_attrs<span class="op">$</span>type, ]
-<span class="co">#&gt;     name  type</span>
-<span class="co">#&gt; E1    E1 FALSE</span>
-<span class="co">#&gt; E2    E2 FALSE</span>
-<span class="co">#&gt; E3    E3 FALSE</span>
-<span class="co">#&gt; E4    E4 FALSE</span>
-<span class="co">#&gt; E5    E5 FALSE</span>
-<span class="co">#&gt; E6    E6 FALSE</span>
-<span class="co">#&gt; E7    E7 FALSE</span>
-<span class="co">#&gt; E8    E8 FALSE</span>
-<span class="co">#&gt; E9    E9 FALSE</span>
-<span class="co">#&gt; E10  E10 FALSE</span>
-<span class="co">#&gt; E11  E11 FALSE</span>
-<span class="co">#&gt; E12  E12 FALSE</span>
-<span class="co">#&gt; E13  E13 FALSE</span>
-<span class="co">#&gt; E14  E14 FALSE</span></code></pre></div>
-<p>This is because of the shape of <code>sw_matrix</code>. The <code>"type"</code> of vertices coming from columns is assigned <code>TRUE</code> while the <code>"type"</code> of vertices coming from rows is assigned <code>FALSE</code>.</p>
-</div>
-<div id="bipartite-graphs-in-network" class="section level2">
-<h2 class="hasAnchor">
-<a href="#bipartite-graphs-in-network" class="anchor"></a>Bipartite Graphs in <code>network</code>
-</h2>
-<p><code>network</code> takes a different approach to handling bipartite graphs by tracking an “actors” mode.</p>
-<p>Recall that <code>nw_clean</code> is not a bipartite network.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nw_clean
-<span class="co">#&gt;  Network attributes:</span>
-<span class="co">#&gt;   vertices = 30 </span>
-<span class="co">#&gt;   directed = TRUE </span>
-<span class="co">#&gt;   hyper = FALSE </span>
-<span class="co">#&gt;   loops = TRUE </span>
-<span class="co">#&gt;   multiple = TRUE </span>
-<span class="co">#&gt;   bipartite = FALSE </span>
-<span class="co">#&gt;   is_wow = TRUE </span>
-<span class="co">#&gt;   net_chr = Much Graph. Many Attributes </span>
-<span class="co">#&gt;   net_dbl = 3.14 </span>
-<span class="co">#&gt;   net_int = 1 </span>
-<span class="co">#&gt;   original class = network </span>
-<span class="co">#&gt;   total edges= 1000 </span>
-<span class="co">#&gt;     missing edges= 0 </span>
-<span class="co">#&gt;     non-missing edges= 1000 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Vertex attribute names: </span>
-<span class="co">#&gt;     vertex.names vrt_chr vrt_dbl vrt_int vrt_lgl </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Edge attribute names: </span>
-<span class="co">#&gt;     edg_chr edg_dbl edg_int edg_lgl</span></code></pre></div>
-<p>We an see that it explicilty states that <code>bipartite = FALSE</code>.</p>
-<p>If a <code>network</code> object is bipartite, it’s no longer <code>FALSE</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">southern_women_nw &lt;-<span class="st"> </span><span class="kw">as.network.matrix</span>(<span class="kw">t</span>(sw_matrix), <span class="dt">bipartite =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/clean_graph.html">clean_graph</a></span>()
-
-southern_women_nw
-<span class="co">#&gt;  Network attributes:</span>
-<span class="co">#&gt;   vertices = 32 </span>
-<span class="co">#&gt;   directed = FALSE </span>
-<span class="co">#&gt;   hyper = FALSE </span>
-<span class="co">#&gt;   loops = FALSE </span>
-<span class="co">#&gt;   multiple = FALSE </span>
-<span class="co">#&gt;   bipartite = 18 </span>
-<span class="co">#&gt;   total edges= 93 </span>
-<span class="co">#&gt;     missing edges= 0 </span>
-<span class="co">#&gt;     non-missing edges= 93 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Vertex attribute names: </span>
-<span class="co">#&gt;     vertex.names </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; No edge attributes</span></code></pre></div>
-<p>It’s also not <code>TRUE</code>.</p>
-<p><code>bipartite = 18</code> refers to the number of vertices belonging to the “actors” mode of the network. In this network, the other vertices are the events.</p>
-</div>
-<div id="ambiguity" class="section level2">
-<h2 class="hasAnchor">
-<a href="#ambiguity" class="anchor"></a>Ambiguity</h2>
-<p>This difference in bipartite graph handling leaves room for ambiguity when converting from <code>igraph</code> to <code>network</code>. <code><a href="../reference/as_network.html">as_network()</a></code> handles this through its <code>actor_type</code> parameter.</p>
-<p><code>actor_type</code> refers to the vertices’ <code>"type"</code> attribute. We can simply provide <code>TRUE</code> or <code>FALSE</code> to tell <code><a href="../reference/as_network.html">as_network()</a></code> which vertices are meant to be actors in the returned <code>network</code> object.</p>
-<p>For convenience, <code>actor_type</code> defaults to <code>TRUE</code>. With that in mind, we can think of <code>"type"</code> as noting whether a vertex is an “actor” or not, but we need to be careful about creating our objects to reflect this.</p>
-</div>
-<div id="putting-it-all-together" class="section level2">
-<h2 class="hasAnchor">
-<a href="#putting-it-all-together" class="anchor"></a>Putting It All Together</h2>
-<p>Since our vertices already have the “actor” <code>"type"</code> set to <code>TRUE</code>, we can convert <code>southern_women_ig</code> to a <code>network</code> object exactly as we did for <code>ig_clean</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/as_network.html">as_network</a></span>(southern_women_ig)
-<span class="co">#&gt;  Network attributes:</span>
-<span class="co">#&gt;   vertices = 32 </span>
-<span class="co">#&gt;   directed = FALSE </span>
-<span class="co">#&gt;   hyper = FALSE </span>
-<span class="co">#&gt;   loops = FALSE </span>
-<span class="co">#&gt;   multiple = FALSE </span>
-<span class="co">#&gt;   bipartite = 18 </span>
-<span class="co">#&gt;   total edges= 93 </span>
-<span class="co">#&gt;     missing edges= 0 </span>
-<span class="co">#&gt;     non-missing edges= 93 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Vertex attribute names: </span>
-<span class="co">#&gt;     vertex.names </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; No edge attributes</span></code></pre></div>
-<p>What does it looks like when our matrix isn’t as conveniently designed?</p>
-<p>Here’s the same network created using <code>sw_matrix</code>’s transpose.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">swapped_types_ig &lt;-<span class="st"> </span>sw_matrix <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">t</span>() <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">graph_from_incidence_matrix</span>() <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/clean_graph.html">clean_graph</a></span>()
-
-swapped_types_ig
-<span class="co">#&gt; IGRAPH d08ae90 UN-B 32 93 -- </span>
-<span class="co">#&gt; + attr: loops (g/l), name (v/c), type (v/l)</span>
-<span class="co">#&gt; + edges from d08ae90 (vertex names):</span>
-<span class="co">#&gt;  [1] EVELYN   --E1 EVELYN   --E2 EVELYN   --E3 EVELYN   --E4 EVELYN   --E5</span>
-<span class="co">#&gt;  [6] EVELYN   --E6 EVELYN   --E8 EVELYN   --E9 LAURA    --E1 LAURA    --E2</span>
-<span class="co">#&gt; [11] LAURA    --E3 LAURA    --E5 LAURA    --E6 LAURA    --E7 LAURA    --E8</span>
-<span class="co">#&gt; [16] THERESA  --E2 THERESA  --E3 THERESA  --E4 THERESA  --E5 THERESA  --E6</span>
-<span class="co">#&gt; [21] THERESA  --E7 THERESA  --E8 THERESA  --E9 BRENDA   --E1 BRENDA   --E3</span>
-<span class="co">#&gt; [26] BRENDA   --E4 BRENDA   --E5 BRENDA   --E6 BRENDA   --E7 BRENDA   --E8</span>
-<span class="co">#&gt; [31] CHARLOTTE--E3 CHARLOTTE--E4 CHARLOTTE--E5 CHARLOTTE--E7 FRANCES  --E3</span>
-<span class="co">#&gt; [36] FRANCES  --E5 FRANCES  --E6 FRANCES  --E8 ELEANOR  --E5 ELEANOR  --E6</span>
-<span class="co">#&gt; + ... omitted several edges</span></code></pre></div>
-<p>We can see that the events <code>"type"</code> is now <code>TRUE</code>, while the <code>"type"</code> of the “Southern Women” is <code>FALSE</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">swapped_vrt_attrs &lt;-<span class="st"> </span><span class="kw">as_data_frame</span>(swapped_types_ig, <span class="st">"vertices"</span>)
-
-swapped_vrt_attrs[swapped_vrt_attrs<span class="op">$</span>type, ]
-<span class="co">#&gt;     name type</span>
-<span class="co">#&gt; E1    E1 TRUE</span>
-<span class="co">#&gt; E2    E2 TRUE</span>
-<span class="co">#&gt; E3    E3 TRUE</span>
-<span class="co">#&gt; E4    E4 TRUE</span>
-<span class="co">#&gt; E5    E5 TRUE</span>
-<span class="co">#&gt; E6    E6 TRUE</span>
-<span class="co">#&gt; E7    E7 TRUE</span>
-<span class="co">#&gt; E8    E8 TRUE</span>
-<span class="co">#&gt; E9    E9 TRUE</span>
-<span class="co">#&gt; E10  E10 TRUE</span>
-<span class="co">#&gt; E11  E11 TRUE</span>
-<span class="co">#&gt; E12  E12 TRUE</span>
-<span class="co">#&gt; E13  E13 TRUE</span>
-<span class="co">#&gt; E14  E14 TRUE</span></code></pre></div>
-<p>If we don’t clarify the ambiguity of <code>"type"</code>, the wrong vertices are considered to be the “actors”.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/as_network.html">as_network</a></span>(swapped_types_ig)
-<span class="co">#&gt;  Network attributes:</span>
-<span class="co">#&gt;   vertices = 32 </span>
-<span class="co">#&gt;   directed = FALSE </span>
-<span class="co">#&gt;   hyper = FALSE </span>
-<span class="co">#&gt;   loops = FALSE </span>
-<span class="co">#&gt;   multiple = FALSE </span>
-<span class="co">#&gt;   bipartite = 14 </span>
-<span class="co">#&gt;   total edges= 93 </span>
-<span class="co">#&gt;     missing edges= 0 </span>
-<span class="co">#&gt;     non-missing edges= 93 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Vertex attribute names: </span>
-<span class="co">#&gt;     vertex.names </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; No edge attributes</span></code></pre></div>
-<p>By providing <code>FALSE</code> as the argument to <code>actor_type</code>, we can avoid surprises upon conversion.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/as_network.html">as_network</a></span>(swapped_types_ig, <span class="dt">actor_type =</span> <span class="ot">FALSE</span>)
-<span class="co">#&gt;  Network attributes:</span>
-<span class="co">#&gt;   vertices = 32 </span>
-<span class="co">#&gt;   directed = FALSE </span>
-<span class="co">#&gt;   hyper = FALSE </span>
-<span class="co">#&gt;   loops = FALSE </span>
-<span class="co">#&gt;   multiple = FALSE </span>
-<span class="co">#&gt;   bipartite = 18 </span>
-<span class="co">#&gt;   total edges= 93 </span>
-<span class="co">#&gt;     missing edges= 0 </span>
-<span class="co">#&gt;     non-missing edges= 93 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  Vertex attribute names: </span>
-<span class="co">#&gt;     vertex.names </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; No edge attributes</span></code></pre></div>
-<p>Finally, we can confirm that they all convert properly using <code>%==%</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">southern_women_ig <span class="op">%==%</span><span class="st"> </span><span class="kw"><a href="../reference/as_igraph.html">as_igraph</a></span>(<span class="kw"><a href="../reference/as_network.html">as_network</a></span>(southern_women_ig))
-<span class="co">#&gt; [1] TRUE</span>
-
-southern_women_nw <span class="op">%==%</span><span class="st"> </span><span class="kw"><a href="../reference/as_network.html">as_network</a></span>(<span class="kw"><a href="../reference/as_igraph.html">as_igraph</a></span>(southern_women_nw))
-<span class="co">#&gt; [1] TRUE</span></code></pre></div>
+<!-- # Graph Cleaning -->
+<!-- In order to confirm that an `igraph` or `network` object can make a round-trip conversion with its internal data remaining intact, we want to standardize its contents. This is the purpose of `clean_graph()`, which is equipped with `clean_graph.igraph()` and `clean_graph.network()` methods. -->
+<!-- Here, we clean `ig_initial` to create `ig_clean`. -->
+<!-- ```{r} -->
+<!-- ig_clean <- clean_graph(ig_initial) -->
+<!-- ig_clean -->
+<!-- ``` -->
+<!-- Similarly, we clean `nw_initial` to create `nw_clean`. -->
+<!-- ```{r} -->
+<!-- nw_clean <- clean_graph(nw_initial) -->
+<!-- nw_clean -->
+<!-- ``` -->
+<!-- If you don't notice any changes, don't worry. `clean_graph()` is simply ensuring that metadata not strictly required by `igraph` or `network` is present and that attribute names are sorted alphabetically. The changes will usually be subtle if they occur at all. -->
+<!-- # Conversion -->
+<!-- ## `igraph` to `network` -->
+<!-- Once clean, we can safely convert `ig_clean` to a `network` object using `as_network()`. -->
+<!-- ```{r} -->
+<!-- as_network(ig_clean)  -->
+<!-- ``` -->
+<!-- ## `network` to `igraph` -->
+<!-- Going the other direction, we can convert `nw_clean` to an `igraph` object using `as_igraph()`. -->
+<!-- ```{r} -->
+<!-- as_igraph(nw_clean) -->
+<!-- ``` -->
+<!-- ## Testing Conversion -->
+<!-- If you're concerned that `as_igraph()` or `as_network()` will mangle your graph's contents, you can test its original state against the result of a round-trip conversion using `identical()`. `identical()` is the __strictest way to compare objects in R__ and only returns `TRUE` if two objects are _exactly_ equal. -->
+<!-- Note that there's a _small_ catch with `igraph` objects. By itself, `identical()` will never return `TRUE`. -->
+<!-- ```{r} -->
+<!-- identical(ig_clean, as_igraph(as_network(ig_clean))) -->
+<!-- ``` -->
+<!-- This is because `igraph` objects store a pointer that _should not_ be duplicated. We can inspect it like so. -->
+<!-- ```{r} -->
+<!-- unclass(ig_clean)[[10]] -->
+<!-- unclass(as_igraph(as_network(ig_clean)))[[10]] -->
+<!-- ``` -->
+<!-- In order to test that two `igraph` objects are identical, we need to omit that pointer from the object. -->
+<!-- ```{r} -->
+<!-- identical(unclass(ig_clean)[1:9], unclass(as_igraph(as_network(ig_clean)))[1:9]) -->
+<!-- ``` -->
+<!-- To simplify things, {`snatools`} includes the `%==%` infix operator to test that objects are `identical()`. -->
+<!-- ```{r} -->
+<!-- ig_clean %==% as_igraph(as_network(ig_clean)) -->
+<!-- ``` -->
+<!-- Underneath the hood, `%==%` uses `identical()` and can test the stict equality of any objects. -->
+<!-- ```{r} -->
+<!-- snatools:::`%==%.default` -->
+<!-- ``` -->
+<!-- The exception is for `igraph` objects, for which it is equipped to automatically exclude the pointer that we don't need. -->
+<!-- ```{r} -->
+<!-- snatools:::`%==%.igraph` -->
+<!-- ``` -->
+<!-- For `network` objects, you can still use `identical()` if desired. -->
+<!-- ```{r} -->
+<!-- identical(nw_clean, as_network(as_igraph(nw_clean))) -->
+<!-- nw_clean %==% as_network(as_igraph(nw_clean)) -->
+<!-- ``` -->
+<!-- Now you can be __absolutely certain__ that something did not go wrong when converting between graph classes. -->
+<!-- # Bipartite Graphs -->
+<!-- ## Example Data -->
+<!-- `as_igraph()` and `as_network()` also handle bipartite graphs. The process is _slightly_ more complicated due to the different ways that `igraph` and `network` handle such graphs. -->
+<!-- To demonstrate, we'll construct the Southern Women network from scratch using its affiliation matrix. -->
+<!-- ```{r} -->
+<!-- sw_matrix <- matrix( -->
+<!--   c(1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, -->
+<!--     1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1,  -->
+<!--     1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,  -->
+<!--     0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, -->
+<!--     1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, -->
+<!--     1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, -->
+<!--     0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, -->
+<!--     0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, -->
+<!--     0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,  -->
+<!--     1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, -->
+<!--     1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0,  -->
+<!--     0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, -->
+<!--     0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,  -->
+<!--     1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0), -->
+<!--   nrow = 14L, ncol = 18L, -->
+<!--   dimnames = list( -->
+<!--     c("E1", "E2", "E3", "E4", "E5", "E6", "E7", -->
+<!--       "E8", "E9", "E10", "E11", "E12", "E13", "E14"), -->
+<!--     c("EVELYN", "LAURA", "THERESA", "BRENDA", "CHARLOTTE", "FRANCES", -->
+<!--       "ELEANOR", "PEARL", "RUTH", "VERNE", "MYRNA", "KATHERINE",  -->
+<!--       "SYLVIA", "NORA", "HELEN", "DOROTHY", "OLIVIA", "FLORA"))) -->
+<!-- sw_matrix -->
+<!-- ``` -->
+<!-- Notice that the "Southern Women" are represented by columns while the events are represented by the rows. -->
+<!-- ## Bipartite Graphs in `igraph` -->
+<!-- To convert `sw_matrix` to an `igraph` object, we use `graph_from_incidence_matrix()`. We'll also immediately call `clean_graph()`. -->
+<!-- ```{r} -->
+<!-- southern_women_ig <- sw_matrix %>%  -->
+<!--   graph_from_incidence_matrix() %>%  -->
+<!--   clean_graph() -->
+<!-- southern_women_ig -->
+<!-- ``` -->
+<!-- `igraph` tracks the two modes via the vertex attribute `"type"`. Here is one of the methods to obtain vertex attributes. -->
+<!-- ```{r} -->
+<!-- all_vrt_attrs <- as_data_frame(southern_women_ig, "vertices") -->
+<!-- ``` -->
+<!-- Notice that the "Southern Women" were assigned `TRUE` for their `"type"`. -->
+<!-- ```{r} -->
+<!-- all_vrt_attrs[all_vrt_attrs$type, ] -->
+<!-- ``` -->
+<!-- The events were assigned `FALSE`. -->
+<!-- ```{r} -->
+<!-- all_vrt_attrs[!all_vrt_attrs$type, ] -->
+<!-- ``` -->
+<!-- This is because of the shape of `sw_matrix`. The `"type"` of vertices coming from columns is assigned `TRUE` while the `"type"` of vertices coming from rows is assigned `FALSE`. -->
+<!-- ## Bipartite Graphs in `network` -->
+<!-- `network` takes a different approach to handling bipartite graphs by tracking an "actors" mode. -->
+<!-- Recall that `nw_clean` is not a bipartite network. -->
+<!-- ```{r} -->
+<!-- nw_clean -->
+<!-- ``` -->
+<!-- We an see that it explicilty states that `bipartite = FALSE`. -->
+<!-- If a `network` object is bipartite, it's no longer `FALSE`. -->
+<!-- ```{r} -->
+<!-- southern_women_nw <- as.network.matrix(t(sw_matrix), bipartite = TRUE) %>%  -->
+<!--   clean_graph() -->
+<!-- southern_women_nw -->
+<!-- ``` -->
+<!-- It's also not `TRUE`. -->
+<!-- `bipartite = 18` refers to the number of vertices belonging to the "actors" mode of the network. In this network, the other vertices are the events. -->
+<!-- ## Ambiguity -->
+<!-- This difference in bipartite graph handling leaves room for ambiguity when converting from `igraph` to `network`. `as_network()` handles this through its `actor_type` parameter. -->
+<!-- `actor_type` refers to the vertices' `"type"` attribute. We can simply provide `TRUE` or `FALSE` to tell `as_network()` which vertices are meant to be actors in the returned `network` object. -->
+<!-- For convenience, `actor_type` defaults to `TRUE`. With that in mind, we can think of `"type"` as noting whether a vertex is an "actor" or not, but we need to be careful about creating our objects to reflect this. -->
+<!-- ## Putting It All Together -->
+<!-- Since our vertices already have the "actor" `"type"` set to `TRUE`, we can convert `southern_women_ig` to a `network` object exactly as we did for `ig_clean`. -->
+<!-- ```{r} -->
+<!-- as_network(southern_women_ig) -->
+<!-- ``` -->
+<!-- What does it looks like when our matrix isn't as conveniently designed? -->
+<!-- Here's the same network created using `sw_matrix`'s transpose. -->
+<!-- ```{r} -->
+<!-- swapped_types_ig <- sw_matrix %>% -->
+<!--   t() %>%  -->
+<!--   graph_from_incidence_matrix() %>%  -->
+<!--   clean_graph() -->
+<!-- swapped_types_ig -->
+<!-- ``` -->
+<!-- We can see that the events `"type"` is now `TRUE`, while the `"type"` of the "Southern Women" is `FALSE`. -->
+<!-- ```{r} -->
+<!-- swapped_vrt_attrs <- as_data_frame(swapped_types_ig, "vertices") -->
+<!-- swapped_vrt_attrs[swapped_vrt_attrs$type, ] -->
+<!-- ``` -->
+<!-- If we don't clarify the ambiguity of `"type"`, the wrong vertices are considered to be the "actors". -->
+<!-- ```{r} -->
+<!-- as_network(swapped_types_ig) -->
+<!-- ``` -->
+<!-- By providing `FALSE` as the argument to `actor_type`, we can avoid surprises upon conversion. -->
+<!-- ```{r} -->
+<!-- as_network(swapped_types_ig, actor_type = FALSE) -->
+<!-- ``` -->
+<!-- Finally, we can confirm that they all convert properly using `%==%`. -->
+<!-- ```{r} -->
+<!-- southern_women_ig %==% as_igraph(as_network(southern_women_ig)) -->
+<!-- southern_women_nw %==% as_network(as_igraph(southern_women_nw)) -->
+<!-- ``` -->
 </div>
 </div>
   </div>
@@ -709,23 +441,6 @@ southern_women_nw <span class="op">%==%</span><span class="st"> </span><span cla
 <a href="#example-graphs">Example Graphs</a><ul class="nav nav-pills nav-stacked">
 <li><a href="#igraph"><code>igraph</code></a></li>
       <li><a href="#network"><code>network</code></a></li>
-      </ul>
-</li>
-      <li><a href="#graph-cleaning">Graph Cleaning</a></li>
-      <li>
-<a href="#conversion">Conversion</a><ul class="nav nav-pills nav-stacked">
-<li><a href="#igraph-to-network"><code>igraph</code> to <code>network</code></a></li>
-      <li><a href="#network-to-igraph"><code>network</code> to <code>igraph</code></a></li>
-      <li><a href="#testing-conversion">Testing Conversion</a></li>
-      </ul>
-</li>
-      <li>
-<a href="#bipartite-graphs">Bipartite Graphs</a><ul class="nav nav-pills nav-stacked">
-<li><a href="#example-data">Example Data</a></li>
-      <li><a href="#bipartite-graphs-in-igraph">Bipartite Graphs in <code>igraph</code></a></li>
-      <li><a href="#bipartite-graphs-in-network">Bipartite Graphs in <code>network</code></a></li>
-      <li><a href="#ambiguity">Ambiguity</a></li>
-      <li><a href="#putting-it-all-together">Putting It All Together</a></li>
       </ul>
 </li>
       </ul>

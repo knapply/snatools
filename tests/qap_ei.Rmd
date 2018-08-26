@@ -1,0 +1,139 @@
+---
+title: "QAP"
+author: "Brendan Knapp"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center",
+                      fig.width = 8, fig.height = 6)
+```
+
+
+```{r}
+library(snatools)
+library(ggplot2)
+```
+
+## QAP E-I Function
+
+```{r}
+qap_ei_wip <- function(x, vrt_attr, iterations = 1000L, diagonal = FALSE) {
+  if(!class(x) %in% c("igraph", "network")) {
+    stop("`x` must be of class `igraph` or `network`.", call. = FALSE)
+  }
+  observed_ei <- mix_ei_index(x, vrt_attr)            # value test
+  attr_adj_mat <- rep_as_attr_adj_mat(x, vrt_attr)    # matrix to permute
+  permuted_eis <- vector("double", iterations)        # initialize storage vector
+  if(class(x) == "network") {
+    directed <- x$gal$directed
+  }
+  if(class(x) == "igraph") {
+    directed <- igraph::is_directed(x)
+  }
+  if(directed) {
+    for(i in seq_len(iterations)) {
+      permuted_matrix <- snatools:::permute_matrix(attr_adj_mat, # permute the matrix
+                                                   out_class = "attr_adj_mat")
+      if(!diagonal) {
+        diag(permuted_matrix) <- NA_integer_                     # remove the diagonal
+      }
+      permuted_attr_el <- rep_as_attr_el(permuted_matrix)        # convert to el for fast EI
+      permuted_eis[[i]] <- mix_ei_index(permuted_attr_el)        # calc EI, add to `permuted_eis`
+    }
+  } else {                                 # for undirected networks: remove the upper triangle
+    for(i in seq_len(iterations)) {
+      permuted_matrix <- snatools:::permute_matrix(attr_adj_mat, out_class = "attr_adj_mat")
+      permuted_matrix[upper.tri(permuted_matrix, diag = !diagonal)] <- NA_integer_
+      permuted_attr_el <- rep_as_attr_el(permuted_matrix)
+      permuted_eis[[i]] <- mix_ei_index(permuted_attr_el)
+    }
+  }
+  out <- list(vrt_attr = vrt_attr,
+              observed_ei = observed_ei,
+              iterations = iterations,
+              permuted_eis = permuted_eis,
+              n_greater = length(which(permuted_eis >= observed_ei)),
+              prop_greater = mean(as.numeric(permuted_eis >= observed_ei)),
+              n_lesser = length(which(permuted_eis < observed_ei)),
+              prop_lesser = mean(as.numeric(permuted_eis < observed_ei)))
+  class(out) <- "qap_ei"
+
+  out
+}
+```
+
+## Plotter Function
+
+```{r}
+plot_it <- function(x) { # just plots
+  data.frame(perm_ei = x$permuted_eis) %>%
+    ggplot() +
+    stat_density(aes(perm_ei), fill = "orange", alpha = 0.5) +
+    geom_vline(aes(xintercept = x$observed_ei, color = "Observed E-I Index")) +
+    scale_x_continuous(limits = c(-1, 1)) +
+    guides(color = guide_legend(NULL)) +
+    theme_minimal(12, "serif") +
+    theme(plot.caption = element_text("mono"), legend.position = "top") +
+    labs(x = paste("E-I Indices of Permuted Matrices"), y = "Density",
+         title = "QAP E-I Index", 
+         subtitle = paste("Observed E-I:", round(x$observed_ei, 3)),
+         caption = paste("Iterations:", scales::comma(x$iterations)))
+}
+```
+
+## Data
+
+```{r}
+data("samplk", package = "ergm") # 3 `network`s of Sampson's Monks: samplk1, samplk2, samplk3
+
+niter <- 500000 # 500,000... just to see
+```
+
+
+### Cloisterville
+
+This attribute indicates whether the novice attended the minor seminary at Cloisterville before arriving to the monastery where the study took place.
+
+```{r}
+cloisterville_attr <- qap_ei_wip(samplk1, "cloisterville", iterations = niter)
+```
+
+```{r}
+cloisterville_attr[!names(cloisterville_attr) == "permuted_eis"] %>% cbind()
+
+quantile(cloisterville_attr$permuted_eis)
+```
+
+```{r}
+plot_it(cloisterville_attr)
+```
+
+
+### Group (or factions elsewhere)
+
+The four factions classified by Sampson ([link](http://vlado.fmf.uni-lj.si/pub/networks/data/esna/sampson.htm)):
+
+1. Young Turks: novices who arrived later in a period of change
+2. Loyal Opposition: novices who entered the monastery first
+3. Outcasts: novices the that were not accepted in the group
+4. interstitial group: novices who did not take sides
+
+```{r}
+group_attr <- qap_ei_wip(samplk1, "group", iterations = niter)
+```
+
+```{r}
+group_attr[!names(group_attr) == "permuted_eis"] %>% cbind()
+
+quantile(group_attr$permuted_eis)
+```
+
+```{r}
+plot_it(group_attr)
+```
+
+
+<br><br><br>

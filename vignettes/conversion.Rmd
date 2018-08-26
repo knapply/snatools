@@ -135,260 +135,260 @@ The resulting objects are relatively complex and contain attributes from a varie
 list(n = c(`# Vertices` = vcount(ig_initial), `# Edges` = ecount(ig_initial)),
      Edges = c(`Is Multiplex?` = any(is.multiple(ig_initial)),
                `Has Loops?` = any(is.loop(ig_initial))),
-     `Graph Attributes` = vapply(net_attrs(ig_initial), typeof, character(1)),
-     `Vertex Attributes` = vapply(vrt_attrs(ig_initial), typeof, character(1)),
-     `Edge Attributes` = vapply(edg_attrs(ig_initial), typeof, character(1)))
+     `Graph Attributes` = vapply(net_get_attrs(ig_initial), typeof, character(1)),
+     `Vertex Attributes` = vapply(vrt_get_attrs(ig_initial), typeof, character(1)),
+     `Edge Attributes` = vapply(edg_get_attrs(ig_initial), typeof, character(1)))
 
 list(n = c(`# Vertices` = network.size(nw_initial),
            `# Edges` = network.edgecount(nw_initial)),
      Edges = c(`Is Multiplex?` = is.multiplex(nw_initial),
                `Has Loops?` = has.loops(nw_initial)),
-     `Graph Attributes` = vapply(net_attrs(nw_initial), typeof, character(1)),
-     `Vertex Attributes` = vapply(vrt_attrs(nw_initial), typeof, character(1)),
-     `Edge Attributes` = vapply(edg_attrs(nw_initial), typeof, character(1)))
+     `Graph Attributes` = vapply(net_get_attrs(nw_initial), typeof, character(1)),
+     `Vertex Attributes` = vapply(vrt_get_attrs(nw_initial), typeof, character(1)),
+     `Edge Attributes` = vapply(edg_get_attrs(nw_initial), typeof, character(1)))
 ```
 
-# Graph Cleaning
+<!-- # Graph Cleaning -->
 
-In order to confirm that an `igraph` or `network` object can make a round-trip conversion with its internal data remaining intact, we want to standardize its contents. This is the purpose of `clean_graph()`, which is equipped with `clean_graph.igraph()` and `clean_graph.network()` methods.
+<!-- In order to confirm that an `igraph` or `network` object can make a round-trip conversion with its internal data remaining intact, we want to standardize its contents. This is the purpose of `clean_graph()`, which is equipped with `clean_graph.igraph()` and `clean_graph.network()` methods. -->
 
-Here, we clean `ig_initial` to create `ig_clean`.
+<!-- Here, we clean `ig_initial` to create `ig_clean`. -->
 
-```{r}
-ig_clean <- clean_graph(ig_initial)
+<!-- ```{r} -->
+<!-- ig_clean <- clean_graph(ig_initial) -->
 
-ig_clean
-```
+<!-- ig_clean -->
+<!-- ``` -->
 
-Similarly, we clean `nw_initial` to create `nw_clean`.
+<!-- Similarly, we clean `nw_initial` to create `nw_clean`. -->
 
-```{r}
-nw_clean <- clean_graph(nw_initial)
+<!-- ```{r} -->
+<!-- nw_clean <- clean_graph(nw_initial) -->
 
-nw_clean
-```
+<!-- nw_clean -->
+<!-- ``` -->
 
-If you don't notice any changes, don't worry. `clean_graph()` is simply ensuring that metadata not strictly required by `igraph` or `network` is present and that attribute names are sorted alphabetically. The changes will usually be subtle if they occur at all.
+<!-- If you don't notice any changes, don't worry. `clean_graph()` is simply ensuring that metadata not strictly required by `igraph` or `network` is present and that attribute names are sorted alphabetically. The changes will usually be subtle if they occur at all. -->
 
-# Conversion
+<!-- # Conversion -->
 
-## `igraph` to `network`
+<!-- ## `igraph` to `network` -->
 
-Once clean, we can safely convert `ig_clean` to a `network` object using `as_network()`.
+<!-- Once clean, we can safely convert `ig_clean` to a `network` object using `as_network()`. -->
 
-```{r}
-as_network(ig_clean) 
-```
+<!-- ```{r} -->
+<!-- as_network(ig_clean)  -->
+<!-- ``` -->
 
-## `network` to `igraph`
+<!-- ## `network` to `igraph` -->
 
-Going the other direction, we can convert `nw_clean` to an `igraph` object using `as_igraph()`.
+<!-- Going the other direction, we can convert `nw_clean` to an `igraph` object using `as_igraph()`. -->
 
-```{r}
-as_igraph(nw_clean)
-```
+<!-- ```{r} -->
+<!-- as_igraph(nw_clean) -->
+<!-- ``` -->
 
-## Testing Conversion
+<!-- ## Testing Conversion -->
 
-If you're concerned that `as_igraph()` or `as_network()` will mangle your graph's contents, you can test its original state against the result of a round-trip conversion using `identical()`. `identical()` is the __strictest way to compare objects in R__ and only returns `TRUE` if two objects are _exactly_ equal.
+<!-- If you're concerned that `as_igraph()` or `as_network()` will mangle your graph's contents, you can test its original state against the result of a round-trip conversion using `identical()`. `identical()` is the __strictest way to compare objects in R__ and only returns `TRUE` if two objects are _exactly_ equal. -->
 
-Note that there's a _small_ catch with `igraph` objects. By itself, `identical()` will never return `TRUE`.
+<!-- Note that there's a _small_ catch with `igraph` objects. By itself, `identical()` will never return `TRUE`. -->
 
-```{r}
-identical(ig_clean, as_igraph(as_network(ig_clean)))
-```
+<!-- ```{r} -->
+<!-- identical(ig_clean, as_igraph(as_network(ig_clean))) -->
+<!-- ``` -->
 
-This is because `igraph` objects store a pointer that _should not_ be duplicated. We can inspect it like so.
+<!-- This is because `igraph` objects store a pointer that _should not_ be duplicated. We can inspect it like so. -->
 
-```{r}
-unclass(ig_clean)[[10]]
-unclass(as_igraph(as_network(ig_clean)))[[10]]
-```
+<!-- ```{r} -->
+<!-- unclass(ig_clean)[[10]] -->
+<!-- unclass(as_igraph(as_network(ig_clean)))[[10]] -->
+<!-- ``` -->
 
-In order to test that two `igraph` objects are identical, we need to omit that pointer from the object.
+<!-- In order to test that two `igraph` objects are identical, we need to omit that pointer from the object. -->
 
-```{r}
-identical(unclass(ig_clean)[1:9], unclass(as_igraph(as_network(ig_clean)))[1:9])
-```
+<!-- ```{r} -->
+<!-- identical(unclass(ig_clean)[1:9], unclass(as_igraph(as_network(ig_clean)))[1:9]) -->
+<!-- ``` -->
 
-To simplify things, {`snatools`} includes the `%==%` infix operator to test that objects are `identical()`.
+<!-- To simplify things, {`snatools`} includes the `%==%` infix operator to test that objects are `identical()`. -->
 
-```{r}
-ig_clean %==% as_igraph(as_network(ig_clean))
-```
+<!-- ```{r} -->
+<!-- ig_clean %==% as_igraph(as_network(ig_clean)) -->
+<!-- ``` -->
 
-Underneath the hood, `%==%` uses `identical()` and can test the stict equality of any objects.
+<!-- Underneath the hood, `%==%` uses `identical()` and can test the stict equality of any objects. -->
 
-```{r}
-snatools:::`%==%.default`
-```
+<!-- ```{r} -->
+<!-- snatools:::`%==%.default` -->
+<!-- ``` -->
 
 
-The exception is for `igraph` objects, for which it is equipped to automatically exclude the pointer that we don't need.
+<!-- The exception is for `igraph` objects, for which it is equipped to automatically exclude the pointer that we don't need. -->
 
-```{r}
-snatools:::`%==%.igraph`
-```
+<!-- ```{r} -->
+<!-- snatools:::`%==%.igraph` -->
+<!-- ``` -->
 
-For `network` objects, you can still use `identical()` if desired.
+<!-- For `network` objects, you can still use `identical()` if desired. -->
 
-```{r}
-identical(nw_clean, as_network(as_igraph(nw_clean)))
-nw_clean %==% as_network(as_igraph(nw_clean))
-```
+<!-- ```{r} -->
+<!-- identical(nw_clean, as_network(as_igraph(nw_clean))) -->
+<!-- nw_clean %==% as_network(as_igraph(nw_clean)) -->
+<!-- ``` -->
 
-Now you can be __absolutely certain__ that something did not go wrong when converting between graph classes.
+<!-- Now you can be __absolutely certain__ that something did not go wrong when converting between graph classes. -->
 
-# Bipartite Graphs
+<!-- # Bipartite Graphs -->
 
-## Example Data
+<!-- ## Example Data -->
 
-`as_igraph()` and `as_network()` also handle bipartite graphs. The process is _slightly_ more complicated due to the different ways that `igraph` and `network` handle such graphs.
+<!-- `as_igraph()` and `as_network()` also handle bipartite graphs. The process is _slightly_ more complicated due to the different ways that `igraph` and `network` handle such graphs. -->
 
-To demonstrate, we'll construct the Southern Women network from scratch using its affiliation matrix.
+<!-- To demonstrate, we'll construct the Southern Women network from scratch using its affiliation matrix. -->
 
-```{r}
-sw_matrix <- matrix(
-  c(1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0,
-    1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 
-    1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 
-    0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,
-    1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 
-    1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1,
-    1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 
-    0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0,
-    0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 
-    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0),
-  nrow = 14L, ncol = 18L,
-  dimnames = list(
-    c("E1", "E2", "E3", "E4", "E5", "E6", "E7",
-      "E8", "E9", "E10", "E11", "E12", "E13", "E14"),
-    c("EVELYN", "LAURA", "THERESA", "BRENDA", "CHARLOTTE", "FRANCES",
-      "ELEANOR", "PEARL", "RUTH", "VERNE", "MYRNA", "KATHERINE", 
-      "SYLVIA", "NORA", "HELEN", "DOROTHY", "OLIVIA", "FLORA")))
+<!-- ```{r} -->
+<!-- sw_matrix <- matrix( -->
+<!--   c(1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, -->
+<!--     1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1,  -->
+<!--     1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,  -->
+<!--     0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, -->
+<!--     1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, -->
+<!--     1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, -->
+<!--     0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, -->
+<!--     0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, -->
+<!--     0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,  -->
+<!--     1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, -->
+<!--     1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0,  -->
+<!--     0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, -->
+<!--     0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,  -->
+<!--     1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0), -->
+<!--   nrow = 14L, ncol = 18L, -->
+<!--   dimnames = list( -->
+<!--     c("E1", "E2", "E3", "E4", "E5", "E6", "E7", -->
+<!--       "E8", "E9", "E10", "E11", "E12", "E13", "E14"), -->
+<!--     c("EVELYN", "LAURA", "THERESA", "BRENDA", "CHARLOTTE", "FRANCES", -->
+<!--       "ELEANOR", "PEARL", "RUTH", "VERNE", "MYRNA", "KATHERINE",  -->
+<!--       "SYLVIA", "NORA", "HELEN", "DOROTHY", "OLIVIA", "FLORA"))) -->
 
-sw_matrix
-```
+<!-- sw_matrix -->
+<!-- ``` -->
 
-Notice that the "Southern Women" are represented by columns while the events are represented by the rows.
+<!-- Notice that the "Southern Women" are represented by columns while the events are represented by the rows. -->
 
-## Bipartite Graphs in `igraph`
+<!-- ## Bipartite Graphs in `igraph` -->
 
-To convert `sw_matrix` to an `igraph` object, we use `graph_from_incidence_matrix()`. We'll also immediately call `clean_graph()`.
+<!-- To convert `sw_matrix` to an `igraph` object, we use `graph_from_incidence_matrix()`. We'll also immediately call `clean_graph()`. -->
 
-```{r}
-southern_women_ig <- sw_matrix %>% 
-  graph_from_incidence_matrix() %>% 
-  clean_graph()
+<!-- ```{r} -->
+<!-- southern_women_ig <- sw_matrix %>%  -->
+<!--   graph_from_incidence_matrix() %>%  -->
+<!--   clean_graph() -->
 
-southern_women_ig
-```
+<!-- southern_women_ig -->
+<!-- ``` -->
 
-`igraph` tracks the two modes via the vertex attribute `"type"`. Here is one of the methods to obtain vertex attributes.
+<!-- `igraph` tracks the two modes via the vertex attribute `"type"`. Here is one of the methods to obtain vertex attributes. -->
 
-```{r}
-all_vrt_attrs <- as_data_frame(southern_women_ig, "vertices")
-```
+<!-- ```{r} -->
+<!-- all_vrt_attrs <- as_data_frame(southern_women_ig, "vertices") -->
+<!-- ``` -->
 
-Notice that the "Southern Women" were assigned `TRUE` for their `"type"`.
+<!-- Notice that the "Southern Women" were assigned `TRUE` for their `"type"`. -->
 
-```{r}
-all_vrt_attrs[all_vrt_attrs$type, ]
-```
+<!-- ```{r} -->
+<!-- all_vrt_attrs[all_vrt_attrs$type, ] -->
+<!-- ``` -->
 
-The events were assigned `FALSE`.
+<!-- The events were assigned `FALSE`. -->
 
-```{r}
-all_vrt_attrs[!all_vrt_attrs$type, ]
-```
+<!-- ```{r} -->
+<!-- all_vrt_attrs[!all_vrt_attrs$type, ] -->
+<!-- ``` -->
 
-This is because of the shape of `sw_matrix`. The `"type"` of vertices coming from columns is assigned `TRUE` while the `"type"` of vertices coming from rows is assigned `FALSE`.
+<!-- This is because of the shape of `sw_matrix`. The `"type"` of vertices coming from columns is assigned `TRUE` while the `"type"` of vertices coming from rows is assigned `FALSE`. -->
 
-## Bipartite Graphs in `network`
+<!-- ## Bipartite Graphs in `network` -->
 
-`network` takes a different approach to handling bipartite graphs by tracking an "actors" mode.
+<!-- `network` takes a different approach to handling bipartite graphs by tracking an "actors" mode. -->
 
-Recall that `nw_clean` is not a bipartite network.
+<!-- Recall that `nw_clean` is not a bipartite network. -->
 
-```{r}
-nw_clean
-```
+<!-- ```{r} -->
+<!-- nw_clean -->
+<!-- ``` -->
 
-We an see that it explicilty states that `bipartite = FALSE`.
+<!-- We an see that it explicilty states that `bipartite = FALSE`. -->
 
-If a `network` object is bipartite, it's no longer `FALSE`.
+<!-- If a `network` object is bipartite, it's no longer `FALSE`. -->
 
-```{r}
-southern_women_nw <- as.network.matrix(t(sw_matrix), bipartite = TRUE) %>% 
-  clean_graph()
+<!-- ```{r} -->
+<!-- southern_women_nw <- as.network.matrix(t(sw_matrix), bipartite = TRUE) %>%  -->
+<!--   clean_graph() -->
 
-southern_women_nw
-```
+<!-- southern_women_nw -->
+<!-- ``` -->
 
-It's also not `TRUE`.
+<!-- It's also not `TRUE`. -->
 
-`bipartite = 18` refers to the number of vertices belonging to the "actors" mode of the network. In this network, the other vertices are the events.
+<!-- `bipartite = 18` refers to the number of vertices belonging to the "actors" mode of the network. In this network, the other vertices are the events. -->
 
-## Ambiguity
+<!-- ## Ambiguity -->
 
-This difference in bipartite graph handling leaves room for ambiguity when converting from `igraph` to `network`. `as_network()` handles this through its `actor_type` parameter.
+<!-- This difference in bipartite graph handling leaves room for ambiguity when converting from `igraph` to `network`. `as_network()` handles this through its `actor_type` parameter. -->
 
-`actor_type` refers to the vertices' `"type"` attribute. We can simply provide `TRUE` or `FALSE` to tell `as_network()` which vertices are meant to be actors in the returned `network` object.
+<!-- `actor_type` refers to the vertices' `"type"` attribute. We can simply provide `TRUE` or `FALSE` to tell `as_network()` which vertices are meant to be actors in the returned `network` object. -->
 
-For convenience, `actor_type` defaults to `TRUE`. With that in mind, we can think of `"type"` as noting whether a vertex is an "actor" or not, but we need to be careful about creating our objects to reflect this.
+<!-- For convenience, `actor_type` defaults to `TRUE`. With that in mind, we can think of `"type"` as noting whether a vertex is an "actor" or not, but we need to be careful about creating our objects to reflect this. -->
 
-## Putting It All Together
+<!-- ## Putting It All Together -->
 
-Since our vertices already have the "actor" `"type"` set to `TRUE`, we can convert `southern_women_ig` to a `network` object exactly as we did for `ig_clean`.
+<!-- Since our vertices already have the "actor" `"type"` set to `TRUE`, we can convert `southern_women_ig` to a `network` object exactly as we did for `ig_clean`. -->
 
-```{r}
-as_network(southern_women_ig)
-```
+<!-- ```{r} -->
+<!-- as_network(southern_women_ig) -->
+<!-- ``` -->
 
-What does it looks like when our matrix isn't as conveniently designed?
+<!-- What does it looks like when our matrix isn't as conveniently designed? -->
 
-Here's the same network created using `sw_matrix`'s transpose.
+<!-- Here's the same network created using `sw_matrix`'s transpose. -->
 
-```{r}
-swapped_types_ig <- sw_matrix %>%
-  t() %>% 
-  graph_from_incidence_matrix() %>% 
-  clean_graph()
+<!-- ```{r} -->
+<!-- swapped_types_ig <- sw_matrix %>% -->
+<!--   t() %>%  -->
+<!--   graph_from_incidence_matrix() %>%  -->
+<!--   clean_graph() -->
 
-swapped_types_ig
-```
+<!-- swapped_types_ig -->
+<!-- ``` -->
 
-We can see that the events `"type"` is now `TRUE`, while the `"type"` of the "Southern Women" is `FALSE`.
+<!-- We can see that the events `"type"` is now `TRUE`, while the `"type"` of the "Southern Women" is `FALSE`. -->
 
-```{r}
-swapped_vrt_attrs <- as_data_frame(swapped_types_ig, "vertices")
+<!-- ```{r} -->
+<!-- swapped_vrt_attrs <- as_data_frame(swapped_types_ig, "vertices") -->
 
-swapped_vrt_attrs[swapped_vrt_attrs$type, ]
-```
+<!-- swapped_vrt_attrs[swapped_vrt_attrs$type, ] -->
+<!-- ``` -->
 
-If we don't clarify the ambiguity of `"type"`, the wrong vertices are considered to be the "actors".
+<!-- If we don't clarify the ambiguity of `"type"`, the wrong vertices are considered to be the "actors". -->
 
-```{r}
-as_network(swapped_types_ig)
-```
+<!-- ```{r} -->
+<!-- as_network(swapped_types_ig) -->
+<!-- ``` -->
 
-By providing `FALSE` as the argument to `actor_type`, we can avoid surprises upon conversion.
+<!-- By providing `FALSE` as the argument to `actor_type`, we can avoid surprises upon conversion. -->
 
-```{r}
-as_network(swapped_types_ig, actor_type = FALSE)
-```
+<!-- ```{r} -->
+<!-- as_network(swapped_types_ig, actor_type = FALSE) -->
+<!-- ``` -->
 
-Finally, we can confirm that they all convert properly using `%==%`.
+<!-- Finally, we can confirm that they all convert properly using `%==%`. -->
 
-```{r}
-southern_women_ig %==% as_igraph(as_network(southern_women_ig))
+<!-- ```{r} -->
+<!-- southern_women_ig %==% as_igraph(as_network(southern_women_ig)) -->
 
-southern_women_nw %==% as_network(as_igraph(southern_women_nw))
-```
+<!-- southern_women_nw %==% as_network(as_igraph(southern_women_nw)) -->
+<!-- ``` -->
 
 
 
