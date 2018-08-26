@@ -1,8 +1,7 @@
 context("E-I Index: directed")
 
 
-ig_undir <- snatools:::build_test_graph("ig", direct = FALSE) %>% 
-  clean_graph()
+ig_undir <- snatools:::build_test_graph("ig", direct = FALSE)
 
 test_that("ig vs other", {
   expect_true(
@@ -16,8 +15,7 @@ test_that("ig to nw vs other", {
     )
 })
 
-ig_dir <- snatools:::build_test_graph("ig") %>% 
-  clean_graph()
+ig_dir <- snatools:::build_test_graph("ig")
 
 context("E-I Index: undirected")
 

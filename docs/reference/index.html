@@ -173,46 +173,56 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-attributes" class="hasAnchor"><a href="#section-attributes" class="anchor"></a>Attributes</h2>
-          <p class="section-desc"><p>Obtain network, vertex, and edge attributes in consistent formats.</p></p>
+          <h2 id="section-vertices" class="hasAnchor"><a href="#section-vertices" class="anchor"></a>Vertices</h2>
+          <p class="section-desc"><p>Operations targeting vertices.</p></p>
         </th>
       </tr>
       <tr>
         
         <td>
-          <p><code><a href="edg_attrs.html">edg_attrs()</a></code> </p>
+          <p><code><a href="extract-vertex-attributes.html">vrt_get_attrs()</a></code> <code><a href="extract-vertex-attributes.html">vrt_get_attrs_df()</a></code> <code><a href="extract-vertex-attributes.html">vrt_get_attr()</a></code> <code><a href="extract-vertex-attributes.html">vrt_get_names()</a></code> <code><a href="extract-vertex-attributes.html">vrt_get_attr_names()</a></code> </p>
         </td>
-        <td><p>Extract edge attributes.</p></td>
+        <td><p>Extract Vertex Attributes</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-edges" class="hasAnchor"><a href="#section-edges" class="anchor"></a>Edges</h2>
+          <p class="section-desc"><p>Operations targeting edges.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="extract-edge-attributes.html">edg_get_attrs()</a></code> <code><a href="extract-edge-attributes.html">edg_get_attrs_df()</a></code> <code><a href="extract-edge-attributes.html">edg_get_attr()</a></code> <code><a href="extract-edge-attributes.html">edg_get_attr_names()</a></code> </p>
+        </td>
+        <td><p>Edge Attributes</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="edg_attr_names.html">edg_attr_names()</a></code> </p>
+          <p><code><a href="parallel-edges.html">edg_any_parallel()</a></code> <code><a href="parallel-edges.html">edg_sum_parallel()</a></code> <code><a href="parallel-edges.html">edg_count_parallel()</a></code> <code><a href="parallel-edges.html">edg_count_parallel_df()</a></code> </p>
         </td>
-        <td><p>List edge attribute names.</p></td>
+        <td><p>Parallel Edges Queries</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-network" class="hasAnchor"><a href="#section-network" class="anchor"></a>Network</h2>
+          <p class="section-desc"><p>Operations targeting graph-level attributes and metadata.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="extract-network-attributes.html">net_get_attrs()</a></code> <code><a href="extract-network-attributes.html">net_get_attrs_df()</a></code> <code><a href="extract-network-attributes.html">net_get_attr()</a></code> <code><a href="extract-network-attributes.html">net_get_attr_names()</a></code> </p>
+        </td>
+        <td><p>Extract Graph-Level Attributes</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="net_attrs.html">net_attrs()</a></code> </p>
+          <p><code><a href="metadata-queries.html">net_is_bipartite()</a></code> <code><a href="metadata-queries.html">net_is_directed()</a></code> </p>
         </td>
-        <td><p>Extract graph attributes.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="net_attr_names.html">net_attr_names()</a></code> </p>
-        </td>
-        <td><p>List a network/graph's attribute names.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="vrt_attrs.html">vrt_attrs()</a></code> </p>
-        </td>
-        <td><p>Extract vertex attributes from a graph.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="vrt_attr_names.html">vrt_attr_names()</a></code> </p>
-        </td>
-        <td><p>List vertex attribute names.</p></td>
+        <td><p>Metadata Queries</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -267,6 +277,26 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
+          <h2 id="section-bipartite" class="hasAnchor"><a href="#section-bipartite" class="anchor"></a>Bipartite</h2>
+          <p class="section-desc"><p>Operations to assist bipartite network handling.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="bip_clarify_actors.html">bip_clarify_actors()</a></code> </p>
+        </td>
+        <td><p>Assign vertex attributes to the distinguish sets in <code>network</code> objects.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="bip_swap_modes.html">bip_swap_modes()</a></code> </p>
+        </td>
+        <td><p>Swap vertex modes in bipartite graphs.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
           <h2 id="section-homophily" class="hasAnchor"><a href="#section-homophily" class="anchor"></a>Homophily</h2>
           <p class="section-desc"><p>Procedures addressing homophily and mixing patterns.</p></p>
         </th>
@@ -309,20 +339,6 @@
           <p><code><a href="qap_cor.html">qap_cor()</a></code> </p>
         </td>
         <td><p>Quadratic Assignment Procedure (Correlation)</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-carpentry" class="hasAnchor"><a href="#section-carpentry" class="anchor"></a>Carpentry</h2>
-          <p class="section-desc"><p>Clean network internals to enforce stricter attribute data types and accurate metadata.</p></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="clean_graph.html">clean_graph()</a></code> </p>
-        </td>
-        <td><p>Clean a graph object's internals and standardize attributes.</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -421,11 +437,13 @@
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#section-snatools">snatools</a></li>
       <li><a href="#section-class-conversion">Class Conversion</a></li>
-      <li><a href="#section-attributes">Attributes</a></li>
+      <li><a href="#section-vertices">Vertices</a></li>
+      <li><a href="#section-edges">Edges</a></li>
+      <li><a href="#section-network">Network</a></li>
       <li><a href="#section-representations">Representations</a></li>
+      <li><a href="#section-bipartite">Bipartite</a></li>
       <li><a href="#section-homophily">Homophily</a></li>
       <li><a href="#section-quadratic-assignment-procedure">Quadratic Assignment Procedure</a></li>
-      <li><a href="#section-carpentry">Carpentry</a></li>
       <li><a href="#section-visualization">Visualization</a></li>
       <li><a href="#section-foreign-file-formats">Foreign File Formats</a></li>
       <li><a href="#section-data">Data</a></li>

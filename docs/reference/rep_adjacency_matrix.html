@@ -145,8 +145,7 @@
   <span class='kw'>sparse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for network</span>
-<span class='fu'>rep_adjacency_matrix</span>(<span class='no'>x</span>, <span class='kw'>edg_attr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>sparse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>rep_adjacency_matrix</span>(<span class='no'>x</span>, <span class='kw'>edg_attr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -162,6 +161,69 @@
     <p><code>matrix</code> or <code>dgCMatrix</code></p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>snatools</span>)
+
+<span class='fu'>data</span>(<span class='st'>"sampson"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"ergm"</span>)
+
+<span class='fu'>rep_adjacency_matrix</span>(<span class='no'>samplike</span>)</div><div class='output co'>#&gt;             John Bosco Gregory Basil Peter Bonaventure Berthold Mark Victor
+#&gt; John Bosco           0       1     1     0           1        0    0      1
+#&gt; Gregory              1       0     0     0           0        0    1      0
+#&gt; Basil                1       1     0     0           0        0    0      0
+#&gt; Peter                0       0     0     0           1        1    0      0
+#&gt; Bonaventure          1       0     0     1           0        0    0      0
+#&gt; Berthold             1       0     0     1           1        0    0      0
+#&gt; Mark                 1       1     0     0           0        0    0      1
+#&gt; Victor               1       1     0     1           0        1    0      0
+#&gt; Ambrose              0       0     0     0           1        0    0      1
+#&gt; Romauld              0       0     0     1           1        0    0      1
+#&gt; Louis                0       0     0     1           1        0    0      1
+#&gt; Winfrid              1       1     0     0           0        0    1      0
+#&gt; Amand                0       0     0     0           1        0    1      0
+#&gt; Hugh                 1       1     0     0           0        0    0      0
+#&gt; Boniface             1       1     0     0           1        0    1      0
+#&gt; Albert               1       1     0     0           0        0    1      0
+#&gt; Elias                0       1     1     0           0        0    0      0
+#&gt; Simplicius           1       1     1     0           0        0    1      0
+#&gt;             Ambrose Romauld Louis Winfrid Amand Hugh Boniface Albert Elias
+#&gt; John Bosco        0       0     0       1     0    1        0      0     0
+#&gt; Gregory           0       0     0       1     0    1        1      0     0
+#&gt; Basil             0       0     0       0     1    0        0      0     1
+#&gt; Peter             0       1     1       0     0    0        0      0     0
+#&gt; Bonaventure       1       0     1       0     1    0        0      0     0
+#&gt; Berthold          1       0     0       0     0    0        0      0     0
+#&gt; Mark              0       0     0       1     0    0        0      1     0
+#&gt; Victor            1       1     0       0     0    0        0      0     0
+#&gt; Ambrose           0       0     0       1     0    0        0      1     0
+#&gt; Romauld           1       0     0       0     1    1        0      0     0
+#&gt; Louis             0       0     0       0     0    1        0      1     0
+#&gt; Winfrid           0       0     0       0     0    1        0      0     0
+#&gt; Amand             0       0     0       0     0    0        0      0     0
+#&gt; Hugh              0       0     1       1     0    0        1      0     0
+#&gt; Boniface          0       0     0       1     0    1        0      0     0
+#&gt; Albert            0       0     0       1     0    0        1      0     0
+#&gt; Elias             0       0     0       0     1    0        0      0     0
+#&gt; Simplicius        0       0     0       0     1    0        0      0     1
+#&gt;             Simplicius
+#&gt; John Bosco           0
+#&gt; Gregory              0
+#&gt; Basil                1
+#&gt; Peter                0
+#&gt; Bonaventure          0
+#&gt; Berthold             0
+#&gt; Mark                 0
+#&gt; Victor               0
+#&gt; Ambrose              0
+#&gt; Romauld              0
+#&gt; Louis                0
+#&gt; Winfrid              0
+#&gt; Amand                1
+#&gt; Hugh                 0
+#&gt; Boniface             0
+#&gt; Albert               0
+#&gt; Elias                1
+#&gt; Simplicius           0</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -169,7 +231,9 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

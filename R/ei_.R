@@ -167,13 +167,13 @@ ei_index_global <- function(x, vrt_attr, ...) {
 #' @export
 #' 
 ei_index_global.igraph <- function(x, vrt_attr, drop_loops = FALSE) { # fast E-I
-  if(!vrt_attr %in% vrt_attr_names(x)) {
+  if(!vrt_attr %in% vrt_get_attr_names(x)) {
     stop("`vrt_attr` is not a vertex attribute in `x`", call. = FALSE)
   }
   if(drop_loops) {
     x <- igraph::simplify(x, remove.multiple = FALSE, remove.loops = TRUE)
   }
-  attrs <- vrt_attr(x, vrt_attr)
+  attrs <- vrt_get_attr(x, vrt_attr)
   el <- rep_edgelist(x)
   
   attr_el <- matrix(attrs[el], ncol = 2)
@@ -188,13 +188,13 @@ ei_index_global.igraph <- function(x, vrt_attr, drop_loops = FALSE) { # fast E-I
 #' @export
 #' 
 ei_index_global.network <- function(x, vrt_attr, drop_loops = FALSE) { # fast E-I
-  if(!vrt_attr %in% vrt_attr_names(x)) {
+  if(!vrt_attr %in% vrt_get_attr_names(x)) {
     stop("`vrt_attr` is not a vertex attribute in `x`", call. = FALSE)
   }
   if(drop_loops) {
     network::set.network.attribute(x, "loops", value = FALSE)
   }
-  attrs <- vrt_attr(x, vrt_attr)
+  attrs <- vrt_get_attr(x, vrt_attr)
   el <- rep_edgelist(x)
   
   attr_el <- matrix(attrs[el], ncol = 2)
@@ -256,8 +256,8 @@ ei_index_vrt <- function(x, vrt_attr, drop_loops = FALSE) {
   if(drop_loops) {
     x <- drop_loops(x)
   }
-  vrt_names <- vrt_names(x)
-  attrs <- vrt_attrs(x)[[vrt_attr]]
+  vrt_names <- vrt_get_names(x)
+  attrs <- vrt_get_attrs(x)[[vrt_attr]]
   attr_mat <- rep_attr_adj_mat(x, vrt_attr)
   rownames(attr_mat) <- vrt_names
   mix_mat_names <- t(rowsum(t(attr_mat), group = colnames(attr_mat), na.rm = TRUE))

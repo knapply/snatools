@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>List vertex attribute names. — vrt_attr_names • snatools</title>
+<title>Metadata Queries — net_is_bipartite • snatools</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="List vertex attribute names. — vrt_attr_names" />
+<meta property="og:title" content="Metadata Queries — net_is_bipartite" />
 
-<meta property="og:description" content="List vertex attribute names." />
+<meta property="og:description" content="Metadata Queries" />
 
 <meta property="og:image" content="https://knapply.github.io/snatools/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -127,66 +127,92 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>List vertex attribute names.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/vrt_.R'><code>R/vrt_.R</code></a></small>
-    <div class="hidden name"><code>vrt_attr_names.Rd</code></div>
+    <h1>Metadata Queries</h1>
+    <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/net_is_.R'><code>R/net_is_.R</code></a></small>
+    <div class="hidden name"><code>metadata-queries.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>List vertex attribute names.</p>
+    <p>Metadata Queries</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>vrt_attr_names</span>(<span class='no'>x</span>, <span class='kw'>exclude_na</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+    <pre class="usage"><span class='fu'>net_is_bipartite</span>(<span class='no'>x</span>)
 
 <span class='co'># S3 method for igraph</span>
-<span class='fu'>vrt_attr_names</span>(<span class='no'>x</span>, <span class='kw'>exclude_na</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>net_is_bipartite</span>(<span class='no'>x</span>)
 
 <span class='co'># S3 method for network</span>
-<span class='fu'>vrt_attr_names</span>(<span class='no'>x</span>, <span class='kw'>exclude_na</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+<span class='fu'>net_is_bipartite</span>(<span class='no'>x</span>)
+
+<span class='fu'>net_is_directed</span>(<span class='no'>x</span>)
+
+<span class='co'># S3 method for igraph</span>
+<span class='fu'>net_is_directed</span>(<span class='no'>x</span>)
+
+<span class='co'># S3 method for network</span>
+<span class='fu'>net_is_directed</span>(<span class='no'>x</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>An <code>igraph</code> or <code>network</code> object.</p></td>
-    </tr>
-    <tr>
-      <th>exclude_na</th>
-      <td><p><code>network</code> objects include a <code>"na"</code> attribute indicating whether
-a vertex is "missing" from the network. <code>exclude_na</code> determines whether or not to include
-this <code>"na"</code> attribute in returned names. <br /></p><ul>
-<li><p>Default: <code>TRUE</code></p></li>
-<li><p>If <code>exclude_na</code> is provided when <code>x</code> is an <code>igraph</code> object, it is ignored with a <code>warning</code>.</p></li>
-</ul></td>
+      <td><p>A graph object.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code>character</code> <code>vector</code>of <code>x</code>'s vertex attribute names.</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/igraph/topics/vertex_attr_names'>igraph::vertex_attr_names()</a></code>, <code><a href='http://www.rdocumentation.org/packages/network/topics/attribute.methods'>network::list.vertex.attributes()</a></code></p></div>
+    <p><code>net_is_bipartite()</code> checks whether <code>x</code> is <em>labeled</em> as bipartite and returns a <code>logical</code> scalar.</p>
+<p><code>net_is_directed()</code> checks whether <code>x</code> is <em>labeled</em> as directed and returns a <code>logical</code> scalar.</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>snatools</span>)
+
+<span class='fu'>data</span>(<span class='st'>"karate"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"igraphdata"</span>)
+(<span class='no'>ig</span> <span class='kw'>&lt;-</span> <span class='no'>karate</span>)</div><div class='output co'>#&gt; IGRAPH 4b458a1 UNW- 34 78 -- Zachary's karate club network
+#&gt; + attr: name (g/c), Citation (g/c), Author (g/c), Faction (v/n), name
+#&gt; | (v/c), label (v/c), color (v/n), weight (e/n)
+#&gt; + edges from 4b458a1 (vertex names):
+#&gt;  [1] Mr Hi  --Actor 2  Mr Hi  --Actor 3  Mr Hi  --Actor 4  Mr Hi  --Actor 5 
+#&gt;  [5] Mr Hi  --Actor 6  Mr Hi  --Actor 7  Mr Hi  --Actor 8  Mr Hi  --Actor 9 
+#&gt;  [9] Mr Hi  --Actor 11 Mr Hi  --Actor 12 Mr Hi  --Actor 13 Mr Hi  --Actor 14
+#&gt; [13] Mr Hi  --Actor 18 Mr Hi  --Actor 20 Mr Hi  --Actor 22 Mr Hi  --Actor 32
+#&gt; [17] Actor 2--Actor 3  Actor 2--Actor 4  Actor 2--Actor 8  Actor 2--Actor 14
+#&gt; [21] Actor 2--Actor 18 Actor 2--Actor 20 Actor 2--Actor 22 Actor 2--Actor 31
+#&gt; [25] Actor 3--Actor 4  Actor 3--Actor 8  Actor 3--Actor 9  Actor 3--Actor 10
+#&gt; + ... omitted several edges</div><div class='input'>
+<span class='fu'>data</span>(<span class='st'>"emon"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"network"</span>)
+(<span class='no'>nw</span> <span class='kw'>&lt;-</span> <span class='no'>emon</span>$<span class='no'>Cheyenne</span>)</div><div class='output co'>#&gt;  Network attributes:
+#&gt;   vertices = 14 
+#&gt;   directed = TRUE 
+#&gt;   hyper = FALSE 
+#&gt;   loops = FALSE 
+#&gt;   multiple = FALSE 
+#&gt;   total edges= 83 
+#&gt;     missing edges= 0 
+#&gt;     non-missing edges= 83 
+#&gt; 
+#&gt;  Vertex attribute names: 
+#&gt;     Command.Rank.Score Decision.Rank.Score Formalization Location Paid.Staff Sponsorship vertex.names Volunteer.Staff 
+#&gt; 
+#&gt;  Edge attribute names: 
+#&gt;     Frequency </div><div class='input'>
+<span class='fu'>net_is_bipartite</span>(<span class='no'>ig</span>)</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'><span class='fu'>net_is_bipartite</span>(<span class='no'>nw</span>)</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
+<span class='fu'>net_is_directed</span>(<span class='no'>ig</span>)</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'><span class='fu'>net_is_directed</span>(<span class='no'>nw</span>)</div><div class='output co'>#&gt; [1] TRUE</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-          </ul>
-
-    <h2>Author</h2>
-    
-Brendan Knapp <a href='mailto:brendan.g.knapp@gmail.com'>brendan.g.knapp@gmail.com</a>
+      <li><a href="#details">Details</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

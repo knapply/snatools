@@ -3,10 +3,7 @@
 #' @param x 
 #'     `igraph` ([`igraph::graph`]) or [`tidygraph::tbl_graph`] object.
 #' @param ... 
-#'     Additional arguments on to other methods (`clean_graph`, `actor_type`).
-#' @param clean_graph 
-#'     `logical`. Whether to automatically call `clean_graph()` before converting `x`. \cr
-#'     Default: `TRUE`
+#'     Additional arguments passed on to other methods (currently `actor_type`).
 #' @param actor_type 
 #'     `logical`. For bipartite graphs, the vertex `"type"` specifying which vertices in 
 #'     `x` are to be treated as "actors" in returned `network` object. See __Details__. \cr
@@ -71,7 +68,7 @@
 #' 
 #' southern_women_ig
 #' 
-#' vrt_attrs(southern_women_ig)
+#' vrt_get_attrs(southern_women_ig)
 #' 
 #' as_network(southern_women_ig)
 #' 
@@ -81,7 +78,7 @@
 #' 
 #' southern_women_with_actors_false <- igraph::graph_from_incidence_matrix(sw_transposed)
 #' 
-#' vrt_attrs(southern_women_with_actors_false)
+#' vrt_get_attrs(southern_women_with_actors_false)
 #' 
 #' as_network(southern_women_with_actors_false, actor_type = FALSE)
 #' 
@@ -110,13 +107,13 @@ as_network.network <- function(x, ...) {
 #' 
 #' @export
 #' 
-as_network.igraph <- function(x, clean_graph = TRUE, actor_type = TRUE) {
-  if(clean_graph) {
-    x <- clean_graph(x, actor_type)
-  }
-  vert_attr_names <- vrt_attr_names(x)
-  if("vertex.names" %in% vert_attr_names){
-    if("name" %in% vert_attr_names) {
+as_network.igraph <- function(x, actor_type = TRUE) {
+  # if(clean_graph) {
+    # x <- clean_graph(x, actor_type)
+  # }
+  vrt_attr_names <- vrt_get_attr_names(x)
+  if("vertex.names" %in% vrt_attr_names){
+    if("name" %in% vrt_attr_names) {
       stop('\n`x` is an `igraph` object, but has vertex attributes "vertex.names".\n\n',
          'For `igraph` objects, the attribute name that refers to vertex names should be "name".\n\n',
          'For `network` objects, the attribute name that refers to vertex names should be "vertex.names".\n\n',
@@ -132,48 +129,90 @@ as_network.igraph <- function(x, clean_graph = TRUE, actor_type = TRUE) {
             call. = FALSE)
     }
   }
-  graph_attrs <- net_attrs(x)
-  vert_attrs <- vrt_attrs(x)
-  names(vert_attrs)[names(vert_attrs) == "name"] <- "vertex.names"
-  edge_attrs <- edg_attrs(x)
+  net_attrs <- net_get_attrs(x)
+  vrt_attrs <- vrt_get_attrs(x)
+  if("name" %in% names(vrt_attrs)) {
+    names(vrt_attrs)[names(vrt_attrs) == "name"] <- "vertex.names"
+  }
+  edg_attrs <- edg_get_attrs(x)
   el <- rep_edgelist(x)
-  
-  if("type" %in% names(vert_attrs)) {
+
+  if(any(igraph::is.loop(x))) {
+    loops_arg <- TRUE
+  } else {
+    loops_arg <- NULL
+  }
+  if(any(igraph::is.multiple(x))) {
+    multiple_arg <- TRUE
+  } else {
+    multiple_arg <- NULL
+  }
+  if("type" %in% names(vrt_attrs)) {
     if(actor_type) {
       bipartite_arg <- length(which(igraph::V(x)$type))
     } else {
       bipartite_arg <- length(which(!igraph::V(x)$type))
     }
-    vert_attrs$type <- NULL
+    # vrt_attrs$type <- NULL
+    names(vrt_attrs) <- txt_replace(names(vrt_attrs), "type", "is_actor")
   } else {
-    bipartite_arg <- FALSE
+    bipartite_arg <- NULL
   }
   
-  args <- list(n = unique(vapply(vert_attrs, length, integer(1), USE.NAMES = FALSE)),
-               igraph::is_directed(x),
+  args <- list(n = igraph::vcount(x),
+               directed = igraph::is_directed(x),
                hyper = FALSE,
-               loops = any(igraph::is.loop(x)),
-               multiple = any(igraph::is.multiple(x)),
+               loops = loops_arg,
+               multiple = multiple_arg,
                bipartite = bipartite_arg)
+  args <- Filter(length, args)
   
   out <- do.call(network::network.initialize, args)
-  
+  # `network.initialize` MAY auto create loops, multiple, bipartite, and vertex.names
+  # inspect and drop attrs not present in `x`
+  if("loops" %in% net_get_attr_names(out, drop_metadata = FALSE)) {
+    if(!"loops" %in% net_get_attr_names(x)) {
+      network::delete.vertex.attribute(out, "loops")
+      out$gal$loops <- NULL
+    }
+  }
+  # if("multiple" %in% net_get_attr_names(out, drop_metadata = FALSE)) {
+  #   if(!"multiple" %in% net_get_attr_names(x)) {
+  #     network::delete.vertex.attribute(out, "multiple")
+  #     out$gal$multiple <- NULL
+  #   }
+  # }
+  if("bipartite" %in% net_get_attr_names(out, drop_metadata = FALSE)) {
+    if(!"bipartite" %in% net_get_attr_names(x)) {
+      if(!igraph::is_bipartite(x)) {
+        network::delete.vertex.attribute(out, "bipartite")
+        out$gal$bipartite <- NULL
+      }
+    }
+  }
+  if("vertex.names" %in% vrt_get_attr_names(out)) { 
+    network::delete.vertex.attribute(out, "vertex.names")
+  }
   if(nrow(el)) {
-    network::add.edges(out, tail = el[, 1], head = el[, 2]) # assigns invisibly
-  }
-  if(length(edge_attrs)) {
-    for(e_attr in names(edge_attrs)) {
-      network::set.edge.attribute(out, e_attr, edge_attrs[[e_attr]]) # assigns invisibly
+    if(args$directed) {
+      network::add.edges(out, tail = el[, 1], head = el[, 2]) # assigns invisibly
+    } else {
+      network::add.edges(out, tail = el[, 2], head = el[, 1]) # assigns invisibly
     }
   }
-  if(length(vert_attrs)){
-    for(v_attr in names(vert_attrs)){
-      network::set.vertex.attribute(out, v_attr, vert_attrs[[v_attr]]) # assigns invisibly
+  if(length(edg_attrs)) {
+    for(e_attr in names(edg_attrs)) {
+      network::set.edge.attribute(out, e_attr, edg_attrs[[e_attr]]) # assigns invisibly
     }
   }
-  if(length(graph_attrs)){
-    for(g_attr in names(graph_attrs)) {
-      network::set.network.attribute(out, g_attr, graph_attrs[[g_attr]]) # assigns invisibly
+  if(length(vrt_attrs)){
+    for(v_attr in names(vrt_attrs)){
+      network::set.vertex.attribute(out, v_attr, vrt_attrs[[v_attr]]) # assigns invisibly
+    }
+  }
+  if(length(net_attrs)){
+    for(g_attr in names(net_attrs)) {
+      network::set.network.attribute(out, g_attr, net_attrs[[g_attr]]) # assigns invisibly
     }
   }
   
@@ -205,3 +244,4 @@ as_network.default <- function(x, ...) {
 as_network.tbl_graph <- function(x, ...) {
   as_network(as_igraph(x, ...))
 }
+

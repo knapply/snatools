@@ -21,7 +21,8 @@ Suggests:
     knitr,
     rmarkdown,
     sna,
-    testthat
+    testthat,
+    tidygraph
 RoxygenNote: 6.1.0.9000
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr

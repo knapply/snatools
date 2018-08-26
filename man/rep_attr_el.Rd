@@ -3,11 +3,17 @@
 \name{rep_attr_el}
 \alias{rep_attr_el}
 \alias{rep_attr_el.attr_adj_mat}
+\alias{rep_attr_el.igraph}
+\alias{rep_attr_el.network}
 \title{Build a graphs's edge list, using an attribute categories instead of vertex names.}
 \usage{
 rep_attr_el(x, vrt_attr)
 
 \method{rep_attr_el}{attr_adj_mat}(x, vrt_attr)
+
+\method{rep_attr_el}{igraph}(x, vrt_attr)
+
+\method{rep_attr_el}{network}(x, vrt_attr)
 }
 \description{
 Build a graphs's edge list, using an attribute categories instead of vertex names.

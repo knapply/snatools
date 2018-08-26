@@ -12,7 +12,7 @@ as_network(x, ...)
 
 \method{as_network}{network}(x, ...)
 
-\method{as_network}{igraph}(x, clean_graph = TRUE, actor_type = TRUE)
+\method{as_network}{igraph}(x, actor_type = TRUE)
 
 \method{as_network}{default}(x, ...)
 
@@ -21,10 +21,7 @@ as_network(x, ...)
 \arguments{
 \item{x}{\code{igraph} (\code{\link[igraph:graph]{igraph::graph}}) or \code{\link[tidygraph:tbl_graph]{tidygraph::tbl_graph}} object.}
 
-\item{...}{Additional arguments on to other methods (\code{clean_graph}, \code{actor_type}).}
-
-\item{clean_graph}{\code{logical}. Whether to automatically call \code{clean_graph()} before converting \code{x}. \cr
-Default: \code{TRUE}}
+\item{...}{Additional arguments passed on to other methods (currently \code{actor_type}).}
 
 \item{actor_type}{\code{logical}. For bipartite graphs, the vertex \code{"type"} specifying which vertices in
 \code{x} are to be treated as "actors" in returned \code{network} object. See \strong{Details}. \cr}
@@ -92,7 +89,7 @@ southern_women_ig <- igraph::graph_from_incidence_matrix(southern_women_matrix)
 
 southern_women_ig
 
-vrt_attrs(southern_women_ig)
+vrt_get_attrs(southern_women_ig)
 
 as_network(southern_women_ig)
 
@@ -102,7 +99,7 @@ sw_transposed <- t(southern_women_matrix)
 
 southern_women_with_actors_false <- igraph::graph_from_incidence_matrix(sw_transposed)
 
-vrt_attrs(southern_women_with_actors_false)
+vrt_get_attrs(southern_women_with_actors_false)
 
 as_network(southern_women_with_actors_false, actor_type = FALSE)
 

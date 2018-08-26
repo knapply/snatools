@@ -53,7 +53,7 @@
 #'   head()
 #' 
 #' @export
-rep_edgelist <- function(x, use_names = FALSE) {
+rep_edgelist <- function(x, ...) {
   UseMethod("rep_edgelist")
 }
 
@@ -75,22 +75,29 @@ rep_edgelist.igraph <- function(ig, use_names = FALSE) {
 #' 
 #' @export
 #' 
-rep_edgelist.network <- function(nw, use_names = FALSE) {
-  outl <- lapply(nw$mel, `[[`, "outl")
+rep_edgelist.network <- function(x, use_names = FALSE) {
+  # out <- network::as.matrix.network.edgelist(x)
+  # attr(out, "n") <- NULL
+  # attr(out, "vnames") <- NULL
+  # out
+  outl <- lapply(x$mel, `[[`, "outl")
   outl <- unlist(outl)
-  inl <- lapply(nw$mel, `[[`, "inl")
+  inl <- lapply(x$mel, `[[`, "inl")
   inl <- unlist(inl)
-  if(nw$gal$directed) {
+  if(x$gal$directed) {
     out <- cbind(outl, inl)
     colnames(out) <- c("from", "to")
   } else {
     out <- cbind(inl, outl)
     colnames(out) <- c("vert1", "vert2")
   }
+  if(is.integer(out)) {
+    out <- apply(out, 2, as.double)
+  }
   if(!use_names) {
     return(out)
   }
-  vert_names <- vapply(nw$val, function(x) x[["vertex.names"]], character(1))
+  vert_names <- vapply(x$val, function(x) x[["vertex.names"]], character(1))
   matrix(vert_names[out], ncol = 2, dimnames = list(NULL, colnames(out)))
 }
 
@@ -102,6 +109,13 @@ rep_edgelist.network <- function(nw, use_names = FALSE) {
 #' @param ...
 #' 
 #' @return `matrix` or `dgCMatrix`
+#' 
+#' @examples 
+#' library(snatools)
+#' 
+#' data("sampson", package = "ergm")
+#' 
+#' rep_adjacency_matrix(samplike)
 #' 
 #' @export
 #' 
@@ -121,16 +135,13 @@ rep_adjacency_matrix.igraph <- function(x, edg_attr = NULL, sparse = FALSE, ...)
 #' 
 #' @export
 #' 
-rep_adjacency_matrix.network <- function(x, edg_attr = NULL, sparse = FALSE, ...) {
+rep_adjacency_matrix.network <- function(x, edg_attr = NULL, ...) {
   if(!length(edg_attr)) {
     out <- network::as.matrix.network.adjacency(x, ...)
   } else {
     out <- network::as.matrix.network.adjacency(x, attrname = edg_attr, ...)
   }
-  if(!sparse) {
-    return(out)
-  }
-  Matrix::Matrix(out)
+  out
 }
 
 #' rep_two_mode_matrix
@@ -210,7 +221,10 @@ rep_attr_adj_mat <- function(x, vrt_attr) {
 #' @export
 #' 
 rep_attr_adj_mat.igraph <- function(x, vrt_attr) {
-  attrs <- igraph::vertex_attr(x, name = vrt_attr)
+  attrs <- vrt_get_attr(x, vrt_attr = vrt_attr)
+  if(is.null(attrs)) {
+    stop("No vertex attributes named `vrt_attr` found.")
+  }
   # attrs <- network::get.vertex.attribute(x, vrt_attr)
   out <- rep_adjacency_matrix(x)
   rownames(out) <- attrs
@@ -225,8 +239,8 @@ rep_attr_adj_mat.igraph <- function(x, vrt_attr) {
 #' @export
 #' 
 rep_attr_adj_mat.network <- function(x, vrt_attr) {
-  attrs <- unlist(lapply(lapply(x$val, `[`), `[[`, vrt_attr))
-  # attrs <- network::get.vertex.attribute(x, vrt_attr)
+  # attrs <- unlist(lapply(lapply(x$val, `[`), `[[`, vrt_attr))
+  attrs <- vrt_get_attr(x, vrt_attr)
   out <- rep_adjacency_matrix(x)
   rownames(out) <- attrs
   colnames(out) <- attrs
@@ -259,8 +273,12 @@ rep_attr_el.attr_adj_mat <- function(x, vrt_attr) {
   out
 }
 
-rep_attr_el.network <- function(x, vrt_attr) {
-  attrs <- network::get.vertex.attribute(x, vrt_attr)
+#' @rdname rep_attr_el
+#' 
+#' @export
+#'
+rep_attr_el.igraph <- function(x, vrt_attr) {
+  attrs <- vrt_get_attr(x, vrt_attr)
   el <- rep_edgelist(x)
   out <- matrix(attrs[el], ncol = 2)
   colnames(out) <- c("from", "to")
@@ -269,8 +287,19 @@ rep_attr_el.network <- function(x, vrt_attr) {
   out
 }
 
-
-
+#' @rdname rep_attr_el
+#' 
+#' @export
+#'
+rep_attr_el.network <- function(x, vrt_attr) {
+  attrs <- vrt_get_attr(x, vrt_attr)
+  el <- rep_edgelist(x)
+  out <- matrix(attrs[el], ncol = 2)
+  colnames(out) <- c("from", "to")
+  class(out) <- c("attr_el", "matrix")
+  
+  out
+}
 
 #' Build a network/graph's mixing matrix.
 #' 
@@ -289,23 +318,14 @@ rep_mixing_matrix <- function(x, vrt_attr, drop_loops = FALSE) {
 #' @export
 #' 
 rep_mixing_matrix.igraph <- function(x, vrt_attr, drop_loops = FALSE) {
-  if(!is.character(vrt_attr)) {
-    stop("`vrt_attr` must be a `character`.", call. = FALSE)
-  }
-  if(!vrt_attr %in% igraph::vertex_attr_names(x)) {
-    stop("`vrt_attr` is not a vertex attribute in `x`", call. = FALSE)
-  }
   if(drop_loops) {
-    x <- igraph::simplify(x, remove.multiple = FALSE, remove.loops = TRUE)
+    x <- drop_loops(x)
   }
-  attrs <- igraph::vertex_attr(x, vrt_attr)
+  attrs <- vrt_get_attr(x, vrt_attr)
   cats <- sort(unique(attrs))
-  el <- igraph::as_edgelist(x, names = FALSE)
+  el <- rep_edgelist(x)
   el_list <- list(el[, 1], el[, 2])
-  init <- lapply(el_list, function(x) {
-    factor(attrs[x], levels = cats)
-  })
-  # table(from = init[[1]], to = init[[2]])
+  
   from <- factor(attrs[el[, 1]], levels = cats)
   to <- factor(attrs[el[, 2]], levels = cats)
   out <- table(from, to)
@@ -319,21 +339,14 @@ rep_mixing_matrix.igraph <- function(x, vrt_attr, drop_loops = FALSE) {
 #' @export
 #' 
 rep_mixing_matrix.network <- function(x, vrt_attr, drop_loops = FALSE) {
-  if(!is.character(vrt_attr)) {
-    stop("`vrt_attr` must be a `character`.", call. = FALSE)
-  }
-  if(!vrt_attr %in% vrt_attr_names(x)) {
-    stop("`vrt_attr` is not a vertex attribute in `x`", call. = FALSE)
-  }
   if(drop_loops) {
-    network::set.network.attribute(x, "loops", value = FALSE)
+    x <- drop_loops(x)
   }
-  attrs <- network::get.vertex.attribute(x, vrt_attr)
+  attrs <- vrt_get_attr(x, vrt_attr)
   cats <- sort(unique(attrs))
-  el <- network::as.matrix.network.edgelist(x)
-  if(nrow(el) == 0L) {
-    message("`x` does not have any edges.")
-  }
+  el <- rep_edgelist(x)
+  el_list <- list(el[, 1], el[, 2])
+  
   from <- factor(attrs[el[, 1]], levels = cats)
   to <- factor(attrs[el[, 2]], levels = cats)
   out <- table(from, to)

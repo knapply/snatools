@@ -1,7 +1,6 @@
 context("Round trip conversion: simple graph")
 
-zachary <- igraph::graph("Zachary") %>% 
-  clean_graph()
+zachary <- igraph::graph("Zachary")
 
 test_that("simple igraph makes round trip unchanged", {
   expect_true(zachary %==% as_igraph(as_network(zachary)))
@@ -9,10 +8,8 @@ test_that("simple igraph makes round trip unchanged", {
 
 context("Round trip conversion: undirected graphs")
 
-ig_undir <- snatools:::build_test_graph("ig", direct = FALSE) %>% 
-  clean_graph()
-nw_undir <- snatools:::build_test_graph("nw", direct = FALSE) %>% 
-  clean_graph()
+ig_undir <- snatools:::build_test_graph("ig", direct = FALSE)
+nw_undir <- snatools:::build_test_graph("nw", direct = FALSE)
 
 test_that("undirected igraph makes round trip unchanged", {
   expect_true(ig_undir %==% as_igraph(as_network(ig_undir)))
@@ -24,10 +21,8 @@ test_that("undirected network makes round trip unchanged", {
 
 context("Round trip conversion: directed graphs")
 
-ig_dir <- snatools:::build_test_graph("ig") %>% 
-  clean_graph()
-nw_dir <- snatools:::build_test_graph("nw") %>% 
-  clean_graph()
+ig_dir <- snatools:::build_test_graph("ig")
+nw_dir <- snatools:::build_test_graph("nw")
 
 test_that("undirected igraph makes round trip unchanged", {
   expect_true(ig_dir %==% as_igraph(as_network(ig_dir)))
@@ -63,17 +58,37 @@ sw_matrix <- matrix(
       "SYLVIA", "NORA", "HELEN", "DOROTHY", "OLIVIA", "FLORA")))
 
 ig_bipart <- igraph::graph_from_incidence_matrix(sw_matrix) %>% 
-  igraph::permute.vertices(sample(igraph::V(.))) %>% 
-  clean_graph()
+  igraph::permute.vertices(sample(igraph::V(.))) 
 
 nw_bipart <- network::as.network.matrix(t(sw_matrix), bipartite = TRUE) %>% 
-  clean_graph()
+  bip_clarify_actors()
+
+nw_bipart_swap <- network::as.network.matrix(sw_matrix, bipartite = TRUE) %>% 
+  bip_swap_modes()
+
+random_attr <- sample(seq_len(nw_bipart$gal$n))
+
+nw_bipart_random_attrs <- network::as.network.matrix(t(sw_matrix), bipartite = TRUE) %>% 
+  network::set.vertex.attribute("test_attr", random_attr) %>% 
+  bip_clarify_actors()
+
+random_attr_swap <- c(random_attr[(nw_bipart_random_attrs$gal$bipartite + 1):nw_bipart_random_attrs$gal$n],
+                      random_attr[1:nw_bipart_random_attrs$gal$bipartite])
+
+nw_bipart_swap_random_attrs <- network::as.network.matrix(sw_matrix, bipartite = TRUE) %>% 
+  network::set.vertex.attribute("test_attr", random_attr_swap) %>% 
+  bip_swap_modes()
+
+
  
 test_that("bipartite igraph makes round trip unchanged", {
   expect_true(ig_bipart %==% as_igraph(as_network(ig_bipart)))
 })
 
-test_that("bipartite network makes round trip unchanged with corrected `actor_type`", {
+test_that("bipartite network (w/ is_actor attr) makes round trip unchanged", {
   expect_true(nw_bipart %==% as_network(as_igraph(nw_bipart)))
 })
 
+test_that("bipartite network + bip_swap_modes()", {
+  expect_true(nw_bipart_random_attrs %==% nw_bipart_swap_random_attrs)
+})

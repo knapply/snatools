@@ -11,8 +11,7 @@ rep_adjacency_matrix(x, ...)
 \method{rep_adjacency_matrix}{igraph}(x, edg_attr = NULL,
   sparse = FALSE, ...)
 
-\method{rep_adjacency_matrix}{network}(x, edg_attr = NULL,
-  sparse = FALSE, ...)
+\method{rep_adjacency_matrix}{network}(x, edg_attr = NULL, ...)
 }
 \arguments{
 \item{...}{}
@@ -22,4 +21,12 @@ rep_adjacency_matrix(x, ...)
 }
 \description{
 Build a network's adjacency matrix representation
+}
+\examples{
+library(snatools)
+
+data("sampson", package = "ergm")
+
+rep_adjacency_matrix(samplike)
+
 }

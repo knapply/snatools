@@ -1,3 +1,41 @@
+
+
+clean_network_metadata <- function(x) {
+  if(class(x) != "network") {
+    stop("`fill_network_metadata()` is only applicable to `network` objects.")
+  }
+  if(is.null(x$gal$bipartite)) {
+    network::set.network.attribute(x, "bipartite", network::is.bipartite(x))
+  }
+  if(is.null(x$gal$loops)) {
+    network::set.network.attribute(x, "loops", network::has.loops(x))
+  }
+  if(is.null(x$gal$hyper)) {
+    network::set.network.attribute(x, "hyper", network::is.hyper(x))
+  }
+  if(is.null(x$gal$multiple)) {
+    if(is.null(network::is.multiplex(x))) {
+      network::set.network.attribute(x, "multiple", FALSE)
+    } else {
+    network::set.network.attribute(x, "multiple", network::is.multiplex(x))
+    }
+  }
+  net_attrs <- net_get_attrs(x, drop_metadata = FALSE)
+  net_attrs <- net_attrs[order(names(net_attrs))]
+  for(i in names(net_attrs)) {
+    network::delete.network.attribute(x, i)
+    x$gal[[i]] <- NULL
+  }
+  for(i in seq_along(net_attrs)) {
+    network::set.network.attribute(x, names(net_attrs)[[i]], net_attrs[[i]])
+  }
+  x
+}
+
+#' Permute matrix columns and rows.
+#' 
+#' @export
+#' 
 permute_matrix <- function(x, out_class = "matrix") {
   n_row <- nrow(x)
   n_col <- ncol(x)
@@ -9,6 +47,23 @@ permute_matrix <- function(x, out_class = "matrix") {
   
   out
 }
+
+# permute_matrix <- function(x, out_class = "matrix") {
+#   X <- Matrix::Matrix(x)
+#   n_row <- nrow(x)
+#   n_col <- ncol(x)
+#   row_seq <- sample(seq_len(nrow(x)))
+#   out <- matrix(x[row_seq, row_seq], nrow = n_row, ncol = n_col)
+#   # X[row_seq, row_seq]
+#   matrix(x[row_seq, row_seq], nrow = n_row, ncol = n_col)
+#   
+#   rownames(out) <- rownames(x)
+#   colnames(out) <- colnames(x)
+#   class(out) <- out_class
+#   
+#   out
+# }
+
 
 #' @export
 #' 

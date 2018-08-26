@@ -6,11 +6,11 @@
 \alias{rep_edgelist.network}
 \title{Build a networks's edge list representation.}
 \usage{
-rep_edgelist(x, use_names = FALSE)
+rep_edgelist(x, ...)
 
 \method{rep_edgelist}{igraph}(ig, use_names = FALSE)
 
-\method{rep_edgelist}{network}(nw, use_names = FALSE)
+\method{rep_edgelist}{network}(x, use_names = FALSE)
 }
 \arguments{
 \item{x}{An \code{igraph} or \code{network} object.}

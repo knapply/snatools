@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Clean a graph object's internals and standardize attributes. — clean_graph • snatools</title>
+<title>Permute matrix columns and rows. — permute_matrix • snatools</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Clean a graph object's internals and standardize attributes. — clean_graph" />
+<meta property="og:title" content="Permute matrix columns and rows. — permute_matrix" />
 
-<meta property="og:description" content="Clean a graph object's internals and standardize attributes." />
+<meta property="og:description" content="Permute matrix columns and rows." />
 
 <meta property="og:image" content="https://knapply.github.io/snatools/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -127,84 +127,25 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Clean a graph object's internals and standardize attributes.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/clean_graph.R'><code>R/clean_graph.R</code></a></small>
-    <div class="hidden name"><code>clean_graph.Rd</code></div>
+    <h1>Permute matrix columns and rows.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
+    <div class="hidden name"><code>permute_matrix.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Clean a graph object's internals and standardize attributes.</p>
+    <p>Permute matrix columns and rows.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>clean_graph</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>permute_matrix</span>(<span class='no'>x</span>, <span class='kw'>out_class</span> <span class='kw'>=</span> <span class='st'>"matrix"</span>)</pre>
+        
 
-<span class='co'># S3 method for igraph</span>
-<span class='fu'>clean_graph</span>(<span class='no'>x</span>, <span class='kw'>actor_type</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
-<span class='co'># S3 method for network</span>
-<span class='fu'>clean_graph</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>x</th>
-      <td><p>An <code>igraph</code> or <code>network</code> object.</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A cleaned version of <code>x</code> with safe attributes.</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='as_igraph.html'>as_igraph()</a></code>, <code><a href='as_network.html'>as_network()</a></code></p></div>
-    
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>snatools</span>)
-
-<span class='fu'>data</span>(<span class='st'>"Koenigsberg"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"igraphdata"</span>)
-
-<span class='no'>Koenigsberg</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='vrt_attrs.html'>vrt_attrs</a></span>()</div><div class='output co'>#&gt; $name
-#&gt; [1] "Altstadt-Loebenicht" "Kneiphof"            "Vorstadt-Haberberg" 
-#&gt; [4] "Lomse"              
-#&gt; 
-#&gt; $Euler_letter
-#&gt; [1] "B" "A" "C" "D"
-#&gt; </div><div class='input'>
-<span class='no'>Koenigsberg</span> <span class='kw'>%&gt;%</span> <span class='fu'>clean_graph</span>()</div><div class='output co'>#&gt; IGRAPH 227bd5e UN-- 4 7 -- The seven bidges of Koenigsberg
-#&gt; + attr: loops (g/l), name (g/c), Euler_letter (v/c), name (v/c),
-#&gt; | Euler_letter (e/c), name (e/c)
-#&gt; + edges from 227bd5e (vertex names):
-#&gt; [1] Altstadt-Loebenicht--Kneiphof          
-#&gt; [2] Altstadt-Loebenicht--Kneiphof          
-#&gt; [3] Altstadt-Loebenicht--Lomse             
-#&gt; [4] Kneiphof           --Lomse             
-#&gt; [5] Vorstadt-Haberberg --Lomse             
-#&gt; [6] Kneiphof           --Vorstadt-Haberberg
-#&gt; [7] Kneiphof           --Vorstadt-Haberberg</div><div class='input'>
-
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
-    <h2>Author</h2>
-    
-Brendan Knapp <a href='mailto:brendan.g.knapp@gmail.com'>brendan.g.knapp@gmail.com</a>
+                </ul>
 
   </div>
 </div>

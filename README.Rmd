@@ -2,6 +2,8 @@
 output: 
   github_document:
     html_preview: false
+editor_options: 
+  chunk_output_type: console
 ---
 
 <!-- README.Rmd generates README.md. -->
@@ -45,7 +47,23 @@ library(snatools)
 ## Development Test Results
 
 ```{r}
-devtools::test()
+printed <- capture.output(res <- as.data.frame(devtools::test()))
 ```
+
+```{r}
+res$success <- ifelse(res$failed == 0, TRUE, FALSE)
+
+cat("Test Success Rate:", scales::percent(mean(as.numeric(res$success))))
+```
+
+
+```{r}
+res$test <- txt_replace_all(res$test, "\\s+", " ")
+res$success <- paste0("`", res$success, "`")
+
+res[, c("context", "success")] %>% 
+  knitr::kable(caption = "Test Details")
+```
+
 
 

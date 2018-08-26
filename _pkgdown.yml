@@ -23,12 +23,22 @@ reference:
     - starts_with("as_igraph")
     - starts_with("as_network")
   
-  - title: Attributes
-    desc: Obtain network, vertex, and edge attributes in consistent formats.
+  - title: Vertices
+    desc: Operations targeting vertices.
     contents:
-    - starts_with("edg_")
-    - starts_with("net_")
-    - starts_with("vrt_")
+    - starts_with("vrt_get_")
+    
+  - title: Edges
+    desc: Operations targeting edges.
+    contents:
+    - starts_with("edg_get_")
+    - ends_with("parallel")
+  
+  - title: Network
+    desc: Operations targeting graph-level attributes and metadata.
+    contents:
+    - starts_with("net_get_")
+    - starts_with("net_is_")
 
   - title: Representations
     desc: Construct various network representations.
@@ -40,6 +50,12 @@ reference:
     - rep_two_mode_matrix
     - rep_biadjacency_matrix
     - rep_mixing_matrix
+  
+  - title: Bipartite
+    desc: Operations to assist bipartite network handling.
+    contents:
+    - bip_clarify_actors
+    - bip_swap_modes
     
   - title: Homophily
     desc: Procedures addressing homophily and mixing patterns.
@@ -56,10 +72,10 @@ reference:
     - qap_cor
     - qap_ei
 
-  - title: Carpentry
-    desc: Clean network internals to enforce stricter attribute data types and accurate metadata.
-    contents:
-    - clean_graph
+#  - title: Carpentry
+#    desc: Clean network internals to enforce stricter attribute data types and accurate metadata.
+#    contents:
+#    - clean_graph
     
   - title: Visualization
     contents:
