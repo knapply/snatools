@@ -116,242 +116,104 @@
 <div id="development-test-results" class="section level2">
 <h2 class="hasAnchor">
 <a href="#development-test-results" class="anchor"></a>Development Test Results</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">printed &lt;-<span class="st"> </span><span class="kw">capture.output</span>(res &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/test">test</a></span>()))</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res<span class="op">$</span>success &lt;-<span class="st"> </span><span class="kw">ifelse</span>(res<span class="op">$</span>failed <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)
-
-<span class="kw">cat</span>(<span class="st">"Test Success Rate:"</span>, scales<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/scales/topics/number_format">percent</a></span>(<span class="kw">mean</span>(<span class="kw">as.numeric</span>(res<span class="op">$</span>success))))
-<span class="co">#&gt; Test Success Rate: 100%</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res<span class="op">$</span>test &lt;-<span class="st"> </span><span class="kw"><a href="reference/character-manipulation-tools.html">txt_replace_all</a></span>(res<span class="op">$</span>test, <span class="st">"</span><span class="ch">\\</span><span class="st">s+"</span>, <span class="st">" "</span>)
-res<span class="op">$</span>success &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">"`"</span>, res<span class="op">$</span>success, <span class="st">"`"</span>)
-
-res[, <span class="kw">c</span>(<span class="st">"context"</span>, <span class="st">"success"</span>)] <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/knitr/topics/kable">kable</a></span>(<span class="dt">caption =</span> <span class="st">"Test Details"</span>)</code></pre></div>
 <table class="table table">
-<caption>Test Details</caption>
 <thead><tr class="header">
 <th align="left">context</th>
-<th align="left">success</th>
+<th align="right"># of tests</th>
+<th align="left">All Successful</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">Undirected Edge Lists</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="even">
-<td align="left">Undirected Edge Lists</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="odd">
-<td align="left">Undirected Edge Lists</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="even">
-<td align="left">Undirected Edge Lists</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="odd">
-<td align="left">Undirected Edge Lists</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="even">
-<td align="left">Undirected Edge Lists</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="odd">
-<td align="left">Undirected Edge Lists</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="even">
-<td align="left">Undirected Edge Lists</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="odd">
-<td align="left">Directed Edge Lists</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="even">
-<td align="left">Directed Edge Lists</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="odd">
-<td align="left">Directed Edge Lists</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="even">
-<td align="left">Directed Edge Lists</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="odd">
-<td align="left">Directed Edge Lists</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="even">
-<td align="left">Directed Edge Lists</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="odd">
-<td align="left">Directed Edge Lists</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="even">
-<td align="left">Directed Edge Lists</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="odd">
-<td align="left">Undirected Adjacency Matrices</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="even">
-<td align="left">Undirected Adjacency Matrices</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="odd">
-<td align="left">Undirected Adjacency Matrices</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="even">
-<td align="left">Undirected Adjacency Matrices</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="odd">
-<td align="left">Undirected Adjacency Matrices</td>
-<td align="left"><code>TRUE</code></td>
+<td align="left">Directed <code>attr_el</code>s from <code>attr_adj_mats</code>
+</td>
+<td align="right">2</td>
+<td align="left">TRUE</td>
 </tr>
 <tr class="even">
 <td align="left">Directed Adjacency Matrices</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="odd">
-<td align="left">Directed Adjacency Matrices</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="even">
-<td align="left">Directed Adjacency Matrices</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="odd">
-<td align="left">Directed Adjacency Matrices</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="even">
-<td align="left">Directed Adjacency Matrices</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="odd">
-<td align="left">Undirected Attribute Edge Lists</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="even">
-<td align="left">Undirected Attribute Edge Lists</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="odd">
-<td align="left">Directed Attribute Edge Lists</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="even">
-<td align="left">Directed Attribute Edge Lists</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="odd">
-<td align="left">Undirected Attribute Adjacency Matrices</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="even">
-<td align="left">Undirected Attribute Adjacency Matrices</td>
-<td align="left"><code>TRUE</code></td>
+<td align="right">5</td>
+<td align="left">TRUE</td>
 </tr>
 <tr class="odd">
 <td align="left">Directed Attribute Adjacency Matrices</td>
-<td align="left"><code>TRUE</code></td>
+<td align="right">2</td>
+<td align="left">TRUE</td>
 </tr>
 <tr class="even">
-<td align="left">Directed Attribute Adjacency Matrices</td>
-<td align="left"><code>TRUE</code></td>
+<td align="left">Directed Attribute Edge Lists</td>
+<td align="right">2</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">Directed Edge Lists</td>
+<td align="right">8</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Directed Mixing Matrices</td>
+<td align="right">2</td>
+<td align="left">TRUE</td>
 </tr>
 <tr class="odd">
 <td align="left">Undirected <code>attr_el</code>s from <code>attr_adj_mats</code>
 </td>
-<td align="left"><code>TRUE</code></td>
+<td align="right">2</td>
+<td align="left">TRUE</td>
 </tr>
 <tr class="even">
-<td align="left">Undirected <code>attr_el</code>s from <code>attr_adj_mats</code>
-</td>
-<td align="left"><code>TRUE</code></td>
+<td align="left">Undirected Adjacency Matrices</td>
+<td align="right">5</td>
+<td align="left">TRUE</td>
 </tr>
 <tr class="odd">
-<td align="left">Directed <code>attr_el</code>s from <code>attr_adj_mats</code>
-</td>
-<td align="left"><code>TRUE</code></td>
+<td align="left">Undirected Attribute Adjacency Matrices</td>
+<td align="right">2</td>
+<td align="left">TRUE</td>
 </tr>
 <tr class="even">
-<td align="left">Directed <code>attr_el</code>s from <code>attr_adj_mats</code>
-</td>
-<td align="left"><code>TRUE</code></td>
+<td align="left">Undirected Attribute Edge Lists</td>
+<td align="right">2</td>
+<td align="left">TRUE</td>
 </tr>
 <tr class="odd">
+<td align="left">Undirected Edge Lists</td>
+<td align="right">8</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
 <td align="left">Undirected Mixing Matrices</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="even">
-<td align="left">Undirected Mixing Matrices</td>
-<td align="left"><code>TRUE</code></td>
+<td align="right">2</td>
+<td align="left">TRUE</td>
 </tr>
 <tr class="odd">
-<td align="left">Directed Mixing Matrices</td>
-<td align="left"><code>TRUE</code></td>
+<td align="left">Round trip conversion: bipartite graphs</td>
+<td align="right">3</td>
+<td align="left">TRUE</td>
 </tr>
 <tr class="even">
-<td align="left">Directed Mixing Matrices</td>
-<td align="left"><code>TRUE</code></td>
+<td align="left">Round trip conversion: directed graphs</td>
+<td align="right">2</td>
+<td align="left">TRUE</td>
 </tr>
 <tr class="odd">
 <td align="left">Round trip conversion: simple graph</td>
-<td align="left"><code>TRUE</code></td>
+<td align="right">1</td>
+<td align="left">TRUE</td>
 </tr>
 <tr class="even">
 <td align="left">Round trip conversion: undirected graphs</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="odd">
-<td align="left">Round trip conversion: undirected graphs</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="even">
-<td align="left">Round trip conversion: directed graphs</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="odd">
-<td align="left">Round trip conversion: directed graphs</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="even">
-<td align="left">Round trip conversion: bipartite graphs</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="odd">
-<td align="left">Round trip conversion: bipartite graphs</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="even">
-<td align="left">Round trip conversion: bipartite graphs</td>
-<td align="left"><code>TRUE</code></td>
+<td align="right">2</td>
+<td align="left">TRUE</td>
 </tr>
 <tr class="odd">
 <td align="left">E-I Index: directed</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="even">
-<td align="left">E-I Index: directed</td>
-<td align="left"><code>TRUE</code></td>
-</tr>
-<tr class="odd">
-<td align="left">E-I Index: undirected</td>
-<td align="left"><code>TRUE</code></td>
+<td align="right">2</td>
+<td align="left">TRUE</td>
 </tr>
 <tr class="even">
 <td align="left">E-I Index: undirected</td>
-<td align="left"><code>TRUE</code></td>
+<td align="right">2</td>
+<td align="left">TRUE</td>
 </tr>
 </tbody>
 </table>
