@@ -14,8 +14,10 @@ Installation
 # Install {devtools} if you haven't already.
 # install.packages("devtools")
 
+require(devtools)
+
 # Install {snatools} from GitHub.
-devtools::install_github("knapply/snatools")
+install_github("knapply/snatools")
 
 # Load {snatools}.
 library(snatools)
@@ -26,20 +28,6 @@ Development Test Results
 
 ``` r
 printed <- capture.output(res <- as.data.frame(devtools::test()))
-#> Loading snatools
-#> Loading required package: testthat
-#> 
-#> Attaching package: 'testthat'
-#> The following object is masked from 'package:dplyr':
-#> 
-#>     matches
-#> The following object is masked from 'package:purrr':
-#> 
-#>     is_null
-#> The following object is masked from 'package:igraph':
-#> 
-#>     compare
-#> Testing snatools
 ```
 
 ``` r

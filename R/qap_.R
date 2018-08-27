@@ -104,35 +104,30 @@ print.qap_cor <- function(x) {
   cat("\n")
   cat("# permuted rhos >= observed rho: ", x$n_greater, " (", 
       round(x$prop_greater * 100, 2), "%)\n", sep = "")
-  cat("# permuted rhos < observed rho:  ", x$n_lesser, " (", 
+  cat("# permuted rhos <= observed rho:  ", x$n_lesser, " (", 
       round(x$prop_lesser * 100, 2), "%)\n", sep = "")
 }
 
+
+
 #' @export
-#' 
-autoplot.qap_cor <- function(x, leave_bare = FALSE) {
-  if (!requireNamespace("ggplot2", quietly = TRUE)) {
-    stop('The {ggplot2} package is required for this functionality.', call. = FALSE)
-  }
+autoplot.qap_cor <- function(x) {
+  check_ggplot()
+  
   df <- data.frame(perm_rho = x$permuted_rhos)
   out <- ggplot2::ggplot(df) +
     ggplot2::stat_density(ggplot2::aes(perm_rho), fill = "orange", alpha = 0.5) +
-    ggplot2::geom_vline(ggplot2::aes(xintercept = x$observed_rho, 
-                                     color = "Observed Correlation")) +
-    ggplot2::scale_x_continuous(limits = c(-1, 1)) +
-    ggplot2::guides(color = guide_legend(NULL))
-  if(leave_bare) {
-    return(out)
-  }
-  out + 
-    ggplot2::theme_minimal(12, "serif") +
-    ggplot2::theme(plot.caption = ggplot2::element_text("mono"), 
-                   legend.position = "top") +
+    ggplot2::geom_vline(ggplot2::aes(xintercept = x$observed_rho, color = "Observed Correlation")) +
+    ggplot2::guides(color = ggplot2::guide_legend(NULL)) +
+    ggplot2::theme(plot.caption = ggplot2::element_text("mono"), legend.position = "top") +
     ggplot2::labs(x = paste("Correlations of Permuted Matrices"), y = "Density",
-                  title = "QAP Correlation", 
-                  subtitle = paste("Observed Correlation:", round(x$observed_rho, 3)),
-                  caption = paste("Iterations:", scales::comma(x$iterations)))
-    
+         title = "QAP Correlation", 
+         subtitle = paste("Observed Correlation:", round(x$observed_rho, 3)),
+         caption = paste("Iterations:", scales::comma(x$iterations))) +
+    scale_x_ratio() +
+    theme_sna()
+  
+  out
 }
 
 

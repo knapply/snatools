@@ -154,10 +154,11 @@ as_igraph.ucinet <- function(x, ...) {
 #' @rdname as_igraph
 #' 
 #' @export
-#' 
-as_igraph.tbl_graph <- function(x) {
-  attributes(x) <- NULL
-  class(x) <- "igraph"
-  x
+as_igraph.tbl_graph <- function(x, ...) {
+  if(!requireNamespace("tidygraph", quietly = TRUE)) {
+    stop('The `tidygraph` package is required for this functionality. 
+          Install it via `install.packages("tidygraph")`', call. = FALSE)
+  }
+  tidygraph::as.igraph(x, ...)
 }
 

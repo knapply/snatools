@@ -5,10 +5,15 @@
 \alias{edg_get_attrs.igraph}
 \alias{edg_get_attrs.network}
 \alias{edg_get_attrs_df}
+\alias{edg_get_attrs_df.igraph}
+\alias{edg_get_attrs_df.network}
 \alias{edg_get_attr}
+\alias{edg_get_attr.igraph}
 \alias{edg_get_attr.network}
 \alias{edg_get_attr_names}
-\title{Edge Attributes}
+\alias{edg_get_attr_names.igraph}
+\alias{edg_get_attr_names.network}
+\title{Extract Edge Attributes}
 \usage{
 edg_get_attrs(x, ...)
 
@@ -16,13 +21,23 @@ edg_get_attrs(x, ...)
 
 \method{edg_get_attrs}{network}(x, ignore_na = TRUE)
 
-edg_get_attrs_df(x, try_tibble = TRUE, ...)
+edg_get_attrs_df(x, ...)
+
+\method{edg_get_attrs_df}{igraph}(x, try_tibble = TRUE, ...)
+
+\method{edg_get_attrs_df}{network}(x, try_tibble = TRUE, ...)
 
 edg_get_attr(x, edg_attr, ...)
 
+\method{edg_get_attr}{igraph}(x, edg_attr, ...)
+
 \method{edg_get_attr}{network}(x, edg_attr, ignore_na = TRUE, ...)
 
-edg_get_attr_names(x, ignore_na = TRUE)
+edg_get_attr_names(x, ...)
+
+\method{edg_get_attr_names}{igraph}(x)
+
+\method{edg_get_attr_names}{network}(x, ignore_na = TRUE)
 }
 \arguments{
 \item{x}{A graph object.}
@@ -43,7 +58,8 @@ Default: \code{TRUE}}
 A named \code{list}, \code{vector}, \code{data.frame}, or \code{\link[tibble:tibble]{tibble::tibble}}. See Details.
 }
 \description{
-Extract edge attributes in a variety of formats.
+Extract edge attributes in a variety of formats consistent across
+\code{igraph} and \code{network} objects.
 }
 \details{
 \itemize{
@@ -51,20 +67,25 @@ Extract edge attributes in a variety of formats.
 }
 
 \itemize{
-\item \code{edg_get_attrs_df} is a convenience wrapper around \code{edg_get_attrs()} that returns a
+\item \code{edg_get_attrs_df()} is a convenience wrapper around \code{edg_get_attrs()} that returns a
 \code{data.frame}.
 \itemize{
 \item \code{stringsAsFactors} is \emph{always} \code{FALSE}.
-\item If available, \code{\link[tibble:as_tibble]{tibble::as_tibble()}} is called to return a \code{tbl_df} instead.
+\item If \code{try_tibble} is \code{TRUE} and the \code{tibble} package is available, a
+\code{\link[tibble:tibble]{tibble::tibble}} is returned.
 }
 }
 
 \itemize{
-\item \code{edg_get_attr} extracts the single edge attribute specified by \code{edg_attr} as a \code{vector}.
+\item \code{edg_get_attr()} extracts the single edge attribute specified by \code{edg_attr} as a \code{vector}.
 }
 
 \itemize{
-\item \code{edg_get_attr_names} extract the names of vertex attributes as a \code{character} \code{vector}.
+\item \code{edg_get_attr_names()} extract the names of vertex attributes as a \code{character} \code{vector}.
+\itemize{
+\item \code{edg_get_attr_names()} differs from \code{network::list.edge.attributes()}, which
+sorts attribute names alphabetically.
+}
 }
 }
 \examples{
@@ -76,22 +97,21 @@ data("enron", package = "igraphdata")
 data("sampson", package = "ergm")
 (nw <- samplike)
 
-edg_get_attr_names(ig)
-edg_get_attr_names(nw)
-
 edg_get_attrs(ig) \%>\% lapply(head)
 edg_get_attrs(nw)
 
 edg_get_attrs_df(ig)
 edg_get_attrs_df(nw)
 
-edg_get_attr(ig, edg_attr = "Time") \%>\% head()
-edg_get_attr(nw, edg_attr = "nominations")
-
 }
 \seealso{
-\code{\link[igraph:edge_attr]{igraph::edge_attr()}}, \code{\link[igraph:edge_attr_names]{igraph::edge_attr_names()}}, \code{\link[igraph:as_data_frame]{igraph::as_data_frame()}},
-\code{\link[network:get.edge.attribute]{network::get.edge.attribute()}}, \code{\link[network:list.edge.attributes]{network::list.edge.attributes()}}
+\code{\link[igraph:edge_attr]{igraph::edge_attr()}}
+
+\code{\link[igraph:as_data_frame]{igraph::as_data_frame()}}
+
+\code{\link[igraph:edge_attr]{igraph::edge_attr()}}, \code{\link[network:get.edge.attribute]{network::get.edge.attribute()}}
+
+\code{\link[igraph:edge_attr_names]{igraph::edge_attr_names()}}, \code{\link[network:list.edge.attributes]{network::list.edge.attributes()}}
 }
 \author{
 Brendan Knapp \email{brendan.g.knapp@gmail.com}

@@ -4,6 +4,10 @@
 \alias{rep_edgelist}
 \alias{rep_edgelist.igraph}
 \alias{rep_edgelist.network}
+\alias{rep_attr_el}
+\alias{rep_attr_el.attr_adj_mat}
+\alias{rep_attr_el.igraph}
+\alias{rep_attr_el.network}
 \title{Build a networks's edge list representation.}
 \usage{
 rep_edgelist(x, ...)
@@ -11,6 +15,14 @@ rep_edgelist(x, ...)
 \method{rep_edgelist}{igraph}(ig, use_names = FALSE)
 
 \method{rep_edgelist}{network}(x, use_names = FALSE)
+
+rep_attr_el(x, vrt_attr)
+
+\method{rep_attr_el}{attr_adj_mat}(x, vrt_attr)
+
+\method{rep_attr_el}{igraph}(x, vrt_attr)
+
+\method{rep_attr_el}{network}(x, vrt_attr)
 }
 \arguments{
 \item{x}{An \code{igraph} or \code{network} object.}
@@ -18,6 +30,8 @@ rep_edgelist(x, ...)
 \item{use_names}{\code{logical} Whether the returned edge list should use vertex names instead of their
 indices. \cr
 Default: \code{FALSE}}
+
+\item{vrt_attr}{\code{character}. Name of target vertex attribute.}
 }
 \value{
 \code{matrix} \cr
@@ -43,6 +57,9 @@ Default: \code{FALSE}}
 tie's direction.
 \item If \code{x} is \emph{undirected}, columns are named \code{"vert1"} and \code{"vert2"}.
 }
+
+\code{rep_attr_el()} creates an edge list replacing vertex names with the category
+in \code{vrt_attr} to which each vertex belongs.
 }
 \examples{
 library(snatools)

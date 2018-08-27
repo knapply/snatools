@@ -128,7 +128,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>E-I Index Permutation Test</h1>
-    <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/ei_.R'><code>R/ei_.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/ei_index.R'><code>R/ei_index.R</code></a></small>
     <div class="hidden name"><code>ei_index_global_permute.Rd</code></div>
     </div>
 
@@ -139,7 +139,13 @@
     </div>
 
     <pre class="usage"><span class='fu'>ei_index_global_permute</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>, <span class='kw'>iterations</span> <span class='kw'>=</span> <span class='fl'>1000L</span>,
-  <span class='kw'>diagonal</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+  <span class='kw'>diagonal</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='co'># S3 method for ei_index_global_permute</span>
+<span class='fu'>print</span>(<span class='no'>x</span>)
+
+<span class='co'># S3 method for ei_index_global_permute</span>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>(<span class='no'>x</span>)</pre>
         
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -155,9 +161,9 @@
 #&gt; 
 #&gt; Iterations:                        1000 
 #&gt; 
-#&gt; # Permutations &gt;= Observed:       849 (84.9%)
-#&gt; # Permutations &lt; Observed:        151 (15.1%)</div><div class='input'>
-<span class='fu'><a href='https://knapply.github.io/snatools//reference/reexports.html'>autoplot</a></span>(<span class='no'>res1</span>)</div><div class='img'><img src='ei_index_global_permute-1.png' alt='' width='700' height='433' /></div><div class='input'>
+#&gt; # Permutations &gt;= Observed:       912 (91.2%)
+#&gt; # Permutations &lt;= Observed:        88 (8.8%)</div><div class='input'>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>(<span class='no'>res1</span>)</div><div class='img'><img src='ei_index_global_permute-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='no'>res2</span> <span class='kw'>&lt;-</span> <span class='fu'>ei_index_global_permute</span>(<span class='no'>samplk1</span>, <span class='st'>"group"</span>)
 
 <span class='no'>res2</span></div><div class='output co'>#&gt; Target Attribute:                  group 
@@ -167,8 +173,8 @@
 #&gt; Iterations:                        1000 
 #&gt; 
 #&gt; # Permutations &gt;= Observed:       1000 (100%)
-#&gt; # Permutations &lt; Observed:        0 (0%)</div><div class='input'>
-<span class='fu'><a href='https://knapply.github.io/snatools//reference/reexports.html'>autoplot</a></span>(<span class='no'>res2</span>)</div><div class='img'><img src='ei_index_global_permute-2.png' alt='' width='700' height='433' /></div><div class='input'>
+#&gt; # Permutations &lt;= Observed:        0 (0%)</div><div class='input'>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>(<span class='no'>res2</span>)</div><div class='img'><img src='ei_index_global_permute-2.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

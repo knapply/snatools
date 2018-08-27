@@ -146,9 +146,6 @@
 <span class='co'># S3 method for igraph</span>
 <span class='fu'>as_network</span>(<span class='no'>x</span>, <span class='kw'>actor_type</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='co'># S3 method for default</span>
-<span class='fu'>as_network</span>(<span class='no'>x</span>, <span class='no'>...</span>)
-
 <span class='co'># S3 method for tbl_graph</span>
 <span class='fu'>as_network</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
@@ -166,7 +163,7 @@
     <tr>
       <th>actor_type</th>
       <td><p><code>logical</code>. For bipartite graphs, the vertex <code>"type"</code> specifying which vertices in
-<code>x</code> are to be treated as "actors" in returned <code>network</code> object. See <strong>Details</strong>. <br /></p></td>
+<code>x</code> are to be treated as "actors" in returned <code>network</code> object. See Details. <br /></p></td>
     </tr>
     </table>
     
@@ -187,7 +184,7 @@ of the second mode, e.g. "events").</p></li>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>clean_graph()</code></p></div>
+    <div class='dont-index'><p><code><a href='as_igraph.html'>as_igraph()</a></code>, <code><a href='http://www.rdocumentation.org/packages/intergraph/topics/asNetwork'>intergraph::asNetwork()</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -281,9 +278,9 @@ of the second mode, e.g. "events").</p></li>
 
 <span class='no'>southern_women_ig</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/graph_from_incidence_matrix'>graph_from_incidence_matrix</a></span>(<span class='no'>southern_women_matrix</span>)
 
-<span class='no'>southern_women_ig</span></div><div class='output co'>#&gt; IGRAPH b7f75b0 UN-B 32 93 -- 
+<span class='no'>southern_women_ig</span></div><div class='output co'>#&gt; IGRAPH d2d728b UN-B 32 93 -- 
 #&gt; + attr: type (v/l), name (v/c)
-#&gt; + edges from b7f75b0 (vertex names):
+#&gt; + edges from d2d728b (vertex names):
 #&gt;  [1] E1--EVELYN    E1--LAURA     E1--BRENDA    E2--EVELYN    E2--LAURA    
 #&gt;  [6] E2--THERESA   E3--EVELYN    E3--LAURA     E3--THERESA   E3--BRENDA   
 #&gt; [11] E3--CHARLOTTE E3--FRANCES   E4--EVELYN    E4--THERESA   E4--BRENDA   

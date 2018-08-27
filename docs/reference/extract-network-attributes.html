@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Extract Graph-Level Attributes — net_get_attrs • snatools</title>
+<title>Extract Global Network Attributes — net_get_attrs • snatools</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,10 @@
 
 
 
-<meta property="og:title" content="Extract Graph-Level Attributes — net_get_attrs" />
+<meta property="og:title" content="Extract Global Network Attributes — net_get_attrs" />
 
-<meta property="og:description" content="Extract Graph-Level Attributes" />
+<meta property="og:description" content="Extract global network attributes in a variety of formats consistent across
+igraph and network objects." />
 
 <meta property="og:image" content="https://knapply.github.io/snatools/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -127,44 +128,67 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Extract Graph-Level Attributes</h1>
+    <h1>Extract Global Network Attributes</h1>
     <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/net_get_.R'><code>R/net_get_.R</code></a></small>
     <div class="hidden name"><code>extract-network-attributes.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Extract Graph-Level Attributes</p>
+    <p>Extract global network attributes in a variety of formats consistent across
+<code>igraph</code> and <code>network</code> objects.</p>
     
     </div>
 
     <pre class="usage"><span class='fu'>net_get_attrs</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for igraph</span>
-<span class='fu'>net_get_attrs</span>(<span class='no'>x</span>)
+<span class='fu'>net_get_attrs</span>(<span class='no'>x</span>, <span class='kw'>.default</span> <span class='kw'>=</span> <span class='fl'>NA</span>)
+
+<span class='co'># S3 method for network</span>
+<span class='fu'>net_get_attrs</span>(<span class='no'>x</span>, <span class='kw'>drop_metadata</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>.default</span> <span class='kw'>=</span> <span class='fl'>NA</span>)
 
 <span class='fu'>net_get_attrs_df</span>(<span class='no'>x</span>, <span class='kw'>try_tibble</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
 
 <span class='fu'>net_get_attr</span>(<span class='no'>x</span>, <span class='no'>net_attr</span>)
 
+<span class='co'># S3 method for igraph</span>
+<span class='fu'>net_get_attr</span>(<span class='no'>x</span>, <span class='no'>net_attr</span>, <span class='kw'>.default</span> <span class='kw'>=</span> <span class='fl'>NA</span>)
+
+<span class='co'># S3 method for network</span>
+<span class='fu'>net_get_attr</span>(<span class='no'>x</span>, <span class='no'>net_attr</span>, <span class='kw'>.default</span> <span class='kw'>=</span> <span class='fl'>NA</span>)
+
 <span class='fu'>net_get_attr_names</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for igraph</span>
-<span class='fu'>net_get_attr_names</span>(<span class='no'>x</span>)
+<span class='fu'>net_get_attr_names</span>(<span class='no'>x</span>, <span class='kw'>.default</span> <span class='kw'>=</span> <span class='fl'>NA</span>)
 
 <span class='co'># S3 method for network</span>
-<span class='fu'>net_get_attr_names</span>(<span class='no'>x</span>, <span class='kw'>drop_metadata</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+<span class='fu'>net_get_attr_names</span>(<span class='no'>x</span>, <span class='kw'>drop_metadata</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>.default</span> <span class='kw'>=</span> <span class='fl'>NA</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A graph object.</p></td>
+      <td><p>An <code>igraph</code> (<code><a href='http://www.rdocumentation.org/packages/igraph/topics/make_graph'>igraph::graph</a></code>) or <code><a href='http://www.rdocumentation.org/packages/network/topics/network'>network::network</a></code> object.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Arguments passed on to other methods. See below.</p></td>
+      <td><p>Arguments passed on to other methods. See other arguments.</p></td>
+    </tr>
+    <tr>
+      <th>.default</th>
+      <td><p>If returned value is empty (i.e. <code>x</code> has no global network attributes
+or none that match the target specified by <code>net_attr</code>), <code>.default</code> is returned instead. <br />
+Default: <code>NA</code></p></td>
+    </tr>
+    <tr>
+      <th>drop_metadata</th>
+      <td><p><code>logical</code>. Whether or not to drop a <code><a href='http://www.rdocumentation.org/packages/network/topics/network'>network::network</a></code>'s
+metadata attributes from returned object. See Details. <br />
+Default: <code>TRUE</code></p></td>
     </tr>
     <tr>
       <th>try_tibble</th>
@@ -176,14 +200,6 @@ Default: <code>TRUE</code></p></td>
       <th>net_attr</th>
       <td><p><code>character</code>. Name of target attribute.</p></td>
     </tr>
-    <tr>
-      <th>drop_metadata</th>
-      <td><p><code>logical</code>. Whether or not to drop metadata attributes from
-returned object. See Details. <br />
-Default: <code>FALSE</code>
-<code><a href='http://www.rdocumentation.org/packages/network/topics/network'>network::network</a></code> objects include what can be
-described as "metadata" in their graph-level attributes.</p></td>
-    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -192,35 +208,40 @@ described as "metadata" in their graph-level attributes.</p></td>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code>drop_metadata</code></p><ul>
-<li><p><code><a href='http://www.rdocumentation.org/packages/network/topics/network'>network::network</a></code> object include what can be described as metadata in their
-network/graph-level attributes. These metadata include: <br />
-+<code>"n"</code>: The number of vertices in the <code>network</code> object.</p><ul>
-<li><p><code>"directed"</code>: Whether the <code>network</code> object is directed.</p></li>
-<li><p><code>"hyper"</code>: Whether the <code>network</code> object is a hypergraph.</p></li>
-<li><p><code>"multiple"</code>: Whether the <code>network</code> object is multiplex.</p></li>
-<li><p><code>"bipartite"</code>: Whether the <code>network</code> object is bipartite.</p></li>
-<li><p><code>"mnext"</code>: The index of the next edge to be added to the <code>network</code> object. <br /></p></li>
+    <ul>
+<li><p><code>drop_metadata</code></p><ul>
+<li><p><code><a href='http://www.rdocumentation.org/packages/network/topics/network'>network::network</a></code> objects automatically include what can be described as metadata in their
+global network attributes. These metadata are:</p><ul>
+<li><p><code>"n"</code> (<code>numeric</code>): The number of vertices in the <code>network</code> object.</p></li>
+<li><p><code>"directed"</code> (<code>logical</code>): Whether the <code>network</code> object's edges are meant to be interpreted as directed.</p></li>
+<li><p><code>"hyper"</code> (<code>logical</code>): Whether the <code>network</code> object is a hypergraph.</p></li>
+<li><p><code>"multiple"</code> (<code>logical</code>): Whether the <code>network</code> object's edges are meant to be interpreted as multiplex.</p></li>
+<li><p><code>"bipartite"</code> (<code>logical</code> <em>or</em> <code>numeric</code>): <code>FALSE</code>, if the <code>network</code> object is not bipartite <em>or</em>
+the number of vertices belonging to the its "actors" mode if it is bipartite.</p></li>
+<li><p><code>"mnext"</code> (<code>numeric</code>): The index of the next edge to be added to the <code>network</code> object.</p></li>
 </ul></li>
-<li><p><code>drop_metadata</code> determines whether or not to include these in the returned object.</p></li>
+<li><p><code>drop_metadata</code> decides whether to include these in the returned object.</p></li>
+</ul></li>
 </ul>
-    <p><code>net_get_attrs()</code> extracts all vertex attributes as a named list.</p>
-<ul>
-<li><p><code>net_get_attrs_df</code> is a convenience wrapper around <code>net_get_attrs()</code> that returns a
+    <ul>
+<li><p><code>net_get_attrs()</code> extracts all global network attributes as a named <code>list</code>.</p></li>
+</ul>
+    <ul>
+<li><p><code>net_get_attrs_df()</code> is a convenience wrapper around <code>net_get_attrs()</code> that returns a
 <code>data.frame</code>.</p><ul>
 <li><p><code>stringsAsFactors</code> is <em>always</em> <code>FALSE</code>.</p></li>
-<li><p>If available, <code><a href='http://www.rdocumentation.org/packages/tibble/topics/as_tibble'>tibble::as_tibble()</a></code> is called to return a <code>tbl_df</code> instead.</p></li>
+<li><p>If <code>try_tibble</code> is <code>TRUE</code> and the <code>tibble</code> package is available, a
+<code><a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble</a></code> is returned.</p></li>
 </ul></li>
 </ul>
-    <p><code>net_get_attr()</code> extracts the single network/graph-level attribute specified
-by <code>net_attr</code> and returns a scalar.</p>
-<p><code>net_get_attr_names()</code> extracts the names of network/graph-level attributes as
-a <code>character</code> <code>vector</code>.</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/igraph/topics/graph_attr'>igraph::graph_attr()</a></code>, <code><a href='http://www.rdocumentation.org/packages/igraph/topics/graph_attr_names'>igraph::graph_attr_names()</a></code>,
-<code><a href='http://www.rdocumentation.org/packages/network/topics/attribute.methods'>network::get.network.attribute()</a></code>, <code><a href='http://www.rdocumentation.org/packages/network/topics/attribute.methods'>network::list.network.attributes()</a></code></p></div>
+    <ul>
+<li><p><code>net_get_attr()</code> extracts the single global, network-level attribute specified
+by <code>net_attr</code> and returns a scalar.</p></li>
+</ul>
+    <ul>
+<li><p><code>net_get_attr_names()</code> extracts the names of network/graph-level attributes as
+a <code>character</code> <code>vector</code>.</p></li>
+</ul>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -255,7 +276,6 @@ a <code>character</code> <code>vector</code>.</p>
 #&gt; 
 #&gt;  Edge attribute names: 
 #&gt;     Frequency </div><div class='input'>
-<span class='fu'>net_get_attr_names</span>(<span class='no'>ig</span>)</div><div class='output co'>#&gt; [1] "name"     "Citation" "Author"  </div><div class='input'><span class='fu'>net_get_attr_names</span>(<span class='no'>nw</span>, <span class='kw'>drop_metadata</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; [1] "n"        "mnext"    "directed" "hyper"    "loops"    "multiple"</div><div class='input'>
 <span class='fu'>net_get_attrs</span>(<span class='no'>ig</span>)</div><div class='output co'>#&gt; $name
 #&gt; [1] "Zachary's karate club network"
 #&gt; 
@@ -290,6 +310,7 @@ a <code>character</code> <code>vector</code>.</p>
 #&gt;   &lt;int&gt; &lt;dbl&gt; &lt;lgl&gt;    &lt;lgl&gt; &lt;lgl&gt; &lt;lgl&gt;   
 #&gt; 1    14    84 TRUE     FALSE FALSE FALSE   </div><div class='input'>
 <span class='fu'>net_get_attr</span>(<span class='no'>ig</span>, <span class='st'>"Author"</span>)</div><div class='output co'>#&gt; [1] "Wayne W. Zachary"</div><div class='input'>
+<span class='fu'>net_get_attr_names</span>(<span class='no'>ig</span>)</div><div class='output co'>#&gt; [1] "name"     "Citation" "Author"  </div><div class='input'><span class='fu'>net_get_attr_names</span>(<span class='no'>nw</span>, <span class='kw'>drop_metadata</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; [1] "n"        "mnext"    "directed" "hyper"    "loops"    "multiple"</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -300,8 +321,6 @@ a <code>character</code> <code>vector</code>.</p>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
-
-      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

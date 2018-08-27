@@ -4,7 +4,6 @@
 \alias{as_network}
 \alias{as_network.network}
 \alias{as_network.igraph}
-\alias{as_network.default}
 \alias{as_network.tbl_graph}
 \title{Conversion to \code{network} objects.}
 \usage{
@@ -14,8 +13,6 @@ as_network(x, ...)
 
 \method{as_network}{igraph}(x, actor_type = TRUE)
 
-\method{as_network}{default}(x, ...)
-
 \method{as_network}{tbl_graph}(x, ...)
 }
 \arguments{
@@ -24,7 +21,7 @@ as_network(x, ...)
 \item{...}{Additional arguments passed on to other methods (currently \code{actor_type}).}
 
 \item{actor_type}{\code{logical}. For bipartite graphs, the vertex \code{"type"} specifying which vertices in
-\code{x} are to be treated as "actors" in returned \code{network} object. See \strong{Details}. \cr}
+\code{x} are to be treated as "actors" in returned \code{network} object. See Details. \cr}
 }
 \value{
 A \code{\link[network:network]{network::network}} object.
@@ -112,7 +109,7 @@ as_network(tidy_g)
 
 }
 \seealso{
-\code{\link[=clean_graph]{clean_graph()}}
+\code{\link[=as_igraph]{as_igraph()}}, \code{\link[intergraph:asNetwork]{intergraph::asNetwork()}}
 }
 \author{
 Brendan Knapp \email{brendan.g.knapp@gmail.com}

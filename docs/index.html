@@ -105,8 +105,10 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Install {devtools} if you haven't already.</span>
 <span class="co"># install.packages("devtools")</span>
 
+<span class="kw">require</span>(devtools)
+
 <span class="co"># Install {snatools} from GitHub.</span>
-devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"knapply/snatools"</span>)
+<span class="kw">install_github</span>(<span class="st">"knapply/snatools"</span>)
 
 <span class="co"># Load {snatools}.</span>
 <span class="kw">library</span>(snatools)</code></pre></div>
@@ -114,10 +116,7 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <div id="development-test-results" class="section level2">
 <h2 class="hasAnchor">
 <a href="#development-test-results" class="anchor"></a>Development Test Results</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">printed &lt;-<span class="st"> </span><span class="kw">capture.output</span>(res &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/test">test</a></span>()))
-<span class="co">#&gt; Loading snatools</span>
-<span class="co">#&gt; Loading required package: testthat</span>
-<span class="co">#&gt; Testing snatools</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">printed &lt;-<span class="st"> </span><span class="kw">capture.output</span>(res &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/test">test</a></span>()))</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res<span class="op">$</span>success &lt;-<span class="st"> </span><span class="kw">ifelse</span>(res<span class="op">$</span>failed <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>)
 
 <span class="kw">cat</span>(<span class="st">"Test Success Rate:"</span>, scales<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/scales/topics/number_format">percent</a></span>(<span class="kw">mean</span>(<span class="kw">as.numeric</span>(res<span class="op">$</span>success))))

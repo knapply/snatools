@@ -7,15 +7,15 @@ if(dir.exists("docs")) {
   unlink("docs", recursive = TRUE, force = TRUE)
 }
 
-if(dir.exists("man")) {
-  unlink("man", recursive = TRUE, force = TRUE)
-}
+# if(dir.exists("man")) {
+#   unlink("man", recursive = TRUE, force = TRUE)
+# }
 
 devtools::document(".")
 
 devtools::install(".", dependencies = FALSE, upgrade_dependencies = FALSE)
 
-source("inst/logo.R", local = TRUE)
+# source("inst/logo.R", local = TRUE)
 
 rmarkdown::render("README.Rmd", output_format = "github_document")
 
