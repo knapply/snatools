@@ -26,78 +26,23 @@ library(snatools)
 Development Test Results
 ------------------------
 
-``` r
-printed <- capture.output(res <- as.data.frame(devtools::test()))
-```
-
-``` r
-res$success <- ifelse(res$failed == 0, TRUE, FALSE)
-
-cat("Test Success Rate:", scales::percent(mean(as.numeric(res$success))))
-#> Test Success Rate: 100%
-```
-
-``` r
-res$test <- txt_replace_all(res$test, "\\s+", " ")
-res$success <- paste0("`", res$success, "`")
-
-res[, c("context", "success")] %>% 
-  knitr::kable(caption = "Test Details")
-```
-
-| context                                    | success |
-|:-------------------------------------------|:--------|
-| Undirected Edge Lists                      | `TRUE`  |
-| Undirected Edge Lists                      | `TRUE`  |
-| Undirected Edge Lists                      | `TRUE`  |
-| Undirected Edge Lists                      | `TRUE`  |
-| Undirected Edge Lists                      | `TRUE`  |
-| Undirected Edge Lists                      | `TRUE`  |
-| Undirected Edge Lists                      | `TRUE`  |
-| Undirected Edge Lists                      | `TRUE`  |
-| Directed Edge Lists                        | `TRUE`  |
-| Directed Edge Lists                        | `TRUE`  |
-| Directed Edge Lists                        | `TRUE`  |
-| Directed Edge Lists                        | `TRUE`  |
-| Directed Edge Lists                        | `TRUE`  |
-| Directed Edge Lists                        | `TRUE`  |
-| Directed Edge Lists                        | `TRUE`  |
-| Directed Edge Lists                        | `TRUE`  |
-| Undirected Adjacency Matrices              | `TRUE`  |
-| Undirected Adjacency Matrices              | `TRUE`  |
-| Undirected Adjacency Matrices              | `TRUE`  |
-| Undirected Adjacency Matrices              | `TRUE`  |
-| Undirected Adjacency Matrices              | `TRUE`  |
-| Directed Adjacency Matrices                | `TRUE`  |
-| Directed Adjacency Matrices                | `TRUE`  |
-| Directed Adjacency Matrices                | `TRUE`  |
-| Directed Adjacency Matrices                | `TRUE`  |
-| Directed Adjacency Matrices                | `TRUE`  |
-| Undirected Attribute Edge Lists            | `TRUE`  |
-| Undirected Attribute Edge Lists            | `TRUE`  |
-| Directed Attribute Edge Lists              | `TRUE`  |
-| Directed Attribute Edge Lists              | `TRUE`  |
-| Undirected Attribute Adjacency Matrices    | `TRUE`  |
-| Undirected Attribute Adjacency Matrices    | `TRUE`  |
-| Directed Attribute Adjacency Matrices      | `TRUE`  |
-| Directed Attribute Adjacency Matrices      | `TRUE`  |
-| Undirected `attr_el`s from `attr_adj_mats` | `TRUE`  |
-| Undirected `attr_el`s from `attr_adj_mats` | `TRUE`  |
-| Directed `attr_el`s from `attr_adj_mats`   | `TRUE`  |
-| Directed `attr_el`s from `attr_adj_mats`   | `TRUE`  |
-| Undirected Mixing Matrices                 | `TRUE`  |
-| Undirected Mixing Matrices                 | `TRUE`  |
-| Directed Mixing Matrices                   | `TRUE`  |
-| Directed Mixing Matrices                   | `TRUE`  |
-| Round trip conversion: simple graph        | `TRUE`  |
-| Round trip conversion: undirected graphs   | `TRUE`  |
-| Round trip conversion: undirected graphs   | `TRUE`  |
-| Round trip conversion: directed graphs     | `TRUE`  |
-| Round trip conversion: directed graphs     | `TRUE`  |
-| Round trip conversion: bipartite graphs    | `TRUE`  |
-| Round trip conversion: bipartite graphs    | `TRUE`  |
-| Round trip conversion: bipartite graphs    | `TRUE`  |
-| E-I Index: directed                        | `TRUE`  |
-| E-I Index: directed                        | `TRUE`  |
-| E-I Index: undirected                      | `TRUE`  |
-| E-I Index: undirected                      | `TRUE`  |
+| context                                    |  \# of tests| All Successful |
+|:-------------------------------------------|------------:|:---------------|
+| Directed `attr_el`s from `attr_adj_mats`   |            2| TRUE           |
+| Directed Adjacency Matrices                |            5| TRUE           |
+| Directed Attribute Adjacency Matrices      |            2| TRUE           |
+| Directed Attribute Edge Lists              |            2| TRUE           |
+| Directed Edge Lists                        |            8| TRUE           |
+| Directed Mixing Matrices                   |            2| TRUE           |
+| Undirected `attr_el`s from `attr_adj_mats` |            2| TRUE           |
+| Undirected Adjacency Matrices              |            5| TRUE           |
+| Undirected Attribute Adjacency Matrices    |            2| TRUE           |
+| Undirected Attribute Edge Lists            |            2| TRUE           |
+| Undirected Edge Lists                      |            8| TRUE           |
+| Undirected Mixing Matrices                 |            2| TRUE           |
+| Round trip conversion: bipartite graphs    |            3| TRUE           |
+| Round trip conversion: directed graphs     |            2| TRUE           |
+| Round trip conversion: simple graph        |            1| TRUE           |
+| Round trip conversion: undirected graphs   |            2| TRUE           |
+| E-I Index: directed                        |            2| TRUE           |
+| E-I Index: undirected                      |            2| TRUE           |
