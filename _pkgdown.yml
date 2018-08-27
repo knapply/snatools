@@ -70,7 +70,6 @@ reference:
   - title: Quadratic Assignment Procedure
     contents:
     - qap_cor
-    - qap_ei
 
 #  - title: Carpentry
 #    desc: Clean network internals to enforce stricter attribute data types and accurate metadata.

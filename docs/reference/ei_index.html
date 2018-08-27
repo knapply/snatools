@@ -129,7 +129,7 @@ index represents a ratio of external to internal ties." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>E-I Index</h1>
-    <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/ei_.R'><code>R/ei_.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/ei_index.R'><code>R/ei_index.R</code></a></small>
     <div class="hidden name"><code>ei_index.Rd</code></div>
     </div>
 
@@ -141,7 +141,13 @@ index represents a ratio of external to internal ties.</p>
     </div>
 
     <pre class="usage"><span class='fu'>ei_index</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>, <span class='kw'>scope</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"global"</span>, <span class='st'>"group"</span>, <span class='st'>"vertex"</span>, <span class='st'>"full"</span>),
-  <span class='kw'>drop_loops</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+  <span class='kw'>drop_loops</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='co'># S3 method for ei_index_vrt</span>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>(<span class='no'>x</span>)
+
+<span class='co'># S3 method for ei_index_grp</span>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>(<span class='no'>x</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -277,7 +283,7 @@ Organizational Crises: An Experimental Simulation." Social Psychology Quarterly 
 #&gt; 2  Outcasts             6             3  0.33333333
 #&gt; 3     Turks             4            18 -0.63636364
 #&gt; 4  Waverers             8             1  0.77777778</div><div class='input'>
-<span class='fu'><a href='https://knapply.github.io/snatools//reference/reexports.html'>autoplot</a></span>(<span class='no'>ei_by_group</span>)</div><div class='img'><img src='ei_index-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>(<span class='no'>ei_by_group</span>)</div><div class='img'><img src='ei_index-1.png' alt='' width='700' height='433' /></div><div class='input'>
 (<span class='no'>ei_by_vertex</span> <span class='kw'>&lt;-</span> <span class='fu'>ei_index_vrt</span>(<span class='no'>samplk1</span>, <span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='st'>"group"</span>))</div><div class='output co'>#&gt;           name attribute external_ties internal_ties   ei_index
 #&gt; 1   John Bosco     Turks             2             1  0.3333333
 #&gt; 2      Gregory     Turks             0             3 -1.0000000
@@ -297,7 +303,7 @@ Organizational Crises: An Experimental Simulation." Social Psychology Quarterly 
 #&gt; 16      Albert     Turks             0             3 -1.0000000
 #&gt; 17       Elias  Outcasts             1             2 -0.3333333
 #&gt; 18  Simplicius  Outcasts             3             0  1.0000000</div><div class='input'>
-<span class='fu'><a href='https://knapply.github.io/snatools//reference/reexports.html'>autoplot</a></span>(<span class='no'>ei_by_vertex</span>)</div><div class='img'><img src='ei_index-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>(<span class='no'>ei_by_vertex</span>)</div><div class='img'><img src='ei_index-2.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

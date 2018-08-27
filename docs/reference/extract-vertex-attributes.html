@@ -32,7 +32,8 @@
 
 <meta property="og:title" content="Extract Vertex Attributes — vrt_get_attrs" />
 
-<meta property="og:description" content="Extract Vertex Attributes" />
+<meta property="og:description" content="Extract vertex attributes in a variety of formats consistent across
+igraph and network objects." />
 
 <meta property="og:image" content="https://knapply.github.io/snatools/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -134,7 +135,8 @@
 
     <div class="ref-description">
     
-    <p>Extract Vertex Attributes</p>
+    <p>Extract vertex attributes in a variety of formats consistent across
+<code>igraph</code> and <code>network</code> objects.</p>
     
     </div>
 
@@ -147,6 +149,12 @@
 <span class='fu'>vrt_get_attrs</span>(<span class='no'>x</span>, <span class='kw'>ignore_na</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='fu'>vrt_get_attrs_df</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for igraph</span>
+<span class='fu'>vrt_get_attrs_df</span>(<span class='no'>x</span>, <span class='kw'>try_tibble</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for network</span>
+<span class='fu'>vrt_get_attrs_df</span>(<span class='no'>x</span>, <span class='kw'>try_tibble</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
 
 <span class='fu'>vrt_get_attr</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>)
 
@@ -190,14 +198,14 @@
 Default: <code>TRUE</code></p></td>
     </tr>
     <tr>
-      <th>vrt_attr</th>
-      <td><p><code>character</code>. Name of target attribute.</p></td>
-    </tr>
-    <tr>
       <th>try_tibble</th>
       <td><p><code>logical</code>.
 Whether to attempt calling <code><a href='http://www.rdocumentation.org/packages/tibble/topics/as_tibble'>tibble::as_tibble()</a></code> in <code>vrt_get_attrs_df()</code>. <br />
 Default: <code>TRUE</code></p></td>
+    </tr>
+    <tr>
+      <th>vrt_attr</th>
+      <td><p><code>character</code>. Name of target attribute.</p></td>
     </tr>
     </table>
     
@@ -208,20 +216,21 @@ Default: <code>TRUE</code></p></td>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <ul>
-<li><p><code>vrt_get_attrs</code> extracts all vertex attributes as a named <code>list</code>.</p></li>
+<li><p><code>vrt_get_attrs()</code> extracts all vertex attributes as a named <code>list</code>.</p></li>
 </ul>
     <ul>
-<li><p><code>vrt_get_attrs_df</code> is a convenience wrapper around <code>vrt_get_attrs()</code> that returns a
+<li><p><code>vrt_get_attrs_df()</code> is a convenience wrapper around <code>vrt_get_attrs()</code> that returns a
 <code>data.frame</code>.</p><ul>
 <li><p><code>stringsAsFactors</code> is <em>always</em> <code>FALSE</code>.</p></li>
-<li><p>If available, <code><a href='http://www.rdocumentation.org/packages/tibble/topics/as_tibble'>tibble::as_tibble()</a></code> is called to return a <code>tbl_df</code> instead.</p></li>
+<li><p>If <code>try_tibble</code> is <code>TRUE</code> and the <code>tibble</code> package is available,
+a <code><a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble</a></code> is returned.</p></li>
 </ul></li>
 </ul>
     <ul>
-<li><p><code>vrt_get_attr</code> extracts the single vertex attribute specified by <code>vrt_attr</code> as a <code>vector</code>.</p></li>
+<li><p><code>vrt_get_attr()</code> extracts the single vertex attribute specified by <code>vrt_attr</code> as a <code>vector</code>.</p></li>
 </ul>
     <ul>
-<li><p><code>vrt_get_names</code> is a convenience wrapper around <code>vrt_get_attr</code> to extract the names
+<li><p><code>vrt_get_names()</code> is a convenience wrapper around <code>vrt_get_attr()</code> to extract the names
 of vertices as a <code>vector</code>.</p><ul>
 <li><p>It assumes <code>igraph</code> objects use <code>"name"</code> and <code>network</code> objects use
 <code>"vertex.names"</code>.</p></li>
@@ -230,13 +239,18 @@ throws a warning and returns <code>NULL</code>.</p></li>
 </ul></li>
 </ul>
     <ul>
-<li><p><code>vrt_get_attr_names</code> extract the names of vertex attributes as a <code>character</code> <code>vector</code>.</p></li>
+<li><p><code>vrt_get_attr_names()</code> extract the names of vertex attributes as a <code>character</code> <code>vector</code>.</p><ul>
+<li><p><code>vrt_get_attr_names()</code> differs from <code><a href='http://www.rdocumentation.org/packages/network/topics/attribute.methods'>network::list.vertex.attributes()</a></code>, which sorts
+attribute names alphabetically.</p></li>
+</ul></li>
 </ul>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/igraph/topics/vertex_attr'>igraph::vertex_attr()</a></code>, <code><a href='http://www.rdocumentation.org/packages/igraph/topics/vertex_attr_names'>igraph::vertex_attr_names()</a></code>, <code><a href='http://www.rdocumentation.org/packages/igraph/topics/graph_from_data_frame'>igraph::as_data_frame()</a></code>,
-<code><a href='http://www.rdocumentation.org/packages/network/topics/attribute.methods'>network::get.vertex.attribute()</a></code>, <code><a href='http://www.rdocumentation.org/packages/network/topics/attribute.methods'>network::list.vertex.attributes()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/igraph/topics/vertex_attr'>igraph::vertex_attr()</a></code></p>
+<p><code><a href='http://www.rdocumentation.org/packages/igraph/topics/graph_from_data_frame'>igraph::as_data_frame()</a></code>, <code><a href='http://www.rdocumentation.org/packages/tibble/topics/as_tibble'>tibble::as_tibble()</a></code></p>
+<p><code><a href='http://www.rdocumentation.org/packages/igraph/topics/vertex_attr'>igraph::vertex_attr()</a></code>, <code><a href='http://www.rdocumentation.org/packages/network/topics/attribute.methods'>network::get.vertex.attribute()</a></code></p>
+<p><code><a href='http://www.rdocumentation.org/packages/igraph/topics/vertex_attr_names'>igraph::vertex_attr_names()</a></code>, <code><a href='http://www.rdocumentation.org/packages/network/topics/attribute.methods'>network::list.vertex.attributes()</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -271,9 +285,6 @@ throws a warning and returns <code>NULL</code>.</p></li>
 #&gt; 
 #&gt;  Edge attribute names: 
 #&gt;     Frequency </div><div class='input'>
-<span class='fu'>vrt_get_attr_names</span>(<span class='no'>ig</span>)</div><div class='output co'>#&gt; [1] "Faction" "name"    "label"   "color"  </div><div class='input'><span class='fu'>vrt_get_attr_names</span>(<span class='no'>nw</span>)</div><div class='output co'>#&gt; [1] "vertex.names"        "Sponsorship"         "Paid.Staff"         
-#&gt; [4] "Volunteer.Staff"     "Location"            "Formalization"      
-#&gt; [7] "Decision.Rank.Score" "Command.Rank.Score" </div><div class='input'>
 <span class='fu'>vrt_get_attrs</span>(<span class='no'>ig</span>)</div><div class='output co'>#&gt; $Faction
 #&gt;  [1] 1 1 1 1 1 1 1 1 2 2 1 1 1 1 2 2 1 1 2 1 2 1 2 2 2 2 2 2 2 2 2 2 2 2
 #&gt; 
@@ -384,7 +395,11 @@ throws a warning and returns <code>NULL</code>.</p></li>
 #&gt; [11] "Laramie.County.Fire.District..1..volunteer."   
 #&gt; [12] "Laramie.County.Fire.District..2..volunteer."   
 #&gt; [13] "A.1.Ambulance.Service"                         
-#&gt; [14] "Shy.Wy.HAM.Radio.Club"                         </div></pre>
+#&gt; [14] "Shy.Wy.HAM.Radio.Club"                         </div><div class='input'>
+<span class='fu'>vrt_get_attr_names</span>(<span class='no'>ig</span>)</div><div class='output co'>#&gt; [1] "Faction" "name"    "label"   "color"  </div><div class='input'><span class='fu'>vrt_get_attr_names</span>(<span class='no'>nw</span>)</div><div class='output co'>#&gt; [1] "vertex.names"        "Sponsorship"         "Paid.Staff"         
+#&gt; [4] "Volunteer.Staff"     "Location"            "Formalization"      
+#&gt; [7] "Decision.Rank.Score" "Command.Rank.Score" </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

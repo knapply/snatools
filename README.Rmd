@@ -32,8 +32,10 @@ An R toolkit to bridge graph classes and streamline network analytic workflows.
 # Install {devtools} if you haven't already.
 # install.packages("devtools")
 
+require(devtools)
+
 # Install {snatools} from GitHub.
-devtools::install_github("knapply/snatools")
+install_github("knapply/snatools")
 
 # Load {snatools}.
 library(snatools)
@@ -46,7 +48,7 @@ library(snatools)
 
 ## Development Test Results
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 printed <- capture.output(res <- as.data.frame(devtools::test()))
 ```
 

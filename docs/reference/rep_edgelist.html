@@ -144,7 +144,18 @@
 <span class='fu'>rep_edgelist</span>(<span class='no'>ig</span>, <span class='kw'>use_names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='co'># S3 method for network</span>
-<span class='fu'>rep_edgelist</span>(<span class='no'>x</span>, <span class='kw'>use_names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+<span class='fu'>rep_edgelist</span>(<span class='no'>x</span>, <span class='kw'>use_names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='fu'>rep_attr_el</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>)
+
+<span class='co'># S3 method for attr_adj_mat</span>
+<span class='fu'>rep_attr_el</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>)
+
+<span class='co'># S3 method for igraph</span>
+<span class='fu'>rep_attr_el</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>)
+
+<span class='co'># S3 method for network</span>
+<span class='fu'>rep_attr_el</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -158,6 +169,10 @@
       <td><p><code>logical</code> Whether the returned edge list should use vertex names instead of their
 indices. <br />
 Default: <code>FALSE</code></p></td>
+    </tr>
+    <tr>
+      <th>vrt_attr</th>
+      <td><p><code>character</code>. Name of target vertex attribute.</p></td>
     </tr>
     </table>
     
@@ -182,6 +197,8 @@ Default: <code>FALSE</code></p></td>
 tie's direction.</p></li>
 <li><p>If <code>x</code> is <em>undirected</em>, columns are named <code>"vert1"</code> and <code>"vert2"</code>.</p></li>
 </ul>
+    <p><code>rep_attr_el()</code> creates an edge list replacing vertex names with the category
+in <code>vrt_attr</code> to which each vertex belongs.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 

@@ -4,6 +4,9 @@
 \alias{rep_adjacency_matrix}
 \alias{rep_adjacency_matrix.igraph}
 \alias{rep_adjacency_matrix.network}
+\alias{rep_attr_adj_mat}
+\alias{rep_attr_adj_mat.igraph}
+\alias{rep_attr_adj_mat.network}
 \title{Build a network's adjacency matrix representation}
 \usage{
 rep_adjacency_matrix(x, ...)
@@ -12,6 +15,12 @@ rep_adjacency_matrix(x, ...)
   sparse = FALSE, ...)
 
 \method{rep_adjacency_matrix}{network}(x, edg_attr = NULL, ...)
+
+rep_attr_adj_mat(x, vrt_attr)
+
+\method{rep_attr_adj_mat}{igraph}(x, vrt_attr)
+
+\method{rep_attr_adj_mat}{network}(x, vrt_attr)
 }
 \arguments{
 \item{...}{}
@@ -21,6 +30,10 @@ rep_adjacency_matrix(x, ...)
 }
 \description{
 Build a network's adjacency matrix representation
+}
+\details{
+\code{rep_attr_adj_mat()} creates an adjacency matrix replacing vertex names with the category
+in \code{vrt_attr} to which each vertex belongs.
 }
 \examples{
 library(snatools)

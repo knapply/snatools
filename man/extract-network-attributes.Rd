@@ -3,82 +3,105 @@
 \name{net_get_attrs}
 \alias{net_get_attrs}
 \alias{net_get_attrs.igraph}
+\alias{net_get_attrs.network}
 \alias{net_get_attrs_df}
 \alias{net_get_attr}
+\alias{net_get_attr.igraph}
+\alias{net_get_attr.network}
 \alias{net_get_attr_names}
 \alias{net_get_attr_names.igraph}
 \alias{net_get_attr_names.network}
-\title{Extract Graph-Level Attributes}
+\title{Extract Global Network Attributes}
 \usage{
 net_get_attrs(x, ...)
 
-\method{net_get_attrs}{igraph}(x)
+\method{net_get_attrs}{igraph}(x, .default = NA)
+
+\method{net_get_attrs}{network}(x, drop_metadata = TRUE, .default = NA)
 
 net_get_attrs_df(x, try_tibble = TRUE, ...)
 
 net_get_attr(x, net_attr)
 
+\method{net_get_attr}{igraph}(x, net_attr, .default = NA)
+
+\method{net_get_attr}{network}(x, net_attr, .default = NA)
+
 net_get_attr_names(x, ...)
 
-\method{net_get_attr_names}{igraph}(x)
+\method{net_get_attr_names}{igraph}(x, .default = NA)
 
-\method{net_get_attr_names}{network}(x, drop_metadata = TRUE)
+\method{net_get_attr_names}{network}(x, drop_metadata = TRUE,
+  .default = NA)
 }
 \arguments{
-\item{x}{A graph object.}
+\item{x}{An \code{igraph} (\code{\link[igraph:graph]{igraph::graph}}) or \code{network::network} object.}
 
-\item{...}{Arguments passed on to other methods. See below.}
+\item{...}{Arguments passed on to other methods. See other arguments.}
+
+\item{.default}{If returned value is empty (i.e. \code{x} has no global network attributes
+or none that match the target specified by \code{net_attr}), \code{.default} is returned instead. \cr
+Default: \code{NA}}
+
+\item{drop_metadata}{\code{logical}. Whether or not to drop a \code{\link[network:network]{network::network}}'s
+metadata attributes from returned object. See Details. \cr
+Default: \code{TRUE}}
 
 \item{try_tibble}{\code{logical}.
 Whether to attempt calling \code{\link[tibble:as_tibble]{tibble::as_tibble()}} in \code{vrt_get_attrs_df()}. \cr
 Default: \code{TRUE}}
 
 \item{net_attr}{\code{character}. Name of target attribute.}
-
-\item{drop_metadata}{\code{logical}. Whether or not to drop metadata attributes from
-returned object. See Details. \cr
-Default: \code{FALSE}
-\code{\link[network:network]{network::network}} objects include what can be
-described as "metadata" in their graph-level attributes.}
 }
 \value{
 A named \code{list}, \code{vector}, \code{data.frame}, or \code{\link[tibble:tibble]{tibble::tibble}}. See Details.
 }
 \description{
-Extract Graph-Level Attributes
+Extract global network attributes in a variety of formats consistent across
+\code{igraph} and \code{network} objects.
 }
 \details{
-\code{drop_metadata}
 \itemize{
-\item \code{\link[network:network]{network::network}} object include what can be described as metadata in their
-network/graph-level attributes. These metadata include: \cr
-+\code{"n"}: The number of vertices in the \code{network} object.
+\item \code{drop_metadata}
 \itemize{
-\item \code{"directed"}: Whether the \code{network} object is directed.
-\item \code{"hyper"}: Whether the \code{network} object is a hypergraph.
-\item \code{"multiple"}: Whether the \code{network} object is multiplex.
-\item \code{"bipartite"}: Whether the \code{network} object is bipartite.
-\item \code{"mnext"}: The index of the next edge to be added to the \code{network} object. \cr
+\item \code{\link[network:network]{network::network}} objects automatically include what can be described as metadata in their
+global network attributes. These metadata are:
+\itemize{
+\item \code{"n"} (\code{numeric}): The number of vertices in the \code{network} object.
+\item \code{"directed"} (\code{logical}): Whether the \code{network} object's edges are meant to be interpreted as directed.
+\item \code{"hyper"} (\code{logical}): Whether the \code{network} object is a hypergraph.
+\item \code{"multiple"} (\code{logical}): Whether the \code{network} object's edges are meant to be interpreted as multiplex.
+\item \code{"bipartite"} (\code{logical} \emph{or} \code{numeric}): \code{FALSE}, if the \code{network} object is not bipartite \emph{or}
+the number of vertices belonging to the its "actors" mode if it is bipartite.
+\item \code{"mnext"} (\code{numeric}): The index of the next edge to be added to the \code{network} object.
 }
-\item \code{drop_metadata} determines whether or not to include these in the returned object.
+\item \code{drop_metadata} decides whether to include these in the returned object.
+}
 }
 
-\code{net_get_attrs()} extracts all vertex attributes as a named list.
+\itemize{
+\item \code{net_get_attrs()} extracts all global network attributes as a named \code{list}.
+}
 
 \itemize{
-\item \code{net_get_attrs_df} is a convenience wrapper around \code{net_get_attrs()} that returns a
+\item \code{net_get_attrs_df()} is a convenience wrapper around \code{net_get_attrs()} that returns a
 \code{data.frame}.
 \itemize{
 \item \code{stringsAsFactors} is \emph{always} \code{FALSE}.
-\item If available, \code{\link[tibble:as_tibble]{tibble::as_tibble()}} is called to return a \code{tbl_df} instead.
+\item If \code{try_tibble} is \code{TRUE} and the \code{tibble} package is available, a
+\code{\link[tibble:tibble]{tibble::tibble}} is returned.
 }
 }
 
-\code{net_get_attr()} extracts the single network/graph-level attribute specified
+\itemize{
+\item \code{net_get_attr()} extracts the single global, network-level attribute specified
 by \code{net_attr} and returns a scalar.
+}
 
-\code{net_get_attr_names()} extracts the names of network/graph-level attributes as
+\itemize{
+\item \code{net_get_attr_names()} extracts the names of network/graph-level attributes as
 a \code{character} \code{vector}.
+}
 }
 \examples{
 library(snatools)
@@ -89,9 +112,6 @@ data("karate", package = "igraphdata")
 data("emon", package = "network")
 (nw <- emon$Cheyenne)
 
-net_get_attr_names(ig)
-net_get_attr_names(nw, drop_metadata = FALSE)
-
 net_get_attrs(ig)
 net_get_attrs(nw, drop_metadata = FALSE)
 
@@ -100,10 +120,9 @@ net_get_attrs_df(nw, drop_metadata = FALSE)
 
 net_get_attr(ig, "Author")
 
-}
-\seealso{
-\code{\link[igraph:graph_attr]{igraph::graph_attr()}}, \code{\link[igraph:graph_attr_names]{igraph::graph_attr_names()}},
-\code{\link[network:get.network.attribute]{network::get.network.attribute()}}, \code{\link[network:list.network.attributes]{network::list.network.attributes()}}
+net_get_attr_names(ig)
+net_get_attr_names(nw, drop_metadata = FALSE)
+
 }
 \author{
 Brendan Knapp \email{brendan.g.knapp@gmail.com}

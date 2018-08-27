@@ -128,7 +128,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Global E-I Index</h1>
-    <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/ei_.R'><code>R/ei_.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/ei_index.R'><code>R/ei_index.R</code></a></small>
     <div class="hidden name"><code>ei_index_global.Rd</code></div>
     </div>
 
@@ -183,7 +183,7 @@ Default: <code>FALSE</code></p></td>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='ei_index.html'>ei_index()</a></code>. <code><a href='rep_attr_el.html'>rep_attr_el()</a></code>, <code><a href='rep_attr_adj_mat.html'>rep_attr_adj_mat()</a></code>, <code><a href='rep_mixing_matrix.html'>rep_mixing_matrix()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='ei_index.html'>ei_index()</a></code>. <code><a href='rep_edgelist.html'>rep_attr_el()</a></code>, <code><a href='rep_adjacency_matrix.html'>rep_attr_adj_mat()</a></code>, <code><a href='rep_mixing_matrix.html'>rep_mixing_matrix()</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -198,7 +198,7 @@ Default: <code>FALSE</code></p></td>
 
 <span class='fu'><a href='ei_index.html'>ei_index</a></span>(<span class='no'>samplk1</span>, <span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='st'>"group"</span>)</div><div class='output co'>#&gt; [1] -0.09090909</div><div class='input'>
 <span class='co'># attr_adj_mat ========================================================================</span>
-(<span class='no'>attr_adj_mat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rep_attr_adj_mat.html'>rep_attr_adj_mat</a></span>(<span class='no'>samplk1</span>, <span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='st'>"group"</span>))</div><div class='output co'>#&gt;          Turks Turks Outcasts Loyal Loyal Loyal Turks Waverers Loyal Waverers
+(<span class='no'>attr_adj_mat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rep_adjacency_matrix.html'>rep_attr_adj_mat</a></span>(<span class='no'>samplk1</span>, <span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='st'>"group"</span>))</div><div class='output co'>#&gt;          Turks Turks Outcasts Loyal Loyal Loyal Turks Waverers Loyal Waverers
 #&gt; Turks        0     0        1     0     1     0     0        0     0        0
 #&gt; Turks        1     0        0     0     0     0     1        0     0        0
 #&gt; Outcasts     1     1        0     0     0     0     0        0     0        0
@@ -239,7 +239,7 @@ Default: <code>FALSE</code></p></td>
 #&gt; attr(,"class")
 #&gt; [1] "attr_adj_mat" "matrix"      </div><div class='input'><span class='fu'>ei_index_global</span>(<span class='no'>attr_adj_mat</span>)</div><div class='output co'>#&gt; [1] -0.09090909</div><div class='input'>
 <span class='co'># attr_el =============================================================================</span>
-(<span class='no'>attr_el</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rep_attr_el.html'>rep_attr_el</a></span>(<span class='no'>attr_adj_mat</span>)) <span class='kw'>%&gt;%</span> <span class='fu'>head</span>()</div><div class='output co'>#&gt;    from       to     
+(<span class='no'>attr_el</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rep_edgelist.html'>rep_attr_el</a></span>(<span class='no'>attr_adj_mat</span>)) <span class='kw'>%&gt;%</span> <span class='fu'>head</span>()</div><div class='output co'>#&gt;    from       to     
 #&gt; 2  "Turks"    "Turks"
 #&gt; 3  "Outcasts" "Turks"
 #&gt; 6  "Loyal"    "Turks"

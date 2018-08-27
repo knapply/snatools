@@ -128,7 +128,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Permute matrix columns and rows.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/permute_matrix.R'><code>R/permute_matrix.R</code></a></small>
     <div class="hidden name"><code>permute_matrix.Rd</code></div>
     </div>
 
@@ -138,7 +138,18 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>permute_matrix</span>(<span class='no'>x</span>, <span class='kw'>out_class</span> <span class='kw'>=</span> <span class='st'>"matrix"</span>)</pre>
+    <pre class="usage"><span class='fu'>permute_matrix</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for igraph</span>
+<span class='fu'>permute_matrix</span>(<span class='no'>x</span>, <span class='kw'>matrix_fun</span> <span class='kw'>=</span> <span class='no'>rep_adjacency_matrix</span>,
+  <span class='no'>...</span>)
+
+<span class='co'># S3 method for network</span>
+<span class='fu'>permute_matrix</span>(<span class='no'>x</span>, <span class='kw'>matrix_fun</span> <span class='kw'>=</span> <span class='no'>rep_adjacency_matrix</span>,
+  <span class='no'>...</span>)
+
+<span class='co'># S3 method for matrix</span>
+<span class='fu'>permute_matrix</span>(<span class='no'>x</span>, <span class='kw'>out_class</span> <span class='kw'>=</span> <span class='fu'>class</span>(<span class='no'>x</span>))</pre>
         
 
   </div>

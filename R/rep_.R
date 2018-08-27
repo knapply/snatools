@@ -208,7 +208,11 @@ rep_biadjacency_matrix.network <- function(x, ...) {
 
 
 
-#' Build a graphs's adjacency matrix, using an attribute category in place of vertex names.
+#' @rdname rep_adjacency_matrix
+#' 
+#' @details
+#' `rep_attr_adj_mat()` creates an adjacency matrix replacing vertex names with the category
+#' in `vrt_attr` to which each vertex belongs.
 #' 
 #' @export
 #' 
@@ -216,7 +220,7 @@ rep_attr_adj_mat <- function(x, vrt_attr) {
   UseMethod("rep_attr_adj_mat")
 }
 
-#' @rdname rep_attr_adj_mat
+#' @rdname rep_adjacency_matrix
 #' 
 #' @export
 #' 
@@ -234,7 +238,7 @@ rep_attr_adj_mat.igraph <- function(x, vrt_attr) {
   out
 }
 
-#' @rdname rep_attr_adj_mat
+#' @rdname rep_adjacency_matrix
 #' 
 #' @export
 #' 
@@ -249,7 +253,12 @@ rep_attr_adj_mat.network <- function(x, vrt_attr) {
   out
 }
 
-#' Build a graphs's edge list, using an attribute categories instead of vertex names.
+#' @rdname rep_edgelist
+#' 
+#' @param vrt_attr `character`. Name of target vertex attribute.
+#' 
+#' @details `rep_attr_el()` creates an edge list replacing vertex names with the category
+#' in `vrt_attr` to which each vertex belongs.
 #' 
 #' @export
 #' 
@@ -257,7 +266,7 @@ rep_attr_el <- function(x, vrt_attr) {
   UseMethod("rep_attr_el")
 }
 
-#' @rdname rep_attr_el
+#' @rdname rep_edgelist
 #' 
 #' @export
 #' 
@@ -273,7 +282,7 @@ rep_attr_el.attr_adj_mat <- function(x, vrt_attr) {
   out
 }
 
-#' @rdname rep_attr_el
+#' @rdname rep_edgelist
 #' 
 #' @export
 #'
@@ -287,7 +296,7 @@ rep_attr_el.igraph <- function(x, vrt_attr) {
   out
 }
 
-#' @rdname rep_attr_el
+#' @rdname rep_edgelist
 #' 
 #' @export
 #'

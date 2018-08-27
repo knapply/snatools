@@ -171,7 +171,7 @@ ei_index_global.igraph <- function(x, vrt_attr, drop_loops = FALSE) { # fast E-I
     stop("`vrt_attr` is not a vertex attribute in `x`", call. = FALSE)
   }
   if(drop_loops) {
-    x <- igraph::simplify(x, remove.multiple = FALSE, remove.loops = TRUE)
+    x <- drop_loops(x)
   }
   attrs <- vrt_get_attr(x, vrt_attr)
   el <- rep_edgelist(x)
@@ -186,13 +186,12 @@ ei_index_global.igraph <- function(x, vrt_attr, drop_loops = FALSE) { # fast E-I
 #' @rdname ei_index_global
 #' 
 #' @export
-#' 
 ei_index_global.network <- function(x, vrt_attr, drop_loops = FALSE) { # fast E-I
   if(!vrt_attr %in% vrt_get_attr_names(x)) {
     stop("`vrt_attr` is not a vertex attribute in `x`", call. = FALSE)
   }
   if(drop_loops) {
-    network::set.network.attribute(x, "loops", value = FALSE)
+    x <- drop_loops(x)
   }
   attrs <- vrt_get_attr(x, vrt_attr)
   el <- rep_edgelist(x)
@@ -206,7 +205,6 @@ ei_index_global.network <- function(x, vrt_attr, drop_loops = FALSE) { # fast E-
 #' @rdname ei_index_global
 #' 
 #' @export
-#' 
 ei_index_global.tbl_graph <- function(x, vrt_attr, ...) {
   ei_index_global(as_igraph(x), vrt_attr, ...)
 }
@@ -289,8 +287,9 @@ ei_index_vrt <- function(x, vrt_attr, drop_loops = FALSE) {
   out
 }
 
-#' @export
+#' @rdname ei_index
 #' 
+#' @export
 autoplot.ei_index_vrt <- function(x) {
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
     stop('The {ggplot2} package is required for this functionality.', call. = FALSE)
@@ -344,12 +343,11 @@ ei_index_grp <- function(x, vrt_attr, drop_loops = FALSE) {
 }
 
 
-#' @export
+#' @rdname ei_index
 #' 
+#' @export
 autoplot.ei_index_grp <- function(x) {
-  if (!requireNamespace("ggplot2", quietly = TRUE)) {
-    stop('The {ggplot2} package is required for this functionality.', call. = FALSE)
-  }
+  check_ggplot()
   out <- ggplot2::ggplot(x)
   out <- out + ggplot2::geom_segment(ggplot2::aes(x = 0, xend = ei_index, 
                                                   y = attribute, yend = attribute, 
@@ -398,28 +396,28 @@ ei_index_global_permute <- function(x, vrt_attr, iterations = 1000L, diagonal = 
   if(!class(x) %in% c("igraph", "network")) {
     stop("`x` must be of class `igraph` or `network`.", call. = FALSE)
   }
-  observed_ei <- ei_index_global(x, vrt_attr)            # value test
-  attr_adj_mat <- rep_attr_adj_mat(x, vrt_attr)    # matrix to permute
-  permuted_eis <- vector("double", iterations)        # initialize storage vector
-  if(class(x) == "network") {
-    directed <- x$gal$directed
-  }
-  if(class(x) == "igraph") {
-    directed <- igraph::is_directed(x)
-  }
-  if(directed) {
-    for(i in seq_len(iterations)) {
-      permuted_matrix <- snatools:::permute_matrix(attr_adj_mat, # permute the matrix
-                                                   out_class = "attr_adj_mat")
-      if(!diagonal) {
-        diag(permuted_matrix) <- NA_integer_                     # remove the diagonal
+  observed_ei <- ei_index_global(x, vrt_attr)
+  attr_adj_mat <- rep_attr_adj_mat(x, vrt_attr)
+  permuted_eis <- vector("double", iterations)
+
+  if(net_is_directed(x)) {
+    if(diagonal) { # seperate loops to prevent need to check `diagonal` every iteration
+      for(i in seq_len(iterations)) {
+        permuted_matrix <- permute_matrix(attr_adj_mat)
+        permuted_attr_el <- rep_attr_el(permuted_matrix)
+        permuted_eis[[i]] <- ei_index_global(permuted_attr_el)
       }
-      permuted_attr_el <- rep_attr_el(permuted_matrix)        # convert to el for fast EI
-      permuted_eis[[i]] <- ei_index_global(permuted_attr_el)        # calc EI, add to `permuted_eis`
+    } else {
+      for(i in seq_len(iterations)) {
+        permuted_matrix <- permute_matrix(attr_adj_mat)
+        diag(permuted_matrix) <- NA_integer_
+        permuted_attr_el <- rep_attr_el(permuted_matrix)
+        permuted_eis[[i]] <- ei_index_global(permuted_attr_el)
+      }
     }
-  } else { # for undirected networks: remove the upper triangle
+  } else {
     for(i in seq_len(iterations)) {
-      permuted_matrix <- snatools:::permute_matrix(attr_adj_mat, out_class = "attr_adj_mat")
+      permuted_matrix <- permute_matrix(attr_adj_mat)
       permuted_matrix[upper.tri(permuted_matrix, diag = !diagonal)] <- NA_integer_
       permuted_attr_el <- rep_attr_el(permuted_matrix)
       permuted_eis[[i]] <- ei_index_global(permuted_attr_el)
@@ -438,8 +436,9 @@ ei_index_global_permute <- function(x, vrt_attr, iterations = 1000L, diagonal = 
   out
 }
 
-#' @export
+#' @rdname ei_index_global_permute
 #' 
+#' @export
 print.ei_index_global_permute <- function(x) {
   cat("Target Attribute:                 ", x$vrt_attr, "\n")
   cat("\n")
@@ -449,16 +448,15 @@ print.ei_index_global_permute <- function(x) {
   cat("\n")
   cat("# Permutations >= Observed:       ", x$n_greater, " (", 
       round(x$prop_greater * 100, 2), "%)\n", sep = "")
-  cat("# Permutations < Observed:        ", x$n_lesser, " (", 
+  cat("# Permutations <= Observed:        ", x$n_lesser, " (", 
       round(x$prop_lesser * 100, 2), "%)\n", sep = "")
 }
 
-#' @export
+#' @rdname ei_index_global_permute
 #' 
-autoplot.ei_index_global_permute <- function(x, leave_bare = FALSE) {
-  if (!requireNamespace("ggplot2", quietly = TRUE)) {
-    stop('The {ggplot2} package is required for this functionality.', call. = FALSE)
-  }
+#' @export
+autoplot.ei_index_global_permute <- function(x) {
+  check_ggplot()
   df <- data.frame(perm_ei = x$permuted_eis)
   out <- ggplot2::ggplot(df)
   out <- out + ggplot2::stat_density(ggplot2::aes(perm_ei), fill = "orange", alpha = 0.5)

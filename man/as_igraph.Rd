@@ -19,7 +19,7 @@ as_igraph(x, ...)
 
 \method{as_igraph}{ucinet}(x, ...)
 
-\method{as_igraph}{tbl_graph}(x)
+\method{as_igraph}{tbl_graph}(x, ...)
 }
 \arguments{
 \item{x}{\code{\link[network:network]{network::network}} object.}
