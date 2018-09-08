@@ -199,14 +199,20 @@
 #&gt;     vertex.names 
 #&gt; 
 #&gt; No edge attributes</div><div class='input'>
-<span class='no'>southern_women_nw</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='extract-vertex-attributes.html'>vrt_get_attrs</a></span>()</div><div class='output co'>#&gt; $vertex.names
-#&gt;  [1] "EVELYN"    "LAURA"     "THERESA"   "BRENDA"    "CHARLOTTE" "FRANCES"  
-#&gt;  [7] "ELEANOR"   "PEARL"     "RUTH"      "VERNE"     "MYRNA"     "KATHERINE"
-#&gt; [13] "SYLVIA"    "NORA"      "HELEN"     "DOROTHY"   "OLIVIA"    "FLORA"    
-#&gt; [19] "E1"        "E2"        "E3"        "E4"        "E5"        "E6"       
-#&gt; [25] "E7"        "E8"        "E9"        "E10"       "E11"       "E12"      
-#&gt; [31] "E13"       "E14"      
-#&gt; </div><div class='input'>
+<span class='no'>southern_women_nw</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='extract-vertex-attributes.html'>vrt_get_attrs</a></span>()</div><div class='output co'>#&gt; # A tibble: 32 x 1
+#&gt;    vertex.names
+#&gt;    &lt;chr&gt;       
+#&gt;  1 EVELYN      
+#&gt;  2 LAURA       
+#&gt;  3 THERESA     
+#&gt;  4 BRENDA      
+#&gt;  5 CHARLOTTE   
+#&gt;  6 FRANCES     
+#&gt;  7 ELEANOR     
+#&gt;  8 PEARL       
+#&gt;  9 RUTH        
+#&gt; 10 VERNE       
+#&gt; # ... with 22 more rows</div><div class='input'>
 (<span class='no'>actors_clarified</span> <span class='kw'>&lt;-</span> <span class='fu'>bip_clarify_actors</span>(<span class='no'>southern_women_nw</span>))</div><div class='output co'>#&gt;  Network attributes:
 #&gt;   vertices = 32 
 #&gt;   directed = FALSE 
@@ -222,19 +228,20 @@
 #&gt;     is_actor vertex.names 
 #&gt; 
 #&gt; No edge attributes</div><div class='input'>
-<span class='no'>actors_clarified</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='extract-vertex-attributes.html'>vrt_get_attrs</a></span>()</div><div class='output co'>#&gt; $vertex.names
-#&gt;  [1] "EVELYN"    "LAURA"     "THERESA"   "BRENDA"    "CHARLOTTE" "FRANCES"  
-#&gt;  [7] "ELEANOR"   "PEARL"     "RUTH"      "VERNE"     "MYRNA"     "KATHERINE"
-#&gt; [13] "SYLVIA"    "NORA"      "HELEN"     "DOROTHY"   "OLIVIA"    "FLORA"    
-#&gt; [19] "E1"        "E2"        "E3"        "E4"        "E5"        "E6"       
-#&gt; [25] "E7"        "E8"        "E9"        "E10"       "E11"       "E12"      
-#&gt; [31] "E13"       "E14"      
-#&gt; 
-#&gt; $is_actor
-#&gt;  [1]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
-#&gt; [13]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE
-#&gt; [25] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-#&gt; </div><div class='input'>
+<span class='no'>actors_clarified</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='extract-vertex-attributes.html'>vrt_get_attrs</a></span>()</div><div class='output co'>#&gt; # A tibble: 32 x 2
+#&gt;    vertex.names is_actor
+#&gt;    &lt;chr&gt;        &lt;lgl&gt;   
+#&gt;  1 EVELYN       TRUE    
+#&gt;  2 LAURA        TRUE    
+#&gt;  3 THERESA      TRUE    
+#&gt;  4 BRENDA       TRUE    
+#&gt;  5 CHARLOTTE    TRUE    
+#&gt;  6 FRANCES      TRUE    
+#&gt;  7 ELEANOR      TRUE    
+#&gt;  8 PEARL        TRUE    
+#&gt;  9 RUTH         TRUE    
+#&gt; 10 VERNE        TRUE    
+#&gt; # ... with 22 more rows</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -2,18 +2,9 @@
 % Please edit documentation in R/operators.R
 \name{\%==\%}
 \alias{\%==\%}
-\alias{\%==\%.default}
-\alias{\%==\%.igraph}
-\alias{\%==\%.network}
 \title{Strict object comparison.}
 \usage{
 lhs \%==\% rhs
-
-\method{\%==\%}{default}(lhs, rhs)
-
-\method{\%==\%}{igraph}(lhs, rhs)
-
-\method{\%==\%}{network}(lhs, rhs)
 }
 \arguments{
 \item{lhs}{left-hand side}

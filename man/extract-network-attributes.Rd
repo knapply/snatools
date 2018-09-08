@@ -19,7 +19,7 @@ net_get_attrs(x, ...)
 
 \method{net_get_attrs}{network}(x, drop_metadata = TRUE, .default = NA)
 
-net_get_attrs_df(x, try_tibble = TRUE, ...)
+net_get_attrs_df(x, ...)
 
 net_get_attr(x, net_attr)
 
@@ -45,16 +45,14 @@ Default: \code{NA}}
 
 \item{drop_metadata}{\code{logical}. Whether or not to drop a \code{\link[network:network]{network::network}}'s
 metadata attributes from returned object. See Details. \cr
-Default: \code{TRUE}}
-
-\item{try_tibble}{\code{logical}.
+Default: \code{TRUE}
 Whether to attempt calling \code{\link[tibble:as_tibble]{tibble::as_tibble()}} in \code{vrt_get_attrs_df()}. \cr
 Default: \code{TRUE}}
 
 \item{net_attr}{\code{character}. Name of target attribute.}
 }
 \value{
-A named \code{list}, \code{vector}, \code{data.frame}, or \code{\link[tibble:tibble]{tibble::tibble}}. See Details.
+A named \code{list}, \code{vector}, or \code{\link[tibble:tibble]{tibble::tibble}}. See Details.
 }
 \description{
 Extract global network attributes in a variety of formats consistent across
@@ -85,12 +83,7 @@ the number of vertices belonging to the its "actors" mode if it is bipartite.
 
 \itemize{
 \item \code{net_get_attrs_df()} is a convenience wrapper around \code{net_get_attrs()} that returns a
-\code{data.frame}.
-\itemize{
-\item \code{stringsAsFactors} is \emph{always} \code{FALSE}.
-\item If \code{try_tibble} is \code{TRUE} and the \code{tibble} package is available, a
-\code{\link[tibble:tibble]{tibble::tibble}} is returned.
-}
+\code{tibble::tibble}.
 }
 
 \itemize{

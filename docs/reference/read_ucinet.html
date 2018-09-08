@@ -151,9 +151,96 @@
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code>ucinet</code> object.</p>
+    <p>A <code>network_dataset</code> object.</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>snatools</span>)
+
+<span class='st'>"http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/sampson.dat"</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>read_ucinet</span>()</div><div class='output co'>#&gt; $directed
+#&gt; [1] TRUE
+#&gt; 
+#&gt; $bipartite
+#&gt; [1] FALSE
+#&gt; 
+#&gt; $multiple
+#&gt; [1] TRUE
+#&gt; 
+#&gt; $loops
+#&gt; [1] FALSE
+#&gt; 
+#&gt; $edges
+#&gt; # A tibble: 510 x 4
+#&gt;    from      to        weight level  
+#&gt;  * &lt;chr&gt;     &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;  
+#&gt;  1 ROMUL_10  AMBROSE_9      2 SAMPLK1
+#&gt;  2 ROMUL_10  PETER_4        3 SAMPLK1
+#&gt;  3 ROMUL_10  ALBERT_16      1 SAMPLK1
+#&gt;  4 BONAVEN_5 ROMUL_10       3 SAMPLK1
+#&gt;  5 BONAVEN_5 VICTOR_8       2 SAMPLK1
+#&gt;  6 BONAVEN_5 ALBERT_16      1 SAMPLK1
+#&gt;  7 AMBROSE_9 ROMUL_10       2 SAMPLK1
+#&gt;  8 AMBROSE_9 BONAVEN_5      3 SAMPLK1
+#&gt;  9 AMBROSE_9 ELIAS_17       1 SAMPLK1
+#&gt; 10 BERTH_6   PETER_4        3 SAMPLK1
+#&gt; # ... with 500 more rows
+#&gt; 
+#&gt; $vertices
+#&gt; # A tibble: 18 x 1
+#&gt;    name     
+#&gt;  * &lt;chr&gt;    
+#&gt;  1 ROMUL_10 
+#&gt;  2 BONAVEN_5
+#&gt;  3 AMBROSE_9
+#&gt;  4 BERTH_6  
+#&gt;  5 PETER_4  
+#&gt;  6 LOUIS_11 
+#&gt;  7 VICTOR_8 
+#&gt;  8 WINF_12  
+#&gt;  9 JOHN_1   
+#&gt; 10 GREG_2   
+#&gt; 11 HUGH_14  
+#&gt; 12 BONI_15  
+#&gt; 13 MARK_7   
+#&gt; 14 ALBERT_16
+#&gt; 15 AMAND_13 
+#&gt; 16 BASIL_3  
+#&gt; 17 ELIAS_17 
+#&gt; 18 SIMP_18  
+#&gt; 
+#&gt; attr(,"class")
+#&gt; [1] "network_dataset"</div><div class='input'>
+<span class='st'>"http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/davis.dat"</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>read_ucinet</span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='as_igraph.html'>as_igraph</a></span>()</div><div class='output co'>#&gt; IGRAPH 43fbee8 UN-B 32 93 -- 
+#&gt; + attr: name (v/c), type (v/l)
+#&gt; + edges from 43fbee8 (vertex names):
+#&gt;  [1] EVELYN   --E1 EVELYN   --E2 EVELYN   --E3 EVELYN   --E4 EVELYN   --E5
+#&gt;  [6] EVELYN   --E6 EVELYN   --E8 EVELYN   --E9 LAURA    --E1 LAURA    --E2
+#&gt; [11] LAURA    --E3 LAURA    --E5 LAURA    --E6 LAURA    --E7 LAURA    --E8
+#&gt; [16] THERESA  --E2 THERESA  --E3 THERESA  --E4 THERESA  --E5 THERESA  --E6
+#&gt; [21] THERESA  --E7 THERESA  --E8 THERESA  --E9 BRENDA   --E1 BRENDA   --E3
+#&gt; [26] BRENDA   --E4 BRENDA   --E5 BRENDA   --E6 BRENDA   --E7 BRENDA   --E8
+#&gt; [31] CHARLOTTE--E3 CHARLOTTE--E4 CHARLOTTE--E5 CHARLOTTE--E7 FRANCES  --E3
+#&gt; [36] FRANCES  --E5 FRANCES  --E6 FRANCES  --E8 ELEANOR  --E5 ELEANOR  --E6
+#&gt; + ... omitted several edges</div><div class='input'>
+<span class='st'>"http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/newfrat.dat"</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>read_ucinet</span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='as_network.html'>as_network</a></span>()</div><div class='output co'>#&gt;  Network attributes:
+#&gt;   vertices = 17 
+#&gt;   directed = TRUE 
+#&gt;   hyper = FALSE 
+#&gt;   multiple = TRUE 
+#&gt;   total edges= 4080 
+#&gt;     missing edges= 0 
+#&gt;     non-missing edges= 4080 
+#&gt; 
+#&gt;  Vertex attribute names: 
+#&gt;     vertex.names 
+#&gt; 
+#&gt;  Edge attribute names not shown </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -161,7 +248,9 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

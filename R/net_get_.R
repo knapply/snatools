@@ -11,7 +11,6 @@
 #' @param drop_metadata `logical`. Whether or not to drop a [`network::network`]'s 
 #' metadata attributes from returned object. See Details. \cr
 #' Default: `TRUE`
-#' @param try_tibble `logical`. 
 #' Whether to attempt calling [`tibble::as_tibble()`] in `vrt_get_attrs_df()`. \cr
 #' Default: `TRUE`
 #' @param .default If returned value is empty (i.e. `x` has no global network attributes
@@ -31,7 +30,7 @@
 #'     + `"mnext"` (`numeric`): The index of the next edge to be added to the `network` object.
 #'   + `drop_metadata` decides whether to include these in the returned object.
 #' 
-#' @return A named `list`, `vector`, `data.frame`, or [`tibble::tibble`]. See Details.
+#' @return A named `list`, `vector`, or [`tibble::tibble`]. See Details.
 #' 
 #' @author Brendan Knapp \email{brendan.g.knapp@@gmail.com}
 #' 
@@ -94,10 +93,7 @@ net_get_attrs.network <- function(x, drop_metadata = TRUE, .default = NA) {
 #' 
 #' @details 
 #' * `net_get_attrs_df()` is a convenience wrapper around `net_get_attrs()` that returns a
-#' `data.frame`.
-#'     + `stringsAsFactors` is _always_ `FALSE`.
-#'     + If `try_tibble` is `TRUE` and the `tibble` package is available, a 
-#'     [`tibble::tibble`] is returned.
+#' `tibble::tibble`.
 #'
 #' @examples
 #' net_get_attrs_df(ig)
@@ -105,15 +101,9 @@ net_get_attrs.network <- function(x, drop_metadata = TRUE, .default = NA) {
 #' 
 #' @importFrom tibble as_tibble
 #' @export
-net_get_attrs_df <- function(x, try_tibble = TRUE, ...) {
+net_get_attrs_df <- function(x, ...) {
   out <- net_get_attrs(x, ...)
-  out <- as.data.frame(out, stringsAsFactors = FALSE)
-  if(try_tibble) {
-    if(requireNamespace("tibble", quietly = TRUE)) {
-      out <- as_tibble(out)
-    }
-  }
-  out
+  as_tibble(out)
 }
 
 #' @rdname extract-network-attributes

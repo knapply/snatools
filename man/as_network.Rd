@@ -3,6 +3,7 @@
 \name{as_network}
 \alias{as_network}
 \alias{as_network.network}
+\alias{as_network.network_dataset}
 \alias{as_network.igraph}
 \alias{as_network.tbl_graph}
 \title{Conversion to \code{network} objects.}
@@ -10,6 +11,8 @@
 as_network(x, ...)
 
 \method{as_network}{network}(x, ...)
+
+\method{as_network}{network_dataset}(x)
 
 \method{as_network}{igraph}(x, actor_type = TRUE)
 

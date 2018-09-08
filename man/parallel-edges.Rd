@@ -21,7 +21,7 @@ edg_count_parallel_df(x, ...)
 \item{...}{Arguments passed on to other methods. See below.}
 }
 \value{
-A \code{logical} or \code{numeric} scalar.
+A \code{logical} or \code{numeric} scalar or \code{\link[tibble:tibble]{tibble::tibble}}.
 }
 \description{
 Parallel Edges Queries
@@ -48,11 +48,7 @@ for loops.
 
 \itemize{
 \item \code{edg_count_parallel_df} is a convenience wrapper around \code{edg_count_parallel()} and
-\code{edg_get_attrs_df()} that returns a \code{data.frame}.
-\itemize{
-\item \code{stringsAsFactors} is \emph{always} \code{FALSE}.
-\item If available, \code{\link[tibble:as_tibble]{tibble::as_tibble()}} is called to return a \code{tbl_df} instead.
-}
+\code{edg_get_attrs()} that returns a \code{tibble::tibble}.
 }
 }
 \examples{

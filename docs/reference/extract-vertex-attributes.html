@@ -148,14 +148,6 @@ igraph and network objects." />
 <span class='co'># S3 method for network</span>
 <span class='fu'>vrt_get_attrs</span>(<span class='no'>x</span>, <span class='kw'>ignore_na</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='fu'>vrt_get_attrs_df</span>(<span class='no'>x</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for igraph</span>
-<span class='fu'>vrt_get_attrs_df</span>(<span class='no'>x</span>, <span class='kw'>try_tibble</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for network</span>
-<span class='fu'>vrt_get_attrs_df</span>(<span class='no'>x</span>, <span class='kw'>try_tibble</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
-
 <span class='fu'>vrt_get_attr</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>)
 
 <span class='co'># S3 method for igraph</span>
@@ -198,12 +190,6 @@ igraph and network objects." />
 Default: <code>TRUE</code></p></td>
     </tr>
     <tr>
-      <th>try_tibble</th>
-      <td><p><code>logical</code>.
-Whether to attempt calling <code><a href='http://www.rdocumentation.org/packages/tibble/topics/as_tibble'>tibble::as_tibble()</a></code> in <code>vrt_get_attrs_df()</code>. <br />
-Default: <code>TRUE</code></p></td>
-    </tr>
-    <tr>
       <th>vrt_attr</th>
       <td><p><code>character</code>. Name of target attribute.</p></td>
     </tr>
@@ -211,20 +197,12 @@ Default: <code>TRUE</code></p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A named <code>list</code>, <code>vector</code>, <code>data.frame</code>, or <code><a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble</a></code>. See Details.</p>
+    <p>A named <code>list</code>, <code>vector</code>, or <code><a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble</a></code>. See Details.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <ul>
 <li><p><code>vrt_get_attrs()</code> extracts all vertex attributes as a named <code>list</code>.</p></li>
-</ul>
-    <ul>
-<li><p><code>vrt_get_attrs_df()</code> is a convenience wrapper around <code>vrt_get_attrs()</code> that returns a
-<code>data.frame</code>.</p><ul>
-<li><p><code>stringsAsFactors</code> is <em>always</em> <code>FALSE</code>.</p></li>
-<li><p>If <code>try_tibble</code> is <code>TRUE</code> and the <code>tibble</code> package is available,
-a <code><a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble</a></code> is returned.</p></li>
-</ul></li>
 </ul>
     <ul>
 <li><p><code>vrt_get_attr()</code> extracts the single vertex attribute specified by <code>vrt_attr</code> as a <code>vector</code>.</p></li>
@@ -248,7 +226,6 @@ attribute names alphabetically.</p></li>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/igraph/topics/vertex_attr'>igraph::vertex_attr()</a></code></p>
-<p><code><a href='http://www.rdocumentation.org/packages/igraph/topics/graph_from_data_frame'>igraph::as_data_frame()</a></code>, <code><a href='http://www.rdocumentation.org/packages/tibble/topics/as_tibble'>tibble::as_tibble()</a></code></p>
 <p><code><a href='http://www.rdocumentation.org/packages/igraph/topics/vertex_attr'>igraph::vertex_attr()</a></code>, <code><a href='http://www.rdocumentation.org/packages/network/topics/attribute.methods'>network::get.vertex.attribute()</a></code></p>
 <p><code><a href='http://www.rdocumentation.org/packages/igraph/topics/vertex_attr_names'>igraph::vertex_attr_names()</a></code>, <code><a href='http://www.rdocumentation.org/packages/network/topics/attribute.methods'>network::list.vertex.attributes()</a></code></p></div>
     
@@ -256,149 +233,83 @@ attribute names alphabetically.</p></li>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>snatools</span>)
 
-<span class='fu'>data</span>(<span class='st'>"karate"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"igraphdata"</span>)
-(<span class='no'>ig</span> <span class='kw'>&lt;-</span> <span class='no'>karate</span>)</div><div class='output co'>#&gt; IGRAPH 4b458a1 UNW- 34 78 -- Zachary's karate club network
-#&gt; + attr: name (g/c), Citation (g/c), Author (g/c), Faction (v/n), name
-#&gt; | (v/c), label (v/c), color (v/n), weight (e/n)
-#&gt; + edges from 4b458a1 (vertex names):
-#&gt;  [1] Mr Hi  --Actor 2  Mr Hi  --Actor 3  Mr Hi  --Actor 4  Mr Hi  --Actor 5 
-#&gt;  [5] Mr Hi  --Actor 6  Mr Hi  --Actor 7  Mr Hi  --Actor 8  Mr Hi  --Actor 9 
-#&gt;  [9] Mr Hi  --Actor 11 Mr Hi  --Actor 12 Mr Hi  --Actor 13 Mr Hi  --Actor 14
-#&gt; [13] Mr Hi  --Actor 18 Mr Hi  --Actor 20 Mr Hi  --Actor 22 Mr Hi  --Actor 32
-#&gt; [17] Actor 2--Actor 3  Actor 2--Actor 4  Actor 2--Actor 8  Actor 2--Actor 14
-#&gt; [21] Actor 2--Actor 18 Actor 2--Actor 20 Actor 2--Actor 22 Actor 2--Actor 31
-#&gt; [25] Actor 3--Actor 4  Actor 3--Actor 8  Actor 3--Actor 9  Actor 3--Actor 10
-#&gt; + ... omitted several edges</div><div class='input'>
-<span class='fu'>data</span>(<span class='st'>"emon"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"network"</span>)
-(<span class='no'>nw</span> <span class='kw'>&lt;-</span> <span class='no'>emon</span>$<span class='no'>Cheyenne</span>)</div><div class='output co'>#&gt;  Network attributes:
-#&gt;   vertices = 14 
+<span class='fu'>data</span>(<span class='st'>"sampson_monastery"</span>)
+
+(<span class='no'>ig</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_igraph.html'>as_igraph</a></span>(<span class='no'>sampson_monastery</span>))</div><div class='output co'>#&gt; IGRAPH 3e2c8d0 DNW- 18 510 -- 
+#&gt; + attr: name (v/c), faction (v/c), cloisterville (v/l), status (v/c),
+#&gt; | weight (e/n), relation (e/c), time (e/n), positive_relation (e/l)
+#&gt; + edges from 3e2c8d0 (vertex names):
+#&gt;  [1] Romauld    -&gt;Ambrose     Romauld    -&gt;Peter       Romauld    -&gt;Albert     
+#&gt;  [4] Bonaventure-&gt;Romauld     Bonaventure-&gt;Victor      Bonaventure-&gt;Albert     
+#&gt;  [7] Ambrose    -&gt;Romauld     Ambrose    -&gt;Bonaventure Ambrose    -&gt;Elias      
+#&gt; [10] Berthold   -&gt;Peter       Berthold   -&gt;Louis       Berthold   -&gt;Gregory    
+#&gt; [13] Peter      -&gt;Berthold    Peter      -&gt;Hugh        Peter      -&gt;Mark       
+#&gt; [16] Louis      -&gt;Romauld     Louis      -&gt;Berthold    Louis      -&gt;John Bosco 
+#&gt; [19] Victor     -&gt;Bonaventure Victor     -&gt;Winfrid     Victor     -&gt;Basil      
+#&gt; + ... omitted several edges</div><div class='input'>(<span class='no'>nw</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_network.html'>as_network</a></span>(<span class='no'>sampson_monastery</span>))</div><div class='output co'>#&gt;  Network attributes:
+#&gt;   vertices = 18 
 #&gt;   directed = TRUE 
 #&gt;   hyper = FALSE 
-#&gt;   loops = FALSE 
-#&gt;   multiple = FALSE 
-#&gt;   total edges= 83 
+#&gt;   multiple = TRUE 
+#&gt;   total edges= 510 
 #&gt;     missing edges= 0 
-#&gt;     non-missing edges= 83 
+#&gt;     non-missing edges= 510 
 #&gt; 
 #&gt;  Vertex attribute names: 
-#&gt;     Command.Rank.Score Decision.Rank.Score Formalization Location Paid.Staff Sponsorship vertex.names Volunteer.Staff 
+#&gt;     cloisterville faction status vertex.names 
 #&gt; 
 #&gt;  Edge attribute names: 
-#&gt;     Frequency </div><div class='input'>
-<span class='fu'>vrt_get_attrs</span>(<span class='no'>ig</span>)</div><div class='output co'>#&gt; $Faction
-#&gt;  [1] 1 1 1 1 1 1 1 1 2 2 1 1 1 1 2 2 1 1 2 1 2 1 2 2 2 2 2 2 2 2 2 2 2 2
-#&gt; 
-#&gt; $name
-#&gt;  [1] "Mr Hi"    "Actor 2"  "Actor 3"  "Actor 4"  "Actor 5"  "Actor 6" 
-#&gt;  [7] "Actor 7"  "Actor 8"  "Actor 9"  "Actor 10" "Actor 11" "Actor 12"
-#&gt; [13] "Actor 13" "Actor 14" "Actor 15" "Actor 16" "Actor 17" "Actor 18"
-#&gt; [19] "Actor 19" "Actor 20" "Actor 21" "Actor 22" "Actor 23" "Actor 24"
-#&gt; [25] "Actor 25" "Actor 26" "Actor 27" "Actor 28" "Actor 29" "Actor 30"
-#&gt; [31] "Actor 31" "Actor 32" "Actor 33" "John A"  
-#&gt; 
-#&gt; $label
-#&gt;  [1] "H"  "2"  "3"  "4"  "5"  "6"  "7"  "8"  "9"  "10" "11" "12" "13" "14" "15"
-#&gt; [16] "16" "17" "18" "19" "20" "21" "22" "23" "24" "25" "26" "27" "28" "29" "30"
-#&gt; [31] "31" "32" "33" "A" 
-#&gt; 
-#&gt; $color
-#&gt;  [1] 1 1 1 1 1 1 1 1 2 2 1 1 1 1 2 2 1 1 2 1 2 1 2 2 2 2 2 2 2 2 2 2 2 2
-#&gt; </div><div class='input'><span class='fu'>vrt_get_attrs</span>(<span class='no'>nw</span>)</div><div class='output co'>#&gt; $vertex.names
-#&gt;  [1] "Wyoming.Disaster.and.Civil.Defense.Agnecy"     
-#&gt;  [2] "Wyoming.State.National.Guard..Army.and.Air."   
-#&gt;  [3] "Wyoming.State.Highway.Patrol"                  
-#&gt;  [4] "Francis.E..Warren.Air.Force.Base..fire.unit."  
-#&gt;  [5] "Red.Cross"                                     
-#&gt;  [6] "Salvation.Army"                                
-#&gt;  [7] "Laramie.County.Sheriff.s.Office"               
-#&gt;  [8] "Laramie.County...Cheyenne.Civil.Defense.Agency"
-#&gt;  [9] "Cheyenne.Fire.Department"                      
-#&gt; [10] "Cheyenne.Police.Department"                    
-#&gt; [11] "Laramie.County.Fire.District..1..volunteer."   
-#&gt; [12] "Laramie.County.Fire.District..2..volunteer."   
-#&gt; [13] "A.1.Ambulance.Service"                         
-#&gt; [14] "Shy.Wy.HAM.Radio.Club"                         
-#&gt; 
-#&gt; $Sponsorship
-#&gt;  [1] "State"       "State"       "State"       "Federal"     "Private"    
-#&gt;  [6] "Private"     "County"      "County/City" "City"        "City"       
-#&gt; [11] "County"      "County"      "Private"     "Private"    
-#&gt; 
-#&gt; $Paid.Staff
-#&gt;  [1]  10 400 200  60   1   7  60   7  70 100  NA   1  10   0
-#&gt; 
-#&gt; $Volunteer.Staff
-#&gt;  [1]   50 2000    0    0   20   80   20  100    0    0   NA   20    6   NA
-#&gt; 
-#&gt; $Location
-#&gt;  [1] "L" "L" "L" "L" "L" "L" "L" "L" "L" "L" "L" "L" "L" "L"
-#&gt; 
-#&gt; $Formalization
-#&gt;  [1]  2  1  1  1  1  1  1  2  1  3 NA  1  1  1
-#&gt; 
-#&gt; $Decision.Rank.Score
-#&gt;  [1] 20  7  0  5  0  0 20 50 10 20  3  3  2  0
-#&gt; 
-#&gt; $Command.Rank.Score
-#&gt;  [1]  0 10  3  5  0  0 20 40 10 30  2  2  2  0
-#&gt; </div><div class='input'>
-<span class='fu'>vrt_get_attrs_df</span>(<span class='no'>ig</span>)</div><div class='output co'>#&gt; # A tibble: 34 x 4
-#&gt;    Faction name     label color
-#&gt;      &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt; &lt;dbl&gt;
-#&gt;  1       1 Mr Hi    H         1
-#&gt;  2       1 Actor 2  2         1
-#&gt;  3       1 Actor 3  3         1
-#&gt;  4       1 Actor 4  4         1
-#&gt;  5       1 Actor 5  5         1
-#&gt;  6       1 Actor 6  6         1
-#&gt;  7       1 Actor 7  7         1
-#&gt;  8       1 Actor 8  8         1
-#&gt;  9       2 Actor 9  9         2
-#&gt; 10       2 Actor 10 10        2
-#&gt; # ... with 24 more rows</div><div class='input'><span class='fu'>vrt_get_attrs_df</span>(<span class='no'>nw</span>)</div><div class='output co'>#&gt; # A tibble: 14 x 8
-#&gt;    vertex.names Sponsorship Paid.Staff Volunteer.Staff Location Formalization
-#&gt;    &lt;chr&gt;        &lt;chr&gt;            &lt;dbl&gt;           &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt;
-#&gt;  1 Wyoming.Dis~ State               10              50 L                    2
-#&gt;  2 Wyoming.Sta~ State              400            2000 L                    1
-#&gt;  3 Wyoming.Sta~ State              200               0 L                    1
-#&gt;  4 Francis.E..~ Federal             60               0 L                    1
-#&gt;  5 Red.Cross    Private              1              20 L                    1
-#&gt;  6 Salvation.A~ Private              7              80 L                    1
-#&gt;  7 Laramie.Cou~ County              60              20 L                    1
-#&gt;  8 Laramie.Cou~ County/City          7             100 L                    2
-#&gt;  9 Cheyenne.Fi~ City                70               0 L                    1
-#&gt; 10 Cheyenne.Po~ City               100               0 L                    3
-#&gt; 11 Laramie.Cou~ County              NA              NA L                   NA
-#&gt; 12 Laramie.Cou~ County               1              20 L                    1
-#&gt; 13 A.1.Ambulan~ Private             10               6 L                    1
-#&gt; 14 Shy.Wy.HAM.~ Private              0              NA L                    1
-#&gt; # ... with 2 more variables: Decision.Rank.Score &lt;dbl&gt;,
-#&gt; #   Command.Rank.Score &lt;dbl&gt;</div><div class='input'>
-<span class='fu'>vrt_get_attr</span>(<span class='no'>ig</span>, <span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='st'>"Faction"</span>)</div><div class='output co'>#&gt;  [1] 1 1 1 1 1 1 1 1 2 2 1 1 1 1 2 2 1 1 2 1 2 1 2 2 2 2 2 2 2 2 2 2 2 2</div><div class='input'><span class='fu'>vrt_get_attr</span>(<span class='no'>nw</span>, <span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='st'>"Sponsorship"</span>)</div><div class='output co'>#&gt;  [1] "State"       "State"       "State"       "Federal"     "Private"    
-#&gt;  [6] "Private"     "County"      "County/City" "City"        "City"       
-#&gt; [11] "County"      "County"      "Private"     "Private"    </div><div class='input'>
-<span class='fu'>vrt_get_names</span>(<span class='no'>ig</span>)</div><div class='output co'>#&gt;  [1] "Mr Hi"    "Actor 2"  "Actor 3"  "Actor 4"  "Actor 5"  "Actor 6" 
-#&gt;  [7] "Actor 7"  "Actor 8"  "Actor 9"  "Actor 10" "Actor 11" "Actor 12"
-#&gt; [13] "Actor 13" "Actor 14" "Actor 15" "Actor 16" "Actor 17" "Actor 18"
-#&gt; [19] "Actor 19" "Actor 20" "Actor 21" "Actor 22" "Actor 23" "Actor 24"
-#&gt; [25] "Actor 25" "Actor 26" "Actor 27" "Actor 28" "Actor 29" "Actor 30"
-#&gt; [31] "Actor 31" "Actor 32" "Actor 33" "John A"  </div><div class='input'><span class='fu'>vrt_get_names</span>(<span class='no'>nw</span>)</div><div class='output co'>#&gt;  [1] "Wyoming.Disaster.and.Civil.Defense.Agnecy"     
-#&gt;  [2] "Wyoming.State.National.Guard..Army.and.Air."   
-#&gt;  [3] "Wyoming.State.Highway.Patrol"                  
-#&gt;  [4] "Francis.E..Warren.Air.Force.Base..fire.unit."  
-#&gt;  [5] "Red.Cross"                                     
-#&gt;  [6] "Salvation.Army"                                
-#&gt;  [7] "Laramie.County.Sheriff.s.Office"               
-#&gt;  [8] "Laramie.County...Cheyenne.Civil.Defense.Agency"
-#&gt;  [9] "Cheyenne.Fire.Department"                      
-#&gt; [10] "Cheyenne.Police.Department"                    
-#&gt; [11] "Laramie.County.Fire.District..1..volunteer."   
-#&gt; [12] "Laramie.County.Fire.District..2..volunteer."   
-#&gt; [13] "A.1.Ambulance.Service"                         
-#&gt; [14] "Shy.Wy.HAM.Radio.Club"                         </div><div class='input'>
-<span class='fu'>vrt_get_attr_names</span>(<span class='no'>ig</span>)</div><div class='output co'>#&gt; [1] "Faction" "name"    "label"   "color"  </div><div class='input'><span class='fu'>vrt_get_attr_names</span>(<span class='no'>nw</span>)</div><div class='output co'>#&gt; [1] "vertex.names"        "Sponsorship"         "Paid.Staff"         
-#&gt; [4] "Volunteer.Staff"     "Location"            "Formalization"      
-#&gt; [7] "Decision.Rank.Score" "Command.Rank.Score" </div><div class='input'>
+#&gt;     positive_relation relation time weight </div><div class='input'>
+<span class='fu'>vrt_get_attrs</span>(<span class='no'>ig</span>)</div><div class='output co'>#&gt; # A tibble: 18 x 4
+#&gt;    name        faction     cloisterville status          
+#&gt;  * &lt;chr&gt;       &lt;chr&gt;       &lt;lgl&gt;         &lt;chr&gt;           
+#&gt;  1 Romauld     Waverers    FALSE         Remained        
+#&gt;  2 Bonaventure Loyal       TRUE          Remained        
+#&gt;  3 Ambrose     Loyal       FALSE         Remained        
+#&gt;  4 Berthold    Loyal       FALSE         Remained        
+#&gt;  5 Peter       Loyal       TRUE          Remained        
+#&gt;  6 Louis       Loyal       FALSE         Remained        
+#&gt;  7 Victor      Waverers    FALSE         Remained        
+#&gt;  8 Winfrid     Young Turks FALSE         Remained        
+#&gt;  9 John Bosco  Young Turks TRUE          Left Voluntarily
+#&gt; 10 Gregory     Young Turks TRUE          Expelled        
+#&gt; 11 Hugh        Young Turks FALSE         Left Voluntarily
+#&gt; 12 Boniface    Young Turks FALSE         Left Voluntarily
+#&gt; 13 Mark        Young Turks TRUE          Left Voluntarily
+#&gt; 14 Albert      Young Turks FALSE         Left Voluntarily
+#&gt; 15 Amand       Waverers    FALSE         Remained        
+#&gt; 16 Basil       Outcasts    TRUE          Expelled        
+#&gt; 17 Elias       Outcasts    FALSE         Expelled        
+#&gt; 18 Simplicius  Outcasts    FALSE         Expelled        </div><div class='input'><span class='fu'>vrt_get_attrs</span>(<span class='no'>nw</span>)</div><div class='output co'>#&gt; # A tibble: 18 x 4
+#&gt;    vertex.names faction     cloisterville status          
+#&gt;    &lt;chr&gt;        &lt;chr&gt;       &lt;lgl&gt;         &lt;chr&gt;           
+#&gt;  1 Romauld      Waverers    FALSE         Remained        
+#&gt;  2 Bonaventure  Loyal       TRUE          Remained        
+#&gt;  3 Ambrose      Loyal       FALSE         Remained        
+#&gt;  4 Berthold     Loyal       FALSE         Remained        
+#&gt;  5 Peter        Loyal       TRUE          Remained        
+#&gt;  6 Louis        Loyal       FALSE         Remained        
+#&gt;  7 Victor       Waverers    FALSE         Remained        
+#&gt;  8 Winfrid      Young Turks FALSE         Remained        
+#&gt;  9 John Bosco   Young Turks TRUE          Left Voluntarily
+#&gt; 10 Gregory      Young Turks TRUE          Expelled        
+#&gt; 11 Hugh         Young Turks FALSE         Left Voluntarily
+#&gt; 12 Boniface     Young Turks FALSE         Left Voluntarily
+#&gt; 13 Mark         Young Turks TRUE          Left Voluntarily
+#&gt; 14 Albert       Young Turks FALSE         Left Voluntarily
+#&gt; 15 Amand        Waverers    FALSE         Remained        
+#&gt; 16 Basil        Outcasts    TRUE          Expelled        
+#&gt; 17 Elias        Outcasts    FALSE         Expelled        
+#&gt; 18 Simplicius   Outcasts    FALSE         Expelled        </div><div class='input'>
+<span class='fu'>vrt_get_attr</span>(<span class='no'>ig</span>, <span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='st'>"Faction"</span>)</div><div class='output co'>#&gt; <span class='error'>Error: `vrt_attr` is not a vertex attribute in `x`</span></div><div class='input'><span class='fu'>vrt_get_attr</span>(<span class='no'>nw</span>, <span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='st'>"Sponsorship"</span>)</div><div class='output co'>#&gt; <span class='error'>Error: `vrt_attr` is not a vertex attribute in `x`</span></div><div class='input'>
+<span class='fu'>vrt_get_names</span>(<span class='no'>ig</span>)</div><div class='output co'>#&gt;  [1] "Romauld"     "Bonaventure" "Ambrose"     "Berthold"    "Peter"      
+#&gt;  [6] "Louis"       "Victor"      "Winfrid"     "John Bosco"  "Gregory"    
+#&gt; [11] "Hugh"        "Boniface"    "Mark"        "Albert"      "Amand"      
+#&gt; [16] "Basil"       "Elias"       "Simplicius" </div><div class='input'><span class='fu'>vrt_get_names</span>(<span class='no'>nw</span>)</div><div class='output co'>#&gt;  [1] "Romauld"     "Bonaventure" "Ambrose"     "Berthold"    "Peter"      
+#&gt;  [6] "Louis"       "Victor"      "Winfrid"     "John Bosco"  "Gregory"    
+#&gt; [11] "Hugh"        "Boniface"    "Mark"        "Albert"      "Amand"      
+#&gt; [16] "Basil"       "Elias"       "Simplicius" </div><div class='input'>
+<span class='fu'>vrt_get_attr_names</span>(<span class='no'>ig</span>)</div><div class='output co'>#&gt; [1] "name"          "faction"       "cloisterville" "status"       </div><div class='input'><span class='fu'>vrt_get_attr_names</span>(<span class='no'>nw</span>)</div><div class='output co'>#&gt; [1] "vertex.names"  "faction"       "cloisterville" "status"       </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

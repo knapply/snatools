@@ -92,7 +92,7 @@
       <h1>Converting Graph Classes</h1>
                         <h4 class="author">Brendan Knapp</h4>
             
-            <h4 class="date">2018-08-27</h4>
+            <h4 class="date">2018-09-07</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/knapply/snatools/blob/master/vignettes/conversion.Rmd"><code>vignettes/conversion.Rmd</code></a></small>
       <div class="hidden name"><code>conversion.Rmd</code></div>
@@ -151,15 +151,13 @@ edges_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span 
 <p>We can then construct an <code>igraph</code> object like so.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ig_initial &lt;-<span class="st"> </span><span class="kw">graph_from_data_frame</span>(edges_df, <span class="dt">vertices =</span> vertices_df)
 <span class="kw">graph_attr</span>(ig_initial) &lt;-<span class="st"> </span>graph_attrs</code></pre></div>
-<p>We’ll also set a graph-level attribute noting its <code>"original class"</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">graph_attr</span>(ig_initial, <span class="st">"original class"</span>) &lt;-<span class="st"> "igraph"</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ig_initial
-<span class="co">#&gt; IGRAPH c0f4bac DN-- 30 1000 -- </span>
+<span class="co">#&gt; IGRAPH 46e2edf DN-- 30 1000 -- </span>
 <span class="co">#&gt; + attr: net_chr (g/c), is_wow (g/l), net_int (g/n), net_dbl (g/n),</span>
-<span class="co">#&gt; | original class (g/c), name (v/c), vrt_chr (v/c), vrt_int (v/n),</span>
-<span class="co">#&gt; | vrt_dbl (v/n), vrt_lgl (v/l), edg_chr (e/c), edg_int (e/n),</span>
-<span class="co">#&gt; | edg_dbl (e/n), edg_lgl (e/l)</span>
-<span class="co">#&gt; + edges from c0f4bac (vertex names):</span>
+<span class="co">#&gt; | name (v/c), vrt_chr (v/c), vrt_int (v/n), vrt_dbl (v/n), vrt_lgl</span>
+<span class="co">#&gt; | (v/l), edg_chr (e/c), edg_int (e/n), edg_dbl (e/n), edg_lgl</span>
+<span class="co">#&gt; | (e/l)</span>
+<span class="co">#&gt; + edges from 46e2edf (vertex names):</span>
 <span class="co">#&gt;  [1] vrt_2 -&gt;vrt_13 vrt_4 -&gt;vrt_4  vrt_17-&gt;vrt_11 vrt_3 -&gt;vrt_5 </span>
 <span class="co">#&gt;  [5] vrt_11-&gt;vrt_18 vrt_5 -&gt;vrt_21 vrt_24-&gt;vrt_16 vrt_1 -&gt;vrt_3 </span>
 <span class="co">#&gt;  [9] vrt_18-&gt;vrt_10 vrt_13-&gt;vrt_23 vrt_20-&gt;vrt_13 vrt_3 -&gt;vrt_27</span>
@@ -178,7 +176,7 @@ edges_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">el &lt;-<span class="st"> </span><span class="kw">as_edgelist</span>(ig_initial, <span class="dt">names =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <p>We can then construct the <code>network</code> object like so.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nw_initial &lt;-<span class="st"> </span><span class="kw">as.network.matrix</span>(el, <span class="dt">matrix.type =</span> <span class="st">"edgelist"</span>, 
-                                <span class="dt">loops =</span> <span class="ot">TRUE</span>, <span class="dt">multiple =</span> <span class="ot">TRUE</span>, <span class="dt">edge.check =</span> <span class="ot">TRUE</span>)
+                                <span class="dt">multiple =</span> <span class="ot">TRUE</span>, <span class="dt">edge.check =</span> <span class="ot">TRUE</span>)
 
 <span class="cf">for</span>(g <span class="cf">in</span> <span class="kw">names</span>(graph_attrs)) {
   <span class="kw">set.network.attribute</span>(nw_initial, g, graph_attrs[[g]])
@@ -190,21 +188,36 @@ edges_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span 
   <span class="kw">set.edge.attribute</span>(nw_initial, e, edges_df[[e]])
 }</code></pre></div>
 <p>As with <code>ig_initial</code>, we’ll assign a graph-level attribute noting its <code>"original class"</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.network.attribute</span>(nw_initial, <span class="st">"original class"</span>, <span class="st">"network"</span>)
+<p>The resulting objects are relatively complex and contain attributes from a variety of data types at all levels.</p>
+</div>
+</div>
+<div id="simple-conversion" class="section level1">
+<h1 class="hasAnchor">
+<a href="#simple-conversion" class="anchor"></a>Simple Conversion</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/as_igraph.html">as_igraph</a></span>(nw_initial)
+<span class="co">#&gt; IGRAPH 47060f2 DN-- 30 1000 -- </span>
+<span class="co">#&gt; + attr: loops (g/l), net_chr (g/c), is_wow (g/l), net_int (g/n),</span>
+<span class="co">#&gt; | net_dbl (g/n), name (v/c), vrt_chr (v/c), vrt_int (v/n), vrt_dbl</span>
+<span class="co">#&gt; | (v/n), vrt_lgl (v/l), edg_chr (e/c), edg_int (e/n), edg_dbl</span>
+<span class="co">#&gt; | (e/n), edg_lgl (e/l)</span>
+<span class="co">#&gt; + edges from 47060f2 (vertex names):</span>
+<span class="co">#&gt;  [1] vrt_2 -&gt;vrt_13 vrt_4 -&gt;vrt_4  vrt_17-&gt;vrt_11 vrt_3 -&gt;vrt_5 </span>
+<span class="co">#&gt;  [5] vrt_11-&gt;vrt_18 vrt_5 -&gt;vrt_21 vrt_24-&gt;vrt_16 vrt_1 -&gt;vrt_3 </span>
+<span class="co">#&gt;  [9] vrt_18-&gt;vrt_10 vrt_13-&gt;vrt_23 vrt_20-&gt;vrt_13 vrt_3 -&gt;vrt_27</span>
+<span class="co">#&gt; [13] vrt_9 -&gt;vrt_6  vrt_8 -&gt;vrt_28 vrt_24-&gt;vrt_30 vrt_8 -&gt;vrt_10</span>
+<span class="co">#&gt; [17] vrt_9 -&gt;vrt_1  vrt_7 -&gt;vrt_8  vrt_10-&gt;vrt_22 vrt_23-&gt;vrt_22</span>
+<span class="co">#&gt; + ... omitted several edges</span>
 
-nw_initial
+<span class="kw"><a href="../reference/as_network.html">as_network</a></span>(ig_initial)
 <span class="co">#&gt;  Network attributes:</span>
 <span class="co">#&gt;   vertices = 30 </span>
 <span class="co">#&gt;   directed = TRUE </span>
 <span class="co">#&gt;   hyper = FALSE </span>
-<span class="co">#&gt;   loops = TRUE </span>
 <span class="co">#&gt;   multiple = TRUE </span>
-<span class="co">#&gt;   bipartite = FALSE </span>
 <span class="co">#&gt;   net_chr = Much Graph. Many Attributes </span>
 <span class="co">#&gt;   is_wow = TRUE </span>
 <span class="co">#&gt;   net_int = 1 </span>
 <span class="co">#&gt;   net_dbl = 3.14 </span>
-<span class="co">#&gt;   original class = network </span>
 <span class="co">#&gt;   total edges= 1000 </span>
 <span class="co">#&gt;     missing edges= 0 </span>
 <span class="co">#&gt;     non-missing edges= 1000 </span>
@@ -214,61 +227,14 @@ nw_initial
 <span class="co">#&gt; </span>
 <span class="co">#&gt;  Edge attribute names: </span>
 <span class="co">#&gt;     edg_chr edg_dbl edg_int edg_lgl</span></code></pre></div>
-<p>The resulting objects are relatively complex and contain attributes from a variety of data types at all levels.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list</span>(<span class="dt">n =</span> <span class="kw">c</span>(<span class="st">`</span><span class="dt"># Vertices</span><span class="st">`</span> =<span class="st"> </span><span class="kw">vcount</span>(ig_initial), <span class="st">`</span><span class="dt"># Edges</span><span class="st">`</span> =<span class="st"> </span><span class="kw">ecount</span>(ig_initial)),
-     <span class="dt">Edges =</span> <span class="kw">c</span>(<span class="st">`</span><span class="dt">Is Multiplex?</span><span class="st">`</span> =<span class="st"> </span><span class="kw">any</span>(<span class="kw">is.multiple</span>(ig_initial)),
-               <span class="st">`</span><span class="dt">Has Loops?</span><span class="st">`</span> =<span class="st"> </span><span class="kw">any</span>(<span class="kw">is.loop</span>(ig_initial))),
-     <span class="st">`</span><span class="dt">Graph Attributes</span><span class="st">`</span> =<span class="st"> </span><span class="kw">vapply</span>(<span class="kw"><a href="../reference/extract-network-attributes.html">net_get_attrs</a></span>(ig_initial), typeof, <span class="kw">character</span>(<span class="dv">1</span>)),
-     <span class="st">`</span><span class="dt">Vertex Attributes</span><span class="st">`</span> =<span class="st"> </span><span class="kw">vapply</span>(<span class="kw"><a href="../reference/extract-vertex-attributes.html">vrt_get_attrs</a></span>(ig_initial), typeof, <span class="kw">character</span>(<span class="dv">1</span>)),
-     <span class="st">`</span><span class="dt">Edge Attributes</span><span class="st">`</span> =<span class="st"> </span><span class="kw">vapply</span>(<span class="kw"><a href="../reference/extract-edge-attributes.html">edg_get_attrs</a></span>(ig_initial), typeof, <span class="kw">character</span>(<span class="dv">1</span>)))
-<span class="co">#&gt; $n</span>
-<span class="co">#&gt; # Vertices    # Edges </span>
-<span class="co">#&gt;         30       1000 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $Edges</span>
-<span class="co">#&gt; Is Multiplex?    Has Loops? </span>
-<span class="co">#&gt;          TRUE          TRUE </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $`Graph Attributes`</span>
-<span class="co">#&gt;        net_chr         is_wow        net_int        net_dbl original class </span>
-<span class="co">#&gt;    "character"      "logical"      "integer"       "double"    "character" </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $`Vertex Attributes`</span>
-<span class="co">#&gt;        name     vrt_chr     vrt_int     vrt_dbl     vrt_lgl </span>
-<span class="co">#&gt; "character" "character"   "integer"    "double"   "logical" </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $`Edge Attributes`</span>
-<span class="co">#&gt;     edg_chr     edg_int     edg_dbl     edg_lgl </span>
-<span class="co">#&gt; "character"   "integer"    "double"   "logical"</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nw_initial <span class="op">%==%</span><span class="st"> </span><span class="kw"><a href="../reference/as_network.html">as_network</a></span>(<span class="kw"><a href="../reference/as_igraph.html">as_igraph</a></span>(nw_initial))
+<span class="co">#&gt; [1] TRUE</span>
 
-<span class="kw">list</span>(<span class="dt">n =</span> <span class="kw">c</span>(<span class="st">`</span><span class="dt"># Vertices</span><span class="st">`</span> =<span class="st"> </span><span class="kw">network.size</span>(nw_initial),
-           <span class="st">`</span><span class="dt"># Edges</span><span class="st">`</span> =<span class="st"> </span><span class="kw">network.edgecount</span>(nw_initial)),
-     <span class="dt">Edges =</span> <span class="kw">c</span>(<span class="st">`</span><span class="dt">Is Multiplex?</span><span class="st">`</span> =<span class="st"> </span><span class="kw">is.multiplex</span>(nw_initial),
-               <span class="st">`</span><span class="dt">Has Loops?</span><span class="st">`</span> =<span class="st"> </span><span class="kw">has.loops</span>(nw_initial)),
-     <span class="st">`</span><span class="dt">Graph Attributes</span><span class="st">`</span> =<span class="st"> </span><span class="kw">vapply</span>(<span class="kw"><a href="../reference/extract-network-attributes.html">net_get_attrs</a></span>(nw_initial), typeof, <span class="kw">character</span>(<span class="dv">1</span>)),
-     <span class="st">`</span><span class="dt">Vertex Attributes</span><span class="st">`</span> =<span class="st"> </span><span class="kw">vapply</span>(<span class="kw"><a href="../reference/extract-vertex-attributes.html">vrt_get_attrs</a></span>(nw_initial), typeof, <span class="kw">character</span>(<span class="dv">1</span>)),
-     <span class="st">`</span><span class="dt">Edge Attributes</span><span class="st">`</span> =<span class="st"> </span><span class="kw">vapply</span>(<span class="kw"><a href="../reference/extract-edge-attributes.html">edg_get_attrs</a></span>(nw_initial), typeof, <span class="kw">character</span>(<span class="dv">1</span>)))
-<span class="co">#&gt; $n</span>
-<span class="co">#&gt; # Vertices    # Edges </span>
-<span class="co">#&gt;         30       1000 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $Edges</span>
-<span class="co">#&gt; Is Multiplex?    Has Loops? </span>
-<span class="co">#&gt;          TRUE          TRUE </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $`Graph Attributes`</span>
-<span class="co">#&gt;          loops        net_chr         is_wow        net_int        net_dbl </span>
-<span class="co">#&gt;      "logical"    "character"      "logical"      "integer"       "double" </span>
-<span class="co">#&gt; original class </span>
-<span class="co">#&gt;    "character" </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $`Vertex Attributes`</span>
-<span class="co">#&gt; vertex.names      vrt_chr      vrt_int      vrt_dbl      vrt_lgl </span>
-<span class="co">#&gt;  "character"  "character"    "integer"     "double"    "logical" </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $`Edge Attributes`</span>
-<span class="co">#&gt;     edg_chr     edg_int     edg_dbl     edg_lgl </span>
-<span class="co">#&gt; "character"   "integer"    "double"   "logical"</span></code></pre></div>
+ig_initial <span class="op">%==%</span><span class="st"> </span><span class="kw"><a href="../reference/as_igraph.html">as_igraph</a></span>(<span class="kw"><a href="../reference/as_network.html">as_network</a></span>(ig_initial))
+<span class="co">#&gt; [1] TRUE</span>
+
+nw_initial <span class="op">%==%</span><span class="st"> </span>ig_initial
+<span class="co">#&gt; [1] TRUE</span></code></pre></div>
 <!-- # Graph Cleaning -->
 <!-- In order to confirm that an `igraph` or `network` object can make a round-trip conversion with its internal data remaining intact, we want to standardize its contents. This is the purpose of `clean_graph()`, which is equipped with `clean_graph.igraph()` and `clean_graph.network()` methods. -->
 <!-- Here, we clean `ig_initial` to create `ig_clean`. -->
@@ -429,7 +395,6 @@ nw_initial
 <!-- southern_women_nw %==% as_network(as_igraph(southern_women_nw)) -->
 <!-- ``` -->
 </div>
-</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -443,6 +408,7 @@ nw_initial
       <li><a href="#network"><code>network</code></a></li>
       </ul>
 </li>
+      <li><a href="#simple-conversion">Simple Conversion</a></li>
       </ul>
 </div>
       </div>

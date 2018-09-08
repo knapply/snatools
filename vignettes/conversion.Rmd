@@ -78,12 +78,6 @@ ig_initial <- graph_from_data_frame(edges_df, vertices = vertices_df)
 graph_attr(ig_initial) <- graph_attrs
 ```
 
-We'll also set a graph-level attribute noting its `"original class"`.
-
-```{r}
-graph_attr(ig_initial, "original class") <- "igraph"
-```
-
 ```{r}
 ig_initial
 ```
@@ -108,7 +102,7 @@ We can then construct the `network` object like so.
 
 ```{r}
 nw_initial <- as.network.matrix(el, matrix.type = "edgelist", 
-                                loops = TRUE, multiple = TRUE, edge.check = TRUE)
+                                multiple = TRUE, edge.check = TRUE)
 
 for(g in names(graph_attrs)) {
   set.network.attribute(nw_initial, g, graph_attrs[[g]])
@@ -123,30 +117,25 @@ for(e in names(edges_df)[!names(edges_df) %in% c("from", "to")]) {
 
 As with `ig_initial`, we'll assign a graph-level attribute noting its `"original class"`.
 
-```{r}
-set.network.attribute(nw_initial, "original class", "network")
-
-nw_initial
-```
-
 The resulting objects are relatively complex and contain attributes from a variety of data types at all levels.
 
-```{r}
-list(n = c(`# Vertices` = vcount(ig_initial), `# Edges` = ecount(ig_initial)),
-     Edges = c(`Is Multiplex?` = any(is.multiple(ig_initial)),
-               `Has Loops?` = any(is.loop(ig_initial))),
-     `Graph Attributes` = vapply(net_get_attrs(ig_initial), typeof, character(1)),
-     `Vertex Attributes` = vapply(vrt_get_attrs(ig_initial), typeof, character(1)),
-     `Edge Attributes` = vapply(edg_get_attrs(ig_initial), typeof, character(1)))
+# Simple Conversion
 
-list(n = c(`# Vertices` = network.size(nw_initial),
-           `# Edges` = network.edgecount(nw_initial)),
-     Edges = c(`Is Multiplex?` = is.multiplex(nw_initial),
-               `Has Loops?` = has.loops(nw_initial)),
-     `Graph Attributes` = vapply(net_get_attrs(nw_initial), typeof, character(1)),
-     `Vertex Attributes` = vapply(vrt_get_attrs(nw_initial), typeof, character(1)),
-     `Edge Attributes` = vapply(edg_get_attrs(nw_initial), typeof, character(1)))
+```{r}
+as_igraph(nw_initial)
+
+as_network(ig_initial)
 ```
+
+```{r}
+nw_initial %==% as_network(as_igraph(nw_initial))
+
+ig_initial %==% as_igraph(as_network(ig_initial))
+
+nw_initial %==% ig_initial
+```
+
+
 
 <!-- # Graph Cleaning -->
 

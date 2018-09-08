@@ -1,3 +1,37 @@
+#' @importFrom rlang is_named
+sort_list_by_name <- function(x) {
+  if(is_named(x)) {
+    return(x[order(names(x))])
+  }
+  x
+}
+
+clear_metadata <- function(x) {
+  metadata <- c("n", "directed", "hyper", "loops", "multiple", "bipartite", "mnext")
+  out <- x[!names(x) %in% metadata]
+  sort_list_by_name(out)
+}
+
+dissect_graph <- function(x) {
+  net_attrs = net_get_attrs(x)
+  vrt_attrs = vrt_get_attrs(x)
+  edg_attrs = edg_get_attrs(x)
+  el <- rep_edgelist(x)
+  
+  if(class(x) == "network") {
+    vrt_attrs$name <- vrt_attrs$vertex.names
+    vrt_attrs$vertex.names <- NULL
+    net_attrs <- clear_metadata(net_attrs)
+  }
+  out <- list(net_attrs = sort_list_by_name(net_attrs),
+              vrt_attrs = sort_list_by_name(vrt_attrs),
+              edg_attrs = sort_list_by_name(edg_attrs),
+              el = el)
+  out
+}
+
+  
+
 clean_network_metadata <- function(x) {
   if(class(x) != "network") {
     stop("`fill_network_metadata()` is only applicable to `network` objects.")

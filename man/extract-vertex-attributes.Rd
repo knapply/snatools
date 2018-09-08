@@ -4,9 +4,6 @@
 \alias{vrt_get_attrs}
 \alias{vrt_get_attrs.igraph}
 \alias{vrt_get_attrs.network}
-\alias{vrt_get_attrs_df}
-\alias{vrt_get_attrs_df.igraph}
-\alias{vrt_get_attrs_df.network}
 \alias{vrt_get_attr}
 \alias{vrt_get_attr.igraph}
 \alias{vrt_get_attr.network}
@@ -23,12 +20,6 @@ vrt_get_attrs(x, ...)
 \method{vrt_get_attrs}{igraph}(x)
 
 \method{vrt_get_attrs}{network}(x, ignore_na = TRUE)
-
-vrt_get_attrs_df(x, ...)
-
-\method{vrt_get_attrs_df}{igraph}(x, try_tibble = TRUE, ...)
-
-\method{vrt_get_attrs_df}{network}(x, try_tibble = TRUE, ...)
 
 vrt_get_attr(x, vrt_attr)
 
@@ -57,14 +48,10 @@ vrt_get_attr_names(x, ...)
 \code{\link[network:network]{network::network}} objects. \cr
 Default: \code{TRUE}}
 
-\item{try_tibble}{\code{logical}.
-Whether to attempt calling \code{\link[tibble:as_tibble]{tibble::as_tibble()}} in \code{vrt_get_attrs_df()}. \cr
-Default: \code{TRUE}}
-
 \item{vrt_attr}{\code{character}. Name of target attribute.}
 }
 \value{
-A named \code{list}, \code{vector}, \code{data.frame}, or \code{\link[tibble:tibble]{tibble::tibble}}. See Details.
+A named \code{list}, \code{vector}, or \code{\link[tibble:tibble]{tibble::tibble}}. See Details.
 }
 \description{
 Extract vertex attributes in a variety of formats consistent across
@@ -73,16 +60,6 @@ Extract vertex attributes in a variety of formats consistent across
 \details{
 \itemize{
 \item \code{vrt_get_attrs()} extracts all vertex attributes as a named \code{list}.
-}
-
-\itemize{
-\item \code{vrt_get_attrs_df()} is a convenience wrapper around \code{vrt_get_attrs()} that returns a
-\code{data.frame}.
-\itemize{
-\item \code{stringsAsFactors} is \emph{always} \code{FALSE}.
-\item If \code{try_tibble} is \code{TRUE} and the \code{tibble} package is available,
-a \code{\link[tibble:tibble]{tibble::tibble}} is returned.
-}
 }
 
 \itemize{
@@ -111,17 +88,13 @@ attribute names alphabetically.
 \examples{
 library(snatools)
 
-data("karate", package = "igraphdata")
-(ig <- karate)
+data("sampson_monastery")
 
-data("emon", package = "network")
-(nw <- emon$Cheyenne)
+(ig <- as_igraph(sampson_monastery))
+(nw <- as_network(sampson_monastery))
 
 vrt_get_attrs(ig)
 vrt_get_attrs(nw)
-
-vrt_get_attrs_df(ig)
-vrt_get_attrs_df(nw)
 
 vrt_get_attr(ig, vrt_attr = "Faction")
 vrt_get_attr(nw, vrt_attr = "Sponsorship")
@@ -135,8 +108,6 @@ vrt_get_attr_names(nw)
 }
 \seealso{
 \code{\link[igraph:vertex_attr]{igraph::vertex_attr()}}
-
-\code{\link[igraph:as_data_frame]{igraph::as_data_frame()}}, \code{\link[tibble:as_tibble]{tibble::as_tibble()}}
 
 \code{\link[igraph:vertex_attr]{igraph::vertex_attr()}}, \code{\link[network:get.vertex.attribute]{network::get.vertex.attribute()}}
 
