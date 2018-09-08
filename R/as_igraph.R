@@ -77,63 +77,63 @@ as_igraph.tbl_graph <- function(x, ...) {
   tidygraph::as.igraph(x, ...)
 }
 
-#' @rdname as_igraph
-#' 
-#' @export
-#' 
-as_igraph.ucinet <- function(x, ...) {
-  graph_mode <- vapply(attr(x, "is_directed"), function(x) {
-    switch(x, "TRUE" = "directed", "FALSE" = "undirected")
-    }, character(1), USE.NAMES = FALSE)
-  if (attr(x, "is_list")) {
-    # TODO throws error if `weighted` is NULL, NA, or FALSE when `directed=TRUE`... 
-    # TODO docs don't clarify, so resorting to explicit loops now
-    is_weighted <- vapply(x, function(x) {
-      any(!x %in% c(0, 1))
-    }, logical(1))
-    
-    if (nrow(x[[1]]) == ncol(x[[1]])) {
-        out <- vector("list", length = length(x))
-        for (i in seq_along(x)) {
-          if (is_weighted[[i]]) {
-            out[[i]] <- igraph::graph_from_adjacency_matrix(adjmatrix = x[[i]],
-                                                            mode = graph_mode[[i]],
-                                                            weighted = is_weighted[[i]])
-          } else {
-            out[[i]] <- igraph::graph_from_adjacency_matrix(adjmatrix = x[[i]],
-                                                            mode = graph_mode[[i]])
-          }
-        }
-      names(out) <- names(x)
-      return(out)
-    }
-    out <- vector("list", length = length(x))
-    for (i in seq_along(x)) {
-      if (is_weighted[[i]]) {
-        out[[i]] <- igraph::graph_from_incidence_matrix(adjmatrix = x[[i]],
-                                                        weighted = is_weighted[[i]])
-        } else {
-          out[[i]] <- igraph::graph_from_incidence_matrix(adjmatrix = x[[i]])
-        }
-      }
-    names(out) <- names(x)
-    return(out)
-    }
-  is_weighted <- any(!x %in% c(0, 1))
-  if (nrow(x) == ncol(x)) {
-    if (is_weighted) {
-      return(igraph::graph_from_adjacency_matrix(adjmatrix = x, mode = graph_mode, 
-                                                 weighted = is_weighted))
-    }
-    return(igraph::graph_from_adjacency_matrix(adjmatrix = x, mode = graph_mode))
-  }
-  if (is_weighted) {
-    return(
-      igraph::graph_from_incidence_matrix(incidence = x, weighted = is_weighted)
-      )
-  }
-  igraph::graph_from_incidence_matrix(incidence = x)
-}
+#' #' @rdname as_igraph
+#' #' 
+#' #' @export
+#' #' 
+#' as_igraph.ucinet <- function(x, ...) {
+#'   graph_mode <- vapply(attr(x, "is_directed"), function(x) {
+#'     switch(x, "TRUE" = "directed", "FALSE" = "undirected")
+#'     }, character(1), USE.NAMES = FALSE)
+#'   if (attr(x, "is_list")) {
+#'     # TODO throws error if `weighted` is NULL, NA, or FALSE when `directed=TRUE`... 
+#'     # TODO docs don't clarify, so resorting to explicit loops now
+#'     is_weighted <- vapply(x, function(x) {
+#'       any(!x %in% c(0, 1))
+#'     }, logical(1))
+#'     
+#'     if (nrow(x[[1]]) == ncol(x[[1]])) {
+#'         out <- vector("list", length = length(x))
+#'         for (i in seq_along(x)) {
+#'           if (is_weighted[[i]]) {
+#'             out[[i]] <- igraph::graph_from_adjacency_matrix(adjmatrix = x[[i]],
+#'                                                             mode = graph_mode[[i]],
+#'                                                             weighted = is_weighted[[i]])
+#'           } else {
+#'             out[[i]] <- igraph::graph_from_adjacency_matrix(adjmatrix = x[[i]],
+#'                                                             mode = graph_mode[[i]])
+#'           }
+#'         }
+#'       names(out) <- names(x)
+#'       return(out)
+#'     }
+#'     out <- vector("list", length = length(x))
+#'     for (i in seq_along(x)) {
+#'       if (is_weighted[[i]]) {
+#'         out[[i]] <- igraph::graph_from_incidence_matrix(adjmatrix = x[[i]],
+#'                                                         weighted = is_weighted[[i]])
+#'         } else {
+#'           out[[i]] <- igraph::graph_from_incidence_matrix(adjmatrix = x[[i]])
+#'         }
+#'       }
+#'     names(out) <- names(x)
+#'     return(out)
+#'     }
+#'   is_weighted <- any(!x %in% c(0, 1))
+#'   if (nrow(x) == ncol(x)) {
+#'     if (is_weighted) {
+#'       return(igraph::graph_from_adjacency_matrix(adjmatrix = x, mode = graph_mode, 
+#'                                                  weighted = is_weighted))
+#'     }
+#'     return(igraph::graph_from_adjacency_matrix(adjmatrix = x, mode = graph_mode))
+#'   }
+#'   if (is_weighted) {
+#'     return(
+#'       igraph::graph_from_incidence_matrix(incidence = x, weighted = is_weighted)
+#'       )
+#'   }
+#'   igraph::graph_from_incidence_matrix(incidence = x)
+#' }
 
 
 

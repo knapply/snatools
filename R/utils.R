@@ -14,7 +14,14 @@ clear_metadata <- function(x) {
 
 dissect_graph <- function(x) {
   net_attrs = net_get_attrs(x)
+  if (length(unlist(net_attrs)) == 0L | all(is.na(unlist(net_attrs)))) {
+    net_attrs <- NULL
+  }
   vrt_attrs = vrt_get_attrs(x)
+  if ("is_actor" %in% vrt_get_attr_names(x)) {
+    vrt_attrs$type <- vrt_attrs$is_actor
+    vrt_attrs$is_actor <- NULL
+  }
   edg_attrs = edg_get_attrs(x)
   el <- rep_edgelist(x)
   

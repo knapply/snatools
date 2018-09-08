@@ -40,19 +40,19 @@
   if(class(lhs) %in% c("igraph", "network") && class(rhs) %in% c("igraph", "network")) {
     lhs_guts <- dissect_graph(lhs)
     rhs_guts <- dissect_graph(rhs)
-    if(!identical(lhs_guts$net_attrs, rhs_guts$net_attrs)) {
+    if(!identical(lhs_guts$net_attrs, rhs_guts$net_attrs, ignore.environment = TRUE)) {
       message("graph-level attributes don't match")
       return(FALSE)
     }
-    if(!identical(lhs_guts$edg_attrs, rhs_guts$edg_attrs)) {
+    if(!identical(lhs_guts$edg_attrs, rhs_guts$edg_attrs, ignore.environment = TRUE)) {
       message("edge attributes don't match")
       return(FALSE)
     }
-    if(!identical(lhs_guts$vrt_attrs, rhs_guts$vrt_attrs)) {
+    if(!identical(lhs_guts$vrt_attrs, rhs_guts$vrt_attrs, ignore.environment = TRUE)) {
       message("vertex attributes don't match")
       return(FALSE)
     }
-    if(!identical(lhs_guts$el, rhs_guts$el)) {
+    if(!identical(lhs_guts$el, rhs_guts$el, ignore.environment = TRUE)) {
       message("edge lists don't match")
       return(FALSE)
     }

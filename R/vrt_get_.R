@@ -75,8 +75,8 @@ vrt_get_attrs.network <- function(x, ignore_na = TRUE) {
 #' [`igraph::vertex_attr()`], [`network::get.vertex.attribute()`]
 #' 
 #' @examples
-#' vrt_get_attr(ig, vrt_attr = "Faction")
-#' vrt_get_attr(nw, vrt_attr = "Sponsorship")
+#' vrt_get_attr(ig, vrt_attr = "faction")
+#' vrt_get_attr(nw, vrt_attr = "status")
 #' 
 #' @export
 #' 
@@ -86,7 +86,6 @@ vrt_get_attr <- function(x, vrt_attr) {
 
 #' @rdname extract-vertex-attributes
 #' 
-#' @importFrom igraph vertex_attr
 #' @export
 vrt_get_attr.igraph <- function(x, vrt_attr) {
   if(!vrt_attr %in% vrt_get_attr_names(x)) {
