@@ -235,10 +235,10 @@ attribute names alphabetically.</p></li>
 
 <span class='fu'>data</span>(<span class='st'>"sampson_monastery"</span>)
 
-(<span class='no'>ig</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_igraph.html'>as_igraph</a></span>(<span class='no'>sampson_monastery</span>))</div><div class='output co'>#&gt; IGRAPH 3e2c8d0 DNW- 18 510 -- 
+(<span class='no'>ig</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_igraph.html'>as_igraph</a></span>(<span class='no'>sampson_monastery</span>))</div><div class='output co'>#&gt; IGRAPH 58a37cf DNW- 18 510 -- 
 #&gt; + attr: name (v/c), faction (v/c), cloisterville (v/l), status (v/c),
 #&gt; | weight (e/n), relation (e/c), time (e/n), positive_relation (e/l)
-#&gt; + edges from 3e2c8d0 (vertex names):
+#&gt; + edges from 58a37cf (vertex names):
 #&gt;  [1] Romauld    -&gt;Ambrose     Romauld    -&gt;Peter       Romauld    -&gt;Albert     
 #&gt;  [4] Bonaventure-&gt;Romauld     Bonaventure-&gt;Victor      Bonaventure-&gt;Albert     
 #&gt;  [7] Ambrose    -&gt;Romauld     Ambrose    -&gt;Bonaventure Ambrose    -&gt;Elias      
@@ -301,7 +301,14 @@ attribute names alphabetically.</p></li>
 #&gt; 16 Basil        Outcasts    TRUE          Expelled        
 #&gt; 17 Elias        Outcasts    FALSE         Expelled        
 #&gt; 18 Simplicius   Outcasts    FALSE         Expelled        </div><div class='input'>
-<span class='fu'>vrt_get_attr</span>(<span class='no'>ig</span>, <span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='st'>"Faction"</span>)</div><div class='output co'>#&gt; <span class='error'>Error: `vrt_attr` is not a vertex attribute in `x`</span></div><div class='input'><span class='fu'>vrt_get_attr</span>(<span class='no'>nw</span>, <span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='st'>"Sponsorship"</span>)</div><div class='output co'>#&gt; <span class='error'>Error: `vrt_attr` is not a vertex attribute in `x`</span></div><div class='input'>
+<span class='fu'>vrt_get_attr</span>(<span class='no'>ig</span>, <span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='st'>"faction"</span>)</div><div class='output co'>#&gt;  [1] "Waverers"    "Loyal"       "Loyal"       "Loyal"       "Loyal"      
+#&gt;  [6] "Loyal"       "Waverers"    "Young Turks" "Young Turks" "Young Turks"
+#&gt; [11] "Young Turks" "Young Turks" "Young Turks" "Young Turks" "Waverers"   
+#&gt; [16] "Outcasts"    "Outcasts"    "Outcasts"   </div><div class='input'><span class='fu'>vrt_get_attr</span>(<span class='no'>nw</span>, <span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='st'>"status"</span>)</div><div class='output co'>#&gt;  [1] "Remained"         "Remained"         "Remained"         "Remained"        
+#&gt;  [5] "Remained"         "Remained"         "Remained"         "Remained"        
+#&gt;  [9] "Left Voluntarily" "Expelled"         "Left Voluntarily" "Left Voluntarily"
+#&gt; [13] "Left Voluntarily" "Left Voluntarily" "Remained"         "Expelled"        
+#&gt; [17] "Expelled"         "Expelled"        </div><div class='input'>
 <span class='fu'>vrt_get_names</span>(<span class='no'>ig</span>)</div><div class='output co'>#&gt;  [1] "Romauld"     "Bonaventure" "Ambrose"     "Berthold"    "Peter"      
 #&gt;  [6] "Louis"       "Victor"      "Winfrid"     "John Bosco"  "Gregory"    
 #&gt; [11] "Hugh"        "Boniface"    "Mark"        "Albert"      "Amand"      

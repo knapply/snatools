@@ -46,69 +46,27 @@ of the second mode, e.g. "events").
 \examples{
 library(snatools)
 
-# `igraph` to `network` ===============================================================
-## undirected =========================================================================
-data("karate", package = "igraphdata")
-karate
+data("sampson_monastery")
+  
+sampson_monastery \%>\% 
+  as_network()
+  
+sampson_monastery \%>\% 
+  as_igraph() \%>\% 
+  as_network()
 
-as_network(karate)
+as_igraph(sampson_monastery) \%==\% as_network(sampson_monastery)
 
-## directed ===========================================================================
-data("USairports", package = "igraphdata")
+data("davis_southern_women")
 
-USairports
-
-as_network(USairports)
-
-## bipartite ==========================================================================
-southern_women_matrix <- matrix(
-  c(1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0,
-    1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 
-    1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 
-    0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,
-    1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 
-    1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1,
-    1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 
-    0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0,
-    0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 
-    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0),
-  nrow = 14L, ncol = 18L,
-  dimnames = list(
-    c("E1", "E2", "E3", "E4", "E5", "E6", "E7",
-      "E8", "E9", "E10", "E11", "E12", "E13", "E14"),
-    c("EVELYN", "LAURA", "THERESA", "BRENDA", "CHARLOTTE", "FRANCES",
-      "ELEANOR", "PEARL", "RUTH", "VERNE", "MYRNA", "KATHERINE", 
-      "SYLVIA", "NORA", "HELEN", "DOROTHY", "OLIVIA", "FLORA"))
- )
-
-southern_women_ig <- igraph::graph_from_incidence_matrix(southern_women_matrix)
-
-southern_women_ig
-
-vrt_get_attrs(southern_women_ig)
-
-as_network(southern_women_ig)
-
-## using `actor_type` to specify bipartite mapping ====================================
-
-sw_transposed <- t(southern_women_matrix)
-
-southern_women_with_actors_false <- igraph::graph_from_incidence_matrix(sw_transposed)
-
-vrt_get_attrs(southern_women_with_actors_false)
-
-as_network(southern_women_with_actors_false, actor_type = FALSE)
-
-# `tbl_graph` to `network` ============================================================
-tidy_g <- tidygraph::create_notable("Zachary")
-
-tidy_g
-
-as_network(tidy_g)
+davis_southern_women \%>\% # bipartite
+  as_network()
+  
+davis_southern_women \%>\% 
+  as_igraph() \%>\% 
+  as_network()
+  
+as_network(davis_southern_women) \%==\% as_igraph(davis_southern_women)
 
 }
 \seealso{

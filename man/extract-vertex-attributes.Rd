@@ -96,8 +96,8 @@ data("sampson_monastery")
 vrt_get_attrs(ig)
 vrt_get_attrs(nw)
 
-vrt_get_attr(ig, vrt_attr = "Faction")
-vrt_get_attr(nw, vrt_attr = "Sponsorship")
+vrt_get_attr(ig, vrt_attr = "faction")
+vrt_get_attr(nw, vrt_attr = "status")
 
 vrt_get_names(ig)
 vrt_get_names(nw)
