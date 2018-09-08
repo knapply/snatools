@@ -49,12 +49,12 @@ bip_clarify_actors <- function(x) {
   if(!net_is_bipartite(x)) {
     stop("`bip_clarify_actors()` is only applicable to bipartite `network` objects.")
   }
-  actor_n <- x$gal$bipartite
-  vrt_n <- x$gal$n
-  is_actor_attr <- c(rep(TRUE, actor_n), rep(FALSE, vrt_n - actor_n))
-  
-  network::set.vertex.attribute(x, "is_actor", is_actor_attr) # assigns invisibly
-  
+  if(!"is_actor" %in% vrt_get_attr_names(x)) {
+    actor_n <- x$gal$bipartite
+    vrt_n <- x$gal$n
+    is_actor_attr <- c(rep(TRUE, actor_n), rep(FALSE, vrt_n - actor_n))
+    network::set.vertex.attribute(x, "is_actor", is_actor_attr) # modifies in-place
+  }
   x
 }
 

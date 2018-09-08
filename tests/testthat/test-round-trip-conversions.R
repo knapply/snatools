@@ -15,6 +15,9 @@ test_that("undirected igraph makes round trip unchanged", {
   expect_true(ig_undir %==% as_igraph(as_network(ig_undir)))
 })
 
+as_igraph(as_network(ig_undir)) %>% snatools:::edg_get_attrs.igraph()
+ig_undir %>% snatools:::edg_get_attrs.igraph()
+
 test_that("undirected network makes round trip unchanged", {
   expect_true(nw_undir %==% as_network(as_igraph(nw_undir)))
 })
@@ -60,8 +63,8 @@ sw_matrix <- matrix(
 ig_bipart <- igraph::graph_from_incidence_matrix(sw_matrix) %>% 
   igraph::permute.vertices(sample(igraph::V(.))) 
 
-nw_bipart <- network::as.network.matrix(t(sw_matrix), bipartite = TRUE) %>% 
-  bip_clarify_actors()
+nw_bipart <- network::as.network.matrix(t(sw_matrix), bipartite = TRUE) #%>% 
+  # bip_clarify_actors()
 
 nw_bipart_swap <- network::as.network.matrix(sw_matrix, bipartite = TRUE) %>% 
   bip_swap_modes()

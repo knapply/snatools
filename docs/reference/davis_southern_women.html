@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Davis' Southern Women — southern_women • snatools</title>
+<title>Davis' Southern Women — davis_southern_women • snatools</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,7 +30,7 @@
 
 
 
-<meta property="og:title" content="Davis' Southern Women — southern_women" />
+<meta property="og:title" content="Davis' Southern Women — davis_southern_women" />
 
 <meta property="og:description" content="Davis' Southern Women" />
 
@@ -129,7 +129,7 @@
     <div class="page-header">
     <h1>Davis' Southern Women</h1>
     <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/data.R'><code>R/data.R</code></a></small>
-    <div class="hidden name"><code>southern_women.Rd</code></div>
+    <div class="hidden name"><code>davis_southern_women.Rd</code></div>
     </div>
 
     <div class="ref-description">
@@ -138,15 +138,25 @@
     
     </div>
 
-    <pre class="usage"><span class='no'>southern_women</span></pre>
+    <pre class="usage"><span class='no'>davis_southern_women</span></pre>
         
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p><code>igraph</code></p>
+    <p><code>network_dataset</code></p>
     
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
     <p><a href='http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/ucidata.htm'>http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/ucidata.htm</a></p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p><strong>Background</strong>, adapted from <a href='http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/ucidata.htm'>http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/ucidata.htm</a>: <br /></p><ul>
+<li><p>In the 1950s John Gagnon collected sociometric choice data from 67 prison inmates. All
+were asked, "What fellows on the tier are you closest friends with?" Each was free to
+choose as few or as many "friends" as he desired. The data were analyzed by MacRae and
+characterized by him as "less clear cut" in their internal structure than similar data
+from schools or residential populations.</p></li>
+</ul>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
@@ -157,7 +167,80 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'><span class='fu'>data</span>(<span class='st'>"davis_southern_women"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"snatools"</span>)
+
+<span class='no'>davis_southern_women</span></div><div class='output co'>#&gt; $directed
+#&gt; [1] FALSE
+#&gt; 
+#&gt; $bipartite
+#&gt; [1] TRUE
+#&gt; 
+#&gt; $multiple
+#&gt; [1] FALSE
+#&gt; 
+#&gt; $loops
+#&gt; [1] FALSE
+#&gt; 
+#&gt; $edges
+#&gt; # A tibble: 93 x 2
+#&gt;    from   to   
+#&gt;  * &lt;chr&gt;  &lt;chr&gt;
+#&gt;  1 EVELYN E1   
+#&gt;  2 EVELYN E2   
+#&gt;  3 EVELYN E3   
+#&gt;  4 EVELYN E4   
+#&gt;  5 EVELYN E5   
+#&gt;  6 EVELYN E6   
+#&gt;  7 EVELYN E8   
+#&gt;  8 EVELYN E9   
+#&gt;  9 LAURA  E1   
+#&gt; 10 LAURA  E2   
+#&gt; # ... with 83 more rows
+#&gt; 
+#&gt; $vertices
+#&gt; # A tibble: 32 x 2
+#&gt;    name      type 
+#&gt;  * &lt;chr&gt;     &lt;lgl&gt;
+#&gt;  1 EVELYN    TRUE 
+#&gt;  2 LAURA     TRUE 
+#&gt;  3 THERESA   TRUE 
+#&gt;  4 BRENDA    TRUE 
+#&gt;  5 CHARLOTTE TRUE 
+#&gt;  6 FRANCES   TRUE 
+#&gt;  7 ELEANOR   TRUE 
+#&gt;  8 PEARL     TRUE 
+#&gt;  9 RUTH      TRUE 
+#&gt; 10 VERNE     TRUE 
+#&gt; # ... with 22 more rows
+#&gt; 
+#&gt; attr(,"class")
+#&gt; [1] "network_dataset"</div><div class='input'>
+<span class='fu'><a href='as_igraph.html'>as_igraph</a></span>(<span class='no'>davis_southern_women</span>)</div><div class='output co'>#&gt; IGRAPH 399c701 UN-B 32 93 -- 
+#&gt; + attr: name (v/c), type (v/l)
+#&gt; + edges from 399c701 (vertex names):
+#&gt;  [1] EVELYN   --E1 EVELYN   --E2 EVELYN   --E3 EVELYN   --E4 EVELYN   --E5
+#&gt;  [6] EVELYN   --E6 EVELYN   --E8 EVELYN   --E9 LAURA    --E1 LAURA    --E2
+#&gt; [11] LAURA    --E3 LAURA    --E5 LAURA    --E6 LAURA    --E7 LAURA    --E8
+#&gt; [16] THERESA  --E2 THERESA  --E3 THERESA  --E4 THERESA  --E5 THERESA  --E6
+#&gt; [21] THERESA  --E7 THERESA  --E8 THERESA  --E9 BRENDA   --E1 BRENDA   --E3
+#&gt; [26] BRENDA   --E4 BRENDA   --E5 BRENDA   --E6 BRENDA   --E7 BRENDA   --E8
+#&gt; [31] CHARLOTTE--E3 CHARLOTTE--E4 CHARLOTTE--E5 CHARLOTTE--E7 FRANCES  --E3
+#&gt; [36] FRANCES  --E5 FRANCES  --E6 FRANCES  --E8 ELEANOR  --E5 ELEANOR  --E6
+#&gt; + ... omitted several edges</div><div class='input'>
+<span class='fu'><a href='as_network.html'>as_network</a></span>(<span class='no'>davis_southern_women</span>)</div><div class='output co'>#&gt;  Network attributes:
+#&gt;   vertices = 32 
+#&gt;   directed = FALSE 
+#&gt;   hyper = FALSE 
+#&gt;   multiple = FALSE 
+#&gt;   bipartite = 18 
+#&gt;   total edges= 93 
+#&gt;     missing edges= 0 
+#&gt;     non-missing edges= 93 
+#&gt; 
+#&gt;  Vertex attribute names: 
+#&gt;     is_actor vertex.names 
+#&gt; 
+#&gt; No edge attributes</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -167,6 +250,8 @@
       <li><a href="#format">Format</a></li>
 
       <li><a href="#source">Source</a></li>
+
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#references">References</a></li>
       

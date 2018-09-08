@@ -2,24 +2,24 @@
 % Please edit documentation in R/as_igraph.R
 \name{as_igraph}
 \alias{as_igraph}
-\alias{as_igraph.network}
-\alias{as_igraph.default}
 \alias{as_igraph.igraph}
-\alias{as_igraph.ucinet}
+\alias{as_igraph.network_dataset}
+\alias{as_igraph.network}
 \alias{as_igraph.tbl_graph}
+\alias{as_igraph.ucinet}
 \title{Conversion to \code{igraph} objects.}
 \usage{
 as_igraph(x, ...)
 
-\method{as_igraph}{network}(x, clean_graph = TRUE, actor_type = TRUE)
-
-\method{as_igraph}{default}(x, ...)
-
 \method{as_igraph}{igraph}(x)
 
-\method{as_igraph}{ucinet}(x, ...)
+\method{as_igraph}{network_dataset}(x)
+
+\method{as_igraph}{network}(x)
 
 \method{as_igraph}{tbl_graph}(x, ...)
+
+\method{as_igraph}{ucinet}(x, ...)
 }
 \arguments{
 \item{x}{\code{\link[network:network]{network::network}} object.}

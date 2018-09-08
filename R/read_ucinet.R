@@ -2,8 +2,28 @@
 #' 
 #' @param path Path to file or URL.
 #' 
-#' @return A `ucinet` object.
+#' @return A `network_dataset` object.
+#' 
+#' @examples 
+#' library(snatools)
+#' 
+#' "http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/sampson.dat" %>%
+#'   read_ucinet()
+#'   
+#' "http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/davis.dat" %>% 
+#'   read_ucinet() %>% 
+#'   as_igraph()
+#'   
+#' "http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/newfrat.dat" %>% 
+#'   read_ucinet() %>% 
+#'   as_network()
 #'
+#' @importFrom dplyr bind_rows distinct everything mutate select
+#' @importFrom igraph as_data_frame graph_from_adjacency_matrix graph_from_incidence_matrix
+#' @importFrom igraph is_bipartite is_directed is.igraph is.loop is.multiple
+#' @importFrom magrittr %>%
+#' @importFrom purrr imap map map_df
+#' @importFrom tibble as_tibble tibble
 #' @export
 read_ucinet <- function(path, directed = NULL) {
   raw <- readLines(path)
@@ -13,13 +33,20 @@ read_ucinet <- function(path, directed = NULL) {
          call. = FALSE)
   }
   node_count <- as.integer(txt_extract(raw[[2]], "(?<=^N=)\\d+"))
+  if (!length(node_count)) {
+    two_mode <- TRUE
+    row_count <- as.integer(txt_extract(raw[[2]], "(?<=^NR=)\\d+"))
+    col_count <- as.integer(txt_extract(raw[[2]], "(?<=NC=)\\d+"))
+  } else {
+    two_mode <- FALSE
+  }
   matrix_count <- as.integer(txt_extract(raw[[2]], "(?<=\\sNM=)\\d+$"))
-  if(length(matrix_count) == 0) {
+  if(length(matrix_count) == 0L) {
     matrix_count <- 1L
   }
   file_format <- txt_extract(txt_subset(raw, "FORMAT\\s=\\s"), "(?<=\\s=\\s).*$")
   n_row <- as.integer(txt_extract(raw[[2]], "(?<=^NR=)\\d+"))
-  if(length(n_row) == 0) {
+  if (length(n_row) == 0) {
     n_row <- node_count
   }
   n_col <- as.integer(txt_extract(raw[[2]], "(?<=\\sNC=)\\d+$"))
@@ -30,81 +57,108 @@ read_ucinet <- function(path, directed = NULL) {
   attr_lines <- txt_which(raw, ":$")
   names(attr_lines) <- txt_remove(txt_subset(raw, ":$"), ":")
   
-  # row_labels_line <- as.integer(txt_which(raw, "ROW LABELS:"))
-  # col_labels_line <- as.integer(txt_which(raw, "COLUMN LABELS:"))
-  # data_line <- as.integer(txt_which(raw, "DATA:"))
-  # level_labels_line <- as.integer(txt_which(raw, "LEVEL LABELS:"))
-  
   data_raw <- raw[(attr_lines["DATA"] + 1):length(raw)]
   data_trimmed <- txt_squish(txt_trim(data_raw))
   data_list <- lapply(txt_split(data_trimmed, "\\s+"), as.integer)
-  # data_flat <- unlist(data_list)
-  if(matrix_count == 1) {
+
+  if (matrix_count == 1L) {
     data_flat <- unlist(data_list)
-    out <- matrix(data_flat, nrow = n_row, ncol = n_col, byrow = TRUE)
+    mats <- matrix(data_flat, nrow = n_row, ncol = n_col, byrow = TRUE)
   }
-  if(matrix_count > 1) {
+  if (matrix_count > 1L) {
     split_list <- split(data_list, rep(seq_len(matrix_count), each = n_row))
     flat_matrices <- lapply(split_list, unlist)
-    out <- lapply(flat_matrices, matrix, nrow = n_row, ncol = n_col, byrow = TRUE)
-    # rows_per_matrix <- nrow(out) %/% matrix_count
-    # flat_matrices <- split(matrix(data_flat, ncol = n_col, byrow = TRUE), rep(seq_len(matrix_count), each = n_row))
-    # out <- lapply(flat_matrices, matrix, nrow = n_row, ncol = n_col)
+    mats <- lapply(flat_matrices, matrix, nrow = n_row, ncol = n_col, byrow = TRUE)
   }
-  if(!is.na(attr_lines["ROW LABELS"])) {
+  if (!is.na(attr_lines["ROW LABELS"])) {
     row_labels <- raw[(attr_lines["ROW LABELS"] + 1):(attr_lines["COLUMN LABELS"] - 1)]
-    if(is.list(out)) {
-      out <- lapply(out, `rownames<-`, row_labels)
+    if (is.list(mats)) {
+      mats <- lapply(mats, `rownames<-`, row_labels)
     } else {
-      rownames(out) <- row_labels
+      rownames(mats) <- row_labels
     }
+  } else {
+    row_labels <- NULL
   }
-  if(!is.na(attr_lines["COLUMN LABELS"])) {
-    if(is.list(out)) {
+  if (!is.na(attr_lines["COLUMN LABELS"])) {
+    if(is.list(mats)) {
       col_labels <- raw[(attr_lines["COLUMN LABELS"] + 1):(attr_lines["LEVEL LABELS"] - 1)]
-      out <- lapply(out, `colnames<-`, col_labels)
+      mats <- lapply(mats, `colnames<-`, col_labels)
     } else {
       col_labels <- raw[(attr_lines["COLUMN LABELS"] + 1):(attr_lines["DATA"] - 1)]
-      colnames(out) <- col_labels
+      colnames(mats) <- col_labels
     }
+  } else {
+    col_labels <- NULL
   }
-  if(!is.na(attr_lines["LEVEL LABELS"])) {
+  if (!is.na(attr_lines["LEVEL LABELS"])) {
     lev_labels <- raw[(attr_lines["LEVEL LABELS"] + 1):(attr_lines["DATA"] - 1)]
-    names(out) <- lev_labels
+    names(mats) <- lev_labels
+  } else {
+    lev_labels <- NULL
   }
-  if(is.null(directed)) {
-    if(is.list(out)) {
-      directed <- as.character(vapply(out, function(x) !isSymmetric(x), logical(1)))
+  weighted <- any(vapply(mats, function(x) length(x[!x %in% c(0, 1)]) > 0L, logical(1)))
+  if (is.null(directed)) {
+    if (!two_mode) {
+      if (is.list(mats)) {
+        directed <- any(vapply(mats, function(x) !isSymmetric(x), logical(1)))
+      } 
     } else {
-      directed <- as.character(!isSymmetric(out))
+      directed <- FALSE
     }
   }
-  attr(out, "is_list") <- is.list(out)
-  attr(out, "is_directed") <- as.character(directed)
-  class(out) <- "ucinet"
+  if (directed) {
+    directed_chr <- "directed"
+  } else {
+    directed_chr <- "undirected"
+  }
+  if (!two_mode) {
+    if (is.list(mats)) {
+      all_gs <- map(mats, ~ graph_from_adjacency_matrix(.x, mode = directed_chr, 
+                                                        weighted = TRUE))
+    } else {
+      all_gs <- graph_from_adjacency_matrix(.x, mode = directed_chr, weighted = TRUE)
+    }
+  } else {
+    if (is.list(mats)) {
+      all_gs <- map(mats, ~ graph_from_incidence_matrix(.x, directed = directed))
+      all_gs <- map(all_gs, bip_swap_modes)
+    } else {
+      all_gs <- graph_from_incidence_matrix(mats, directed = directed)
+      all_gs <- bip_swap_modes(all_gs)
+    }
+  }
+  if (!is.igraph(all_gs)) {
+    init_edges <- imap(all_gs, ~ igraph::as_data_frame(.x, what = "edges") %>% 
+                         tibble::as_tibble() %>% 
+                         dplyr::mutate(level = .y)
+                      )
+    init_edges <- bind_rows(init_edges)
+    init_vertices <- map_df(all_gs, igraph::as_data_frame, what = "vertices")
+  } else {
+    init_edges <- as_data_frame(all_gs, what = "edges")
+    init_vertices <- as_data_frame(all_gs, what = "vertices")
+  }
+  init_edges <- as_tibble(init_edges)
+  init_vertices <- as_tibble(init_vertices)
+  if (!ncol(init_vertices)) {
+    init_vertices <- tibble(name = sort(unique(c(init_edges$from, init_edges$to))))
+  }
+  init_vertices <- select(init_vertices, name, everything())
+  init_vertices <- distinct(init_vertices)
+
+  g <- graph_from_data_frame(init_edges, directed, vertices = init_vertices)
   
+  edges <- as_tibble(as_data_frame(g))
+  vertices <- as_tibble(as_data_frame(g, what = "vertices"))
+
+  out <- list(directed = is_directed(g),
+              bipartite = is_bipartite(g),
+              multiple = any(is.multiple(g)),
+              loops = any(is.loop(g)),
+              edges = edges,
+              vertices = vertices)
+  class(out) <- "network_dataset"
+
   out
 }
-
-
-
-# "http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/sampson.dat" %>%
-  # read_ucinet() %>%
-  # as_igraph()
-
-
-# "http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/davis.dat" %>% 
-#   read_ucinet() %>% 
-#   as_igraph()
-
-# "http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/newfrat.dat" %>% 
-#   read_ucinet() %>% 
-#   as_igraph()
-
-# "http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/wiring.dat" %>% 
-#   read_ucinet() %>% 
-#   as_igraph()
-# 
-# "http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/padgett.dat" %>% 
-#   read_ucinet() %>% 
-#   as_igraph()

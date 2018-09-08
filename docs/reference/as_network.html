@@ -143,6 +143,9 @@
 <span class='co'># S3 method for network</span>
 <span class='fu'>as_network</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
+<span class='co'># S3 method for network_dataset</span>
+<span class='fu'>as_network</span>(<span class='no'>x</span>)
+
 <span class='co'># S3 method for igraph</span>
 <span class='fu'>as_network</span>(<span class='no'>x</span>, <span class='kw'>actor_type</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
@@ -278,9 +281,9 @@ of the second mode, e.g. "events").</p></li>
 
 <span class='no'>southern_women_ig</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/graph_from_incidence_matrix'>graph_from_incidence_matrix</a></span>(<span class='no'>southern_women_matrix</span>)
 
-<span class='no'>southern_women_ig</span></div><div class='output co'>#&gt; IGRAPH b3f6f01 UN-B 32 93 -- 
+<span class='no'>southern_women_ig</span></div><div class='output co'>#&gt; IGRAPH 3610855 UN-B 32 93 -- 
 #&gt; + attr: type (v/l), name (v/c)
-#&gt; + edges from b3f6f01 (vertex names):
+#&gt; + edges from 3610855 (vertex names):
 #&gt;  [1] E1--EVELYN    E1--LAURA     E1--BRENDA    E2--EVELYN    E2--LAURA    
 #&gt;  [6] E2--THERESA   E3--EVELYN    E3--LAURA     E3--THERESA   E3--BRENDA   
 #&gt; [11] E3--CHARLOTTE E3--FRANCES   E4--EVELYN    E4--THERESA   E4--BRENDA   
@@ -290,19 +293,20 @@ of the second mode, e.g. "events").</p></li>
 #&gt; [31] E6--PEARL     E6--NORA      E7--LAURA     E7--THERESA   E7--BRENDA   
 #&gt; [36] E7--CHARLOTTE E7--ELEANOR   E7--RUTH      E7--VERNE     E7--SYLVIA   
 #&gt; + ... omitted several edges</div><div class='input'>
-<span class='fu'><a href='extract-vertex-attributes.html'>vrt_get_attrs</a></span>(<span class='no'>southern_women_ig</span>)</div><div class='output co'>#&gt; $type
-#&gt;  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-#&gt; [13] FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
-#&gt; [25]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
-#&gt; 
-#&gt; $name
-#&gt;  [1] "E1"        "E2"        "E3"        "E4"        "E5"        "E6"       
-#&gt;  [7] "E7"        "E8"        "E9"        "E10"       "E11"       "E12"      
-#&gt; [13] "E13"       "E14"       "EVELYN"    "LAURA"     "THERESA"   "BRENDA"   
-#&gt; [19] "CHARLOTTE" "FRANCES"   "ELEANOR"   "PEARL"     "RUTH"      "VERNE"    
-#&gt; [25] "MYRNA"     "KATHERINE" "SYLVIA"    "NORA"      "HELEN"     "DOROTHY"  
-#&gt; [31] "OLIVIA"    "FLORA"    
-#&gt; </div><div class='input'>
+<span class='fu'><a href='extract-vertex-attributes.html'>vrt_get_attrs</a></span>(<span class='no'>southern_women_ig</span>)</div><div class='output co'>#&gt; # A tibble: 32 x 2
+#&gt;    type  name 
+#&gt;  * &lt;lgl&gt; &lt;chr&gt;
+#&gt;  1 FALSE E1   
+#&gt;  2 FALSE E2   
+#&gt;  3 FALSE E3   
+#&gt;  4 FALSE E4   
+#&gt;  5 FALSE E5   
+#&gt;  6 FALSE E6   
+#&gt;  7 FALSE E7   
+#&gt;  8 FALSE E8   
+#&gt;  9 FALSE E9   
+#&gt; 10 FALSE E10  
+#&gt; # ... with 22 more rows</div><div class='input'>
 <span class='fu'>as_network</span>(<span class='no'>southern_women_ig</span>)</div><div class='output co'>#&gt;  Network attributes:
 #&gt;   vertices = 32 
 #&gt;   directed = FALSE 
@@ -323,19 +327,20 @@ of the second mode, e.g. "events").</p></li>
 
 <span class='no'>southern_women_with_actors_false</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/graph_from_incidence_matrix'>graph_from_incidence_matrix</a></span>(<span class='no'>sw_transposed</span>)
 
-<span class='fu'><a href='extract-vertex-attributes.html'>vrt_get_attrs</a></span>(<span class='no'>southern_women_with_actors_false</span>)</div><div class='output co'>#&gt; $type
-#&gt;  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-#&gt; [13] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
-#&gt; [25]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
-#&gt; 
-#&gt; $name
-#&gt;  [1] "EVELYN"    "LAURA"     "THERESA"   "BRENDA"    "CHARLOTTE" "FRANCES"  
-#&gt;  [7] "ELEANOR"   "PEARL"     "RUTH"      "VERNE"     "MYRNA"     "KATHERINE"
-#&gt; [13] "SYLVIA"    "NORA"      "HELEN"     "DOROTHY"   "OLIVIA"    "FLORA"    
-#&gt; [19] "E1"        "E2"        "E3"        "E4"        "E5"        "E6"       
-#&gt; [25] "E7"        "E8"        "E9"        "E10"       "E11"       "E12"      
-#&gt; [31] "E13"       "E14"      
-#&gt; </div><div class='input'>
+<span class='fu'><a href='extract-vertex-attributes.html'>vrt_get_attrs</a></span>(<span class='no'>southern_women_with_actors_false</span>)</div><div class='output co'>#&gt; # A tibble: 32 x 2
+#&gt;    type  name     
+#&gt;  * &lt;lgl&gt; &lt;chr&gt;    
+#&gt;  1 FALSE EVELYN   
+#&gt;  2 FALSE LAURA    
+#&gt;  3 FALSE THERESA  
+#&gt;  4 FALSE BRENDA   
+#&gt;  5 FALSE CHARLOTTE
+#&gt;  6 FALSE FRANCES  
+#&gt;  7 FALSE ELEANOR  
+#&gt;  8 FALSE PEARL    
+#&gt;  9 FALSE RUTH     
+#&gt; 10 FALSE VERNE    
+#&gt; # ... with 22 more rows</div><div class='input'>
 <span class='fu'>as_network</span>(<span class='no'>southern_women_with_actors_false</span>, <span class='kw'>actor_type</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt;  Network attributes:
 #&gt;   vertices = 32 
 #&gt;   directed = FALSE 

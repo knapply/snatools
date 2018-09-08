@@ -4,9 +4,6 @@
 \alias{edg_get_attrs}
 \alias{edg_get_attrs.igraph}
 \alias{edg_get_attrs.network}
-\alias{edg_get_attrs_df}
-\alias{edg_get_attrs_df.igraph}
-\alias{edg_get_attrs_df.network}
 \alias{edg_get_attr}
 \alias{edg_get_attr.igraph}
 \alias{edg_get_attr.network}
@@ -17,15 +14,10 @@
 \usage{
 edg_get_attrs(x, ...)
 
-\method{edg_get_attrs}{igraph}(x)
+\method{edg_get_attrs}{igraph}(x, include_el = FALSE)
 
-\method{edg_get_attrs}{network}(x, ignore_na = TRUE)
-
-edg_get_attrs_df(x, ...)
-
-\method{edg_get_attrs_df}{igraph}(x, try_tibble = TRUE, ...)
-
-\method{edg_get_attrs_df}{network}(x, try_tibble = TRUE, ...)
+\method{edg_get_attrs}{network}(x, include_el = FALSE,
+  ignore_na = TRUE)
 
 edg_get_attr(x, edg_attr, ...)
 
@@ -44,18 +36,19 @@ edg_get_attr_names(x, ...)
 
 \item{...}{Arguments passed on to other methods. See below.}
 
+\item{include_el}{\code{logical}. Whether to include edge list columns indicating which
+vertices are part of each edge's dyad.}
+
 \item{ignore_na}{\code{logical}. Whether to ignore the \code{"na"} attribute of
 \code{\link[network:network]{network::network}} objects. \cr
 Default: \code{TRUE}}
 
-\item{try_tibble}{\code{logical}.
+\item{edg_attr}{\code{character}. Name of target attribute.
 Whether to attempt calling \code{\link[tibble:as_tibble]{tibble::as_tibble()}} in \code{edg_get_attrs_df()}. \cr
 Default: \code{TRUE}}
-
-\item{edg_attr}{\code{character}. Name of target attribute.}
 }
 \value{
-A named \code{list}, \code{vector}, \code{data.frame}, or \code{\link[tibble:tibble]{tibble::tibble}}. See Details.
+A named \code{list}, \code{vector}, or \code{\link[tibble:tibble]{tibble::tibble}}. See Details.
 }
 \description{
 Extract edge attributes in a variety of formats consistent across
@@ -63,17 +56,7 @@ Extract edge attributes in a variety of formats consistent across
 }
 \details{
 \itemize{
-\item \code{edg_get_attrs} extract all edge attributes as a named \code{list}.
-}
-
-\itemize{
-\item \code{edg_get_attrs_df()} is a convenience wrapper around \code{edg_get_attrs()} that returns a
-\code{data.frame}.
-\itemize{
-\item \code{stringsAsFactors} is \emph{always} \code{FALSE}.
-\item If \code{try_tibble} is \code{TRUE} and the \code{tibble} package is available, a
-\code{\link[tibble:tibble]{tibble::tibble}} is returned.
-}
+\item \code{edg_get_attrs} extract all edge attributes as a named \code{tibble::tibble}.
 }
 
 \itemize{
@@ -97,16 +80,14 @@ data("enron", package = "igraphdata")
 data("sampson", package = "ergm")
 (nw <- samplike)
 
-edg_get_attrs(ig) \%>\% lapply(head)
-edg_get_attrs(nw)
+edg_get_attrs(ig, include_el = TRUE)
+edg_get_attrs(nw, include_el = TRUE)
 
-edg_get_attrs_df(ig)
-edg_get_attrs_df(nw)
+edg_get_attr(ig, "Time") \%>\% head(20)
+edg_get_attr(nw, "nominations") \%>\% head(20)
 
 }
 \seealso{
-\code{\link[igraph:edge_attr]{igraph::edge_attr()}}
-
 \code{\link[igraph:as_data_frame]{igraph::as_data_frame()}}
 
 \code{\link[igraph:edge_attr]{igraph::edge_attr()}}, \code{\link[network:get.edge.attribute]{network::get.edge.attribute()}}

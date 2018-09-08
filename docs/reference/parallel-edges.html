@@ -161,7 +161,7 @@
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code>logical</code> or <code>numeric</code> scalar.</p>
+    <p>A <code>logical</code> or <code>numeric</code> scalar or <code><a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble</a></code>.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
@@ -181,10 +181,7 @@ for loops.</p></li>
 </ul>
     <ul>
 <li><p><code>edg_count_parallel_df</code> is a convenience wrapper around <code>edg_count_parallel()</code> and
-<code><a href='extract-edge-attributes.html'>edg_get_attrs_df()</a></code> that returns a <code>data.frame</code>.</p><ul>
-<li><p><code>stringsAsFactors</code> is <em>always</em> <code>FALSE</code>.</p></li>
-<li><p>If available, <code><a href='http://www.rdocumentation.org/packages/tibble/topics/as_tibble'>tibble::as_tibble()</a></code> is called to return a <code>tbl_df</code> instead.</p></li>
-</ul></li>
+<code><a href='extract-edge-attributes.html'>edg_get_attrs()</a></code> that returns a <code><a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble</a></code>.</p></li>
 </ul>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -236,7 +233,7 @@ for loops.</p></li>
 <span class='fu'>edg_count_parallel</span>(<span class='no'>ig</span>) <span class='kw'>%&gt;%</span> <span class='fu'>head</span>(<span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1]  2  2 10  1  1 20 10  1  1  1</div><div class='input'><span class='fu'>edg_count_parallel</span>(<span class='no'>nw</span>) <span class='kw'>%&gt;%</span> <span class='fu'>head</span>(<span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 1 1 1 1 1 1 1 1 1 1</div><div class='input'>
 <span class='fu'>edg_count_parallel_df</span>(<span class='no'>USairports</span>)</div><div class='output co'>#&gt; # A tibble: 23,473 x 9
 #&gt;    from  to    Carrier      Departures Seats Passengers Aircraft Distance     n
-#&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;             &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;    &lt;int&gt;    &lt;dbl&gt; &lt;int&gt;
+#&gt;  * &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;             &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;    &lt;int&gt;    &lt;dbl&gt; &lt;int&gt;
 #&gt;  1 BGR   JFK   British Air~          1   226        193      627      382     2
 #&gt;  2 BGR   JFK   British Air~          1   299        253      819      382     2
 #&gt;  3 BOS   EWR   British Air~          1   216        141      627      200    10

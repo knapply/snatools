@@ -35,55 +35,28 @@
 #' igraph::graph("Zachary") %==% igraph::graph("Zachary")
 #' 
 #' @export
+#' 
 `%==%` <- function(lhs, rhs) {
-  UseMethod("%==%")
-}
-
-
-#' @rdname strict-compare
-#' 
-#' @export
-#' 
-`%==%.default` <- function(lhs, rhs) {
-  identical(lhs, rhs)
-}
-
-#' @rdname strict-compare
-#' 
-#' @export
-#' 
-`%==%.igraph` <- function(lhs, rhs) {
-  if(class(rhs) != "igraph") {
-    stop("`lhs` and `rhs` are not both `igraph` objects.")
+  if(class(lhs) %in% c("igraph", "network") && class(rhs) %in% c("igraph", "network")) {
+    lhs_guts <- dissect_graph(lhs)
+    rhs_guts <- dissect_graph(rhs)
+    if(!identical(lhs_guts$net_attrs, rhs_guts$net_attrs)) {
+      message("graph-level attributes don't match")
+      return(FALSE)
+    }
+    if(!identical(lhs_guts$edg_attrs, rhs_guts$edg_attrs)) {
+      message("edge attributes don't match")
+      return(FALSE)
+    }
+    if(!identical(lhs_guts$vrt_attrs, rhs_guts$vrt_attrs)) {
+      message("vertex attributes don't match")
+      return(FALSE)
+    }
+    if(!identical(lhs_guts$el, rhs_guts$el)) {
+      message("edge lists don't match")
+      return(FALSE)
+    }
+    return(TRUE)
   }
-  lhs_net_attrs <- net_get_attrs(lhs)
-  lhs_net_attrs <- lhs_net_attrs[order(names(lhs_net_attrs))]
-  rhs_net_attrs <- net_get_attrs(rhs)
-  rhs_net_attrs <- rhs_net_attrs[order(names(rhs_net_attrs))]
-  for(i in names(lhs_net_attrs)) {
-    lhs <- igraph::delete_graph_attr(lhs, i)
-  }
-  for(i in names(rhs_net_attrs)) {
-    rhs <- igraph::delete_graph_attr(rhs, i)
-  }
-  tests <- c(identical(lhs_net_attrs, rhs_net_attrs),
-             identical(unclass(lhs)[seq_len(9)], unclass(rhs)[seq_len(9)]))
-  
-  all(tests)
-}
-
-
-#' @rdname strict-compare
-#' 
-#' @export
-#' 
-`%==%.network` <- function(lhs, rhs) {
-  if(class(rhs) != "network") {
-    stop("`lhs` and `rhs` are not both `network` objects.")
-  }
-
-  lhs <- clean_network_metadata(lhs)
-  rhs <- clean_network_metadata(rhs)
-  
   identical(lhs, rhs)
 }

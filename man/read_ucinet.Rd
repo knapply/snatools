@@ -10,8 +10,23 @@ read_ucinet(path, directed = NULL)
 \item{path}{Path to file or URL.}
 }
 \value{
-A \code{ucinet} object.
+A \code{network_dataset} object.
 }
 \description{
 Read UCINET's .dl files
+}
+\examples{
+library(snatools)
+
+"http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/sampson.dat" \%>\%
+  read_ucinet()
+  
+"http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/davis.dat" \%>\% 
+  read_ucinet() \%>\% 
+  as_igraph()
+  
+"http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/newfrat.dat" \%>\% 
+  read_ucinet() \%>\% 
+  as_network()
+
 }

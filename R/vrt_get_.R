@@ -11,22 +11,18 @@
 #' [`network::network`] objects. \cr
 #' Default: `TRUE`
 #' @param vrt_attr `character`. Name of target attribute.
-#' @param try_tibble `logical`. 
-#' Whether to attempt calling [`tibble::as_tibble()`] in `vrt_get_attrs_df()`. \cr
-#' Default: `TRUE`
 #' 
-#' @return A named `list`, `vector`, `data.frame`, or [`tibble::tibble`]. See Details.
+#' @return A named `list`, `vector`, or [`tibble::tibble`]. See Details.
 #' 
 #' @author Brendan Knapp \email{brendan.g.knapp@@gmail.com}
 #' 
 #' @examples
 #' library(snatools)
 #' 
-#' data("karate", package = "igraphdata")
-#' (ig <- karate)
+#' data("sampson_monastery")
 #' 
-#' data("emon", package = "network")
-#' (nw <- emon$Cheyenne)
+#' (ig <- as_igraph(sampson_monastery))
+#' (nw <- as_network(sampson_monastery))
 #'
 
 
@@ -50,81 +46,22 @@ vrt_get_attrs <- function(x, ...) {
 
 #' @rdname extract-vertex-attributes
 #' 
-#' @importFrom igraph vertex_attr
-#' @export
-vrt_get_attrs.igraph <- function(x) {
-  out <- vertex_attr(x)
-  if(!length(out)) {
-    out <- NULL
-  }
-  out
-}
-
-#' @rdname extract-vertex-attributes
-#' 
-#' @export
-#' 
-vrt_get_attrs.network <- function(x, ignore_na = TRUE) {
-  out <- lapply(x$val, `[`)
-  out <- do.call(rbind, out)
-  out_names <- colnames(out)
-  out <- lapply(seq_len(ncol(out)), function(x) unlist(out[, x]))
-  names(out) <- out_names
-  if(ignore_na) {
-    out$na <- NULL
-  }
-  out
-}
- 
-#' @rdname extract-vertex-attributes
-#' 
-#' @details 
-#' * `vrt_get_attrs_df()` is a convenience wrapper around `vrt_get_attrs()` that returns a
-#' `data.frame`.
-#'     + `stringsAsFactors` is _always_ `FALSE`.
-#'     + If `try_tibble` is `TRUE` and the `tibble` package is available,
-#'      a [`tibble::tibble`] is returned.
-#' 
-#' @seealso 
-#' [`igraph::as_data_frame()`], [`tibble::as_tibble()`]
-#' 
-#' @examples 
-#' vrt_get_attrs_df(ig)
-#' vrt_get_attrs_df(nw)
-#' 
-#' @export
-#' 
-vrt_get_attrs_df <- function(x, ...) {
-  UseMethod("vrt_get_attrs_df")
-}
-
-#' @rdname extract-vertex-attributes
-#' 
 #' @importFrom igraph as_data_frame
 #' @importFrom tibble as_tibble
 #' @export
-vrt_get_attrs_df.igraph <- function(x, try_tibble = TRUE, ...) {
+vrt_get_attrs.igraph <- function(x) {
   out <- as_data_frame(x, what = "vertices")
-  if(try_tibble) {
-    if(requireNamespace("tibble", quietly = TRUE)) {
-      out <- as_tibble(out)
-    }
-  }
-  out
+  as_tibble(out)
 }
 
 #' @rdname extract-vertex-attributes
 #' 
-#' @importFrom tibble as_tibble
+#' @importFrom purrr map_df
 #' @export
-#' 
-vrt_get_attrs_df.network <- function(x, try_tibble = TRUE, ...) {
-  out <- vrt_get_attrs(x, ...)
-  out <- as.data.frame(out, stringsAsFactors = FALSE)
-  if(try_tibble) {
-    if(requireNamespace("tibble", quietly = TRUE)) {
-      out <- as_tibble(out)
-    }
+vrt_get_attrs.network <- function(x, ignore_na = TRUE) {
+  out <- map_df(x$val, `[`)
+  if(ignore_na) {
+    out$na <- NULL
   }
   out
 }
@@ -155,7 +92,7 @@ vrt_get_attr.igraph <- function(x, vrt_attr) {
   if(!vrt_attr %in% vrt_get_attr_names(x)) {
     stop("`vrt_attr` is not a vertex attribute in `x`", call. = FALSE)
   }
-  vertex_attr(x, vrt_attr)
+  vrt_get_attrs(x)[[vrt_attr]]
 }
 
 #' @rdname extract-vertex-attributes
@@ -166,7 +103,7 @@ vrt_get_attr.network <- function(x, vrt_attr) {
   if(!vrt_attr %in% vrt_get_attr_names(x)) {
     stop("`vrt_attr` is not a vertex attribute in `x`", call. = FALSE)
   }
-  unlist(lapply(x$val, `[[`, vrt_attr))
+  vrt_get_attrs(x, ignore_na = FALSE)[[vrt_attr]]
 }
 
 

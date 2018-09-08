@@ -99,8 +99,14 @@ as_network <- function(x, ...) {
 #' @export
 #' 
 as_network.network <- function(x, ...) {
-  message("`x` is already a `network` object.")
   x
+}
+
+#' @rdname as_network
+#' 
+#' @export
+as_network.network_dataset <- function(x) {
+  as_network(as_igraph(x))
 }
 
 #' @rdname as_network

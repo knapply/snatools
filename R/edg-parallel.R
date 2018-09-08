@@ -5,7 +5,7 @@
 #' @param x A graph object.
 #' @param ... Arguments passed on to other methods. See below.
 #' 
-#' @return A `logical` or `numeric` scalar.
+#' @return A `logical` or `numeric` scalar or [`tibble::tibble`].
 #' 
 #' @author Brendan Knapp \email{brendan.g.knapp@@gmail.com}
 #' 
@@ -114,16 +114,13 @@ edg_count_parallel <- function(x) {
 #' 
 #' @details 
 #' * `edg_count_parallel_df` is a convenience wrapper around `edg_count_parallel()` and
-#' `edg_get_attrs_df()` that returns a `data.frame`.
-#'     + `stringsAsFactors` is _always_ `FALSE`.
-#'     + If available, [`tibble::as_tibble()`] is called to return a `tbl_df` instead.
-#' 
+#' `edg_get_attrs()` that returns a `tibble::tibble`.
 #' 
 #' @export
 #' 
 edg_count_parallel_df <- function(x, ...) {
   parallel <- edg_count_parallel(x)
-  out <- edg_get_attrs_df(x, ...)
+  out <- edg_get_attrs(x, include_el = TRUE, ...)
   out$n <- parallel
   
   out
