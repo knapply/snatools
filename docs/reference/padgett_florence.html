@@ -183,83 +183,128 @@ Oxford University Press.</p></li>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>data</span>(<span class='st'>"padgett_florence"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"snatools"</span>)
 
-<span class='no'>padgett_florence</span></div><div class='output co'>#&gt; $directed
+<span class='no'>padgett_florence</span></div><div class='output co'>#&gt; $graph_attributes
+#&gt; NULL
+#&gt; 
+#&gt; $metadata
+#&gt; $metadata$n_vertices
+#&gt; [1] 16
+#&gt; 
+#&gt; $metadata$n_edges
+#&gt; [1] 35
+#&gt; 
+#&gt; $metadata$is_directed
 #&gt; [1] FALSE
 #&gt; 
-#&gt; $bipartite
+#&gt; $metadata$is_bipartite
 #&gt; [1] FALSE
 #&gt; 
-#&gt; $multiple
+#&gt; $metadata$any_multiplex
 #&gt; [1] TRUE
 #&gt; 
-#&gt; $loops
+#&gt; $metadata$any_loops
 #&gt; [1] FALSE
 #&gt; 
-#&gt; $edges
-#&gt; # A tibble: 35 x 3
-#&gt;    from      to        relation
-#&gt;    &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;   
-#&gt;  1 Acciaiuol Medici    marriage
-#&gt;  2 Albizzi   Ginori    marriage
-#&gt;  3 Albizzi   Guadagni  marriage
-#&gt;  4 Albizzi   Medici    marriage
-#&gt;  5 Barbadori Castellan marriage
-#&gt;  6 Barbadori Medici    marriage
-#&gt;  7 Bischeri  Guadagni  marriage
-#&gt;  8 Bischeri  Peruzzi   marriage
-#&gt;  9 Bischeri  Strozzi   marriage
-#&gt; 10 Castellan Peruzzi   marriage
-#&gt; # ... with 25 more rows
 #&gt; 
-#&gt; $vertices
-#&gt; # A tibble: 16 x 3
-#&gt;    name      net_wealth priorates
-#&gt;    &lt;chr&gt;          &lt;int&gt;     &lt;int&gt;
-#&gt;  1 Acciaiuol         10        53
-#&gt;  2 Albizzi           36        65
-#&gt;  3 Barbadori         55         0
-#&gt;  4 Bischeri          44        12
-#&gt;  5 Castellan         20        22
-#&gt;  6 Ginori            32         0
-#&gt;  7 Guadagni           8        21
-#&gt;  8 Lambertes         42         0
-#&gt;  9 Medici           103        53
-#&gt; 10 Pazzi             48         0
-#&gt; 11 Peruzzi           49        42
-#&gt; 12 Pucci              3         0
-#&gt; 13 Ridolfi           27        38
-#&gt; 14 Salviati          10        35
-#&gt; 15 Strozzi          146        74
+#&gt; $edgelist
+#&gt;    ego alter
+#&gt; 1    1     9
+#&gt; 2    2     6
+#&gt; 3    2     7
+#&gt; 4    2     9
+#&gt; 5    3     5
+#&gt; 6    3     9
+#&gt; 7    4     7
+#&gt; 8    4    11
+#&gt; 9    4    15
+#&gt; 10   5    11
+#&gt; 11   5    15
+#&gt; 12   7     8
+#&gt; 13   7    16
+#&gt; 14   9    13
+#&gt; 15   9    14
+#&gt; 16   9    16
+#&gt; 17  10    14
+#&gt; 18  11    15
+#&gt; 19  13    15
+#&gt; 20  13    16
+#&gt; 21   3     5
+#&gt; 22   3     6
+#&gt; 23   3     9
+#&gt; 24   3    11
+#&gt; 25   4     7
+#&gt; 26   4     8
+#&gt; 27   4    11
+#&gt; 28   5     8
+#&gt; 29   5    11
+#&gt; 30   6     9
+#&gt; 31   7     8
+#&gt; 32   8    11
+#&gt; 33   9    10
+#&gt; 34   9    14
+#&gt; 35   9    16
+#&gt; 
+#&gt; $edge_attributes
+#&gt;    relation
+#&gt; 1  marriage
+#&gt; 2  marriage
+#&gt; 3  marriage
+#&gt; 4  marriage
+#&gt; 5  marriage
+#&gt; 6  marriage
+#&gt; 7  marriage
+#&gt; 8  marriage
+#&gt; 9  marriage
+#&gt; 10 marriage
+#&gt; 11 marriage
+#&gt; 12 marriage
+#&gt; 13 marriage
+#&gt; 14 marriage
+#&gt; 15 marriage
+#&gt; 16 marriage
+#&gt; 17 marriage
+#&gt; 18 marriage
+#&gt; 19 marriage
+#&gt; 20 marriage
+#&gt; 21 business
+#&gt; 22 business
+#&gt; 23 business
+#&gt; 24 business
+#&gt; 25 business
+#&gt; 26 business
+#&gt; 27 business
+#&gt; 28 business
+#&gt; 29 business
+#&gt; 30 business
+#&gt; 31 business
+#&gt; 32 business
+#&gt; 33 business
+#&gt; 34 business
+#&gt; 35 business
+#&gt; 
+#&gt; $vertex_attributes
+#&gt;         name net_wealth priorates
+#&gt; 1  Acciaiuol         10        53
+#&gt; 2    Albizzi         36        65
+#&gt; 3  Barbadori         55         0
+#&gt; 4   Bischeri         44        12
+#&gt; 5  Castellan         20        22
+#&gt; 6     Ginori         32         0
+#&gt; 7   Guadagni          8        21
+#&gt; 8  Lambertes         42         0
+#&gt; 9     Medici        103        53
+#&gt; 10     Pazzi         48         0
+#&gt; 11   Peruzzi         49        42
+#&gt; 12     Pucci          3         0
+#&gt; 13   Ridolfi         27        38
+#&gt; 14  Salviati         10        35
+#&gt; 15   Strozzi        146        74
 #&gt; 16 Tornabuon         48         0
 #&gt; 
 #&gt; attr(,"class")
-#&gt; [1] "network_dataset"</div><div class='input'>
-<span class='fu'><a href='as_igraph.html'>as_igraph</a></span>(<span class='no'>padgett_florence</span>)</div><div class='output co'>#&gt; IGRAPH 590f629 UN-- 16 35 -- 
-#&gt; + attr: name (v/c), net_wealth (v/n), priorates (v/n), relation (e/c)
-#&gt; + edges from 590f629 (vertex names):
-#&gt;  [1] Acciaiuol--Medici    Albizzi  --Ginori    Albizzi  --Guadagni 
-#&gt;  [4] Albizzi  --Medici    Barbadori--Castellan Barbadori--Medici   
-#&gt;  [7] Bischeri --Guadagni  Bischeri --Peruzzi   Bischeri --Strozzi  
-#&gt; [10] Castellan--Peruzzi   Castellan--Strozzi   Guadagni --Lambertes
-#&gt; [13] Guadagni --Tornabuon Medici   --Ridolfi   Medici   --Salviati 
-#&gt; [16] Medici   --Tornabuon Pazzi    --Salviati  Peruzzi  --Strozzi  
-#&gt; [19] Ridolfi  --Strozzi   Ridolfi  --Tornabuon Barbadori--Castellan
-#&gt; [22] Barbadori--Ginori    Barbadori--Medici    Barbadori--Peruzzi  
-#&gt; + ... omitted several edges</div><div class='input'>
-<span class='fu'><a href='as_network.html'>as_network</a></span>(<span class='no'>padgett_florence</span>)</div><div class='output co'>#&gt;  Network attributes:
-#&gt;   vertices = 16 
-#&gt;   directed = FALSE 
-#&gt;   hyper = FALSE 
-#&gt;   multiple = TRUE 
-#&gt;   total edges= 35 
-#&gt;     missing edges= 0 
-#&gt;     non-missing edges= 35 
-#&gt; 
-#&gt;  Vertex attribute names: 
-#&gt;     net_wealth priorates vertex.names 
-#&gt; 
-#&gt;  Edge attribute names: 
-#&gt;     relation </div><div class='input'>
+#&gt; [1] "net_primitive"</div><div class='input'>
+<span class='fu'><a href='as_igraph.html'>as_igraph</a></span>(<span class='no'>padgett_florence</span>)</div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("as_igraph"): no applicable method for 'as_igraph' applied to an object of class "net_primitive"</span></div><div class='input'>
+<span class='fu'><a href='as_network.html'>as_network</a></span>(<span class='no'>padgett_florence</span>)</div><div class='output co'>#&gt; <span class='error'>Error in UseMethod("as_network"): no applicable method for 'as_network' applied to an object of class "net_primitive"</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

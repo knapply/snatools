@@ -2,7 +2,7 @@
 #' 
 #' @param path Path to file or URL.
 #' 
-#' @return A `network_dataset` object.
+#' @return A `net_primitive` object.
 #' 
 #' @examples 
 #' library(snatools)
@@ -20,7 +20,8 @@
 #'
 #' @importFrom dplyr bind_rows distinct everything mutate select
 #' @importFrom igraph as_data_frame graph_from_adjacency_matrix graph_from_incidence_matrix
-#' @importFrom igraph is_bipartite is_directed is.igraph is.loop is.multiple
+#' @importFrom igraph graph_from_data_frame is_bipartite is_directed
+#' @importFrom igraph is.igraph is.loop is.multiple
 #' @importFrom magrittr %>%
 #' @importFrom purrr imap map map_df
 #' @importFrom tibble as_tibble tibble
@@ -147,18 +148,11 @@ read_ucinet <- function(path, directed = NULL) {
   init_vertices <- select(init_vertices, name, everything())
   init_vertices <- distinct(init_vertices)
 
-  g <- graph_from_data_frame(init_edges, directed, vertices = init_vertices)
-  
-  edges <- as_tibble(as_data_frame(g))
-  vertices <- as_tibble(as_data_frame(g, what = "vertices"))
-
-  out <- list(directed = is_directed(g),
-              bipartite = is_bipartite(g),
-              multiple = any(is.multiple(g)),
-              loops = any(is.loop(g)),
-              edges = edges,
-              vertices = vertices)
-  class(out) <- "network_dataset"
-
-  out
+  out <- graph_from_data_frame(init_edges, directed, vertices = init_vertices)
+  if ("weight" %in% edge_attr_names(out)) {
+    if (all(edge_attr(out, "weight") == 1L)) {
+      out <- delete_edge_attr(out, "weight")
+    }
+  }
+  as_net_primitive(out)
 }

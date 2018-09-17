@@ -154,3 +154,23 @@ txt_to_title <- function(text) {
   paste(txt_to_upper(txt_sub(words, 1, 1)), txt_sub(words, 2),
         sep = "", collapse = " ")
 }
+
+#' @rdname character-manipulation-tools
+#' 
+#' @export
+#' 
+txt_wrap <- function(text, width = floor(options("width")[["width"]] * 0.9), 
+                     indent = 0, exdent = 0, prefix = "") {
+  out <- strwrap(text, width = width, indent = indent, exdent = exdent, prefix = prefix,
+                 simplify = FALSE)
+  vapply(out, paste0, character(1), collapse = ("\n"))
+}
+
+patch <- function(text, ...) {
+  txt_wrap(sprintf(text, ...))
+}
+
+cat_patch <- function(text, ...) {
+  cat(patch(text, ...))
+}
+

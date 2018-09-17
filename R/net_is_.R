@@ -32,7 +32,6 @@ net_is_bipartite <- function(x) {
 #' @rdname metadata-queries
 #' 
 #' @export
-#' 
 net_is_bipartite.igraph <- function(x) {
   "type" %in% vrt_get_attr_names(x)
 }
@@ -42,7 +41,7 @@ net_is_bipartite.igraph <- function(x) {
 #' @export
 #' 
 net_is_bipartite.network <- function(x) {
-  is.numeric(x$gal$bipartite)
+  is.numeric(x[["gal"]][["bipartite"]])
 }
 
 #' @rdname metadata-queries
@@ -57,8 +56,8 @@ net_is_directed <- function(x) {
 
 #' @rdname metadata-queries
 #'
+#' @importFrom igraph is_directed
 #' @export
-#' 
 net_is_directed.igraph <- function(x) {
   igraph::is_directed(x)
 }
@@ -68,5 +67,5 @@ net_is_directed.igraph <- function(x) {
 #' @export
 #' 
 net_is_directed.network <- function(x) {
-  isTRUE(x$gal$directed)
+  is_true(x[["gal"]][["directed"]])
 }

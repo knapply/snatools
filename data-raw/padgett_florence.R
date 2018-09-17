@@ -27,16 +27,16 @@ relation_dict <- c(PADGB = "business",
                    PADGM = "marriage")
 
 dat <- "http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/padgett.dat" %>%
-  read_ucinet() 
+  read_ucinet()
 
-dat$edges <- dat$edges %>% 
+dat$edge_attributes <- dat$edge_attributes %>% 
   rename(relation = level) %>% 
-  mutate(relation = recode(relation, !!!relation_dict)) %>% 
-  mutate_at(vars(from, to), str_to_title) %>% 
-  select(-weight)
+  mutate(relation = recode(relation, !!!relation_dict))
 
-dat$vertices <- dat$vertices %>% 
-  mutate(name = str_to_title(name)) %>% 
+dat$vertex_attributes <- dat$vertex_attributes %>%
+  mutate(name = str_to_title(name))
+
+dat$vertex_attributes <- dat$vertex_attributes %>% 
   left_join(padgw, by = "name")
 
 padgett_florence <- dat

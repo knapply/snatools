@@ -190,9 +190,9 @@ objects.</p></td>
 
 (<span class='no'>southern_women_ig</span> <span class='kw'>&lt;-</span> <span class='no'>sw_matrix</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>t</span>() <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/graph_from_incidence_matrix'>graph_from_incidence_matrix</a></span>())</div><div class='output co'>#&gt; IGRAPH 53a08f1 UN-B 32 93 -- 
+  <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/graph_from_incidence_matrix'>graph_from_incidence_matrix</a></span>())</div><div class='output co'>#&gt; IGRAPH d89ab7f UN-B 32 93 -- 
 #&gt; + attr: type (v/l), name (v/c)
-#&gt; + edges from 53a08f1 (vertex names):
+#&gt; + edges from d89ab7f (vertex names):
 #&gt;  [1] EVELYN   --E1 EVELYN   --E2 EVELYN   --E3 EVELYN   --E4 EVELYN   --E5
 #&gt;  [6] EVELYN   --E6 EVELYN   --E8 EVELYN   --E9 LAURA    --E1 LAURA    --E2
 #&gt; [11] LAURA    --E3 LAURA    --E5 LAURA    --E6 LAURA    --E7 LAURA    --E8
@@ -202,83 +202,17 @@ objects.</p></td>
 #&gt; [31] CHARLOTTE--E3 CHARLOTTE--E4 CHARLOTTE--E5 CHARLOTTE--E7 FRANCES  --E3
 #&gt; [36] FRANCES  --E5 FRANCES  --E6 FRANCES  --E8 ELEANOR  --E5 ELEANOR  --E6
 #&gt; + ... omitted several edges</div><div class='input'>
-<span class='no'>southern_women_ig</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='extract-vertex-attributes.html'>vrt_get_attrs</a></span>()</div><div class='output co'>#&gt; # A tibble: 32 x 2
-#&gt;    type  name     
-#&gt;  * &lt;lgl&gt; &lt;chr&gt;    
-#&gt;  1 FALSE EVELYN   
-#&gt;  2 FALSE LAURA    
-#&gt;  3 FALSE THERESA  
-#&gt;  4 FALSE BRENDA   
-#&gt;  5 FALSE CHARLOTTE
-#&gt;  6 FALSE FRANCES  
-#&gt;  7 FALSE ELEANOR  
-#&gt;  8 FALSE PEARL    
-#&gt;  9 FALSE RUTH     
-#&gt; 10 FALSE VERNE    
-#&gt; # ... with 22 more rows</div><div class='input'>
+<span class='no'>southern_women_ig</span> <span class='kw'>%&gt;%</span> <span class='fu'>vrt_get_attrs</span>()</div><div class='output co'>#&gt; <span class='error'>Error in vrt_get_attrs(.): could not find function "vrt_get_attrs"</span></div><div class='input'>
 <span class='no'>southern_women_ig</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>bip_swap_modes</span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='extract-vertex-attributes.html'>vrt_get_attrs</a></span>()</div><div class='output co'>#&gt; # A tibble: 32 x 2
-#&gt;    type  name     
-#&gt;  * &lt;lgl&gt; &lt;chr&gt;    
-#&gt;  1 TRUE  EVELYN   
-#&gt;  2 TRUE  LAURA    
-#&gt;  3 TRUE  THERESA  
-#&gt;  4 TRUE  BRENDA   
-#&gt;  5 TRUE  CHARLOTTE
-#&gt;  6 TRUE  FRANCES  
-#&gt;  7 TRUE  ELEANOR  
-#&gt;  8 TRUE  PEARL    
-#&gt;  9 TRUE  RUTH     
-#&gt; 10 TRUE  VERNE    
-#&gt; # ... with 22 more rows</div><div class='input'>
+  <span class='fu'>vrt_get_attrs</span>()</div><div class='output co'>#&gt; <span class='error'>Error in vrt_get_attrs(.): could not find function "vrt_get_attrs"</span></div><div class='input'>
 (<span class='no'>southern_women_nw</span> <span class='kw'>&lt;-</span> <span class='no'>sw_matrix</span> <span class='kw'>%&gt;%</span>
   <span class='kw pkg'>network</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/network/topics/as.network.matrix'>as.network.matrix</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='bip_clarify_actors.html'>bip_clarify_actors</a></span>())</div><div class='output co'>#&gt;  Network attributes:
-#&gt;   vertices = 32 
-#&gt;   directed = FALSE 
-#&gt;   hyper = FALSE 
-#&gt;   loops = FALSE 
-#&gt;   multiple = FALSE 
-#&gt;   bipartite = 14 
-#&gt;   total edges= 93 
-#&gt;     missing edges= 0 
-#&gt;     non-missing edges= 93 
-#&gt; 
-#&gt;  Vertex attribute names: 
-#&gt;     is_actor vertex.names 
-#&gt; 
-#&gt; No edge attributes</div><div class='input'>
-<span class='no'>southern_women_nw</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='extract-vertex-attributes.html'>vrt_get_attrs</a></span>()</div><div class='output co'>#&gt; # A tibble: 32 x 2
-#&gt;    vertex.names is_actor
-#&gt;    &lt;chr&gt;        &lt;lgl&gt;   
-#&gt;  1 E1           TRUE    
-#&gt;  2 E2           TRUE    
-#&gt;  3 E3           TRUE    
-#&gt;  4 E4           TRUE    
-#&gt;  5 E5           TRUE    
-#&gt;  6 E6           TRUE    
-#&gt;  7 E7           TRUE    
-#&gt;  8 E8           TRUE    
-#&gt;  9 E9           TRUE    
-#&gt; 10 E10          TRUE    
-#&gt; # ... with 22 more rows</div><div class='input'>
+  <span class='fu'><a href='bip_clarify_actors.html'>bip_clarify_actors</a></span>())</div><div class='output co'>#&gt; <span class='error'>Error in vrt_get_attr_names(x): could not find function "vrt_get_attr_names"</span></div><div class='input'>
+<span class='no'>southern_women_nw</span> <span class='kw'>%&gt;%</span> <span class='fu'>vrt_get_attrs</span>()</div><div class='output co'>#&gt; <span class='error'>Error in eval(lhs, parent, parent): object 'southern_women_nw' not found</span></div><div class='input'>
 <span class='no'>southern_women_nw</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>bip_swap_modes</span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='extract-vertex-attributes.html'>vrt_get_attrs</a></span>()</div><div class='output co'>#&gt; # A tibble: 32 x 2
-#&gt;    vertex.names is_actor
-#&gt;    &lt;chr&gt;        &lt;lgl&gt;   
-#&gt;  1 EVELYN       TRUE    
-#&gt;  2 LAURA        TRUE    
-#&gt;  3 THERESA      TRUE    
-#&gt;  4 BRENDA       TRUE    
-#&gt;  5 CHARLOTTE    TRUE    
-#&gt;  6 FRANCES      TRUE    
-#&gt;  7 ELEANOR      TRUE    
-#&gt;  8 PEARL        TRUE    
-#&gt;  9 RUTH         TRUE    
-#&gt; 10 VERNE        TRUE    
-#&gt; # ... with 22 more rows</div><div class='input'>
+  <span class='fu'>vrt_get_attrs</span>()</div><div class='output co'>#&gt; <span class='error'>Error in eval(lhs, parent, parent): object 'southern_women_nw' not found</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

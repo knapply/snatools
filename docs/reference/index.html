@@ -153,6 +153,21 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
+          <h2 id="section-a-graph-class-to-simplify-network-analysis" class="hasAnchor"><a href="#section-a-graph-class-to-simplify-network-analysis" class="anchor"></a>A Graph Class to Simplify Network Analysis</h2>
+          <p class="section-desc"><p>A graph data object that bridges the major frameworks of R’s network analysis ecosystem.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="sna_net.html">sna_net()</a></code> <code><a href="sna_net.html">as_sna_net()</a></code> </p>
+        </td>
+        <td><p>The <code>sna_net</code> object effectively bridges the <code>network</code> objects used by the <code>statnet</code>
+suite and <code>igraph</code> objects and their derivatives.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
           <h2 id="section-class-conversion" class="hasAnchor"><a href="#section-class-conversion" class="anchor"></a>Class Conversion</h2>
           <p class="section-desc"><p>Safely convert objects between common network classes.</p></p>
         </th>
@@ -174,213 +189,53 @@
       <tr>
         <th colspan="2">
           <h2 id="section-vertices" class="hasAnchor"><a href="#section-vertices" class="anchor"></a>Vertices</h2>
-          <p class="section-desc"><p>Operations targeting vertices.</p></p>
+          <p class="section-desc"><p>Operations targeting vertices and their attributes.</p></p>
         </th>
       </tr>
       <tr>
         
         <td>
-          <p><code><a href="extract-vertex-attributes.html">vrt_get_attrs()</a></code> <code><a href="extract-vertex-attributes.html">vrt_get_attr()</a></code> <code><a href="extract-vertex-attributes.html">vrt_get_names()</a></code> <code><a href="extract-vertex-attributes.html">vrt_get_attr_names()</a></code> </p>
+          <p><code><a href="vrt_attr_names.html">vrt_attr_names()</a></code> </p>
         </td>
-        <td><p>Extract Vertex Attributes</p></td>
+        <td><p>Extract a graph objects's vertex attribute names.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="vrt_get_attr.html">vrt_get_attr()</a></code> </p>
+        </td>
+        <td><p>Extract a specific vertex attribute.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="vrt_get_attr_df.html">vrt_get_attr_df()</a></code> </p>
+        </td>
+        <td><p>Extract all vertex attributes as a data frame.</p></td>
       </tr>
     </tbody><tbody>
       <tr>
         <th colspan="2">
           <h2 id="section-edges" class="hasAnchor"><a href="#section-edges" class="anchor"></a>Edges</h2>
-          <p class="section-desc"><p>Operations targeting edges.</p></p>
+          <p class="section-desc"><p>Operations targeting edges and their attributes.</p></p>
         </th>
       </tr>
       <tr>
         
         <td>
-          <p><code><a href="extract-edge-attributes.html">edg_get_attrs()</a></code> <code><a href="extract-edge-attributes.html">edg_get_attr()</a></code> <code><a href="extract-edge-attributes.html">edg_get_attr_names()</a></code> </p>
+          <p><code><a href="edg_attr_names.html">edg_attr_names()</a></code> </p>
         </td>
-        <td><p>Extract Edge Attributes</p></td>
+        <td><p>Extract a graph objects's edge attribute names.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="parallel-edges.html">edg_any_parallel()</a></code> <code><a href="parallel-edges.html">edg_sum_parallel()</a></code> <code><a href="parallel-edges.html">edg_count_parallel()</a></code> <code><a href="parallel-edges.html">edg_count_parallel_df()</a></code> </p>
+          <p><code><a href="edg_get_attr.html">edg_get_attr()</a></code> </p>
         </td>
-        <td><p>Parallel Edges Queries</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-network" class="hasAnchor"><a href="#section-network" class="anchor"></a>Network</h2>
-          <p class="section-desc"><p>Operations targeting graph-level attributes and metadata.</p></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="extract-network-attributes.html">net_get_attrs()</a></code> <code><a href="extract-network-attributes.html">net_get_attrs_df()</a></code> <code><a href="extract-network-attributes.html">net_get_attr()</a></code> <code><a href="extract-network-attributes.html">net_get_attr_names()</a></code> </p>
-        </td>
-        <td><p>Extract Global Network Attributes</p></td>
+        <td><p>Extract a specific edge attribute.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="metadata-queries.html">net_is_bipartite()</a></code> <code><a href="metadata-queries.html">net_is_directed()</a></code> </p>
+          <p><code><a href="edg_get_attr_df.html">edg_get_attr_df()</a></code> </p>
         </td>
-        <td><p>Metadata Queries</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-representations" class="hasAnchor"><a href="#section-representations" class="anchor"></a>Representations</h2>
-          <p class="section-desc"><p>Construct various network representations.</p></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="rep_adjacency_matrix.html">rep_adjacency_matrix()</a></code> <code><a href="rep_adjacency_matrix.html">rep_attr_adj_mat()</a></code> </p>
-        </td>
-        <td><p>Build a network's adjacency matrix representation</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rep_edgelist.html">rep_edgelist()</a></code> <code><a href="rep_edgelist.html">rep_attr_el()</a></code> </p>
-        </td>
-        <td><p>Build a networks's edge list representation.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rep_two_mode_matrix.html">rep_two_mode_matrix()</a></code> </p>
-        </td>
-        <td><p>rep_two_mode_matrix</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rep_biadjacency_matrix.html">rep_biadjacency_matrix()</a></code> </p>
-        </td>
-        <td><p>rep_biadjacency_matrix</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rep_mixing_matrix.html">rep_mixing_matrix()</a></code> </p>
-        </td>
-        <td><p>Build a network/graph's mixing matrix.</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-bipartite" class="hasAnchor"><a href="#section-bipartite" class="anchor"></a>Bipartite</h2>
-          <p class="section-desc"><p>Operations to assist bipartite network handling.</p></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="bip_clarify_actors.html">bip_clarify_actors()</a></code> </p>
-        </td>
-        <td><p>Assign vertex attributes to the distinguish sets in <code>network</code> objects.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="bip_swap_modes.html">bip_swap_modes()</a></code> </p>
-        </td>
-        <td><p>Swap vertex modes in bipartite graphs.</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-homophily" class="hasAnchor"><a href="#section-homophily" class="anchor"></a>Homophily</h2>
-          <p class="section-desc"><p>Procedures addressing homophily and mixing patterns.</p></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="ei_index.html">ei_index()</a></code> <code><a href="ei_index.html">autoplot(<i>&lt;ei_index_vrt&gt;</i>)</a></code> <code><a href="ei_index.html">autoplot(<i>&lt;ei_index_grp&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>E-I Index</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ei_index_global.html">ei_index_global()</a></code> </p>
-        </td>
-        <td><p>Global E-I Index</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="ei_index_global_permute.html">ei_index_global_permute()</a></code> <code><a href="ei_index_global_permute.html">print(<i>&lt;ei_index_global_permute&gt;</i>)</a></code> <code><a href="ei_index_global_permute.html">autoplot(<i>&lt;ei_index_global_permute&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>E-I Index Permutation Test</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rep_mixing_matrix.html">rep_mixing_matrix()</a></code> </p>
-        </td>
-        <td><p>Build a network/graph's mixing matrix.</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-quadratic-assignment-procedure" class="hasAnchor"><a href="#section-quadratic-assignment-procedure" class="anchor"></a>Quadratic Assignment Procedure</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="qap_cor.html">qap_cor()</a></code> </p>
-        </td>
-        <td><p>Quadratic Assignment Procedure (Correlation)</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-visualization" class="hasAnchor"><a href="#section-visualization" class="anchor"></a>Visualization</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="plot_triad_census.html">plot_triad_census()</a></code> </p>
-        </td>
-        <td><p>Quickly plot a graph's triad census.</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-foreign-file-formats" class="hasAnchor"><a href="#section-foreign-file-formats" class="anchor"></a>Foreign File Formats</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="read_ucinet.html">read_ucinet()</a></code> </p>
-        </td>
-        <td><p>Read UCINET's .dl files</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-data" class="hasAnchor"><a href="#section-data" class="anchor"></a>Data</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="padgett_florence.html">padgett_florence</a></code> </p>
-        </td>
-        <td><p>Padgett's Florentine Families</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sampson_monastery.html">sampson_monastery</a></code> </p>
-        </td>
-        <td><p>Sampson's Monastery</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="davis_southern_women.html">davis_southern_women</a></code> </p>
-        </td>
-        <td><p>Davis' Southern Women</p></td>
+        <td><p>Extract all edge attributes as a data frame.</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -402,20 +257,6 @@
         </td>
         <td><p>Strict object comparison.</p></td>
       </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-miscellaneous" class="hasAnchor"><a href="#section-miscellaneous" class="anchor"></a>Miscellaneous</h2>
-          <p class="section-desc"><p>Helper functions exported for convenience.</p></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="character-manipulation-tools.html">txt_detect()</a></code> <code><a href="character-manipulation-tools.html">txt_extract()</a></code> <code><a href="character-manipulation-tools.html">txt_extract_all()</a></code> <code><a href="character-manipulation-tools.html">txt_replace()</a></code> <code><a href="character-manipulation-tools.html">txt_replace_all()</a></code> <code><a href="character-manipulation-tools.html">txt_remove()</a></code> <code><a href="character-manipulation-tools.html">txt_remove_all()</a></code> <code><a href="character-manipulation-tools.html">txt_split()</a></code> <code><a href="character-manipulation-tools.html">txt_trim()</a></code> <code><a href="character-manipulation-tools.html">txt_squish()</a></code> <code><a href="character-manipulation-tools.html">txt_to_lower()</a></code> <code><a href="character-manipulation-tools.html">txt_to_upper()</a></code> <code><a href="character-manipulation-tools.html">txt_sub()</a></code> <code><a href="character-manipulation-tools.html">txt_subset()</a></code> <code><a href="character-manipulation-tools.html">txt_which()</a></code> <code><a href="character-manipulation-tools.html">txt_to_title()</a></code> </p>
-        </td>
-        <td><p>Text manipulation tools.</p></td>
-      </tr>
     </tbody>
     </table>
   </div>
@@ -424,19 +265,11 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#section-snatools">snatools</a></li>
+      <li><a href="#section-a-graph-class-to-simplify-network-analysis">A Graph Class to Simplify Network Analysis</a></li>
       <li><a href="#section-class-conversion">Class Conversion</a></li>
       <li><a href="#section-vertices">Vertices</a></li>
       <li><a href="#section-edges">Edges</a></li>
-      <li><a href="#section-network">Network</a></li>
-      <li><a href="#section-representations">Representations</a></li>
-      <li><a href="#section-bipartite">Bipartite</a></li>
-      <li><a href="#section-homophily">Homophily</a></li>
-      <li><a href="#section-quadratic-assignment-procedure">Quadratic Assignment Procedure</a></li>
-      <li><a href="#section-visualization">Visualization</a></li>
-      <li><a href="#section-foreign-file-formats">Foreign File Formats</a></li>
-      <li><a href="#section-data">Data</a></li>
       <li><a href="#section-operators">Operators</a></li>
-      <li><a href="#section-miscellaneous">Miscellaneous</a></li>
     </ul>
   </div>
 </div>
