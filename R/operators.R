@@ -35,28 +35,53 @@
 #' igraph::graph("Zachary") %==% igraph::graph("Zachary")
 #' 
 #' @export
-#' 
 `%==%` <- function(lhs, rhs) {
-  if(class(lhs) %in% c("igraph", "network") && class(rhs) %in% c("igraph", "network")) {
-    lhs_guts <- dissect_graph(lhs)
-    rhs_guts <- dissect_graph(rhs)
-    if(!identical(lhs_guts$net_attrs, rhs_guts$net_attrs, ignore.environment = TRUE)) {
-      message("graph-level attributes don't match")
-      return(FALSE)
-    }
-    if(!identical(lhs_guts$edg_attrs, rhs_guts$edg_attrs, ignore.environment = TRUE)) {
-      message("edge attributes don't match")
-      return(FALSE)
-    }
-    if(!identical(lhs_guts$vrt_attrs, rhs_guts$vrt_attrs, ignore.environment = TRUE)) {
-      message("vertex attributes don't match")
-      return(FALSE)
-    }
-    if(!identical(lhs_guts$el, rhs_guts$el, ignore.environment = TRUE)) {
-      message("edge lists don't match")
-      return(FALSE)
-    }
-    return(TRUE)
-  }
+  UseMethod("%==%")
+}
+
+#' @rdname %==%
+#' 
+#' @export
+`%==%.default` <- function(lhs, rhs) {
   identical(lhs, rhs)
+}
+
+#' @rdname %==%
+#' 
+#' @export
+`%==%.igraph` <- function(lhs, rhs) {
+  lhs <- as_sna_net(lhs)
+  lhs[["graph_attributes"]] <- NULL
+  rhs <- as_sna_net(rhs)
+  rhs[["graph_attributes"]] <- NULL
+  identical(lhs, rhs)
+}
+
+#' @rdname %==%
+#' 
+#' @export
+`%==%.network` <- function(lhs, rhs) {
+  lhs <- as_sna_net(lhs)
+  lhs[["graph_attributes"]] <- NULL
+  rhs <- as_sna_net(rhs)
+  rhs[["graph_attributes"]] <- NULL
+  identical(lhs, rhs)
+}
+
+#' @rdname %==%
+#' 
+#' @export
+`%==%.tbl_graph` <- function(lhs, rhs) {
+  identical(as_sna_net(lhs), as_sna_net(rhs))
+}
+
+
+`%||%` <- function(lhs, rhs) {
+  if (identical(lhs, NULL)) return(rhs)
+  lhs
+}
+
+`%{}%` <- function(lhs, rhs) {
+  if (length(lhs) == 0L) return(rhs)
+  lhs
 }

@@ -5,38 +5,38 @@ library(hexSticker)
 library(magick)
 
 directed_triads <- list(
-  triad_003 = make_graph(~ A, B, C) %>% 
+  triad_003 = igraph::make_graph(~ A, B, C) %>% 
     igraph::as.directed(),
   triad_012 =  igraph::make_empty_graph(3) %>% 
     set_vertex_attr("name", value = c("A", "B", "C")) %>% 
     add_edges(c("B", "A")),
   triad_102 = graph(c("A", "B", "B", "A")) %>% add_vertices(nv = 1, attr = list(name = "C")),
   triad_021D = graph(c("B", "A", "B", "C")),
-  triad_021U = make_empty_graph(3) %>% 
+  triad_021U = igraph::make_empty_graph(3) %>% 
     set_vertex_attr("name", value = c("A", "B", "C")) %>% 
     add_edges(c("B", "A", "C", "A")),
-  triad_021C = make_empty_graph(3) %>% 
+  triad_021C = igraph::make_empty_graph(3) %>% 
     set_vertex_attr("name", value = c("A", "B", "C")) %>% 
     add_edges(c("B", "A", "A", "C")),
-  triad_111D = make_empty_graph(3) %>% 
+  triad_111D = igraph::make_empty_graph(3) %>% 
     set_vertex_attr("name", value = c("A", "B", "C")) %>% 
     add_edges(c("A", "C", "B", "C", "C", "B")),
-  triad_111U = make_empty_graph(3) %>% 
+  triad_111U = igraph::make_empty_graph(3) %>% 
     set_vertex_attr("name", value = c("A", "B", "C")) %>% 
     add_edges(c("C", "A", "B", "C", "C", "B")),
-  triad_030T = make_empty_graph(3) %>% 
+  triad_030T = igraph::make_empty_graph(3) %>% 
     set_vertex_attr("name", value = c("A", "B", "C")) %>% 
     add_edges(c("C", "A", "B", "A", "B", "C")),
   triad_030C = graph(c("B", "A", "C", "B", "A", "C")),
   triad_201 = graph(c("A", "B", "B", "A", "B", "C", "C", "B")),
   triad_120D = graph(c("B", "A", "B", "C", "A", "C", "C", "A")),
-  triad_120U = make_empty_graph(3) %>% 
+  triad_120U = igraph::make_empty_graph(3) %>% 
     set_vertex_attr("name", value = c("A", "B", "C")) %>% 
     add_edges(c("B", "A", "C", "A", "B", "C", "C", "B")),
-  triad_120C = make_empty_graph(3) %>% 
+  triad_120C = igraph::make_empty_graph(3) %>% 
     set_vertex_attr("name", value = c("A", "B", "C")) %>% 
     add_edges(c("B", "A", "A", "C", "B", "C", "C", "B")),
-  triad_210 = make_empty_graph(3) %>% 
+  triad_210 = igraph::make_empty_graph(3) %>% 
     set_vertex_attr("name", value = c("A", "B", "C")) %>% 
     add_edges(c("B", "A", "B", "C", "C", "B", "A", "C", "C", "A")),
   triad_300 = graph(c("A", "B", "B", "A", "B", "C", "C", "B", "A", "C", "C", "A"))
@@ -138,6 +138,6 @@ sticker(subplot = img,
   url = "knapply.github.io/snatools",
   filename = "man/figures/logo.png")
 
-ggsave(width = 43.9 * 1.5, height = 50.8 * 1.5, dpi = 800,
-       filename = "man/figures/logo.png",
-       bg = "transparent", units = "mm")
+ggplot2::ggsave(width = 43.9 * 1.5, height = 50.8 * 1.5, dpi = 800,
+                filename = "man/figures/logo.png",
+                bg = "transparent", units = "mm")

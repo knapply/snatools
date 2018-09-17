@@ -6,26 +6,21 @@ Authors@R: person("Brendan", "Knapp", email = "brendan.g.knapp@gmail.com", role 
 Description: 
 Depends: R (>= 3.5.1)
 Imports:
-    dplyr,
     igraph,
     magrittr,
-    network,
-    purrr,
-    rlang,
-    tibble
+    network
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
 URL: https://github.com/knapply/snatools, https://knapply.github.io/snatools/
 BugReports: https://github.com/knapply/snatools/issues
 LazyData: true
 Suggests:
-    igraphdata,
-    ergm,
+    data.table,
     ggplot2,
     knitr,
     rmarkdown,
-    sna,
     testthat,
+    tibble,
     tidygraph
 RoxygenNote: 6.1.0.9000
 Roxygen: list(markdown = TRUE)

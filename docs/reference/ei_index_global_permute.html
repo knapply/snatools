@@ -153,28 +153,12 @@
 
 <span class='fu'>data</span>(<span class='st'>"samplk"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"ergm"</span>)
 
-<span class='no'>res1</span> <span class='kw'>&lt;-</span> <span class='fu'>ei_index_global_permute</span>(<span class='no'>samplk1</span>, <span class='st'>"cloisterville"</span>)
-
-<span class='no'>res1</span></div><div class='output co'>#&gt; Target Attribute:                  cloisterville 
-#&gt; 
-#&gt; Observed E-I Index:                0.09090909 
-#&gt; 
-#&gt; Iterations:                        1000 
-#&gt; 
-#&gt; # Permutations &gt;= Observed:       912 (91.2%)
-#&gt; # Permutations &lt;= Observed:        88 (8.8%)</div><div class='input'>
-<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>(<span class='no'>res1</span>)</div><div class='img'><img src='ei_index_global_permute-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='no'>res2</span> <span class='kw'>&lt;-</span> <span class='fu'>ei_index_global_permute</span>(<span class='no'>samplk1</span>, <span class='st'>"group"</span>)
-
-<span class='no'>res2</span></div><div class='output co'>#&gt; Target Attribute:                  group 
-#&gt; 
-#&gt; Observed E-I Index:                -0.09090909 
-#&gt; 
-#&gt; Iterations:                        1000 
-#&gt; 
-#&gt; # Permutations &gt;= Observed:       1000 (100%)
-#&gt; # Permutations &lt;= Observed:        0 (0%)</div><div class='input'>
-<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>(<span class='no'>res2</span>)</div><div class='img'><img src='ei_index_global_permute-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='no'>res1</span> <span class='kw'>&lt;-</span> <span class='fu'>ei_index_global_permute</span>(<span class='no'>samplk1</span>, <span class='st'>"cloisterville"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in vrt_get_attr_names(x): could not find function "vrt_get_attr_names"</span></div><div class='input'>
+<span class='no'>res1</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'res1' not found</span></div><div class='input'>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>(<span class='no'>res1</span>)</div><div class='output co'>#&gt; <span class='error'>Error in autoplot(res1): object 'res1' not found</span></div><div class='input'>
+<span class='no'>res2</span> <span class='kw'>&lt;-</span> <span class='fu'>ei_index_global_permute</span>(<span class='no'>samplk1</span>, <span class='st'>"group"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in vrt_get_attr_names(x): could not find function "vrt_get_attr_names"</span></div><div class='input'>
+<span class='no'>res2</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'res2' not found</span></div><div class='input'>
+<span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>(<span class='no'>res2</span>)</div><div class='output co'>#&gt; <span class='error'>Error in autoplot(res2): object 'res2' not found</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

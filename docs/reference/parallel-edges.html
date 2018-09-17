@@ -181,7 +181,7 @@ for loops.</p></li>
 </ul>
     <ul>
 <li><p><code>edg_count_parallel_df</code> is a convenience wrapper around <code>edg_count_parallel()</code> and
-<code><a href='extract-edge-attributes.html'>edg_get_attrs()</a></code> that returns a <code><a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble</a></code>.</p></li>
+<code>edg_get_attrs()</code> that returns a <code><a href='http://www.rdocumentation.org/packages/tibble/topics/tibble'>tibble::tibble</a></code>.</p></li>
 </ul>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -231,33 +231,7 @@ for loops.</p></li>
 <span class='fu'>edg_sum_parallel</span>(<span class='no'>ig</span>)</div><div class='output co'>#&gt; [1] 15208</div><div class='input'><span class='fu'>length</span>(<span class='fu'>which</span>(<span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/which_multiple'>which_multiple</a></span>(<span class='no'>ig</span>)))</div><div class='output co'>#&gt; [1] 15208</div><div class='input'>
 <span class='fu'>edg_sum_parallel</span>(<span class='no'>nw_undirected</span>)</div><div class='output co'>#&gt; [1] 56</div><div class='input'>
 <span class='fu'>edg_count_parallel</span>(<span class='no'>ig</span>) <span class='kw'>%&gt;%</span> <span class='fu'>head</span>(<span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1]  2  2 10  1  1 20 10  1  1  1</div><div class='input'><span class='fu'>edg_count_parallel</span>(<span class='no'>nw</span>) <span class='kw'>%&gt;%</span> <span class='fu'>head</span>(<span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 1 1 1 1 1 1 1 1 1 1</div><div class='input'>
-<span class='fu'>edg_count_parallel_df</span>(<span class='no'>USairports</span>)</div><div class='output co'>#&gt; # A tibble: 23,473 x 9
-#&gt;    from  to    Carrier      Departures Seats Passengers Aircraft Distance     n
-#&gt;  * &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;             &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;    &lt;int&gt;    &lt;dbl&gt; &lt;int&gt;
-#&gt;  1 BGR   JFK   British Air~          1   226        193      627      382     2
-#&gt;  2 BGR   JFK   British Air~          1   299        253      819      382     2
-#&gt;  3 BOS   EWR   British Air~          1   216        141      627      200    10
-#&gt;  4 ANC   JFK   China Airli~         13  5161       3135      819     3386     1
-#&gt;  5 JFK   ANC   China Airli~         13  5161       4097      819     3386     1
-#&gt;  6 LAS   LAX   Korean Air ~         14  3654       1353      627      236    20
-#&gt;  7 MIA   JFK   Lan Ecuador           1   204        183      626     1090    10
-#&gt;  8 EWR   ANC   Eva Airways~         18  5718       4818      627     3370     1
-#&gt;  9 BJC   MIA   G5 Executiv~          1    14          2      667     1732     1
-#&gt; 10 MIA   BJC   G5 Executiv~          1    14          1      667     1732     1
-#&gt; # ... with 23,463 more rows</div><div class='input'><span class='fu'>edg_count_parallel_df</span>(<span class='no'>nw</span>)</div><div class='output co'>#&gt; # A tibble: 88 x 4
-#&gt;    from        to          nominations     n
-#&gt;    &lt;chr&gt;       &lt;chr&gt;             &lt;dbl&gt; &lt;int&gt;
-#&gt;  1 Bonaventure John Bosco            1     1
-#&gt;  2 Mark        John Bosco            1     1
-#&gt;  3 John Bosco  Gregory               1     1
-#&gt;  4 Basil       Gregory               1     1
-#&gt;  5 Winfrid     Gregory               3     1
-#&gt;  6 Boniface    Gregory               3     1
-#&gt;  7 John Bosco  Basil                 2     1
-#&gt;  8 Bonaventure Peter                 3     1
-#&gt;  9 John Bosco  Bonaventure           2     1
-#&gt; 10 Peter       Bonaventure           3     1
-#&gt; # ... with 78 more rows</div><div class='input'>
+<span class='fu'>edg_count_parallel_df</span>(<span class='no'>USairports</span>)</div><div class='output co'>#&gt; <span class='error'>Error in edg_get_attrs(x, include_el = TRUE, ...): could not find function "edg_get_attrs"</span></div><div class='input'><span class='fu'>edg_count_parallel_df</span>(<span class='no'>nw</span>)</div><div class='output co'>#&gt; <span class='error'>Error in edg_get_attrs(x, include_el = TRUE, ...): could not find function "edg_get_attrs"</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

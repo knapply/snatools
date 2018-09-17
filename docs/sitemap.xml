@@ -22,6 +22,15 @@
     <loc>https://knapply.github.io/snatools//reference/davis_southern_women.html</loc>
   </url>
   <url>
+    <loc>https://knapply.github.io/snatools//reference/edg_attr_names.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/edg_get_attr.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/edg_get_attr_df.html</loc>
+  </url>
+  <url>
     <loc>https://knapply.github.io/snatools//reference/ei_index.html</loc>
   </url>
   <url>
@@ -31,16 +40,13 @@
     <loc>https://knapply.github.io/snatools//reference/ei_index_global_permute.html</loc>
   </url>
   <url>
-    <loc>https://knapply.github.io/snatools//reference/extract-edge-attributes.html</loc>
-  </url>
-  <url>
     <loc>https://knapply.github.io/snatools//reference/extract-network-attributes.html</loc>
   </url>
   <url>
-    <loc>https://knapply.github.io/snatools//reference/extract-vertex-attributes.html</loc>
+    <loc>https://knapply.github.io/snatools//reference/metadata-queries.html</loc>
   </url>
   <url>
-    <loc>https://knapply.github.io/snatools//reference/metadata-queries.html</loc>
+    <loc>https://knapply.github.io/snatools//reference/net_count_actors.html</loc>
   </url>
   <url>
     <loc>https://knapply.github.io/snatools//reference/padgett_florence.html</loc>
@@ -85,10 +91,25 @@
     <loc>https://knapply.github.io/snatools//reference/sampson_monastery.html</loc>
   </url>
   <url>
+    <loc>https://knapply.github.io/snatools//reference/set_whole_number_storage.html</loc>
+  </url>
+  <url>
     <loc>https://knapply.github.io/snatools//reference/snatools.html</loc>
   </url>
   <url>
+    <loc>https://knapply.github.io/snatools//reference/sna_net.html</loc>
+  </url>
+  <url>
     <loc>https://knapply.github.io/snatools//reference/strict-compare.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/vrt_attr_names.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/vrt_get_attr.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/vrt_get_attr_df.html</loc>
   </url>
   <url>
     <loc>https://knapply.github.io/snatools//articles/conversion.html</loc>

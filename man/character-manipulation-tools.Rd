@@ -18,6 +18,7 @@
 \alias{txt_subset}
 \alias{txt_which}
 \alias{txt_to_title}
+\alias{txt_wrap}
 \title{Text manipulation tools.}
 \usage{
 txt_detect(text, pattern, ignore_case = FALSE, ...)
@@ -51,6 +52,9 @@ txt_subset(text, pattern, ...)
 txt_which(text, pattern, ...)
 
 txt_to_title(text)
+
+txt_wrap(text, width = floor(options("width")[["width"]] * 0.9),
+  indent = 0, exdent = 0, prefix = "")
 }
 \arguments{
 \item{text}{\code{character}. Object to target.}

@@ -17,6 +17,16 @@ knitr::opts_chunk$set(
 )
 
 knitr::opts_chunk$set(echo = TRUE)
+
+options(crayon.enabled = TRUE)
+sgr_wrap <- function(x, options){
+  paste0(
+    "<pre class=\"r-output\"><code>",
+    fansi::sgr_to_html(x = htmltools::htmlEscape(x)),
+    "</code></pre>"
+  )
+}
+knitr::knit_hooks$set(output = sgr_wrap, warning=sgr_wrap, message=sgr_wrap)
 ```
 
 
@@ -26,16 +36,17 @@ knitr::opts_chunk$set(echo = TRUE)
 
 An R toolkit to bridge graph classes and streamline network analytic workflows.
 
+<br>
+
 ## Installation
 
 ```{r, eval=FALSE}
 # Install {devtools} if you haven't already.
 # install.packages("devtools")
-
-require(devtools)
+requireNamespace(devtools)
 
 # Install {snatools} from GitHub.
-install_github("knapply/snatools")
+devtools::install_github("knapply/snatools")
 
 # Load {snatools}.
 library(snatools)
@@ -45,21 +56,55 @@ library(snatools)
 library(snatools)
 ```
 
+<br>
 
-## Development Test Results
+# `network` to `igraph`
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-library(tidyverse)
-choke <- capture.output(res <- as_tibble(devtools::test()))
+```{r}
+network_object <- snatools:::build_test_graph("nw")
 
-res %>% 
-  group_by(file, context) %>% 
-  mutate(test = row_number()) %>% 
-  summarise(`# of tests` = n(),
-            `All Successful` = all(failed == 0L)) %>% 
-  ungroup() %>% 
-  select(-file) %>% 
-  knitr::kable()
+network_object %>%  
+  as_sna_net()
+network_object %>% 
+  as_igraph()
 ```
 
+## bipartite `network` to `igraph`
+
+```{r}
+bipartite_network <- snatools:::build_test_graph("nw", directed = FALSE, bipartite = TRUE)
+bipartite_network %>% 
+  as_sna_net()
+bipartite_network %>% 
+  as_igraph()
+```
+
+# `igraph` to `network`
+
+```{r}
+igraph_object <- snatools:::build_test_graph("ig")
+
+igraph_object %>% 
+  as_sna_net()
+igraph_object %>% 
+  as_network()
+```
+
+## bipartite `igraph` to `network`
+
+````{r}
+bipartite_igraph <- snatools:::build_test_graph("ig", directed = FALSE, bipartite = TRUE)
+
+bipartite_igraph %>% 
+  as_sna_net()
+bipartite_igraph %>% 
+  as_network()
+```
+
+
+## Development Tests
+
+```{r}
+devtools::test()
+```
 

@@ -10,7 +10,7 @@ read_ucinet(path, directed = NULL)
 \item{path}{Path to file or URL.}
 }
 \value{
-A \code{network_dataset} object.
+A \code{net_primitive} object.
 }
 \description{
 Read UCINET's .dl files

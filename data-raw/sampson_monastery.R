@@ -49,8 +49,7 @@ vertices <- list(samplk1, samplk2, samplk3) %>%
 dat <- "http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/sampson.dat" %>% 
   read_ucinet()
 
-dat$edges <- dat$edges %>% 
-  mutate_at(vars(from, to), ~ recode(., !!!names_dict)) %>% 
+dat$edge_attributes <- dat$edge_attributes %>% 
   mutate(time = case_when(
     level == "SAMPLK1" ~ 1L,
     level == "SAMPLK2" ~ 2L,
@@ -61,8 +60,8 @@ dat$edges <- dat$edges %>%
   mutate(positive_relation = relation %in% c("liking", "esteem",
                                              "positive influence", "praise"))
 
-dat$vertices <- dat$vertices %>% 
-  mutate(name = recode(name, !!!names_dict)) %>% 
+dat$vertex_attributes <- dat$vertex_attributes %>% 
+  mutate_at(vars(from, to), ~ recode(., !!!names_dict)) %>%
   left_join(vertices, by = "name")
 
 sampson_monastery <- dat
