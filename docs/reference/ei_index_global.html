@@ -247,14 +247,15 @@ Default: <code>FALSE</code></p></td>
 #&gt; 12 "Turks"    "Turks"
 #&gt; 14 "Turks"    "Turks"</div><div class='input'><span class='fu'>ei_index_global</span>(<span class='no'>attr_el</span>)</div><div class='output co'>#&gt; [1] -0.09090909</div><div class='input'>
 <span class='co'># mixing_matrix =======================================================================</span>
-(<span class='no'>mix_mat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rep_mixing_matrix.html'>rep_mixing_matrix</a></span>(<span class='no'>samplk1</span>, <span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='st'>"group"</span>))</div><div class='output co'>#&gt;           to
-#&gt; from       Loyal Outcasts Turks Waverers
-#&gt;   Loyal        8        0     3        4
-#&gt;   Outcasts     0        3     5        1
-#&gt;   Turks        2        1    18        1
-#&gt;   Waverers     3        1     4        1
-#&gt; attr(,"class")
-#&gt; [1] "mixing_matrix" "matrix"       </div><div class='input'><span class='fu'>ei_index_global</span>(<span class='no'>mix_mat</span>)</div><div class='output co'>#&gt; [1] -0.09090909</div><div class='input'>
+(<span class='no'>mix_mat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='rep_mixing_matrix.html'>rep_mixing_matrix</a></span>(<span class='no'>samplk1</span>, <span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='st'>"group"</span>))</div><div class='output co'>#&gt; # A mixing_matrix with 4 attribute categories.
+#&gt;                .alter
+#&gt; .ego             Loyal Outcasts Turks Waverers     Incoming Ties
+#&gt;   Loyal          8     0        3     4          | 15           
+#&gt;   Outcasts       0     3        5     1          | 9            
+#&gt;   Turks          2     1        18    1          | 22           
+#&gt;   Waverers       3     1        4     1          | 9            
+#&gt;                  -     -        -     -                         
+#&gt;   Outgoing Ties  13    5        30    7                         </div><div class='input'><span class='fu'>ei_index_global</span>(<span class='no'>mix_mat</span>)</div><div class='output co'>#&gt; [1] -0.09090909</div><div class='input'>
 <span class='co'># tbl_graph ===========================================================================</span>
 (<span class='no'>tbl_g</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>tidygraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/tidygraph/topics/tbl_graph'>as_tbl_graph</a></span>(<span class='no'>UKfaculty</span>))</div><div class='output co'>#&gt; # A tbl_graph: 81 nodes and 817 edges
 #&gt; #

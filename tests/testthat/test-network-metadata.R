@@ -107,3 +107,30 @@ test_that("ig_dir vs nw_dir)", {
 test_that("ig_dir vs sna_net_dir)", {
   expect_equal(net_count_vertices(ig_bip), net_count_vertices(sna_net_bip))
   })
+
+# loops ====
+context("net_has_loops")
+#* directed ====
+test_that("ig_dir vs nw_dir)", {
+  expect_equal(net_has_loops(ig_dir), net_has_loops(nw_dir))
+  })
+test_that("ig_dir vs sna_net_dir)", {
+  expect_equal(net_has_loops(ig_dir), net_has_loops(sna_net_dir))
+  })
+#* undirected ====
+test_that("ig_dir vs nw_dir)", {
+  expect_equal(net_has_loops(ig_undir), net_has_loops(nw_undir))
+  })
+test_that("ig_dir vs sna_net_dir)", {
+  expect_equal(net_has_loops(ig_undir), net_has_loops(sna_net_undir))
+  })
+#* bipartite ====
+test_that("ig_dir vs nw_dir)", {
+  expect_equal(net_has_loops(ig_bip), net_has_loops(nw_bip))
+  })
+test_that("ig_dir vs sna_net_dir)", {
+  expect_equal(net_has_loops(ig_bip), net_has_loops(sna_net_bip))
+  })
+
+
+

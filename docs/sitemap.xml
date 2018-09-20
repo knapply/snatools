@@ -49,6 +49,21 @@
     <loc>https://knapply.github.io/snatools//reference/net_count_actors.html</loc>
   </url>
   <url>
+    <loc>https://knapply.github.io/snatools//reference/net_count_edges.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/net_count_vertices.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/net_is_bipartite.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/net_is_directed.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/net_is_multiplex.html</loc>
+  </url>
+  <url>
     <loc>https://knapply.github.io/snatools//reference/padgett_florence.html</loc>
   </url>
   <url>
@@ -76,6 +91,12 @@
     <loc>https://knapply.github.io/snatools//reference/rep_adjacency_matrix.html</loc>
   </url>
   <url>
+    <loc>https://knapply.github.io/snatools//reference/rep_as_edgelist.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/rep_as_mixing_matrix.html</loc>
+  </url>
+  <url>
     <loc>https://knapply.github.io/snatools//reference/rep_biadjacency_matrix.html</loc>
   </url>
   <url>
@@ -89,9 +110,6 @@
   </url>
   <url>
     <loc>https://knapply.github.io/snatools//reference/sampson_monastery.html</loc>
-  </url>
-  <url>
-    <loc>https://knapply.github.io/snatools//reference/set_whole_number_storage.html</loc>
   </url>
   <url>
     <loc>https://knapply.github.io/snatools//reference/snatools.html</loc>

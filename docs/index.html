@@ -123,8 +123,8 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 
 network_object <span class="op">%&gt;%</span><span class="st">  </span>
 <span class="st">  </span><span class="kw"><a href="reference/sna_net.html">as_sna_net</a></span>()</code></pre></div>
-<pre class="r-output"><code>#&gt; # A directed, multiplex, 1-mode `sna_net`.
-#&gt; ## - Contains &gt;0 loops and 0 isolates.
+<pre class="r-output"><code>#&gt; A directed, multiplex, 1-mode `sna_net`.
+#&gt; - Contains &gt;0 loops and 0 isolates.
 #&gt; $edges # first 3 of 22
 #&gt;    .ego    .alter  edge_chr edge_int edge_dbl edge_lgl
 #&gt;    &lt;.name&gt; &lt;.name&gt; &lt;chr&gt;    &lt;int&gt;    &lt;dbl&gt;    &lt;lgl&gt;   
@@ -140,12 +140,12 @@ network_object <span class="op">%&gt;%</span><span class="st">  </span>
 </code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">network_object <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="reference/as_igraph.html">as_igraph</a></span>()</code></pre></div>
-<pre class="r-output"><code>#&gt; IGRAPH d11ac0e DN-- 10 22 -- 
+<pre class="r-output"><code>#&gt; IGRAPH c4c9c82 DN-- 10 22 -- 
 #&gt; + attr: graph_chr (g/c), graph_lgl (g/l), graph_int (g/n),
 #&gt; | graph_dbl (g/n), node_chr (v/c), node_int (v/n), node_dbl (v/n),
 #&gt; | node_lgl (v/l), name (v/c), edge_chr (e/c), edge_int (e/n),
 #&gt; | edge_dbl (e/n), edge_lgl (e/l)
-#&gt; + edges from d11ac0e (vertex names):
+#&gt; + edges from c4c9c82 (vertex names):
 #&gt;  [1] node_2-&gt;node_7  node_4-&gt;node_3  node_5-&gt;node_6  node_5-&gt;node_7 
 #&gt;  [5] node_5-&gt;node_8  node_5-&gt;node_10 node_7-&gt;node_1  node_7-&gt;node_7 
 #&gt;  [9] node_7-&gt;node_8  node_7-&gt;node_9  node_8-&gt;node_9  node_2-&gt;node_7 
@@ -160,8 +160,8 @@ network_object <span class="op">%&gt;%</span><span class="st">  </span>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bipartite_network &lt;-<span class="st"> </span>snatools<span class="op">:::</span><span class="kw">build_test_graph</span>(<span class="st">"nw"</span>, <span class="dt">directed =</span> <span class="ot">FALSE</span>, <span class="dt">bipartite =</span> <span class="ot">TRUE</span>)
 bipartite_network <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="reference/sna_net.html">as_sna_net</a></span>()</code></pre></div>
-<pre class="r-output"><code>#&gt; # An undirected, multiplex, bipartite `sna_net`.
-#&gt; ## - Contains 0 loops and &gt;0 isolates.
+<pre class="r-output"><code>#&gt; An undirected, multiplex, bipartite `sna_net`.
+#&gt; - Contains 0 loops and &gt;0 isolates.
 #&gt; $edges # first 3 of 4
 #&gt;    .ego    .alter  edge_chr edge_int edge_dbl edge_lgl
 #&gt;    &lt;.name&gt; &lt;.name&gt; &lt;chr&gt;    &lt;int&gt;    &lt;dbl&gt;    &lt;lgl&gt;   
@@ -177,12 +177,12 @@ bipartite_network <span class="op">%&gt;%</span><span class="st"> </span>
 </code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bipartite_network <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="reference/as_igraph.html">as_igraph</a></span>()</code></pre></div>
-<pre class="r-output"><code>#&gt; IGRAPH d125c3d UN-B 10 4 -- 
+<pre class="r-output"><code>#&gt; IGRAPH c4d38e2 UN-B 10 4 -- 
 #&gt; + attr: graph_chr (g/c), graph_lgl (g/l), graph_int (g/n),
 #&gt; | graph_dbl (g/n), node_chr (v/c), node_int (v/n), node_dbl (v/n),
 #&gt; | node_lgl (v/l), type (v/l), name (v/c), edge_chr (e/c), edge_int
 #&gt; | (e/n), edge_dbl (e/n), edge_lgl (e/l)
-#&gt; + edges from d125c3d (vertex names):
+#&gt; + edges from c4d38e2 (vertex names):
 #&gt; [1] node_1--node_3 node_1--node_6 node_1--node_3 node_1--node_6
 </code></pre>
 </div>
@@ -195,8 +195,8 @@ bipartite_network <span class="op">%&gt;%</span><span class="st"> </span>
 
 igraph_object <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="reference/sna_net.html">as_sna_net</a></span>()</code></pre></div>
-<pre class="r-output"><code>#&gt; # A directed, multiplex, 1-mode `sna_net`.
-#&gt; ## - Contains &gt;0 loops and 0 isolates.
+<pre class="r-output"><code>#&gt; A directed, multiplex, 1-mode `sna_net`.
+#&gt; - Contains &gt;0 loops and 0 isolates.
 #&gt; $edges # first 3 of 22
 #&gt;    .ego    .alter  edge_chr edge_int edge_dbl edge_lgl
 #&gt;    &lt;.name&gt; &lt;.name&gt; &lt;chr&gt;    &lt;int&gt;    &lt;dbl&gt;    &lt;lgl&gt;   
@@ -241,8 +241,8 @@ igraph_object <span class="op">%&gt;%</span><span class="st"> </span>
 
 bipartite_igraph <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="reference/sna_net.html">as_sna_net</a></span>()</code></pre></div>
-<pre class="r-output"><code>#&gt; # An undirected, multiplex, bipartite `sna_net`.
-#&gt; ## - Contains 0 loops and &gt;0 isolates.
+<pre class="r-output"><code>#&gt; An undirected, multiplex, bipartite `sna_net`.
+#&gt; - Contains 0 loops and &gt;0 isolates.
 #&gt; $edges # first 3 of 4
 #&gt;    .ego    .alter  edge_chr edge_int edge_dbl edge_lgl
 #&gt;    &lt;.name&gt; &lt;.name&gt; &lt;chr&gt;    &lt;int&gt;    &lt;dbl&gt;    &lt;lgl&gt;   
@@ -297,7 +297,7 @@ bipartite_igraph <span class="op">%&gt;%</span><span class="st"> </span>
 \ |  2       | converting empty graphs to `sna_net`s
 | |  3       | converting empty graphs to `sna_net`s
 / |  4       | converting empty graphs to `sna_net`s
-</span><span style="color: #00BB00;">v</span><span> |  4       | converting empty graphs to `sna_net`s</span><span style="color: #00BBBB;"> [0.3 s]</span><span>
+</span><span style="color: #00BB00;">v</span><span> |  4       | converting empty graphs to `sna_net`s</span><span style="color: #00BBBB;"> [0.2 s]</span><span>
 #&gt; 
 / |  0       | converting non-empty graphs to `sna_net`s
 - |  1       | converting non-empty graphs to `sna_net`s
@@ -311,7 +311,7 @@ bipartite_igraph <span class="op">%&gt;%</span><span class="st"> </span>
 \ |  2       | `igraph` %&gt;% `network` vertices match control
 | |  3       | `igraph` %&gt;% `network` vertices match control
 / |  4       | `igraph` %&gt;% `network` vertices match control
-</span><span style="color: #00BB00;">v</span><span> |  4       | `igraph` %&gt;% `network` vertices match control</span><span style="color: #00BBBB;"> [0.1 s]</span><span>
+</span><span style="color: #00BB00;">v</span><span> |  4       | `igraph` %&gt;% `network` vertices match control
 #&gt; 
 / |  0       | `network` %&gt;% `igraph` vertices match control
 - |  1       | `network` %&gt;% `igraph` vertices match control
@@ -411,7 +411,7 @@ bipartite_igraph <span class="op">%&gt;%</span><span class="st"> </span>
 </span><span style="color: #00BB00;">v</span><span> |  6       | vertex counts
 #&gt; 
 #&gt; == </span><span style="font-weight: bold;">Results</span><span> ========================================================
-#&gt; </span><span style="color: #00BBBB;">Duration: 1.1 s</span><span>
+#&gt; </span><span style="color: #00BBBB;">Duration: 0.8 s</span><span>
 #&gt; 
 #&gt; OK:       </span><span style="color: #00BB00;">67</span><span>
 #&gt; Failed:   </span><span style="color: #00BB00;">0</span><span>

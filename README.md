@@ -36,8 +36,8 @@ network_object %>%
   as_sna_net()
 ```
 
-<pre class="r-output"><code>#&gt; # A directed, multiplex, 1-mode `sna_net`.
-#&gt; ## - Contains &gt;0 loops and 0 isolates.
+<pre class="r-output"><code>#&gt; A directed, multiplex, 1-mode `sna_net`.
+#&gt; - Contains &gt;0 loops and 0 isolates.
 #&gt; $edges # first 3 of 22
 #&gt;    .ego    .alter  edge_chr edge_int edge_dbl edge_lgl
 #&gt;    &lt;.name&gt; &lt;.name&gt; &lt;chr&gt;    &lt;int&gt;    &lt;dbl&gt;    &lt;lgl&gt;   
@@ -56,12 +56,12 @@ network_object %>%
   as_igraph()
 ```
 
-<pre class="r-output"><code>#&gt; IGRAPH ca4bf9b DN-- 10 22 -- 
+<pre class="r-output"><code>#&gt; IGRAPH bed93ed DN-- 10 22 -- 
 #&gt; + attr: graph_chr (g/c), graph_lgl (g/l), graph_int (g/n),
 #&gt; | graph_dbl (g/n), node_chr (v/c), node_int (v/n), node_dbl (v/n),
 #&gt; | node_lgl (v/l), name (v/c), edge_chr (e/c), edge_int (e/n),
 #&gt; | edge_dbl (e/n), edge_lgl (e/l)
-#&gt; + edges from ca4bf9b (vertex names):
+#&gt; + edges from bed93ed (vertex names):
 #&gt;  [1] node_2-&gt;node_7  node_4-&gt;node_3  node_5-&gt;node_6  node_5-&gt;node_7 
 #&gt;  [5] node_5-&gt;node_8  node_5-&gt;node_10 node_7-&gt;node_1  node_7-&gt;node_7 
 #&gt;  [9] node_7-&gt;node_8  node_7-&gt;node_9  node_8-&gt;node_9  node_2-&gt;node_7 
@@ -78,8 +78,8 @@ bipartite_network %>%
   as_sna_net()
 ```
 
-<pre class="r-output"><code>#&gt; # An undirected, multiplex, bipartite `sna_net`.
-#&gt; ## - Contains 0 loops and &gt;0 isolates.
+<pre class="r-output"><code>#&gt; An undirected, multiplex, bipartite `sna_net`.
+#&gt; - Contains 0 loops and &gt;0 isolates.
 #&gt; $edges # first 3 of 4
 #&gt;    .ego    .alter  edge_chr edge_int edge_dbl edge_lgl
 #&gt;    &lt;.name&gt; &lt;.name&gt; &lt;chr&gt;    &lt;int&gt;    &lt;dbl&gt;    &lt;lgl&gt;   
@@ -98,12 +98,12 @@ bipartite_network %>%
   as_igraph()
 ```
 
-<pre class="r-output"><code>#&gt; IGRAPH ca56c78 UN-B 10 4 -- 
+<pre class="r-output"><code>#&gt; IGRAPH bee3285 UN-B 10 4 -- 
 #&gt; + attr: graph_chr (g/c), graph_lgl (g/l), graph_int (g/n),
 #&gt; | graph_dbl (g/n), node_chr (v/c), node_int (v/n), node_dbl (v/n),
 #&gt; | node_lgl (v/l), type (v/l), name (v/c), edge_chr (e/c), edge_int
 #&gt; | (e/n), edge_dbl (e/n), edge_lgl (e/l)
-#&gt; + edges from ca56c78 (vertex names):
+#&gt; + edges from bee3285 (vertex names):
 #&gt; [1] node_1--node_3 node_1--node_6 node_1--node_3 node_1--node_6
 </code></pre>
 `igraph` to `network`
@@ -116,8 +116,8 @@ igraph_object %>%
   as_sna_net()
 ```
 
-<pre class="r-output"><code>#&gt; # A directed, multiplex, 1-mode `sna_net`.
-#&gt; ## - Contains &gt;0 loops and 0 isolates.
+<pre class="r-output"><code>#&gt; A directed, multiplex, 1-mode `sna_net`.
+#&gt; - Contains &gt;0 loops and 0 isolates.
 #&gt; $edges # first 3 of 22
 #&gt;    .ego    .alter  edge_chr edge_int edge_dbl edge_lgl
 #&gt;    &lt;.name&gt; &lt;.name&gt; &lt;chr&gt;    &lt;int&gt;    &lt;dbl&gt;    &lt;lgl&gt;   
@@ -167,8 +167,8 @@ bipartite_igraph %>%
   as_sna_net()
 ```
 
-<pre class="r-output"><code>#&gt; # An undirected, multiplex, bipartite `sna_net`.
-#&gt; ## - Contains 0 loops and &gt;0 isolates.
+<pre class="r-output"><code>#&gt; An undirected, multiplex, bipartite `sna_net`.
+#&gt; - Contains 0 loops and &gt;0 isolates.
 #&gt; $edges # first 3 of 4
 #&gt;    .ego    .alter  edge_chr edge_int edge_dbl edge_lgl
 #&gt;    &lt;.name&gt; &lt;.name&gt; &lt;chr&gt;    &lt;int&gt;    &lt;dbl&gt;    &lt;lgl&gt;   
@@ -228,7 +228,7 @@ devtools::test()
 \ |  2       | converting empty graphs to `sna_net`s
 | |  3       | converting empty graphs to `sna_net`s
 / |  4       | converting empty graphs to `sna_net`s
-</span><span style='color: #00BB00;'>v</span><span> |  4       | converting empty graphs to `sna_net`s</span><span style='color: #00BBBB;'> [0.3 s]</span><span>
+</span><span style='color: #00BB00;'>v</span><span> |  4       | converting empty graphs to `sna_net`s</span><span style='color: #00BBBB;'> [0.2 s]</span><span>
 #&gt; 
 / |  0       | converting non-empty graphs to `sna_net`s
 - |  1       | converting non-empty graphs to `sna_net`s
@@ -342,7 +342,7 @@ devtools::test()
 </span><span style='color: #00BB00;'>v</span><span> |  6       | vertex counts
 #&gt; 
 #&gt; == </span><span style='font-weight: bold;'>Results</span><span> =====================================================================
-#&gt; </span><span style='color: #00BBBB;'>Duration: 0.9 s</span><span>
+#&gt; </span><span style='color: #00BBBB;'>Duration: 0.7 s</span><span>
 #&gt; 
 #&gt; OK:       </span><span style='color: #00BB00;'>67</span><span>
 #&gt; Failed:   </span><span style='color: #00BB00;'>0</span><span>

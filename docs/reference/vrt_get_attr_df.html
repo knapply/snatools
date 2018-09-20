@@ -187,47 +187,47 @@ an <code>sna_vertices_df</code> object that standardizes the results of graph ob
 
 <span class='fu'>vrt_get_attr_df</span>(<span class='no'>ig</span>)</div><div class='output co'>#&gt; # sna_vertices_df: 4 x 2
 #&gt;     .name a_vertex_attribute
-#&gt;   1     a                  3
+#&gt;   1     a                  1
 #&gt;   2     b                  2
-#&gt;   3     c                  1
+#&gt;   3     c                  3
 #&gt;   4     d                  4</div><div class='input'><span class='fu'>vrt_get_attr_df</span>(<span class='no'>ig</span>, <span class='kw'>sna_vertices_df</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt;   name a_vertex_attribute
-#&gt; a    a                  3
+#&gt; a    a                  1
 #&gt; b    b                  2
-#&gt; c    c                  1
+#&gt; c    c                  3
 #&gt; d    d                  4</div><div class='input'>
 <span class='no'>nw</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>network</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/network/topics/network'>as.network</a></span>(<span class='no'>adj_mat</span>)
 <span class='kw pkg'>network</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/network/topics/attribute.methods'>set.vertex.attribute</a></span>(<span class='no'>nw</span>, <span class='st'>"a_vertex_attribute"</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'>sample</span>(<span class='fu'>seq_len</span>(<span class='kw pkg'>network</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/network/topics/network.size'>network.size</a></span>(<span class='no'>nw</span>))))
 
 <span class='fu'>vrt_get_attr_df</span>(<span class='no'>nw</span>)</div><div class='output co'>#&gt; # sna_vertices_df: 4 x 2
 #&gt;     .name a_vertex_attribute
-#&gt;   1     a                  3
-#&gt;   2     b                  1
-#&gt;   3     c                  4
-#&gt;   4     d                  2</div><div class='input'><span class='fu'>vrt_get_attr_df</span>(<span class='no'>nw</span>, <span class='kw'>sna_vertices_df</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt;   vertex.names a_vertex_attribute
-#&gt; 1            a                  3
-#&gt; 2            b                  1
-#&gt; 3            c                  4
-#&gt; 4            d                  2</div><div class='input'>
+#&gt;   1     a                  2
+#&gt;   2     b                  4
+#&gt;   3     c                  1
+#&gt;   4     d                  3</div><div class='input'><span class='fu'>vrt_get_attr_df</span>(<span class='no'>nw</span>, <span class='kw'>sna_vertices_df</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt;   vertex.names a_vertex_attribute
+#&gt; 1            a                  2
+#&gt; 2            b                  4
+#&gt; 3            c                  1
+#&gt; 4            d                  3</div><div class='input'>
 <span class='no'>tbl_g</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>tidygraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/tidygraph/topics/tbl_graph'>as_tbl_graph</a></span>(<span class='no'>ig</span>)
 
 <span class='fu'>vrt_get_attr_df</span>(<span class='no'>tbl_g</span>)</div><div class='output co'>#&gt; # sna_vertices_df: 4 x 2
 #&gt;     .name a_vertex_attribute
-#&gt;   1     a                  3
+#&gt;   1     a                  1
 #&gt;   2     b                  2
-#&gt;   3     c                  1
+#&gt;   3     c                  3
 #&gt;   4     d                  4</div><div class='input'><span class='fu'>vrt_get_attr_df</span>(<span class='no'>tbl_g</span>, <span class='kw'>sna_vertices_df</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt;   name a_vertex_attribute
-#&gt; a    a                  3
+#&gt; a    a                  1
 #&gt; b    b                  2
-#&gt; c    c                  1
+#&gt; c    c                  3
 #&gt; d    d                  4</div><div class='input'>
 <span class='no'>sna_g</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sna_net.html'>as_sna_net</a></span>(<span class='no'>nw</span>)
 
 <span class='fu'>vrt_get_attr_df</span>(<span class='no'>sna_g</span>)</div><div class='output co'>#&gt; # sna_vertices_df: 4 x 2
 #&gt;     .name a_vertex_attribute
-#&gt;   1     a                  3
-#&gt;   2     b                  1
-#&gt;   3     c                  4
-#&gt;   4     d                  2</div><div class='input'>
+#&gt;   1     a                  2
+#&gt;   2     b                  4
+#&gt;   3     c                  1
+#&gt;   4     d                  3</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

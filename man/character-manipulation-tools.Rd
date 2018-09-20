@@ -54,7 +54,7 @@ txt_which(text, pattern, ...)
 txt_to_title(text)
 
 txt_wrap(text, width = floor(options("width")[["width"]] * 0.9),
-  indent = 0, exdent = 0, prefix = "")
+  indent = 0, exdent = 0, initial = "", prefix = "")
 }
 \arguments{
 \item{text}{\code{character}. Object to target.}

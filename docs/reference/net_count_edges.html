@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Extract a specific vertex attribute. — vrt_get_attr • snatools</title>
+<title>Count the number of edges present in a graph object. — net_count_edges • snatools</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Extract a specific vertex attribute. — vrt_get_attr" />
+<meta property="og:title" content="Count the number of edges present in a graph object. — net_count_edges" />
 
-<meta property="og:description" content="Extract a specific vertex attribute." />
+<meta property="og:description" content="Count the number of edges present in a graph object." />
 
 <meta property="og:image" content="https://knapply.github.io/snatools/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -127,78 +127,75 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Extract a specific vertex attribute.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/vertex-attributes.R'><code>R/vertex-attributes.R</code></a></small>
-    <div class="hidden name"><code>vrt_get_attr.Rd</code></div>
+    <h1>Count the number of edges present in a graph object.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/network-metadata.R'><code>R/network-metadata.R</code></a></small>
+    <div class="hidden name"><code>net_count_edges.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Extract a specific vertex attribute.</p>
+    <p>Count the number of edges present in a graph object.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>vrt_get_attr</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>)
+    <pre class="usage"><span class='fu'>net_count_edges</span>(<span class='no'>x</span>)
 
 <span class='co'># S3 method for sna_net</span>
-<span class='fu'>vrt_get_attr</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>)
+<span class='fu'>net_count_edges</span>(<span class='no'>x</span>)
 
 <span class='co'># S3 method for igraph</span>
-<span class='fu'>vrt_get_attr</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>)
+<span class='fu'>net_count_edges</span>(<span class='no'>x</span>)
 
 <span class='co'># S3 method for network</span>
-<span class='fu'>vrt_get_attr</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>)
+<span class='fu'>net_count_edges</span>(<span class='no'>x</span>)
 
 <span class='co'># S3 method for tbl_graph</span>
-<span class='fu'>vrt_get_attr</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>)</pre>
+<span class='fu'>net_count_edges</span>(<span class='no'>x</span>)
+
+<span class='co'># S3 method for edgelist</span>
+<span class='fu'>net_count_edges</span>(<span class='no'>x</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>An <code>sna_net</code>, <code>igraph</code>, <code>network</code>, or <code>tbl_graph</code>.</p></td>
-    </tr>
-    <tr>
-      <th>vrt_attr</th>
-      <td><p><code>character</code> specifying the target vertex attribute.</p></td>
+      <td><p>An <code>sna_net</code>, <code>igraph</code>, <code>network</code>, <code>tbl_graph</code>, or <code>edgelist</code> object.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>vector</code> of vertex attribute values.</p>
+    <p><code>integer</code> indicating the number of edges in <code>x</code>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='vrt_attr_names.html'>vrt_attr_names()</a></code>, <code><a href='vrt_get_attr_df.html'>vrt_get_attr_df()</a></code>, <code><a href='http://www.rdocumentation.org/packages/igraph/topics/vertex_attr'>igraph::vertex_attr()</a></code>,
-<code><a href='http://www.rdocumentation.org/packages/network/topics/attribute.methods'>network::get.vertex.attribute()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/igraph/topics/gsize'>igraph::ecount()</a></code></p>
+<p><code><a href='http://www.rdocumentation.org/packages/network/topics/network.edgecount'>network::network.edgecount()</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>snatools</span>)
 
-<span class='no'>adj_mat</span> <span class='kw'>&lt;-</span> <span class='fu'>rbinom</span>(<span class='fl'>16L</span>, <span class='fl'>1L</span>, <span class='fl'>0.3</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>matrix</span>(<span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>4L</span>, <span class='kw'>dimnames</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>4</span>], <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>4</span>]))
+<span class='no'>ig</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/erdos.renyi.game'>random.graph.game</a></span>(<span class='fl'>10</span>, <span class='fl'>0.25</span>, <span class='kw'>directed</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='no'>ig</span> <span class='kw'>&lt;-</span> <span class='no'>adj_mat</span> <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/graph_from_adjacency_matrix'>graph_from_adjacency_matrix</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/set_vertex_attr'>set_vertex_attr</a></span>(<span class='st'>"a_vertex_attribute"</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'>sample</span>(<span class='fu'>seq_len</span>(<span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/gorder'>vcount</a></span>(<span class='no'>.</span>))))
+<span class='no'>nw</span> <span class='kw'>&lt;-</span> <span class='no'>ig</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='as_network.html'>as_network</a></span>()
 
-<span class='no'>ig</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>vrt_get_attr</span>(<span class='st'>"name"</span>)</div><div class='output co'>#&gt; [1] "a" "b" "c" "d"</div><div class='input'>
-<span class='no'>nw</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>network</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/network/topics/network'>as.network</a></span>(<span class='no'>adj_mat</span>)
-  <span class='kw pkg'>network</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/network/topics/attribute.methods'>set.vertex.attribute</a></span>(<span class='no'>nw</span>, <span class='st'>"a_vertex_attribute"</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'>sample</span>(<span class='fu'>seq_len</span>(<span class='kw pkg'>network</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/network/topics/network.size'>network.size</a></span>(<span class='no'>nw</span>))))
+<span class='no'>sna_g</span> <span class='kw'>&lt;-</span> <span class='no'>ig</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='sna_net.html'>as_sna_net</a></span>()
 
-<span class='no'>nw</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>vrt_get_attr</span>(<span class='st'>"vertex.names"</span>)</div><div class='output co'>#&gt; [1] "a" "b" "c" "d"</div><div class='input'>
-<span class='no'>tbl_g</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>tidygraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/tidygraph/topics/tbl_graph'>as_tbl_graph</a></span>(<span class='no'>ig</span>)
+<span class='no'>tidy_g</span> <span class='kw'>&lt;-</span> <span class='no'>ig</span> <span class='kw'>%&gt;%</span>
+  <span class='kw pkg'>tidygraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/tidygraph/topics/tbl_graph'>as_tbl_graph</a></span>()
 
-<span class='no'>tbl_g</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>vrt_get_attr</span>(<span class='st'>"a_vertex_attribute"</span>)</div><div class='output co'>#&gt; [1] 2 3 4 1</div><div class='input'>
-<span class='no'>sna_g</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sna_net.html'>as_sna_net</a></span>(<span class='no'>nw</span>)
+<span class='no'>el</span> <span class='kw'>&lt;-</span> <span class='no'>ig</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='rep_as_edgelist.html'>rep_as_edgelist</a></span>(<span class='kw'>use_names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>vrt_get_attr</span>(<span class='no'>sna_g</span>, <span class='st'>"a_vertex_attribute"</span>)</div><div class='output co'>#&gt; [1] 1 3 2 4</div><div class='input'>
+<span class='fu'>net_count_edges</span>(<span class='no'>sna_g</span>)</div><div class='output co'>#&gt; [1] 16</div><div class='input'>
+<span class='fu'>net_count_edges</span>(<span class='no'>ig</span>)</div><div class='output co'>#&gt; [1] 16</div><div class='input'>
+<span class='fu'>net_count_edges</span>(<span class='no'>nw</span>)</div><div class='output co'>#&gt; [1] 16</div><div class='input'>
+<span class='fu'>net_count_edges</span>(<span class='no'>tidy_g</span>)</div><div class='output co'>#&gt; [1] 16</div><div class='input'>
+<span class='fu'>net_count_edges</span>(<span class='no'>el</span>)</div><div class='output co'>#&gt; [1] 16</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

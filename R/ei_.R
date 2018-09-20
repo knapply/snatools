@@ -1,7 +1,8 @@
-ei_index <- function(x, vrt_attr, scope = c("global", "group", "vertex")) {
+ei_index <- function(x, vrt_attr, scope = c("global", "group", "vertex"),
+                     permute = FALSE) {
   scope <- match.arg(scope, c("global", "groups", "vertices"))
   switch(scope,
-         global = ei_index_global(x, vrt_attr),
+         global = ei_index_global(x, vrt_attr, permute),
          group = ei_index_group(x, vrt_attr),
          vertex = ei_index_vertex(x, vrt))
 }
@@ -20,3 +21,5 @@ ei_index_global <- function(x, vrt_attr) {
   
   (external - internal) / n_edges
 }
+
+

@@ -43,21 +43,22 @@ reference:
     - edg_get_attr
     - edg_get_attr_df
     
-#  - title: Edges
-#    desc: Operations targeting edges.
-#    contents:
-#    - starts_with("edg_get_")
-#    - ends_with("parallel")
-#  
-#  - title: Network
-#    desc: Operations targeting graph-level attributes and metadata.
-#    contents:
-#    - starts_with("net_get_")
-#    - starts_with("net_is_")
-#
-#  - title: Representations
-#    desc: Construct various network representations.
-#    contents:
+  - title: Network Metadata
+    desc: Operations targeting graph-level attributes and metadata.
+    contents:
+    - net_is_directed
+    - net_is_multiplex
+    - net_count_vertices
+    - net_count_edges
+    - net_is_bipartite
+    - net_count_actors
+
+  - title: Representations
+    desc: Construct and test various network representations.
+    contents:
+    - rep_as_edgelist
+    - rep_as_mixing_matrix
+
 #    - rep_adjacency_matrix
 #    - rep_attr_adj_mat
 #    - rep_edgelist
