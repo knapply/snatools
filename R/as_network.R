@@ -2,13 +2,13 @@
 #' 
 #' Accurately map foreign graph data to `network` objects.
 #' 
-#' @param x `sna_net`, `igraph` ([`igraph::graph`]), or [`tidygraph::tbl_graph`].
+#' @param x `bridge_net`, `igraph` ([`igraph::graph`]), or [`tidygraph::tbl_graph`].
 #' @param ... Named arguments passed on to other methods. Currently `.actor`
 #' @param .actor `logical`, defaults `TRUE`. Whether to retain the `.actor` vertex attribute
 #' of converted bipartite graphs.
 #' 
 #' @details
-#' `as_network()` converts `x` to an intermediate `sna_net` object that is capable of 
+#' `as_network()` converts `x` to an intermediate `bridge_net` object that is capable of 
 #' mapping metadata, edges, vertices, and attributes (edge, vertex, and graph-level)
 #' to a new, valid `network` object. \cr
 #' 
@@ -25,14 +25,14 @@
 #'     bipartite `igraph`s to `networks` in a way that results in truly _identical_ 
 #'     objects is only possible when an `igraph`'s vertices are already sorted by their
 #'     `type`` attribute.
-#' * To handle this discrepency, intermediate `sna_net` objects treat vertices whose 
+#' * To handle this discrepency, intermediate `bridge_net` objects treat vertices whose 
 #'   `type` attributes are `TRUE` as "actors", meaning the `igraph`'s vertices are
 #'   sorted during conversion to ensure that `TRUE` vertices are first (via 
 #'   [`igraph::permute()`]).
 #'   + The intention of using `TRUE` vertices is to allow a user to think of an `igraph`'s 
 #'     vertices' `type` attribute as indicating whether a vertex is an "actor".
 #' * In order to standardize representations, returned bipartite `network` objects 
-#'   intentionally retain the intermediate `sna_net`'s `.actor` vertex attribute (a 
+#'   intentionally retain the intermediate `bridge_net`'s `.actor` vertex attribute (a 
 #'   `logical` `vector`).
 #'   + `.actor` corresponds to an `igraph`'s `type` vertex attributes, i.e. 
 #'     `V(x_igraph)$type` and `x_network %v% ".actor"` will _always_ match.
@@ -41,7 +41,7 @@
 #' 
 #' @return A [`network::network`] object.
 #' 
-#' @seealso [as_sna_net()], [as_igraph()], [intergraph::asNetwork()]
+#' @seealso [as_bridge_net()], [as_igraph()], [intergraph::asNetwork()]
 #' 
 #' @author Brendan Knapp \email{brendan.g.knapp@@gmail.com}
 #' 
@@ -64,16 +64,13 @@
 #' nw1
 #' 
 #' # manually comparing original and converted networks ==================================
-#' as_sna_net(ig1)$vertices
-#' as_sna_net(nw1)$vertices
-#' identical(as_sna_net(ig1)$vertices, as_sna_net(nw1)$vertices)
+#' as_bridge_net(ig1)$vertices
+#' as_bridge_net(nw1)$vertices
+#' identical(as_bridge_net(ig1)$vertices, as_bridge_net(nw1)$vertices)
 #' 
-#' as_sna_net(ig1)$edges
-#' as_sna_net(nw1)$edges
-#' identical(as_sna_net(ig1)$edges, as_sna_net(nw1)$edges)
-#' 
-#' # convenience comparison operator =====================================================
-#' ig1 %==% nw1
+#' as_bridge_net(ig1)$edges
+#' as_bridge_net(nw1)$edges
+#' identical(as_bridge_net(ig1)$edges, as_bridge_net(nw1)$edges)
 #' 
 #' # converting bipartite igraph to bipartite network ====================================
 #' ig2 <- bipartite.random.game(3, 5, "gnp", 0.4)
@@ -90,60 +87,8 @@
 #' nw2 <- as_network(ig2)
 #' nw2
 #' 
-#' # comparing objects ===================================================================
-#' as_sna_net(ig2)$vertices
-#' as_sna_net(nw2)$vertices
-#' identical(as_sna_net(ig1)$vertices, as_sna_net(nw1)$vertices)
-#' 
-#' ig2 %>% rep_as_edgelist()
-#' nw2 %>% rep_as_edgelist()
-#' identical(as_sna_net(ig2)$edges, as_sna_net(nw2)$edges)
-#' 
-#' ig2 %==% nw2
-#' 
 #' # discarding `.actor` vertex attribute from bipartite graphs ==========================
 #' as_network(ig2, .actor = FALSE)
-#' 
-#' # visual comparison ===================================================================
-#' plot_net <- function(x, coords = NULL, main = NULL, v_cex = 0L,  v_lab_cex = NULL, 
-#'                      e_col = "lightgray", e_lab_cex = NULL, e_lab_col = "black", 
-#'                      arw_cex = NULL) {
-#'   if (class(x) == "igraph") {
-#'     v_lab_cols <- igraph::V(x)$color
-#'     if(all(is.na(v_lab_cols))) v_lab_cols <- NULL
-#'     args <- list(x = x, layout = coords, main = main,
-#'                  vertex.size = v_cex, vertex.label.color = v_lab_cols, 
-#'                  vertex.label.cex = v_lab_cex, edge.color = e_col, 
-#'                  edge.label = igraph::E(x)$lab, edge.label.color = e_lab_col,
-#'                  edge.label.size = e_lab_cex, edge.arrow.size = arw_cex)
-#'     args <- Filter(length, args)
-#'     do.call(plot, args)
-#'   } else if (class(x) == "network") {
-#'     v_lab_cols <- network::get.vertex.attribute(x, "color")
-#'     if(all(is.na(v_lab_cols))) v_lab_cols <- NULL
-#'     args <- list(x = x, coord = coords, main = main,
-#'                  label = "vertex.names", vertex.cex = v_cex, label.col = v_lab_cols, 
-#'                  label.cex = v_lab_cex, edge.col = e_col, edge.label = "lab", 
-#'                  edge.label.col = e_lab_col, edge.label.cex = e_lab_cex, label.pos = 5,
-#'                  arrowhead.cex = arw_cex)
-#'     args <- Filter(length, args)
-#'     do.call(plot, args)
-#'   } else stop("`x` is not an `igraph` or `network` object.", call. = FALSE)
-#' }
-#' 
-#' par(mfrow = c(1, 2))
-#' plot_net(ig1, coords, v_lab_cex = 1.5, e_lab_cex = 0.75, arw_cex = 0.5, main = "original igraph")
-#' plot_net(nw1, coords, v_lab_cex = 1.5, e_lab_cex = 0.75, arw_cex = 2.75, main = "post-conversion network")
-#'          
-#' nw_bip_coords <- cbind(network::get.vertex.attribute(nw2, "x"),
-#'                        network::get.vertex.attribute(nw2, "y"))
-#'
-#' plot_net(ig2, ig_bip_coords, v_lab_cex = 1.15, e_lab_col = "black", e_lab_cex = 0.75, 
-#'          main = "original\nbipartite igraph")
-#' plot_net(nw2, nw_bip_coords, v_lab_cex = 1.15, e_lab_col = "black", e_lab_cex = 0.75, 
-#'          main = "post-conversion\nbipartite network")
-#'          
-#' par(mfrow = c(1, 1))
 #' 
 #' @export
 as_network <- function(x, ...) {
@@ -155,7 +100,7 @@ as_network <- function(x, ...) {
 #' @importFrom network add.edges.network network.initialize set.edge.attribute 
 #'             set.network.attribute set.vertex.attribute
 #' @export
-as_network.sna_net <- function(x, .actor = TRUE) {
+as_network.bridge_net <- function(x, .actor = TRUE) {
   metadata <- x[["metadata"]]
   if (metadata[["is_bipartite"]]) {
     bipartite_arg <- metadata[["n_actors"]]
@@ -207,23 +152,23 @@ as_network.sna_net <- function(x, .actor = TRUE) {
 #' 
 #' @importFrom igraph is_bipartite
 #' @export
-as_network.igraph <- function(x, edg_attr = TRUE, vrt_attr = TRUE, net_attr = TRUE, ...) {
+as_network.igraph <- function(x, ...) {
   if (is_bipartite(x)) {
     x <- prep_bipartite_igraph(x)
   }
-  as_network(as_sna_net(x, edg_attr = TRUE, vrt_attr = TRUE, net_attr = TRUE), ...)
+  as_network(as_bridge_net(x), ...)
 }
 
 #' @rdname as_network
 #' 
 #' @export
-as_network.network <- function(x) {
+as_network.network <- function(x, ...) {
   x
 }
 
 #' @rdname as_network
 #' 
 #' @export
-as_network.tbl_graph <- function(x, edg_attr = TRUE, vrt_attr = TRUE, net_attr = TRUE, ...) {
-  as_network(as_sna_net(x, edg_attr = TRUE, vrt_attr = TRUE, net_attr = TRUE), ...)
+as_network.tbl_graph <- function(x, ...) {
+  as_network(as_bridge_net(x), ...)
 }

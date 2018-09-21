@@ -6,9 +6,9 @@ nw_dir <- build_test_graph("nw")
 nw_undir <- build_test_graph("ig", directed = FALSE)
 nw_bip <- build_test_graph("nw", directed = FALSE, bipartite = TRUE)
 
-sna_net_dir <- as_sna_net(ig_dir)
-sna_net_undir <- as_sna_net(ig_undir)
-sna_net_bip <- as_sna_net(ig_bip)
+sna_net_dir <- as_bridge_net(ig_dir)
+sna_net_undir <- as_bridge_net(ig_undir)
+sna_net_bip <- as_bridge_net(ig_bip)
 
 
 # raw el w/ indices ====

@@ -3,15 +3,15 @@
 #' Accurately map foreign graph data to `igraph` objects.
 #' 
 #' @details
-#' `as_igraph()` converts `x` to an intermediate `sna_net` object that is capable of 
+#' `as_igraph()` converts `x` to an intermediate `bridge_net` object that is capable of 
 #' mapping metadata, edges, vertices, and attributes (edge, vertex, and graph-level)
 #' to a new, valid `igraph` object. \cr
 #' 
-#' @param x `sna_net` or [`network::network`] object.
+#' @param x `bridge_net` or [`network::network`] object.
 #' 
 #' @return An `igraph` ([`igraph::graph`]) object.
 #' 
-#' @seealso [as_sna_net()], [as_network()], [intergraph::asIgraph()]
+#' @seealso [as_bridge_net()], [as_network()], [intergraph::asIgraph()]
 #' 
 #' @author Brendan Knapp \email{brendan.g.knapp@@gmail.com}
 #' 
@@ -39,16 +39,13 @@
 #' ig1
 #' 
 #' # manually comparing original and converted networks ==================================
-#' as_sna_net(nw1)$vertices
-#' as_sna_net(ig1)$vertices
-#' identical(as_sna_net(nw1)$vertices, as_sna_net(ig1)$vertices)
+#' as_bridge_net(nw1)$vertices
+#' as_bridge_net(ig1)$vertices
+#' identical(as_bridge_net(nw1)$vertices, as_bridge_net(ig1)$vertices)
 #' 
-#' as_sna_net(nw1)$edges
-#' as_sna_net(ig1)$edges
-#' identical(as_sna_net(nw1)$edges, as_sna_net(ig1)$edges)
-#' 
-#' # convenience comparison operator =====================================================
-#' nw1 %==% ig1
+#' as_bridge_net(nw1)$edges
+#' as_bridge_net(ig1)$edges
+#' identical(as_bridge_net(nw1)$edges, as_bridge_net(ig1)$edges)
 #' 
 #' # converting bipartite network to bipartite igraph ====================================
 #' n_actors <- 5L
@@ -72,15 +69,13 @@
 #' ig2
 #' 
 #' # comparing objects ===================================================================
-#' as_sna_net(nw2)$vertices
-#' as_sna_net(ig2)$vertices
-#' identical(as_sna_net(nw2)$vertices, as_sna_net(ig2)$vertices)
+#' as_bridge_net(nw2)$vertices
+#' as_bridge_net(ig2)$vertices
+#' identical(as_bridge_net(nw2)$vertices, as_bridge_net(ig2)$vertices)
 #' 
-#' as_sna_net(nw2)$edges
-#' as_sna_net(ig2)$edges
-#' identical(as_sna_net(nw2)$edges, as_sna_net(ig2)$edges)
-#' 
-#' nw2 %==% ig2
+#' as_bridge_net(nw2)$edges
+#' as_bridge_net(ig2)$edges
+#' identical(as_bridge_net(nw2)$edges, as_bridge_net(ig2)$edges)
 #' 
 #' # visual comparison ===================================================================
 #' plot_net <- function(x, coords = NULL, main = NULL, v_cex = 0L, v_lab_cex = NULL, 
@@ -126,7 +121,7 @@
 #'
 #' @export
 #' 
-as_igraph <- function(x, ...) {
+as_igraph <- function(x) {
   UseMethod("as_igraph")
 }
 
@@ -134,7 +129,7 @@ as_igraph <- function(x, ...) {
 #' 
 #' @importFrom igraph add_edges edge_attr<- graph_attr<- make_empty_graph vertex_attr<- V<-
 #' @export
-as_igraph.sna_net <- function(x) {
+as_igraph.bridge_net <- function(x) {
   metadata <- x[["metadata"]]
   out <- make_empty_graph(n = metadata[["n_vertices"]], 
                           directed = metadata[["is_directed"]])
@@ -177,7 +172,7 @@ as_igraph.igraph <- function(x) {
 #' 
 #' @export
 as_igraph.network <- function(x) {
-  as_igraph(as_sna_net(x))
+  as_igraph(as_bridge_net(x))
 }
 
 #' @rdname as_igraph

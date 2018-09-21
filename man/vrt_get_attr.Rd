@@ -2,7 +2,7 @@
 % Please edit documentation in R/vertex-attributes.R
 \name{vrt_get_attr}
 \alias{vrt_get_attr}
-\alias{vrt_get_attr.sna_net}
+\alias{vrt_get_attr.bridge_net}
 \alias{vrt_get_attr.igraph}
 \alias{vrt_get_attr.network}
 \alias{vrt_get_attr.tbl_graph}
@@ -10,7 +10,7 @@
 \usage{
 vrt_get_attr(x, vrt_attr)
 
-\method{vrt_get_attr}{sna_net}(x, vrt_attr)
+\method{vrt_get_attr}{bridge_net}(x, vrt_attr)
 
 \method{vrt_get_attr}{igraph}(x, vrt_attr)
 
@@ -19,7 +19,7 @@ vrt_get_attr(x, vrt_attr)
 \method{vrt_get_attr}{tbl_graph}(x, vrt_attr)
 }
 \arguments{
-\item{x}{An \code{sna_net}, \code{igraph}, \code{network}, or \code{tbl_graph}.}
+\item{x}{An \code{bridge_net}, \code{igraph}, \code{network}, or \code{tbl_graph}.}
 
 \item{vrt_attr}{\code{character} specifying the target vertex attribute.}
 }
@@ -37,13 +37,15 @@ adj_mat <- rbinom(16L, 1L, 0.3) \%>\%
 
 ig <- adj_mat \%>\% 
   igraph::graph_from_adjacency_matrix() \%>\% 
-  igraph::set_vertex_attr("a_vertex_attribute", value = sample(seq_len(igraph::vcount(.)))) 
+  igraph::set_vertex_attr("a_vertex_attribute", 
+                          value = sample(seq_len(igraph::vcount(.)))) 
 
 ig \%>\% 
   vrt_get_attr("name")
 
 nw <- network::as.network(adj_mat)
-  network::set.vertex.attribute(nw, "a_vertex_attribute", value = sample(seq_len(network::network.size(nw))))
+  network::set.vertex.attribute(nw, "a_vertex_attribute", 
+                                value = sample(seq_len(network::network.size(nw))))
 
 nw \%>\% 
   vrt_get_attr("vertex.names")
@@ -53,13 +55,13 @@ tbl_g <- tidygraph::as_tbl_graph(ig)
 tbl_g \%>\% 
   vrt_get_attr("a_vertex_attribute")
 
-sna_g <- as_sna_net(nw)
+sna_g <- as_bridge_net(nw)
 
 vrt_get_attr(sna_g, "a_vertex_attribute")
 
 }
 \seealso{
-\code{\link[=vrt_attr_names]{vrt_attr_names()}}, \code{\link[=vrt_get_attr_df]{vrt_get_attr_df()}}, \code{\link[igraph:vertex_attr]{igraph::vertex_attr()}},
+\code{\link[=vrt_attr_names]{vrt_attr_names()}}, \code{\link[=vrt_to_df]{vrt_to_df()}}, \code{\link[igraph:vertex_attr]{igraph::vertex_attr()}},
 \code{\link[network:get.vertex.attribute]{network::get.vertex.attribute()}}
 }
 \author{

@@ -2,15 +2,15 @@
 % Please edit documentation in R/as_igraph.R
 \name{as_igraph}
 \alias{as_igraph}
-\alias{as_igraph.sna_net}
+\alias{as_igraph.bridge_net}
 \alias{as_igraph.igraph}
 \alias{as_igraph.network}
 \alias{as_igraph.tbl_graph}
 \title{Conversion to \code{igraph} objects.}
 \usage{
-as_igraph(x, ...)
+as_igraph(x)
 
-\method{as_igraph}{sna_net}(x)
+\method{as_igraph}{bridge_net}(x)
 
 \method{as_igraph}{igraph}(x)
 
@@ -19,7 +19,7 @@ as_igraph(x, ...)
 \method{as_igraph}{tbl_graph}(x)
 }
 \arguments{
-\item{x}{\code{sna_net} or \code{\link[network:network]{network::network}} object.}
+\item{x}{\code{bridge_net} or \code{\link[network:network]{network::network}} object.}
 }
 \value{
 An \code{igraph} (\code{\link[igraph:graph]{igraph::graph}}) object.
@@ -28,7 +28,7 @@ An \code{igraph} (\code{\link[igraph:graph]{igraph::graph}}) object.
 Accurately map foreign graph data to \code{igraph} objects.
 }
 \details{
-\code{as_igraph()} converts \code{x} to an intermediate \code{sna_net} object that is capable of
+\code{as_igraph()} converts \code{x} to an intermediate \code{bridge_net} object that is capable of
 mapping metadata, edges, vertices, and attributes (edge, vertex, and graph-level)
 to a new, valid \code{igraph} object. \cr
 }
@@ -56,16 +56,13 @@ ig1 <- as_igraph(nw1)
 ig1
 
 # manually comparing original and converted networks ==================================
-as_sna_net(nw1)$vertices
-as_sna_net(ig1)$vertices
-identical(as_sna_net(nw1)$vertices, as_sna_net(ig1)$vertices)
+as_bridge_net(nw1)$vertices
+as_bridge_net(ig1)$vertices
+identical(as_bridge_net(nw1)$vertices, as_bridge_net(ig1)$vertices)
 
-as_sna_net(nw1)$edges
-as_sna_net(ig1)$edges
-identical(as_sna_net(nw1)$edges, as_sna_net(ig1)$edges)
-
-# convenience comparison operator =====================================================
-nw1 \%==\% ig1
+as_bridge_net(nw1)$edges
+as_bridge_net(ig1)$edges
+identical(as_bridge_net(nw1)$edges, as_bridge_net(ig1)$edges)
 
 # converting bipartite network to bipartite igraph ====================================
 n_actors <- 5L
@@ -89,15 +86,13 @@ ig2 <- as_igraph(nw2)
 ig2
 
 # comparing objects ===================================================================
-as_sna_net(nw2)$vertices
-as_sna_net(ig2)$vertices
-identical(as_sna_net(nw2)$vertices, as_sna_net(ig2)$vertices)
+as_bridge_net(nw2)$vertices
+as_bridge_net(ig2)$vertices
+identical(as_bridge_net(nw2)$vertices, as_bridge_net(ig2)$vertices)
 
-as_sna_net(nw2)$edges
-as_sna_net(ig2)$edges
-identical(as_sna_net(nw2)$edges, as_sna_net(ig2)$edges)
-
-nw2 \%==\% ig2
+as_bridge_net(nw2)$edges
+as_bridge_net(ig2)$edges
+identical(as_bridge_net(nw2)$edges, as_bridge_net(ig2)$edges)
 
 # visual comparison ===================================================================
 plot_net <- function(x, coords = NULL, main = NULL, v_cex = 0L, v_lab_cex = NULL, 
@@ -143,7 +138,7 @@ par(mfrow = c(1, 1))
 
 }
 \seealso{
-\code{\link[=as_sna_net]{as_sna_net()}}, \code{\link[=as_network]{as_network()}}, \code{\link[intergraph:asIgraph]{intergraph::asIgraph()}}
+\code{\link[=as_bridge_net]{as_bridge_net()}}, \code{\link[=as_network]{as_network()}}, \code{\link[intergraph:asIgraph]{intergraph::asIgraph()}}
 }
 \author{
 Brendan Knapp \email{brendan.g.knapp@gmail.com}

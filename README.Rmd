@@ -9,6 +9,8 @@ editor_options:
 <!-- README.Rmd generates README.md. -->
 
 ```{r, echo = FALSE}
+rm(list = ls(all.names = TRUE))
+
 knitr::opts_chunk$set(
   collapse = TRUE, 
   fig.align = "center",
@@ -64,7 +66,7 @@ library(snatools)
 network_object <- snatools:::build_test_graph("nw")
 
 network_object %>%  
-  as_sna_net()
+  as_bridge_net()
 network_object %>% 
   as_igraph()
 ```
@@ -74,7 +76,7 @@ network_object %>%
 ```{r}
 bipartite_network <- snatools:::build_test_graph("nw", directed = FALSE, bipartite = TRUE)
 bipartite_network %>% 
-  as_sna_net()
+  as_bridge_net()
 bipartite_network %>% 
   as_igraph()
 ```
@@ -85,7 +87,7 @@ bipartite_network %>%
 igraph_object <- snatools:::build_test_graph("ig")
 
 igraph_object %>% 
-  as_sna_net()
+  as_bridge_net()
 igraph_object %>% 
   as_network()
 ```
@@ -96,7 +98,7 @@ igraph_object %>%
 bipartite_igraph <- snatools:::build_test_graph("ig", directed = FALSE, bipartite = TRUE)
 
 bipartite_igraph %>% 
-  as_sna_net()
+  as_bridge_net()
 bipartite_igraph %>% 
   as_network()
 ```

@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A toolkit to streamline network analytic workflows R. • snatools</title>
+<title>A toolkit to streamline network analytic workflows R • snatools</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="A toolkit to streamline network analytic workflows R.">
-<meta property="og:description" content="">
+<script src="pkgdown.js"></script><meta property="og:title" content="A toolkit to streamline network analytic workflows R">
+<meta property="og:description" content="A toolkit to streamline network analytic workflows R.">
 <meta property="og:image" content="https://knapply.github.io/snatools/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
@@ -50,18 +50,6 @@
 </li>
 <li>
   <a href="reference/index.html">Reference</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="articles/conversion.html">Converting Graph Classes</a>
-    </li>
-  </ul>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -122,9 +110,9 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">network_object &lt;-<span class="st"> </span>snatools<span class="op">:::</span><span class="kw">build_test_graph</span>(<span class="st">"nw"</span>)
 
 network_object <span class="op">%&gt;%</span><span class="st">  </span>
-<span class="st">  </span><span class="kw"><a href="reference/sna_net.html">as_sna_net</a></span>()</code></pre></div>
-<pre class="r-output"><code>#&gt; # A directed, multiplex, 1-mode `sna_net`.
-#&gt; ## - Contains &gt;0 loops and 0 isolates.
+<span class="st">  </span><span class="kw"><a href="reference/bridge_net.html">as_bridge_net</a></span>()</code></pre></div>
+<pre class="r-output"><code>#&gt; A directed, multiplex, 1-mode `bridge_net`.
+#&gt; - Contains &gt;0 loops and 0 isolates.
 #&gt; $edges # first 3 of 22
 #&gt;    .ego    .alter  edge_chr edge_int edge_dbl edge_lgl
 #&gt;    &lt;.name&gt; &lt;.name&gt; &lt;chr&gt;    &lt;int&gt;    &lt;dbl&gt;    &lt;lgl&gt;   
@@ -140,12 +128,12 @@ network_object <span class="op">%&gt;%</span><span class="st">  </span>
 </code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">network_object <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="reference/as_igraph.html">as_igraph</a></span>()</code></pre></div>
-<pre class="r-output"><code>#&gt; IGRAPH d11ac0e DN-- 10 22 -- 
+<pre class="r-output"><code>#&gt; IGRAPH cd9d6ec DN-- 10 22 -- 
 #&gt; + attr: graph_chr (g/c), graph_lgl (g/l), graph_int (g/n),
 #&gt; | graph_dbl (g/n), node_chr (v/c), node_int (v/n), node_dbl (v/n),
 #&gt; | node_lgl (v/l), name (v/c), edge_chr (e/c), edge_int (e/n),
 #&gt; | edge_dbl (e/n), edge_lgl (e/l)
-#&gt; + edges from d11ac0e (vertex names):
+#&gt; + edges from cd9d6ec (vertex names):
 #&gt;  [1] node_2-&gt;node_7  node_4-&gt;node_3  node_5-&gt;node_6  node_5-&gt;node_7 
 #&gt;  [5] node_5-&gt;node_8  node_5-&gt;node_10 node_7-&gt;node_1  node_7-&gt;node_7 
 #&gt;  [9] node_7-&gt;node_8  node_7-&gt;node_9  node_8-&gt;node_9  node_2-&gt;node_7 
@@ -159,9 +147,9 @@ network_object <span class="op">%&gt;%</span><span class="st">  </span>
 </h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bipartite_network &lt;-<span class="st"> </span>snatools<span class="op">:::</span><span class="kw">build_test_graph</span>(<span class="st">"nw"</span>, <span class="dt">directed =</span> <span class="ot">FALSE</span>, <span class="dt">bipartite =</span> <span class="ot">TRUE</span>)
 bipartite_network <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="reference/sna_net.html">as_sna_net</a></span>()</code></pre></div>
-<pre class="r-output"><code>#&gt; # An undirected, multiplex, bipartite `sna_net`.
-#&gt; ## - Contains 0 loops and &gt;0 isolates.
+<span class="st">  </span><span class="kw"><a href="reference/bridge_net.html">as_bridge_net</a></span>()</code></pre></div>
+<pre class="r-output"><code>#&gt; An undirected, multiplex, bipartite `bridge_net`.
+#&gt; - Contains 0 loops and &gt;0 isolates.
 #&gt; $edges # first 3 of 4
 #&gt;    .ego    .alter  edge_chr edge_int edge_dbl edge_lgl
 #&gt;    &lt;.name&gt; &lt;.name&gt; &lt;chr&gt;    &lt;int&gt;    &lt;dbl&gt;    &lt;lgl&gt;   
@@ -177,12 +165,12 @@ bipartite_network <span class="op">%&gt;%</span><span class="st"> </span>
 </code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bipartite_network <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="reference/as_igraph.html">as_igraph</a></span>()</code></pre></div>
-<pre class="r-output"><code>#&gt; IGRAPH d125c3d UN-B 10 4 -- 
+<pre class="r-output"><code>#&gt; IGRAPH cda9fc6 UN-B 10 4 -- 
 #&gt; + attr: graph_chr (g/c), graph_lgl (g/l), graph_int (g/n),
 #&gt; | graph_dbl (g/n), node_chr (v/c), node_int (v/n), node_dbl (v/n),
 #&gt; | node_lgl (v/l), type (v/l), name (v/c), edge_chr (e/c), edge_int
 #&gt; | (e/n), edge_dbl (e/n), edge_lgl (e/l)
-#&gt; + edges from d125c3d (vertex names):
+#&gt; + edges from cda9fc6 (vertex names):
 #&gt; [1] node_1--node_3 node_1--node_6 node_1--node_3 node_1--node_6
 </code></pre>
 </div>
@@ -194,9 +182,9 @@ bipartite_network <span class="op">%&gt;%</span><span class="st"> </span>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">igraph_object &lt;-<span class="st"> </span>snatools<span class="op">:::</span><span class="kw">build_test_graph</span>(<span class="st">"ig"</span>)
 
 igraph_object <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="reference/sna_net.html">as_sna_net</a></span>()</code></pre></div>
-<pre class="r-output"><code>#&gt; # A directed, multiplex, 1-mode `sna_net`.
-#&gt; ## - Contains &gt;0 loops and 0 isolates.
+<span class="st">  </span><span class="kw"><a href="reference/bridge_net.html">as_bridge_net</a></span>()</code></pre></div>
+<pre class="r-output"><code>#&gt; A directed, multiplex, 1-mode `bridge_net`.
+#&gt; - Contains &gt;0 loops and 0 isolates.
 #&gt; $edges # first 3 of 22
 #&gt;    .ego    .alter  edge_chr edge_int edge_dbl edge_lgl
 #&gt;    &lt;.name&gt; &lt;.name&gt; &lt;chr&gt;    &lt;int&gt;    &lt;dbl&gt;    &lt;lgl&gt;   
@@ -216,7 +204,6 @@ igraph_object <span class="op">%&gt;%</span><span class="st"> </span>
 #&gt;   vertices = 10 
 #&gt;   directed = TRUE 
 #&gt;   hyper = FALSE 
-#&gt;   loops = TRUE 
 #&gt;   multiple = TRUE 
 #&gt;   bipartite = FALSE 
 #&gt;   graph_chr = Much Graph. Many Attributes 
@@ -240,9 +227,9 @@ igraph_object <span class="op">%&gt;%</span><span class="st"> </span>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bipartite_igraph &lt;-<span class="st"> </span>snatools<span class="op">:::</span><span class="kw">build_test_graph</span>(<span class="st">"ig"</span>, <span class="dt">directed =</span> <span class="ot">FALSE</span>, <span class="dt">bipartite =</span> <span class="ot">TRUE</span>)
 
 bipartite_igraph <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="reference/sna_net.html">as_sna_net</a></span>()</code></pre></div>
-<pre class="r-output"><code>#&gt; # An undirected, multiplex, bipartite `sna_net`.
-#&gt; ## - Contains 0 loops and &gt;0 isolates.
+<span class="st">  </span><span class="kw"><a href="reference/bridge_net.html">as_bridge_net</a></span>()</code></pre></div>
+<pre class="r-output"><code>#&gt; An undirected, multiplex, bipartite `bridge_net`.
+#&gt; - Contains 0 loops and &gt;0 isolates.
 #&gt; $edges # first 3 of 4
 #&gt;    .ego    .alter  edge_chr edge_int edge_dbl edge_lgl
 #&gt;    &lt;.name&gt; &lt;.name&gt; &lt;chr&gt;    &lt;int&gt;    &lt;dbl&gt;    &lt;lgl&gt;   
@@ -262,7 +249,6 @@ bipartite_igraph <span class="op">%&gt;%</span><span class="st"> </span>
 #&gt;   vertices = 10 
 #&gt;   directed = FALSE 
 #&gt;   hyper = FALSE 
-#&gt;   loops = FALSE 
 #&gt;   multiple = TRUE 
 #&gt;   bipartite = 2 
 #&gt;   graph_chr = Much Graph. Many Attributes 
@@ -292,51 +278,23 @@ bipartite_igraph <span class="op">%&gt;%</span><span class="st"> </span>
 </code></pre>
 <pre class="r-output"><code>#&gt; v | OK <span style="color: #BB0000;">F</span><span> </span><span style="color: #BB00BB;">W</span><span> </span><span style="color: #0000BB;">S</span><span> | Context
 #&gt; 
-/ |  0       | converting empty graphs to `sna_net`s
-- |  1       | converting empty graphs to `sna_net`s
-\ |  2       | converting empty graphs to `sna_net`s
-| |  3       | converting empty graphs to `sna_net`s
-/ |  4       | converting empty graphs to `sna_net`s
-</span><span style="color: #00BB00;">v</span><span> |  4       | converting empty graphs to `sna_net`s</span><span style="color: #00BBBB;"> [0.3 s]</span><span>
+- |  1       | 0
+\ |  2       | 0
+| |  3       | 0
+/ |  4       | 0
+- |  5       | 0
+\ |  6       | 0
+/ |  0       | edg_to_df() directed
+- |  1       | edg_to_df() directed
+</span><span style="color: #00BB00;">v</span><span> |  1       | edg_to_df() directed
 #&gt; 
-/ |  0       | converting non-empty graphs to `sna_net`s
-- |  1       | converting non-empty graphs to `sna_net`s
-\ |  2       | converting non-empty graphs to `sna_net`s
-| |  3       | converting non-empty graphs to `sna_net`s
-/ |  4       | converting non-empty graphs to `sna_net`s
-</span><span style="color: #00BB00;">v</span><span> |  4       | converting non-empty graphs to `sna_net`s
+/ |  0       | edg_to_df() undirected
+- |  1       | edg_to_df() undirected
+</span><span style="color: #00BB00;">v</span><span> |  1       | edg_to_df() undirected
 #&gt; 
-/ |  0       | `igraph` %&gt;% `network` vertices match control
-- |  1       | `igraph` %&gt;% `network` vertices match control
-\ |  2       | `igraph` %&gt;% `network` vertices match control
-| |  3       | `igraph` %&gt;% `network` vertices match control
-/ |  4       | `igraph` %&gt;% `network` vertices match control
-</span><span style="color: #00BB00;">v</span><span> |  4       | `igraph` %&gt;% `network` vertices match control</span><span style="color: #00BBBB;"> [0.1 s]</span><span>
-#&gt; 
-/ |  0       | `network` %&gt;% `igraph` vertices match control
-- |  1       | `network` %&gt;% `igraph` vertices match control
-\ |  2       | `network` %&gt;% `igraph` vertices match control
-| |  3       | `network` %&gt;% `igraph` vertices match control
-/ |  4       | `network` %&gt;% `igraph` vertices match control
-</span><span style="color: #00BB00;">v</span><span> |  4       | `network` %&gt;% `igraph` vertices match control
-#&gt; 
-/ |  0       | edg_attr_names()
-- |  1       | edg_attr_names()
-\ |  2       | edg_attr_names()
-| |  3       | edg_attr_names()
-</span><span style="color: #00BB00;">v</span><span> |  3       | edg_attr_names()
-#&gt; 
-/ |  0       | edg_get_attr()
-- |  1       | edg_get_attr()
-\ |  2       | edg_get_attr()
-| |  3       | edg_get_attr()
-</span><span style="color: #00BB00;">v</span><span> |  3       | edg_get_attr()
-#&gt; 
-/ |  0       | edg_get_attr_df()
-- |  1       | edg_get_attr_df()
-\ |  2       | edg_get_attr_df()
-| |  3       | edg_get_attr_df()
-</span><span style="color: #00BB00;">v</span><span> |  3       | edg_get_attr_df()
+/ |  0       | edg_to_df() bipartite
+- |  1       | edg_to_df() bipartite
+</span><span style="color: #00BB00;">v</span><span> |  1       | edg_to_df() bipartite
 #&gt; 
 / |  0       | raw matrix edgelists using indices
 - |  1       | raw matrix edgelists using indices
@@ -410,10 +368,43 @@ bipartite_igraph <span class="op">%&gt;%</span><span class="st"> </span>
 \ |  6       | vertex counts
 </span><span style="color: #00BB00;">v</span><span> |  6       | vertex counts
 #&gt; 
+/ |  0       | net_has_loops
+- |  1       | net_has_loops
+\ |  2       | net_has_loops
+| |  3       | net_has_loops
+/ |  4       | net_has_loops
+- |  5       | net_has_loops
+\ |  6       | net_has_loops
+</span><span style="color: #00BB00;">v</span><span> |  6       | net_has_loops
+#&gt; 
+/ |  0       | net_has_isolates ig_dir() vs nw_dir()
+- |  1       | net_has_isolates ig_dir() vs nw_dir()
+</span><span style="color: #00BB00;">v</span><span> |  1       | net_has_isolates ig_dir() vs nw_dir()
+#&gt; 
+/ |  0       | net_has_isolates ig_dir() vs bridge_net_dir()
+- |  1       | net_has_isolates ig_dir() vs bridge_net_dir()
+</span><span style="color: #00BB00;">v</span><span> |  1       | net_has_isolates ig_dir() vs bridge_net_dir()
+#&gt; 
+/ |  0       | net_has_isolated ig_undir() vs nw_undir()
+- |  1       | net_has_isolated ig_undir() vs nw_undir()
+</span><span style="color: #00BB00;">v</span><span> |  1       | net_has_isolated ig_undir() vs nw_undir()
+#&gt; 
+/ |  0       | net_has_isolates ig_undir() vs bridge_net_undir()
+- |  1       | net_has_isolates ig_undir() vs bridge_net_undir()
+</span><span style="color: #00BB00;">v</span><span> |  1       | net_has_isolates ig_undir() vs bridge_net_undir()
+#&gt; 
+/ |  0       | net_has_isolates ig_bip() vs nw_bip()
+- |  1       | net_has_isolates ig_bip() vs nw_bip()
+</span><span style="color: #00BB00;">v</span><span> |  1       | net_has_isolates ig_bip() vs nw_bip()
+#&gt; 
+/ |  0       | net_has_isolates ig_bip() vs bridge_net_bip()
+- |  1       | net_has_isolates ig_bip() vs bridge_net_bip()
+</span><span style="color: #00BB00;">v</span><span> |  1       | net_has_isolates ig_bip() vs bridge_net_bip()
+#&gt; 
 #&gt; == </span><span style="font-weight: bold;">Results</span><span> ========================================================
 #&gt; </span><span style="color: #00BBBB;">Duration: 1.1 s</span><span>
 #&gt; 
-#&gt; OK:       </span><span style="color: #00BB00;">67</span><span>
+#&gt; OK:       </span><span style="color: #00BB00;">63</span><span>
 #&gt; Failed:   </span><span style="color: #00BB00;">0</span><span>
 #&gt; Warnings: </span><span style="color: #00BB00;">0</span><span>
 #&gt; Skipped:  </span><span style="color: #00BB00;">0</span><span>

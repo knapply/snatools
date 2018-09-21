@@ -2,7 +2,7 @@
 % Please edit documentation in R/as_network.R
 \name{as_network}
 \alias{as_network}
-\alias{as_network.sna_net}
+\alias{as_network.bridge_net}
 \alias{as_network.igraph}
 \alias{as_network.network}
 \alias{as_network.tbl_graph}
@@ -10,18 +10,16 @@
 \usage{
 as_network(x, ...)
 
-\method{as_network}{sna_net}(x, .actor = TRUE)
+\method{as_network}{bridge_net}(x, .actor = TRUE)
 
-\method{as_network}{igraph}(x, edg_attr = TRUE, vrt_attr = TRUE,
-  net_attr = TRUE, ...)
+\method{as_network}{igraph}(x, ...)
 
-\method{as_network}{network}(x)
+\method{as_network}{network}(x, ...)
 
-\method{as_network}{tbl_graph}(x, edg_attr = TRUE, vrt_attr = TRUE,
-  net_attr = TRUE, ...)
+\method{as_network}{tbl_graph}(x, ...)
 }
 \arguments{
-\item{x}{\code{sna_net}, \code{igraph} (\code{\link[igraph:graph]{igraph::graph}}), or \code{\link[tidygraph:tbl_graph]{tidygraph::tbl_graph}}.}
+\item{x}{\code{bridge_net}, \code{igraph} (\code{\link[igraph:graph]{igraph::graph}}), or \code{\link[tidygraph:tbl_graph]{tidygraph::tbl_graph}}.}
 
 \item{...}{Named arguments passed on to other methods. Currently \code{.actor}}
 
@@ -35,7 +33,7 @@ A \code{\link[network:network]{network::network}} object.
 Accurately map foreign graph data to \code{network} objects.
 }
 \details{
-\code{as_network()} converts \code{x} to an intermediate \code{sna_net} object that is capable of
+\code{as_network()} converts \code{x} to an intermediate \code{bridge_net} object that is capable of
 mapping metadata, edges, vertices, and attributes (edge, vertex, and graph-level)
 to a new, valid \code{network} object. \cr
 
@@ -57,7 +55,7 @@ bipartite \code{igraph}s to \code{networks} in a way that results in truly \emph
 objects is only possible when an \code{igraph}'s vertices are already sorted by their
 `type`` attribute.
 }
-\item To handle this discrepency, intermediate \code{sna_net} objects treat vertices whose
+\item To handle this discrepency, intermediate \code{bridge_net} objects treat vertices whose
 \code{type} attributes are \code{TRUE} as "actors", meaning the \code{igraph}'s vertices are
 sorted during conversion to ensure that \code{TRUE} vertices are first (via
 \code{\link[igraph:permute]{igraph::permute()}}).
@@ -66,7 +64,7 @@ sorted during conversion to ensure that \code{TRUE} vertices are first (via
 vertices' \code{type} attribute as indicating whether a vertex is an "actor".
 }
 \item In order to standardize representations, returned bipartite \code{network} objects
-intentionally retain the intermediate \code{sna_net}'s \code{.actor} vertex attribute (a
+intentionally retain the intermediate \code{bridge_net}'s \code{.actor} vertex attribute (a
 \code{logical} \code{vector}).
 \itemize{
 \item \code{.actor} corresponds to an \code{igraph}'s \code{type} vertex attributes, i.e.
@@ -95,16 +93,13 @@ nw1 <- as_network(ig1)
 nw1
 
 # manually comparing original and converted networks ==================================
-as_sna_net(ig1)$vertices
-as_sna_net(nw1)$vertices
-identical(as_sna_net(ig1)$vertices, as_sna_net(nw1)$vertices)
+as_bridge_net(ig1)$vertices
+as_bridge_net(nw1)$vertices
+identical(as_bridge_net(ig1)$vertices, as_bridge_net(nw1)$vertices)
 
-as_sna_net(ig1)$edges
-as_sna_net(nw1)$edges
-identical(as_sna_net(ig1)$edges, as_sna_net(nw1)$edges)
-
-# convenience comparison operator =====================================================
-ig1 \%==\% nw1
+as_bridge_net(ig1)$edges
+as_bridge_net(nw1)$edges
+identical(as_bridge_net(ig1)$edges, as_bridge_net(nw1)$edges)
 
 # converting bipartite igraph to bipartite network ====================================
 ig2 <- bipartite.random.game(3, 5, "gnp", 0.4)
@@ -121,64 +116,12 @@ V(ig2)$y <- ig_bip_coords[, 2L]
 nw2 <- as_network(ig2)
 nw2
 
-# comparing objects ===================================================================
-as_sna_net(ig2)$vertices
-as_sna_net(nw2)$vertices
-identical(as_sna_net(ig1)$vertices, as_sna_net(nw1)$vertices)
-
-ig2 \%>\% rep_as_edgelist()
-nw2 \%>\% rep_as_edgelist()
-identical(as_sna_net(ig2)$edges, as_sna_net(nw2)$edges)
-
-ig2 \%==\% nw2
-
 # discarding `.actor` vertex attribute from bipartite graphs ==========================
 as_network(ig2, .actor = FALSE)
 
-# visual comparison ===================================================================
-plot_net <- function(x, coords = NULL, main = NULL, v_cex = 0L,  v_lab_cex = NULL, 
-                     e_col = "lightgray", e_lab_cex = NULL, e_lab_col = "black", 
-                     arw_cex = NULL) {
-  if (class(x) == "igraph") {
-    v_lab_cols <- igraph::V(x)$color
-    if(all(is.na(v_lab_cols))) v_lab_cols <- NULL
-    args <- list(x = x, layout = coords, main = main,
-                 vertex.size = v_cex, vertex.label.color = v_lab_cols, 
-                 vertex.label.cex = v_lab_cex, edge.color = e_col, 
-                 edge.label = igraph::E(x)$lab, edge.label.color = e_lab_col,
-                 edge.label.size = e_lab_cex, edge.arrow.size = arw_cex)
-    args <- Filter(length, args)
-    do.call(plot, args)
-  } else if (class(x) == "network") {
-    v_lab_cols <- network::get.vertex.attribute(x, "color")
-    if(all(is.na(v_lab_cols))) v_lab_cols <- NULL
-    args <- list(x = x, coord = coords, main = main,
-                 label = "vertex.names", vertex.cex = v_cex, label.col = v_lab_cols, 
-                 label.cex = v_lab_cex, edge.col = e_col, edge.label = "lab", 
-                 edge.label.col = e_lab_col, edge.label.cex = e_lab_cex, label.pos = 5,
-                 arrowhead.cex = arw_cex)
-    args <- Filter(length, args)
-    do.call(plot, args)
-  } else stop("`x` is not an `igraph` or `network` object.", call. = FALSE)
-}
-
-par(mfrow = c(1, 2))
-plot_net(ig1, coords, v_lab_cex = 1.5, e_lab_cex = 0.75, arw_cex = 0.5, main = "original igraph")
-plot_net(nw1, coords, v_lab_cex = 1.5, e_lab_cex = 0.75, arw_cex = 2.75, main = "post-conversion network")
-         
-nw_bip_coords <- cbind(network::get.vertex.attribute(nw2, "x"),
-                       network::get.vertex.attribute(nw2, "y"))
-
-plot_net(ig2, ig_bip_coords, v_lab_cex = 1.15, e_lab_col = "black", e_lab_cex = 0.75, 
-         main = "original\\nbipartite igraph")
-plot_net(nw2, nw_bip_coords, v_lab_cex = 1.15, e_lab_col = "black", e_lab_cex = 0.75, 
-         main = "post-conversion\\nbipartite network")
-         
-par(mfrow = c(1, 1))
-
 }
 \seealso{
-\code{\link[=as_sna_net]{as_sna_net()}}, \code{\link[=as_igraph]{as_igraph()}}, \code{\link[intergraph:asNetwork]{intergraph::asNetwork()}}
+\code{\link[=as_bridge_net]{as_bridge_net()}}, \code{\link[=as_igraph]{as_igraph()}}, \code{\link[intergraph:asNetwork]{intergraph::asNetwork()}}
 }
 \author{
 Brendan Knapp \email{brendan.g.knapp@gmail.com}

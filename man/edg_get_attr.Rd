@@ -2,7 +2,7 @@
 % Please edit documentation in R/edge-attributes.R
 \name{edg_get_attr}
 \alias{edg_get_attr}
-\alias{edg_get_attr.sna_net}
+\alias{edg_get_attr.bridge_net}
 \alias{edg_get_attr.igraph}
 \alias{edg_get_attr.network}
 \alias{edg_get_attr.tbl_graph}
@@ -10,7 +10,7 @@
 \usage{
 edg_get_attr(x, edg_attr)
 
-\method{edg_get_attr}{sna_net}(x, edg_attr)
+\method{edg_get_attr}{bridge_net}(x, edg_attr)
 
 \method{edg_get_attr}{igraph}(x, edg_attr)
 
@@ -19,7 +19,7 @@ edg_get_attr(x, edg_attr)
 \method{edg_get_attr}{tbl_graph}(x, edg_attr)
 }
 \arguments{
-\item{x}{An \code{sna_net}, \code{igraph}, \code{network}, or \code{tbl_graph}.}
+\item{x}{An \code{bridge_net}, \code{igraph}, \code{network}, or \code{tbl_graph}.}
 
 \item{edg_attr}{\code{character} specifying the target edge attribute.}
 }
@@ -37,13 +37,15 @@ adj_mat <- rbinom(16L, 1L, 0.3) \%>\%
 
 ig <- adj_mat \%>\% 
   igraph::graph_from_adjacency_matrix() \%>\% 
-  igraph::set_edge_attr("an_edge_attribute", value = sample(seq_len(igraph::ecount(.)))) 
+  igraph::set_edge_attr("an_edge_attribute", 
+                        value = sample(seq_len(igraph::ecount(.)))) 
 
 ig \%>\% 
   edg_get_attr("an_edge_attribute")
 
 nw <- network::as.network(adj_mat)
-  network::set.edge.attribute(nw, "an_edge_attribute", value = sample(seq_len(network::network.edgecount(nw))))
+  network::set.edge.attribute(nw, "an_edge_attribute", 
+                              value = sample(seq_len(network::network.edgecount(nw))))
 
 nw \%>\% 
   edg_get_attr("an_edge_attribute")
@@ -53,13 +55,13 @@ tbl_g <- tidygraph::as_tbl_graph(ig)
 tbl_g \%>\% 
   edg_get_attr("an_edge_attribute")
 
-sna_g <- as_sna_net(nw)
+sna_g <- as_bridge_net(nw)
 
 edg_get_attr(sna_g, "an_edge_attribute")
 
 }
 \seealso{
-\code{\link[=edg_attr_names]{edg_attr_names()}}, \code{\link[=edg_get_attr_df]{edg_get_attr_df()}}, \code{\link[igraph:edge_attr]{igraph::edge_attr()}},
+\code{\link[=edg_attr_names]{edg_attr_names()}}, \code{\link[=edg_to_df]{edg_to_df()}}, \code{\link[igraph:edge_attr]{igraph::edge_attr()}},
 \code{\link[network:get.edge.attribute]{network::get.edge.attribute()}}
 }
 \author{

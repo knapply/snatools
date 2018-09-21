@@ -1,12 +1,12 @@
 #' Extract a graph objects's vertex attribute names.
 #' 
-#' @param x An `sna_net`, `igraph`, `network`, or `tbl_graph`.
+#' @param x An `bridge_net`, `igraph`, `network`, or `tbl_graph`.
 #' 
 #' @return `character` `vector` listing the names of `x`'s vertex attributes.
 #' 
 #' @author Brendan Knapp \email{brendan.g.knapp@@gmail.com}
 #' 
-#' @seealso [vrt_get_attr()], [vrt_get_attr_df()], [igraph::vertex_attr_names()],
+#' @seealso [vrt_get_attr()], [vrt_to_df()], [igraph::vertex_attr_names()],
 #' [network::list.vertex.attributes()]
 #' 
 #' @examples 
@@ -22,7 +22,8 @@
 #' vrt_attr_names(ig)
 #' 
 #' nw <- network::as.network(adj_mat)
-#' network::set.vertex.attribute(nw, "another_attr", value = sample(seq_len(network::network.size(nw))))
+#' network::set.vertex.attribute(nw, "another_attr", 
+#'                               value = sample(seq_len(network::network.size(nw))))
 #' 
 #' vrt_attr_names(nw)
 #' 
@@ -30,7 +31,7 @@
 #' 
 #' vrt_attr_names(tbl_g)
 #' 
-#' sna_g <- as_sna_net(ig)
+#' sna_g <- as_bridge_net(ig)
 #' 
 #' vrt_attr_names(sna_g)
 #' 
@@ -41,7 +42,7 @@ vrt_attr_names <- function(x) {
 
 #' @rdname vrt_attr_names
 #' @export
-vrt_attr_names.sna_net <- function(x) {
+vrt_attr_names.bridge_net <- function(x) {
   names(x[["vertices"]])
 }
 
@@ -78,14 +79,14 @@ vrt_attr_names.tbl_graph <- function(x) {
 
 #' Extract a specific vertex attribute.
 #' 
-#' @param x An `sna_net`, `igraph`, `network`, or `tbl_graph`.
+#' @param x An `bridge_net`, `igraph`, `network`, or `tbl_graph`.
 #' @param vrt_attr `character` specifying the target vertex attribute.
 #' 
 #' @return `vector` of vertex attribute values.
 #' 
 #' @author Brendan Knapp \email{brendan.g.knapp@@gmail.com}
 #' 
-#' @seealso [vrt_attr_names()], [vrt_get_attr_df()], [igraph::vertex_attr()],
+#' @seealso [vrt_attr_names()], [vrt_to_df()], [igraph::vertex_attr()],
 #' [network::get.vertex.attribute()]
 #' 
 #' @examples 
@@ -96,13 +97,15 @@ vrt_attr_names.tbl_graph <- function(x) {
 #'
 #' ig <- adj_mat %>% 
 #'   igraph::graph_from_adjacency_matrix() %>% 
-#'   igraph::set_vertex_attr("a_vertex_attribute", value = sample(seq_len(igraph::vcount(.)))) 
+#'   igraph::set_vertex_attr("a_vertex_attribute", 
+#'                           value = sample(seq_len(igraph::vcount(.)))) 
 #' 
 #' ig %>% 
 #'   vrt_get_attr("name")
 #' 
 #' nw <- network::as.network(adj_mat)
-#'   network::set.vertex.attribute(nw, "a_vertex_attribute", value = sample(seq_len(network::network.size(nw))))
+#'   network::set.vertex.attribute(nw, "a_vertex_attribute", 
+#'                                 value = sample(seq_len(network::network.size(nw))))
 #' 
 #' nw %>% 
 #'   vrt_get_attr("vertex.names")
@@ -112,7 +115,7 @@ vrt_attr_names.tbl_graph <- function(x) {
 #' tbl_g %>% 
 #'   vrt_get_attr("a_vertex_attribute")
 #' 
-#' sna_g <- as_sna_net(nw)
+#' sna_g <- as_bridge_net(nw)
 #' 
 #' vrt_get_attr(sna_g, "a_vertex_attribute")
 #' 
@@ -124,7 +127,7 @@ vrt_get_attr <- function(x, vrt_attr) {
 #' @rdname vrt_get_attr
 #' 
 #' @export
-vrt_get_attr.sna_net <- function(x, vrt_attr) {
+vrt_get_attr.bridge_net <- function(x, vrt_attr) {
   x[["vertices"]][[vrt_attr]]
 }
 
@@ -155,11 +158,12 @@ vrt_get_attr.tbl_graph <- function(x, vrt_attr) {
 
 #' Extract all vertex attributes as a data frame.
 #' 
-#' @param x An `sna_net`, `igraph`, `network`, or `tbl_graph`.
-#' @param sna_vertices_df `logical` (default: `TRUE`) indicating whether to return
-#' an `sna_vertices_df` object that standardizes the results of graph objects.
+#' @param x An `bridge_net`, `igraph`, `network`, or `tbl_graph`.
+#' @param leave_raw `logical` (default: `FALSE`) indicating whether to return
+#' a raw `data.frame` instead of a `vertex_data_frame` that standardizes results across 
+#' graph classes.
 #' 
-#' @return `data.frame` or `sna_vertices_df` with all vertex attributes contained in `x`.
+#' @return `data.frame` or `vertex_data_frame` with all vertex attributes contained in `x`.
 #' 
 #' @author Brendan Knapp \email{brendan.g.knapp@@gmail.com}
 #' 
@@ -173,67 +177,69 @@ vrt_get_attr.tbl_graph <- function(x, vrt_attr) {
 #'
 #' ig <- adj_mat %>% 
 #'   igraph::graph_from_adjacency_matrix() %>% 
-#'   igraph::set_vertex_attr("a_vertex_attribute", value = sample(seq_len(igraph::vcount(.)))) 
+#'   igraph::set_vertex_attr("a_vertex_attribute", 
+#'                           value = sample(seq_len(igraph::vcount(.)))) 
 #' 
-#' vrt_get_attr_df(ig)
-#' vrt_get_attr_df(ig, sna_vertices_df = FALSE)
+#' vrt_to_df(ig)
+#' vrt_to_df(ig, leave_raw = FALSE)
 #' 
 #' nw <- network::as.network(adj_mat)
-#' network::set.vertex.attribute(nw, "a_vertex_attribute", value = sample(seq_len(network::network.size(nw))))
+#' network::set.vertex.attribute(nw, "a_vertex_attribute", 
+#'                               value = sample(seq_len(network::network.size(nw))))
 #' 
-#' vrt_get_attr_df(nw)
-#' vrt_get_attr_df(nw, sna_vertices_df = FALSE)
+#' vrt_to_df(nw)
+#' vrt_to_df(nw, leave_raw = FALSE)
 #' 
 #' tbl_g <- tidygraph::as_tbl_graph(ig)
 #' 
-#' vrt_get_attr_df(tbl_g)
-#' vrt_get_attr_df(tbl_g, sna_vertices_df = FALSE)
+#' vrt_to_df(tbl_g)
+#' vrt_to_df(tbl_g, leave_raw = FALSE)
 #' 
-#' sna_g <- as_sna_net(nw)
+#' sna_g <- as_bridge_net(nw)
 #' 
-#' vrt_get_attr_df(sna_g)
+#' vrt_to_df(sna_g)
 #' 
 #' @export
-vrt_get_attr_df <- function(x, sna_vertices_df = TRUE) {
-  UseMethod("vrt_get_attr_df")
+vrt_to_df <- function(x, leave_raw = FALSE) {
+  UseMethod("vrt_to_df")
 }
 
-#' @rdname vrt_get_attr_df
+#' @rdname vrt_to_df
 #' 
 #' @export
-vrt_get_attr_df.sna_net <- function(x) {
+vrt_to_df.bridge_net <- function(x) {
   x[["vertices"]]
 }
 
-#' @rdname vrt_get_attr_df
+#' @rdname vrt_to_df
 #' 
 #' @importFrom igraph as_data_frame set_vertex_attr V vcount vertex_attr
 #' @export
-vrt_get_attr_df.igraph <- function(x, sna_vertices_df = TRUE) {
+vrt_to_df.igraph <- function(x, leave_raw = FALSE) {
   if (net_count_vertices(x) == 0L) {
     return(NULL)
   }
   if (!"name" %in% vrt_attr_names(x)) {
     x <- set_vertex_attr(x, "name", value = seq_len(vcount(x)))
   }
-  if (sna_vertices_df && net_is_bipartite(x)) {
+  if (!leave_raw && net_is_bipartite(x)) {
     x <- prep_bipartite_igraph(x)
   }
   out <- as_data_frame(x, what = "vertices")
-  if (sna_vertices_df) {
+  if (!leave_raw) {
     if (net_is_bipartite(x)) {
       out[[".actor"]] <- out[["type"]]
       out[["type"]] <- NULL
     }
-    return(as_sna_vertices_df(out))
+    return(as_vertex_data_frame(out))
   }
   out
 }
 
-#' @rdname vrt_get_attr_df
+#' @rdname vrt_to_df
 #' 
 #' @export
-vrt_get_attr_df.network <- function(x, sna_vertices_df = TRUE) {
+vrt_to_df.network <- function(x, leave_raw = FALSE) {
   if (net_count_vertices(x) == 0L) {
     return(NULL)
   }
@@ -268,25 +274,25 @@ vrt_get_attr_df.network <- function(x, sna_vertices_df = TRUE) {
                                        stringsAsFactors = FALSE))
   }
   out <- out[, colnames(out) != "na", drop = FALSE]
-  if (sna_vertices_df) {
+  if (!leave_raw) {
     if (net_is_bipartite(x)) {
       out[[".actor"]] <- c(rep(TRUE, x[["gal"]][["bipartite"]]),
                            rep(FALSE, x[["gal"]][["n"]] - x[["gal"]][["bipartite"]]))
     }
-    return(as_sna_vertices_df(out))
+    return(as_vertex_data_frame(out))
   }
   out
 }
 
-#' @rdname vrt_get_attr_df
+#' @rdname vrt_to_df
 #' 
 #' @export
-vrt_get_attr_df.tbl_graph <- function(x, sna_vertices_df = TRUE) {
-  vrt_get_attr_df(as_igraph(x), sna_vertices_df)
+vrt_to_df.tbl_graph <- function(x, leave_raw = FALSE) {
+  vrt_to_df(as_igraph(x), leave_raw = leave_raw)
 }
 
 
-as_sna_vertices_df <- function(x) {
+as_vertex_data_frame <- function(x) {
   if (!is.data.frame(x)) {
     terminate("`x` must be a `data.frame`")
   }
@@ -314,15 +320,16 @@ as_sna_vertices_df <- function(x) {
   }
 
   rownames(x) <- NULL
-  class(x) <- c("sna_vertices_df", "data.frame")
+  class(x) <- c("vertex_data_frame", "data.frame")
   x
 }
 
-print.sna_vertices_df <- function(x, .nrow = 10L, .verbose = TRUE) {
+#' @importFrom utils head
+print.vertex_data_frame <- function(x, .nrow = 10L, .verbose = TRUE) {
   out <- head(x, .nrow)
   rownames(out) <- paste0("  ", seq_len(nrow(out)))
   if (.verbose) {
-    cat_patch("# sna_vertices_df: %s x %s",
+    cat_patch("# vertex_data_frame: %s x %s",
               format(nrow(x), big.mark = ","),
               format(ncol(x), big.mark = ","))
     cat("\n")

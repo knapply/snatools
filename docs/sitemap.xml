@@ -10,16 +10,7 @@
     <loc>https://knapply.github.io/snatools//reference/as_network.html</loc>
   </url>
   <url>
-    <loc>https://knapply.github.io/snatools//reference/bip_clarify_actors.html</loc>
-  </url>
-  <url>
-    <loc>https://knapply.github.io/snatools//reference/bip_swap_modes.html</loc>
-  </url>
-  <url>
-    <loc>https://knapply.github.io/snatools//reference/character-manipulation-tools.html</loc>
-  </url>
-  <url>
-    <loc>https://knapply.github.io/snatools//reference/davis_southern_women.html</loc>
+    <loc>https://knapply.github.io/snatools//reference/bridge_net.html</loc>
   </url>
   <url>
     <loc>https://knapply.github.io/snatools//reference/edg_attr_names.html</loc>
@@ -28,79 +19,43 @@
     <loc>https://knapply.github.io/snatools//reference/edg_get_attr.html</loc>
   </url>
   <url>
-    <loc>https://knapply.github.io/snatools//reference/edg_get_attr_df.html</loc>
-  </url>
-  <url>
-    <loc>https://knapply.github.io/snatools//reference/ei_index.html</loc>
-  </url>
-  <url>
-    <loc>https://knapply.github.io/snatools//reference/ei_index_global.html</loc>
-  </url>
-  <url>
-    <loc>https://knapply.github.io/snatools//reference/ei_index_global_permute.html</loc>
-  </url>
-  <url>
-    <loc>https://knapply.github.io/snatools//reference/extract-network-attributes.html</loc>
-  </url>
-  <url>
-    <loc>https://knapply.github.io/snatools//reference/metadata-queries.html</loc>
+    <loc>https://knapply.github.io/snatools//reference/edg_to_df.html</loc>
   </url>
   <url>
     <loc>https://knapply.github.io/snatools//reference/net_count_actors.html</loc>
   </url>
   <url>
-    <loc>https://knapply.github.io/snatools//reference/padgett_florence.html</loc>
+    <loc>https://knapply.github.io/snatools//reference/net_count_edges.html</loc>
   </url>
   <url>
-    <loc>https://knapply.github.io/snatools//reference/parallel-edges.html</loc>
+    <loc>https://knapply.github.io/snatools//reference/net_count_vertices.html</loc>
   </url>
   <url>
-    <loc>https://knapply.github.io/snatools//reference/permute_matrix.html</loc>
+    <loc>https://knapply.github.io/snatools//reference/net_has_isolates.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/net_has_loops.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/net_is_bipartite.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/net_is_directed.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/net_is_multiplex.html</loc>
   </url>
   <url>
     <loc>https://knapply.github.io/snatools//reference/pipe.html</loc>
   </url>
   <url>
-    <loc>https://knapply.github.io/snatools//reference/plot_triad_census.html</loc>
+    <loc>https://knapply.github.io/snatools//reference/rep_as_edgelist.html</loc>
   </url>
   <url>
-    <loc>https://knapply.github.io/snatools//reference/qap_cor.html</loc>
-  </url>
-  <url>
-    <loc>https://knapply.github.io/snatools//reference/read_ucinet.html</loc>
-  </url>
-  <url>
-    <loc>https://knapply.github.io/snatools//reference/reexports.html</loc>
-  </url>
-  <url>
-    <loc>https://knapply.github.io/snatools//reference/rep_adjacency_matrix.html</loc>
-  </url>
-  <url>
-    <loc>https://knapply.github.io/snatools//reference/rep_biadjacency_matrix.html</loc>
-  </url>
-  <url>
-    <loc>https://knapply.github.io/snatools//reference/rep_edgelist.html</loc>
-  </url>
-  <url>
-    <loc>https://knapply.github.io/snatools//reference/rep_mixing_matrix.html</loc>
-  </url>
-  <url>
-    <loc>https://knapply.github.io/snatools//reference/rep_two_mode_matrix.html</loc>
-  </url>
-  <url>
-    <loc>https://knapply.github.io/snatools//reference/sampson_monastery.html</loc>
-  </url>
-  <url>
-    <loc>https://knapply.github.io/snatools//reference/set_whole_number_storage.html</loc>
+    <loc>https://knapply.github.io/snatools//reference/rep_as_mixing_matrix.html</loc>
   </url>
   <url>
     <loc>https://knapply.github.io/snatools//reference/snatools.html</loc>
-  </url>
-  <url>
-    <loc>https://knapply.github.io/snatools//reference/sna_net.html</loc>
-  </url>
-  <url>
-    <loc>https://knapply.github.io/snatools//reference/strict-compare.html</loc>
   </url>
   <url>
     <loc>https://knapply.github.io/snatools//reference/vrt_attr_names.html</loc>
@@ -109,9 +64,6 @@
     <loc>https://knapply.github.io/snatools//reference/vrt_get_attr.html</loc>
   </url>
   <url>
-    <loc>https://knapply.github.io/snatools//reference/vrt_get_attr_df.html</loc>
-  </url>
-  <url>
-    <loc>https://knapply.github.io/snatools//articles/conversion.html</loc>
+    <loc>https://knapply.github.io/snatools//reference/vrt_to_df.html</loc>
   </url>
 </urlset>
