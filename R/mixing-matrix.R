@@ -3,12 +3,14 @@
 #' Using a categorical vertex attribute, construct a matrix depicting network mixing
 #' patterns.
 #'
-#' @param x An `sna_net`, `igraph`, `network`, `tbl_graph`, or `edgelist` object.
+#' @param x An `bridge_net`, `igraph`, `network`, `tbl_graph`, or `edgelist` object.
 #' @param vrt_attr `character` indicating which vertex attribute to use.
 #' @param drop_loops `logical` (default: `FALSE`) indicating whether to drop loop edges 
 #' prior to calculations.
 #' @param leave_raw `logical` (default: `FALSE`) indicating whether the returned object
 #' should be a raw `matrix` rather than a `mixing_matrix` object.
+#' @param mixing_matrix An object of class `mixing_matrix`.
+#' @param ... Additional arguments to be passed to or used by other methods.
 #' 
 #' @return `mixing_matrix` or `matrix`
 #' 
@@ -58,42 +60,43 @@ is_mixing_matrix <- function(x) {
 #' @rdname rep_as_mixing_matrix
 #' 
 #' @export
-print.mixing_matrix <- function(x, ...) {
-  cat_patch("# A mixing_matrix with %s attribute categories.", nrow(x))
+print.mixing_matrix <- function(mixing_matrix, ...) {
+  cat_patch("# A mixing_matrix with %s attribute categories.", nrow(mixing_matrix))
   cat("\n")
-  out <- rbind(cbind(NA_integer_, x, replicate(2L, rep(NA_integer_, nrow(x))), 
-                     rep("|", nrow(x)), rowSums(x)),
-               rep(NA_integer_, ncol(x) + 5L),
-               c(NA_integer_, colSums(x), rep(NA_integer_, 4L)))
+  out <- rbind(cbind(NA_integer_, mixing_matrix,
+                     replicate(2L, rep(NA_integer_, nrow(mixing_matrix))), 
+                     rep("|", nrow(mixing_matrix)), rowSums(mixing_matrix)),
+               rep(NA_integer_, ncol(mixing_matrix) + 5L),
+               c(NA_integer_, colSums(mixing_matrix), rep(NA_integer_, 4L)))
   out[is.na(out)] <- ""
   out[nrow(out) - 1L, 2:(ncol(out) - 4L)] <- "-"
-  dimnames(out) <- list(.ego = c(rownames(x), "", "Outgoing Ties"),
-                        .alter = c("", colnames(x), rep("", 3L), "Incoming Ties"))
+  dimnames(out) <- list(.ego = c(rownames(mixing_matrix), "", "Outgoing Ties"),
+                        .alter = c("", colnames(mixing_matrix), 
+                                   rep("", 3L), "Incoming Ties"))
   print(out, quote = FALSE, ...)
 }
 
 #' @rdname rep_as_mixing_matrix
 #' 
 #' @export
-as.matrix.mixing_matrix <- function(x) {
+as.matrix.mixing_matrix <- function(mixing_matrix) {
   mat_attrs <- c("dim", "dimnames")
-  for (i in names(attributes(x))) {
+  for (i in names(attributes(mixing_matrix))) {
     if (!i %in% mat_attrs) {
-      attr(x, i) <- NULL
+      attr(mixing_matrix, i) <- NULL
     }
   }
-  class(x) <- "matrix"
-  x
+  class(mixing_matrix) <- "matrix"
+  mixing_matrix
 }
 
 #' @rdname rep_as_mixing_matrix
 #' 
 #' @export
-as.data.frame.mixing_matrix <- function(x, stringsAsFactors = FALSE, ...) {
-  temp <- as.data.frame(as.matrix(x), stringsAsFactors = stringsAsFactors, ...)
-  out <- cbind.data.frame(data.frame(`.ego` = rownames(temp), stringsAsFactors = stringsAsFactors),
-                          `rownames<-`(temp, NULL), 
-                          stringsAsFactors = stringsAsFactors)
+as.data.frame.mixing_matrix <- function(mixing_matrix, ...) {
+  temp <- as.data.frame(as.matrix(mixing_matrix), stringsAsFactors = FALSE, ...)
+  out <- cbind.data.frame(data.frame(`.ego` = rownames(temp), stringsAsFactors = FALSE),
+                          `rownames<-`(temp, NULL), stringsAsFactors = FALSE, ...)
   `rownames<-`(out, NULL)
 }
 

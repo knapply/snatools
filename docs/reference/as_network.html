@@ -88,18 +88,6 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/conversion.html">Converting Graph Classes</a>
-    </li>
-  </ul>
-</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -140,26 +128,24 @@
 
     <pre class="usage"><span class='fu'>as_network</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
-<span class='co'># S3 method for sna_net</span>
+<span class='co'># S3 method for bridge_net</span>
 <span class='fu'>as_network</span>(<span class='no'>x</span>, <span class='kw'>.actor</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'># S3 method for igraph</span>
-<span class='fu'>as_network</span>(<span class='no'>x</span>, <span class='kw'>edg_attr</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>net_attr</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
+<span class='fu'>as_network</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for network</span>
-<span class='fu'>as_network</span>(<span class='no'>x</span>)
+<span class='fu'>as_network</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for tbl_graph</span>
-<span class='fu'>as_network</span>(<span class='no'>x</span>, <span class='kw'>edg_attr</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>net_attr</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>as_network</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p><code>sna_net</code>, <code>igraph</code> (<code><a href='http://www.rdocumentation.org/packages/igraph/topics/make_graph'>igraph::graph</a></code>), or <code><a href='http://www.rdocumentation.org/packages/tidygraph/topics/tbl_graph'>tidygraph::tbl_graph</a></code>.</p></td>
+      <td><p><code>bridge_net</code>, <code>igraph</code> (<code><a href='http://www.rdocumentation.org/packages/igraph/topics/make_graph'>igraph::graph</a></code>), or <code><a href='http://www.rdocumentation.org/packages/tidygraph/topics/tbl_graph'>tidygraph::tbl_graph</a></code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -178,7 +164,7 @@ of converted bipartite graphs.</p></td>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code>as_network()</code> converts <code>x</code> to an intermediate <code>sna_net</code> object that is capable of
+    <p><code>as_network()</code> converts <code>x</code> to an intermediate <code>bridge_net</code> object that is capable of
 mapping metadata, edges, vertices, and attributes (edge, vertex, and graph-level)
 to a new, valid <code>network</code> object. <br /></p>
 <p>A note regarding bipartite graph conversion: <br /></p><ul>
@@ -196,7 +182,7 @@ bipartite <code>igraph</code>s to <code>networks</code> in a way that results in
 objects is only possible when an <code>igraph</code>'s vertices are already sorted by their
 `type`` attribute.</p></li>
 </ul></li>
-<li><p>To handle this discrepency, intermediate <code>sna_net</code> objects treat vertices whose
+<li><p>To handle this discrepency, intermediate <code>bridge_net</code> objects treat vertices whose
 <code>type</code> attributes are <code>TRUE</code> as "actors", meaning the <code>igraph</code>'s vertices are
 sorted during conversion to ensure that <code>TRUE</code> vertices are first (via
 <code><a href='http://www.rdocumentation.org/packages/igraph/topics/permute'>igraph::permute()</a></code>).</p><ul>
@@ -204,7 +190,7 @@ sorted during conversion to ensure that <code>TRUE</code> vertices are first (vi
 vertices' <code>type</code> attribute as indicating whether a vertex is an "actor".</p></li>
 </ul></li>
 <li><p>In order to standardize representations, returned bipartite <code>network</code> objects
-intentionally retain the intermediate <code>sna_net</code>'s <code>.actor</code> vertex attribute (a
+intentionally retain the intermediate <code>bridge_net</code>'s <code>.actor</code> vertex attribute (a
 <code>logical</code> <code>vector</code>).</p><ul>
 <li><p><code>.actor</code> corresponds to an <code>igraph</code>'s <code>type</code> vertex attributes, i.e.
 <code>V(x_igraph)$type</code> and <code>x_network %v% ".actor"</code> will <em>always</em> match.</p></li>
@@ -215,7 +201,7 @@ intentionally retain the intermediate <code>sna_net</code>'s <code>.actor</code>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='sna_net.html'>as_sna_net()</a></code>, <code><a href='as_igraph.html'>as_igraph()</a></code>, <code><a href='http://www.rdocumentation.org/packages/intergraph/topics/asNetwork'>intergraph::asNetwork()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='bridge_net.html'>as_bridge_net()</a></code>, <code><a href='as_igraph.html'>as_igraph()</a></code>, <code><a href='http://www.rdocumentation.org/packages/intergraph/topics/asNetwork'>intergraph::asNetwork()</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -231,21 +217,21 @@ intentionally retain the intermediate <code>sna_net</code>'s <code>.actor</code>
 <span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/V'>V</a></span>(<span class='no'>ig1</span>)$<span class='no'>name</span> <span class='kw'>&lt;-</span> <span class='fu'>seq_along</span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/V'>V</a></span>(<span class='no'>ig1</span>))
 <span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/V'>V</a></span>(<span class='no'>ig1</span>)$<span class='no'>color</span> <span class='kw'>&lt;-</span> <span class='fu'>color_palette</span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/gorder'>vcount</a></span>(<span class='no'>ig1</span>))
 <span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/E'>E</a></span>(<span class='no'>ig1</span>)$<span class='no'>lab</span> <span class='kw'>&lt;-</span> <span class='fu'>seq_along</span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/E'>E</a></span>(<span class='no'>ig1</span>))
-<span class='no'>ig1</span></div><div class='output co'>#&gt; IGRAPH ca46849 DN-- 10 10 -- Erdos renyi (gnp) graph
+<span class='no'>ig1</span></div><div class='output co'>#&gt; IGRAPH d336433 DN-- 10 10 -- Erdos renyi (gnp) graph
 #&gt; + attr: name (g/c), type (g/c), loops (g/l), p (g/n), name (v/n), color
 #&gt; | (v/c), lab (e/n)
-#&gt; + edges from ca46849 (vertex names):
+#&gt; + edges from d336433 (vertex names):
 #&gt;  [1] 4-&gt;2 8-&gt;4 3-&gt;5 4-&gt;6 4-&gt;7 5-&gt;7 9-&gt;7 5-&gt;8 7-&gt;8 2-&gt;9</div><div class='input'>
 <span class='no'>nw1</span> <span class='kw'>&lt;-</span> <span class='fu'>as_network</span>(<span class='no'>ig1</span>)
 <span class='no'>nw1</span></div><div class='output co'>#&gt;  Network attributes:
 #&gt;   vertices = 10 
 #&gt;   directed = TRUE 
 #&gt;   hyper = FALSE 
-#&gt;   loops = FALSE 
 #&gt;   multiple = FALSE 
 #&gt;   bipartite = FALSE 
 #&gt;   name = Erdos renyi (gnp) graph 
 #&gt;   type = gnp 
+#&gt;   loops = FALSE 
 #&gt;   p = 0.15 
 #&gt;   total edges= 10 
 #&gt;     missing edges= 0 
@@ -257,7 +243,7 @@ intentionally retain the intermediate <code>sna_net</code>'s <code>.actor</code>
 #&gt;  Edge attribute names: 
 #&gt;     lab </div><div class='input'>
 <span class='co'># manually comparing original and converted networks ==================================</span>
-<span class='fu'><a href='sna_net.html'>as_sna_net</a></span>(<span class='no'>ig1</span>)$<span class='no'>vertices</span></div><div class='output co'>#&gt; # sna_vertices_df: 10 x 2
+<span class='fu'><a href='bridge_net.html'>as_bridge_net</a></span>(<span class='no'>ig1</span>)$<span class='no'>vertices</span></div><div class='output co'>#&gt; # vertex_data_frame: 10 x 2
 #&gt;      .name   color
 #&gt;   1      1 #FF0000
 #&gt;   2      2 #D40E6A
@@ -268,7 +254,7 @@ intentionally retain the intermediate <code>sna_net</code>'s <code>.actor</code>
 #&gt;   7      7 #0055A9
 #&gt;   8      8 #001CFF
 #&gt;   9      9 #008DFF
-#&gt;   10    10 #00FFFF</div><div class='input'><span class='fu'><a href='sna_net.html'>as_sna_net</a></span>(<span class='no'>nw1</span>)$<span class='no'>vertices</span></div><div class='output co'>#&gt; # sna_vertices_df: 10 x 2
+#&gt;   10    10 #00FFFF</div><div class='input'><span class='fu'><a href='bridge_net.html'>as_bridge_net</a></span>(<span class='no'>nw1</span>)$<span class='no'>vertices</span></div><div class='output co'>#&gt; # vertex_data_frame: 10 x 2
 #&gt;      .name   color
 #&gt;   1      1 #FF0000
 #&gt;   2      2 #D40E6A
@@ -279,8 +265,8 @@ intentionally retain the intermediate <code>sna_net</code>'s <code>.actor</code>
 #&gt;   7      7 #0055A9
 #&gt;   8      8 #001CFF
 #&gt;   9      9 #008DFF
-#&gt;   10    10 #00FFFF</div><div class='input'><span class='fu'>identical</span>(<span class='fu'><a href='sna_net.html'>as_sna_net</a></span>(<span class='no'>ig1</span>)$<span class='no'>vertices</span>, <span class='fu'><a href='sna_net.html'>as_sna_net</a></span>(<span class='no'>nw1</span>)$<span class='no'>vertices</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
-<span class='fu'><a href='sna_net.html'>as_sna_net</a></span>(<span class='no'>ig1</span>)$<span class='no'>edges</span></div><div class='output co'>#&gt;    .ego .alter lab
+#&gt;   10    10 #00FFFF</div><div class='input'><span class='fu'>identical</span>(<span class='fu'><a href='bridge_net.html'>as_bridge_net</a></span>(<span class='no'>ig1</span>)$<span class='no'>vertices</span>, <span class='fu'><a href='bridge_net.html'>as_bridge_net</a></span>(<span class='no'>nw1</span>)$<span class='no'>vertices</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+<span class='fu'><a href='bridge_net.html'>as_bridge_net</a></span>(<span class='no'>ig1</span>)$<span class='no'>edges</span></div><div class='output co'>#&gt;    .ego .alter lab
 #&gt; 1     4      2   1
 #&gt; 2     8      4   2
 #&gt; 3     3      5   3
@@ -290,7 +276,7 @@ intentionally retain the intermediate <code>sna_net</code>'s <code>.actor</code>
 #&gt; 7     9      7   7
 #&gt; 8     5      8   8
 #&gt; 9     7      8   9
-#&gt; 10    2      9  10</div><div class='input'><span class='fu'><a href='sna_net.html'>as_sna_net</a></span>(<span class='no'>nw1</span>)$<span class='no'>edges</span></div><div class='output co'>#&gt;    .ego .alter lab
+#&gt; 10    2      9  10</div><div class='input'><span class='fu'><a href='bridge_net.html'>as_bridge_net</a></span>(<span class='no'>nw1</span>)$<span class='no'>edges</span></div><div class='output co'>#&gt;    .ego .alter lab
 #&gt; 1     4      2   1
 #&gt; 2     8      4   2
 #&gt; 3     3      5   3
@@ -300,18 +286,16 @@ intentionally retain the intermediate <code>sna_net</code>'s <code>.actor</code>
 #&gt; 7     9      7   7
 #&gt; 8     5      8   8
 #&gt; 9     7      8   9
-#&gt; 10    2      9  10</div><div class='input'><span class='fu'>identical</span>(<span class='fu'><a href='sna_net.html'>as_sna_net</a></span>(<span class='no'>ig1</span>)$<span class='no'>edges</span>, <span class='fu'><a href='sna_net.html'>as_sna_net</a></span>(<span class='no'>nw1</span>)$<span class='no'>edges</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
-<span class='co'># convenience comparison operator =====================================================</span>
-<span class='no'>ig1</span> <span class='kw'>%==%</span> <span class='no'>nw1</span></div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+#&gt; 10    2      9  10</div><div class='input'><span class='fu'>identical</span>(<span class='fu'><a href='bridge_net.html'>as_bridge_net</a></span>(<span class='no'>ig1</span>)$<span class='no'>edges</span>, <span class='fu'><a href='bridge_net.html'>as_bridge_net</a></span>(<span class='no'>nw1</span>)$<span class='no'>edges</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
 <span class='co'># converting bipartite igraph to bipartite network ====================================</span>
 <span class='no'>ig2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/sample_bipartite'>bipartite.random.game</a></span>(<span class='fl'>3</span>, <span class='fl'>5</span>, <span class='st'>"gnp"</span>, <span class='fl'>0.4</span>)
 <span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/V'>V</a></span>(<span class='no'>ig2</span>)$<span class='no'>name</span> <span class='kw'>&lt;-</span> <span class='fu'>seq_along</span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/V'>V</a></span>(<span class='no'>ig2</span>))
 <span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/V'>V</a></span>(<span class='no'>ig2</span>)$<span class='no'>color</span> <span class='kw'>&lt;-</span> <span class='fu'>ifelse</span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/V'>V</a></span>(<span class='no'>ig2</span>)$<span class='no'>type</span>, <span class='st'>"red"</span>, <span class='st'>"blue"</span>)
 <span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/E'>E</a></span>(<span class='no'>ig2</span>)$<span class='no'>lab</span> <span class='kw'>&lt;-</span> <span class='fu'>sample</span>(<span class='fu'>seq_len</span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/gsize'>ecount</a></span>(<span class='no'>ig2</span>)))
-<span class='no'>ig2</span></div><div class='output co'>#&gt; IGRAPH ca4bfd9 UN-B 8 8 -- Bipartite Gnp random graph
+<span class='no'>ig2</span></div><div class='output co'>#&gt; IGRAPH d342485 UN-B 8 8 -- Bipartite Gnp random graph
 #&gt; + attr: name (g/c), p (g/n), type (v/l), name (v/n), color (v/c), lab
 #&gt; | (e/n)
-#&gt; + edges from ca4bfd9 (vertex names):
+#&gt; + edges from d342485 (vertex names):
 #&gt; [1] 1--4 3--4 2--5 3--5 1--6 3--6 2--7 3--8</div><div class='input'>
 <span class='no'>ig_bip_coords</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/layout_with_fr'>layout_with_fr</a></span>(<span class='no'>ig2</span>)
 
@@ -323,7 +307,6 @@ intentionally retain the intermediate <code>sna_net</code>'s <code>.actor</code>
 #&gt;   vertices = 8 
 #&gt;   directed = FALSE 
 #&gt;   hyper = FALSE 
-#&gt;   loops = FALSE 
 #&gt;   multiple = FALSE 
 #&gt;   bipartite = 5 
 #&gt;   name = Bipartite Gnp random graph 
@@ -337,54 +320,11 @@ intentionally retain the intermediate <code>sna_net</code>'s <code>.actor</code>
 #&gt; 
 #&gt;  Edge attribute names: 
 #&gt;     lab </div><div class='input'>
-<span class='co'># comparing objects ===================================================================</span>
-<span class='fu'><a href='sna_net.html'>as_sna_net</a></span>(<span class='no'>ig2</span>)$<span class='no'>vertices</span></div><div class='output co'>#&gt; # sna_vertices_df: 8 x 5
-#&gt;     .name .actor color         x         y
-#&gt;   1     4   TRUE   red  9.998458  9.224250
-#&gt;   2     5   TRUE   red 12.747764  7.896764
-#&gt;   3     6   TRUE   red 10.365337 10.339054
-#&gt;   4     7   TRUE   red 14.766643  5.618681
-#&gt;   5     8   TRUE   red 12.470001 10.379054
-#&gt;   6     1  FALSE  blue  9.164107 10.130687
-#&gt;   7     2  FALSE  blue 13.858173  6.642272
-#&gt;   8     3  FALSE  blue 11.516053  9.316465</div><div class='input'><span class='fu'><a href='sna_net.html'>as_sna_net</a></span>(<span class='no'>nw2</span>)$<span class='no'>vertices</span></div><div class='output co'>#&gt; # sna_vertices_df: 8 x 5
-#&gt;     .name .actor color         x         y
-#&gt;   1     4   TRUE   red  9.998458  9.224250
-#&gt;   2     5   TRUE   red 12.747764  7.896764
-#&gt;   3     6   TRUE   red 10.365337 10.339054
-#&gt;   4     7   TRUE   red 14.766643  5.618681
-#&gt;   5     8   TRUE   red 12.470001 10.379054
-#&gt;   6     1  FALSE  blue  9.164107 10.130687
-#&gt;   7     2  FALSE  blue 13.858173  6.642272
-#&gt;   8     3  FALSE  blue 11.516053  9.316465</div><div class='input'><span class='fu'>identical</span>(<span class='fu'><a href='sna_net.html'>as_sna_net</a></span>(<span class='no'>ig1</span>)$<span class='no'>vertices</span>, <span class='fu'><a href='sna_net.html'>as_sna_net</a></span>(<span class='no'>nw1</span>)$<span class='no'>vertices</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
-<span class='no'>ig2</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='rep_as_edgelist.html'>rep_as_edgelist</a></span>()</div><div class='output co'>#&gt; # An undirected, bipartite edgelist with 8 edges.*
-#&gt;   .ego .alter
-#&gt; 1    1      4
-#&gt; 2    3      4
-#&gt; 3    2      5
-#&gt; 4    3      5
-#&gt; 5    1      6
-#&gt; 6    3      6
-#&gt; 7    2      7
-#&gt; 8    3      8
-#&gt; # * Values correspond to vertex names.</div><div class='input'><span class='no'>nw2</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='rep_as_edgelist.html'>rep_as_edgelist</a></span>()</div><div class='output co'>#&gt; # An undirected, bipartite edgelist with 8 edges.*
-#&gt;   .ego .alter
-#&gt; 1    4      1
-#&gt; 2    4      3
-#&gt; 3    5      2
-#&gt; 4    5      3
-#&gt; 5    6      1
-#&gt; 6    6      3
-#&gt; 7    7      2
-#&gt; 8    8      3
-#&gt; # * Values correspond to vertex names.</div><div class='input'><span class='fu'>identical</span>(<span class='fu'><a href='sna_net.html'>as_sna_net</a></span>(<span class='no'>ig2</span>)$<span class='no'>edges</span>, <span class='fu'><a href='sna_net.html'>as_sna_net</a></span>(<span class='no'>nw2</span>)$<span class='no'>edges</span>)</div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
-<span class='no'>ig2</span> <span class='kw'>%==%</span> <span class='no'>nw2</span></div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
 <span class='co'># discarding `.actor` vertex attribute from bipartite graphs ==========================</span>
 <span class='fu'>as_network</span>(<span class='no'>ig2</span>, <span class='kw'>.actor</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt;  Network attributes:
 #&gt;   vertices = 8 
 #&gt;   directed = FALSE 
 #&gt;   hyper = FALSE 
-#&gt;   loops = FALSE 
 #&gt;   multiple = FALSE 
 #&gt;   bipartite = 5 
 #&gt;   name = Bipartite Gnp random graph 
@@ -398,44 +338,7 @@ intentionally retain the intermediate <code>sna_net</code>'s <code>.actor</code>
 #&gt; 
 #&gt;  Edge attribute names: 
 #&gt;     lab </div><div class='input'>
-<span class='co'># visual comparison ===================================================================</span>
-<span class='no'>plot_net</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>x</span>, <span class='no'>coords</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>main</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>v_cex</span> <span class='kw'>=</span> <span class='fl'>0L</span>,  <span class='no'>v_lab_cex</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-                     <span class='no'>e_col</span> <span class='kw'>=</span> <span class='st'>"lightgray"</span>, <span class='no'>e_lab_cex</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>e_lab_col</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
-                     <span class='no'>arw_cex</span> <span class='kw'>=</span> <span class='kw'>NULL</span>) {
-  <span class='kw'>if</span> (<span class='fu'>class</span>(<span class='no'>x</span>) <span class='kw'>==</span> <span class='st'>"igraph"</span>) {
-    <span class='no'>v_lab_cols</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/V'>V</a></span>(<span class='no'>x</span>)$<span class='no'>color</span>
-    <span class='kw'>if</span>(<span class='fu'>all</span>(<span class='fu'>is.na</span>(<span class='no'>v_lab_cols</span>))) <span class='no'>v_lab_cols</span> <span class='kw'>&lt;-</span> <span class='kw'>NULL</span>
-    <span class='no'>args</span> <span class='kw'>&lt;-</span> <span class='fu'>list</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>layout</span> <span class='kw'>=</span> <span class='no'>coords</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='no'>main</span>,
-                 <span class='kw'>vertex.size</span> <span class='kw'>=</span> <span class='no'>v_cex</span>, <span class='kw'>vertex.label.color</span> <span class='kw'>=</span> <span class='no'>v_lab_cols</span>,
-                 <span class='kw'>vertex.label.cex</span> <span class='kw'>=</span> <span class='no'>v_lab_cex</span>, <span class='kw'>edge.color</span> <span class='kw'>=</span> <span class='no'>e_col</span>,
-                 <span class='kw'>edge.label</span> <span class='kw'>=</span> <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/E'>E</a></span>(<span class='no'>x</span>)$<span class='no'>lab</span>, <span class='kw'>edge.label.color</span> <span class='kw'>=</span> <span class='no'>e_lab_col</span>,
-                 <span class='kw'>edge.label.size</span> <span class='kw'>=</span> <span class='no'>e_lab_cex</span>, <span class='kw'>edge.arrow.size</span> <span class='kw'>=</span> <span class='no'>arw_cex</span>)
-    <span class='no'>args</span> <span class='kw'>&lt;-</span> <span class='fu'>Filter</span>(<span class='no'>length</span>, <span class='no'>args</span>)
-    <span class='fu'>do.call</span>(<span class='no'>plot</span>, <span class='no'>args</span>)
-  } <span class='kw'>else</span> <span class='kw'>if</span> (<span class='fu'>class</span>(<span class='no'>x</span>) <span class='kw'>==</span> <span class='st'>"network"</span>) {
-    <span class='no'>v_lab_cols</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>network</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/network/topics/attribute.methods'>get.vertex.attribute</a></span>(<span class='no'>x</span>, <span class='st'>"color"</span>)
-    <span class='kw'>if</span>(<span class='fu'>all</span>(<span class='fu'>is.na</span>(<span class='no'>v_lab_cols</span>))) <span class='no'>v_lab_cols</span> <span class='kw'>&lt;-</span> <span class='kw'>NULL</span>
-    <span class='no'>args</span> <span class='kw'>&lt;-</span> <span class='fu'>list</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>coord</span> <span class='kw'>=</span> <span class='no'>coords</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='no'>main</span>,
-                 <span class='kw'>label</span> <span class='kw'>=</span> <span class='st'>"vertex.names"</span>, <span class='kw'>vertex.cex</span> <span class='kw'>=</span> <span class='no'>v_cex</span>, <span class='kw'>label.col</span> <span class='kw'>=</span> <span class='no'>v_lab_cols</span>,
-                 <span class='kw'>label.cex</span> <span class='kw'>=</span> <span class='no'>v_lab_cex</span>, <span class='kw'>edge.col</span> <span class='kw'>=</span> <span class='no'>e_col</span>, <span class='kw'>edge.label</span> <span class='kw'>=</span> <span class='st'>"lab"</span>,
-                 <span class='kw'>edge.label.col</span> <span class='kw'>=</span> <span class='no'>e_lab_col</span>, <span class='kw'>edge.label.cex</span> <span class='kw'>=</span> <span class='no'>e_lab_cex</span>, <span class='kw'>label.pos</span> <span class='kw'>=</span> <span class='fl'>5</span>,
-                 <span class='kw'>arrowhead.cex</span> <span class='kw'>=</span> <span class='no'>arw_cex</span>)
-    <span class='no'>args</span> <span class='kw'>&lt;-</span> <span class='fu'>Filter</span>(<span class='no'>length</span>, <span class='no'>args</span>)
-    <span class='fu'>do.call</span>(<span class='no'>plot</span>, <span class='no'>args</span>)
-  } <span class='kw'>else</span> <span class='fu'>stop</span>(<span class='st'>"`x` is not an `igraph` or `network` object."</span>, <span class='kw'>call.</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-}
-
-<span class='fu'>par</span>(<span class='kw'>mfrow</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>2</span>))
-<span class='fu'>plot_net</span>(<span class='no'>ig1</span>, <span class='no'>coords</span>, <span class='kw'>v_lab_cex</span> <span class='kw'>=</span> <span class='fl'>1.5</span>, <span class='kw'>e_lab_cex</span> <span class='kw'>=</span> <span class='fl'>0.75</span>, <span class='kw'>arw_cex</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"original igraph"</span>)
-<span class='fu'>plot_net</span>(<span class='no'>nw1</span>, <span class='no'>coords</span>, <span class='kw'>v_lab_cex</span> <span class='kw'>=</span> <span class='fl'>1.5</span>, <span class='kw'>e_lab_cex</span> <span class='kw'>=</span> <span class='fl'>0.75</span>, <span class='kw'>arw_cex</span> <span class='kw'>=</span> <span class='fl'>2.75</span>, <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"post-conversion network"</span>)</div><div class='img'><img src='as_network-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='no'>nw_bip_coords</span> <span class='kw'>&lt;-</span> <span class='fu'>cbind</span>(<span class='kw pkg'>network</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/network/topics/attribute.methods'>get.vertex.attribute</a></span>(<span class='no'>nw2</span>, <span class='st'>"x"</span>),
-                       <span class='kw pkg'>network</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/network/topics/attribute.methods'>get.vertex.attribute</a></span>(<span class='no'>nw2</span>, <span class='st'>"y"</span>))
-
-<span class='fu'>plot_net</span>(<span class='no'>ig2</span>, <span class='no'>ig_bip_coords</span>, <span class='kw'>v_lab_cex</span> <span class='kw'>=</span> <span class='fl'>1.15</span>, <span class='kw'>e_lab_col</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>e_lab_cex</span> <span class='kw'>=</span> <span class='fl'>0.75</span>,
-         <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"original\nbipartite igraph"</span>)
-<span class='fu'>plot_net</span>(<span class='no'>nw2</span>, <span class='no'>nw_bip_coords</span>, <span class='kw'>v_lab_cex</span> <span class='kw'>=</span> <span class='fl'>1.15</span>, <span class='kw'>e_lab_col</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>e_lab_cex</span> <span class='kw'>=</span> <span class='fl'>0.75</span>,
-         <span class='kw'>main</span> <span class='kw'>=</span> <span class='st'>"post-conversion\nbipartite network"</span>)</div><div class='img'><img src='as_network-2.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='fu'>par</span>(<span class='kw'>mfrow</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>1</span>))</div></pre>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

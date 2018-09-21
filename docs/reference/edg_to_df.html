@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Extract a specific vertex attribute. — vrt_get_attr • snatools</title>
+<title>Extract all edge attributes as a data frame. — edg_to_df • snatools</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Extract a specific vertex attribute. — vrt_get_attr" />
+<meta property="og:title" content="Extract all edge attributes as a data frame. — edg_to_df" />
 
-<meta property="og:description" content="Extract a specific vertex attribute." />
+<meta property="og:description" content="Extract all edge attributes as a data frame." />
 
 <meta property="og:image" content="https://knapply.github.io/snatools/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -115,30 +115,35 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Extract a specific vertex attribute.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/vertex-attributes.R'><code>R/vertex-attributes.R</code></a></small>
-    <div class="hidden name"><code>vrt_get_attr.Rd</code></div>
+    <h1>Extract all edge attributes as a data frame.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/edge-attributes.R'><code>R/edge-attributes.R</code></a></small>
+    <div class="hidden name"><code>edg_to_df.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Extract a specific vertex attribute.</p>
+    <p>Extract all edge attributes as a data frame.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>vrt_get_attr</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>)
+    <pre class="usage"><span class='fu'>edg_to_df</span>(<span class='no'>x</span>, <span class='kw'>include_dyad</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>leave_raw</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'># S3 method for bridge_net</span>
-<span class='fu'>vrt_get_attr</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>)
+<span class='fu'>edg_to_df</span>(<span class='no'>x</span>, <span class='kw'>include_dyad</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>leave_raw</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='co'># S3 method for igraph</span>
-<span class='fu'>vrt_get_attr</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>)
+<span class='fu'>edg_to_df</span>(<span class='no'>x</span>, <span class='kw'>include_dyad</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>leave_raw</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='co'># S3 method for network</span>
-<span class='fu'>vrt_get_attr</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>)
+<span class='fu'>edg_to_df</span>(<span class='no'>x</span>, <span class='kw'>include_dyad</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>leave_raw</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='co'># S3 method for tbl_graph</span>
-<span class='fu'>vrt_get_attr</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>)</pre>
+<span class='fu'>edg_to_df</span>(<span class='no'>x</span>, <span class='kw'>include_dyad</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>leave_raw</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+<span class='co'># S3 method for edge_data_frame</span>
+<span class='fu'>print</span>(<span class='no'>x</span>, <span class='kw'>.nrow</span> <span class='kw'>=</span> <span class='fl'>10L</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -148,19 +153,28 @@
       <td><p>An <code>bridge_net</code>, <code>igraph</code>, <code>network</code>, or <code>tbl_graph</code>.</p></td>
     </tr>
     <tr>
-      <th>vrt_attr</th>
-      <td><p><code>character</code> specifying the target vertex attribute.</p></td>
+      <th>include_dyad</th>
+      <td><p><code>logical</code> (default: <code>TRUE</code>) indicating whether to return the <code>.ego</code>
+and <code>.alter</code> of each edge's dyad.</p></td>
+    </tr>
+    <tr>
+      <th>leave_raw</th>
+      <td><p><code>logical</code> (default: <code>FALSE</code>) indicating whether to return a bare
+<code>data.frame</code> (<code>stringsAsFactors = FALSE</code>) instead of an <code>edge_data_frame</code>.</p></td>
+    </tr>
+    <tr>
+      <th>.nrow</th>
+      <td><p>Maximum number of rows to <code>print()</code>.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>vector</code> of vertex attribute values.</p>
+    <p><code>edge_data_frame</code> <code>data.frame</code> with all edge attributes contained in <code>x</code>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='vrt_attr_names.html'>vrt_attr_names()</a></code>, <code><a href='vrt_to_df.html'>vrt_to_df()</a></code>, <code><a href='http://www.rdocumentation.org/packages/igraph/topics/vertex_attr'>igraph::vertex_attr()</a></code>,
-<code><a href='http://www.rdocumentation.org/packages/network/topics/attribute.methods'>network::get.vertex.attribute()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='edg_get_attr.html'>edg_get_attr()</a></code>, <code><a href='edg_attr_names.html'>edg_attr_names()</a></code>, <code><a href='http://www.rdocumentation.org/packages/igraph/topics/graph_from_data_frame'>igraph::as_data_frame()</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -171,24 +185,37 @@
 
 <span class='no'>ig</span> <span class='kw'>&lt;-</span> <span class='no'>adj_mat</span> <span class='kw'>%&gt;%</span>
   <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/graph_from_adjacency_matrix'>graph_from_adjacency_matrix</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/set_vertex_attr'>set_vertex_attr</a></span>(<span class='st'>"a_vertex_attribute"</span>,
-                          <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'>sample</span>(<span class='fu'>seq_len</span>(<span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/gorder'>vcount</a></span>(<span class='no'>.</span>))))
+  <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/set_edge_attr'>set_edge_attr</a></span>(<span class='st'>"an_edge_attribute"</span>,
+                        <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'>sample</span>(<span class='fu'>seq_len</span>(<span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/gsize'>ecount</a></span>(<span class='no'>.</span>))))
 
-<span class='no'>ig</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>vrt_get_attr</span>(<span class='st'>"name"</span>)</div><div class='output co'>#&gt; [1] "a" "b" "c" "d"</div><div class='input'>
+<span class='fu'>edg_to_df</span>(<span class='no'>ig</span>)</div><div class='output co'>#&gt; # edge_data_frame: 1 x 3
+#&gt;     .ego .alter an_edge_attribute
+#&gt;   1    c      d                 1</div><div class='input'><span class='fu'>edg_to_df</span>(<span class='no'>ig</span>, <span class='kw'>include_dyad</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; # edge_data_frame: 1 x 1
+#&gt;     an_edge_attribute
+#&gt;   1                 1</div><div class='input'><span class='fu'>edg_to_df</span>(<span class='no'>ig</span>, <span class='kw'>leave_raw</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;   .ego .alter an_edge_attribute
+#&gt; 1    c      d                 1</div><div class='input'>
 <span class='no'>nw</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>network</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/network/topics/network'>as.network</a></span>(<span class='no'>adj_mat</span>)
-  <span class='kw pkg'>network</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/network/topics/attribute.methods'>set.vertex.attribute</a></span>(<span class='no'>nw</span>, <span class='st'>"a_vertex_attribute"</span>,
-                                <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'>sample</span>(<span class='fu'>seq_len</span>(<span class='kw pkg'>network</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/network/topics/network.size'>network.size</a></span>(<span class='no'>nw</span>))))
+<span class='kw pkg'>network</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/network/topics/attribute.methods'>set.edge.attribute</a></span>(<span class='no'>nw</span>, <span class='st'>"an_edge_attribute"</span>,
+                            <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'>sample</span>(<span class='fu'>seq_len</span>(<span class='kw pkg'>network</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/network/topics/network.edgecount'>network.edgecount</a></span>(<span class='no'>nw</span>))))
 
-<span class='no'>nw</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>vrt_get_attr</span>(<span class='st'>"vertex.names"</span>)</div><div class='output co'>#&gt; [1] "a" "b" "c" "d"</div><div class='input'>
+<span class='fu'>edg_to_df</span>(<span class='no'>nw</span>)</div><div class='output co'>#&gt; # edge_data_frame: 1 x 3
+#&gt;     .ego .alter an_edge_attribute
+#&gt;   1    c      d                 1</div><div class='input'><span class='fu'>edg_to_df</span>(<span class='no'>nw</span>, <span class='kw'>include_dyad</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; # edge_data_frame: 1 x 1
+#&gt;     an_edge_attribute
+#&gt;   1                 1</div><div class='input'><span class='fu'>edg_to_df</span>(<span class='no'>nw</span>, <span class='kw'>leave_raw</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;   .ego .alter an_edge_attribute
+#&gt; 1    c      d                 1</div><div class='input'>
 <span class='no'>tbl_g</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>tidygraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/tidygraph/topics/tbl_graph'>as_tbl_graph</a></span>(<span class='no'>ig</span>)
 
-<span class='no'>tbl_g</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>vrt_get_attr</span>(<span class='st'>"a_vertex_attribute"</span>)</div><div class='output co'>#&gt; [1] 2 1 4 3</div><div class='input'>
+<span class='fu'>edg_to_df</span>(<span class='no'>tbl_g</span>)</div><div class='output co'>#&gt; # edge_data_frame: 1 x 3
+#&gt;     .ego .alter an_edge_attribute
+#&gt;   1    c      d                 1</div><div class='input'><span class='fu'>edg_to_df</span>(<span class='no'>tbl_g</span>, <span class='kw'>include_dyad</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; # edge_data_frame: 1 x 1
+#&gt;     an_edge_attribute
+#&gt;   1                 1</div><div class='input'><span class='fu'>edg_to_df</span>(<span class='no'>tbl_g</span>, <span class='kw'>leave_raw</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;   .ego .alter an_edge_attribute
+#&gt; 1    c      d                 1</div><div class='input'>
 <span class='no'>sna_g</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='bridge_net.html'>as_bridge_net</a></span>(<span class='no'>nw</span>)
 
-<span class='fu'>vrt_get_attr</span>(<span class='no'>sna_g</span>, <span class='st'>"a_vertex_attribute"</span>)</div><div class='output co'>#&gt; [1] 3 4 1 2</div><div class='input'>
+<span class='fu'>edg_to_df</span>(<span class='no'>sna_g</span>)</div><div class='output co'>#&gt;   .ego .alter an_edge_attribute
+#&gt; 1    3      4                 1</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

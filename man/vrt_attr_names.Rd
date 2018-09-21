@@ -2,7 +2,7 @@
 % Please edit documentation in R/vertex-attributes.R
 \name{vrt_attr_names}
 \alias{vrt_attr_names}
-\alias{vrt_attr_names.sna_net}
+\alias{vrt_attr_names.bridge_net}
 \alias{vrt_attr_names.igraph}
 \alias{vrt_attr_names.network}
 \alias{vrt_attr_names.tbl_graph}
@@ -10,7 +10,7 @@
 \usage{
 vrt_attr_names(x)
 
-\method{vrt_attr_names}{sna_net}(x)
+\method{vrt_attr_names}{bridge_net}(x)
 
 \method{vrt_attr_names}{igraph}(x)
 
@@ -19,7 +19,7 @@ vrt_attr_names(x)
 \method{vrt_attr_names}{tbl_graph}(x)
 }
 \arguments{
-\item{x}{An \code{sna_net}, \code{igraph}, \code{network}, or \code{tbl_graph}.}
+\item{x}{An \code{bridge_net}, \code{igraph}, \code{network}, or \code{tbl_graph}.}
 }
 \value{
 \code{character} \code{vector} listing the names of \code{x}'s vertex attributes.
@@ -40,7 +40,8 @@ ig <- adj_mat \%>\%
 vrt_attr_names(ig)
 
 nw <- network::as.network(adj_mat)
-network::set.vertex.attribute(nw, "another_attr", value = sample(seq_len(network::network.size(nw))))
+network::set.vertex.attribute(nw, "another_attr", 
+                              value = sample(seq_len(network::network.size(nw))))
 
 vrt_attr_names(nw)
 
@@ -48,13 +49,13 @@ tbl_g <- tidygraph::as_tbl_graph(ig)
 
 vrt_attr_names(tbl_g)
 
-sna_g <- as_sna_net(ig)
+sna_g <- as_bridge_net(ig)
 
 vrt_attr_names(sna_g)
 
 }
 \seealso{
-\code{\link[=vrt_get_attr]{vrt_get_attr()}}, \code{\link[=vrt_get_attr_df]{vrt_get_attr_df()}}, \code{\link[igraph:vertex_attr_names]{igraph::vertex_attr_names()}},
+\code{\link[=vrt_get_attr]{vrt_get_attr()}}, \code{\link[=vrt_to_df]{vrt_to_df()}}, \code{\link[igraph:vertex_attr_names]{igraph::vertex_attr_names()}},
 \code{\link[network:list.vertex.attributes]{network::list.vertex.attributes()}}
 }
 \author{

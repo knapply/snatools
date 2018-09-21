@@ -2,7 +2,7 @@
 % Please edit documentation in R/network-metadata.R
 \name{net_is_directed}
 \alias{net_is_directed}
-\alias{net_is_directed.sna_net}
+\alias{net_is_directed.bridge_net}
 \alias{net_is_directed.igraph}
 \alias{net_is_directed.network}
 \alias{net_is_directed.tbl_graph}
@@ -11,7 +11,7 @@
 \usage{
 net_is_directed(x)
 
-\method{net_is_directed}{sna_net}(x)
+\method{net_is_directed}{bridge_net}(x)
 
 \method{net_is_directed}{igraph}(x)
 
@@ -22,7 +22,7 @@ net_is_directed(x)
 \method{net_is_directed}{edgelist}(x)
 }
 \arguments{
-\item{x}{An \code{sna_net}, \code{igraph}, \code{network}, \code{tbl_graph}, or \code{edgelist} object.}
+\item{x}{An \code{bridge_net}, \code{igraph}, \code{network}, \code{tbl_graph}, or \code{edgelist} object.}
 }
 \value{
 \code{logical} indicating whether \code{x}'s edges are directed.
@@ -38,8 +38,8 @@ ig <- igraph::random.graph.game(10, 0.25, directed = TRUE)
 nw <- ig \%>\% 
   as_network()
   
-sna_g <- ig \%>\% 
-  as_sna_net()
+bridge_g <- ig \%>\% 
+  as_bridge_net()
   
 tidy_g <- ig \%>\% 
   tidygraph::as_tbl_graph()
@@ -47,7 +47,7 @@ tidy_g <- ig \%>\%
 el <- ig \%>\% 
   rep_as_edgelist(use_names = FALSE)
 
-net_is_directed(sna_g)
+net_is_directed(bridge_g)
 
 net_is_directed(ig)
 

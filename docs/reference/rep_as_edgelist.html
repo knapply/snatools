@@ -90,18 +90,6 @@ graphs and parallel edges are never dropped from multiplex graphs." />
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/conversion.html">Converting Graph Classes</a>
-    </li>
-  </ul>
-</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -154,14 +142,14 @@ graphs and parallel edges are never dropped from multiplex graphs.</p>
 <span class='fu'>as.matrix</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for edgelist</span>
-<span class='fu'>as.data.frame</span>(<span class='no'>x</span>, <span class='kw'>stringsAsFactors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>as.data.frame</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>An <code>sna_net</code>, <code>igraph</code>, <code>network</code>, <code>tbl_graph</code>, or <code>edgelist</code> object.</p></td>
+      <td><p>An <code>bridge_net</code>, <code>igraph</code>, <code>network</code>, <code>tbl_graph</code>, or <code>edgelist</code> object.</p></td>
     </tr>
     <tr>
       <th>use_names</th>
@@ -188,6 +176,14 @@ object instead of a <code>matrix</code> or <code>data.frame</code>.</p></td>
       <td><p><code>logical</code> (default: <code>FALSE</code>) whether to throw a warning if
 <code>use_names = TRUE</code> but  <code>x</code> does not contain valid vertex names.</p></td>
     </tr>
+    <tr>
+      <th>.nrow</th>
+      <td><p>Maximum number of rows to print.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Arguments passed on to <code>as.data.frame()</code>.</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -206,7 +202,7 @@ thrown (unless <code>ignore_missing_names = TRUE</code>).</p></li>
 <li><p>Each class uses a different attribute for valid vertex names:</p><ul>
 <li><p><code>igraph</code> and <code>tbl_graph</code> objects use a vertex attribute called <code>name</code></p></li>
 <li><p><code>network</code> objects use a vertex attribute called <code>vertex.names</code></p></li>
-<li><p><code>sna_net</code> objects use a vertex attribute called <code>.name</code></p></li>
+<li><p><code>bridge_net</code> objects use a vertex attribute called <code>.name</code></p></li>
 </ul></li>
 </ul></li>
 <li><p><code>weights</code></p><ul>
@@ -254,29 +250,37 @@ for which a traditional edgelist requires extra information.</p><ul>
   <span class='fu'><a href='as_network.html'>as_network</a></span>()
 
 <span class='no'>sna_g</span> <span class='kw'>&lt;-</span> <span class='no'>ig</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='sna_net.html'>as_sna_net</a></span>()
+  <span class='fu'><a href='bridge_net.html'>as_bridge_net</a></span>()
 
 <span class='no'>tidy_g</span> <span class='kw'>&lt;-</span> <span class='no'>ig</span> <span class='kw'>%&gt;%</span>
   <span class='kw pkg'>tidygraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/tidygraph/topics/tbl_graph'>as_tbl_graph</a></span>()
 
-<span class='no'>ig</span> <span class='kw'>%&gt;%</span> <span class='fu'>rep_as_edgelist</span>()</div><div class='output co'>#&gt; # An undirected edgelist with 2 edges.*
+<span class='no'>ig</span> <span class='kw'>%&gt;%</span> <span class='fu'>rep_as_edgelist</span>()</div><div class='output co'>#&gt; # An undirected edgelist with 4 edges.*
 #&gt;   .ego .alter
-#&gt; 1 a    c     
+#&gt; 1 b    d     
 #&gt; 2 d    e     
+#&gt; 3 b    g     
+#&gt; 4 h    j     
 #&gt; # * Values correspond to vertex names.</div><div class='input'>
-<span class='no'>nw</span> <span class='kw'>%&gt;%</span> <span class='fu'>rep_as_edgelist</span>(<span class='kw'>use_names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; # An undirected edgelist with 2 edges.*
+<span class='no'>nw</span> <span class='kw'>%&gt;%</span> <span class='fu'>rep_as_edgelist</span>(<span class='kw'>use_names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; # An undirected edgelist with 4 edges.*
 #&gt;   .ego .alter
-#&gt; 1    1      3
+#&gt; 1    2      4
 #&gt; 2    4      5
+#&gt; 3    2      7
+#&gt; 4    8     10
 #&gt; # * Values correspond to vertex indices.</div><div class='input'>
-<span class='no'>tidy_g</span> <span class='kw'>%&gt;%</span> <span class='fu'>rep_as_edgelist</span>(<span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='st'>"group"</span>)</div><div class='output co'>#&gt; # An undirected edgelist with 2 edges.*
+<span class='no'>tidy_g</span> <span class='kw'>%&gt;%</span> <span class='fu'>rep_as_edgelist</span>(<span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='st'>"group"</span>)</div><div class='output co'>#&gt; # An undirected edgelist with 4 edges.*
 #&gt;   .ego .alter
-#&gt; 1 C    B     
-#&gt; 2 B    C     
+#&gt; 1 B    B     
+#&gt; 2 B    A     
+#&gt; 3 B    B     
+#&gt; 4 A    A     
 #&gt; # * Values correspond to a vertex attribute ('group').</div><div class='input'>
 <span class='no'>ig</span> <span class='kw'>%&gt;%</span> <span class='fu'>rep_as_edgelist</span>(<span class='kw'>leave_raw</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;      .ego .alter
-#&gt; [1,] "a"  "c"   
-#&gt; [2,] "d"  "e"   </div><div class='input'>
+#&gt; [1,] "b"  "d"   
+#&gt; [2,] "d"  "e"   
+#&gt; [3,] "b"  "g"   
+#&gt; [4,] "h"  "j"   </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

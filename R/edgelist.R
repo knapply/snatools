@@ -4,7 +4,7 @@
 #' that edge sources (`.ego`) and targets (`.alter`) are sorted row-wise for undirected 
 #' graphs and parallel edges are never dropped from multiplex graphs.
 #' 
-#' @param x An `sna_net`, `igraph`, `network`, `tbl_graph`, or `edgelist` object.
+#' @param x An `bridge_net`, `igraph`, `network`, `tbl_graph`, or `edgelist` object.
 #' @param use_names `logical` (default: `TRUE`) indicating whether to use vertex names in
 #' the returned object. If `FALSE`, the returned object uses vertex indices.
 #' @param vrt_attr `character` (default: `NULL`) indicating which vertex attribute to use 
@@ -29,7 +29,7 @@
 #'   + Each class uses a different attribute for valid vertex names:
 #'     + `igraph` and `tbl_graph` objects use a vertex attribute called `name`
 #'     + `network` objects use a vertex attribute called `vertex.names`
-#'     + `sna_net` objects use a vertex attribute called `.name`
+#'     + `bridge_net` objects use a vertex attribute called `.name`
 #' * `weights`
 #'   + If `weights` is `TRUE`, `rep_as_edgelist()` combines parallel edges to create a 
 #'     third column (`.weight`).
@@ -66,7 +66,7 @@
 #'   as_network()
 #'   
 #' sna_g <- ig %>% 
-#'   as_sna_net()
+#'   as_bridge_net()
 #'   
 #' tidy_g <- ig %>% 
 #'   tidygraph::as_tbl_graph()
@@ -201,6 +201,7 @@ set_edgelist_class <- function(x) {
   x
 }
 
+#' @importFrom stats aggregate.data.frame
 as_weighted_el <- function(x, el_type) {
   x <- as.data.frame(x, stringsAsFactors = FALSE)
   out <- aggregate.data.frame(x, by = x[, c(".ego", ".alter")], length)[seq_len(ncol(x) + 1)]
@@ -218,6 +219,9 @@ is_edgelist <- function(x) {
 
 #' @rdname rep_as_edgelist
 #' 
+#' @param .nrow Maximum number of rows to print.
+#' 
+#' @importFrom utils head
 #' @export
 print.edgelist <- function(x, .nrow = 10L) {
   class(x) <- class(x)[[2L]]
@@ -246,6 +250,8 @@ print.edgelist <- function(x, .nrow = 10L) {
 
 #' @rdname rep_as_edgelist
 #' 
+#' @param ... Arguments passed on to `as.data.frame()`.
+#' 
 #' @export
 as.matrix.edgelist <- function(x, ...) {
   class(x) <- class(x)[[2L]]
@@ -264,12 +270,12 @@ as.matrix.edgelist <- function(x, ...) {
 #' @rdname rep_as_edgelist
 #' 
 #' @export
-as.data.frame.edgelist <- function(x, stringsAsFactors = FALSE, ...) {
+as.data.frame.edgelist <- function(x, ...) {
   class(x) <- class(x)[[2L]]
   if (class(x) == "data.frame") {
     return(x)
   }
-  as.data.frame(x, stringsAsFactors = stringsAsFactors, ...)
+  as.data.frame(x, stringsAsFactors = FALSE, ...)
 }
 
 
@@ -280,7 +286,7 @@ as.data.frame.edgelist <- function(x, stringsAsFactors = FALSE, ...) {
 #' 
 #' 
 #' 
-#' rep_as_edgelist.sna_net <- function(x, vrt_attr = ".name") {
+#' rep_as_edgelist.bridge_net <- function(x, vrt_attr = ".name") {
 #'   if (!is.character(vrt_attr) || length(vrt_attr) > 1L || !is.atomic(vrt_attr)) {
 #'     stop("`vrt_attr` must be a character vector of length 1.", call. = FALSE)
 #'   }

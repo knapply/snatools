@@ -17,10 +17,10 @@ is_edgelist(x)
 
 \method{as.matrix}{edgelist}(x, ...)
 
-\method{as.data.frame}{edgelist}(x, stringsAsFactors = FALSE, ...)
+\method{as.data.frame}{edgelist}(x, ...)
 }
 \arguments{
-\item{x}{An \code{sna_net}, \code{igraph}, \code{network}, \code{tbl_graph}, or \code{edgelist} object.}
+\item{x}{An \code{bridge_net}, \code{igraph}, \code{network}, \code{tbl_graph}, or \code{edgelist} object.}
 
 \item{use_names}{\code{logical} (default: \code{TRUE}) indicating whether to use vertex names in
 the returned object. If \code{FALSE}, the returned object uses vertex indices.}
@@ -36,6 +36,10 @@ object instead of a \code{matrix} or \code{data.frame}.}
 
 \item{ignore_missing_names}{\code{logical} (default: \code{FALSE}) whether to throw a warning if
 \code{use_names = TRUE} but  \code{x} does not contain valid vertex names.}
+
+\item{.nrow}{Maximum number of rows to print.}
+
+\item{...}{Arguments passed on to \code{as.data.frame()}.}
 }
 \value{
 \code{edgelist} object, \code{matrix}, or \code{data.frame}.
@@ -59,7 +63,7 @@ thrown (unless \code{ignore_missing_names = TRUE}).
 \itemize{
 \item \code{igraph} and \code{tbl_graph} objects use a vertex attribute called \code{name}
 \item \code{network} objects use a vertex attribute called \code{vertex.names}
-\item \code{sna_net} objects use a vertex attribute called \code{.name}
+\item \code{bridge_net} objects use a vertex attribute called \code{.name}
 }
 }
 \item \code{weights}
@@ -107,7 +111,7 @@ nw <- ig \%>\%
   as_network()
   
 sna_g <- ig \%>\% 
-  as_sna_net()
+  as_bridge_net()
   
 tidy_g <- ig \%>\% 
   tidygraph::as_tbl_graph()

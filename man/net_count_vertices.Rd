@@ -2,7 +2,7 @@
 % Please edit documentation in R/network-metadata.R
 \name{net_count_vertices}
 \alias{net_count_vertices}
-\alias{net_count_vertices.sna_net}
+\alias{net_count_vertices.bridge_net}
 \alias{net_count_vertices.igraph}
 \alias{net_count_vertices.network}
 \alias{net_count_vertices.tbl_graph}
@@ -11,7 +11,7 @@
 \usage{
 net_count_vertices(x)
 
-\method{net_count_vertices}{sna_net}(x)
+\method{net_count_vertices}{bridge_net}(x)
 
 \method{net_count_vertices}{igraph}(x)
 
@@ -22,7 +22,7 @@ net_count_vertices(x)
 \method{net_count_vertices}{edgelist}(x)
 }
 \arguments{
-\item{x}{An \code{sna_net}, \code{igraph}, \code{network}, \code{tbl_graph}, or \code{edgelist} object.}
+\item{x}{An \code{bridge_net}, \code{igraph}, \code{network}, \code{tbl_graph}, or \code{edgelist} object.}
 }
 \value{
 \code{integer} indicating the number of vertices in \code{x}.
@@ -38,8 +38,8 @@ ig <- igraph::random.graph.game(10, 0.25, directed = TRUE)
 nw <- ig \%>\% 
   as_network()
   
-sna_g <- ig \%>\% 
-  as_sna_net()
+bridge_g <- ig \%>\% 
+  as_bridge_net()
   
 tidy_g <- ig \%>\% 
   tidygraph::as_tbl_graph()
@@ -47,7 +47,7 @@ tidy_g <- ig \%>\%
 el <- ig \%>\% 
   rep_as_edgelist(use_names = FALSE)
 
-net_count_vertices(sna_g)
+net_count_vertices(bridge_g)
 
 net_count_vertices(ig)
 

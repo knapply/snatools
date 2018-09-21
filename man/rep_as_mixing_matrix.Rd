@@ -13,14 +13,14 @@ rep_as_mixing_matrix(x, vrt_attr, drop_loops = FALSE,
 
 is_mixing_matrix(x)
 
-\method{print}{mixing_matrix}(x, ...)
+\method{print}{mixing_matrix}(mixing_matrix, ...)
 
-\method{as.matrix}{mixing_matrix}(x)
+\method{as.matrix}{mixing_matrix}(mixing_matrix)
 
-\method{as.data.frame}{mixing_matrix}(x, stringsAsFactors = FALSE, ...)
+\method{as.data.frame}{mixing_matrix}(mixing_matrix, ...)
 }
 \arguments{
-\item{x}{An \code{sna_net}, \code{igraph}, \code{network}, \code{tbl_graph}, or \code{edgelist} object.}
+\item{x}{An \code{bridge_net}, \code{igraph}, \code{network}, \code{tbl_graph}, or \code{edgelist} object.}
 
 \item{vrt_attr}{\code{character} indicating which vertex attribute to use.}
 
@@ -29,6 +29,10 @@ prior to calculations.}
 
 \item{leave_raw}{\code{logical} (default: \code{FALSE}) indicating whether the returned object
 should be a raw \code{matrix} rather than a \code{mixing_matrix} object.}
+
+\item{mixing_matrix}{An object of class \code{mixing_matrix}.}
+
+\item{...}{Additional arguments to be passed to or used by other methods.}
 }
 \value{
 \code{mixing_matrix} or \code{matrix}

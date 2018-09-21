@@ -56,7 +56,7 @@ print.net_metadata <- function(x) {
 
 #' Is a graph object bipartite?
 #' 
-#' @param x An `sna_net`, `igraph`, `network`, `tbl_graph`, or `edgelist` object.
+#' @param x An `bridge_net`, `igraph`, `network`, `tbl_graph`, or `edgelist` object.
 #' 
 #' @return `logical` indicating whether `x` is bipartite.
 #' 
@@ -70,8 +70,8 @@ print.net_metadata <- function(x) {
 #' nw <- ig %>% 
 #'   as_network()
 #'   
-#' sna_g <- ig %>% 
-#'   as_sna_net()
+#' bridge_g <- ig %>% 
+#'   as_bridge_net()
 #'   
 #' tidy_g <- ig %>% 
 #'   tidygraph::as_tbl_graph()
@@ -87,10 +87,10 @@ net_is_bipartite <- function(x) {
 #' @rdname net_is_bipartite
 #'
 #' @examples 
-#' net_is_bipartite(sna_g)
+#' net_is_bipartite(bridge_g)
 #' 
 #' @export
-net_is_bipartite.sna_net <- function(x) {
+net_is_bipartite.bridge_net <- function(x) {
   x[["metadata"]][["is_bipartite"]]
 }
 
@@ -142,7 +142,7 @@ net_is_bipartite.edgelist <- function(x) {
 
 #' Count the number of vertices belonging to the actor mode of a bipartite graph object.
 #' 
-#' @param x An `sna_net`, `igraph`, `network`, `tbl_graph`, or `edgelist` object.
+#' @param x An `bridge_net`, `igraph`, `network`, `tbl_graph`, or `edgelist` object.
 #' 
 #' @return `integer` corresponding to the number `x`'s actors.
 #' 
@@ -156,8 +156,8 @@ net_is_bipartite.edgelist <- function(x) {
 #' nw <- ig %>% 
 #'   as_network()
 #'   
-#' sna_g <- ig %>% 
-#'   as_sna_net()
+#' bridge_g <- ig %>% 
+#'   as_bridge_net()
 #'   
 #' tidy_g <- ig %>% 
 #'   tidygraph::as_tbl_graph()
@@ -199,10 +199,10 @@ net_count_actors.network <- function(x) {
 #' @rdname net_count_actors
 #' 
 #' @examples 
-#' net_count_actors(sna_g)
+#' net_count_actors(bridge_g)
 #' 
 #' @export
-net_count_actors.sna_net <- function(x) {
+net_count_actors.bridge_net <- function(x) {
   if (!net_is_bipartite(x)) {
     terminate("`actors` only exist in bipartite networks.")
   }
@@ -238,7 +238,7 @@ net_count_actors.edgelist <- function(x) {
 
 #' Are a network's edges directed or undirected?
 #' 
-#' @param x An `sna_net`, `igraph`, `network`, `tbl_graph`, or `edgelist` object.
+#' @param x An `bridge_net`, `igraph`, `network`, `tbl_graph`, or `edgelist` object.
 #' 
 #' @return `logical` indicating whether `x`'s edges are directed.
 #' 
@@ -250,8 +250,8 @@ net_count_actors.edgelist <- function(x) {
 #' nw <- ig %>% 
 #'   as_network()
 #'   
-#' sna_g <- ig %>% 
-#'   as_sna_net()
+#' bridge_g <- ig %>% 
+#'   as_bridge_net()
 #'   
 #' tidy_g <- ig %>% 
 #'   tidygraph::as_tbl_graph()
@@ -269,10 +269,10 @@ net_is_directed <- function(x) {
 #' @rdname net_is_directed
 #' 
 #' @examples 
-#' net_is_directed(sna_g)
+#' net_is_directed(bridge_g)
 #'
 #' @export
-net_is_directed.sna_net <- function(x) {
+net_is_directed.bridge_net <- function(x) {
   x[["metadata"]][["is_directed"]]
 }
 
@@ -327,7 +327,7 @@ net_is_directed.edgelist <- function(x) {
 
 #' Count the number of vertices present in a graph object.
 #' 
-#' @param x An `sna_net`, `igraph`, `network`, `tbl_graph`, or `edgelist` object.
+#' @param x An `bridge_net`, `igraph`, `network`, `tbl_graph`, or `edgelist` object.
 #' 
 #' @return `integer` indicating the number of vertices in `x`.
 #' 
@@ -339,8 +339,8 @@ net_is_directed.edgelist <- function(x) {
 #' nw <- ig %>% 
 #'   as_network()
 #'   
-#' sna_g <- ig %>% 
-#'   as_sna_net()
+#' bridge_g <- ig %>% 
+#'   as_bridge_net()
 #'   
 #' tidy_g <- ig %>% 
 #'   tidygraph::as_tbl_graph()
@@ -358,10 +358,10 @@ net_count_vertices <- function(x) {
 #' @rdname net_count_vertices
 #' 
 #' @examples
-#' net_count_vertices(sna_g)
+#' net_count_vertices(bridge_g)
 #'
 #' @export
-net_count_vertices.sna_net <- function(x) {
+net_count_vertices.bridge_net <- function(x) {
   set_whole_number_storage(x[["metadata"]][["n_vertices"]])
 }
 
@@ -414,7 +414,7 @@ net_count_vertices.edgelist <- function(x) {
 
 #' Count the number of edges present in a graph object.
 #' 
-#' @param x An `sna_net`, `igraph`, `network`, `tbl_graph`, or `edgelist` object.
+#' @param x An `bridge_net`, `igraph`, `network`, `tbl_graph`, or `edgelist` object.
 #' 
 #' @return `integer` indicating the number of edges in `x`.
 #' 
@@ -426,8 +426,8 @@ net_count_vertices.edgelist <- function(x) {
 #' nw <- ig %>% 
 #'   as_network()
 #'   
-#' sna_g <- ig %>% 
-#'   as_sna_net()
+#' bridge_g <- ig %>% 
+#'   as_bridge_net()
 #'   
 #' tidy_g <- ig %>% 
 #'   tidygraph::as_tbl_graph()
@@ -445,10 +445,10 @@ net_count_edges <- function(x) {
 #' @rdname net_count_edges
 #' 
 #' @examples 
-#' net_count_edges(sna_g)
+#' net_count_edges(bridge_g)
 #' 
 #' @export
-net_count_edges.sna_net <- function(x) {
+net_count_edges.bridge_net <- function(x) {
   set_whole_number_storage(x[["metadata"]][["n_edges"]])
 }
 
@@ -500,7 +500,7 @@ net_count_edges.edgelist <- function(x) {
 
 #' Is a graph object multiplex?
 #' 
-#' @param x An `sna_net`, `igraph`, `network`, `tbl_graph`, or `edgelist` object.
+#' @param x An `bridge_net`, `igraph`, `network`, `tbl_graph`, or `edgelist` object.
 #' 
 #' @return `logical` indicating whether `x` is multiplex (It contains parallel edges).
 #' 
@@ -524,8 +524,8 @@ net_count_edges.edgelist <- function(x) {
 #' nw <- ig %>% 
 #'   as_network()
 #'   
-#' sna_g <- ig %>% 
-#'   as_sna_net()
+#' bridge_g <- ig %>% 
+#'   as_bridge_net()
 #'   
 #' tidy_g <- ig %>% 
 #'   tidygraph::as_tbl_graph()
@@ -540,10 +540,10 @@ net_is_multiplex <- function(x) {
 #' @rdname net_is_multiplex
 #' 
 #' @examples 
-#' net_is_multiplex(sna_g)
+#' net_is_multiplex(bridge_g)
 #' 
 #' @export
-net_is_multiplex.sna_net <- function(x) {
+net_is_multiplex.bridge_net <- function(x) {
   x[["metadata"]][["any_multiplex"]]
 }
 
@@ -606,7 +606,7 @@ net_is_multiplex.edgelist <- function(x) {
 #' 
 #' Test whether the `.ego` (source) and `.alter` (target) of any edge is the same vertex.
 #' 
-#' @param x An `sna_net`, `igraph`, `network`, `tbl_graph`, or `edgelist` object.
+#' @param x An `bridge_net`, `igraph`, `network`, `tbl_graph`, or `edgelist` object.
 #' 
 #' @return `logical` indicating whether `x` contains loop edges.
 #' 
@@ -625,8 +625,8 @@ net_is_multiplex.edgelist <- function(x) {
 #' nw <- ig %>% 
 #'   as_network()
 #'   
-#' sna_g <- ig %>% 
-#'   as_sna_net()
+#' bridge_g <- ig %>% 
+#'   as_bridge_net()
 #'   
 #' tidy_g <- ig %>% 
 #'   tidygraph::as_tbl_graph()
@@ -644,12 +644,11 @@ net_has_loops <- function(x) {
 #' @rdname net_has_loops
 #' 
 #' @examples 
-#' net_has_loops(sna_g)
+#' net_has_loops(bridge_g)
 #' 
 #' @export
-net_has_loops.sna_net <- function(x) {
-  el <- rep_as_edgelist(x, use_names = FALSE, leave_raw = TRUE)
-  any(el[, ".ego"] == el[, ".alter"])
+net_has_loops.bridge_net <- function(x) {
+  x[["metadata"]][["has_loops"]]
 }
 
 #' @rdname net_has_loops
@@ -689,6 +688,7 @@ net_has_loops.network <- function(x) {
 #' 
 #' @seealso [tidygraph::edge_is_loop()]
 #' 
+#' @export
 net_has_loops.tbl_graph <- function(x) {
   net_has_loops.igraph(as_igraph.tbl_graph(x))
 }
@@ -698,9 +698,97 @@ net_has_loops.tbl_graph <- function(x) {
 #' @examples 
 #' net_has_loops(el)
 #' 
+#' @export
 net_has_loops.edgelist <- function(x) {
   any(x[, ".ego"] == x[, ".alter"])
 }
 
+#' Does a graph object contain isolates?
+#' 
+#' Test whether any vertices have 0 edges.
+#' 
+#' @param x An `bridge_net`, `igraph`, `network`, `tbl_graph`, or `edgelist` object.
+#' 
+#' @return `logical` indicating whether `x` contains isolated vertices.
+#' 
+#' @examples
+#' library(snatools)
+#' 
+#' ig <- igraph::make_empty_graph(n = 5) %>% 
+#'   igraph::add_edges(c(1, 2, 2, 3, 4, 1, 2, 4))
+#' 
+#' nw <- ig %>% 
+#'   as_network()
+#'   
+#' bridge_g <- ig %>% 
+#'   as_bridge_net()
+#'   
+#' tidy_g <- ig %>% 
+#'   tidygraph::as_tbl_graph()
+#'   
+#' el <- ig %>% 
+#'   rep_as_edgelist(use_names = FALSE)
+#' 
+#' @author Brendan Knapp \email{brendan.g.knapp@@gmail.com}
+#' 
+#' @export
+net_has_isolates <- function(x) {
+  UseMethod("net_has_isolates")
+}
 
+#' @rdname net_has_isolates
+#' 
+#' @examples 
+#' net_has_isolates(bridge_g)
+#' 
+#' @export
+net_has_isolates.bridge_net <- function(x) {
+  n_with_edges <- length(unique(c(x[["edges"]][, c(".ego", ".alter")])))
+  x[["metadata"]][["n_vertices"]] > n_with_edges
+}
+
+#' @rdname net_has_isolates
+#' 
+#' @examples 
+#' net_has_isolates(ig)
+#' 
+#' @importFrom igraph degree
+#' @export 
+net_has_isolates.igraph <- function(x) {
+  any(degree(x, mode = "total") == 0L)
+}
+
+#' @rdname net_has_isolates
+#' 
+#' @examples 
+#' net_has_isolates(nw)
+#' 
+#' @export 
+net_has_isolates.network <- function(x) {
+  n_with_edges <- length(unique(c(rep_as_edgelist(x, use_names = FALSE, 
+                                                  leave_raw = TRUE))))
+  x[["gal"]][["n"]] > n_with_edges
+}
+
+#' @rdname net_has_isolates
+#' 
+#' @examples 
+#' net_has_isolates(tidy_g)
+#' 
+#' @seealso [tidygraph::node_is_isolated()]
+#' 
+#' @export 
+net_has_isolates.tbl_graph <- function(x) {
+  net_has_isolates.igraph(as_igraph.tbl_graph(x))
+}
+
+#' @rdname net_has_isolates
+#' 
+#' @examples 
+#' net_has_isolates(el)
+#' 
+#' @export 
+net_has_isolates.edgelist <- function(x) {
+  attr(x, "n_vertices") > length(unique(c(x)))
+}
 

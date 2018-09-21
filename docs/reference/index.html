@@ -86,18 +86,6 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/conversion.html">Converting Graph Classes</a>
-    </li>
-  </ul>
-</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -160,9 +148,9 @@
       <tr>
         
         <td>
-          <p><code><a href="sna_net.html">sna_net()</a></code> <code><a href="sna_net.html">as_sna_net()</a></code> </p>
+          <p><code><a href="bridge_net.html">as_bridge_net()</a></code> </p>
         </td>
-        <td><p>The <code>sna_net</code> object effectively bridges the <code>network</code> objects used by the <code>statnet</code>
+        <td><p>The <code>bridge_net</code> object effectively bridges the <code>network</code> objects used by the <code>statnet</code>
 suite and <code>igraph</code> objects and their derivatives.</p></td>
       </tr>
     </tbody><tbody>
@@ -207,7 +195,7 @@ suite and <code>igraph</code> objects and their derivatives.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="vrt_get_attr_df.html">vrt_get_attr_df()</a></code> </p>
+          <p><code><a href="vrt_to_df.html">vrt_to_df()</a></code> </p>
         </td>
         <td><p>Extract all vertex attributes as a data frame.</p></td>
       </tr>
@@ -233,7 +221,7 @@ suite and <code>igraph</code> objects and their derivatives.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="edg_get_attr_df.html">edg_get_attr_df()</a></code> </p>
+          <p><code><a href="edg_to_df.html">edg_to_df()</a></code> <code><a href="edg_to_df.html">print(<i>&lt;edge_data_frame&gt;</i>)</a></code> </p>
         </td>
         <td><p>Extract all edge attributes as a data frame.</p></td>
       </tr>
@@ -259,6 +247,12 @@ suite and <code>igraph</code> objects and their derivatives.</p></td>
       </tr><tr>
         
         <td>
+          <p><code><a href="net_is_bipartite.html">net_is_bipartite()</a></code> </p>
+        </td>
+        <td><p>Is a graph object bipartite?</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="net_count_vertices.html">net_count_vertices()</a></code> </p>
         </td>
         <td><p>Count the number of vertices present in a graph object.</p></td>
@@ -271,15 +265,21 @@ suite and <code>igraph</code> objects and their derivatives.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="net_is_bipartite.html">net_is_bipartite()</a></code> </p>
-        </td>
-        <td><p>Is a graph object bipartite?</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="net_count_actors.html">net_count_actors()</a></code> </p>
         </td>
         <td><p>Count the number of vertices belonging to the actor mode of a bipartite graph object.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="net_has_loops.html">net_has_loops()</a></code> </p>
+        </td>
+        <td><p>Does a graph object contain loops?</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="net_has_isolates.html">net_has_isolates()</a></code> </p>
+        </td>
+        <td><p>Does a graph object contain isolates?</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -301,26 +301,6 @@ suite and <code>igraph</code> objects and their derivatives.</p></td>
         </td>
         <td><p>Construct a graph object's mixing matrix.</p></td>
       </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-operators" class="hasAnchor"><a href="#section-operators" class="anchor"></a>Operators</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="pipe.html">%>%</a></code> </p>
-        </td>
-        <td><p>Ceci n'est pas une pipe.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="strict-compare.html">`%==%`</a></code> </p>
-        </td>
-        <td><p>Strict object comparison.</p></td>
-      </tr>
     </tbody>
     </table>
   </div>
@@ -335,7 +315,6 @@ suite and <code>igraph</code> objects and their derivatives.</p></td>
       <li><a href="#section-edges">Edges</a></li>
       <li><a href="#section-network-metadata">Network Metadata</a></li>
       <li><a href="#section-representations">Representations</a></li>
-      <li><a href="#section-operators">Operators</a></li>
     </ul>
   </div>
 </div>

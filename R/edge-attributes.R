@@ -1,12 +1,12 @@
 #' Extract a graph objects's edge attribute names.
 #' 
-#' @param x An `sna_net`, `igraph`, `network`, or `tbl_graph`.
+#' @param x An `bridge_net`, `igraph`, `network`, or `tbl_graph`.
 #' 
 #' @return `character` `vector` listing the names of `x`'s edge attributes.
 #' 
 #' @author Brendan Knapp \email{brendan.g.knapp@@gmail.com}
 #' 
-#' @seealso [edg_get_attr()], [edg_get_attr_df()], [igraph::edge_attr_names()],
+#' @seealso [edg_get_attr()], [edg_to_df()], [igraph::edge_attr_names()],
 #' [network::list.edge.attributes()]
 #' 
 #' @examples 
@@ -21,13 +21,14 @@
 #' edg_attr_names(ig)
 #' 
 #' nw <- network::as.network(adj_mat)
-#' network::set.edge.attribute(nw, "another_attr", value = sample(seq_len(network::network.edgecount(nw))))
+#' network::set.edge.attribute(nw, "another_attr", 
+#'                             value = sample(seq_len(network::network.edgecount(nw))))
 #' edg_attr_names(nw)
 #' 
 #' tbl_g <- tidygraph::as_tbl_graph(ig)
 #' edg_attr_names(tbl_g)
 #' 
-#' sna_g <- as_sna_net(ig)
+#' sna_g <- as_bridge_net(ig)
 #' edg_attr_names(sna_g)
 #' 
 #' @export
@@ -36,13 +37,15 @@ edg_attr_names <- function(x) {
 }
 
 #' @rdname edg_attr_names
+#' 
 #' @export
-edg_attr_names.sna_net <- function(x) {
+edg_attr_names.bridge_net <- function(x) {
   out <- colnames(x[["edges"]])
   out[!out %in% c(".ego", ".alter")]
 }
 
 #' @rdname edg_attr_names
+#' 
 #' @importFrom igraph edge_attr_names
 #' @export
 edg_attr_names.igraph <- function(x) {
@@ -54,6 +57,7 @@ edg_attr_names.igraph <- function(x) {
 }
 
 #' @rdname edg_attr_names
+#' 
 #' @export
 edg_attr_names.network <- function(x) {
   out <- unique(unlist(lapply(lapply(x[["mel"]], `[[`, "atl"), names)))
@@ -65,6 +69,7 @@ edg_attr_names.network <- function(x) {
 }
 
 #' @rdname edg_attr_names
+#' 
 #' @export
 edg_attr_names.tbl_graph <- function(x) {
   edg_attr_names(as_igraph(x))
@@ -75,14 +80,14 @@ edg_attr_names.tbl_graph <- function(x) {
 
 #' Extract a specific edge attribute.
 #' 
-#' @param x An `sna_net`, `igraph`, `network`, or `tbl_graph`.
+#' @param x An `bridge_net`, `igraph`, `network`, or `tbl_graph`.
 #' @param edg_attr `character` specifying the target edge attribute.
 #' 
 #' @return `vector` of edge attribute values.
 #' 
 #' @author Brendan Knapp \email{brendan.g.knapp@@gmail.com}
 #' 
-#' @seealso [edg_attr_names()], [edg_get_attr_df()], [igraph::edge_attr()],
+#' @seealso [edg_attr_names()], [edg_to_df()], [igraph::edge_attr()],
 #' [network::get.edge.attribute()]
 #' 
 #' @examples 
@@ -93,13 +98,15 @@ edg_attr_names.tbl_graph <- function(x) {
 #'
 #' ig <- adj_mat %>% 
 #'   igraph::graph_from_adjacency_matrix() %>% 
-#'   igraph::set_edge_attr("an_edge_attribute", value = sample(seq_len(igraph::ecount(.)))) 
+#'   igraph::set_edge_attr("an_edge_attribute", 
+#'                         value = sample(seq_len(igraph::ecount(.)))) 
 #' 
 #' ig %>% 
 #'   edg_get_attr("an_edge_attribute")
 #' 
 #' nw <- network::as.network(adj_mat)
-#'   network::set.edge.attribute(nw, "an_edge_attribute", value = sample(seq_len(network::network.edgecount(nw))))
+#'   network::set.edge.attribute(nw, "an_edge_attribute", 
+#'                               value = sample(seq_len(network::network.edgecount(nw))))
 #' 
 #' nw %>% 
 #'   edg_get_attr("an_edge_attribute")
@@ -109,7 +116,7 @@ edg_attr_names.tbl_graph <- function(x) {
 #' tbl_g %>% 
 #'   edg_get_attr("an_edge_attribute")
 #' 
-#' sna_g <- as_sna_net(nw)
+#' sna_g <- as_bridge_net(nw)
 #' 
 #' edg_get_attr(sna_g, "an_edge_attribute")
 #' 
@@ -121,7 +128,7 @@ edg_get_attr <- function(x, edg_attr) {
 #' @rdname edg_get_attr
 #' 
 #' @export
-edg_get_attr.sna_net <- function(x, edg_attr) {
+edg_get_attr.bridge_net <- function(x, edg_attr) {
   validate_edg_attr(x, edg_attr)
   x[["edges_attr"]]
 }
@@ -153,13 +160,13 @@ edg_get_attr.tbl_graph <- function(x, edg_attr) {
 
 #' Extract all edge attributes as a data frame.
 #' 
-#' @param x An `sna_net`, `igraph`, `network`, or `tbl_graph`.
+#' @param x An `bridge_net`, `igraph`, `network`, or `tbl_graph`.
 #' @param include_dyad `logical` (default: `TRUE`) indicating whether to return the `.ego`
 #' and `.alter` of each edge's dyad.
 #' @param leave_raw `logical` (default: `FALSE`) indicating whether to return a bare
-#' `data.frame` (`stringsAsFactors = FALSE`) instead of an `sna_edges_df`.
+#' `data.frame` (`stringsAsFactors = FALSE`) instead of an `edge_data_frame`.
 #' 
-#' @return `sna_edges_df` `data.frame` with all edge attributes contained in `x`.
+#' @return `edge_data_frame` `data.frame` with all edge attributes contained in `x`.
 #' 
 #' @author Brendan Knapp \email{brendan.g.knapp@@gmail.com}
 #' 
@@ -173,38 +180,40 @@ edg_get_attr.tbl_graph <- function(x, edg_attr) {
 #'
 #' ig <- adj_mat %>% 
 #'   igraph::graph_from_adjacency_matrix() %>% 
-#'   igraph::set_edge_attr("an_edge_attribute", value = sample(seq_len(igraph::ecount(.)))) 
+#'   igraph::set_edge_attr("an_edge_attribute", 
+#'                         value = sample(seq_len(igraph::ecount(.)))) 
 #' 
-#' edg_get_attr_df(ig)
-#' edg_get_attr_df(ig, include_dyad = FALSE)
-#' edg_get_attr_df(ig, leave_raw = TRUE)
+#' edg_to_df(ig)
+#' edg_to_df(ig, include_dyad = FALSE)
+#' edg_to_df(ig, leave_raw = TRUE)
 #' 
 #' nw <- network::as.network(adj_mat)
-#' network::set.edge.attribute(nw, "an_edge_attribute", value = sample(seq_len(network::network.edgecount(nw))))
+#' network::set.edge.attribute(nw, "an_edge_attribute", 
+#'                             value = sample(seq_len(network::network.edgecount(nw))))
 #' 
-#' edg_get_attr_df(nw)
-#' edg_get_attr_df(nw, include_dyad = FALSE)
-#' edg_get_attr_df(nw, leave_raw = TRUE)
+#' edg_to_df(nw)
+#' edg_to_df(nw, include_dyad = FALSE)
+#' edg_to_df(nw, leave_raw = TRUE)
 #' 
 #' tbl_g <- tidygraph::as_tbl_graph(ig)
 #' 
-#' edg_get_attr_df(tbl_g)
-#' edg_get_attr_df(tbl_g, include_dyad = FALSE)
-#' edg_get_attr_df(tbl_g, leave_raw = TRUE)
+#' edg_to_df(tbl_g)
+#' edg_to_df(tbl_g, include_dyad = FALSE)
+#' edg_to_df(tbl_g, leave_raw = TRUE)
 #' 
-#' sna_g <- as_sna_net(nw)
+#' sna_g <- as_bridge_net(nw)
 #' 
-#' edg_get_attr_df(sna_g)
+#' edg_to_df(sna_g)
 #' 
 #' @export
-edg_get_attr_df <- function(x, include_dyad = TRUE, leave_raw = TRUE) {
-  UseMethod("edg_get_attr_df")
+edg_to_df <- function(x, include_dyad = TRUE, leave_raw = TRUE) {
+  UseMethod("edg_to_df")
 }
 
-#' @rdname edg_get_attr_df
+#' @rdname edg_to_df
 #' 
 #' @export
-edg_get_attr_df.sna_net <- function(x, include_dyad = TRUE, leave_raw = FALSE) {
+edg_to_df.bridge_net <- function(x, include_dyad = TRUE, leave_raw = FALSE) {
   if (net_count_vertices(x) == 0L) {
     return(NULL)
   }
@@ -219,11 +228,11 @@ edg_get_attr_df.sna_net <- function(x, include_dyad = TRUE, leave_raw = FALSE) {
   out
 }
 
-#' @rdname edg_get_attr_df
+#' @rdname edg_to_df
 #' 
 #' @importFrom igraph as_data_frame
 #' @export
-edg_get_attr_df.igraph <- function(x, include_dyad = TRUE, leave_raw = FALSE) {
+edg_to_df.igraph <- function(x, include_dyad = TRUE, leave_raw = FALSE) {
   if (net_count_vertices(x) == 0L) {
     return(NULL)
   }
@@ -239,15 +248,15 @@ edg_get_attr_df.igraph <- function(x, include_dyad = TRUE, leave_raw = FALSE) {
     out[["to"]] <- NULL
   }
   if (!leave_raw) {
-    return(as_sna_edges_df(out))
+    return(as_edge_data_frame(out))
   }
   out
 }
 
-#' @rdname edg_get_attr_df
+#' @rdname edg_to_df
 #' 
 #' @export
-edg_get_attr_df.network <- function(x, include_dyad = TRUE, leave_raw = FALSE) {
+edg_to_df.network <- function(x, include_dyad = TRUE, leave_raw = FALSE) {
   if (net_count_vertices(x) == 0L) {
     return(NULL)
   }
@@ -288,39 +297,45 @@ edg_get_attr_df.network <- function(x, include_dyad = TRUE, leave_raw = FALSE) {
   }
   rownames(out) <- NULL
   if (!leave_raw) {
-    return(as_sna_edges_df(out))
+    return(as_edge_data_frame(out))
   }
   out
 }
 
-as_sna_edges_df <- function(x) {
+as_edge_data_frame <- function(x) {
   stopifnot(is.data.frame(x))
-  class(x) <- c("sna_edges_df", "data.frame")
+  class(x) <- c("edge_data_frame", "data.frame")
   x
 }
 
-#' @rdname edg_get_attr_df
+#' @rdname edg_to_df
 #' 
 #' @export
-edg_get_attr_df.tbl_graph <- function(x, include_dyad = TRUE, leave_raw = FALSE) {
-  edg_get_attr_df(as_igraph(x), include_dyad = include_dyad, leave_raw = leave_raw)
+edg_to_df.tbl_graph <- function(x, include_dyad = TRUE, leave_raw = FALSE) {
+  edg_to_df(as_igraph(x), include_dyad = include_dyad, leave_raw = leave_raw)
 }
 
-print.sna_edges_df <- function(x, .nrow = 10L, .verbose = TRUE) {
+#' @rdname edg_to_df
+#' 
+#' @param .nrow Maximum number of rows to `print()`.
+#' 
+#' @importFrom utils head
+#' @export
+print.edge_data_frame <- function(x, .nrow = 10L) {
   out <- head(x, .nrow)
   rownames(out) <- paste0("  ", seq_len(nrow(out)))
-  if (.verbose) {
-    cat_patch("# sna_edges_df: %s x %s",
+  # if (.verbose) {
+    cat_patch("# edge_data_frame: %s x %s",
               format(nrow(x), big.mark = ","),
               format(ncol(x), big.mark = ","))
     cat("\n")
-  } else {
-    cat_patch("$edges # A %s:  %s x %s ",
-              class(x)[[2]],
-              format(nrow(x), big.mark = ","),
-              format(ncol(x), big.mark = ","))
-    cat("\n")
-  }
+  # } else {
+  #   cat_patch("$edges # A %s:  %s x %s ",
+  #             class(x)[[2]],
+  #             format(nrow(x), big.mark = ","),
+  #             format(ncol(x), big.mark = ","))
+  #   cat("\n")
+  # }
   print.data.frame(out)
   if (nrow(out) < nrow(x)) {
     cat("  ")

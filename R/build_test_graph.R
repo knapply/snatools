@@ -1,5 +1,7 @@
+#' @importFrom stats runif
 build_test_graph <- function(ig_or_nw, n_nodes = 10L,
-                             directed = TRUE, bipartite = FALSE, seed = 1234) {
+                             directed = TRUE, bipartite = FALSE, 
+                             isolate = FALSE, seed = 1234) {
   n_edges <- NULL
   if (!bipartite) {
     potential_ties <- n_nodes^2
@@ -63,6 +65,15 @@ build_test_graph <- function(ig_or_nw, n_nodes = 10L,
                               node_dbl = runif(n_nodes, 0, 100),
                               node_lgl = sample(c(TRUE, FALSE), n_nodes, replace = TRUE),
                               stringsAsFactors = FALSE) 
+    # if (add_isolate) {
+    #   vertices_df <- rbind.data.frame(data.frame(vertex.names = "the_isolate",
+    #                                              node_chr = "isolate_chr",
+    #                                              node_int = 0L,
+    #                                              node_dbl = 2.2,
+    #                                              node_lgl = FALSE,
+    #                                              stringsAsFactors = FALSE),
+    #                                   stringsAsFactors = FALSE)
+    # }
   } else {
     vertices_df <- NULL
   }
@@ -113,10 +124,16 @@ build_test_graph <- function(ig_or_nw, n_nodes = 10L,
   if (ig_or_nw == "ig") {
     out <- build_test_igraph(vattrs = vertices_df, eattrs = edges_df,
                              directed = directed, bipartite = bipartite)
+    if (isolate) {
+      out <- igraph::delete_vertices(out, 3L)
+    }
   }
   if (ig_or_nw == "nw") {
     out <- build_test_network(vattrs = vertices_df, eattrs = edges_df,
                               directed = directed, bipartite = bipartite)
+    if (isolate) {
+      network::delete.vertices(out, 3L)
+    }
   }
   out
 }

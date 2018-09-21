@@ -4,7 +4,7 @@
 \alias{net_count_actors}
 \alias{net_count_actors.igraph}
 \alias{net_count_actors.network}
-\alias{net_count_actors.sna_net}
+\alias{net_count_actors.bridge_net}
 \alias{net_count_actors.tbl_graph}
 \alias{net_count_actors.edgelist}
 \title{Count the number of vertices belonging to the actor mode of a bipartite graph object.}
@@ -15,14 +15,14 @@ net_count_actors(x)
 
 \method{net_count_actors}{network}(x)
 
-\method{net_count_actors}{sna_net}(x)
+\method{net_count_actors}{bridge_net}(x)
 
 \method{net_count_actors}{tbl_graph}(x)
 
 \method{net_count_actors}{edgelist}(x)
 }
 \arguments{
-\item{x}{An \code{sna_net}, \code{igraph}, \code{network}, \code{tbl_graph}, or \code{edgelist} object.}
+\item{x}{An \code{bridge_net}, \code{igraph}, \code{network}, \code{tbl_graph}, or \code{edgelist} object.}
 }
 \value{
 \code{integer} corresponding to the number \code{x}'s actors.
@@ -38,8 +38,8 @@ ig <- igraph::bipartite.random.game(7, 3, type = "gnp", p = 0.4)
 nw <- ig \%>\% 
   as_network()
   
-sna_g <- ig \%>\% 
-  as_sna_net()
+bridge_g <- ig \%>\% 
+  as_bridge_net()
   
 tidy_g <- ig \%>\% 
   tidygraph::as_tbl_graph()
@@ -51,7 +51,7 @@ net_count_actors(ig)
 
 net_count_actors(nw)
 
-net_count_actors(sna_g)
+net_count_actors(bridge_g)
 
 net_count_actors(tidy_g)
 

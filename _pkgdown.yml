@@ -20,38 +20,39 @@ reference:
   - title: A Graph Class to Simplify Network Analysis
     desc: A graph data object that bridges the major frameworks of R's network analysis ecosystem.
     contents:
-    - sna_net
-    - as_sna_net
+    - as_bridge_net
 
   - title: Class Conversion
     desc: Safely convert objects between common network classes.
     contents:
-    - starts_with("as_igraph")
-    - starts_with("as_network")
+    - as_igraph
+    - as_network
   
   - title: Vertices
     desc: Operations targeting vertices and their attributes.
     contents:
     - vrt_attr_names
     - vrt_get_attr
-    - vrt_get_attr_df
+    - vrt_to_df
     
   - title: Edges
     desc: Operations targeting edges and their attributes.
     contents:
     - edg_attr_names
     - edg_get_attr
-    - edg_get_attr_df
+    - edg_to_df
     
   - title: Network Metadata
     desc: Operations targeting graph-level attributes and metadata.
     contents:
     - net_is_directed
     - net_is_multiplex
+    - net_is_bipartite
     - net_count_vertices
     - net_count_edges
-    - net_is_bipartite
     - net_count_actors
+    - net_has_loops
+    - net_has_isolates
 
   - title: Representations
     desc: Construct and test various network representations.
@@ -59,62 +60,7 @@ reference:
     - rep_as_edgelist
     - rep_as_mixing_matrix
 
-#    - rep_adjacency_matrix
-#    - rep_attr_adj_mat
-#    - rep_edgelist
-#    - rep_attr_el
-#    - rep_two_mode_matrix
-#    - rep_biadjacency_matrix
-#    - rep_mixing_matrix
-#  
-#  - title: Bipartite
-#    desc: Operations to assist bipartite network handling.
-#    contents:
-#    - bip_clarify_actors
-#    - bip_swap_modes
-#    
-#  - title: Homophily
-#    desc: Procedures addressing homophily and mixing patterns.
-#    contents:
-#    - ei_index
-#    - ei_index_global
-#    - ei_index_grp
-#    - ei_index_vrt
-#    - ei_index_global_permute
-#    - rep_mixing_matrix
-#    
-#  - title: Quadratic Assignment Procedure
-#    contents:
-#    - qap_cor
-#    
-#  - title: Visualization
-#    contents:
-#    - plot_triad_census
-#    
-#  - title: Foreign File Formats
-#    contents:
-#    - read_ucinet
-#  
-#  - title: Data
-#    contents:
-#    - padgett_florence
-#    - sampson_monastery
-#    - davis_southern_women
-#
-  - title: Operators
-    contents:
-    - "%>%"
-    - "%==%"
-
 navbar:
-# type: default
-# left:
-#   - icon: fa-file-code-o 
-#     text: "Documentation"
-#     href: reference/index.html
-#   - icon: fa-file-code-o 
-#     text: "Vignettes"
-#     href: articles/index.html
   right:
     - icon: fa-twitter
       href: https://twitter.com/knapply_

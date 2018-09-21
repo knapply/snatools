@@ -2,7 +2,7 @@
 % Please edit documentation in R/network-metadata.R
 \name{net_is_multiplex}
 \alias{net_is_multiplex}
-\alias{net_is_multiplex.sna_net}
+\alias{net_is_multiplex.bridge_net}
 \alias{net_is_multiplex.igraph}
 \alias{net_is_multiplex.network}
 \alias{net_is_multiplex.tbl_graph}
@@ -11,7 +11,7 @@
 \usage{
 net_is_multiplex(x)
 
-\method{net_is_multiplex}{sna_net}(x)
+\method{net_is_multiplex}{bridge_net}(x)
 
 \method{net_is_multiplex}{igraph}(x)
 
@@ -22,7 +22,7 @@ net_is_multiplex(x)
 \method{net_is_multiplex}{edgelist}(x)
 }
 \arguments{
-\item{x}{An \code{sna_net}, \code{igraph}, \code{network}, \code{tbl_graph}, or \code{edgelist} object.}
+\item{x}{An \code{bridge_net}, \code{igraph}, \code{network}, \code{tbl_graph}, or \code{edgelist} object.}
 }
 \value{
 \code{logical} indicating whether \code{x} is multiplex (It contains parallel edges).
@@ -53,13 +53,13 @@ ig <- c(1, 2,
 nw <- ig \%>\% 
   as_network()
   
-sna_g <- ig \%>\% 
-  as_sna_net()
+bridge_g <- ig \%>\% 
+  as_bridge_net()
   
 tidy_g <- ig \%>\% 
   tidygraph::as_tbl_graph()
 
-net_is_multiplex(sna_g)
+net_is_multiplex(bridge_g)
 
 net_is_multiplex(ig)
 

@@ -1,13 +1,14 @@
 Package: snatools
-Title: A toolkit to streamline network analytic workflows R.
+Title: A toolkit to streamline network analytic workflows R
 Version: 0.0.0.9000
 Authors@R: person("Brendan", "Knapp", email = "brendan.g.knapp@gmail.com", role = c("aut", "cre"),
                   comment = c(ORCID = "0000-0003-3284-4972"))
-Description: 
-Depends: R (>= 3.5.1)
+Description: A toolkit to streamline network analytic workflows R.
+Depends: R (>= 3.5.0)
 Imports:
     igraph,
     magrittr,
+    methods,
     network
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
@@ -16,11 +17,11 @@ BugReports: https://github.com/knapply/snatools/issues
 LazyData: true
 Suggests:
     data.table,
-    ggplot2,
+    dplyr,
+    ergm,
     knitr,
     rmarkdown,
     testthat,
-    tibble,
     tidygraph
 RoxygenNote: 6.1.0.9000
 Roxygen: list(markdown = TRUE)

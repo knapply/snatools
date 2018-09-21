@@ -88,18 +88,6 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/conversion.html">Converting Graph Classes</a>
-    </li>
-  </ul>
-</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -140,7 +128,7 @@
 
     <pre class="usage"><span class='fu'>edg_get_attr</span>(<span class='no'>x</span>, <span class='no'>edg_attr</span>)
 
-<span class='co'># S3 method for sna_net</span>
+<span class='co'># S3 method for bridge_net</span>
 <span class='fu'>edg_get_attr</span>(<span class='no'>x</span>, <span class='no'>edg_attr</span>)
 
 <span class='co'># S3 method for igraph</span>
@@ -157,7 +145,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>An <code>sna_net</code>, <code>igraph</code>, <code>network</code>, or <code>tbl_graph</code>.</p></td>
+      <td><p>An <code>bridge_net</code>, <code>igraph</code>, <code>network</code>, or <code>tbl_graph</code>.</p></td>
     </tr>
     <tr>
       <th>edg_attr</th>
@@ -171,7 +159,7 @@
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='edg_attr_names.html'>edg_attr_names()</a></code>, <code><a href='edg_get_attr_df.html'>edg_get_attr_df()</a></code>, <code><a href='http://www.rdocumentation.org/packages/igraph/topics/edge_attr'>igraph::edge_attr()</a></code>,
+    <div class='dont-index'><p><code><a href='edg_attr_names.html'>edg_attr_names()</a></code>, <code><a href='edg_to_df.html'>edg_to_df()</a></code>, <code><a href='http://www.rdocumentation.org/packages/igraph/topics/edge_attr'>igraph::edge_attr()</a></code>,
 <code><a href='http://www.rdocumentation.org/packages/network/topics/attribute.methods'>network::get.edge.attribute()</a></code></p></div>
     
 
@@ -183,20 +171,22 @@
 
 <span class='no'>ig</span> <span class='kw'>&lt;-</span> <span class='no'>adj_mat</span> <span class='kw'>%&gt;%</span>
   <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/graph_from_adjacency_matrix'>graph_from_adjacency_matrix</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/set_edge_attr'>set_edge_attr</a></span>(<span class='st'>"an_edge_attribute"</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'>sample</span>(<span class='fu'>seq_len</span>(<span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/gsize'>ecount</a></span>(<span class='no'>.</span>))))
+  <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/set_edge_attr'>set_edge_attr</a></span>(<span class='st'>"an_edge_attribute"</span>,
+                        <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'>sample</span>(<span class='fu'>seq_len</span>(<span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/gsize'>ecount</a></span>(<span class='no'>.</span>))))
 
 <span class='no'>ig</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>edg_get_attr</span>(<span class='st'>"an_edge_attribute"</span>)</div><div class='output co'>#&gt; [1] 2 4 1 3</div><div class='input'>
+  <span class='fu'>edg_get_attr</span>(<span class='st'>"an_edge_attribute"</span>)</div><div class='output co'>#&gt; [1] 1 3 2</div><div class='input'>
 <span class='no'>nw</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>network</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/network/topics/network'>as.network</a></span>(<span class='no'>adj_mat</span>)
-  <span class='kw pkg'>network</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/network/topics/attribute.methods'>set.edge.attribute</a></span>(<span class='no'>nw</span>, <span class='st'>"an_edge_attribute"</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'>sample</span>(<span class='fu'>seq_len</span>(<span class='kw pkg'>network</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/network/topics/network.edgecount'>network.edgecount</a></span>(<span class='no'>nw</span>))))
+  <span class='kw pkg'>network</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/network/topics/attribute.methods'>set.edge.attribute</a></span>(<span class='no'>nw</span>, <span class='st'>"an_edge_attribute"</span>,
+                              <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'>sample</span>(<span class='fu'>seq_len</span>(<span class='kw pkg'>network</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/network/topics/network.edgecount'>network.edgecount</a></span>(<span class='no'>nw</span>))))
 
 <span class='no'>nw</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>edg_get_attr</span>(<span class='st'>"an_edge_attribute"</span>)</div><div class='output co'>#&gt; [1] 3 4 2 1</div><div class='input'>
+  <span class='fu'>edg_get_attr</span>(<span class='st'>"an_edge_attribute"</span>)</div><div class='output co'>#&gt; [1] 2 1</div><div class='input'>
 <span class='no'>tbl_g</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>tidygraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/tidygraph/topics/tbl_graph'>as_tbl_graph</a></span>(<span class='no'>ig</span>)
 
 <span class='no'>tbl_g</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>edg_get_attr</span>(<span class='st'>"an_edge_attribute"</span>)</div><div class='output co'>#&gt; [1] 2 4 1 3</div><div class='input'>
-<span class='no'>sna_g</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sna_net.html'>as_sna_net</a></span>(<span class='no'>nw</span>)
+  <span class='fu'>edg_get_attr</span>(<span class='st'>"an_edge_attribute"</span>)</div><div class='output co'>#&gt; [1] 1 3 2</div><div class='input'>
+<span class='no'>sna_g</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='bridge_net.html'>as_bridge_net</a></span>(<span class='no'>nw</span>)
 
 <span class='fu'>edg_get_attr</span>(<span class='no'>sna_g</span>, <span class='st'>"an_edge_attribute"</span>)</div><div class='output co'>#&gt; NULL</div><div class='input'>
 </div></pre>
