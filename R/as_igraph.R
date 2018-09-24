@@ -18,7 +18,7 @@
 #' @examples
 #' library(snatools)
 #' suppressPackageStartupMessages(library(network))
-#' color_palette <-  colorRampPalette(c("red", "purple", "green", "blue", "cyan"))
+#' color_pal <- colorRampPalette(c("red", "green", "blue"))
 #' 
 #' # simple, 1-mode network to igraph conversion =========================================
 #' n_vertices <- 10L
@@ -29,9 +29,7 @@
 #' 
 #' nw1 <- network(adjacency_matrix, directed = TRUE)
 #' 
-#' coords <- network.layout.fruchtermanreingold(nw1, layout.par = NULL)
-#' 
-#' nw1 %v% "color" <- color_palette(network.size(nw1))
+#' nw1 %v% "color" <- color_pal(network.size(nw1))
 #' nw1 %e% "lab" <- seq_len(sum(adjacency_matrix))
 #' nw1
 #' 
@@ -39,13 +37,15 @@
 #' ig1
 #' 
 #' # manually comparing original and converted networks ==================================
-#' as_bridge_net(nw1)$vertices
-#' as_bridge_net(ig1)$vertices
-#' identical(as_bridge_net(nw1)$vertices, as_bridge_net(ig1)$vertices)
+#' nw1 %>% vrt_to_df()
+#' ig1 %>% vrt_to_df()
 #' 
-#' as_bridge_net(nw1)$edges
-#' as_bridge_net(ig1)$edges
-#' identical(as_bridge_net(nw1)$edges, as_bridge_net(ig1)$edges)
+#' identical(vrt_to_df(nw1), vrt_to_df(ig1))
+#' 
+#' nw1 %>% edg_to_df()
+#' ig1 %>% edg_to_df()
+#' 
+#' identical(edg_to_df(nw1), edg_to_df(ig1))
 #' 
 #' # converting bipartite network to bipartite igraph ====================================
 #' n_actors <- 5L
@@ -55,13 +55,9 @@
 #'   apply(2L, sample) %>% 
 #'   t()
 #'   
-#' nw2 <- network(affiliation_matrix, bipartite = n_actors)
-#' 
-#' nw_bip_coords <- network.layout.fruchtermanreingold(nw2, layout.par = NULL)
-#' 
+#' nw2 <- as.network.matrix(affiliation_matrix, matrix.type = "adjacency", 
+#'                          bipartite = n_actors)
 #' nw2 %v% "color" <- c(rep("red", n_actors), rep("blue", n_events))
-#' nw2 %v% "x" <- nw_bip_coords[, 1L]
-#' nw2 %v% "y" <- nw_bip_coords[, 2L]
 #' nw2 %e% "lab" <- seq_len(sum(affiliation_matrix))
 #' nw2
 #' 
@@ -69,55 +65,15 @@
 #' ig2
 #' 
 #' # comparing objects ===================================================================
-#' as_bridge_net(nw2)$vertices
-#' as_bridge_net(ig2)$vertices
-#' identical(as_bridge_net(nw2)$vertices, as_bridge_net(ig2)$vertices)
+#' nw2 %>% vrt_to_df()
+#' ig2 %>% vrt_to_df()
 #' 
-#' as_bridge_net(nw2)$edges
-#' as_bridge_net(ig2)$edges
-#' identical(as_bridge_net(nw2)$edges, as_bridge_net(ig2)$edges)
+#' identical(vrt_to_df(nw2), vrt_to_df(ig2))
 #' 
-#' # visual comparison ===================================================================
-#' plot_net <- function(x, coords = NULL, main = NULL, v_cex = 0L, v_lab_cex = NULL, 
-#'                      e_col = "lightgray", e_lab_cex = NULL, e_lab_col = "black", 
-#'                      arw_cex = NULL) {
-#'   if (class(x) == "igraph") {
-#'     v_lab_cols <- igraph::V(x)$color
-#'     if(all(is.na(v_lab_cols))) v_lab_cols <- NULL
-#'     args <- list(x = x, layout = coords, main = main,
-#'                  vertex.size = v_cex, vertex.label.color = v_lab_cols, 
-#'                  vertex.label.cex = v_lab_cex, edge.color = e_col, 
-#'                  edge.label = igraph::E(x)$lab, edge.label.color = e_lab_col,
-#'                  edge.label.size = e_lab_cex, edge.arrow.size = arw_cex)
-#'     args <- Filter(length, args)
-#'     do.call(plot, args)
-#'   } else if (class(x) == "network") {
-#'     v_lab_cols <- network::get.vertex.attribute(x, "color")
-#'     if(all(is.na(v_lab_cols))) v_lab_cols <- NULL
-#'     args <- list(x = x, coord = coords, main = main,
-#'                  label = "vertex.names", vertex.cex = v_cex, label.col = v_lab_cols, 
-#'                  label.cex = v_lab_cex, edge.col = e_col, edge.label = "lab", 
-#'                  edge.label.col = e_lab_col, edge.label.cex = e_lab_cex, label.pos = 5,
-#'                  arrowhead.cex = arw_cex)
-#'     args <- Filter(length, args)
-#'     do.call(plot, args)
-#'   } else stop("`x` is not an `igraph` or `network` object.", call. = FALSE)
-#' }
+#' nw2 %>% edg_to_df()
+#' ig2 %>% edg_to_df()
 #' 
-#' par(mfrow = c(1, 2))
-#' plot_net(nw1, coords, v_lab_cex = 1.75, e_lab_cex = 0.75, arw_cex = 2.5,
-#'          main = "original network")
-#' plot_net(ig1, coords, v_lab_cex = 1.75, e_lab_cex = 0.75, arw_cex = 0.65,
-#'          main = "post-conversion igraph")
-#' 
-#' ig_bip_coords <- cbind(igraph::V(ig2)$x, igraph::V(ig2)$y)
-#' 
-#' plot_net(nw2, nw_bip_coords, v_lab_cex = 1.25,
-#'          e_lab_col = "black", e_lab_cex = 0.75, main = "original\nbipartite network")
-#' plot_net(ig2, ig_bip_coords, v_lab_cex = 1.5, e_lab_col = "black", 
-#'          e_lab_cex = 0.75, main = "post-conversion\nbipartite igraph")
-#'
-#' par(mfrow = c(1, 1))
+#' identical(edg_to_df(nw2), edg_to_df(ig2))
 #'
 #' @export
 #' 

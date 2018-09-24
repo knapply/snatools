@@ -87,9 +87,9 @@ ei_index_global.network <- function(x, vrt_attr, drop_loops = FALSE) {
 }
 
 ei_index_global.adj_matrix <- function(x, drop_loops = FALSE) {
-  if (vrt_attr == ".name") {
-    terminate('".name" is not a valid vertex attribute.')
-  }
+  # if (attr(x, "vrt_attr") == ".name") {
+  #   terminate('".name" is not a valid vertex attribute.')
+  # }
   el <- rep_as_edgelist(x, leave_raw = TRUE)
   if(drop_loops && net_has_loops(x)) {
     el <- unique.matrix(el)
@@ -122,8 +122,11 @@ ei_index_group <- function(x, vrt_attr, drop_loops = FALSE) {
   out
 }
 
-ei_index_vertex <- function() {
+ei_index_vertex <- function(x, vrt_attr, drop_loops = FALSE) {
   stop("Not yet implemented.")
+  x
+  vrt_attr
+  drop_loops
 }
 
 # permute_matrix <- function(adj_matrix, test_fun, ...) {
