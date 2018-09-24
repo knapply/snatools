@@ -150,11 +150,11 @@
 <a href="#conversion" class="anchor"></a>Conversion</h3>
 <p>Through <code>bridge_net</code> objects, <code>igraph</code> and <code>network</code> objects can play together easier than ever.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">ig &lt;-<span class="st"> </span><span class="kw"><a href="reference/as_igraph.html">as_igraph</a></span>(sampson_monastery)</a></code></pre></div>
-<pre><code>#&gt; IGRAPH 56488f1 DNW- 18 510 -- 
+<pre><code>#&gt; IGRAPH f6476cf DNW- 18 510 -- 
 #&gt; + attr: network_name (g/c), author (g/c), faction (v/c),
 #&gt; | cloisterville (v/l), status (v/c), name (v/c), weight (e/n),
 #&gt; | relation (e/c), time (e/n), positive_relation (e/l)
-#&gt; + edges from 56488f1 (vertex names):
+#&gt; + edges from f6476cf (vertex names):
 #&gt;  [1] Romauld    -&gt;Ambrose     Romauld    -&gt;Peter      
 #&gt;  [3] Romauld    -&gt;Albert      Bonaventure-&gt;Romauld    
 #&gt;  [5] Bonaventure-&gt;Victor      Bonaventure-&gt;Albert     
@@ -201,11 +201,11 @@
 <a class="sourceLine" id="cb8-18" data-line-number="18"><span class="co">#&gt;  Edge attribute names: </span></a>
 <a class="sourceLine" id="cb8-19" data-line-number="19"><span class="co">#&gt;     positive_relation relation time weight</span></a></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="reference/as_igraph.html">as_igraph</a></span>(nw)</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; IGRAPH 56741f5 DNW- 18 510 -- </span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; IGRAPH f674b32 DNW- 18 510 -- </span></a>
 <a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt; + attr: network_name (g/c), author (g/c), faction (v/c),</span></a>
 <a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt; | cloisterville (v/l), status (v/c), name (v/c), weight (e/n),</span></a>
 <a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; | relation (e/c), time (e/n), positive_relation (e/l)</span></a>
-<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt; + edges from 56741f5 (vertex names):</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt; + edges from f674b32 (vertex names):</span></a>
 <a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt;  [1] Romauld    -&gt;Ambrose     Romauld    -&gt;Peter      </span></a>
 <a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt;  [3] Romauld    -&gt;Albert      Bonaventure-&gt;Romauld    </span></a>
 <a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt;  [5] Bonaventure-&gt;Victor      Bonaventure-&gt;Albert     </span></a>
@@ -299,7 +299,6 @@
 <div id="easy-integeration-with-modern-workflows" class="section level3">
 <h3 class="hasAnchor">
 <a href="#easy-integeration-with-modern-workflows" class="anchor"></a>Easy Integeration with Modern Workflows</h3>
-<center>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">library</span>(tidygraph, <span class="dt">warn.conflicts =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb16-2" data-line-number="2"><span class="kw">library</span>(ggraph, <span class="dt">quietly =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb16-3" data-line-number="3"></a>
@@ -322,8 +321,7 @@
 <a class="sourceLine" id="cb16-20" data-line-number="20"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">strip.text =</span> <span class="kw">element_text</span>(<span class="dt">face =</span> <span class="st">"bold"</span>, <span class="dt">vjust =</span> <span class="dv">1</span>),</a>
 <a class="sourceLine" id="cb16-21" data-line-number="21">        <span class="dt">panel.border =</span> <span class="kw">element_rect</span>(<span class="dt">fill =</span> <span class="ot">NA</span>, <span class="dt">color =</span> <span class="st">"lightgray"</span>),</a>
 <a class="sourceLine" id="cb16-22" data-line-number="22">        <span class="dt">legend.position =</span> <span class="st">"bottom"</span>)</a></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-18-1.png" width="700"></p>
-</center>
+<p><img src="reference/figures/unnamed-chunk-18-1.png" width="700" style="display: block; margin: auto;"></p>
 <!-- # Development Tests -->
 <!-- ```{r, message=FALSE} -->
 <!-- # devtools::test() -->

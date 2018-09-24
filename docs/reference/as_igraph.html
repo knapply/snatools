@@ -196,9 +196,9 @@ to a new, valid <code>igraph</code> object. <br /></p>
 #&gt;  Edge attribute names: 
 #&gt;     lab </div><div class='input'>
 <span class='no'>ig1</span> <span class='kw'>&lt;-</span> <span class='fu'>as_igraph</span>(<span class='no'>nw1</span>)
-<span class='no'>ig1</span></div><div class='output co'>#&gt; IGRAPH 5d21d7e DN-- 10 10 -- 
+<span class='no'>ig1</span></div><div class='output co'>#&gt; IGRAPH fb9a75f DN-- 10 10 -- 
 #&gt; + attr: color (v/c), name (v/n), lab (e/n)
-#&gt; + edges from 5d21d7e (vertex names):
+#&gt; + edges from fb9a75f (vertex names):
 #&gt;  [1]  3-&gt; 2  5-&gt; 2 10-&gt; 2  1-&gt; 3  9-&gt; 6  2-&gt; 8  6-&gt; 8  4-&gt; 9  7-&gt; 9  8-&gt;10</div><div class='input'>
 <span class='co'># manually comparing original and converted networks ==================================</span>
 <span class='no'>nw1</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='vrt_to_df.html'>vrt_to_df</a></span>()</div><div class='output co'>#&gt; # vertex_data_frame: 10 x 2
@@ -282,9 +282,9 @@ to a new, valid <code>igraph</code> object. <br /></p>
 #&gt;  Edge attribute names: 
 #&gt;     lab </div><div class='input'>
 <span class='no'>ig2</span> <span class='kw'>&lt;-</span> <span class='fu'>as_igraph</span>(<span class='no'>nw2</span>)
-<span class='no'>ig2</span></div><div class='output co'>#&gt; IGRAPH 5d358ad UN-B 8 10 -- 
+<span class='no'>ig2</span></div><div class='output co'>#&gt; IGRAPH fbb0e9d UN-B 8 10 -- 
 #&gt; + attr: color (v/c), type (v/l), name (v/n), lab (e/n)
-#&gt; + edges from 5d358ad (vertex names):
+#&gt; + edges from fbb0e9d (vertex names):
 #&gt;  [1] 1--6 1--7 2--7 2--8 3--7 3--8 4--7 4--8 5--6 5--8</div><div class='input'>
 <span class='co'># comparing objects ===================================================================</span>
 <span class='no'>nw2</span> <span class='kw'>%&gt;%</span> <span class='fu'><a href='vrt_to_df.html'>vrt_to_df</a></span>()</div><div class='output co'>#&gt; # vertex_data_frame: 8 x 3

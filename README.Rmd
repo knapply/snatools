@@ -9,6 +9,7 @@ output:
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
+  fig.align = "center",
   comment = "#>",
   fig.path = "man/figures/"
 )
@@ -151,8 +152,6 @@ nw %>% rep_as_mixing_matrix(vrt_attr = "faction")
 
 ### Easy Integeration with Modern Workflows
 
-<center>
-
 ```{r, message=FALSE}
 library(tidygraph, warn.conflicts = FALSE)
 library(ggraph, quietly = TRUE)
@@ -177,8 +176,6 @@ nw %>%
         panel.border = element_rect(fill = NA, color = "lightgray"),
         legend.position = "bottom")
 ```
-
-</center>
 
 <!-- # Development Tests -->
 
