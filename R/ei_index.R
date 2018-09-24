@@ -49,7 +49,11 @@ ei_index <- function(x, vrt_attr, scope = c("global", "group", "vertex"),
   switch(scope,
          global = ei_index_global(x, vrt_attr, drop_loops = drop_loops),
          group = ei_index_group(x, vrt_attr, drop_loops = drop_loops),
-         vertex = ei_index_vertex(x, vrt, drop_loops = drop_loops))
+         vertex = ei_index_vertex(x, vrt_attr, drop_loops = drop_loops))
+}
+
+ei_index_global <- function(x, vrt_attr, drop_loops = FALSE) {
+  UseMethod("ei_index_global")
 }
 
 ei_index_global.igraph <- function(x, vrt_attr, drop_loops = FALSE) {
@@ -118,16 +122,20 @@ ei_index_group <- function(x, vrt_attr, drop_loops = FALSE) {
   out
 }
 
-permute_matrix <- function(adj_matrix, test_fun, ...) {
-  n <- seq_len(nrow(adj_matrix))
-  force(test_fun)
-  
-  function() {
-    rownames(adj_matrix) <- rownames(adj_matrix)[sample(n)]
-    colnames(adj_matrix) <- rownames(adj_matrix)
-    test_fun(adj_matrix, ...)
-  }
+ei_index_vertex <- function() {
+  stop("Not yet implemented.")
 }
+
+# permute_matrix <- function(adj_matrix, test_fun, ...) {
+#   n <- seq_len(nrow(adj_matrix))
+#   force(test_fun)
+#   
+#   function() {
+#     rownames(adj_matrix) <- rownames(adj_matrix)[sample(n)]
+#     colnames(adj_matrix) <- rownames(adj_matrix)
+#     test_fun(adj_matrix, ...)
+#   }
+# }
 
 # adj_mat_tester <- igraph::graph("Zachary") %>% 
 #   igraph::set_vertex_attr("name", value = c(letters, LETTERS)[seq_len(igraph::vcount(.))]) %>% 
@@ -145,15 +153,15 @@ permute_matrix <- function(adj_matrix, test_fun, ...) {
   # 
 # }
 
-rep_as_edgelist.adj_matrix <- function(x) {
-  out <- as.data.frame.table(x, responseName = "n", 
-                             stringsAsFactors = FALSE)
-  out <- out[out[["n"]] > 0L, ]
-  out[["n"]] <- NULL
-  colnames(out) <- c(".ego", ".alter")
-  rownames(out) <- NULL
-  as_edge_data_frame(out)
-}
+# rep_as_edgelist.adj_matrix <- function(x) {
+#   out <- as.data.frame.table(x, responseName = "n", 
+#                              stringsAsFactors = FALSE)
+#   out <- out[out[["n"]] > 0L, ]
+#   out[["n"]] <- NULL
+#   colnames(out) <- c(".ego", ".alter")
+#   rownames(out) <- NULL
+#   as_edge_data_frame(out)
+# }
 # 
 # library(tidyverse)
 # samplike %>% 

@@ -129,11 +129,11 @@
 <a href="#conversion" class="anchor"></a>Conversion</h2>
 <p>Through <code>bridge_net</code> objects, <code>igraph</code> and <code>network</code> objects can play together easier than ever.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">ig &lt;-<span class="st"> </span><span class="kw"><a href="reference/as_igraph.html">as_igraph</a></span>(sampson_monastery)</a></code></pre></div>
-<pre><code>#&gt; IGRAPH 1edab65 DNW- 18 510 -- 
+<pre><code>#&gt; IGRAPH c9f1621 DNW- 18 510 -- 
 #&gt; + attr: network_name (g/c), author (g/c), faction (v/c),
 #&gt; | cloisterville (v/l), status (v/c), name (v/c), weight (e/n),
 #&gt; | relation (e/c), time (e/n), positive_relation (e/l)
-#&gt; + edges from 1edab65 (vertex names):
+#&gt; + edges from c9f1621 (vertex names):
 #&gt;  [1] Romauld    -&gt;Ambrose     Romauld    -&gt;Peter      
 #&gt;  [3] Romauld    -&gt;Albert      Bonaventure-&gt;Romauld    
 #&gt;  [5] Bonaventure-&gt;Victor      Bonaventure-&gt;Albert     
@@ -180,11 +180,11 @@
 <a class="sourceLine" id="cb8-18" data-line-number="18"><span class="co">#&gt;  Edge attribute names: </span></a>
 <a class="sourceLine" id="cb8-19" data-line-number="19"><span class="co">#&gt;     positive_relation relation time weight</span></a></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="reference/as_igraph.html">as_igraph</a></span>(nw)</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; IGRAPH 1f07d84 DNW- 18 510 -- </span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; IGRAPH ca28a91 DNW- 18 510 -- </span></a>
 <a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt; + attr: network_name (g/c), author (g/c), faction (v/c),</span></a>
 <a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt; | cloisterville (v/l), status (v/c), name (v/c), weight (e/n),</span></a>
 <a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; | relation (e/c), time (e/n), positive_relation (e/l)</span></a>
-<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt; + edges from 1f07d84 (vertex names):</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt; + edges from ca28a91 (vertex names):</span></a>
 <a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt;  [1] Romauld    -&gt;Ambrose     Romauld    -&gt;Peter      </span></a>
 <a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt;  [3] Romauld    -&gt;Albert      Bonaventure-&gt;Romauld    </span></a>
 <a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt;  [5] Bonaventure-&gt;Victor      Bonaventure-&gt;Albert     </span></a>
@@ -478,7 +478,7 @@
 <a class="sourceLine" id="cb17-170" data-line-number="170">v <span class="op">|</span><span class="st">  </span><span class="dv">6</span>       <span class="op">|</span><span class="st"> </span>vrt_to_df</a>
 <a class="sourceLine" id="cb17-171" data-line-number="171"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb17-172" data-line-number="172"><span class="co">#&gt; == Results =======================================================</span></a>
-<a class="sourceLine" id="cb17-173" data-line-number="173"><span class="co">#&gt; Duration: 1.2 s</span></a>
+<a class="sourceLine" id="cb17-173" data-line-number="173"><span class="co">#&gt; Duration: 1.1 s</span></a>
 <a class="sourceLine" id="cb17-174" data-line-number="174"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb17-175" data-line-number="175"><span class="co">#&gt; OK:       93</span></a>
 <a class="sourceLine" id="cb17-176" data-line-number="176"><span class="co">#&gt; Failed:   0</span></a>
@@ -488,24 +488,23 @@
 <h2 class="hasAnchor">
 <a href="#test-coverage" class="anchor"></a>Test Coverage</h2>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">covr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/covr/topics/package_coverage">package_coverage</a></span>()</a>
-<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="co">#&gt; snatools Coverage: 34.11%</span></a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="co">#&gt; snatools Coverage: 37.20%</span></a>
 <a class="sourceLine" id="cb18-3" data-line-number="3"><span class="co">#&gt; R/adjacency-matrix.R: 0.00%</span></a>
 <a class="sourceLine" id="cb18-4" data-line-number="4"><span class="co">#&gt; R/as_igraph.R: 0.00%</span></a>
 <a class="sourceLine" id="cb18-5" data-line-number="5"><span class="co">#&gt; R/as_network.R: 0.00%</span></a>
 <a class="sourceLine" id="cb18-6" data-line-number="6"><span class="co">#&gt; R/ei_index.R: 0.00%</span></a>
 <a class="sourceLine" id="cb18-7" data-line-number="7"><span class="co">#&gt; R/mixing-matrix.R: 0.00%</span></a>
 <a class="sourceLine" id="cb18-8" data-line-number="8"><span class="co">#&gt; R/operators.R: 0.00%</span></a>
-<a class="sourceLine" id="cb18-9" data-line-number="9"><span class="co">#&gt; R/read_ucinet.R: 0.00%</span></a>
-<a class="sourceLine" id="cb18-10" data-line-number="10"><span class="co">#&gt; R/txt_.R: 0.00%</span></a>
-<a class="sourceLine" id="cb18-11" data-line-number="11"><span class="co">#&gt; R/as_bridge_net.R: 15.28%</span></a>
-<a class="sourceLine" id="cb18-12" data-line-number="12"><span class="co">#&gt; R/utils-attributes.R: 25.00%</span></a>
-<a class="sourceLine" id="cb18-13" data-line-number="13"><span class="co">#&gt; R/utils.R: 25.00%</span></a>
-<a class="sourceLine" id="cb18-14" data-line-number="14"><span class="co">#&gt; R/edge-attributes.R: 28.87%</span></a>
-<a class="sourceLine" id="cb18-15" data-line-number="15"><span class="co">#&gt; R/vertex-attributes.R: 32.78%</span></a>
-<a class="sourceLine" id="cb18-16" data-line-number="16"><span class="co">#&gt; R/edgelist.R: 57.66%</span></a>
-<a class="sourceLine" id="cb18-17" data-line-number="17"><span class="co">#&gt; R/network-metadata.R: 62.20%</span></a>
-<a class="sourceLine" id="cb18-18" data-line-number="18"><span class="co">#&gt; R/network-attributes.R: 79.31%</span></a>
-<a class="sourceLine" id="cb18-19" data-line-number="19"><span class="co">#&gt; R/build_test_graph.R: 90.68%</span></a></code></pre></div>
+<a class="sourceLine" id="cb18-9" data-line-number="9"><span class="co">#&gt; R/txt_.R: 0.00%</span></a>
+<a class="sourceLine" id="cb18-10" data-line-number="10"><span class="co">#&gt; R/as_bridge_net.R: 15.28%</span></a>
+<a class="sourceLine" id="cb18-11" data-line-number="11"><span class="co">#&gt; R/utils-attributes.R: 25.00%</span></a>
+<a class="sourceLine" id="cb18-12" data-line-number="12"><span class="co">#&gt; R/utils.R: 25.00%</span></a>
+<a class="sourceLine" id="cb18-13" data-line-number="13"><span class="co">#&gt; R/edge-attributes.R: 28.87%</span></a>
+<a class="sourceLine" id="cb18-14" data-line-number="14"><span class="co">#&gt; R/vertex-attributes.R: 32.78%</span></a>
+<a class="sourceLine" id="cb18-15" data-line-number="15"><span class="co">#&gt; R/edgelist.R: 57.66%</span></a>
+<a class="sourceLine" id="cb18-16" data-line-number="16"><span class="co">#&gt; R/network-metadata.R: 62.20%</span></a>
+<a class="sourceLine" id="cb18-17" data-line-number="17"><span class="co">#&gt; R/network-attributes.R: 79.31%</span></a>
+<a class="sourceLine" id="cb18-18" data-line-number="18"><span class="co">#&gt; R/build_test_graph.R: 90.68%</span></a></code></pre></div>
 </div>
 </div>
   </div>
@@ -539,7 +538,10 @@
       <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="lifecycle"></a></li>
+<li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle"></a></li>
+<li><a href="https://travis-ci.org/knapply/snatools"><img src="https://travis-ci.org/knapply/snatools.svg?branch=master" alt="Travis-CI Build Status"></a></li>
+<li><a href="https://codecov.io/gh/knapply/snatools?branch=master"><img src="https://codecov.io/gh/knapply/snatools/branch/master/graph/badge.svg" alt="Coverage Status"></a></li>
+<li><a href="https://github.com/knapply/snatools"><img src="https://img.shields.io/github/downloads/knapply/snatools/total.svg" alt="GitHub Downloads"></a></li>
 </ul>
 </div>
 </div>
