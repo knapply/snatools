@@ -72,11 +72,11 @@ together easier than ever.
 ig <- as_igraph(sampson_monastery)
 ```
 
-    #> IGRAPH 3b35852 DNW- 18 510 -- 
+    #> IGRAPH 09d79ab DNW- 18 510 -- 
     #> + attr: network_name (g/c), author (g/c), faction (v/c),
     #> | cloisterville (v/l), status (v/c), name (v/c), weight (e/n),
     #> | relation (e/c), time (e/n), positive_relation (e/l)
-    #> + edges from 3b35852 (vertex names):
+    #> + edges from 09d79ab (vertex names):
     #>  [1] Romauld    ->Ambrose     Romauld    ->Peter      
     #>  [3] Romauld    ->Albert      Bonaventure->Romauld    
     #>  [5] Bonaventure->Victor      Bonaventure->Albert     
@@ -132,11 +132,11 @@ as_network(ig)
 
 ``` r
 as_igraph(nw)
-#> IGRAPH 3b5f5e4 DNW- 18 510 -- 
+#> IGRAPH 0a0f68d DNW- 18 510 -- 
 #> + attr: network_name (g/c), author (g/c), faction (v/c),
 #> | cloisterville (v/l), status (v/c), name (v/c), weight (e/n),
 #> | relation (e/c), time (e/n), positive_relation (e/l)
-#> + edges from 3b5f5e4 (vertex names):
+#> + edges from 0a0f68d (vertex names):
 #>  [1] Romauld    ->Ambrose     Romauld    ->Peter      
 #>  [3] Romauld    ->Albert      Bonaventure->Romauld    
 #>  [5] Bonaventure->Victor      Bonaventure->Albert     
@@ -447,7 +447,7 @@ v |  6       | vrt_get_attr
 v |  6       | vrt_to_df
 #> 
 #> == Results =====================================================================
-#> Duration: 1.1 s
+#> Duration: 1.2 s
 #> 
 #> OK:       93
 #> Failed:   0

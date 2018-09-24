@@ -3,6 +3,6 @@ pkgdown: 1.1.0.9000
 pkgdown_sha: b62fef53d0a5633adea58b9c503d35e465a9af43
 articles: []
 urls:
-  reference: https://knapply.github.io/snatools//reference
-  article: https://knapply.github.io/snatools//articles
+  reference: https://knapply.github.io/snatools/reference
+  article: https://knapply.github.io/snatools/articles
 
