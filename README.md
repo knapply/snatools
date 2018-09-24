@@ -101,11 +101,11 @@ together easier than ever.
 ig <- as_igraph(sampson_monastery)
 ```
 
-    #> IGRAPH 4e75b2b DNW- 18 510 -- 
+    #> IGRAPH ee2a7f4 DNW- 18 510 -- 
     #> + attr: network_name (g/c), author (g/c), faction (v/c),
     #> | cloisterville (v/l), status (v/c), name (v/c), weight (e/n),
     #> | relation (e/c), time (e/n), positive_relation (e/l)
-    #> + edges from 4e75b2b (vertex names):
+    #> + edges from ee2a7f4 (vertex names):
     #>  [1] Romauld    ->Ambrose     Romauld    ->Peter      
     #>  [3] Romauld    ->Albert      Bonaventure->Romauld    
     #>  [5] Bonaventure->Victor      Bonaventure->Albert     
@@ -161,11 +161,11 @@ as_network(ig)
 
 ``` r
 as_igraph(nw)
-#> IGRAPH 4ea939c DNW- 18 510 -- 
+#> IGRAPH ee50e64 DNW- 18 510 -- 
 #> + attr: network_name (g/c), author (g/c), faction (v/c),
 #> | cloisterville (v/l), status (v/c), name (v/c), weight (e/n),
 #> | relation (e/c), time (e/n), positive_relation (e/l)
-#> + edges from 4ea939c (vertex names):
+#> + edges from ee50e64 (vertex names):
 #>  [1] Romauld    ->Ambrose     Romauld    ->Peter      
 #>  [3] Romauld    ->Albert      Bonaventure->Romauld    
 #>  [5] Bonaventure->Victor      Bonaventure->Albert     
@@ -274,8 +274,6 @@ nw %>% rep_as_mixing_matrix(vrt_attr = "faction")
 
 ### Easy Integeration with Modern Workflows
 
-<center>
-
 ``` r
 library(tidygraph, warn.conflicts = FALSE)
 library(ggraph, quietly = TRUE)
@@ -301,9 +299,7 @@ nw %>%
         legend.position = "bottom")
 ```
 
-![](man/figures/unnamed-chunk-18-1.png)<!-- -->
-
-</center>
+<img src="man/figures/unnamed-chunk-18-1.png" style="display: block; margin: auto;" />
 
 <!-- # Development Tests -->
 
