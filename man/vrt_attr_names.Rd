@@ -19,7 +19,7 @@ vrt_attr_names(x)
 \method{vrt_attr_names}{tbl_graph}(x)
 }
 \arguments{
-\item{x}{An \code{bridge_net}, \code{igraph}, \code{network}, or \code{tbl_graph}.}
+\item{x}{A \code{bridge_net}, \code{igraph}, \code{network}, or \code{tbl_graph}.}
 }
 \value{
 \code{character} \code{vector} listing the names of \code{x}'s vertex attributes.
@@ -30,32 +30,32 @@ Extract a graph objects's vertex attribute names.
 \examples{
 library(snatools)
 
-adj_mat <- rbinom(16L, 1L, 0.3) \%>\% 
-  matrix(nrow = 4L, dimnames = list(letters[1:4], letters[1:4]))
+data(sampson_monastery)
 
-ig <- adj_mat \%>\% 
-  igraph::graph_from_adjacency_matrix() \%>\% 
-  igraph::set_vertex_attr("another_attr", value = sample(seq_len(igraph::vcount(.)))) 
+ig <- sampson_monastery \%>\% 
+  as_igraph()
+  
+nw <- sampson_monastery \%>\% 
+  as_network()
+
+tidy_g <- ig \%>\% 
+  tidygraph::as_tbl_graph()
+
+vrt_attr_names(sampson_monastery)
 
 vrt_attr_names(ig)
 
-nw <- network::as.network(adj_mat)
-network::set.vertex.attribute(nw, "another_attr", 
-                              value = sample(seq_len(network::network.size(nw))))
-
 vrt_attr_names(nw)
 
-tbl_g <- tidygraph::as_tbl_graph(ig)
-
-vrt_attr_names(tbl_g)
-
-sna_g <- as_bridge_net(ig)
-
-vrt_attr_names(sna_g)
+vrt_attr_names(tidy_g)
 
 }
 \seealso{
 \code{\link[=vrt_get_attr]{vrt_get_attr()}}, \code{\link[=vrt_to_df]{vrt_to_df()}}, \code{\link[igraph:vertex_attr_names]{igraph::vertex_attr_names()}},
+\code{\link[network:list.vertex.attributes]{network::list.vertex.attributes()}}
+
+\code{\link[igraph:vertex_attr_names]{igraph::vertex_attr_names()}}
+
 \code{\link[network:list.vertex.attributes]{network::list.vertex.attributes()}}
 }
 \author{

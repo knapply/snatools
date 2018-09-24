@@ -6,6 +6,7 @@
 \alias{vrt_to_df.igraph}
 \alias{vrt_to_df.network}
 \alias{vrt_to_df.tbl_graph}
+\alias{print.vertex_data_frame}
 \title{Extract all vertex attributes as a data frame.}
 \usage{
 vrt_to_df(x, leave_raw = FALSE)
@@ -17,13 +18,17 @@ vrt_to_df(x, leave_raw = FALSE)
 \method{vrt_to_df}{network}(x, leave_raw = FALSE)
 
 \method{vrt_to_df}{tbl_graph}(x, leave_raw = FALSE)
+
+\method{print}{vertex_data_frame}(x, .nrow = 10L, .verbose = TRUE)
 }
 \arguments{
-\item{x}{An \code{bridge_net}, \code{igraph}, \code{network}, or \code{tbl_graph}.}
+\item{x}{A \code{bridge_net}, \code{igraph}, \code{network}, or \code{tbl_graph}.}
 
 \item{leave_raw}{\code{logical} (default: \code{FALSE}) indicating whether to return
 a raw \code{data.frame} instead of a \code{vertex_data_frame} that standardizes results across
 graph classes.}
+
+\item{.nrow}{Maximum number of rows to \code{print()}.}
 }
 \value{
 \code{data.frame} or \code{vertex_data_frame} with all vertex attributes contained in \code{x}.
@@ -34,32 +39,24 @@ Extract all vertex attributes as a data frame.
 \examples{
 library(snatools)
 
-adj_mat <- rbinom(16L, 1L, 0.3) \%>\% 
-  matrix(nrow = 4L, dimnames = list(letters[1:4], letters[1:4]))
+data(sampson_monastery)
 
-ig <- adj_mat \%>\% 
-  igraph::graph_from_adjacency_matrix() \%>\% 
-  igraph::set_vertex_attr("a_vertex_attribute", 
-                          value = sample(seq_len(igraph::vcount(.)))) 
+ig <- sampson_monastery \%>\% 
+  as_igraph()
+  
+nw <- sampson_monastery \%>\% 
+  as_network()
+
+tidy_g <- ig \%>\% 
+  tidygraph::as_tbl_graph()
+
+vrt_to_df(sampson_monastery)
 
 vrt_to_df(ig)
-vrt_to_df(ig, leave_raw = FALSE)
-
-nw <- network::as.network(adj_mat)
-network::set.vertex.attribute(nw, "a_vertex_attribute", 
-                              value = sample(seq_len(network::network.size(nw))))
 
 vrt_to_df(nw)
-vrt_to_df(nw, leave_raw = FALSE)
 
-tbl_g <- tidygraph::as_tbl_graph(ig)
-
-vrt_to_df(tbl_g)
-vrt_to_df(tbl_g, leave_raw = FALSE)
-
-sna_g <- as_bridge_net(nw)
-
-vrt_to_df(sna_g)
+vrt_to_df(tidy_g)
 
 }
 \seealso{

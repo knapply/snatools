@@ -28,21 +28,32 @@ reference:
     - as_igraph
     - as_network
   
-  - title: Vertices
-    desc: Operations targeting vertices and their attributes.
+  - title: Vertex Attributes
+    desc: Operations targeting vertex attributes.
     contents:
     - vrt_attr_names
     - vrt_get_attr
     - vrt_to_df
+    - vrt_delete_attr
+    - vrt_filter
     
-  - title: Edges
-    desc: Operations targeting edges and their attributes.
+  - title: Edge Attributes
+    desc: Operations targeting edge attributes.
     contents:
     - edg_attr_names
     - edg_get_attr
     - edg_to_df
+    - edg_delete_attr
+    - edg_filter
+
+  - title: Network Attributes
+    -desc: Operations targeting non-structural network attributes
+    contents:
+    - net_attr_names
+    - net_get_attr
+    - net_attrs_to_list
     
-  - title: Network Metadata
+  - title: Structural Metadata
     desc: Operations targeting graph-level attributes and metadata.
     contents:
     - net_is_directed
@@ -58,6 +69,7 @@ reference:
     desc: Construct and test various network representations.
     contents:
     - rep_as_edgelist
+    - rep_as_adj_matrix
     - rep_as_mixing_matrix
 
 navbar:

@@ -34,10 +34,9 @@ relation_dict <- c(SAMPLK1 = "liking",
 data(samplk, package = "ergm")
 
 vertices <- list(samplk1, samplk2, samplk3) %>% 
-  map_df(vrt_get_attrs) %>% 
+  map_df(vrt_to_df) %>% 
   distinct() %>% 
-  rename(name = vertex.names) %>% 
-  select(name, everything()) %>% 
+  select(.name, everything()) %>% 
   mutate(status = case_when(
     row_number() %in% c(2, 3, 17, 18) ~ "Expelled",
     row_number() %in% c(1, 7, 14, 15, 16) ~ "Left Voluntarily",
@@ -49,7 +48,7 @@ vertices <- list(samplk1, samplk2, samplk3) %>%
 dat <- "http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/sampson.dat" %>% 
   read_ucinet()
 
-dat$edge_attributes <- dat$edge_attributes %>% 
+dat$edges <- dat$edges %>% 
   mutate(time = case_when(
     level == "SAMPLK1" ~ 1L,
     level == "SAMPLK2" ~ 2L,
@@ -60,10 +59,13 @@ dat$edge_attributes <- dat$edge_attributes %>%
   mutate(positive_relation = relation %in% c("liking", "esteem",
                                              "positive influence", "praise"))
 
-dat$vertex_attributes <- dat$vertex_attributes %>% 
-  mutate_at(vars(from, to), ~ recode(., !!!names_dict)) %>%
-  left_join(vertices, by = "name")
+dat$vertices <- dat$vertices %>% 
+  mutate(.name = recode(.name, !!!names_dict)) %>% 
+  left_join(vertices, by = ".name")
 
-sampson_monastery <- dat
+dat$net_attrs$network_name <- "Crisis in the Cloister"
+dat$net_attrs$author <- "Samuel F. Sampson"
+
+sampson_monastery <- dat %>% as_igraph() %>% as_bridge_net()
 
 devtools::use_data(sampson_monastery, overwrite = TRUE)

@@ -1,0 +1,293 @@
+RUNIT TEST PROTOCOL -- Sun Sep 23 13:30:29 2018 
+*********************************************** 
+Number of test functions: 90 
+Number of errors: 90 
+Number of failures: 0 
+
+ 
+1 Test Suite : 
+Microsoft R Open version 3.5.1 (2018-08-05 02:17:29 UTC) - 90 test functions, 90 errors, 0 failures
+ERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-agnes-ex.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-agnes-ex.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-anova.gls.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-anova.gls.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-any-all.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-any-all.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-arith-true.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-arith-true.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-arith.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-arith.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-array-subset.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-array-subset.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-augPredmissing.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-augPredmissing.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-bugs.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-bugs.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-clara-ex.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-clara-ex.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-clara-NAs.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-clara-NAs.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-clara.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-clara.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-clusplot-out.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-clusplot-out.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-coef.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-coef.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-complex.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-complex.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-confint.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-confint.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-contrMat.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-contrMat.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-d-p-q-r-tests.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-d-p-q-r-tests.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-daisy-ex.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-daisy-ex.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-data.frame.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-data.frame.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-datasets.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-datasets.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-dates.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-dates.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-deparse.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-deparse.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-diana-ex.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-diana-ex.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-dotplotscoping.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-dotplotscoping.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-ellipsoid-ex.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-ellipsoid-ex.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-encodings.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-encodings.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-errormsgs.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-errormsgs.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-eval-etc.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-eval-etc.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-fanny-ex.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-fanny-ex.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-getData.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-getData.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-glm.nb.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-glm.nb.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-gls.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-gls.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-lapack.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-lapack.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-levelplot.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-levelplot.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-lm-tests.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-lm-tests.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-MASSch04.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-MASSch04.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-method-dispatch.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-method-dispatch.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-missing.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-missing.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-mona.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-mona.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-nlme.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-nlme.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-nls.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-nls.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-ok-errors.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-ok-errors.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-p-r-random-tests.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-p-r-random-tests.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-pam.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-pam.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-polr.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-polr.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-print-tests.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-print-tests.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-ps-tests.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-ps-tests.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-R-intro.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-R-intro.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-reg-BLAS.r: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-reg-BLAS.rERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-reg-IO.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-reg-IO.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-reg-plot-latin1.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-reg-plot-latin1.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-reg-plot.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-reg-plot.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-reg-tests-3.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-reg-tests-3.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-reg-win.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-reg-win.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-reg.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-reg.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-rlm.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-rlm.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-sas.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-sas.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-silhouette-default.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-silhouette-default.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-simple-true.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-simple-true.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-surv_test.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-surv_test.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-survStress.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-survStress.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-sweep-ex.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-sweep-ex.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-temp.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-temp.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-test.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-test.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-testls.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-testls.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-tests.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-tests.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-ts-tests.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-ts-tests.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-update.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-update.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-updateLme.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-updateLme.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-usersplits.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-usersplits.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-varIdent.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-varIdent.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit.package.examples.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit.package.examples.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit.package.loadability.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit.package.loadability.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runit.MRO.checkinstall.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runit.MRO.checkinstall.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runit.revo.common.examples.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runit.revo.common.examples.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runit.revo.common.loadability.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runit.revo.common.loadability.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runit.revo.common.MKL.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runit.revo.common.MKL.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runit.revo.common.version.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runit.revo.common.version.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitDescStat.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitDescStat.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitFileCheck.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitFileCheck.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitGetStart.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitGetStart.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitGraphIOQ.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitGraphIOQ.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitHypothesis.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitHypothesis.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitLicenseIOQ.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitLicenseIOQ.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitParRIOQ.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitParRIOQ.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitRegression.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitRegression.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/windows/runit.revo.windows.examples.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/windows/runit.revo.windows.examples.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/windows/runit.revo.windows.loadability.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/windows/runit.revo.windows.loadability.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/windows/runit.revo.windows.version.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/windows/runit.revo.windows.version.RERROR in C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/windows/runitFileChecks.R: R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/windows/runitFileChecks.R
+
+
+Details 
+*************************** 
+Test Suite: Microsoft R Open version 3.5.1 (2018-08-05 02:17:29 UTC) 
+Test function regexp: ^test.+ 
+Test file regexp: ^runit.+\.[rR]$ 
+Involved directories: 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/windows 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/windows 
+--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-agnes-ex.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-agnes-ex.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-agnes-ex.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-anova.gls.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-anova.gls.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-anova.gls.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-any-all.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-any-all.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-any-all.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-arith-true.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-arith-true.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-arith-true.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-arith.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-arith.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-arith.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-array-subset.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-array-subset.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-array-subset.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-augPredmissing.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-augPredmissing.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-augPredmissing.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-bugs.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-bugs.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-bugs.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-clara-ex.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-clara-ex.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-clara-ex.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-clara-NAs.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-clara-NAs.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-clara-NAs.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-clara.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-clara.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-clara.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-clusplot-out.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-clusplot-out.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-clusplot-out.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-coef.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-coef.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-coef.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-complex.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-complex.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-complex.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-confint.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-confint.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-confint.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-contrMat.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-contrMat.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-contrMat.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-d-p-q-r-tests.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-d-p-q-r-tests.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-d-p-q-r-tests.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-daisy-ex.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-daisy-ex.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-daisy-ex.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-data.frame.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-data.frame.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-data.frame.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-datasets.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-datasets.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-datasets.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-dates.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-dates.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-dates.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-deparse.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-deparse.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-deparse.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-diana-ex.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-diana-ex.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-diana-ex.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-dotplotscoping.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-dotplotscoping.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-dotplotscoping.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-ellipsoid-ex.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-ellipsoid-ex.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-ellipsoid-ex.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-encodings.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-encodings.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-encodings.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-errormsgs.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-errormsgs.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-errormsgs.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-eval-etc.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-eval-etc.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-eval-etc.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-fanny-ex.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-fanny-ex.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-fanny-ex.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-getData.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-getData.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-getData.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-glm.nb.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-glm.nb.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-glm.nb.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-gls.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-gls.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-gls.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-lapack.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-lapack.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-lapack.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-levelplot.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-levelplot.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-levelplot.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-lm-tests.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-lm-tests.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-lm-tests.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-MASSch04.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-MASSch04.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-MASSch04.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-method-dispatch.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-method-dispatch.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-method-dispatch.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-missing.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-missing.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-missing.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-mona.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-mona.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-mona.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-nlme.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-nlme.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-nlme.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-nls.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-nls.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-nls.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-ok-errors.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-ok-errors.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-ok-errors.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-p-r-random-tests.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-p-r-random-tests.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-p-r-random-tests.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-pam.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-pam.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-pam.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-polr.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-polr.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-polr.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-print-tests.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-print-tests.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-print-tests.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-ps-tests.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-ps-tests.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-ps-tests.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-R-intro.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-R-intro.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-R-intro.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-reg-BLAS.r 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-reg-BLAS.r: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-reg-BLAS.r--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-reg-IO.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-reg-IO.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-reg-IO.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-reg-plot-latin1.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-reg-plot-latin1.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-reg-plot-latin1.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-reg-plot.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-reg-plot.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-reg-plot.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-reg-tests-3.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-reg-tests-3.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-reg-tests-3.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-reg-win.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-reg-win.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-reg-win.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-reg.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-reg.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-reg.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-rlm.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-rlm.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-rlm.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-sas.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-sas.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-sas.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-silhouette-default.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-silhouette-default.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-silhouette-default.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-simple-true.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-simple-true.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-simple-true.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-surv_test.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-surv_test.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-surv_test.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-survStress.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-survStress.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-survStress.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-sweep-ex.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-sweep-ex.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-sweep-ex.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-temp.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-temp.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-temp.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-test.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-test.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-test.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-testls.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-testls.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-testls.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-tests.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-tests.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-tests.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-ts-tests.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-ts-tests.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-ts-tests.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-update.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-update.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-update.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-updateLme.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-updateLme.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-updateLme.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-usersplits.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-usersplits.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-usersplits.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-varIdent.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-varIdent.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit-varIdent.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit.package.examples.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit.package.examples.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit.package.examples.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit.package.loadability.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit.package.loadability.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/R/common/runit.package.loadability.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runit.MRO.checkinstall.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runit.MRO.checkinstall.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runit.MRO.checkinstall.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runit.revo.common.examples.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runit.revo.common.examples.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runit.revo.common.examples.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runit.revo.common.loadability.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runit.revo.common.loadability.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runit.revo.common.loadability.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runit.revo.common.MKL.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runit.revo.common.MKL.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runit.revo.common.MKL.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runit.revo.common.version.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runit.revo.common.version.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runit.revo.common.version.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitDescStat.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitDescStat.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitDescStat.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitFileCheck.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitFileCheck.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitFileCheck.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitGetStart.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitGetStart.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitGetStart.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitGraphIOQ.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitGraphIOQ.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitGraphIOQ.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitHypothesis.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitHypothesis.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitHypothesis.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitLicenseIOQ.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitLicenseIOQ.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitLicenseIOQ.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitParRIOQ.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitParRIOQ.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitParRIOQ.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitRegression.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitRegression.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/common/runitRegression.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/windows/runit.revo.windows.examples.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/windows/runit.revo.windows.examples.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/windows/runit.revo.windows.examples.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/windows/runit.revo.windows.loadability.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/windows/runit.revo.windows.loadability.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/windows/runit.revo.windows.loadability.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/windows/runit.revo.windows.version.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/windows/runit.revo.windows.version.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/windows/runit.revo.windows.version.R--------------------------- 
+Test file: C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/windows/runitFileChecks.R 
+C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/windows/runitFileChecks.R: ERROR !! 
+R exited abnormally while running test file C:/Program Files/Microsoft/R Open/R-3.5.1/library/RevoIOQ/unitTests/Revo/windows/runitFileChecks.R

@@ -19,7 +19,7 @@ vrt_get_attr(x, vrt_attr)
 \method{vrt_get_attr}{tbl_graph}(x, vrt_attr)
 }
 \arguments{
-\item{x}{An \code{bridge_net}, \code{igraph}, \code{network}, or \code{tbl_graph}.}
+\item{x}{A \code{bridge_net}, \code{igraph}, \code{network}, or \code{tbl_graph}.}
 
 \item{vrt_attr}{\code{character} specifying the target vertex attribute.}
 }
@@ -32,32 +32,24 @@ Extract a specific vertex attribute.
 \examples{
 library(snatools)
 
-adj_mat <- rbinom(16L, 1L, 0.3) \%>\% 
-  matrix(nrow = 4L, dimnames = list(letters[1:4], letters[1:4]))
+data(sampson_monastery)
 
-ig <- adj_mat \%>\% 
-  igraph::graph_from_adjacency_matrix() \%>\% 
-  igraph::set_vertex_attr("a_vertex_attribute", 
-                          value = sample(seq_len(igraph::vcount(.)))) 
+ig <- sampson_monastery \%>\% 
+  as_igraph()
+  
+nw <- sampson_monastery \%>\% 
+  as_network()
 
-ig \%>\% 
-  vrt_get_attr("name")
+tidy_g <- ig \%>\% 
+  tidygraph::as_tbl_graph()
 
-nw <- network::as.network(adj_mat)
-  network::set.vertex.attribute(nw, "a_vertex_attribute", 
-                                value = sample(seq_len(network::network.size(nw))))
+vrt_get_attr(sampson_monastery, "faction")
 
-nw \%>\% 
-  vrt_get_attr("vertex.names")
+vrt_get_attr(ig, "faction")
 
-tbl_g <- tidygraph::as_tbl_graph(ig)
+vrt_get_attr(nw, "faction")
 
-tbl_g \%>\% 
-  vrt_get_attr("a_vertex_attribute")
-
-sna_g <- as_bridge_net(nw)
-
-vrt_get_attr(sna_g, "a_vertex_attribute")
+vrt_get_attr(tidy_g, "faction")
 
 }
 \seealso{

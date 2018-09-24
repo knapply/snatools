@@ -186,54 +186,17 @@ validate_graph <- function(x) {
   }
 }
 
-is_valid_vrt_attr <- function(x, vrt_attr) {
-  !is.na(vrt_attr) && is.character(vrt_attr) && 
-    is_scalar(vrt_attr) && vrt_attr %in% vrt_attr_names(x)
-}
-
-validate_vrt_attr <- function(x, vrt_attr) {
-  if (!is_valid_vrt_attr(x, vrt_attr)) {
-    terminate(patch('"%s" is not a valid vertex attribute. `vrt_attr` must be a scalar 
-                    character corresponding to the name of an vertex attribute in `x`.',
-                    vrt_attr))
-  }
-}
-
-is_valid_edg_attr <- function(x, edg_attr) {
-  !is.na(edg_attr) && is.character(edg_attr) && 
-    is_scalar(edg_attr) && edg_attr %in% edg_attr_names(x)
-}
-
-validate_edg_attr <- function(x, edg_attr) {
-  if (!is_valid_edg_attr(x, edg_attr)) {
-    terminate(patch('"%s" is not a valid edge attribute. `edg_attr` must be a scalar 
-                    character corresponding to the name of an edge attribute in `x`.',
-                    edg_attr))
-  }
-}
-
-is_vrt_names_attr <- function(x) {
-  x %in% c(".name", "name", "vertex.names")
-}
-
-get_vrt_names_attr <- function(x) {
-  if (inherits(x, "bridge_net")) {
-    return(".name")
-  }
-  if (inherits(x, "igraph")) {
-    return("name")
-  } 
-  if (inherits(x, "network")) {
-    return("vertex.names")
-  }
-}
+# dots <- function(...) {
+#   eval(substitute(alist(...)))
+# }
 
 
 terminate <- function(..., call. = FALSE) {
-  stop(txt_wrap(...), call. = call.)
+  messages <- c(...)
+  stop(vapply(messages, txt_wrap, character(1)), call. = call.)
 }
 
-#' @importFrom igraph set_vertex_attr vcount vertex_attr_names
+#' @importFrom igraph permute set_vertex_attr vcount vertex_attr_names
 prep_bipartite_igraph <- function(x) {
   if (!"name" %in% vertex_attr_names(x)) {
     x <- set_vertex_attr(x, "name", value = seq_len(vcount(x)))
