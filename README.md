@@ -3,17 +3,13 @@
 
 # snatools <a href="http://res.cloudinary.com/syknapptic/image/upload/v1537658876/logo_bnrvvg.png"> <img src="http://res.cloudinary.com/syknapptic/image/upload/v1537658876/logo_bnrvvg.png" align="right" height="45%" width="45%" href="http://res.cloudinary.com/syknapptic/image/upload/v1537658876/logo_bnrvvg.png"/> </a>
 
-[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-
-<!-- ```{r, echo=FALSE, prompt=FALSE, results='asis', comment=""} -->
-
-<!-- cat(' -->
-
-<!--     ') -->
-
-<!-- ``` -->
-
-<!-- [![](https://img.shields.io/badge/devel%20version-0.0.0.9-red.svg)](https://github.com/knapply/snatools) -->
+[![Lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Travis-CI Build
+Status](https://travis-ci.org/knapply/snatools.svg?branch=master)](https://travis-ci.org/knapply/snatools)
+[![Coverage
+Status](https://codecov.io/gh/knapply/snatools/branch/master/graph/badge.svg)](https://codecov.io/gh/knapply/snatools?branch=master)
+[![GitHub
+Downloads](https://img.shields.io/github/downloads/knapply/snatools/total.svg)](https://github.com/knapply/snatools)
 
 An R toolkit to bridge graph classes and streamline network analytic
 workflows.
@@ -72,11 +68,11 @@ together easier than ever.
 ig <- as_igraph(sampson_monastery)
 ```
 
-    #> IGRAPH 09d79ab DNW- 18 510 -- 
+    #> IGRAPH b80ce8f DNW- 18 510 -- 
     #> + attr: network_name (g/c), author (g/c), faction (v/c),
     #> | cloisterville (v/l), status (v/c), name (v/c), weight (e/n),
     #> | relation (e/c), time (e/n), positive_relation (e/l)
-    #> + edges from 09d79ab (vertex names):
+    #> + edges from b80ce8f (vertex names):
     #>  [1] Romauld    ->Ambrose     Romauld    ->Peter      
     #>  [3] Romauld    ->Albert      Bonaventure->Romauld    
     #>  [5] Bonaventure->Victor      Bonaventure->Albert     
@@ -132,11 +128,11 @@ as_network(ig)
 
 ``` r
 as_igraph(nw)
-#> IGRAPH 0a0f68d DNW- 18 510 -- 
+#> IGRAPH b835935 DNW- 18 510 -- 
 #> + attr: network_name (g/c), author (g/c), faction (v/c),
 #> | cloisterville (v/l), status (v/c), name (v/c), weight (e/n),
 #> | relation (e/c), time (e/n), positive_relation (e/l)
-#> + edges from 0a0f68d (vertex names):
+#> + edges from b835935 (vertex names):
 #>  [1] Romauld    ->Ambrose     Romauld    ->Peter      
 #>  [3] Romauld    ->Albert      Bonaventure->Romauld    
 #>  [5] Bonaventure->Victor      Bonaventure->Albert     
@@ -447,7 +443,7 @@ v |  6       | vrt_get_attr
 v |  6       | vrt_to_df
 #> 
 #> == Results =====================================================================
-#> Duration: 1.2 s
+#> Duration: 1.1 s
 #> 
 #> OK:       93
 #> Failed:   0
@@ -459,14 +455,13 @@ v |  6       | vrt_to_df
 
 ``` r
 covr::package_coverage()
-#> snatools Coverage: 34.11%
+#> snatools Coverage: 37.20%
 #> R/adjacency-matrix.R: 0.00%
 #> R/as_igraph.R: 0.00%
 #> R/as_network.R: 0.00%
 #> R/ei_index.R: 0.00%
 #> R/mixing-matrix.R: 0.00%
 #> R/operators.R: 0.00%
-#> R/read_ucinet.R: 0.00%
 #> R/txt_.R: 0.00%
 #> R/as_bridge_net.R: 15.28%
 #> R/utils-attributes.R: 25.00%
