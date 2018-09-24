@@ -19,7 +19,7 @@ edg_get_attr(x, edg_attr)
 \method{edg_get_attr}{tbl_graph}(x, edg_attr)
 }
 \arguments{
-\item{x}{An \code{bridge_net}, \code{igraph}, \code{network}, or \code{tbl_graph}.}
+\item{x}{A \code{bridge_net}, \code{igraph}, \code{network}, or \code{tbl_graph}.}
 
 \item{edg_attr}{\code{character} specifying the target edge attribute.}
 }
@@ -32,37 +32,31 @@ Extract a specific edge attribute.
 \examples{
 library(snatools)
 
-adj_mat <- rbinom(16L, 1L, 0.3) \%>\% 
-  matrix(nrow = 4L, dimnames = list(letters[1:4], letters[1:4]))
+data(sampson_monastery)
 
-ig <- adj_mat \%>\% 
-  igraph::graph_from_adjacency_matrix() \%>\% 
-  igraph::set_edge_attr("an_edge_attribute", 
-                        value = sample(seq_len(igraph::ecount(.)))) 
+ig <- sampson_monastery \%>\% 
+  as_igraph()
+  
+nw <- sampson_monastery \%>\% 
+  as_network()
+  
+tidy_g <- ig \%>\% 
+  tidygraph::as_tbl_graph()
 
-ig \%>\% 
-  edg_get_attr("an_edge_attribute")
+edg_get_attr(sampson_monastery, "relation") \%>\% unique()
 
-nw <- network::as.network(adj_mat)
-  network::set.edge.attribute(nw, "an_edge_attribute", 
-                              value = sample(seq_len(network::network.edgecount(nw))))
+edg_get_attr(ig, "relation") \%>\% unique()
 
-nw \%>\% 
-  edg_get_attr("an_edge_attribute")
+edg_get_attr(nw, "relation") \%>\% unique()
 
-tbl_g <- tidygraph::as_tbl_graph(ig)
-
-tbl_g \%>\% 
-  edg_get_attr("an_edge_attribute")
-
-sna_g <- as_bridge_net(nw)
-
-edg_get_attr(sna_g, "an_edge_attribute")
+edg_get_attr(tidy_g, "relation") \%>\% unique()
 
 }
 \seealso{
 \code{\link[=edg_attr_names]{edg_attr_names()}}, \code{\link[=edg_to_df]{edg_to_df()}}, \code{\link[igraph:edge_attr]{igraph::edge_attr()}},
 \code{\link[network:get.edge.attribute]{network::get.edge.attribute()}}
+
+\code{\link[igraph:edge_attr]{igraph::edge_attr()}}
 }
 \author{
 Brendan Knapp \email{brendan.g.knapp@gmail.com}

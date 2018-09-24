@@ -10,13 +10,13 @@
 \usage{
 as_network(x, ...)
 
-\method{as_network}{bridge_net}(x, .actor = TRUE)
+\method{as_network}{bridge_net}(x, .actor = TRUE, ...)
 
-\method{as_network}{igraph}(x, ...)
+\method{as_network}{igraph}(x, .actor = TRUE, ...)
 
 \method{as_network}{network}(x, ...)
 
-\method{as_network}{tbl_graph}(x, ...)
+\method{as_network}{tbl_graph}(x, .actor = TRUE, ...)
 }
 \arguments{
 \item{x}{\code{bridge_net}, \code{igraph} (\code{\link[igraph:graph]{igraph::graph}}), or \code{\link[tidygraph:tbl_graph]{tidygraph::tbl_graph}}.}

@@ -4,22 +4,40 @@
     <loc>https://knapply.github.io/snatools//index.html</loc>
   </url>
   <url>
+    <loc>https://knapply.github.io/snatools//reference/as_bridge_net.html</loc>
+  </url>
+  <url>
     <loc>https://knapply.github.io/snatools//reference/as_igraph.html</loc>
   </url>
   <url>
     <loc>https://knapply.github.io/snatools//reference/as_network.html</loc>
   </url>
   <url>
-    <loc>https://knapply.github.io/snatools//reference/bridge_net.html</loc>
+    <loc>https://knapply.github.io/snatools//reference/edg_attr_names.html</loc>
   </url>
   <url>
-    <loc>https://knapply.github.io/snatools//reference/edg_attr_names.html</loc>
+    <loc>https://knapply.github.io/snatools//reference/edg_delete_attr.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/edg_filter.html</loc>
   </url>
   <url>
     <loc>https://knapply.github.io/snatools//reference/edg_get_attr.html</loc>
   </url>
   <url>
     <loc>https://knapply.github.io/snatools//reference/edg_to_df.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/ei_index.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/grapes-equals-grapes.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/net_attrs_to_list.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/net_attr_names.html</loc>
   </url>
   <url>
     <loc>https://knapply.github.io/snatools//reference/net_count_actors.html</loc>
@@ -29,6 +47,9 @@
   </url>
   <url>
     <loc>https://knapply.github.io/snatools//reference/net_count_vertices.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/net_get_attr.html</loc>
   </url>
   <url>
     <loc>https://knapply.github.io/snatools//reference/net_has_isolates.html</loc>
@@ -49,6 +70,12 @@
     <loc>https://knapply.github.io/snatools//reference/pipe.html</loc>
   </url>
   <url>
+    <loc>https://knapply.github.io/snatools//reference/read_ucinet.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/rep_as_adj_matrix.html</loc>
+  </url>
+  <url>
     <loc>https://knapply.github.io/snatools//reference/rep_as_edgelist.html</loc>
   </url>
   <url>
@@ -59,6 +86,12 @@
   </url>
   <url>
     <loc>https://knapply.github.io/snatools//reference/vrt_attr_names.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/vrt_delete_attr.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools//reference/vrt_filter.html</loc>
   </url>
   <url>
     <loc>https://knapply.github.io/snatools//reference/vrt_get_attr.html</loc>

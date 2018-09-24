@@ -141,8 +141,8 @@ as_igraph.bridge_net <- function(x) {
     x[["edges"]][[".ego"]] <- NULL
     x[["edges"]][[".alter"]] <- NULL
   }
-  if (length(x[["graph_attributes"]])) {
-    graph_attr(out) <- x[["graph_attributes"]]
+  if (length(x[["net_attrs"]])) {
+    graph_attr(out) <- x[["net_attrs"]]
   }
   if (is.data.frame(x[["edges"]]) && nrow(x[["edges"]])) {
     edge_attr(out) <- x[["edges"]]

@@ -15,8 +15,8 @@ devtools::document(".")
 
 devtools::install(".", dependencies = FALSE, upgrade_dependencies = FALSE)
 
-system("Rscript inst/logo.R", ignore.stdout = TRUE, wait = TRUE, 
-       show.output.on.console = FALSE)
+# system("Rscript inst/logo.R", ignore.stdout = TRUE, wait = TRUE, 
+#        show.output.on.console = FALSE) # rlang update killed it
 
 rmarkdown::render("README.Rmd", output_format = "github_document")
 

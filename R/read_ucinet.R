@@ -25,7 +25,6 @@
 #' @importFrom magrittr %>%
 #' @importFrom purrr imap map map_df
 #' @importFrom tibble as_tibble tibble
-#' @export
 read_ucinet <- function(path, directed = NULL) {
   raw <- readLines(path)
   file_type <- raw[[1]]
@@ -115,44 +114,47 @@ read_ucinet <- function(path, directed = NULL) {
   }
   if (!two_mode) {
     if (is.list(mats)) {
-      all_gs <- map(mats, ~ graph_from_adjacency_matrix(.x, mode = directed_chr, 
-                                                        weighted = TRUE))
+      all_gs <- purrr::map(mats, 
+                           ~ igraph::graph_from_adjacency_matrix(.x, mode = directed_chr, 
+                                                                 weighted = TRUE))
     } else {
-      all_gs <- graph_from_adjacency_matrix(.x, mode = directed_chr, weighted = TRUE)
+      all_gs <- igraph::graph_from_adjacency_matrix(mats, mode = directed_chr, 
+                                                    weighted = TRUE)
     }
   } else {
     if (is.list(mats)) {
-      all_gs <- map(mats, ~ graph_from_incidence_matrix(.x, directed = directed))
+      all_gs <- purrr::map(mats, 
+                           ~ igraph::graph_from_incidence_matrix(.x, directed = directed))
       all_gs <- map(all_gs, bip_swap_modes)
     } else {
-      all_gs <- graph_from_incidence_matrix(mats, directed = directed)
+      all_gs <- igraph::graph_from_incidence_matrix(mats, directed = directed)
       all_gs <- bip_swap_modes(all_gs)
     }
   }
-  if (!is.igraph(all_gs)) {
-    init_edges <- imap(all_gs, ~ igraph::as_data_frame(.x, what = "edges") %>% 
-                         tibble::as_tibble() %>% 
-                         dplyr::mutate(level = .y)
+  if (!igraph::is.igraph(all_gs)) {
+    init_edges <- purrr::imap(all_gs, ~ igraph::as_data_frame(.x, what = "edges") %>% 
+                                tibble::as_tibble() %>% 
+                                dplyr::mutate(level = .y)
                       )
-    init_edges <- bind_rows(init_edges)
-    init_vertices <- map_df(all_gs, igraph::as_data_frame, what = "vertices")
+    init_edges <- dplyr::bind_rows(init_edges)
+    init_vertices <- purrr::map_df(all_gs, igraph::as_data_frame, what = "vertices")
   } else {
-    init_edges <- as_data_frame(all_gs, what = "edges")
-    init_vertices <- as_data_frame(all_gs, what = "vertices")
+    init_edges <- igraph::as_data_frame(all_gs, what = "edges")
+    init_vertices <- igraph::as_data_frame(all_gs, what = "vertices")
   }
-  init_edges <- as_tibble(init_edges)
-  init_vertices <- as_tibble(init_vertices)
+  init_edges <- tibble::as_tibble(init_edges)
+  init_vertices <- tibble::as_tibble(init_vertices)
   if (!ncol(init_vertices)) {
-    init_vertices <- tibble(name = sort(unique(c(init_edges$from, init_edges$to))))
+    init_vertices <- tibble::tibble(name = sort(unique(c(init_edges$from, init_edges$to))))
   }
-  init_vertices <- select(init_vertices, name, everything())
-  init_vertices <- distinct(init_vertices)
+  init_vertices <- dplyr::select(init_vertices, name, everything())
+  init_vertices <- dplyr::distinct(init_vertices)
 
-  out <- graph_from_data_frame(init_edges, directed, vertices = init_vertices)
-  if ("weight" %in% edge_attr_names(out)) {
-    if (all(edge_attr(out, "weight") == 1L)) {
-      out <- delete_edge_attr(out, "weight")
+  out <- igraph::graph_from_data_frame(init_edges, directed, vertices = init_vertices)
+  if ("weight" %in% igraph::edge_attr_names(out)) {
+    if (all(igraph::edge_attr(out, "weight") == 1L)) {
+      out <- igraph::delete_edge_attr(out, "weight")
     }
   }
-  as_net_primitive(out)
+  as_bridge_net(out)
 }

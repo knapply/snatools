@@ -19,7 +19,7 @@ edg_attr_names(x)
 \method{edg_attr_names}{tbl_graph}(x)
 }
 \arguments{
-\item{x}{An \code{bridge_net}, \code{igraph}, \code{network}, or \code{tbl_graph}.}
+\item{x}{A \code{bridge_net}, \code{igraph}, \code{network}, or \code{tbl_graph}.}
 }
 \value{
 \code{character} \code{vector} listing the names of \code{x}'s edge attributes.
@@ -30,28 +30,32 @@ Extract a graph objects's edge attribute names.
 \examples{
 library(snatools)
 
-adj_mat <- rbinom(16L, 1L, 0.3) \%>\% 
-  matrix(nrow = 4L, dimnames = list(letters[1:4], letters[1:4]))
+data(sampson_monastery)
 
-ig <- adj_mat \%>\% 
-  igraph::graph_from_adjacency_matrix() \%>\% 
-  igraph::set_edge_attr("another_attr", value = sample(seq_len(igraph::ecount(.)))) 
+ig <- sampson_monastery \%>\% 
+  as_igraph()
+  
+nw <- sampson_monastery \%>\% 
+  as_network()
+  
+tidy_g <- ig \%>\% 
+  tidygraph::as_tbl_graph()
+
+edg_attr_names(sampson_monastery)
+
 edg_attr_names(ig)
 
-nw <- network::as.network(adj_mat)
-network::set.edge.attribute(nw, "another_attr", 
-                            value = sample(seq_len(network::network.edgecount(nw))))
 edg_attr_names(nw)
 
-tbl_g <- tidygraph::as_tbl_graph(ig)
-edg_attr_names(tbl_g)
-
-sna_g <- as_bridge_net(ig)
-edg_attr_names(sna_g)
+edg_attr_names(tidy_g)
 
 }
 \seealso{
 \code{\link[=edg_get_attr]{edg_get_attr()}}, \code{\link[=edg_to_df]{edg_to_df()}}, \code{\link[igraph:edge_attr_names]{igraph::edge_attr_names()}},
+\code{\link[network:list.edge.attributes]{network::list.edge.attributes()}}
+
+\code{\link[igraph:edge_attr_names]{igraph::edge_attr_names()}}
+
 \code{\link[network:list.edge.attributes]{network::list.edge.attributes()}}
 }
 \author{

@@ -1,43 +1,16 @@
-get_metadata <- function(x, full = FALSE) {
-  UseMethod("get_metadata")
-}
-
-get_metadata.default <- function(x, full = FALSE) {
+get_metadata <- function(x) {
   out <- list(n_vertices = net_count_vertices(x),
               n_edges = net_count_edges(x),
               is_directed = net_is_directed(x),
               is_bipartite = net_is_bipartite(x),
-              n_actors = NULL)
+              n_actors = NULL,
+              is_multiplex = net_is_multiplex(x),
+              has_loops = net_has_loops(x),
+              has_isolates = net_has_isolates(x))
   if (net_is_bipartite(x)) {
     out[["n_actors"]] <- net_count_actors(x)
   }
-  if (full) {
-    out[["any_multiplex"]] <- net_is_multiplex(x)
-    out[["has_loops"]] <- net_has_loops(x)
-    out[["has_isolates"]] <- net_has_isolates(x)
-  }
-  out <- Filter(length, out)
-  class(out) <- c("metadata", "list")
-  out
-}
-
-get_metadata.edgelist <- function(x, full = FALSE) {
-  out <- list(n_vertices = attr(x, "n_vertices"),
-              n_edges = attr(x, "n_edges"),
-              is_directed = attr(x, "is_directed"),
-              is_bipartite = attr(x, "is_bipartite"),
-              n_actors = NULL)
-  if (net_is_bipartite(x)) {
-    out[["n_actors"]] <- attr(x, "n_actors")
-  }
-  if (full) {
-    out[["any_multiplex"]] <- net_is_multiplex(x)
-    out[["has_loops"]] <- net_has_loops(x)
-    out[["has_isolates"]] <- net_has_isolates(x)
-  }
-  out <- Filter(length, out)
-  class(out) <- c("metadata", "list")
-  out
+  Filter(length, out)
 }
 
 set_metadata_attr <- function(x, graph) {
@@ -362,7 +335,7 @@ net_count_vertices <- function(x) {
 #'
 #' @export
 net_count_vertices.bridge_net <- function(x) {
-  set_whole_number_storage(x[["metadata"]][["n_vertices"]])
+  set_whole_number_storage(nrow(x[["vertices"]]))
 }
 
 #' @rdname net_count_vertices
@@ -449,7 +422,7 @@ net_count_edges <- function(x) {
 #' 
 #' @export
 net_count_edges.bridge_net <- function(x) {
-  set_whole_number_storage(x[["metadata"]][["n_edges"]])
+  set_whole_number_storage(nrow(x[["edges"]]))
 }
 
 #' @rdname net_count_edges
@@ -544,7 +517,7 @@ net_is_multiplex <- function(x) {
 #' 
 #' @export
 net_is_multiplex.bridge_net <- function(x) {
-  x[["metadata"]][["any_multiplex"]]
+  any(duplicated.matrix(x[["edges"]][, c(".ego", ".alter")]))
 }
 
 #' @rdname net_is_multiplex

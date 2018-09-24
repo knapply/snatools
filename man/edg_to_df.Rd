@@ -24,7 +24,7 @@ edg_to_df(x, include_dyad = TRUE, leave_raw = TRUE)
 \method{print}{edge_data_frame}(x, .nrow = 10L)
 }
 \arguments{
-\item{x}{An \code{bridge_net}, \code{igraph}, \code{network}, or \code{tbl_graph}.}
+\item{x}{A \code{bridge_net}, \code{igraph}, \code{network}, or \code{tbl_graph}.}
 
 \item{include_dyad}{\code{logical} (default: \code{TRUE}) indicating whether to return the \code{.ego}
 and \code{.alter} of each edge's dyad.}
@@ -43,39 +43,30 @@ Extract all edge attributes as a data frame.
 \examples{
 library(snatools)
 
-adj_mat <- rbinom(16L, 1L, 0.3) \%>\% 
-  matrix(nrow = 4L, dimnames = list(letters[1:4], letters[1:4]))
+data(sampson_monastery)
 
-ig <- adj_mat \%>\% 
-  igraph::graph_from_adjacency_matrix() \%>\% 
-  igraph::set_edge_attr("an_edge_attribute", 
-                        value = sample(seq_len(igraph::ecount(.)))) 
+ig <- sampson_monastery \%>\% 
+  as_igraph()
+  
+nw <- sampson_monastery \%>\% 
+  as_network()
+  
+tidy_g <- ig \%>\% 
+  tidygraph::as_tbl_graph()
+
+edg_to_df(sampson_monastery)
 
 edg_to_df(ig)
-edg_to_df(ig, include_dyad = FALSE)
-edg_to_df(ig, leave_raw = TRUE)
-
-nw <- network::as.network(adj_mat)
-network::set.edge.attribute(nw, "an_edge_attribute", 
-                            value = sample(seq_len(network::network.edgecount(nw))))
 
 edg_to_df(nw)
-edg_to_df(nw, include_dyad = FALSE)
-edg_to_df(nw, leave_raw = TRUE)
 
-tbl_g <- tidygraph::as_tbl_graph(ig)
-
-edg_to_df(tbl_g)
-edg_to_df(tbl_g, include_dyad = FALSE)
-edg_to_df(tbl_g, leave_raw = TRUE)
-
-sna_g <- as_bridge_net(nw)
-
-edg_to_df(sna_g)
+edg_to_df(tidy_g)
 
 }
 \seealso{
 \code{\link[=edg_get_attr]{edg_get_attr()}}, \code{\link[=edg_attr_names]{edg_attr_names()}}, \code{\link[igraph:as_data_frame]{igraph::as_data_frame()}}
+
+\code{\link[igraph:as_data_frame]{igraph::as_data_frame()}}
 }
 \author{
 Brendan Knapp \email{brendan.g.knapp@gmail.com}

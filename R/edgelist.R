@@ -246,6 +246,8 @@ print.edgelist <- function(x, .nrow = 10L) {
     cat("\n")
   }
   cat_patch("* Values correspond to %s.", el_type, initial = "# ", prefix = "## ")
+  cat("\n")
+  invisible(x)
 }
 
 #' @rdname rep_as_edgelist

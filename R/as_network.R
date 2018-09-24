@@ -100,7 +100,7 @@ as_network <- function(x, ...) {
 #' @importFrom network add.edges.network network.initialize set.edge.attribute 
 #'             set.network.attribute set.vertex.attribute
 #' @export
-as_network.bridge_net <- function(x, .actor = TRUE) {
+as_network.bridge_net <- function(x, .actor = TRUE, ...) {
   metadata <- x[["metadata"]]
   if (metadata[["is_bipartite"]]) {
     bipartite_arg <- metadata[["n_actors"]]
@@ -110,8 +110,8 @@ as_network.bridge_net <- function(x, .actor = TRUE) {
   out <- network.initialize(n = metadata[["n_vertices"]], 
                             directed = metadata[["is_directed"]],
                             hyper = FALSE, 
-                            loops = metadata[["any_loops"]], 
-                            multiple = metadata[["any_multiplex"]], 
+                            loops = metadata[["has_loops"]], 
+                            multiple = metadata[["is_multiplex"]], 
                             bipartite = bipartite_arg)
   if (is.matrix(x[["edges"]])) {
     out <- add.edges.network(out, 
@@ -125,10 +125,10 @@ as_network.bridge_net <- function(x, .actor = TRUE) {
     x[["edges"]][[".ego"]] <- NULL
     x[["edges"]][[".alter"]] <- NULL
   }
-  if (length(x[["graph_attributes"]])) {
-    for (g in names(x[["graph_attributes"]])) {
+  if (length(x[["net_attrs"]])) {
+    for (g in names(x[["net_attrs"]])) {
       set.network.attribute(out, attrname = g,
-                            value = x[["graph_attributes"]][[g]])
+                            value = x[["net_attrs"]][[g]])
     }
   }
   if (is.data.frame(x[["edges"]]) && nrow(x[["edges"]])) {
@@ -152,11 +152,11 @@ as_network.bridge_net <- function(x, .actor = TRUE) {
 #' 
 #' @importFrom igraph is_bipartite
 #' @export
-as_network.igraph <- function(x, ...) {
+as_network.igraph <- function(x, .actor = TRUE, ...) {
   if (is_bipartite(x)) {
     x <- prep_bipartite_igraph(x)
   }
-  as_network(as_bridge_net(x), ...)
+  as_network(as_bridge_net(x, ...), .actor = .actor)
 }
 
 #' @rdname as_network
@@ -169,6 +169,6 @@ as_network.network <- function(x, ...) {
 #' @rdname as_network
 #' 
 #' @export
-as_network.tbl_graph <- function(x, ...) {
-  as_network(as_bridge_net(x), ...)
+as_network.tbl_graph <- function(x, .actor = TRUE, ...) {
+  as_network(as_bridge_net(x, ...), .actor = .actor)
 }

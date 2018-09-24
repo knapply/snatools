@@ -74,6 +74,8 @@ print.mixing_matrix <- function(mixing_matrix, ...) {
                         .alter = c("", colnames(mixing_matrix), 
                                    rep("", 3L), "Incoming Ties"))
   print(out, quote = FALSE, ...)
+  cat("\n")
+  invisible(mixing_matrix)
 }
 
 #' @rdname rep_as_mixing_matrix

@@ -1,40 +1,33 @@
 ---
-output: 
-  github_document:
-    html_preview: false
-editor_options: 
-  chunk_output_type: console
+output: github_document
 ---
 
 <!-- README.Rmd generates README.md. -->
 
 ```{r, echo = FALSE}
-rm(list = ls(all.names = TRUE))
-
 knitr::opts_chunk$set(
-  collapse = TRUE, 
-  fig.align = "center",
+  collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/"
 )
-
-knitr::opts_chunk$set(echo = TRUE)
-
-options(crayon.enabled = TRUE)
-sgr_wrap <- function(x, options){
-  paste0(
-    "<pre class=\"r-output\"><code>",
-    fansi::sgr_to_html(x = htmltools::htmlEscape(x)),
-    "</code></pre>"
-  )
-}
-knitr::knit_hooks$set(output = sgr_wrap, warning=sgr_wrap, message=sgr_wrap)
 ```
 
 
-# snatools <a href="man/figures/logo.png"> <img src="man/figures/logo.png" align="right" height="45%" width="45%" href="man/figures/logo.png"/> </a>
+# snatools <a href="http://res.cloudinary.com/syknapptic/image/upload/v1537658876/logo_bnrvvg.png"> <img src="http://res.cloudinary.com/syknapptic/image/upload/v1537658876/logo_bnrvvg.png" align="right" height="45%" width="45%" href="http://res.cloudinary.com/syknapptic/image/upload/v1537658876/logo_bnrvvg.png"/> </a>
 
-[![](https://img.shields.io/badge/devel%20version-0.0.0.9-red.svg)](https://github.com/knapply/snatools)
+[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+
+
+
+<!-- ```{r, echo=FALSE, prompt=FALSE, results='asis', comment=""} -->
+<!-- cat(' -->
+
+<!--     ') -->
+<!-- ``` -->
+
+
+
+<!-- [![](https://img.shields.io/badge/devel%20version-0.0.0.9-red.svg)](https://github.com/knapply/snatools) -->
 
 An R toolkit to bridge graph classes and streamline network analytic workflows.
 
@@ -56,57 +49,127 @@ library(snatools)
 
 ```{r, echo=FALSE}
 library(snatools)
+library(kableExtra)
 ```
 
 <br>
 
-# `network` to `igraph`
-
 ```{r}
-network_object <- snatools:::build_test_graph("nw")
-
-network_object %>%  
-  as_bridge_net()
-network_object %>% 
-  as_igraph()
+data("sampson_monastery")
 ```
 
-## bipartite `network` to `igraph`
+## `bridge_net`
+
+The `bridge_net` object provides an intermediate graph structure that can effectively map data to both `igraph` and `network` objects.
 
 ```{r}
-bipartite_network <- snatools:::build_test_graph("nw", directed = FALSE, bipartite = TRUE)
-bipartite_network %>% 
-  as_bridge_net()
-bipartite_network %>% 
-  as_igraph()
+sampson_monastery
 ```
 
-# `igraph` to `network`
+## Conversion
+
+Through `bridge_net` objects, `igraph` and `network` objects can play together easier than ever.
 
 ```{r}
-igraph_object <- snatools:::build_test_graph("ig")
-
-igraph_object %>% 
-  as_bridge_net()
-igraph_object %>% 
-  as_network()
+ig <- as_igraph(sampson_monastery)
 ```
 
-## bipartite `igraph` to `network`
-
-````{r}
-bipartite_igraph <- snatools:::build_test_graph("ig", directed = FALSE, bipartite = TRUE)
-
-bipartite_igraph %>% 
-  as_bridge_net()
-bipartite_igraph %>% 
-  as_network()
+```{r, echo=FALSE}
+ig
 ```
-
-
-## Development Tests
 
 ```{r}
+nw <- as_network(sampson_monastery)
+```
+
+```{r, echo=FALSE}
+nw
+```
+
+```{r}
+as_network(ig)
+```
+
+```{r}
+as_igraph(nw)
+```
+
+### `%==%`
+
+Since `bridge_net`s are intermediate structures, comparing them is easy. `%==%` streamlines the process to make successful conversion confirmation as simple as possible.
+
+```{r}
+all(ig %==% nw,
+    ig %==% sampson_monastery,
+    nw %==% sampson_monastery)
+```
+
+The only data that are not compared by `%==%` are non-structural attributes as `igraph` and `network` do not handle them in compatible ways.
+
+```{r}
+ig %>% igraph::graph_attr_names()
+nw %>% network::list.network.attributes()
+```
+
+## Standardized Data Extraction
+
+```{r}
+ig %>% vrt_to_df()
+```
+
+```{r}
+nw %>% edg_to_df()
+```
+
+## Standardized Representations
+
+```{r}
+ig %>% rep_as_edgelist()
+```
+
+## Additional Tools
+
+```{r}
+nw %>% rep_as_mixing_matrix(vrt_attr = "faction")
+```
+
+## Easy Integeration with Modern Workflows
+
+```{r, message=FALSE}
+library(tidygraph, warn.conflicts = FALSE)
+library(ggraph, quietly = TRUE)
+
+nw %>% 
+  as_igraph() %>% 
+  as_tbl_graph() %E>%
+  select(time, relation) %>% 
+  filter(time == 3) %>%
+  mutate(relation = factor(relation, 
+                           c("liking", "praise", "esteem", "positive influence",
+                             "disliking", "blame", "disesteem", "negative influence"))
+        ) %>% 
+  ggraph() +
+  geom_edge_fan(aes(colour = relation), width = 0.5, show.legend = FALSE) +
+  geom_node_point(aes(colour = faction)) +
+  guides(edge_colour = guide_legend(title = NULL),
+         colour = guide_legend(title = NULL)) +
+  facet_edges(~ relation, ncol = 4) +
+  theme_void() +
+  theme(strip.text = element_text(face = "bold", vjust = 1),
+        panel.border = element_rect(fill = NA, color = "lightgray"),
+        legend.position = "bottom")
+```
+
+
+# Development Tests
+
+```{r, message=FALSE}
 devtools::test()
+```
+
+## Test Coverage
+
+```{r}
+covr::package_coverage()
 ```
 

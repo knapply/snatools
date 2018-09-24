@@ -1,6 +1,6 @@
 #' Extract a graph objects's vertex attribute names.
 #' 
-#' @param x An `bridge_net`, `igraph`, `network`, or `tbl_graph`.
+#' @param x A `bridge_net`, `igraph`, `network`, or `tbl_graph`.
 #' 
 #' @return `character` `vector` listing the names of `x`'s vertex attributes.
 #' 
@@ -12,28 +12,16 @@
 #' @examples 
 #' library(snatools)
 #' 
-#' adj_mat <- rbinom(16L, 1L, 0.3) %>% 
-#'   matrix(nrow = 4L, dimnames = list(letters[1:4], letters[1:4]))
+#' data(sampson_monastery)
 #'
-#' ig <- adj_mat %>% 
-#'   igraph::graph_from_adjacency_matrix() %>% 
-#'   igraph::set_vertex_attr("another_attr", value = sample(seq_len(igraph::vcount(.)))) 
+#' ig <- sampson_monastery %>% 
+#'   as_igraph()
+#'   
+#' nw <- sampson_monastery %>% 
+#'   as_network()
 #' 
-#' vrt_attr_names(ig)
-#' 
-#' nw <- network::as.network(adj_mat)
-#' network::set.vertex.attribute(nw, "another_attr", 
-#'                               value = sample(seq_len(network::network.size(nw))))
-#' 
-#' vrt_attr_names(nw)
-#' 
-#' tbl_g <- tidygraph::as_tbl_graph(ig)
-#' 
-#' vrt_attr_names(tbl_g)
-#' 
-#' sna_g <- as_bridge_net(ig)
-#' 
-#' vrt_attr_names(sna_g)
+#' tidy_g <- ig %>% 
+#'   tidygraph::as_tbl_graph()
 #' 
 #' @export
 vrt_attr_names <- function(x) {
@@ -41,12 +29,22 @@ vrt_attr_names <- function(x) {
 }
 
 #' @rdname vrt_attr_names
+#' 
+#' @examples 
+#' vrt_attr_names(sampson_monastery)
+#' 
 #' @export
 vrt_attr_names.bridge_net <- function(x) {
   names(x[["vertices"]])
 }
 
 #' @rdname vrt_attr_names
+#' 
+#' @seealso [igraph::vertex_attr_names()]
+#' 
+#' @examples 
+#' vrt_attr_names(ig)
+#' 
 #' @importFrom igraph vertex_attr_names
 #' @export
 vrt_attr_names.igraph <- function(x) {
@@ -58,6 +56,12 @@ vrt_attr_names.igraph <- function(x) {
 }
 
 #' @rdname vrt_attr_names
+#' 
+#' @seealso [network::list.vertex.attributes()]
+#' 
+#' @examples 
+#' vrt_attr_names(nw)
+#' 
 #' @export
 vrt_attr_names.network <- function(x) {
   out <- unique(unlist(lapply(x[["val"]], names)))
@@ -69,6 +73,10 @@ vrt_attr_names.network <- function(x) {
 }
 
 #' @rdname vrt_attr_names
+#' 
+#' @examples 
+#' vrt_attr_names(tidy_g)
+#' 
 #' @export
 vrt_attr_names.tbl_graph <- function(x) {
   vrt_attr_names(as_igraph(x))
@@ -79,7 +87,7 @@ vrt_attr_names.tbl_graph <- function(x) {
 
 #' Extract a specific vertex attribute.
 #' 
-#' @param x An `bridge_net`, `igraph`, `network`, or `tbl_graph`.
+#' @param x A `bridge_net`, `igraph`, `network`, or `tbl_graph`.
 #' @param vrt_attr `character` specifying the target vertex attribute.
 #' 
 #' @return `vector` of vertex attribute values.
@@ -92,32 +100,16 @@ vrt_attr_names.tbl_graph <- function(x) {
 #' @examples 
 #' library(snatools)
 #' 
-#' adj_mat <- rbinom(16L, 1L, 0.3) %>% 
-#'   matrix(nrow = 4L, dimnames = list(letters[1:4], letters[1:4]))
+#' data(sampson_monastery)
 #'
-#' ig <- adj_mat %>% 
-#'   igraph::graph_from_adjacency_matrix() %>% 
-#'   igraph::set_vertex_attr("a_vertex_attribute", 
-#'                           value = sample(seq_len(igraph::vcount(.)))) 
+#' ig <- sampson_monastery %>% 
+#'   as_igraph()
+#'   
+#' nw <- sampson_monastery %>% 
+#'   as_network()
 #' 
-#' ig %>% 
-#'   vrt_get_attr("name")
-#' 
-#' nw <- network::as.network(adj_mat)
-#'   network::set.vertex.attribute(nw, "a_vertex_attribute", 
-#'                                 value = sample(seq_len(network::network.size(nw))))
-#' 
-#' nw %>% 
-#'   vrt_get_attr("vertex.names")
-#' 
-#' tbl_g <- tidygraph::as_tbl_graph(ig)
-#' 
-#' tbl_g %>% 
-#'   vrt_get_attr("a_vertex_attribute")
-#' 
-#' sna_g <- as_bridge_net(nw)
-#' 
-#' vrt_get_attr(sna_g, "a_vertex_attribute")
+#' tidy_g <- ig %>% 
+#'   tidygraph::as_tbl_graph()
 #' 
 #' @export
 vrt_get_attr <- function(x, vrt_attr) {
@@ -126,23 +118,35 @@ vrt_get_attr <- function(x, vrt_attr) {
 
 #' @rdname vrt_get_attr
 #' 
+#' @examples 
+#' vrt_get_attr(sampson_monastery, "faction")
+#' 
 #' @export
 vrt_get_attr.bridge_net <- function(x, vrt_attr) {
+  validate_vrt_attr(x, vrt_attr)
   x[["vertices"]][[vrt_attr]]
 }
 
 #' @rdname vrt_get_attr
 #' 
+#' @examples 
+#' vrt_get_attr(ig, "faction")
+#' 
 #' @importFrom igraph vertex_attr
 #' @export
 vrt_get_attr.igraph <- function(x, vrt_attr) {
+  validate_vrt_attr(x, vrt_attr)
   vertex_attr(x, vrt_attr)
 }
 
 #' @rdname vrt_get_attr
 #' 
+#' @examples 
+#' vrt_get_attr(nw, "faction")
+#' 
 #' @export
 vrt_get_attr.network <- function(x, vrt_attr) {
+  validate_vrt_attr(x, vrt_attr)
   unlist(lapply(x[["val"]], function(x) {
     x[[vrt_attr]] %||% NA
     }))
@@ -150,15 +154,19 @@ vrt_get_attr.network <- function(x, vrt_attr) {
 
 #' @rdname vrt_get_attr
 #' 
+#' @examples 
+#' vrt_get_attr(tidy_g, "faction")
+#' 
 #' @export
 vrt_get_attr.tbl_graph <- function(x, vrt_attr) {
-  vrt_get_attr(as_igraph(x), vrt_attr)
+  validate_vrt_attr(x, vrt_attr)
+  vrt_get_attr.igraph(as_igraph.tbl_graph(x), vrt_attr)
 }
 
 
 #' Extract all vertex attributes as a data frame.
 #' 
-#' @param x An `bridge_net`, `igraph`, `network`, or `tbl_graph`.
+#' @param x A `bridge_net`, `igraph`, `network`, or `tbl_graph`.
 #' @param leave_raw `logical` (default: `FALSE`) indicating whether to return
 #' a raw `data.frame` instead of a `vertex_data_frame` that standardizes results across 
 #' graph classes.
@@ -172,32 +180,16 @@ vrt_get_attr.tbl_graph <- function(x, vrt_attr) {
 #' @examples 
 #' library(snatools)
 #' 
-#' adj_mat <- rbinom(16L, 1L, 0.3) %>% 
-#'   matrix(nrow = 4L, dimnames = list(letters[1:4], letters[1:4]))
+#' data(sampson_monastery)
 #'
-#' ig <- adj_mat %>% 
-#'   igraph::graph_from_adjacency_matrix() %>% 
-#'   igraph::set_vertex_attr("a_vertex_attribute", 
-#'                           value = sample(seq_len(igraph::vcount(.)))) 
+#' ig <- sampson_monastery %>% 
+#'   as_igraph()
+#'   
+#' nw <- sampson_monastery %>% 
+#'   as_network()
 #' 
-#' vrt_to_df(ig)
-#' vrt_to_df(ig, leave_raw = FALSE)
-#' 
-#' nw <- network::as.network(adj_mat)
-#' network::set.vertex.attribute(nw, "a_vertex_attribute", 
-#'                               value = sample(seq_len(network::network.size(nw))))
-#' 
-#' vrt_to_df(nw)
-#' vrt_to_df(nw, leave_raw = FALSE)
-#' 
-#' tbl_g <- tidygraph::as_tbl_graph(ig)
-#' 
-#' vrt_to_df(tbl_g)
-#' vrt_to_df(tbl_g, leave_raw = FALSE)
-#' 
-#' sna_g <- as_bridge_net(nw)
-#' 
-#' vrt_to_df(sna_g)
+#' tidy_g <- ig %>% 
+#'   tidygraph::as_tbl_graph()
 #' 
 #' @export
 vrt_to_df <- function(x, leave_raw = FALSE) {
@@ -206,12 +198,18 @@ vrt_to_df <- function(x, leave_raw = FALSE) {
 
 #' @rdname vrt_to_df
 #' 
+#' @examples 
+#' vrt_to_df(sampson_monastery)
+#' 
 #' @export
 vrt_to_df.bridge_net <- function(x) {
   x[["vertices"]]
 }
 
 #' @rdname vrt_to_df
+#' 
+#' @examples 
+#' vrt_to_df(ig)
 #' 
 #' @importFrom igraph as_data_frame set_vertex_attr V vcount vertex_attr
 #' @export
@@ -237,6 +235,9 @@ vrt_to_df.igraph <- function(x, leave_raw = FALSE) {
 }
 
 #' @rdname vrt_to_df
+#' 
+#' @examples 
+#' vrt_to_df(nw)
 #' 
 #' @export
 vrt_to_df.network <- function(x, leave_raw = FALSE) {
@@ -286,6 +287,9 @@ vrt_to_df.network <- function(x, leave_raw = FALSE) {
 
 #' @rdname vrt_to_df
 #' 
+#' @examples 
+#' vrt_to_df(tidy_g)
+#' 
 #' @export
 vrt_to_df.tbl_graph <- function(x, leave_raw = FALSE) {
   vrt_to_df(as_igraph(x), leave_raw = leave_raw)
@@ -324,7 +328,13 @@ as_vertex_data_frame <- function(x) {
   x
 }
 
+
+#' @rdname vrt_to_df
+#' 
+#' @param .nrow Maximum number of rows to `print()`.
+#' 
 #' @importFrom utils head
+#' @export
 print.vertex_data_frame <- function(x, .nrow = 10L, .verbose = TRUE) {
   out <- head(x, .nrow)
   rownames(out) <- paste0("  ", seq_len(nrow(out)))
@@ -344,8 +354,272 @@ print.vertex_data_frame <- function(x, .nrow = 10L, .verbose = TRUE) {
   if (nrow(out) < nrow(x)) {
     cat("  ")
     cat_patch("  # ... with %s additional rows.", nrow(x) - nrow(out))
+    cat("\n")
   }
+  cat("\n")
+  invisible(x)
 }
 
 
+#' Delete Vertex Attributes
+#' 
+#' @param x A `bridge_net`, `igraph`, `network`, or `tbl_graph`.
+#' @param ... `character` including the name(s) of one or more vertex attributes to delete 
+#' from `x`.
+#' 
+#' @return `x`, but with `...` deleted.
+#' 
+#' @author Brendan Knapp \email{brendan.g.knapp@@gmail.com}
+#' 
+#' @examples 
+#' library(snatools)
+#' 
+#' data(sampson_monastery)
+#' 
+#' ig <- sampson_monastery %>% 
+#'   as_igraph()
+#'   
+#' nw <- sampson_monastery %>% 
+#'   as_network()
+#'   
+#' tidy_g <- ig %>% 
+#'   tidygraph::as_tbl_graph()
+#' 
+#' @export
+vrt_delete_attr <- function(x, ...) {
+  UseMethod("vrt_delete_attr")
+}
+
+#' @rdname vrt_delete_attr
+#' 
+#' @examples 
+#' sampson_monastery %>% 
+#'   vrt_delete_attr("cloisterville", "status")
+#'   
+#' @export
+vrt_delete_attr.bridge_net <- function(x, ...) {
+  attrs <- c(...)
+  validate_vrt_attr(x, attrs, max_length = Inf)
+  x[["vertices"]][, attrs] <- NULL
+  x
+}
+
+#' @rdname vrt_delete_attr
+#' 
+#' @seealso [`igraph::delete_vertex_attr()`]
+#' 
+#' @examples 
+#' ig %>% 
+#'   vrt_delete_attr("faction")
+#' 
+#' @importFrom igraph delete_vertex_attr
+#' @export
+vrt_delete_attr.igraph <- function(x, ...) {
+  attrs <- c(...)
+  validate_vrt_attr(x, attrs, max_length = Inf)
+  for (i in seq_along(attrs)) {
+    x <- delete_vertex_attr(x, attrs[[i]])
+  }
+  x
+}
+
+#' @rdname vrt_delete_attr
+#' 
+#' @seealso [`network::delete.vertex.attribute()`]
+#' 
+#' @examples 
+#' nw %>% 
+#'   vrt_delete_attr("cloisterville", "faction")
+#' 
+#' @importFrom network delete.vertex.attribute
+#' @export
+vrt_delete_attr.network <- function(x, ...) {
+  attrs <- c(...)
+  validate_vrt_attr(x, attrs, max_length = Inf)
+  for (i in seq_along(attrs)) {
+    network::delete.vertex.attribute(x, attrs[[i]])
+  }
+  x
+}
+
+#' @rdname vrt_delete_attr
+#' 
+#' @examples 
+#' tidy_g %>% 
+#'   vrt_delete_attr("faction", "status")
+#'
+#' @export
+vrt_delete_attr.tbl_graph <- function(x, ...) {
+  if (!requireNamespace("tidygraph")) {
+    terminate('{tidygraph} is required for this functionality.
+               Get it with `install.packages("tidygraph")`')
+  }
+  tidygraph::as_tbl_graph(vrt_delete_attr.igraph(as_igraph.tbl_graph(x), ...))
+}
+
+#' Filter vertices by their attributes.
+#' 
+#' @param x A `bridge_net`, `igraph`, `network`, or `tbl_graph`.
+#' @param ... `logical` conditions used to subset rows when said conditions evaluate to 
+#' `TRUE`.
+#' @param vrt_attr `character` specifying edge attribute to target. `vrt_filter_se()` 
+#' only.
+#' @param .f `function` (default: `NULL`) specifying the predicate function to apply to
+#' `vrt_attr`. `vrt_filter_se()` only.
+#' @param vrt_val (default: `NULL`) Value to use as second argument to `.f` (if 
+#' applicable).
+#' 
+#' @return `x`, but with vertices filtered by `...` for `vrt_filter()` or `edge_attr`, `.f`, 
+#' and/or `vrt_val` for `vrt_filter_se()`.
+#' 
+#' @details 
+#' `vrt_filter()` uses non-standard evaluation to make syntax as convenient as possible,
+#' while `vrt_filter_se()` uses standard evaluation if preferred (or if `vrt_filter()` 
+#' causes trouble).
+#' 
+#' @author Brendan Knapp \email{brendan.g.knapp@@gmail.com}
+#' 
+#' @examples 
+#' library(snatools)
+#' 
+#' data(sampson_monastery)
+#' 
+#' ig <- sampson_monastery %>% 
+#'   as_igraph()
+#'   
+#' nw <- sampson_monastery %>% 
+#'   as_network() 
+#' 
+#' @export
+vrt_filter <- function(x, ...) {
+  UseMethod("vrt_filter")
+}
+
+
+#' @rdname vrt_filter
+#' 
+#' @export
+vrt_filter_se <- function(x, vrt_attr, .f, vrt_val = NULL) {
+  UseMethod("vrt_filter_se")
+}
+
+#' @rdname vrt_filter
+#' 
+#' @examples 
+#' sampson_monastery %>% 
+#'   vrt_filter(faction == "Outcasts", status == "Expelled")
+#' 
+#' @export
+vrt_filter.bridge_net <- function(x, ...) {
+  conditions <- eval(substitute(alist(...)))
+  x[["vertices"]][["old_index"]] <- seq_len(nrow(x[["vertices"]]))
+  for (i in seq_along(conditions)) {
+    call <- tryCatch(eval(conditions[[i]], x[["vertices"]]),
+                     error = function(e) {
+                       validate_vrt_attr(x, txt_extract(e[["message"]], "'.*?'"))
+                     })
+    x[["vertices"]] <- x[["vertices"]][call, , drop = FALSE]
+  }
+  x[["edges"]] <- x[["edges"]][x[["edges"]][, ".ego"] %in% 
+                                 x[["vertices"]][["old_index"]], ]
+  x[["edges"]] <- x[["edges"]][x[["edges"]][, ".alter"] %in% 
+                                 x[["vertices"]][["old_index"]], ]
+  
+  x[["edges"]][, ".ego"] <- match(x[["edges"]][, ".ego"], 
+                                  x[["vertices"]][["old_index"]])
+  x[["edges"]][, ".alter"] <- match(x[["edges"]][, ".alter"], 
+                                    x[["vertices"]][["old_index"]])
+  
+  x[["vertices"]][["old_index"]] <- NULL
+  x[["metadata"]] <- get_metadata(x)
+  x
+}
+
+
+#' @rdname vrt_filter
+#' 
+#' @examples 
+#' sampson_monastery %>% 
+#'   vrt_filter_se("faction", `==`, "Outcasts") %>% 
+#'   vrt_filter_se("status", `==`, "Expelled")
+#' 
+#' @export
+vrt_filter_se.bridge_net <- function(x, vrt_attr, .f = NULL, vrt_val = NULL) {
+  validate_vrt_attr(x, vrt_attr)
+  x[["vertices"]][["old_index"]] <- seq_len(nrow(x[["vertices"]]))
+  if (!is.null(.f)) {
+    .f <- match.fun(.f)
+  }
+  if (is.null(vrt_val)) {
+    if (is.null(.f)) {
+      x[["vertices"]] <- x[["vertices"]][x[["vertices"]][[vrt_attr]], , drop = FALSE]
+    } else {
+      x[["vertices"]] <- x[["vertices"]][.f(x[["vertices"]][[vrt_attr]]), , drop = FALSE]
+    }
+  } else {
+    x[["vertices"]] <- x[["vertices"]][.f(x[["vertices"]][[vrt_attr]], vrt_val), , drop = FALSE]
+  }
+  x[["edges"]] <- x[["edges"]][x[["edges"]][, ".ego"] %in% 
+                                 x[["vertices"]][["old_index"]], ]
+  x[["edges"]] <- x[["edges"]][x[["edges"]][, ".alter"] %in% 
+                                 x[["vertices"]][["old_index"]], ]
+  
+  x[["edges"]][, ".ego"] <- match(x[["edges"]][, ".ego"], 
+                                  x[["vertices"]][["old_index"]])
+  x[["edges"]][, ".alter"] <- match(x[["edges"]][, ".alter"], 
+                                    x[["vertices"]][["old_index"]])
+  
+  x[["vertices"]][["old_index"]] <- NULL
+  
+  x[["metadata"]] <- get_metadata(x)
+  x
+}
+
+#' @rdname vrt_filter
+#' 
+#' @examples 
+#' ig %>% 
+#'   vrt_filter(cloisterville, faction == "Loyal")
+#'   
+#' @export
+vrt_filter.igraph <- function(x, ...) {
+  as_igraph(vrt_filter(as_bridge_net(x), ...))
+}
+
+
+#' @rdname vrt_filter
+#' 
+#' @examples
+#' ig %>% 
+#'   vrt_filter_se("cloisterville") %>% 
+#'   vrt_filter_se("faction", `==`, "Loyal")
+#' 
+#' @export
+vrt_filter_se.igraph <- function(x, vrt_attr, .f = NULL, vrt_val = NULL) {
+  as_igraph(vrt_filter_se(as_bridge_net(x), vrt_attr, .f, vrt_val))
+}
+
+
+#' @rdname vrt_filter
+#' 
+#' @examples 
+#' nw %>% 
+#'   vrt_filter(status %in% c("Expelled", "Left Voluntarily"))
+#'   
+#' @export
+vrt_filter.network <- function(x, ...) {
+  as_network(vrt_filter(as_bridge_net(x), ...))
+}
+
+
+#' @rdname vrt_filter
+#' 
+#' @examples
+#' nw %>% 
+#'   vrt_filter_se("status", `%in%`, c("Expelled", "Left Voluntarily"))
+#' 
+#' @export
+vrt_filter_se.network <- function(x, vrt_attr, .f = NULL, vrt_val = NULL) {
+  as_network(vrt_filter_se(as_bridge_net(x), vrt_attr, .f, vrt_val))
+}
 
