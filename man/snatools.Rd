@@ -16,7 +16,7 @@ and those instructing them.
 Useful links:
 \itemize{
   \item \url{https://github.com/knapply/snatools}
-  \item \url{https://knapply.github.io/snatools/}
+  \item \url{https://knapply.github.io/snatools}
   \item Report bugs at \url{https://github.com/knapply/snatools/issues}
 }
 
