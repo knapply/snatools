@@ -15,18 +15,40 @@ knitr::opts_chunk$set(
 ```
 
 
-# snatools <a href="http://res.cloudinary.com/syknapptic/image/upload/v1537658876/logo_bnrvvg.png"> <img src="http://res.cloudinary.com/syknapptic/image/upload/v1537658876/logo_bnrvvg.png" align="right" height="45%" width="45%" href="http://res.cloudinary.com/syknapptic/image/upload/v1537658876/logo_bnrvvg.png"/> </a>
+# snatools <a href="http://res.cloudinary.com/syknapptic/image/upload/v1537658876/logo_bnrvvg.png"> <img src="http://res.cloudinary.com/syknapptic/image/upload/v1537658876/logo_bnrvvg.png" align="right" height="24%" width="24%" href="http://res.cloudinary.com/syknapptic/image/upload/v1537658876/logo_bnrvvg.png"/> </a>
 
 [![Lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![Travis-CI Build Status](https://travis-ci.org/knapply/snatools.svg?branch=master)](https://travis-ci.org/knapply/snatools)
-[![Coverage Status](https://codecov.io/gh/knapply/snatools/branch/master/graph/badge.svg)](https://codecov.io/gh/knapply/snatools?branch=master)
-[![GitHub Downloads](https://img.shields.io/github/downloads/knapply/snatools/total.svg)](https://github.com/knapply/snatools)
+[![codecov](https://codecov.io/gh/knapply/snatools/branch/master/graph/badge.svg)](https://codecov.io/gh/knapply/snatools)
+
+<!-- [![GitHub Downloads](https://img.shields.io/github/downloads/knapply/snatools/total.svg)](https://github.com/knapply/snatools) -->
+
+## Overview
+
+`snatools` is still _very_ experimental; the current API and dependencies are subject to change.
 
 
+`snatools` has four immediate goals:
 
-An R toolkit to bridge graph classes and streamline network analytic workflows.
+1. Accurately bridge existing graph frameworks (i.e. `igraph` and `network`).
+2. Streamline network analytic workflows by making common tasks as intuitive (and stable) as possible.
+    + Improve the efficiency of seasoned analysts while reducing the cognitive load of network newcomers (as well as those instructing them).
+3. Implement metrics that are missing from R's network ecosystem.
+    + Reimplement those that _should_ be made more accessible, efficient, or robust.
+4. Standardize fundamental tasks with methods that bypass the longstanding issues of `igraph` vs `network` namespace conflicts.
 
-<br>
+
+<!-- Additionally, `snatools` seeks to prepare for the future by establishing the foundation (or a set of lessons-learned) for an enhanced network framework that: -->
+
+<!-- 1. continues to be compatible with legacy frameworks. -->
+<!-- 2. can be extended to take advantage of modern and future R's ecosystem . -->
+<!--     + Optimization? `Rcpp`, C++'s Boost Graph Library, Python's graph-tool (heavily C++), CUDA -->
+<!--     + Data Frame Efficiency? `data.table` -->
+<!--     + Spatial Vector Data? `sf` -->
+<!--     + Intuitive Code? `tidyverse`  -->
+<!--         + `tidygraph` and `ggraph` may still be maturing, but they've rendered many legacy workflows for graph manipulation and plotting obsolete. -->
+<!--     + Next Generation Tools? [Apache Arrow](https://arrow.apache.org/) is coming. -->
+
 
 ## Installation
 
@@ -44,7 +66,6 @@ library(snatools)
 
 ```{r, echo=FALSE}
 library(snatools)
-library(kableExtra)
 ```
 
 <br>
@@ -53,7 +74,7 @@ library(kableExtra)
 data("sampson_monastery")
 ```
 
-## `bridge_net`
+### `bridge_net`
 
 The `bridge_net` object provides an intermediate graph structure that can effectively map data to both `igraph` and `network` objects.
 
@@ -61,7 +82,7 @@ The `bridge_net` object provides an intermediate graph structure that can effect
 sampson_monastery
 ```
 
-## Conversion
+### Conversion
 
 Through `bridge_net` objects, `igraph` and `network` objects can play together easier than ever.
 
@@ -89,7 +110,7 @@ as_network(ig)
 as_igraph(nw)
 ```
 
-### `%==%`
+#### `%==%`
 
 Since `bridge_net`s are intermediate structures, comparing them is easy. `%==%` streamlines the process to make successful conversion confirmation as simple as possible.
 
@@ -106,7 +127,7 @@ ig %>% igraph::graph_attr_names()
 nw %>% network::list.network.attributes()
 ```
 
-## Standardized Data Extraction
+### Standardized Data Extraction
 
 ```{r}
 ig %>% vrt_to_df()
@@ -116,19 +137,21 @@ ig %>% vrt_to_df()
 nw %>% edg_to_df()
 ```
 
-## Standardized Representations
+### Standardized Representations
 
 ```{r}
 ig %>% rep_as_edgelist()
 ```
 
-## Additional Tools
+### Additional Tools
 
 ```{r}
 nw %>% rep_as_mixing_matrix(vrt_attr = "faction")
 ```
 
-## Easy Integeration with Modern Workflows
+### Easy Integeration with Modern Workflows
+
+<center>
 
 ```{r, message=FALSE}
 library(tidygraph, warn.conflicts = FALSE)
@@ -155,16 +178,10 @@ nw %>%
         legend.position = "bottom")
 ```
 
+</center>
 
-# Development Tests
+<!-- # Development Tests -->
 
-```{r, message=FALSE}
-devtools::test()
-```
-
-## Test Coverage
-
-```{r}
-covr::package_coverage()
-```
-
+<!-- ```{r, message=FALSE} -->
+<!-- # devtools::test() -->
+<!-- ``` -->

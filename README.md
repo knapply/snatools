@@ -1,20 +1,53 @@
 
 <!-- README.Rmd generates README.md. -->
 
-# snatools <a href="http://res.cloudinary.com/syknapptic/image/upload/v1537658876/logo_bnrvvg.png"> <img src="http://res.cloudinary.com/syknapptic/image/upload/v1537658876/logo_bnrvvg.png" align="right" height="45%" width="45%" href="http://res.cloudinary.com/syknapptic/image/upload/v1537658876/logo_bnrvvg.png"/> </a>
+# snatools <a href="http://res.cloudinary.com/syknapptic/image/upload/v1537658876/logo_bnrvvg.png"> <img src="http://res.cloudinary.com/syknapptic/image/upload/v1537658876/logo_bnrvvg.png" align="right" height="24%" width="24%" href="http://res.cloudinary.com/syknapptic/image/upload/v1537658876/logo_bnrvvg.png"/> </a>
 
 [![Lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![Travis-CI Build
 Status](https://travis-ci.org/knapply/snatools.svg?branch=master)](https://travis-ci.org/knapply/snatools)
-[![Coverage
-Status](https://codecov.io/gh/knapply/snatools/branch/master/graph/badge.svg)](https://codecov.io/gh/knapply/snatools?branch=master)
-[![GitHub
-Downloads](https://img.shields.io/github/downloads/knapply/snatools/total.svg)](https://github.com/knapply/snatools)
+[![codecov](https://codecov.io/gh/knapply/snatools/branch/master/graph/badge.svg)](https://codecov.io/gh/knapply/snatools)
 
-An R toolkit to bridge graph classes and streamline network analytic
-workflows.
+<!-- [![GitHub Downloads](https://img.shields.io/github/downloads/knapply/snatools/total.svg)](https://github.com/knapply/snatools) -->
 
-<br>
+## Overview
+
+`snatools` is still *very* experimental; the current API and
+dependencies are subject to change.
+
+`snatools` has four immediate goals:
+
+1.  Accurately bridge existing graph frameworks (i.e. `igraph` and
+    `network`).
+2.  Streamline network analytic workflows by making common tasks as
+    intuitive (and stable) as possible.
+      - Improve the efficiency of seasoned analysts while reducing the
+        cognitive load of network newcomers (as well as those
+        instructing them).
+3.  Implement metrics that are missing from R’s network ecosystem.
+      - Reimplement those that *should* be made more accessible,
+        efficient, or robust.
+4.  Standardize fundamental tasks with methods that bypass the
+    longstanding issues of `igraph` vs `network` namespace
+conflicts.
+
+<!-- Additionally, `snatools` seeks to prepare for the future by establishing the foundation (or a set of lessons-learned) for an enhanced network framework that: -->
+
+<!-- 1. continues to be compatible with legacy frameworks. -->
+
+<!-- 2. can be extended to take advantage of modern and future R's ecosystem . -->
+
+<!--     + Optimization? `Rcpp`, C++'s Boost Graph Library, Python's graph-tool (heavily C++), CUDA -->
+
+<!--     + Data Frame Efficiency? `data.table` -->
+
+<!--     + Spatial Vector Data? `sf` -->
+
+<!--     + Intuitive Code? `tidyverse`  -->
+
+<!--         + `tidygraph` and `ggraph` may still be maturing, but they've rendered many legacy workflows for graph manipulation and plotting obsolete. -->
+
+<!--     + Next Generation Tools? [Apache Arrow](https://arrow.apache.org/) is coming. -->
 
 ## Installation
 
@@ -36,7 +69,7 @@ library(snatools)
 data("sampson_monastery")
 ```
 
-## `bridge_net`
+### `bridge_net`
 
 The `bridge_net` object provides an intermediate graph structure that
 can effectively map data to both `igraph` and `network` objects.
@@ -59,7 +92,7 @@ sampson_monastery
 #>  | Ambrose     Loyal    FALSE         Remained
 ```
 
-## Conversion
+### Conversion
 
 Through `bridge_net` objects, `igraph` and `network` objects can play
 together easier than ever.
@@ -68,11 +101,11 @@ together easier than ever.
 ig <- as_igraph(sampson_monastery)
 ```
 
-    #> IGRAPH b80ce8f DNW- 18 510 -- 
+    #> IGRAPH 4e75b2b DNW- 18 510 -- 
     #> + attr: network_name (g/c), author (g/c), faction (v/c),
     #> | cloisterville (v/l), status (v/c), name (v/c), weight (e/n),
     #> | relation (e/c), time (e/n), positive_relation (e/l)
-    #> + edges from b80ce8f (vertex names):
+    #> + edges from 4e75b2b (vertex names):
     #>  [1] Romauld    ->Ambrose     Romauld    ->Peter      
     #>  [3] Romauld    ->Albert      Bonaventure->Romauld    
     #>  [5] Bonaventure->Victor      Bonaventure->Albert     
@@ -128,11 +161,11 @@ as_network(ig)
 
 ``` r
 as_igraph(nw)
-#> IGRAPH b835935 DNW- 18 510 -- 
+#> IGRAPH 4ea939c DNW- 18 510 -- 
 #> + attr: network_name (g/c), author (g/c), faction (v/c),
 #> | cloisterville (v/l), status (v/c), name (v/c), weight (e/n),
 #> | relation (e/c), time (e/n), positive_relation (e/l)
-#> + edges from b835935 (vertex names):
+#> + edges from 4ea939c (vertex names):
 #>  [1] Romauld    ->Ambrose     Romauld    ->Peter      
 #>  [3] Romauld    ->Albert      Bonaventure->Romauld    
 #>  [5] Bonaventure->Victor      Bonaventure->Albert     
@@ -142,7 +175,7 @@ as_igraph(nw)
 #> + ... omitted several edges
 ```
 
-### `%==%`
+#### `%==%`
 
 Since `bridge_net`s are intermediate structures, comparing them is easy.
 `%==%` streamlines the process to make successful conversion
@@ -168,7 +201,7 @@ nw %>% network::list.network.attributes()
 #> [9] "network_name"
 ```
 
-## Standardized Data Extraction
+### Standardized Data Extraction
 
 ``` r
 ig %>% vrt_to_df()
@@ -204,7 +237,7 @@ nw %>% edg_to_df()
 #>   # ... with 500 additional rows.
 ```
 
-## Standardized Representations
+### Standardized Representations
 
 ``` r
 ig %>% rep_as_edgelist()
@@ -224,7 +257,7 @@ ig %>% rep_as_edgelist()
 #> # * Values correspond to vertex names.
 ```
 
-## Additional Tools
+### Additional Tools
 
 ``` r
 nw %>% rep_as_mixing_matrix(vrt_attr = "faction")
@@ -239,7 +272,9 @@ nw %>% rep_as_mixing_matrix(vrt_attr = "faction")
 #>   Outgoing Ties  155   103      76       176
 ```
 
-## Easy Integeration with Modern Workflows
+### Easy Integeration with Modern Workflows
+
+<center>
 
 ``` r
 library(tidygraph, warn.conflicts = FALSE)
@@ -268,208 +303,12 @@ nw %>%
 
 ![](man/figures/unnamed-chunk-18-1.png)<!-- -->
 
-# Development Tests
+</center>
 
-``` r
-devtools::test()
-#> v | OK F W S | Context
-#> 
-- |  1       | 0
-\ |  2       | 0
-| |  3       | 0
-/ |  4       | 0
-- |  5       | 0
-\ |  6       | 0
-/ |  0       | edg_to_df() directed
-- |  1       | edg_to_df() directed
-v |  1       | edg_to_df() directed
-#> 
-/ |  0       | edg_to_df() undirected
-- |  1       | edg_to_df() undirected
-v |  1       | edg_to_df() undirected
-#> 
-/ |  0       | edg_to_df() bipartite
-- |  1       | edg_to_df() bipartite
-v |  1       | edg_to_df() bipartite
-#> 
-/ |  0       | raw matrix edgelists using indices
-- |  1       | raw matrix edgelists using indices
-\ |  2       | raw matrix edgelists using indices
-| |  3       | raw matrix edgelists using indices
-v |  3       | raw matrix edgelists using indices
-#> 
-/ |  0       | raw matrix edgelists using names
-- |  1       | raw matrix edgelists using names
-\ |  2       | raw matrix edgelists using names
-| |  3       | raw matrix edgelists using names
-v |  3       | raw matrix edgelists using names
-#> 
-/ |  0       | raw matrix edgelists using vertex attributes
-- |  1       | raw matrix edgelists using vertex attributes
-\ |  2       | raw matrix edgelists using vertex attributes
-| |  3       | raw matrix edgelists using vertex attributes
-v |  3       | raw matrix edgelists using vertex attributes
-#> 
-/ |  0       | edgelist class objects using indices
-- |  1       | edgelist class objects using indices
-\ |  2       | edgelist class objects using indices
-| |  3       | edgelist class objects using indices
-v |  3       | edgelist class objects using indices
-#> 
-/ |  0       | edgelist class objects using names
-- |  1       | edgelist class objects using names
-\ |  2       | edgelist class objects using names
-| |  3       | edgelist class objects using names
-v |  3       | edgelist class objects using names
-#> 
-/ |  0       | edgelist class objects using vertex attributes
-- |  1       | edgelist class objects using vertex attributes
-\ |  2       | edgelist class objects using vertex attributes
-| |  3       | edgelist class objects using vertex attributes
-v |  3       | edgelist class objects using vertex attributes
-#> 
-/ |  0       | net_attr_names
-- |  1       | net_attr_names
-\ |  2       | net_attr_names
-| |  3       | net_attr_names
-/ |  4       | net_attr_names
-- |  5       | net_attr_names
-\ |  6       | net_attr_names
-v |  6       | net_attr_names
-#> 
-/ |  0       | net_attr_names
-- |  1       | net_attr_names
-\ |  2       | net_attr_names
-| |  3       | net_attr_names
-/ |  4       | net_attr_names
-- |  5       | net_attr_names
-\ |  6       | net_attr_names
-v |  6       | net_attr_names
-#> 
-/ |  0       | net_attrs_to_list
-- |  1       | net_attrs_to_list
-\ |  2       | net_attrs_to_list
-| |  3       | net_attrs_to_list
-/ |  4       | net_attrs_to_list
-- |  5       | net_attrs_to_list
-\ |  6       | net_attrs_to_list
-v |  6       | net_attrs_to_list
-#> 
-/ |  0       | net_is_directed
-- |  1       | net_is_directed
-\ |  2       | net_is_directed
-| |  3       | net_is_directed
-/ |  4       | net_is_directed
-- |  5       | net_is_directed
-\ |  6       | net_is_directed
-v |  6       | net_is_directed
-#> 
-/ |  0       | net_is_bipartite
-- |  1       | net_is_bipartite
-\ |  2       | net_is_bipartite
-| |  3       | net_is_bipartite
-/ |  4       | net_is_bipartite
-- |  5       | net_is_bipartite
-\ |  6       | net_is_bipartite
-v |  6       | net_is_bipartite
-#> 
-/ |  0       | edge counts
-- |  1       | edge counts
-\ |  2       | edge counts
-| |  3       | edge counts
-/ |  4       | edge counts
-- |  5       | edge counts
-\ |  6       | edge counts
-v |  6       | edge counts
-#> 
-/ |  0       | vertex counts
-- |  1       | vertex counts
-\ |  2       | vertex counts
-| |  3       | vertex counts
-/ |  4       | vertex counts
-- |  5       | vertex counts
-\ |  6       | vertex counts
-v |  6       | vertex counts
-#> 
-/ |  0       | net_has_loops
-- |  1       | net_has_loops
-\ |  2       | net_has_loops
-| |  3       | net_has_loops
-/ |  4       | net_has_loops
-- |  5       | net_has_loops
-\ |  6       | net_has_loops
-v |  6       | net_has_loops
-#> 
-/ |  0       | net_has_isolates ig_dir() vs nw_dir()
-- |  1       | net_has_isolates ig_dir() vs nw_dir()
-v |  1       | net_has_isolates ig_dir() vs nw_dir()
-#> 
-/ |  0       | net_has_isolates ig_dir() vs bridge_net_dir()
-- |  1       | net_has_isolates ig_dir() vs bridge_net_dir()
-v |  1       | net_has_isolates ig_dir() vs bridge_net_dir()
-#> 
-/ |  0       | net_has_isolated ig_undir() vs nw_undir()
-- |  1       | net_has_isolated ig_undir() vs nw_undir()
-v |  1       | net_has_isolated ig_undir() vs nw_undir()
-#> 
-/ |  0       | net_has_isolates ig_undir() vs bridge_net_undir()
-- |  1       | net_has_isolates ig_undir() vs bridge_net_undir()
-v |  1       | net_has_isolates ig_undir() vs bridge_net_undir()
-#> 
-/ |  0       | net_has_isolates ig_bip() vs nw_bip()
-- |  1       | net_has_isolates ig_bip() vs nw_bip()
-v |  1       | net_has_isolates ig_bip() vs nw_bip()
-#> 
-/ |  0       | net_has_isolates ig_bip() vs bridge_net_bip()
-- |  1       | net_has_isolates ig_bip() vs bridge_net_bip()
-v |  1       | net_has_isolates ig_bip() vs bridge_net_bip()
-#> 
-/ |  0       | vrt_get_attr
-- |  1       | vrt_get_attr
-\ |  2       | vrt_get_attr
-| |  3       | vrt_get_attr
-/ |  4       | vrt_get_attr
-- |  5       | vrt_get_attr
-\ |  6       | vrt_get_attr
-v |  6       | vrt_get_attr
-#> 
-/ |  0       | vrt_to_df
-- |  1       | vrt_to_df
-\ |  2       | vrt_to_df
-| |  3       | vrt_to_df
-/ |  4       | vrt_to_df
-- |  5       | vrt_to_df
-\ |  6       | vrt_to_df
-v |  6       | vrt_to_df
-#> 
-#> == Results =====================================================================
-#> Duration: 1.1 s
-#> 
-#> OK:       93
-#> Failed:   0
-#> Warnings: 0
-#> Skipped:  0
-```
+<!-- # Development Tests -->
 
-## Test Coverage
+<!-- ```{r, message=FALSE} -->
 
-``` r
-covr::package_coverage()
-#> snatools Coverage: 37.20%
-#> R/adjacency-matrix.R: 0.00%
-#> R/as_igraph.R: 0.00%
-#> R/as_network.R: 0.00%
-#> R/ei_index.R: 0.00%
-#> R/mixing-matrix.R: 0.00%
-#> R/operators.R: 0.00%
-#> R/txt_.R: 0.00%
-#> R/as_bridge_net.R: 15.28%
-#> R/utils-attributes.R: 25.00%
-#> R/utils.R: 25.00%
-#> R/edge-attributes.R: 28.87%
-#> R/vertex-attributes.R: 32.78%
-#> R/edgelist.R: 57.66%
-#> R/network-metadata.R: 62.20%
-#> R/network-attributes.R: 79.31%
-#> R/build_test_graph.R: 90.68%
-```
+<!-- # devtools::test() -->
+
+<!-- ``` -->

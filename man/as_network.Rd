@@ -77,15 +77,13 @@ intentionally retain the intermediate \code{bridge_net}'s \code{.actor} vertex a
 \examples{
 library(snatools)
 library(igraph, warn.conflicts = FALSE, quietly = TRUE)
-color_palette <-  colorRampPalette(c("red", "purple", "green", "blue", "cyan"))
+color_pal <- colorRampPalette(c("red", "green", "blue"))
 
 # simple, 1-mode igraph to network conversion =========================================
 ig1 <- random.graph.game(10L, p.or.m = 0.15, directed = TRUE)
 
-coords <- layout_with_fr(ig1)
-
 V(ig1)$name <- seq_along(V(ig1))
-V(ig1)$color <- color_palette(vcount(ig1))
+V(ig1)$color <- color_pal(vcount(ig1))
 E(ig1)$lab <- seq_along(E(ig1))
 ig1
 
@@ -93,13 +91,15 @@ nw1 <- as_network(ig1)
 nw1
 
 # manually comparing original and converted networks ==================================
-as_bridge_net(ig1)$vertices
-as_bridge_net(nw1)$vertices
-identical(as_bridge_net(ig1)$vertices, as_bridge_net(nw1)$vertices)
+nw1 \%>\% vrt_to_df()
+ig1 \%>\% vrt_to_df()
 
-as_bridge_net(ig1)$edges
-as_bridge_net(nw1)$edges
-identical(as_bridge_net(ig1)$edges, as_bridge_net(nw1)$edges)
+identical(vrt_to_df(nw1), vrt_to_df(ig1))
+
+nw1 \%>\% edg_to_df()
+ig1 \%>\% edg_to_df()
+
+identical(edg_to_df(nw1), edg_to_df(ig1))
 
 # converting bipartite igraph to bipartite network ====================================
 ig2 <- bipartite.random.game(3, 5, "gnp", 0.4)
@@ -108,16 +108,22 @@ V(ig2)$color <- ifelse(V(ig2)$type, "red", "blue")
 E(ig2)$lab <- sample(seq_len(ecount(ig2)))
 ig2
 
-ig_bip_coords <- layout_with_fr(ig2)
-
-V(ig2)$x <- ig_bip_coords[, 1L]
-V(ig2)$y <- ig_bip_coords[, 2L]
-
 nw2 <- as_network(ig2)
 nw2
 
 # discarding `.actor` vertex attribute from bipartite graphs ==========================
 as_network(ig2, .actor = FALSE)
+
+# comparing objects ===================================================================
+nw2 \%>\% vrt_to_df()
+ig2 \%>\% vrt_to_df()
+
+identical(vrt_to_df(nw2), vrt_to_df(ig2))
+
+nw2 \%>\% edg_to_df()
+ig2 \%>\% edg_to_df()
+
+identical(edg_to_df(nw2), edg_to_df(ig2))
 
 }
 \seealso{

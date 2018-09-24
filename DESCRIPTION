@@ -1,9 +1,11 @@
 Package: snatools
-Title: A toolkit to streamline network analytic workflows R
+Title: A Toolkit to Bridge Graph Frameworks and Streamline Network Analysis
 Version: 0.0.0.9000
 Authors@R: person("Brendan", "Knapp", email = "brendan.g.knapp@gmail.com", role = c("aut", "cre"),
                   comment = c(ORCID = "0000-0003-3284-4972"))
-Description: A toolkit to streamline network analytic workflows R.
+Description: A consistent toolkit that conveniently connects existing graph structures 
+    (i.e. igraph and network), makes network workflows more intuitive, and provides 
+    metrics missing from R's network analysis ecosystem.
 Depends: R (>= 3.5.0)
 Imports:
     igraph,
@@ -17,8 +19,9 @@ License: GPL-3 + file LICENSE
 Encoding: UTF-8
 URL: https://github.com/knapply/snatools, https://knapply.github.io/snatools
 BugReports: https://github.com/knapply/snatools/issues
-LazyData: true
+LazyData: yes
 Suggests:
+    covr,
     data.table,
     dplyr,
     ergm,
