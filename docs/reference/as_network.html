@@ -214,10 +214,10 @@ intentionally retain the intermediate <code>bridge_net</code>'s <code>.actor</co
 <span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/V'>V</a></span>(<span class='no'>ig1</span>)$<span class='no'>name</span> <span class='kw'>&lt;-</span> <span class='fu'>seq_along</span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/V'>V</a></span>(<span class='no'>ig1</span>))
 <span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/V'>V</a></span>(<span class='no'>ig1</span>)$<span class='no'>color</span> <span class='kw'>&lt;-</span> <span class='fu'>color_pal</span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/gorder'>vcount</a></span>(<span class='no'>ig1</span>))
 <span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/E'>E</a></span>(<span class='no'>ig1</span>)$<span class='no'>lab</span> <span class='kw'>&lt;-</span> <span class='fu'>seq_along</span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/E'>E</a></span>(<span class='no'>ig1</span>))
-<span class='no'>ig1</span></div><div class='output co'>#&gt; IGRAPH 19418ad DN-- 10 14 -- Erdos renyi (gnp) graph
+<span class='no'>ig1</span></div><div class='output co'>#&gt; IGRAPH 18b5d4a DN-- 10 14 -- Erdos renyi (gnp) graph
 #&gt; + attr: name (g/c), type (g/c), loops (g/l), p (g/n), name (v/n), color
 #&gt; | (v/c), lab (e/n)
-#&gt; + edges from 19418ad (vertex names):
+#&gt; + edges from 18b5d4a (vertex names):
 #&gt;  [1]  5-&gt; 1  4-&gt; 2  7-&gt; 2  2-&gt; 3  1-&gt; 4  4-&gt;10  5-&gt; 4 10-&gt; 4 10-&gt; 5  1-&gt; 6
 #&gt; [11]  7-&gt; 6  1-&gt; 7  7-&gt; 9 10-&gt; 9</div><div class='input'>
 <span class='no'>nw1</span> <span class='kw'>&lt;-</span> <span class='fu'>as_network</span>(<span class='no'>ig1</span>)
@@ -298,10 +298,10 @@ intentionally retain the intermediate <code>bridge_net</code>'s <code>.actor</co
 <span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/V'>V</a></span>(<span class='no'>ig2</span>)$<span class='no'>name</span> <span class='kw'>&lt;-</span> <span class='fu'>seq_along</span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/V'>V</a></span>(<span class='no'>ig2</span>))
 <span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/V'>V</a></span>(<span class='no'>ig2</span>)$<span class='no'>color</span> <span class='kw'>&lt;-</span> <span class='fu'>ifelse</span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/V'>V</a></span>(<span class='no'>ig2</span>)$<span class='no'>type</span>, <span class='st'>"red"</span>, <span class='st'>"blue"</span>)
 <span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/E'>E</a></span>(<span class='no'>ig2</span>)$<span class='no'>lab</span> <span class='kw'>&lt;-</span> <span class='fu'>sample</span>(<span class='fu'>seq_len</span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/gsize'>ecount</a></span>(<span class='no'>ig2</span>)))
-<span class='no'>ig2</span></div><div class='output co'>#&gt; IGRAPH 1947650 UN-B 8 7 -- Bipartite Gnp random graph
+<span class='no'>ig2</span></div><div class='output co'>#&gt; IGRAPH 18bc8b7 UN-B 8 7 -- Bipartite Gnp random graph
 #&gt; + attr: name (g/c), p (g/n), type (v/l), name (v/n), color (v/c), lab
 #&gt; | (e/n)
-#&gt; + edges from 1947650 (vertex names):
+#&gt; + edges from 18bc8b7 (vertex names):
 #&gt; [1] 2--4 1--6 3--6 1--7 3--7 1--8 2--8</div><div class='input'>
 <span class='no'>nw2</span> <span class='kw'>&lt;-</span> <span class='fu'>as_network</span>(<span class='no'>ig2</span>)
 <span class='no'>nw2</span></div><div class='output co'>#&gt;  Network attributes:

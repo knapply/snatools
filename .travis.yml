@@ -18,8 +18,8 @@
    global:
    - _R_CHECK_FORCE_SUGGESTS_=false
 
-r_packages:
-  - covr
+r_github_packages:
+  - r-lib/covr
 
 after_success:
-  - Rscript -e 'library(covr); codecov()'
+  - Rscript -e 'covr::codecov()'
