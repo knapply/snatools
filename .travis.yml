@@ -2,10 +2,10 @@
 #   https://docs.travis-ci.com/user/languages/r/
 #   https://github.com/craigcitro/r-travis/wiki/Porting-to-native-R-support-in-Travis
 
- language: R
- cache: packages
+language: R
+cache: packages
  
- jobs:
+jobs:
   include:
   - r: 3.4
     warnings_are_errors: false
@@ -14,12 +14,12 @@
   - r: devel
     warnings_are_errors: false
   
- env:
-   global:
-   - _R_CHECK_FORCE_SUGGESTS_=false
+# env:
+#  global:
+#  - _R_CHECK_FORCE_SUGGESTS_=false
 
-r_packages:
-  - covr
+r_github_packages:
+  - r-lib/covr
 
 after_success:
-  - Rscript -e 'library(covr); codecov()'
+  - Rscript -e 'covr::codecov()'
