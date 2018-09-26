@@ -23,5 +23,11 @@
   rhs <- as_bridge_net(rhs)
   rhs[["net_attrs"]] <- NULL
   
+  # if (identical(lhs[["metadata"]], rhs[["metadata"]]) &&
+  #     identical(lhs[["vertices"]], rhs[["vertices"]]) &&
+  #     identical(table(lhs[["edges"]]), table(lhs[["edges"]]))) {
+  #   return(TRUE)
+  # }
+  # FALSE
   identical(lhs, rhs)
 }

@@ -193,11 +193,11 @@ from <code>x</code>.</p></td>
 #&gt;  | Bonaventure Loyal     TRUE         Remained
 #&gt;  | Ambrose     Loyal    FALSE         Remained</div><div class='input'>
 <span class='no'>ig</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>edg_delete_attr</span>(<span class='st'>"time"</span>)</div><div class='output co'>#&gt; IGRAPH 1946cd0 DNW- 18 510 -- 
-#&gt; + attr: network_name (g/c), author (g/c), faction (v/c), cloisterville
-#&gt; | (v/l), status (v/c), name (v/c), weight (e/n), relation (e/c),
+  <span class='fu'>edg_delete_attr</span>(<span class='st'>"time"</span>)</div><div class='output co'>#&gt; IGRAPH 74c3548 DNW- 18 510 -- 
+#&gt; + attr: network_name (g/c), author (g/c), name (v/c), faction (v/c),
+#&gt; | cloisterville (v/l), status (v/c), weight (e/n), relation (e/c),
 #&gt; | positive_relation (e/l)
-#&gt; + edges from 1946cd0 (vertex names):
+#&gt; + edges from 74c3548 (vertex names):
 #&gt;  [1] Romauld    -&gt;Ambrose     Romauld    -&gt;Peter       Romauld    -&gt;Albert     
 #&gt;  [4] Bonaventure-&gt;Romauld     Bonaventure-&gt;Victor      Bonaventure-&gt;Albert     
 #&gt;  [7] Ambrose    -&gt;Romauld     Ambrose    -&gt;Bonaventure Ambrose    -&gt;Elias      
@@ -230,14 +230,14 @@ from <code>x</code>.</p></td>
 #&gt; # A directed multigraph with 1 component
 #&gt; #
 #&gt; [90m# Node Data: 18 x 4 (active)[39m
-#&gt;   faction  cloisterville status   name       
-#&gt;   [3m[90m&lt;chr&gt;[39m[23m    [3m[90m&lt;lgl&gt;[39m[23m         [3m[90m&lt;chr&gt;[39m[23m    [3m[90m&lt;chr&gt;[39m[23m      
-#&gt; [90m1[39m Waverers FALSE         Remained Romauld    
-#&gt; [90m2[39m Loyal    TRUE          Remained Bonaventure
-#&gt; [90m3[39m Loyal    FALSE         Remained Ambrose    
-#&gt; [90m4[39m Loyal    FALSE         Remained Berthold   
-#&gt; [90m5[39m Loyal    TRUE          Remained Peter      
-#&gt; [90m6[39m Loyal    FALSE         Remained Louis      
+#&gt;   name        faction  cloisterville status  
+#&gt;   [3m[90m&lt;chr&gt;[39m[23m       [3m[90m&lt;chr&gt;[39m[23m    [3m[90m&lt;lgl&gt;[39m[23m         [3m[90m&lt;chr&gt;[39m[23m   
+#&gt; [90m1[39m Romauld     Waverers FALSE         Remained
+#&gt; [90m2[39m Bonaventure Loyal    TRUE          Remained
+#&gt; [90m3[39m Ambrose     Loyal    FALSE         Remained
+#&gt; [90m4[39m Berthold    Loyal    FALSE         Remained
+#&gt; [90m5[39m Peter       Loyal    TRUE          Remained
+#&gt; [90m6[39m Louis       Loyal    FALSE         Remained
 #&gt; [90m# ... with 12 more rows[39m
 #&gt; #
 #&gt; [90m# Edge Data: 510 x 5[39m

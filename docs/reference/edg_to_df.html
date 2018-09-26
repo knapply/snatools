@@ -192,17 +192,17 @@ and <code>.alter</code> of each edge's dyad.</p></td>
   <span class='kw pkg'>tidygraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/tidygraph/topics/tbl_graph'>as_tbl_graph</a></span>()
 
 <span class='fu'>edg_to_df</span>(<span class='no'>sampson_monastery</span>)</div><div class='output co'>#&gt; # edge_data_frame: 510 x 6
-#&gt;      .ego .alter weight relation time positive_relation
-#&gt;   1     1      3      2   liking    1              TRUE
-#&gt;   2     1      5      3   liking    1              TRUE
-#&gt;   3     1     14      1   liking    1              TRUE
-#&gt;   4     2      1      3   liking    1              TRUE
-#&gt;   5     2      7      2   liking    1              TRUE
-#&gt;   6     2     14      1   liking    1              TRUE
-#&gt;   7     3      1      2   liking    1              TRUE
-#&gt;   8     3      2      3   liking    1              TRUE
-#&gt;   9     3     17      1   liking    1              TRUE
-#&gt;   10    4      5      3   liking    1              TRUE
+#&gt;             .ego      .alter weight relation time positive_relation
+#&gt;   1      Romauld     Ambrose      2   liking    1              TRUE
+#&gt;   2      Romauld       Peter      3   liking    1              TRUE
+#&gt;   3      Romauld      Albert      1   liking    1              TRUE
+#&gt;   4  Bonaventure     Romauld      3   liking    1              TRUE
+#&gt;   5  Bonaventure      Victor      2   liking    1              TRUE
+#&gt;   6  Bonaventure      Albert      1   liking    1              TRUE
+#&gt;   7      Ambrose     Romauld      2   liking    1              TRUE
+#&gt;   8      Ambrose Bonaventure      3   liking    1              TRUE
+#&gt;   9      Ambrose       Elias      1   liking    1              TRUE
+#&gt;   10    Berthold       Peter      3   liking    1              TRUE
 #&gt;   # ... with 500 additional rows.</div><div class='input'>
 <span class='fu'>edg_to_df</span>(<span class='no'>ig</span>)</div><div class='output co'>#&gt; # edge_data_frame: 510 x 6
 #&gt;             .ego      .alter weight relation time positive_relation

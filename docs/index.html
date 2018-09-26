@@ -98,7 +98,8 @@
 <li>Accurately bridge existing graph frameworks (i.e. <code>igraph</code> and <code>network</code>).</li>
 <li>Streamline network analytic workflows by making common tasks as intuitive (and stable) as possible.
 <ul>
-<li>Improve the efficiency of seasoned analysts while reducing the cognitive load of network newcomers (as well as those instructing them).</li>
+<li>Increase analyst efficiency.</li>
+<li>Reduce the cognitive load of network newcomers and those instructing them.</li>
 </ul>
 </li>
 <li>Implement metrics that are missing from R’s network ecosystem.
@@ -122,7 +123,10 @@
 <a class="sourceLine" id="cb1-7" data-line-number="7"></a>
 <a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co"># Load {snatools}.</span></a>
 <a class="sourceLine" id="cb1-9" data-line-number="9"><span class="kw">library</span>(snatools)</a></code></pre></div>
-<p><br></p>
+</div>
+<div id="features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#features" class="anchor"></a>Features</h2>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">data</span>(<span class="st">"sampson_monastery"</span>)</a></code></pre></div>
 <div id="bridge_net" class="section level3">
 <h3 class="hasAnchor">
@@ -150,11 +154,11 @@
 <a href="#conversion" class="anchor"></a>Conversion</h3>
 <p>Through <code>bridge_net</code> objects, <code>igraph</code> and <code>network</code> objects can play together easier than ever.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">ig &lt;-<span class="st"> </span><span class="kw"><a href="reference/as_igraph.html">as_igraph</a></span>(sampson_monastery)</a></code></pre></div>
-<pre><code>#&gt; IGRAPH 132d69b DNW- 18 510 -- 
-#&gt; + attr: network_name (g/c), author (g/c), faction (v/c),
-#&gt; | cloisterville (v/l), status (v/c), name (v/c), weight (e/n),
-#&gt; | relation (e/c), time (e/n), positive_relation (e/l)
-#&gt; + edges from 132d69b (vertex names):
+<pre><code>#&gt; IGRAPH 63e1964 DNW- 18 510 -- 
+#&gt; + attr: network_name (g/c), author (g/c), name (v/c), faction
+#&gt; | (v/c), cloisterville (v/l), status (v/c), weight (e/n), relation
+#&gt; | (e/c), time (e/n), positive_relation (e/l)
+#&gt; + edges from 63e1964 (vertex names):
 #&gt;  [1] Romauld    -&gt;Ambrose     Romauld    -&gt;Peter      
 #&gt;  [3] Romauld    -&gt;Albert      Bonaventure-&gt;Romauld    
 #&gt;  [5] Bonaventure-&gt;Victor      Bonaventure-&gt;Albert     
@@ -201,11 +205,11 @@
 <a class="sourceLine" id="cb8-18" data-line-number="18"><span class="co">#&gt;  Edge attribute names: </span></a>
 <a class="sourceLine" id="cb8-19" data-line-number="19"><span class="co">#&gt;     positive_relation relation time weight</span></a></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="reference/as_igraph.html">as_igraph</a></span>(nw)</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; IGRAPH 135bc24 DNW- 18 510 -- </span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt; + attr: network_name (g/c), author (g/c), faction (v/c),</span></a>
-<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt; | cloisterville (v/l), status (v/c), name (v/c), weight (e/n),</span></a>
-<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; | relation (e/c), time (e/n), positive_relation (e/l)</span></a>
-<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt; + edges from 135bc24 (vertex names):</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; IGRAPH 6410eef DNW- 18 510 -- </span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt; + attr: network_name (g/c), author (g/c), name (v/c), faction</span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt; | (v/c), cloisterville (v/l), status (v/c), weight (e/n), relation</span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; | (e/c), time (e/n), positive_relation (e/l)</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt; + edges from 6410eef (vertex names):</span></a>
 <a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt;  [1] Romauld    -&gt;Ambrose     Romauld    -&gt;Peter      </span></a>
 <a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt;  [3] Romauld    -&gt;Albert      Bonaventure-&gt;Romauld    </span></a>
 <a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt;  [5] Bonaventure-&gt;Victor      Bonaventure-&gt;Albert     </span></a>
@@ -235,19 +239,25 @@
 <h3 class="hasAnchor">
 <a href="#standardized-data-extraction" class="anchor"></a>Standardized Data Extraction</h3>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">ig <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/vrt_to_df.html">vrt_to_df</a></span>()</a>
-<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="co">#&gt; # vertex_data_frame: 18 x 4</span></a>
-<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="co">#&gt;            .name     faction cloisterville           status</span></a>
-<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="co">#&gt;   1      Romauld    Waverers         FALSE         Remained</span></a>
-<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="co">#&gt;   2  Bonaventure       Loyal          TRUE         Remained</span></a>
-<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="co">#&gt;   3      Ambrose       Loyal         FALSE         Remained</span></a>
-<a class="sourceLine" id="cb12-7" data-line-number="7"><span class="co">#&gt;   4     Berthold       Loyal         FALSE         Remained</span></a>
-<a class="sourceLine" id="cb12-8" data-line-number="8"><span class="co">#&gt;   5        Peter       Loyal          TRUE         Remained</span></a>
-<a class="sourceLine" id="cb12-9" data-line-number="9"><span class="co">#&gt;   6        Louis       Loyal         FALSE         Remained</span></a>
-<a class="sourceLine" id="cb12-10" data-line-number="10"><span class="co">#&gt;   7       Victor    Waverers         FALSE         Remained</span></a>
-<a class="sourceLine" id="cb12-11" data-line-number="11"><span class="co">#&gt;   8      Winfrid Young Turks         FALSE         Remained</span></a>
-<a class="sourceLine" id="cb12-12" data-line-number="12"><span class="co">#&gt;   9   John Bosco Young Turks          TRUE Left Voluntarily</span></a>
-<a class="sourceLine" id="cb12-13" data-line-number="13"><span class="co">#&gt;   10     Gregory Young Turks          TRUE         Expelled</span></a>
-<a class="sourceLine" id="cb12-14" data-line-number="14"><span class="co">#&gt;   # ... with 8 additional rows.</span></a></code></pre></div>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="co">#&gt;          .name     faction cloisterville           status</span></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="co">#&gt; 1      Romauld    Waverers         FALSE         Remained</span></a>
+<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="co">#&gt; 2  Bonaventure       Loyal          TRUE         Remained</span></a>
+<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="co">#&gt; 3      Ambrose       Loyal         FALSE         Remained</span></a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="co">#&gt; 4     Berthold       Loyal         FALSE         Remained</span></a>
+<a class="sourceLine" id="cb12-7" data-line-number="7"><span class="co">#&gt; 5        Peter       Loyal          TRUE         Remained</span></a>
+<a class="sourceLine" id="cb12-8" data-line-number="8"><span class="co">#&gt; 6        Louis       Loyal         FALSE         Remained</span></a>
+<a class="sourceLine" id="cb12-9" data-line-number="9"><span class="co">#&gt; 7       Victor    Waverers         FALSE         Remained</span></a>
+<a class="sourceLine" id="cb12-10" data-line-number="10"><span class="co">#&gt; 8      Winfrid Young Turks         FALSE         Remained</span></a>
+<a class="sourceLine" id="cb12-11" data-line-number="11"><span class="co">#&gt; 9   John Bosco Young Turks          TRUE Left Voluntarily</span></a>
+<a class="sourceLine" id="cb12-12" data-line-number="12"><span class="co">#&gt; 10     Gregory Young Turks          TRUE         Expelled</span></a>
+<a class="sourceLine" id="cb12-13" data-line-number="13"><span class="co">#&gt; 11        Hugh Young Turks         FALSE Left Voluntarily</span></a>
+<a class="sourceLine" id="cb12-14" data-line-number="14"><span class="co">#&gt; 12    Boniface Young Turks         FALSE Left Voluntarily</span></a>
+<a class="sourceLine" id="cb12-15" data-line-number="15"><span class="co">#&gt; 13        Mark Young Turks          TRUE Left Voluntarily</span></a>
+<a class="sourceLine" id="cb12-16" data-line-number="16"><span class="co">#&gt; 14      Albert Young Turks         FALSE Left Voluntarily</span></a>
+<a class="sourceLine" id="cb12-17" data-line-number="17"><span class="co">#&gt; 15       Amand    Waverers         FALSE         Remained</span></a>
+<a class="sourceLine" id="cb12-18" data-line-number="18"><span class="co">#&gt; 16       Basil    Outcasts          TRUE         Expelled</span></a>
+<a class="sourceLine" id="cb12-19" data-line-number="19"><span class="co">#&gt; 17       Elias    Outcasts         FALSE         Expelled</span></a>
+<a class="sourceLine" id="cb12-20" data-line-number="20"><span class="co">#&gt; 18  Simplicius    Outcasts         FALSE         Expelled</span></a></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">nw <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/edg_to_df.html">edg_to_df</a></span>()</a>
 <a class="sourceLine" id="cb13-2" data-line-number="2"><span class="co">#&gt; # edge_data_frame: 510 x 6</span></a>
 <a class="sourceLine" id="cb13-3" data-line-number="3"><span class="co">#&gt;             .ego      .alter weight relation time positive_relation</span></a>
@@ -326,6 +336,24 @@
 <!-- ```{r, message=FALSE} -->
 <!-- # devtools::test() -->
 <!-- ``` -->
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">covr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/covr/topics/package_coverage">package_coverage</a></span>()</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="co">#&gt; snatools Coverage: 59.14%</span></a>
+<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="co">#&gt; R/adjacency-matrix.R: 0.00%</span></a>
+<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="co">#&gt; R/ei_index.R: 0.00%</span></a>
+<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="co">#&gt; R/mixing-matrix.R: 0.00%</span></a>
+<a class="sourceLine" id="cb17-6" data-line-number="6"><span class="co">#&gt; R/txt_.R: 20.00%</span></a>
+<a class="sourceLine" id="cb17-7" data-line-number="7"><span class="co">#&gt; R/as_bridge_net.R: 29.17%</span></a>
+<a class="sourceLine" id="cb17-8" data-line-number="8"><span class="co">#&gt; R/utils.R: 32.22%</span></a>
+<a class="sourceLine" id="cb17-9" data-line-number="9"><span class="co">#&gt; R/edgelist.R: 57.66%</span></a>
+<a class="sourceLine" id="cb17-10" data-line-number="10"><span class="co">#&gt; R/utils-attributes.R: 62.50%</span></a>
+<a class="sourceLine" id="cb17-11" data-line-number="11"><span class="co">#&gt; R/operators.R: 63.64%</span></a>
+<a class="sourceLine" id="cb17-12" data-line-number="12"><span class="co">#&gt; R/network-metadata.R: 65.85%</span></a>
+<a class="sourceLine" id="cb17-13" data-line-number="13"><span class="co">#&gt; R/vertex-attributes.R: 76.37%</span></a>
+<a class="sourceLine" id="cb17-14" data-line-number="14"><span class="co">#&gt; R/edge-attributes.R: 76.51%</span></a>
+<a class="sourceLine" id="cb17-15" data-line-number="15"><span class="co">#&gt; R/as_network.R: 80.00%</span></a>
+<a class="sourceLine" id="cb17-16" data-line-number="16"><span class="co">#&gt; R/network-attributes.R: 84.85%</span></a>
+<a class="sourceLine" id="cb17-17" data-line-number="17"><span class="co">#&gt; R/as_igraph.R: 85.19%</span></a>
+<a class="sourceLine" id="cb17-18" data-line-number="18"><span class="co">#&gt; R/build_test_graph.R: 90.68%</span></a></code></pre></div>
 </div>
 </div>
 </div>

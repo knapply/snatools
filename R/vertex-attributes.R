@@ -224,6 +224,7 @@ vrt_to_df.igraph <- function(x, leave_raw = FALSE) {
     x <- prep_bipartite_igraph(x)
   }
   out <- as_data_frame(x, what = "vertices")
+  rownames(out) <- NULL
   if (!leave_raw) {
     if (net_is_bipartite(x)) {
       out[[".actor"]] <- out[["type"]]
@@ -328,13 +329,10 @@ as_vertex_data_frame <- function(x) {
   x
 }
 
+as.data.frame.vertex_data_frame <- function(x) {
+  as_df(x)
+}
 
-#' @rdname vrt_to_df
-#' 
-#' @param .nrow Maximum number of rows to `print()`.
-#' 
-#' @importFrom utils head
-#' @export
 print.vertex_data_frame <- function(x, .nrow = 10L, .verbose = TRUE) {
   out <- head(x, .nrow)
   rownames(out) <- paste0("  ", seq_len(nrow(out)))

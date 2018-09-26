@@ -33,7 +33,8 @@ knitr::opts_chunk$set(
 
 1. Accurately bridge existing graph frameworks (i.e. `igraph` and `network`).
 2. Streamline network analytic workflows by making common tasks as intuitive (and stable) as possible.
-    + Improve the efficiency of seasoned analysts while reducing the cognitive load of network newcomers (as well as those instructing them).
+    + Increase analyst efficiency.
+    + Reduce the cognitive load of network newcomers and those instructing them.
 3. Implement metrics that are missing from R's network ecosystem.
     + Reimplement those that _should_ be made more accessible, efficient, or robust.
 4. Standardize fundamental tasks with methods that bypass the longstanding issues of `igraph` vs `network` namespace conflicts.
@@ -69,7 +70,7 @@ library(snatools)
 library(snatools)
 ```
 
-<br>
+## Features
 
 ```{r}
 data("sampson_monastery")
@@ -182,3 +183,9 @@ nw %>%
 <!-- ```{r, message=FALSE} -->
 <!-- # devtools::test() -->
 <!-- ``` -->
+
+
+```{r}
+covr::package_coverage()
+```
+

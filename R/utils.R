@@ -1,127 +1,3 @@
-# #' #' @importFrom rlang is_named
-# #' sort_list_by_name <- function(x) {
-# #'   if(is_named(x)) {
-# #'     return(x[order(names(x))])
-# #'   }
-# #'   x
-# #' }
-# #' 
-# #' clear_metadata <- function(x) {
-# #'   metadata <- c("n", "directed", "hyper", "loops", "multiple", "bipartite", "mnext")
-# #'   out <- x[!names(x) %in% metadata]
-# #'   sort_list_by_name(out)
-# #' }
-# #' 
-# #' dissect_graph <- function(x) {
-# #'   net_attrs = net_get_attrs(x)
-# #'   if (length(unlist(net_attrs)) == 0L | all(is.na(unlist(net_attrs)))) {
-# #'     net_attrs <- NULL
-# #'   }
-# #'   vrt_attrs = vrt_get_attrs(x)
-# #'   if ("is_actor" %in% vrt_get_attr_names(x)) {
-# #'     vrt_attrs$type <- vrt_attrs$is_actor
-# #'     vrt_attrs$is_actor <- NULL
-# #'   }
-# #'   edg_attrs = edg_get_attrs(x)
-# #'   el <- rep_edgelist(x)
-# #' 
-# #'   if(class(x) == "network") {
-# #'     vrt_attrs$name <- vrt_attrs$vertex.names
-# #'     vrt_attrs$vertex.names <- NULL
-# #'     net_attrs <- clear_metadata(net_attrs)
-# #'   }
-# #'   out <- list(net_attrs = sort_list_by_name(net_attrs),
-# #'               vrt_attrs = sort_list_by_name(vrt_attrs),
-# #'               edg_attrs = sort_list_by_name(edg_attrs),
-# #'               el = el)
-# #'   out
-# #' }
-# #' 
-# #' 
-# #' 
-# #' clean_network_metadata <- function(x) {
-# #'   if(class(x) != "network") {
-# #'     stop("`fill_network_metadata()` is only applicable to `network` objects.")
-# #'   }
-# #'   if(is.null(x$gal$bipartite)) {
-# #'     network::set.network.attribute(x, "bipartite", network::is.bipartite(x))
-# #'   }
-# #'   if(is.null(x$gal$loops)) {
-# #'     network::set.network.attribute(x, "loops", network::has.loops(x))
-# #'   }
-# #'   if(is.null(x$gal$hyper)) {
-# #'     network::set.network.attribute(x, "hyper", network::is.hyper(x))
-# #'   }
-# #'   if(is.null(x$gal$multiple)) {
-# #'     if(is.null(network::is.multiplex(x))) {
-# #'       network::set.network.attribute(x, "multiple", FALSE)
-# #'     } else {
-# #'     network::set.network.attribute(x, "multiple", network::is.multiplex(x))
-# #'     }
-# #'   }
-# #'   net_attrs <- net_get_attrs(x, drop_metadata = FALSE)
-# #'   net_attrs <- net_attrs[order(names(net_attrs))]
-# #'   for(i in names(net_attrs)) {
-# #'     network::delete.network.attribute(x, i)
-# #'     x$gal[[i]] <- NULL
-# #'   }
-# #'   for(i in seq_along(net_attrs)) {
-# #'     network::set.network.attribute(x, names(net_attrs)[[i]], net_attrs[[i]])
-# #'   }
-# #'   x
-# #' }
-# #' 
-# #' @export
-# #'
-# drop_loops <- function(x) {
-#   UseMethod("drop_loops")
-# }
-# 
-# #' @importFrom igraph simplify
-# #' @export
-# drop_loops.igraph <- function(x) {
-#   simplify(x, remove.multiple = FALSE, remove.loops = TRUE)
-# }
-# 
-# #' @importFrom network set.network.attribute
-# #' @export
-# drop_loops.network <- function(x) {
-#   out <- set.network.attribute(x, "loops", value = FALSE)
-#   out
-# }
-# #' 
-# #' #' @export
-# #' has_loops <- function(x) {
-# #'   UseMethod("has_loops")
-# #' }
-# #' 
-# #' #' @importFrom igraph is.loop
-# #' #' @export
-# #' has_loops.igraph <- function(x) {
-# #'   any(is.loop(x))
-# #' }
-# #' 
-# #' #' @export
-# #' has_loops.network <- function(x) {
-# #'   el <- rep_edgelist(x)
-# #'   any(el[, 1] == el[, 2])
-# #' }
-# #' 
-# #' choose_df_class <- function(out_class) {
-# #'   if (out_class == "tibble") {
-# #'     if (requireNamespace("tibble", quietly = TRUE)) {
-# #'       return(tibble::as_tibble)
-# #'     }
-# #'   }
-# #'   if (out_class == "data.table") {
-# #'     if (requireNamespace("data.table", quietly = TRUE)) {
-# #'       return(data.table::as.data.table)
-# #'     }
-# #'   }
-# #'   return(NULL)
-# #' }
-# 
-
 `%||%` <- function(lhs, rhs) {
   if (identical(lhs, NULL)) return(rhs)
   lhs
@@ -132,6 +8,7 @@
   lhs
 }
 
+#' @export
 set_whole_number_storage <- function(x, big_tol = .Machine$integer.max*0.8, verbose = FALSE) {
   stopifnot(is.numeric(x))
   if (is.integer(x)) {
@@ -246,8 +123,51 @@ format_table <- function(x, edges_or_verts, specify_edge_dyad_types = TRUE) {
   out
 }
 
+strip_added_attrs <- function(x) {
+  UseMethod("strip_added_attrs")
+}
 
+strip_added_attrs.data.frame <- function(x) {
+  stopifnot(is.data.frame(x))
+  to_keep <- c("names", "row.names", "class")
+  current_attrs <- names(attributes(x))
+  to_strip <- current_attrs[!current_attrs %in% to_keep]
+  if (!is_empty(to_strip)) {
+    for (i in to_strip) {
+      attr(x, i) <- NULL
+    }
+  }
+  class(x) <- "data.frame"
+  x
+}
 
+strip_added_attrs.matrix <- function(x) {
+  stopifnot(is.matrix(x))
+  to_keep <- c("dim", "dimnames")
+  current_attrs <- names(attributes(x))
+  to_strip <- current_attrs[!current_attrs %in% to_keep]
+  if (!is_empty(to_strip)) {
+    for (i in to_strip) {
+      attr(x, i) <- NULL
+    }
+  }
+  class(x) <- "matrix"
+  x
+}
+
+as_df <- function(x) {
+  if (!is.data.frame(x)) {
+    x <- as.data.frame(x, stringsAsFactors = FALSE)
+  }
+  stopifnot(rownames(x) == seq_len(nrow(x)))
+  strip_added_attrs(x)
+}
+
+as_matrix <- function(x) {
+  stopifnot(is.matrix(x))
+  stopifnot(rownames(x) == seq_len(nrow(x)))
+  strip_added_attrs(x)
+}
 
 
 

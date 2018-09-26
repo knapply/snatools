@@ -105,10 +105,14 @@ as_igraph.bridge_net <- function(x) {
     
   }
   if (!is.null(x[["vertices"]]) && nrow(x[["vertices"]])) {
-    x[["vertices"]][["type"]] <- x[["vertices"]][[".actor"]]
-    x[["vertices"]][[".actor"]] <- NULL
-    x[["vertices"]][["name"]] <- x[["vertices"]][[".name"]]
-    x[["vertices"]][[".name"]] <- NULL
+    # x[["vertices"]][["type"]] <- x[["vertices"]][[".actor"]]
+    if (".actor" %in% names(x[["vertices"]])) {
+      names(x[["vertices"]])[names(x[["vertices"]]) == ".actor"] <- "type"
+      # x[["vertices"]][[".actor"]] <- NULL
+    }
+    names(x[["vertices"]])[names(x[["vertices"]]) == ".name"] <- "name"
+    # x[["vertices"]][["name"]] <- x[["vertices"]][[".name"]]
+    # x[["vertices"]][[".name"]] <- NULL
     vertex_attr(out) <- x[["vertices"]]
   }
   if (is.null(x[["vertices"]]) && x[["metadata"]][["is_bipartite"]]) {
