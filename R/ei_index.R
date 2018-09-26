@@ -156,13 +156,16 @@ ei_index_vertex <- function(x, vrt_attr, drop_loops = FALSE) {
 #' 
 #' @export
 sna_plot.ei_index_global <- function(object, ...) {
+  if (!requireNamespace("grDevices", quietly = TRUE)) {
+    stop('{grDevices} is required for this functionality.', call. = FALSE)
+  }
   if (!requireNamespace("ggplot2", quietly = TRUE)) {
     stop('The {ggplot2} package is required for this functionality.', call. = FALSE)
   }
   ei <- object
   vrt_attr <- attr(ei, "vrt_attr_name")
   ei <- unclass(ei)
-  color_pal <- ifelse(ei < 0, colorRampPalette(c("red", "gray")), 
+  color_pal <- ifelse(ei < 0, grDevices::colorRampPalette(c("red", "gray")), 
                       colorRampPalette(c("gray", "blue")))
   color <- color_pal(10)[[ifelse(ei < 0, round((ei + 1) * 10), round(ei * 10))]]
   out <- ggplot2::ggplot()

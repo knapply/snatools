@@ -20,6 +20,8 @@ Suggests:
     data.table,
     dplyr,
     ergm,
+    grDevices,
+    ggplot2,
     knitr,
     rmarkdown,
     testthat,

@@ -101,11 +101,11 @@ together easier than ever.
 ig <- as_igraph(sampson_monastery)
 ```
 
-    #> IGRAPH 93bcc48 DNW- 18 510 -- 
+    #> IGRAPH fa529b1 DNW- 18 510 -- 
     #> + attr: network_name (g/c), author (g/c), name (v/c), faction
     #> | (v/c), cloisterville (v/l), status (v/c), weight (e/n), relation
     #> | (e/c), time (e/n), positive_relation (e/l)
-    #> + edges from 93bcc48 (vertex names):
+    #> + edges from fa529b1 (vertex names):
     #>  [1] Romauld    ->Ambrose     Romauld    ->Peter      
     #>  [3] Romauld    ->Albert      Bonaventure->Romauld    
     #>  [5] Bonaventure->Victor      Bonaventure->Albert     
@@ -161,11 +161,11 @@ as_network(ig)
 
 ``` r
 as_igraph(nw)
-#> IGRAPH 93e556e DNW- 18 510 -- 
+#> IGRAPH fa790c6 DNW- 18 510 -- 
 #> + attr: network_name (g/c), author (g/c), name (v/c), faction
 #> | (v/c), cloisterville (v/l), status (v/c), weight (e/n), relation
 #> | (e/c), time (e/n), positive_relation (e/l)
-#> + edges from 93e556e (vertex names):
+#> + edges from fa790c6 (vertex names):
 #>  [1] Romauld    ->Ambrose     Romauld    ->Peter      
 #>  [3] Romauld    ->Albert      Bonaventure->Romauld    
 #>  [5] Bonaventure->Victor      Bonaventure->Albert     
@@ -317,7 +317,7 @@ nw %>%
 
 ``` r
 covr::package_coverage()
-#> snatools Coverage: 56.95%
+#> snatools Coverage: 56.85%
 #> R/adjacency-matrix.R: 0.00%
 #> R/ei_index.R: 0.00%
 #> R/ggplot.R: 0.00%
