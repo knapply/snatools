@@ -254,44 +254,52 @@ for which a traditional edgelist requires extra information.</p><ul>
 <span class='no'>tidy_g</span> <span class='kw'>&lt;-</span> <span class='no'>ig</span> <span class='kw'>%&gt;%</span>
   <span class='kw pkg'>tidygraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/tidygraph/topics/tbl_graph'>as_tbl_graph</a></span>()
 
-<span class='no'>ig</span> <span class='kw'>%&gt;%</span> <span class='fu'>rep_as_edgelist</span>()</div><div class='output co'>#&gt; # An undirected edgelist with 7 edges.*
+<span class='no'>ig</span> <span class='kw'>%&gt;%</span> <span class='fu'>rep_as_edgelist</span>()</div><div class='output co'>#&gt; # An undirected edgelist with 9 edges.*
 #&gt;   .ego .alter
-#&gt; 1 b    d     
-#&gt; 2 a    f     
-#&gt; 3 b    f     
-#&gt; 4 a    h     
-#&gt; 5 c    h     
-#&gt; 6 g    i     
-#&gt; 7 f    j     
+#&gt; 1 a    d     
+#&gt; 2 c    d     
+#&gt; 3 c    f     
+#&gt; 4 c    h     
+#&gt; 5 e    h     
+#&gt; 6 a    i     
+#&gt; 7 f    i     
+#&gt; 8 d    j     
+#&gt; 9 e    j     
 #&gt; # * Values correspond to vertex names.</div><div class='input'>
-<span class='no'>nw</span> <span class='kw'>%&gt;%</span> <span class='fu'>rep_as_edgelist</span>(<span class='kw'>use_names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; # An undirected edgelist with 7 edges.*
+<span class='no'>nw</span> <span class='kw'>%&gt;%</span> <span class='fu'>rep_as_edgelist</span>(<span class='kw'>use_names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; # An undirected edgelist with 9 edges.*
 #&gt;   .ego .alter
-#&gt; 1    2      4
-#&gt; 2    1      6
-#&gt; 3    2      6
-#&gt; 4    1      8
-#&gt; 5    3      8
-#&gt; 6    7      9
-#&gt; 7    6     10
+#&gt; 1    1      4
+#&gt; 2    3      4
+#&gt; 3    3      6
+#&gt; 4    3      8
+#&gt; 5    5      8
+#&gt; 6    1      9
+#&gt; 7    6      9
+#&gt; 8    4     10
+#&gt; 9    5     10
 #&gt; # * Values correspond to vertex indices.</div><div class='input'>
-<span class='no'>tidy_g</span> <span class='kw'>%&gt;%</span> <span class='fu'>rep_as_edgelist</span>(<span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='st'>"group"</span>)</div><div class='output co'>#&gt; # An undirected edgelist with 7 edges.*
+<span class='no'>tidy_g</span> <span class='kw'>%&gt;%</span> <span class='fu'>rep_as_edgelist</span>(<span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='st'>"group"</span>)</div><div class='output co'>#&gt; # An undirected edgelist with 9 edges.*
 #&gt;   .ego .alter
-#&gt; 1 A    B     
-#&gt; 2 A    A     
-#&gt; 3 A    A     
-#&gt; 4 A    C     
-#&gt; 5 B    C     
-#&gt; 6 B    C     
-#&gt; 7 A    B     
+#&gt; 1 C    C     
+#&gt; 2 B    C     
+#&gt; 3 B    A     
+#&gt; 4 B    A     
+#&gt; 5 A    A     
+#&gt; 6 C    C     
+#&gt; 7 A    C     
+#&gt; 8 C    B     
+#&gt; 9 A    B     
 #&gt; # * Values correspond to a vertex attribute ('group').</div><div class='input'>
-<span class='no'>ig</span> <span class='kw'>%&gt;%</span> <span class='fu'>rep_as_edgelist</span>(<span class='kw'>leave_raw</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;      .ego .alter
-#&gt; [1,] "b"  "d"   
-#&gt; [2,] "a"  "f"   
-#&gt; [3,] "b"  "f"   
-#&gt; [4,] "a"  "h"   
-#&gt; [5,] "c"  "h"   
-#&gt; [6,] "g"  "i"   
-#&gt; [7,] "f"  "j"   </div><div class='input'>
+<span class='no'>ig</span> <span class='kw'>%&gt;%</span> <span class='fu'>rep_as_edgelist</span>(<span class='kw'>leave_raw</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;       .ego .alter
+#&gt;  [1,] "a"  "d"   
+#&gt;  [2,] "c"  "d"   
+#&gt;  [3,] "c"  "f"   
+#&gt;  [4,] "c"  "h"   
+#&gt;  [5,] "e"  "h"   
+#&gt;  [6,] "a"  "i"   
+#&gt;  [7,] "f"  "i"   
+#&gt;  [8,] "d"  "j"   
+#&gt;  [9,] "e"  "j"   </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

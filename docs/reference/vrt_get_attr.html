@@ -137,7 +137,21 @@
 <span class='fu'>vrt_get_attr</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>)
 
 <span class='co'># S3 method for tbl_graph</span>
-<span class='fu'>vrt_get_attr</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>)</pre>
+<span class='fu'>vrt_get_attr</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>)
+
+<span class='fu'>vrt_get_names</span>(<span class='no'>x</span>)
+
+<span class='co'># S3 method for bridge_net</span>
+<span class='fu'>vrt_get_names</span>(<span class='no'>x</span>)
+
+<span class='co'># S3 method for igraph</span>
+<span class='fu'>vrt_get_names</span>(<span class='no'>x</span>)
+
+<span class='co'># S3 method for network</span>
+<span class='fu'>vrt_get_names</span>(<span class='no'>x</span>)
+
+<span class='co'># S3 method for tbl_graph</span>
+<span class='fu'>vrt_get_names</span>(<span class='no'>x</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -154,7 +168,31 @@
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>vector</code> of vertex attribute values.</p>
+    <p><code>vector</code> of vertex attribute values. May be of any type supported by <code>x</code>'s
+object class.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <ul>
+<li><p><code>vrt_get_attr()</code> allows for the extraction of any <code>vrt_attr</code> in <code>x</code>.</p><ul>
+<li><p>If <code>vrt_attr</code> is not found, <code>vrt_get_attr()</code> considers it to be invalid and throws
+an error.</p><ul>
+<li><p>The error message will include details on which vertex attributes are valid.</p></li>
+</ul></li>
+</ul></li>
+<li><p><code>vrt_get_names()</code> is a convenience function that extracts the vertex attribute
+corresponding to each class' vertex name attribute convention.</p><ul>
+<li><p>Since <code>igraph</code>, <code>network</code>, and <code>tbl_graph</code> objects do not require that vertices
+have names, <code>vrt_get_names()</code> returns an <code>integer</code> <code>vector</code> corresponding to
+vertex indices if the appropriate attribute is not found.</p></li>
+<li><p>For reference, each object class uses the following conventions for vertex names:</p><ul>
+<li><p><code>igraph</code>: <code>name</code></p></li>
+<li><p><code>network</code>: <code>vertex.names</code></p></li>
+<li><p><code>bridge_net</code>: <code>.name</code></p></li>
+<li><p><code>tbl_graph</code>: <code>name</code></p></li>
+</ul></li>
+</ul></li>
+</ul>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -192,6 +230,22 @@
 #&gt;  [6] "Loyal"       "Waverers"    "Young Turks" "Young Turks" "Young Turks"
 #&gt; [11] "Young Turks" "Young Turks" "Young Turks" "Young Turks" "Waverers"   
 #&gt; [16] "Outcasts"    "Outcasts"    "Outcasts"   </div><div class='input'>
+<span class='fu'>vrt_get_names</span>(<span class='no'>sampson_monastery</span>)</div><div class='output co'>#&gt;  [1] "Romauld"     "Bonaventure" "Ambrose"     "Berthold"    "Peter"      
+#&gt;  [6] "Louis"       "Victor"      "Winfrid"     "John Bosco"  "Gregory"    
+#&gt; [11] "Hugh"        "Boniface"    "Mark"        "Albert"      "Amand"      
+#&gt; [16] "Basil"       "Elias"       "Simplicius" </div><div class='input'>
+<span class='fu'>vrt_get_names</span>(<span class='no'>ig</span>)</div><div class='output co'>#&gt;  [1] "Romauld"     "Bonaventure" "Ambrose"     "Berthold"    "Peter"      
+#&gt;  [6] "Louis"       "Victor"      "Winfrid"     "John Bosco"  "Gregory"    
+#&gt; [11] "Hugh"        "Boniface"    "Mark"        "Albert"      "Amand"      
+#&gt; [16] "Basil"       "Elias"       "Simplicius" </div><div class='input'>
+<span class='fu'>vrt_get_names</span>(<span class='no'>nw</span>)</div><div class='output co'>#&gt;  [1] "Romauld"     "Bonaventure" "Ambrose"     "Berthold"    "Peter"      
+#&gt;  [6] "Louis"       "Victor"      "Winfrid"     "John Bosco"  "Gregory"    
+#&gt; [11] "Hugh"        "Boniface"    "Mark"        "Albert"      "Amand"      
+#&gt; [16] "Basil"       "Elias"       "Simplicius" </div><div class='input'>
+<span class='fu'>vrt_get_names</span>(<span class='no'>tidy_g</span>)</div><div class='output co'>#&gt;  [1] "Romauld"     "Bonaventure" "Ambrose"     "Berthold"    "Peter"      
+#&gt;  [6] "Louis"       "Victor"      "Winfrid"     "John Bosco"  "Gregory"    
+#&gt; [11] "Hugh"        "Boniface"    "Mark"        "Albert"      "Amand"      
+#&gt; [16] "Basil"       "Elias"       "Simplicius" </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -200,6 +254,8 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
       

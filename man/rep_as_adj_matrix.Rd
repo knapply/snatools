@@ -6,7 +6,7 @@
 \title{Construct a graph object's adjacency matrix representation.}
 \usage{
 rep_as_adj_matrix(x, use_names = TRUE, vrt_attr = NULL,
-  sparse = TRUE)
+  edg_attr = NULL, leave_raw = FALSE)
 
 \method{print}{adj_matrix}(x)
 }
@@ -31,19 +31,26 @@ Construct a graph object's adjacency matrix representation.
 \examples{
 library(snatools)
 
-ig <- igraph::graph("Krackhardt Kite") \%>\% 
-  igraph::set_vertex_attr("name", value = paste0("vrt_",
-                                                  seq_len(igraph::vcount(.)))) \%>\% 
-  igraph::set_vertex_attr("group", value = sample(letters, igraph::vcount(.))) \%>\% 
-  igraph::set_vertex_attr("group", value = sample(letters, igraph::vcount(.)))
+data(sampson_monastery)
   
-rep_as_adj_matrix(ig)
+# sampson_monastery \%>\% 
+# edg_filter(time == 1) \%>\% 
+#   rep_as_adj_matrix()
 
-rep_as_adj_matrix(ig, vrt_attr = "group")
+sampson_monastery \%>\% 
+  edg_filter(time == 1) \%>\% 
+  as_igraph() \%>\% 
+  rep_as_adj_matrix(vrt_attr = "status")
   
-nw <- as_network(ig)
-
-rep_as_adj_matrix(nw, use_names = FALSE)
+sampson_monastery \%>\% 
+  edg_filter(time == 2) \%>\% 
+  as_network() \%>\% 
+  rep_as_adj_matrix(edg_attr = "weight")
+  
+sampson_monastery \%>\% 
+  edg_filter(time == 3, relation == "blame") \%>\% 
+  tidygraph::as_tbl_graph() \%>\% 
+  rep_as_adj_matrix(vrt_attr = "faction")
 
 }
 \author{

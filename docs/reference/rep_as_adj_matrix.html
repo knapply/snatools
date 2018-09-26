@@ -126,7 +126,7 @@
     </div>
 
     <pre class="usage"><span class='fu'>rep_as_adj_matrix</span>(<span class='no'>x</span>, <span class='kw'>use_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>sparse</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+  <span class='kw'>edg_attr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>leave_raw</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='co'># S3 method for adj_matrix</span>
 <span class='fu'>print</span>(<span class='no'>x</span>)</pre>
@@ -163,50 +163,84 @@ in for row and column names. If provided, <code>vrt_attr</code> overrides <code>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>snatools</span>)
 
-<span class='no'>ig</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/make_graph'>graph</a></span>(<span class='st'>"Krackhardt Kite"</span>) <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/set_vertex_attr'>set_vertex_attr</a></span>(<span class='st'>"name"</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'>paste0</span>(<span class='st'>"vrt_"</span>,
-                                                  <span class='fu'>seq_len</span>(<span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/gorder'>vcount</a></span>(<span class='no'>.</span>)))) <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/set_vertex_attr'>set_vertex_attr</a></span>(<span class='st'>"group"</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'>sample</span>(<span class='no'>letters</span>, <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/gorder'>vcount</a></span>(<span class='no'>.</span>))) <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/set_vertex_attr'>set_vertex_attr</a></span>(<span class='st'>"group"</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'>sample</span>(<span class='no'>letters</span>, <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/gorder'>vcount</a></span>(<span class='no'>.</span>)))
+<span class='fu'>data</span>(<span class='no'>sampson_monastery</span>)
 
-<span class='fu'>rep_as_adj_matrix</span>(<span class='no'>ig</span>)</div><div class='output co'>#&gt; # An adj_matrix: 10x10
-#&gt; # Suppressing column names.                          
-#&gt; vrt_1  0 1 1 1 0 1 0 0 0 0
-#&gt; vrt_2  1 0 0 1 1 0 1 0 0 0
-#&gt; vrt_3  1 0 0 1 0 1 0 0 0 0
-#&gt; vrt_4  1 1 1 0 1 1 1 0 0 0
-#&gt; vrt_5  0 1 0 1 0 0 1 0 0 0
-#&gt; vrt_6  1 0 1 1 0 0 1 1 0 0
-#&gt; vrt_7  0 1 0 1 1 1 0 1 0 0
-#&gt; vrt_8  0 0 0 0 0 1 1 0 1 0
-#&gt; vrt_9  0 0 0 0 0 0 0 1 0 1
-#&gt; vrt_10 0 0 0 0 0 0 0 0 1 0</div><div class='input'>
-<span class='fu'>rep_as_adj_matrix</span>(<span class='no'>ig</span>, <span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='st'>"group"</span>)</div><div class='output co'>#&gt; # An adj_matrix: 10x10
-#&gt; # Suppressing column names.                     
-#&gt; f 0 1 1 1 0 1 0 0 0 0
-#&gt; s 1 0 0 1 1 0 1 0 0 0
-#&gt; c 1 0 0 1 0 1 0 0 0 0
-#&gt; z 1 1 1 0 1 1 1 0 0 0
-#&gt; d 0 1 0 1 0 0 1 0 0 0
-#&gt; i 1 0 1 1 0 0 1 1 0 0
-#&gt; l 0 1 0 1 1 1 0 1 0 0
-#&gt; k 0 0 0 0 0 1 1 0 1 0
-#&gt; e 0 0 0 0 0 0 0 1 0 1
-#&gt; a 0 0 0 0 0 0 0 0 1 0</div><div class='input'>
-<span class='no'>nw</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='as_network.html'>as_network</a></span>(<span class='no'>ig</span>)
+<span class='co'># sampson_monastery %&gt;% </span>
+<span class='co'># edg_filter(time == 1) %&gt;% </span>
+<span class='co'>#   rep_as_adj_matrix()</span>
 
-<span class='fu'>rep_as_adj_matrix</span>(<span class='no'>nw</span>, <span class='kw'>use_names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; # An adj_matrix: 10x10
-#&gt; # Suppressing column names.                         
-#&gt;  [1,] 0 1 1 1 0 1 0 0 0 0
-#&gt;  [2,] 1 0 0 1 1 0 1 0 0 0
-#&gt;  [3,] 1 0 0 1 0 1 0 0 0 0
-#&gt;  [4,] 1 1 1 0 1 1 1 0 0 0
-#&gt;  [5,] 0 1 0 1 0 0 1 0 0 0
-#&gt;  [6,] 1 0 1 1 0 0 1 1 0 0
-#&gt;  [7,] 0 1 0 1 1 1 0 1 0 0
-#&gt;  [8,] 0 0 0 0 0 1 1 0 1 0
-#&gt;  [9,] 0 0 0 0 0 0 0 1 0 1
-#&gt; [10,] 0 0 0 0 0 0 0 0 1 0</div><div class='input'>
+<span class='no'>sampson_monastery</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='edg_filter.html'>edg_filter</a></span>(<span class='no'>time</span> <span class='kw'>==</span> <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='as_igraph.html'>as_igraph</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'>rep_as_adj_matrix</span>(<span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='st'>"status"</span>)</div><div class='output co'>#&gt; # An adj_matrix: 18x18
+#&gt; # Suppressing column names.
+#&gt;                  R R R R R R R R L E L L L L R E E E
+#&gt; Remained         0 0 1 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0
+#&gt; Remained         1 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0
+#&gt; Remained         1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0
+#&gt; Remained         0 0 0 0 1 1 0 0 0 1 0 0 0 0 0 0 0 0
+#&gt; Remained         0 0 0 1 0 0 0 0 0 0 1 0 1 0 0 0 0 0
+#&gt; Remained         1 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 0
+#&gt; Remained         0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0
+#&gt; Remained         1 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0
+#&gt; Left Voluntarily 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0 1 0 0
+#&gt; Expelled         0 0 0 1 0 0 0 1 0 0 0 0 0 1 0 0 0 0
+#&gt; Left Voluntarily 0 0 0 0 1 0 0 1 0 0 0 0 0 1 0 0 0 0
+#&gt; Left Voluntarily 1 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0
+#&gt; Left Voluntarily 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0 0 0 1
+#&gt; Left Voluntarily 1 0 0 0 0 0 0 0 0 0 1 1 0 0 1 0 0 0
+#&gt; Remained         1 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0
+#&gt; Expelled         1 1 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Expelled         0 0 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1
+#&gt; Expelled         1 1 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0</div><div class='input'>
+<span class='no'>sampson_monastery</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='edg_filter.html'>edg_filter</a></span>(<span class='no'>time</span> <span class='kw'>==</span> <span class='fl'>2</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='as_network.html'>as_network</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'>rep_as_adj_matrix</span>(<span class='kw'>edg_attr</span> <span class='kw'>=</span> <span class='st'>"weight"</span>)</div><div class='output co'>#&gt; # An adj_matrix: 18x18
+#&gt; # Suppressing column names.
+#&gt;             R B A B P L V W J G H B M A A B E S
+#&gt; Romauld     0 2 0 0 1 0 0 3 0 0 0 0 0 0 0 0 0 0
+#&gt; Bonaventure 3 0 0 0 0 0 1 0 0 0 0 2 0 0 1 0 0 0
+#&gt; Ambrose     3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 2
+#&gt; Berthold    0 0 0 0 3 2 0 0 0 0 1 0 0 0 0 0 0 0
+#&gt; Peter       2 0 0 3 0 0 0 0 0 0 1 0 0 0 0 0 0 0
+#&gt; Louis       1 0 0 3 0 0 0 0 2 0 0 0 0 0 0 0 0 0
+#&gt; Victor      1 2 0 0 0 0 0 0 0 0 0 0 0 0 0 3 0 0
+#&gt; Winfrid     0 0 0 3 0 1 0 0 0 2 0 0 0 0 0 0 0 0
+#&gt; John Bosco  0 0 0 0 1 0 0 3 0 0 0 2 0 0 0 0 0 0
+#&gt; Gregory     0 0 0 3 1 0 0 0 0 0 0 0 2 0 0 0 0 0
+#&gt; Hugh        0 0 0 2 3 0 0 0 0 0 0 0 0 0 0 1 0 0
+#&gt; Boniface    3 1 0 0 0 0 0 0 0 0 0 0 0 2 0 0 0 0
+#&gt; Mark        0 0 0 0 2 0 1 0 0 0 0 0 0 0 0 0 0 3
+#&gt; Albert      3 1 0 0 0 0 0 0 0 0 0 1 0 0 2 0 0 0
+#&gt; Amand       2 3 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0
+#&gt; Basil       0 2 0 0 0 0 3 0 0 0 0 1 0 0 0 0 0 0
+#&gt; Elias       0 1 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3
+#&gt; Simplicius  0 1 0 0 0 0 0 0 0 0 0 0 2 0 0 0 3 0</div><div class='input'>
+<span class='no'>sampson_monastery</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='edg_filter.html'>edg_filter</a></span>(<span class='no'>time</span> <span class='kw'>==</span> <span class='fl'>3</span>, <span class='no'>relation</span> <span class='kw'>==</span> <span class='st'>"blame"</span>) <span class='kw'>%&gt;%</span>
+  <span class='kw pkg'>tidygraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/tidygraph/topics/tbl_graph'>as_tbl_graph</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'>rep_as_adj_matrix</span>(<span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='st'>"faction"</span>)</div><div class='output co'>#&gt; # An adj_matrix: 18x18
+#&gt; # Suppressing column names.
+#&gt;             W L L L L L W Y Y Y Y Y Y Y W O O O
+#&gt; Waverers    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Loyal       0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Loyal       0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Loyal       0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1
+#&gt; Loyal       0 0 0 0 0 0 0 0 0 1 1 0 1 0 0 0 0 0
+#&gt; Loyal       0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 1
+#&gt; Waverers    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1
+#&gt; Young Turks 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 1
+#&gt; Young Turks 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 0 1
+#&gt; Young Turks 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0
+#&gt; Young Turks 0 0 0 0 1 1 0 0 0 0 0 0 0 0 0 1 0 0
+#&gt; Young Turks 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 1 0 1
+#&gt; Young Turks 0 0 0 1 1 0 0 0 0 0 0 0 0 0 0 1 0 0
+#&gt; Young Turks 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 1 1 1
+#&gt; Waverers    0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 1
+#&gt; Outcasts    0 0 0 0 1 0 0 0 0 1 1 0 0 0 0 0 0 0
+#&gt; Outcasts    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Outcasts    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

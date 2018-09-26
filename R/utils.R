@@ -165,7 +165,7 @@ as_df <- function(x) {
 
 as_matrix <- function(x) {
   stopifnot(is.matrix(x))
-  stopifnot(rownames(x) == seq_len(nrow(x)))
+  # stopifnot(rownames(x) == seq_len(nrow(x)))
   strip_added_attrs(x)
 }
 

@@ -139,7 +139,34 @@ as_igraph.network <- function(x) {
 #' 
 #' @export
 as_igraph.tbl_graph <- function(x) {
+  to_keep <- "class"
+  current <- names(attributes(x))
+  for (i in seq_along(current)) {
+    if (!current[[i]] %in% to_keep) `attr<-`(x, current[[i]], NULL)
+  }
   class(x) <- "igraph"
-  `attr<-`(x, "active", NULL)
   x
 }
+
+#' @rdname as_igraph
+#' 
+#' @importFrom igraph as.igraph
+#' @export
+as.igraph.bridge_net <- function(x) {
+  as_igraph.bridge_net(x)
+}
+
+#' @rdname as_igraph
+#' 
+#' @importFrom igraph as.igraph
+#' @export
+as.igraph.network <- function(x) {
+  as_igraph.network(x)
+}
+
+#' @rdname as_igraph
+#' 
+#' @export
+igraph::as.igraph
+
+
