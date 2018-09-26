@@ -77,7 +77,7 @@ print.bridge_net <- function(x, .nrow = 3L) {
     edges <- head(x[["edges"]], .nrow)
     if (!is.null(x[["vertices"]])) {
       if (is.matrix(edges)) {
-        edges <- as.data.frame(edges)
+        edges <- as.data.frame(edges, stringsAsFactors = FALSE)
         edges[, ".ego"] <- x[["vertices"]][[".name"]][edges[, ".ego"]]
         edges[, ".alter"] <- x[["vertices"]][[".name"]][edges[, ".alter"]]
         edges <- as.matrix(edges)

@@ -206,7 +206,10 @@ edg_to_df.bridge_net <- function(x, include_dyad = TRUE, leave_raw = FALSE) {
     return(NULL)
   }
   out <- x[["edges"]]
-  if (!include_dyad) {
+  if (include_dyad) {
+    out[, ".ego"] <- x[["vertices"]][, ".name"][out[, ".ego"]]
+    out[, ".alter"] <- x[["vertices"]][, ".name"][out[, ".alter"]]
+  } else {
     out[[".ego"]] <- NULL
     out[[".alter"]] <- NULL
   }
@@ -300,8 +303,18 @@ edg_to_df.network <- function(x, include_dyad = TRUE, leave_raw = FALSE) {
 
 as_edge_data_frame <- function(x) {
   stopifnot(is.data.frame(x))
+  if (is.numeric(x[[".ego"]])) {
+    x[[".ego"]] <- set_whole_number_storage(x[[".ego"]])
+  }
+  if (is.numeric(x[[".alter"]])) {
+    x[[".alter"]] <- set_whole_number_storage(x[[".alter"]])
+  }
   class(x) <- c("edge_data_frame", "data.frame")
   x
+}
+
+as.data.frame.edge_data_frame <- function(x) {
+  as_df(x)
 }
 
 #' @rdname edg_to_df

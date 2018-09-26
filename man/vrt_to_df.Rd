@@ -6,7 +6,6 @@
 \alias{vrt_to_df.igraph}
 \alias{vrt_to_df.network}
 \alias{vrt_to_df.tbl_graph}
-\alias{print.vertex_data_frame}
 \title{Extract all vertex attributes as a data frame.}
 \usage{
 vrt_to_df(x, leave_raw = FALSE)
@@ -18,8 +17,6 @@ vrt_to_df(x, leave_raw = FALSE)
 \method{vrt_to_df}{network}(x, leave_raw = FALSE)
 
 \method{vrt_to_df}{tbl_graph}(x, leave_raw = FALSE)
-
-\method{print}{vertex_data_frame}(x, .nrow = 10L, .verbose = TRUE)
 }
 \arguments{
 \item{x}{A \code{bridge_net}, \code{igraph}, \code{network}, or \code{tbl_graph}.}
@@ -27,8 +24,6 @@ vrt_to_df(x, leave_raw = FALSE)
 \item{leave_raw}{\code{logical} (default: \code{FALSE}) indicating whether to return
 a raw \code{data.frame} instead of a \code{vertex_data_frame} that standardizes results across
 graph classes.}
-
-\item{.nrow}{Maximum number of rows to \code{print()}.}
 }
 \value{
 \code{data.frame} or \code{vertex_data_frame} with all vertex attributes contained in \code{x}.

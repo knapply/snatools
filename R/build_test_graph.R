@@ -1,6 +1,6 @@
 #' @importFrom stats runif
 build_test_graph <- function(ig_or_nw, n_nodes = 10L,
-                             directed = TRUE, bipartite = FALSE, 
+                             directed = TRUE, bipartite = FALSE,
                              isolate = FALSE, seed = 1234) {
   n_edges <- NULL
   if (!bipartite) {
@@ -56,7 +56,7 @@ build_test_graph <- function(ig_or_nw, n_nodes = 10L,
     mat2 <- mat1
   }
   n_edges <- sum(c(mat1, mat2))
-  
+
   if (n_nodes > 0L) {
     set.seed(seed)
     vertices_df <- data.frame(vertex.names = paste0("node_", seq_len(n_nodes)),
@@ -64,7 +64,7 @@ build_test_graph <- function(ig_or_nw, n_nodes = 10L,
                               node_int = sample(seq_len(n_nodes), n_nodes),
                               node_dbl = runif(n_nodes, 0, 100),
                               node_lgl = sample(c(TRUE, FALSE), n_nodes, replace = TRUE),
-                              stringsAsFactors = FALSE) 
+                              stringsAsFactors = FALSE)
     # if (add_isolate) {
     #   vertices_df <- rbind.data.frame(data.frame(vertex.names = "the_isolate",
     #                                              node_chr = "isolate_chr",
@@ -117,7 +117,7 @@ build_test_graph <- function(ig_or_nw, n_nodes = 10L,
                            edge_dbl = runif(n_edges, 0, 1000),
                            edge_lgl = sample(c(TRUE, FALSE), n_edges, replace = TRUE),
                            stringsAsFactors = FALSE)
-    
+
   } else {
     edges_df <- NULL
   }
@@ -192,7 +192,7 @@ build_test_network <- function(vattrs, eattrs, directed, bipartite) {
   } else {
     bip_arg <- FALSE
   }
-  out <- network::network.initialize(n_nodes, directed, hyper = FALSE, 
+  out <- network::network.initialize(n_nodes, directed, hyper = FALSE,
                                      loops = TRUE, multiple = TRUE, bipartite = bip_arg)
   if (directed) {
     network::set.network.attribute(out, attrname = "directed", value = TRUE)

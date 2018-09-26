@@ -21,9 +21,9 @@ dependencies are subject to change.
     `network`).
 2.  Streamline network analytic workflows by making common tasks as
     intuitive (and stable) as possible.
-      - Improve the efficiency of seasoned analysts while reducing the
-        cognitive load of network newcomers (as well as those
-        instructing them).
+      - Increase analyst efficiency.
+      - Reduce the cognitive load of network newcomers and those
+        instructing them.
 3.  Implement metrics that are missing from R’s network ecosystem.
       - Reimplement those that *should* be made more accessible,
         efficient, or robust.
@@ -63,7 +63,7 @@ devtools::install_github("knapply/snatools")
 library(snatools)
 ```
 
-<br>
+## Features
 
 ``` r
 data("sampson_monastery")
@@ -101,11 +101,11 @@ together easier than ever.
 ig <- as_igraph(sampson_monastery)
 ```
 
-    #> IGRAPH 0b8b1e8 DNW- 18 510 -- 
-    #> + attr: network_name (g/c), author (g/c), faction (v/c),
-    #> | cloisterville (v/l), status (v/c), name (v/c), weight (e/n),
-    #> | relation (e/c), time (e/n), positive_relation (e/l)
-    #> + edges from 0b8b1e8 (vertex names):
+    #> IGRAPH 52f37d4 DNW- 18 510 -- 
+    #> + attr: network_name (g/c), author (g/c), name (v/c), faction
+    #> | (v/c), cloisterville (v/l), status (v/c), weight (e/n), relation
+    #> | (e/c), time (e/n), positive_relation (e/l)
+    #> + edges from 52f37d4 (vertex names):
     #>  [1] Romauld    ->Ambrose     Romauld    ->Peter      
     #>  [3] Romauld    ->Albert      Bonaventure->Romauld    
     #>  [5] Bonaventure->Victor      Bonaventure->Albert     
@@ -161,11 +161,11 @@ as_network(ig)
 
 ``` r
 as_igraph(nw)
-#> IGRAPH 0bba3a8 DNW- 18 510 -- 
-#> + attr: network_name (g/c), author (g/c), faction (v/c),
-#> | cloisterville (v/l), status (v/c), name (v/c), weight (e/n),
-#> | relation (e/c), time (e/n), positive_relation (e/l)
-#> + edges from 0bba3a8 (vertex names):
+#> IGRAPH 5328162 DNW- 18 510 -- 
+#> + attr: network_name (g/c), author (g/c), name (v/c), faction
+#> | (v/c), cloisterville (v/l), status (v/c), weight (e/n), relation
+#> | (e/c), time (e/n), positive_relation (e/l)
+#> + edges from 5328162 (vertex names):
 #>  [1] Romauld    ->Ambrose     Romauld    ->Peter      
 #>  [3] Romauld    ->Albert      Bonaventure->Romauld    
 #>  [5] Bonaventure->Victor      Bonaventure->Albert     
@@ -205,19 +205,25 @@ nw %>% network::list.network.attributes()
 
 ``` r
 ig %>% vrt_to_df()
-#> # vertex_data_frame: 18 x 4
-#>            .name     faction cloisterville           status
-#>   1      Romauld    Waverers         FALSE         Remained
-#>   2  Bonaventure       Loyal          TRUE         Remained
-#>   3      Ambrose       Loyal         FALSE         Remained
-#>   4     Berthold       Loyal         FALSE         Remained
-#>   5        Peter       Loyal          TRUE         Remained
-#>   6        Louis       Loyal         FALSE         Remained
-#>   7       Victor    Waverers         FALSE         Remained
-#>   8      Winfrid Young Turks         FALSE         Remained
-#>   9   John Bosco Young Turks          TRUE Left Voluntarily
-#>   10     Gregory Young Turks          TRUE         Expelled
-#>   # ... with 8 additional rows.
+#>          .name     faction cloisterville           status
+#> 1      Romauld    Waverers         FALSE         Remained
+#> 2  Bonaventure       Loyal          TRUE         Remained
+#> 3      Ambrose       Loyal         FALSE         Remained
+#> 4     Berthold       Loyal         FALSE         Remained
+#> 5        Peter       Loyal          TRUE         Remained
+#> 6        Louis       Loyal         FALSE         Remained
+#> 7       Victor    Waverers         FALSE         Remained
+#> 8      Winfrid Young Turks         FALSE         Remained
+#> 9   John Bosco Young Turks          TRUE Left Voluntarily
+#> 10     Gregory Young Turks          TRUE         Expelled
+#> 11        Hugh Young Turks         FALSE Left Voluntarily
+#> 12    Boniface Young Turks         FALSE Left Voluntarily
+#> 13        Mark Young Turks          TRUE Left Voluntarily
+#> 14      Albert Young Turks         FALSE Left Voluntarily
+#> 15       Amand    Waverers         FALSE         Remained
+#> 16       Basil    Outcasts          TRUE         Expelled
+#> 17       Elias    Outcasts         FALSE         Expelled
+#> 18  Simplicius    Outcasts         FALSE         Expelled
 ```
 
 ``` r
@@ -308,3 +314,24 @@ nw %>%
 <!-- # devtools::test() -->
 
 <!-- ``` -->
+
+``` r
+covr::package_coverage()
+#> snatools Coverage: 59.14%
+#> R/adjacency-matrix.R: 0.00%
+#> R/ei_index.R: 0.00%
+#> R/mixing-matrix.R: 0.00%
+#> R/txt_.R: 20.00%
+#> R/as_bridge_net.R: 29.17%
+#> R/utils.R: 32.22%
+#> R/edgelist.R: 57.66%
+#> R/utils-attributes.R: 62.50%
+#> R/operators.R: 63.64%
+#> R/network-metadata.R: 65.85%
+#> R/vertex-attributes.R: 76.37%
+#> R/edge-attributes.R: 76.51%
+#> R/as_network.R: 80.00%
+#> R/network-attributes.R: 84.85%
+#> R/as_igraph.R: 85.19%
+#> R/build_test_graph.R: 90.68%
+```

@@ -198,7 +198,11 @@ net_attrs_to_list.bridge_net <- function(x) {
 #' @importFrom igraph graph_attr
 #' @export
 net_attrs_to_list.igraph <- function(x) {
-  graph_attr(x)
+  out <- graph_attr(x)
+  if (is_empty(out)) {
+    return(NULL)
+  }
+  out
 }
 
 #' @rdname net_attrs_to_list
@@ -209,9 +213,11 @@ net_attrs_to_list.igraph <- function(x) {
 #' @export
 net_attrs_to_list.network <- function(x) {
   attr_names <- net_attr_names(x)
+  if (is_empty(attr_names)) {
+    return(NULL)
+  }
   out <- lapply(attr_names, function(y) net_get_attr(x, y))
-  names(out) <- attr_names
-  out
+  `names<-`(out, attr_names)
 }
 
 #' @rdname net_attrs_to_list
