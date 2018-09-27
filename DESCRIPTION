@@ -20,7 +20,6 @@ Suggests:
     dplyr,
     ergm,
     ggplot2,
-    ggraph,
     knitr,
     rmarkdown,
     testthat,
