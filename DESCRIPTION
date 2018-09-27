@@ -8,6 +8,7 @@ Description: A consistent toolkit that conveniently connects existing graph stru
     metrics missing from R's network analysis ecosystem.
 Depends: R (>= 3.4.0)
 Imports:
+    ggplot2,
     igraph,
     magrittr,
     methods,
