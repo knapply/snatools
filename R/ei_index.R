@@ -22,6 +22,7 @@
 #' 
 #' @examples 
 #' library(snatools)
+#' library(ggplot2)
 #' 
 #' data(sampson_monastery)
 #' 

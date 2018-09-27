@@ -60,9 +60,6 @@ tidy_g <- ig \%>\%
   
 el <- ig \%>\% 
   rep_as_edgelist(use_names = FALSE)
-  
-adj_mat <- ig \%>\% 
-  rep_as_adj_matrix()
 
 net_has_loops(bridge_g)
 
@@ -71,8 +68,6 @@ net_has_loops(ig)
 net_has_loops(nw)
 
 net_has_loops(tidy_g)
-
-net_has_loops(el)
 
 net_has_loops(el)
 

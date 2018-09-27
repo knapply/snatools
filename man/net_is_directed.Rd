@@ -49,9 +49,6 @@ tidy_g <- ig \%>\%
   
 el <- ig \%>\% 
   rep_as_edgelist(use_names = FALSE)
-  
-adj_mat <- ig \%>\% 
-  rep_as_adj_matrix()
 
 net_is_directed(bridge_g)
 
@@ -62,8 +59,6 @@ net_is_directed(nw)
 net_is_directed(tidy_g)
 
 net_is_directed(el)
-
-net_is_directed(adj_mat)
 
 }
 \seealso{

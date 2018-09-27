@@ -222,8 +222,6 @@ net_count_actors.edgelist <- function(x) {
 
 #' @rdname net_count_actors
 #' 
-#' @examples 
-#' 
 #' @export
 net_count_actors.adj_matrix <- function(x) {
   if (!net_is_bipartite(x)) {
@@ -255,9 +253,6 @@ net_count_actors.adj_matrix <- function(x) {
 #'   
 #' el <- ig %>% 
 #'   rep_as_edgelist(use_names = FALSE)
-#'   
-#' adj_mat <- ig %>% 
-#'   rep_as_adj_matrix()
 #' 
 #' @author Brendan Knapp \email{brendan.g.knapp@@gmail.com}
 #' 
@@ -324,9 +319,6 @@ net_is_directed.edgelist <- function(x) {
 }
 
 #' @rdname net_is_directed
-#' 
-#' @examples 
-#' net_is_directed(adj_mat)
 #'
 #' @export
 net_is_directed.adj_matrix <- function(x) {
@@ -357,9 +349,6 @@ net_is_directed.adj_matrix <- function(x) {
 #'   
 #' el <- ig %>% 
 #'   rep_as_edgelist(use_names = FALSE)
-#'   
-#' adj_matrix <- ig %>% 
-#'  rep_as_adj_matrix()
 #' 
 #' @author Brendan Knapp \email{brendan.g.knapp@@gmail.com}
 #' 
@@ -425,9 +414,6 @@ net_count_vertices.edgelist <- function(x) {
 
 #' @rdname net_count_vertices
 #' 
-#' @examples 
-#' net_count_vertices(el)
-#' 
 #' @export
 net_count_vertices.adj_matrix <- function(x) {
   attr(x, "n_vertices")
@@ -457,9 +443,6 @@ net_count_vertices.adj_matrix <- function(x) {
 #'   
 #' el <- ig %>% 
 #'   rep_as_edgelist(use_names = FALSE)
-#'   
-#' adj_mat <- ig %>% 
-#'   rep_as_adj_matrix()
 #' 
 #' @author Brendan Knapp \email{brendan.g.knapp@@gmail.com}
 #' 
@@ -525,9 +508,6 @@ net_count_edges.edgelist <- function(x) {
 }
 
 #' @rdname net_count_edges
-#' 
-#' @examples 
-#' net_count_edges(adj_mat)
 #' 
 #' @export
 net_count_edges.adj_matrix <- function(x) {
@@ -669,9 +649,6 @@ net_is_multiplex.edgelist <- function(x) {
 #'   
 #' el <- ig %>% 
 #'   rep_as_edgelist(use_names = FALSE)
-#'   
-#' adj_mat <- ig %>% 
-#'   rep_as_adj_matrix()
 #' 
 #' @author Brendan Knapp \email{brendan.g.knapp@@gmail.com}
 #' 
@@ -744,17 +721,14 @@ net_has_loops.edgelist <- function(x) {
 
 #' @rdname net_has_loops
 #' 
-#' @examples 
-#' net_has_loops(el)
-#' 
 #' @export
 net_has_loops.adj_matrix <- function(x) {
+  if (!is.null(attr(x, "edg_attr_name"))) {
+    return(any(is.na(diag(x))))
+  }
   if (is.numeric(x)) {
     return(any(diag(x) != 0))
   }
-  # if (is_logical(x)) {
-    # any
-  # }
   any(!is_empty(diag(x)))
 }
 

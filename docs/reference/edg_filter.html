@@ -232,11 +232,11 @@ causes trouble).</p>
 #&gt;  | Bonaventure Loyal     TRUE         Remained
 #&gt;  | Ambrose     Loyal    FALSE         Remained</div><div class='input'>
 <span class='no'>ig</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>edg_filter</span>(<span class='no'>positive_relation</span>, <span class='no'>weight</span> <span class='kw'>==</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; IGRAPH 3fad107 DNW- 18 101 -- 
+  <span class='fu'>edg_filter</span>(<span class='no'>positive_relation</span>, <span class='no'>weight</span> <span class='kw'>==</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; IGRAPH a1f93a8 DNW- 18 101 -- 
 #&gt; + attr: network_name (g/c), author (g/c), name (v/c), faction (v/c),
 #&gt; | cloisterville (v/l), status (v/c), weight (e/n), relation (e/c), time
 #&gt; | (e/n), positive_relation (e/l)
-#&gt; + edges from 3fad107 (vertex names):
+#&gt; + edges from a1f93a8 (vertex names):
 #&gt;  [1] Romauld    -&gt;Peter       Bonaventure-&gt;Romauld     Ambrose    -&gt;Bonaventure
 #&gt;  [4] Berthold   -&gt;Peter       Peter      -&gt;Berthold    Louis      -&gt;Berthold   
 #&gt;  [7] Victor     -&gt;Basil       Winfrid    -&gt;Romauld     John Bosco -&gt;Winfrid    
@@ -246,11 +246,11 @@ causes trouble).</p>
 #&gt; + ... omitted several edges</div><div class='input'>
 <span class='no'>ig</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>edg_filter_se</span>(<span class='st'>"positive_relation"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>edg_filter_se</span>(<span class='st'>"weight"</span>, <span class='no'>`==`</span>, <span class='fl'>3</span>)</div><div class='output co'>#&gt; IGRAPH 3fb0431 DNW- 18 101 -- 
+  <span class='fu'>edg_filter_se</span>(<span class='st'>"weight"</span>, <span class='no'>`==`</span>, <span class='fl'>3</span>)</div><div class='output co'>#&gt; IGRAPH a1fc5ef DNW- 18 101 -- 
 #&gt; + attr: network_name (g/c), author (g/c), name (v/c), faction (v/c),
 #&gt; | cloisterville (v/l), status (v/c), weight (e/n), relation (e/c), time
 #&gt; | (e/n), positive_relation (e/l)
-#&gt; + edges from 3fb0431 (vertex names):
+#&gt; + edges from a1fc5ef (vertex names):
 #&gt;  [1] Romauld    -&gt;Peter       Bonaventure-&gt;Romauld     Ambrose    -&gt;Bonaventure
 #&gt;  [4] Berthold   -&gt;Peter       Peter      -&gt;Berthold    Louis      -&gt;Berthold   
 #&gt;  [7] Victor     -&gt;Basil       Winfrid    -&gt;Romauld     John Bosco -&gt;Winfrid    

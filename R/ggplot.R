@@ -1,6 +1,6 @@
-#' @importFrom ggplot2 autoplot
-#' @export
-ggplot2::autoplot
+# #' @importFrom ggplot2 autoplot
+# #' @export
+# ggplot2::autoplot
 
 # check_ggplot <- function() {
 #   if(!requireNamespace("ggplot2", quietly = TRUE)) {

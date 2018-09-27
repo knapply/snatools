@@ -32,6 +32,7 @@ index represents a ratio of external to internal ties.
 }
 \examples{
 library(snatools)
+library(ggplot2)
 
 data(sampson_monastery)
 

@@ -49,9 +49,6 @@ tidy_g <- ig \%>\%
   
 el <- ig \%>\% 
   rep_as_edgelist(use_names = FALSE)
-  
-adj_matrix <- ig \%>\% 
- rep_as_adj_matrix()
 
 net_count_vertices(bridge_g)
 
@@ -60,8 +57,6 @@ net_count_vertices(ig)
 net_count_vertices(nw)
 
 net_count_vertices(tidy_g)
-
-net_count_vertices(el)
 
 net_count_vertices(el)
 

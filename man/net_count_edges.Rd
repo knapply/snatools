@@ -49,9 +49,6 @@ tidy_g <- ig \%>\%
   
 el <- ig \%>\% 
   rep_as_edgelist(use_names = FALSE)
-  
-adj_mat <- ig \%>\% 
-  rep_as_adj_matrix()
 
 net_count_edges(bridge_g)
 
@@ -62,8 +59,6 @@ net_count_edges(nw)
 net_count_edges(tidy_g)
 
 net_count_edges(el)
-
-net_count_edges(adj_mat)
 
 }
 \seealso{

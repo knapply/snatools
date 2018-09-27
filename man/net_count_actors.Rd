@@ -60,7 +60,6 @@ net_count_actors(tidy_g)
 
 net_count_actors(el)
 
-
 }
 \author{
 Brendan Knapp \email{brendan.g.knapp@gmail.com}
