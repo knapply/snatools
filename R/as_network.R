@@ -178,3 +178,26 @@ as_network.network <- function(x, ...) {
 as_network.tbl_graph <- function(x, .actor = TRUE, ...) {
   as_network(as_bridge_net(x, ...), .actor = .actor)
 }
+
+#' @rdname as_network
+#' 
+#' @importFrom network as.network
+#' @export
+as.network.bridge_net <- function(x, ...) {
+  as_network.bridge_net(x, ...)
+}
+
+#' @rdname as_network
+#' 
+#' @importFrom network as.network
+#' @export
+as.network.igraph <- function(x, ...) {
+  as_network.igraph(x, ...)
+}
+
+#' @rdname as_network
+#' 
+#' @export
+network::as.network
+
+

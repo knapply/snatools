@@ -17,7 +17,7 @@ reference:
     contents: 
     - snatools-package
   
-  - title: A Graph Class to Simplify Network Analysis
+  - title: Bringing Closure to Network Analysis Frameworks
     desc: A graph data object that bridges the major frameworks of R's network analysis ecosystem.
     contents:
     - as_bridge_net
@@ -27,6 +27,11 @@ reference:
     contents:
     - as_igraph
     - as_network
+    
+  - title: Metrics
+    desc: Additional statistics equipped with methods for all objects.
+    contents: 
+    - ei_index
   
   - title: Vertex Attributes
     desc: Operations targeting vertex attributes.

@@ -154,11 +154,11 @@
 <a href="#conversion" class="anchor"></a>Conversion</h3>
 <p>Through <code>bridge_net</code> objects, <code>igraph</code> and <code>network</code> objects can play together easier than ever.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">ig &lt;-<span class="st"> </span><span class="kw"><a href="reference/as_igraph.html">as_igraph</a></span>(sampson_monastery)</a></code></pre></div>
-<pre><code>#&gt; IGRAPH 63e1964 DNW- 18 510 -- 
+<pre><code>#&gt; IGRAPH 09e1a20 DNW- 18 510 -- 
 #&gt; + attr: network_name (g/c), author (g/c), name (v/c), faction
 #&gt; | (v/c), cloisterville (v/l), status (v/c), weight (e/n), relation
 #&gt; | (e/c), time (e/n), positive_relation (e/l)
-#&gt; + edges from 63e1964 (vertex names):
+#&gt; + edges from 09e1a20 (vertex names):
 #&gt;  [1] Romauld    -&gt;Ambrose     Romauld    -&gt;Peter      
 #&gt;  [3] Romauld    -&gt;Albert      Bonaventure-&gt;Romauld    
 #&gt;  [5] Bonaventure-&gt;Victor      Bonaventure-&gt;Albert     
@@ -205,11 +205,11 @@
 <a class="sourceLine" id="cb8-18" data-line-number="18"><span class="co">#&gt;  Edge attribute names: </span></a>
 <a class="sourceLine" id="cb8-19" data-line-number="19"><span class="co">#&gt;     positive_relation relation time weight</span></a></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="reference/as_igraph.html">as_igraph</a></span>(nw)</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; IGRAPH 6410eef DNW- 18 510 -- </span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; IGRAPH 0a0d482 DNW- 18 510 -- </span></a>
 <a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt; + attr: network_name (g/c), author (g/c), name (v/c), faction</span></a>
 <a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt; | (v/c), cloisterville (v/l), status (v/c), weight (e/n), relation</span></a>
 <a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; | (e/c), time (e/n), positive_relation (e/l)</span></a>
-<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt; + edges from 6410eef (vertex names):</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt; + edges from 0a0d482 (vertex names):</span></a>
 <a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt;  [1] Romauld    -&gt;Ambrose     Romauld    -&gt;Peter      </span></a>
 <a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt;  [3] Romauld    -&gt;Albert      Bonaventure-&gt;Romauld    </span></a>
 <a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt;  [5] Bonaventure-&gt;Victor      Bonaventure-&gt;Albert     </span></a>
@@ -337,23 +337,24 @@
 <!-- # devtools::test() -->
 <!-- ``` -->
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">covr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/covr/topics/package_coverage">package_coverage</a></span>()</a>
-<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="co">#&gt; snatools Coverage: 59.14%</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="co">#&gt; snatools Coverage: 56.85%</span></a>
 <a class="sourceLine" id="cb17-3" data-line-number="3"><span class="co">#&gt; R/adjacency-matrix.R: 0.00%</span></a>
 <a class="sourceLine" id="cb17-4" data-line-number="4"><span class="co">#&gt; R/ei_index.R: 0.00%</span></a>
-<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="co">#&gt; R/mixing-matrix.R: 0.00%</span></a>
-<a class="sourceLine" id="cb17-6" data-line-number="6"><span class="co">#&gt; R/txt_.R: 20.00%</span></a>
-<a class="sourceLine" id="cb17-7" data-line-number="7"><span class="co">#&gt; R/as_bridge_net.R: 29.17%</span></a>
-<a class="sourceLine" id="cb17-8" data-line-number="8"><span class="co">#&gt; R/utils.R: 32.22%</span></a>
-<a class="sourceLine" id="cb17-9" data-line-number="9"><span class="co">#&gt; R/edgelist.R: 57.66%</span></a>
-<a class="sourceLine" id="cb17-10" data-line-number="10"><span class="co">#&gt; R/utils-attributes.R: 62.50%</span></a>
-<a class="sourceLine" id="cb17-11" data-line-number="11"><span class="co">#&gt; R/operators.R: 63.64%</span></a>
-<a class="sourceLine" id="cb17-12" data-line-number="12"><span class="co">#&gt; R/network-metadata.R: 65.85%</span></a>
-<a class="sourceLine" id="cb17-13" data-line-number="13"><span class="co">#&gt; R/vertex-attributes.R: 76.37%</span></a>
-<a class="sourceLine" id="cb17-14" data-line-number="14"><span class="co">#&gt; R/edge-attributes.R: 76.51%</span></a>
-<a class="sourceLine" id="cb17-15" data-line-number="15"><span class="co">#&gt; R/as_network.R: 80.00%</span></a>
-<a class="sourceLine" id="cb17-16" data-line-number="16"><span class="co">#&gt; R/network-attributes.R: 84.85%</span></a>
-<a class="sourceLine" id="cb17-17" data-line-number="17"><span class="co">#&gt; R/as_igraph.R: 85.19%</span></a>
-<a class="sourceLine" id="cb17-18" data-line-number="18"><span class="co">#&gt; R/build_test_graph.R: 90.68%</span></a></code></pre></div>
+<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="co">#&gt; R/ggplot.R: 0.00%</span></a>
+<a class="sourceLine" id="cb17-6" data-line-number="6"><span class="co">#&gt; R/mixing-matrix.R: 0.00%</span></a>
+<a class="sourceLine" id="cb17-7" data-line-number="7"><span class="co">#&gt; R/txt_.R: 20.00%</span></a>
+<a class="sourceLine" id="cb17-8" data-line-number="8"><span class="co">#&gt; R/as_bridge_net.R: 29.17%</span></a>
+<a class="sourceLine" id="cb17-9" data-line-number="9"><span class="co">#&gt; R/utils.R: 32.58%</span></a>
+<a class="sourceLine" id="cb17-10" data-line-number="10"><span class="co">#&gt; R/edgelist.R: 50.00%</span></a>
+<a class="sourceLine" id="cb17-11" data-line-number="11"><span class="co">#&gt; R/utils-attributes.R: 62.50%</span></a>
+<a class="sourceLine" id="cb17-12" data-line-number="12"><span class="co">#&gt; R/operators.R: 63.64%</span></a>
+<a class="sourceLine" id="cb17-13" data-line-number="13"><span class="co">#&gt; R/network-metadata.R: 65.85%</span></a>
+<a class="sourceLine" id="cb17-14" data-line-number="14"><span class="co">#&gt; R/vertex-attributes.R: 73.16%</span></a>
+<a class="sourceLine" id="cb17-15" data-line-number="15"><span class="co">#&gt; R/as_network.R: 76.19%</span></a>
+<a class="sourceLine" id="cb17-16" data-line-number="16"><span class="co">#&gt; R/edge-attributes.R: 76.51%</span></a>
+<a class="sourceLine" id="cb17-17" data-line-number="17"><span class="co">#&gt; R/as_igraph.R: 81.25%</span></a>
+<a class="sourceLine" id="cb17-18" data-line-number="18"><span class="co">#&gt; R/network-attributes.R: 84.85%</span></a>
+<a class="sourceLine" id="cb17-19" data-line-number="19"><span class="co">#&gt; R/build_test_graph.R: 90.68%</span></a></code></pre></div>
 </div>
 </div>
 </div>

@@ -90,8 +90,25 @@ vrt_attr_names.tbl_graph <- function(x) {
 #' @param x A `bridge_net`, `igraph`, `network`, or `tbl_graph`.
 #' @param vrt_attr `character` specifying the target vertex attribute.
 #' 
-#' @return `vector` of vertex attribute values.
+#' @return `vector` of vertex attribute values. May be of any type supported by `x`'s 
+#' object class.
 #' 
+#' @details 
+#' * `vrt_get_attr()` allows for the extraction of any `vrt_attr` in `x`.
+#'   + If `vrt_attr` is not found, `vrt_get_attr()` considers it to be invalid and throws 
+#'     an error.
+#'     + The error message will include details on which vertex attributes are valid.
+#' * `vrt_get_names()` is a convenience function that extracts the vertex attribute
+#'    corresponding to each class' vertex name attribute convention.
+#'     + Since `igraph`, `network`, and `tbl_graph` objects do not require that vertices 
+#'       have names, `vrt_get_names()` returns an `integer` `vector` corresponding to 
+#'       vertex indices if the appropriate attribute is not found.
+#'     + For reference, each object class uses the following conventions for vertex names:
+#'       + `igraph`: `name`
+#'       + `network`: `vertex.names`
+#'       + `bridge_net`: `.name`
+#'       + `tbl_graph`: `name`
+#'    
 #' @author Brendan Knapp \email{brendan.g.knapp@@gmail.com}
 #' 
 #' @seealso [vrt_attr_names()], [vrt_to_df()], [igraph::vertex_attr()],
@@ -163,6 +180,57 @@ vrt_get_attr.tbl_graph <- function(x, vrt_attr) {
   vrt_get_attr.igraph(as_igraph.tbl_graph(x), vrt_attr)
 }
 
+#' @rdname vrt_get_attr
+#' 
+#' @export
+vrt_get_names <- function(x) {
+  UseMethod("vrt_get_names")
+}
+
+#' @rdname vrt_get_attr
+#' 
+#' @examples 
+#' vrt_get_names(sampson_monastery)
+#' 
+#' @export
+vrt_get_names.bridge_net <- function(x) {
+  x[["vertices"]][[".name"]]
+}
+
+#' @rdname vrt_get_attr
+#' 
+#' @examples 
+#' vrt_get_names(ig)
+#' 
+#' @importFrom igraph vcount vertex_attr
+#' @export
+vrt_get_names.igraph <- function(x) {
+  out <- vertex_attr(x, "name")
+  if (is.null(out)) {
+    out <- seq_len(vcount(x))
+  }
+  out
+}
+
+#' @rdname vrt_get_attr
+#' 
+#' @examples 
+#' vrt_get_names(nw)
+#' 
+#' @export
+vrt_get_names.network <- function(x) {
+  unlist(lapply(x[["val"]], `[[`, "vertex.names"))
+}
+
+#' @rdname vrt_get_attr
+#' 
+#' @examples 
+#' vrt_get_names(tidy_g)
+#' 
+#' @export
+vrt_get_names.tbl_graph <- function(x) {
+  vrt_get_names.igraph(as_igraph.tbl_graph(x))
+}
 
 #' Extract all vertex attributes as a data frame.
 #' 

@@ -112,6 +112,32 @@ get_el <- function(x, vrt_attr = NULL, weights = FALSE) {
   UseMethod("get_el")
 }
 
+get_el.bridge_net <- function(x, vrt_attr = NULL, weights = FALSE) {
+  el <- as.matrix.data.frame(x[["edges"]][, c(".ego", ".alter")])
+  if (is.null(vrt_attr)) {
+    el_type <- "vrt_indices"
+  } else if (vrt_attr == "name") {
+    el_type <- "vrt_names"
+  } else {
+    el_type <- "vrt_attrs"
+  }
+  if (!is.null(vrt_attr)) {
+    el <- matrix(x[["vertices"]][[vrt_attr]][el], ncol = 2L,
+                 dimnames = list(NULL, c(".ego", ".alter")))
+  }
+  if (weights && any(duplicated.matrix(el))) {
+    el <- as_weighted_el(el, el_type)
+    attr(el, "is_weighted") <- "TRUE"
+  } else {
+    attr(el, "is_weighted") <- FALSE
+  }
+  attr(el, "el_type") <- el_type
+  if (el_type == "vrt_attrs") {
+    attr(el, "vrt_attr_name") <- vrt_attr
+  }
+  el
+}
+
 #' @importFrom igraph as_edgelist vertex_attr
 get_el.igraph <- function(x, vrt_attr = NULL, weights = FALSE) {
   el <- as_edgelist(x, names = FALSE)

@@ -232,19 +232,19 @@ causes trouble).</p>
 #&gt;  | Elias      Outcasts FALSE         Expelled
 #&gt;  | Simplicius Outcasts FALSE         Expelled</div><div class='input'>
 <span class='no'>ig</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>vrt_filter</span>(<span class='no'>cloisterville</span>, <span class='no'>faction</span> <span class='kw'>==</span> <span class='st'>"Loyal"</span>)</div><div class='output co'>#&gt; IGRAPH 78485c2 DNW- 2 2 -- 
+  <span class='fu'>vrt_filter</span>(<span class='no'>cloisterville</span>, <span class='no'>faction</span> <span class='kw'>==</span> <span class='st'>"Loyal"</span>)</div><div class='output co'>#&gt; IGRAPH 1f85359 DNW- 2 2 -- 
 #&gt; + attr: network_name (g/c), author (g/c), name (v/c), faction (v/c),
 #&gt; | cloisterville (v/l), status (v/c), weight (e/n), relation (e/c), time
 #&gt; | (e/n), positive_relation (e/l)
-#&gt; + edges from 78485c2 (vertex names):
+#&gt; + edges from 1f85359 (vertex names):
 #&gt; [1] Bonaventure-&gt;Peter Bonaventure-&gt;Peter</div><div class='input'>
 <span class='no'>ig</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>vrt_filter_se</span>(<span class='st'>"cloisterville"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>vrt_filter_se</span>(<span class='st'>"faction"</span>, <span class='no'>`==`</span>, <span class='st'>"Loyal"</span>)</div><div class='output co'>#&gt; IGRAPH 784b070 DNW- 2 2 -- 
+  <span class='fu'>vrt_filter_se</span>(<span class='st'>"faction"</span>, <span class='no'>`==`</span>, <span class='st'>"Loyal"</span>)</div><div class='output co'>#&gt; IGRAPH 1f88337 DNW- 2 2 -- 
 #&gt; + attr: network_name (g/c), author (g/c), name (v/c), faction (v/c),
 #&gt; | cloisterville (v/l), status (v/c), weight (e/n), relation (e/c), time
 #&gt; | (e/n), positive_relation (e/l)
-#&gt; + edges from 784b070 (vertex names):
+#&gt; + edges from 1f88337 (vertex names):
 #&gt; [1] Bonaventure-&gt;Peter Bonaventure-&gt;Peter</div><div class='input'>
 <span class='no'>nw</span> <span class='kw'>%&gt;%</span>
   <span class='fu'>vrt_filter</span>(<span class='no'>status</span> <span class='kw'>%in%</span> <span class='fu'>c</span>(<span class='st'>"Expelled"</span>, <span class='st'>"Left Voluntarily"</span>))</div><div class='output co'>#&gt;  Network attributes:

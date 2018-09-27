@@ -6,6 +6,11 @@
 \alias{vrt_get_attr.igraph}
 \alias{vrt_get_attr.network}
 \alias{vrt_get_attr.tbl_graph}
+\alias{vrt_get_names}
+\alias{vrt_get_names.bridge_net}
+\alias{vrt_get_names.igraph}
+\alias{vrt_get_names.network}
+\alias{vrt_get_names.tbl_graph}
 \title{Extract a specific vertex attribute.}
 \usage{
 vrt_get_attr(x, vrt_attr)
@@ -17,6 +22,16 @@ vrt_get_attr(x, vrt_attr)
 \method{vrt_get_attr}{network}(x, vrt_attr)
 
 \method{vrt_get_attr}{tbl_graph}(x, vrt_attr)
+
+vrt_get_names(x)
+
+\method{vrt_get_names}{bridge_net}(x)
+
+\method{vrt_get_names}{igraph}(x)
+
+\method{vrt_get_names}{network}(x)
+
+\method{vrt_get_names}{tbl_graph}(x)
 }
 \arguments{
 \item{x}{A \code{bridge_net}, \code{igraph}, \code{network}, or \code{tbl_graph}.}
@@ -24,10 +39,37 @@ vrt_get_attr(x, vrt_attr)
 \item{vrt_attr}{\code{character} specifying the target vertex attribute.}
 }
 \value{
-\code{vector} of vertex attribute values.
+\code{vector} of vertex attribute values. May be of any type supported by \code{x}'s
+object class.
 }
 \description{
 Extract a specific vertex attribute.
+}
+\details{
+\itemize{
+\item \code{vrt_get_attr()} allows for the extraction of any \code{vrt_attr} in \code{x}.
+\itemize{
+\item If \code{vrt_attr} is not found, \code{vrt_get_attr()} considers it to be invalid and throws
+an error.
+\itemize{
+\item The error message will include details on which vertex attributes are valid.
+}
+}
+\item \code{vrt_get_names()} is a convenience function that extracts the vertex attribute
+corresponding to each class' vertex name attribute convention.
+\itemize{
+\item Since \code{igraph}, \code{network}, and \code{tbl_graph} objects do not require that vertices
+have names, \code{vrt_get_names()} returns an \code{integer} \code{vector} corresponding to
+vertex indices if the appropriate attribute is not found.
+\item For reference, each object class uses the following conventions for vertex names:
+\itemize{
+\item \code{igraph}: \code{name}
+\item \code{network}: \code{vertex.names}
+\item \code{bridge_net}: \code{.name}
+\item \code{tbl_graph}: \code{name}
+}
+}
+}
 }
 \examples{
 library(snatools)
@@ -50,6 +92,14 @@ vrt_get_attr(ig, "faction")
 vrt_get_attr(nw, "faction")
 
 vrt_get_attr(tidy_g, "faction")
+
+vrt_get_names(sampson_monastery)
+
+vrt_get_names(ig)
+
+vrt_get_names(nw)
+
+vrt_get_names(tidy_g)
 
 }
 \seealso{
