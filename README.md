@@ -101,11 +101,11 @@ together easier than ever.
 ig <- as_igraph(sampson_monastery)
 ```
 
-    #> IGRAPH 81e4a06 DNW- 18 510 -- 
+    #> IGRAPH 0019e55 DNW- 18 510 -- 
     #> + attr: network_name (g/c), author (g/c), name (v/c), faction
     #> | (v/c), cloisterville (v/l), status (v/c), weight (e/n), relation
     #> | (e/c), time (e/n), positive_relation (e/l)
-    #> + edges from 81e4a06 (vertex names):
+    #> + edges from 0019e55 (vertex names):
     #>  [1] Romauld    ->Ambrose     Romauld    ->Peter      
     #>  [3] Romauld    ->Albert      Bonaventure->Romauld    
     #>  [5] Bonaventure->Victor      Bonaventure->Albert     
@@ -161,11 +161,11 @@ as_network(ig)
 
 ``` r
 as_igraph(nw)
-#> IGRAPH 820ad3c DNW- 18 510 -- 
+#> IGRAPH 003f2e1 DNW- 18 510 -- 
 #> + attr: network_name (g/c), author (g/c), name (v/c), faction
 #> | (v/c), cloisterville (v/l), status (v/c), weight (e/n), relation
 #> | (e/c), time (e/n), positive_relation (e/l)
-#> + edges from 820ad3c (vertex names):
+#> + edges from 003f2e1 (vertex names):
 #>  [1] Romauld    ->Ambrose     Romauld    ->Peter      
 #>  [3] Romauld    ->Albert      Bonaventure->Romauld    
 #>  [5] Bonaventure->Victor      Bonaventure->Albert     

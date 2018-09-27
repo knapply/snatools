@@ -1,4 +1,3 @@
-#' @importFrom ggplot2 autoplot
 #' @importFrom magrittr %>%
 NULL
 

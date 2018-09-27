@@ -11,7 +11,7 @@ ei_index(x, vrt_attr, scope = c("global", "group", "vertex"),
 
 \method{print}{ei_global}(x, ...)
 
-\method{autoplot}{ei_group}(object, ...)
+autoplot.ei_group(object, ...)
 }
 \arguments{
 \item{x}{A \code{bridge_net}, \code{igraph}, \code{network}, or \code{tbl_graph}.}
