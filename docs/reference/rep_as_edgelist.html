@@ -129,8 +129,15 @@ graphs and parallel edges are never dropped from multiplex graphs.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>rep_as_edgelist</span>(<span class='no'>x</span>, <span class='kw'>use_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>leave_raw</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>ignore_missing_names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>rep_as_edgelist</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for default</span>
+<span class='fu'>rep_as_edgelist</span>(<span class='no'>x</span>, <span class='kw'>use_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>leave_raw</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>ignore_missing_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='co'># S3 method for adj_matrix</span>
+<span class='fu'>rep_as_edgelist</span>(<span class='no'>x</span>, <span class='kw'>use_vrt_attr</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>leave_raw</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
 <span class='fu'>is_edgelist</span>(<span class='no'>x</span>)
 
@@ -151,6 +158,10 @@ graphs and parallel edges are never dropped from multiplex graphs.</p>
       <td><p>An <code>bridge_net</code>, <code>igraph</code>, <code>network</code>, <code>tbl_graph</code>, or <code>edgelist</code> object.</p></td>
     </tr>
     <tr>
+      <th>...</th>
+      <td><p>Arguments passed on to <code>as.data.frame()</code>.</p></td>
+    </tr>
+    <tr>
       <th>use_names</th>
       <td><p><code>logical</code> (default: <code>TRUE</code>) indicating whether to use vertex names in
 the returned object. If <code>FALSE</code>, the returned object uses vertex indices.</p></td>
@@ -167,21 +178,17 @@ multiplex graph objects should be combined into a count column named <code>.weig
     </tr>
     <tr>
       <th>leave_raw</th>
-      <td><p><code>logical</code> (default: <code>TRUE</code>) indicating whether to return an <code>edgelist</code>
-object instead of a <code>matrix</code> or <code>data.frame</code>.</p></td>
+      <td><p><code>logical</code> (default: <code>FALSE</code>) indicating whether to return a <code>matrix</code>
+(or <code>data.frame</code>) instead of an <code>edgelist</code> object.</p></td>
     </tr>
     <tr>
       <th>ignore_missing_names</th>
-      <td><p><code>logical</code> (default: <code>FALSE</code>) whether to throw a warning if
+      <td><p><code>logical</code> (default: <code>TRUE</code>) whether to throw a warning if
 <code>use_names = TRUE</code> but  <code>x</code> does not contain valid vertex names.</p></td>
     </tr>
     <tr>
       <th>.nrow</th>
       <td><p>Maximum number of rows to print.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Arguments passed on to <code>as.data.frame()</code>.</p></td>
     </tr>
     </table>
     

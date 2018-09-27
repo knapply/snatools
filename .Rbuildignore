@@ -10,3 +10,4 @@
 ^data-raw$
 ^\.travis\.yml$
 ^\.github$
+^tests/potential-trash$

@@ -2,14 +2,21 @@
 % Please edit documentation in R/edgelist.R
 \name{rep_as_edgelist}
 \alias{rep_as_edgelist}
+\alias{rep_as_edgelist.default}
+\alias{rep_as_edgelist.adj_matrix}
 \alias{is_edgelist}
 \alias{print.edgelist}
 \alias{as.matrix.edgelist}
 \alias{as.data.frame.edgelist}
 \title{Construct a graph object's edgelist representation}
 \usage{
-rep_as_edgelist(x, use_names = TRUE, vrt_attr = NULL,
-  weights = FALSE, leave_raw = FALSE, ignore_missing_names = FALSE)
+rep_as_edgelist(x, ...)
+
+\method{rep_as_edgelist}{default}(x, use_names = TRUE, vrt_attr = NULL,
+  weights = FALSE, leave_raw = FALSE, ignore_missing_names = TRUE)
+
+\method{rep_as_edgelist}{adj_matrix}(x, use_vrt_attr = TRUE,
+  weights = FALSE, leave_raw = FALSE)
 
 is_edgelist(x)
 
@@ -22,6 +29,8 @@ is_edgelist(x)
 \arguments{
 \item{x}{An \code{bridge_net}, \code{igraph}, \code{network}, \code{tbl_graph}, or \code{edgelist} object.}
 
+\item{...}{Arguments passed on to \code{as.data.frame()}.}
+
 \item{use_names}{\code{logical} (default: \code{TRUE}) indicating whether to use vertex names in
 the returned object. If \code{FALSE}, the returned object uses vertex indices.}
 
@@ -31,15 +40,13 @@ in the returned object. If provided, \code{vrt_attr} overrides \code{use_names}.
 \item{weights}{\code{logical} (default: \code{FALSE}) indicating whether the parallel edges of
 multiplex graph objects should be combined into a count column named \code{.weight}.}
 
-\item{leave_raw}{\code{logical} (default: \code{TRUE}) indicating whether to return an \code{edgelist}
-object instead of a \code{matrix} or \code{data.frame}.}
+\item{leave_raw}{\code{logical} (default: \code{FALSE}) indicating whether to return a \code{matrix}
+(or \code{data.frame}) instead of an \code{edgelist} object.}
 
-\item{ignore_missing_names}{\code{logical} (default: \code{FALSE}) whether to throw a warning if
+\item{ignore_missing_names}{\code{logical} (default: \code{TRUE}) whether to throw a warning if
 \code{use_names = TRUE} but  \code{x} does not contain valid vertex names.}
 
 \item{.nrow}{Maximum number of rows to print.}
-
-\item{...}{Arguments passed on to \code{as.data.frame()}.}
 }
 \value{
 \code{edgelist} object, \code{matrix}, or \code{data.frame}.

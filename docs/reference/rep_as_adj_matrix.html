@@ -126,7 +126,7 @@
     </div>
 
     <pre class="usage"><span class='fu'>rep_as_adj_matrix</span>(<span class='no'>x</span>, <span class='kw'>use_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>edg_attr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>leave_raw</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+  <span class='kw'>edg_attr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>leave_raw</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>ignore_missing_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='co'># S3 method for adj_matrix</span>
 <span class='fu'>print</span>(<span class='no'>x</span>)</pre>
@@ -146,18 +146,28 @@ row and column names.</p></td>
     <tr>
       <th>vrt_attr</th>
       <td><p><code>character</code> (default: <code>NULL</code>) indicating which vertex attribute to use
-in for row and column names. If provided, <code>vrt_attr</code> overrides <code>use_names</code>.`</p></td>
+for row and column names. If provided, <code>vrt_attr</code> overrides <code>use_names</code>.`</p></td>
     </tr>
     <tr>
-      <th>sparse</th>
-      <td><p><code>logical</code> (default: <code>TRUE</code>) indicating whether to use
-<code><a href='http://www.rdocumentation.org/packages/Matrix/topics/sparseMatrix'>Matrix::sparseMatrix()</a></code> in constructing the adjacency matrix.</p></td>
+      <th>edg_attr</th>
+      <td><p><code>character</code> (default: <code>NULL</code>) indicating which edge attribute to use
+to fill the matrix. If provided, missing edges will be filled with <code>NA</code>.</p></td>
+    </tr>
+    <tr>
+      <th>leave_raw</th>
+      <td><p><code>logical</code> (default: <code>FALSE</code>) indicating whether to return a raw
+<code>matrix</code> instead of an <code>adj_matrix</code> object.</p></td>
+    </tr>
+    <tr>
+      <th>ignore_missing_names</th>
+      <td><p><code>logical</code> (default: <code>TRUE</code>) whether to throw a warning if
+<code>use_names = TRUE</code> but  <code>x</code> does not contain valid vertex names.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An <code>adj_matrix</code> object.</p>
+    <p>An <code>adj_matrix</code> or <code>matrix</code>.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -173,74 +183,78 @@ in for row and column names. If provided, <code>vrt_attr</code> overrides <code>
   <span class='fu'><a href='edg_filter.html'>edg_filter</a></span>(<span class='no'>time</span> <span class='kw'>==</span> <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='as_igraph.html'>as_igraph</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'>rep_as_adj_matrix</span>(<span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='st'>"status"</span>)</div><div class='output co'>#&gt; # An adj_matrix: 18x18
-#&gt; # Suppressing column names.
-#&gt;                  R R R R R R R R L E L L L L R E E E
-#&gt; Remained         0 0 1 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0
-#&gt; Remained         1 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0
-#&gt; Remained         1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0
-#&gt; Remained         0 0 0 0 1 1 0 0 0 1 0 0 0 0 0 0 0 0
-#&gt; Remained         0 0 0 1 0 0 0 0 0 0 1 0 1 0 0 0 0 0
-#&gt; Remained         1 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 0
-#&gt; Remained         0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0
-#&gt; Remained         1 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0
-#&gt; Left Voluntarily 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0 1 0 0
-#&gt; Expelled         0 0 0 1 0 0 0 1 0 0 0 0 0 1 0 0 0 0
-#&gt; Left Voluntarily 0 0 0 0 1 0 0 1 0 0 0 0 0 1 0 0 0 0
-#&gt; Left Voluntarily 1 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0
-#&gt; Left Voluntarily 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0 0 0 1
-#&gt; Left Voluntarily 1 0 0 0 0 0 0 0 0 0 1 1 0 0 1 0 0 0
-#&gt; Remained         1 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0
-#&gt; Expelled         1 1 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0
-#&gt; Expelled         0 0 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1
-#&gt; Expelled         1 1 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0</div><div class='input'>
+#&gt; # Truncating names row/column names.
+#&gt;      R R R R R R R R L E L L L L R E E E
+#&gt; Rem. 0 0 1 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0
+#&gt; Rem. 1 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0
+#&gt; Rem. 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0
+#&gt; Rem. 0 0 0 0 1 1 0 0 0 1 0 0 0 0 0 0 0 0
+#&gt; Rem. 0 0 0 1 0 0 0 0 0 0 1 0 1 0 0 0 0 0
+#&gt; Rem. 1 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 0
+#&gt; Rem. 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0
+#&gt; Rem. 1 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0
+#&gt; Lef. 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0 1 0 0
+#&gt; Exp. 0 0 0 1 0 0 0 1 0 0 0 0 0 1 0 0 0 0
+#&gt; Lef. 0 0 0 0 1 0 0 1 0 0 0 0 0 1 0 0 0 0
+#&gt; Lef. 1 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0
+#&gt; Lef. 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0 0 0 1
+#&gt; Lef. 1 0 0 0 0 0 0 0 0 0 1 1 0 0 1 0 0 0
+#&gt; Rem. 1 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0
+#&gt; Exp. 1 1 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Exp. 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1
+#&gt; Exp. 1 1 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0
+#&gt; # * Columns/Rows correspond to vrt_attrs.</div><div class='input'>
 <span class='no'>sampson_monastery</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='edg_filter.html'>edg_filter</a></span>(<span class='no'>time</span> <span class='kw'>==</span> <span class='fl'>2</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='as_network.html'>as_network</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'>rep_as_adj_matrix</span>(<span class='kw'>edg_attr</span> <span class='kw'>=</span> <span class='st'>"weight"</span>)</div><div class='output co'>#&gt; # An adj_matrix: 18x18
-#&gt; # Suppressing column names.
-#&gt;             R B A B P L V W J G H B M A A B E S
-#&gt; Romauld     0 2 0 0 1 0 0 3 0 0 0 0 0 0 0 0 0 0
-#&gt; Bonaventure 3 0 0 0 0 0 1 0 0 0 0 2 0 0 1 0 0 0
-#&gt; Ambrose     3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 2
-#&gt; Berthold    0 0 0 0 3 2 0 0 0 0 1 0 0 0 0 0 0 0
-#&gt; Peter       2 0 0 3 0 0 0 0 0 0 1 0 0 0 0 0 0 0
-#&gt; Louis       1 0 0 3 0 0 0 0 2 0 0 0 0 0 0 0 0 0
-#&gt; Victor      1 2 0 0 0 0 0 0 0 0 0 0 0 0 0 3 0 0
-#&gt; Winfrid     0 0 0 3 0 1 0 0 0 2 0 0 0 0 0 0 0 0
-#&gt; John Bosco  0 0 0 0 1 0 0 3 0 0 0 2 0 0 0 0 0 0
-#&gt; Gregory     0 0 0 3 1 0 0 0 0 0 0 0 2 0 0 0 0 0
-#&gt; Hugh        0 0 0 2 3 0 0 0 0 0 0 0 0 0 0 1 0 0
-#&gt; Boniface    3 1 0 0 0 0 0 0 0 0 0 0 0 2 0 0 0 0
-#&gt; Mark        0 0 0 0 2 0 1 0 0 0 0 0 0 0 0 0 0 3
-#&gt; Albert      3 1 0 0 0 0 0 0 0 0 0 1 0 0 2 0 0 0
-#&gt; Amand       2 3 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0
-#&gt; Basil       0 2 0 0 0 0 3 0 0 0 0 1 0 0 0 0 0 0
-#&gt; Elias       0 1 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3
-#&gt; Simplicius  0 1 0 0 0 0 0 0 0 0 0 0 2 0 0 0 3 0</div><div class='input'>
+#&gt; # Truncating names row/column names.
+#&gt;       R  B  A  B  P  L  V  W  J  G  H  B  M  A  A  B  E  S
+#&gt; Rom. NA  2 NA NA  1 NA NA  3 NA NA NA NA NA NA NA NA NA NA
+#&gt; Bon.  3 NA NA NA NA NA  1 NA NA NA NA  2 NA NA  1 NA NA NA
+#&gt; Amb.  3 NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA  1  2
+#&gt; Ber. NA NA NA NA  3  2 NA NA NA NA  1 NA NA NA NA NA NA NA
+#&gt; Pet.  2 NA NA  3 NA NA NA NA NA NA  1 NA NA NA NA NA NA NA
+#&gt; Lou.  1 NA NA  3 NA NA NA NA  2 NA NA NA NA NA NA NA NA NA
+#&gt; Vic.  1  2 NA NA NA NA NA NA NA NA NA NA NA NA NA  3 NA NA
+#&gt; Win. NA NA NA  3 NA  1 NA NA NA  2 NA NA NA NA NA NA NA NA
+#&gt; Joh. NA NA NA NA  1 NA NA  3 NA NA NA  2 NA NA NA NA NA NA
+#&gt; Gre. NA NA NA  3  1 NA NA NA NA NA NA NA  2 NA NA NA NA NA
+#&gt; Hug. NA NA NA  2  3 NA NA NA NA NA NA NA NA NA NA  1 NA NA
+#&gt; Bon.  3  1 NA NA NA NA NA NA NA NA NA NA NA  2 NA NA NA NA
+#&gt; Mar. NA NA NA NA  2 NA  1 NA NA NA NA NA NA NA NA NA NA  3
+#&gt; Alb.  3  1 NA NA NA NA NA NA NA NA NA  1 NA NA  2 NA NA NA
+#&gt; Ama.  2  3 NA NA  1 NA NA NA NA NA NA NA NA  1 NA NA NA NA
+#&gt; Bas. NA  2 NA NA NA NA  3 NA NA NA NA  1 NA NA NA NA NA NA
+#&gt; Eli. NA  1  2 NA NA NA NA NA NA NA NA NA NA NA NA NA NA  3
+#&gt; Sim. NA  1 NA NA NA NA NA NA NA NA NA NA  2 NA NA NA  3 NA
+#&gt; # * Columns/Rows correspond to vrt_names.
+#&gt; # * Matrix values correspond to an edge attribute (`weight`).</div><div class='input'>
 <span class='no'>sampson_monastery</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='edg_filter.html'>edg_filter</a></span>(<span class='no'>time</span> <span class='kw'>==</span> <span class='fl'>3</span>, <span class='no'>relation</span> <span class='kw'>==</span> <span class='st'>"blame"</span>) <span class='kw'>%&gt;%</span>
   <span class='kw pkg'>tidygraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/tidygraph/topics/tbl_graph'>as_tbl_graph</a></span>() <span class='kw'>%&gt;%</span>
   <span class='fu'>rep_as_adj_matrix</span>(<span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='st'>"faction"</span>)</div><div class='output co'>#&gt; # An adj_matrix: 18x18
-#&gt; # Suppressing column names.
-#&gt;             W L L L L L W Y Y Y Y Y Y Y W O O O
-#&gt; Waverers    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-#&gt; Loyal       0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-#&gt; Loyal       0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-#&gt; Loyal       0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1
-#&gt; Loyal       0 0 0 0 0 0 0 0 0 1 1 0 1 0 0 0 0 0
-#&gt; Loyal       0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 1
-#&gt; Waverers    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1
-#&gt; Young Turks 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 1
-#&gt; Young Turks 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 0 1
-#&gt; Young Turks 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0
-#&gt; Young Turks 0 0 0 0 1 1 0 0 0 0 0 0 0 0 0 1 0 0
-#&gt; Young Turks 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 1 0 1
-#&gt; Young Turks 0 0 0 1 1 0 0 0 0 0 0 0 0 0 0 1 0 0
-#&gt; Young Turks 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 1 1 1
-#&gt; Waverers    0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 1
-#&gt; Outcasts    0 0 0 0 1 0 0 0 0 1 1 0 0 0 0 0 0 0
-#&gt; Outcasts    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-#&gt; Outcasts    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</div><div class='input'>
+#&gt; # Truncating names row/column names.
+#&gt;      W L L L L L W Y Y Y Y Y Y Y W O O O
+#&gt; Wav. 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Loy. 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Loy. 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Loy. 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1
+#&gt; Loy. 0 0 0 0 0 0 0 0 0 1 1 0 1 0 0 0 0 0
+#&gt; Loy. 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 1
+#&gt; Wav. 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1
+#&gt; You. 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 1
+#&gt; You. 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 0 1
+#&gt; You. 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0
+#&gt; You. 0 0 0 0 1 1 0 0 0 0 0 0 0 0 0 1 0 0
+#&gt; You. 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 1 0 1
+#&gt; You. 0 0 0 1 1 0 0 0 0 0 0 0 0 0 0 1 0 0
+#&gt; You. 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 1 1 1
+#&gt; Wav. 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 1
+#&gt; Out. 0 0 0 0 1 0 0 0 0 1 1 0 0 0 0 0 0 0
+#&gt; Out. 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Out. 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; # * Columns/Rows correspond to vrt_attrs.</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

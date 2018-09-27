@@ -128,13 +128,12 @@ index represents a ratio of external to internal ties.</p>
     </div>
 
     <pre class="usage"><span class='fu'>ei_index</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>, <span class='kw'>scope</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"global"</span>, <span class='st'>"group"</span>, <span class='st'>"vertex"</span>),
-  <span class='kw'>drop_loops</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+  <span class='kw'>drop_loops</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='co'># S3 method for ei_index_global</span>
+<span class='co'># S3 method for ei_global</span>
 <span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
-<span class='co'># S3 method for ei_index_global</span>
-<span class='fu'>sna_plot</span>(<span class='no'>object</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>autoplot.ei_group</span>(<span class='no'>object</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -153,8 +152,8 @@ index represents a ratio of external to internal ties.</p>
     </tr>
     <tr>
       <th>drop_loops</th>
-      <td><p><code>logical</code>. Whether loops should be removed prior to calculations. <br />
-Default: <code>FALSE</code></p></td>
+      <td><p><code>logical</code> (default: <code>TRUE</code>) indicating whether loops should be
+removed prior to calculations.</p></td>
     </tr>
     </table>
     
@@ -180,29 +179,14 @@ Organizational Crises: An Experimental Simulation." Social Psychology Quarterly 
 
 <span class='no'>sampson_monastery</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='edg_filter.html'>edg_filter</a></span>(<span class='no'>time</span> <span class='kw'>==</span> <span class='fl'>1</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>ei_index</span>(<span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='st'>"faction"</span>, <span class='kw'>scope</span> <span class='kw'>=</span> <span class='st'>"global"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>sna_plot</span>()</div><div class='img'><img src='ei_index-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='no'>sampson_monastery</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='as_igraph.html'>as_igraph</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='edg_filter.html'>edg_filter</a></span>(<span class='no'>time</span> <span class='kw'>==</span> <span class='fl'>2</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>ei_index</span>(<span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='st'>"faction"</span>, <span class='kw'>scope</span> <span class='kw'>=</span> <span class='st'>"global"</span>)</div><div class='output co'>#&gt; # An ei_index_global object.
 #&gt; # vertex attribute: faction
 #&gt; 
-#&gt; [1] 0.5087719</div><div class='input'>
+#&gt; [1] 0.4181818</div><div class='input'>
 <span class='no'>sampson_monastery</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='as_network.html'>as_network</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='edg_filter.html'>edg_filter</a></span>(<span class='no'>time</span> <span class='kw'>==</span> <span class='fl'>3</span>, <span class='no'>relation</span> <span class='kw'>==</span> <span class='st'>"liking"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>ei_index</span>(<span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='st'>"faction"</span>, <span class='kw'>scope</span> <span class='kw'>=</span> <span class='st'>"global"</span>)</div><div class='output co'>#&gt; # An ei_index_global object.
-#&gt; # vertex attribute: faction
-#&gt; 
-#&gt; [1] 0.4285714</div><div class='input'>
-<span class='no'>sampson_monastery</span> <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>tidygraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/tidygraph/topics/tbl_graph'>as_tbl_graph</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='edg_filter.html'>edg_filter</a></span>(<span class='no'>time</span> <span class='kw'>==</span> <span class='fl'>3</span>, <span class='no'>relation</span> <span class='kw'>==</span> <span class='st'>"disliking"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>ei_index</span>(<span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='st'>"faction"</span>, <span class='kw'>scope</span> <span class='kw'>=</span> <span class='st'>"global"</span>)</div><div class='output co'>#&gt; # An ei_index_global object.
-#&gt; # vertex attribute: faction
-#&gt; 
-#&gt; [1] 0.9148936</div><div class='input'>  
+  <span class='fu'><a href='edg_filter.html'>edg_filter</a></span>(<span class='no'>time</span> <span class='kw'>==</span> <span class='fl'>3</span>, <span class='no'>positive_relation</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>ei_index</span>(<span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='st'>"faction"</span>, <span class='kw'>scope</span> <span class='kw'>=</span> <span class='st'>"group"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>()</div><div class='img'><img src='ei_index-1.png' alt='' width='700' height='433' /></div><div class='input'>  
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

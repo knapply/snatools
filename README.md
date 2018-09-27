@@ -101,11 +101,11 @@ together easier than ever.
 ig <- as_igraph(sampson_monastery)
 ```
 
-    #> IGRAPH fa529b1 DNW- 18 510 -- 
+    #> IGRAPH 1bbbb61 DNW- 18 510 -- 
     #> + attr: network_name (g/c), author (g/c), name (v/c), faction
     #> | (v/c), cloisterville (v/l), status (v/c), weight (e/n), relation
     #> | (e/c), time (e/n), positive_relation (e/l)
-    #> + edges from fa529b1 (vertex names):
+    #> + edges from 1bbbb61 (vertex names):
     #>  [1] Romauld    ->Ambrose     Romauld    ->Peter      
     #>  [3] Romauld    ->Albert      Bonaventure->Romauld    
     #>  [5] Bonaventure->Victor      Bonaventure->Albert     
@@ -161,11 +161,11 @@ as_network(ig)
 
 ``` r
 as_igraph(nw)
-#> IGRAPH fa790c6 DNW- 18 510 -- 
+#> IGRAPH 1bf4345 DNW- 18 510 -- 
 #> + attr: network_name (g/c), author (g/c), name (v/c), faction
 #> | (v/c), cloisterville (v/l), status (v/c), weight (e/n), relation
 #> | (e/c), time (e/n), positive_relation (e/l)
-#> + edges from fa790c6 (vertex names):
+#> + edges from 1bf4345 (vertex names):
 #>  [1] Romauld    ->Ambrose     Romauld    ->Peter      
 #>  [3] Romauld    ->Albert      Bonaventure->Romauld    
 #>  [5] Bonaventure->Victor      Bonaventure->Albert     
@@ -317,19 +317,20 @@ nw %>%
 
 ``` r
 covr::package_coverage()
-#> snatools Coverage: 56.85%
+#> snatools Coverage: 54.30%
 #> R/adjacency-matrix.R: 0.00%
 #> R/ei_index.R: 0.00%
 #> R/ggplot.R: 0.00%
+#> R/global-metrics.R: 0.00%
 #> R/mixing-matrix.R: 0.00%
 #> R/txt_.R: 20.00%
 #> R/as_bridge_net.R: 29.17%
 #> R/utils.R: 32.58%
-#> R/edgelist.R: 50.00%
+#> R/edgelist.R: 43.42%
+#> R/network-metadata.R: 55.67%
 #> R/utils-attributes.R: 62.50%
 #> R/operators.R: 63.64%
-#> R/network-metadata.R: 65.85%
-#> R/vertex-attributes.R: 73.16%
+#> R/vertex-attributes.R: 72.77%
 #> R/as_network.R: 76.19%
 #> R/edge-attributes.R: 76.51%
 #> R/as_igraph.R: 81.25%

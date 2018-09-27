@@ -7,6 +7,7 @@
 \alias{net_is_bipartite.network}
 \alias{net_is_bipartite.tbl_graph}
 \alias{net_is_bipartite.edgelist}
+\alias{net_is_bipartite.adj_matrix}
 \title{Is a graph object bipartite?}
 \usage{
 net_is_bipartite(x)
@@ -20,6 +21,8 @@ net_is_bipartite(x)
 \method{net_is_bipartite}{tbl_graph}(x)
 
 \method{net_is_bipartite}{edgelist}(x)
+
+\method{net_is_bipartite}{adj_matrix}(x)
 }
 \arguments{
 \item{x}{An \code{bridge_net}, \code{igraph}, \code{network}, \code{tbl_graph}, or \code{edgelist} object.}

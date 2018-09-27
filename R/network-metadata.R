@@ -13,6 +13,11 @@ get_metadata <- function(x) {
   Filter(length, out)
 }
 
+update_metadata <- function(x) {
+  stopifnot(class(x)[[1]] == "bridge_net")
+  x[["metadata"]] <- get_metadata(x)
+}
+
 set_metadata_attr <- function(x, graph) {
   metadata <- get_metadata(graph)
   for (i in seq_along(metadata)) {
@@ -113,6 +118,13 @@ net_is_bipartite.edgelist <- function(x) {
   attr(x, "is_bipartite")
 }
 
+#' @rdname net_is_bipartite
+#' 
+#' @export
+net_is_bipartite.adj_matrix <- function(x) {
+  attr(x, "is_bipartite")
+}
+
 #' Count the number of vertices belonging to the actor mode of a bipartite graph object.
 #' 
 #' @param x An `bridge_net`, `igraph`, `network`, `tbl_graph`, or `edgelist` object.
@@ -208,6 +220,18 @@ net_count_actors.edgelist <- function(x) {
   attr(x, "n_actors")
 }
 
+#' @rdname net_count_actors
+#' 
+#' @examples 
+#' 
+#' @export
+net_count_actors.adj_matrix <- function(x) {
+  if (!net_is_bipartite(x)) {
+    terminate("`actors` only exist in bipartite networks.")
+  }
+  attr(x, "n_actors")
+}
+
 
 #' Are a network's edges directed or undirected?
 #' 
@@ -231,6 +255,9 @@ net_count_actors.edgelist <- function(x) {
 #'   
 #' el <- ig %>% 
 #'   rep_as_edgelist(use_names = FALSE)
+#'   
+#' adj_mat <- ig %>% 
+#'   rep_as_adj_matrix()
 #' 
 #' @author Brendan Knapp \email{brendan.g.knapp@@gmail.com}
 #' 
@@ -296,6 +323,16 @@ net_is_directed.edgelist <- function(x) {
   attr(x, "is_directed")
 }
 
+#' @rdname net_is_directed
+#' 
+#' @examples 
+#' net_is_directed(adj_mat)
+#'
+#' @export
+net_is_directed.adj_matrix <- function(x) {
+  attr(x, "is_directed")
+}
+
 
 
 #' Count the number of vertices present in a graph object.
@@ -320,6 +357,9 @@ net_is_directed.edgelist <- function(x) {
 #'   
 #' el <- ig %>% 
 #'   rep_as_edgelist(use_names = FALSE)
+#'   
+#' adj_matrix <- ig %>% 
+#'  rep_as_adj_matrix()
 #' 
 #' @author Brendan Knapp \email{brendan.g.knapp@@gmail.com}
 #' 
@@ -383,6 +423,16 @@ net_count_vertices.edgelist <- function(x) {
   attr(x, "n_vertices")
 }
 
+#' @rdname net_count_vertices
+#' 
+#' @examples 
+#' net_count_vertices(el)
+#' 
+#' @export
+net_count_vertices.adj_matrix <- function(x) {
+  attr(x, "n_vertices")
+}
+
 
 
 #' Count the number of edges present in a graph object.
@@ -407,6 +457,9 @@ net_count_vertices.edgelist <- function(x) {
 #'   
 #' el <- ig %>% 
 #'   rep_as_edgelist(use_names = FALSE)
+#'   
+#' adj_mat <- ig %>% 
+#'   rep_as_adj_matrix()
 #' 
 #' @author Brendan Knapp \email{brendan.g.knapp@@gmail.com}
 #' 
@@ -468,6 +521,16 @@ net_count_edges.tbl_graph <- function(x) {
 #' 
 #' @export
 net_count_edges.edgelist <- function(x) {
+  attr(x, "n_edges")
+}
+
+#' @rdname net_count_edges
+#' 
+#' @examples 
+#' net_count_edges(adj_mat)
+#' 
+#' @export
+net_count_edges.adj_matrix <- function(x) {
   attr(x, "n_edges")
 }
 
@@ -606,6 +669,9 @@ net_is_multiplex.edgelist <- function(x) {
 #'   
 #' el <- ig %>% 
 #'   rep_as_edgelist(use_names = FALSE)
+#'   
+#' adj_mat <- ig %>% 
+#'   rep_as_adj_matrix()
 #' 
 #' @author Brendan Knapp \email{brendan.g.knapp@@gmail.com}
 #' 
@@ -674,6 +740,22 @@ net_has_loops.tbl_graph <- function(x) {
 #' @export
 net_has_loops.edgelist <- function(x) {
   any(x[, ".ego"] == x[, ".alter"])
+}
+
+#' @rdname net_has_loops
+#' 
+#' @examples 
+#' net_has_loops(el)
+#' 
+#' @export
+net_has_loops.adj_matrix <- function(x) {
+  if (is.numeric(x)) {
+    return(any(diag(x) != 0))
+  }
+  # if (is_logical(x)) {
+    # any
+  # }
+  any(!is_empty(diag(x)))
 }
 
 #' Does a graph object contain isolates?
@@ -763,5 +845,57 @@ net_has_isolates.tbl_graph <- function(x) {
 #' @export 
 net_has_isolates.edgelist <- function(x) {
   attr(x, "n_vertices") > length(unique(c(x)))
+}
+
+#' Convert a directed graph object to undirected.
+#' 
+#' @seealso [igraph::as.undirected()]
+#' 
+#' @examples 
+#' library(snatools)
+#' 
+#' ig <- c(0, 1, 0, 1,
+#'         1, 0, 0, 0,
+#'         0, 1, 0, 1,
+#'         1, 0, 1, 0) %>%
+#'   matrix(nrow = 4, byrow = TRUE) %>%
+#'   igraph::graph_from_adjacency_matrix()
+#' 
+#' nw <- ig %>% 
+#'   as_network()
+#' 
+#' @export
+net_as_undirected <- function(x, ...) {
+  UseMethod("net_as_undirected")
+}
+
+
+#' @rdname net_as_undirected
+#' 
+#' @examples 
+#' nw
+#' 
+#' nw %>% 
+#'   net_as_undirected()
+#' 
+#' @importFrom igraph as.undirected
+#' @export
+net_as_undirected.network <- function(x, ...) {
+  as_network(as.undirected(as_igraph(x), ...))
+}
+
+
+#' @rdname net_as_undirected
+#' 
+#' @examples 
+#' ig
+#' 
+#' ig %>% 
+#'   net_as_undirected()
+#' 
+#' @importFrom igraph as.undirected
+#' @export
+net_as_undirected.igraph <- function(x, ...) {
+  as.undirected(x, ...)
 }
 

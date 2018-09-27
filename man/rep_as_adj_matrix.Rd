@@ -6,7 +6,7 @@
 \title{Construct a graph object's adjacency matrix representation.}
 \usage{
 rep_as_adj_matrix(x, use_names = TRUE, vrt_attr = NULL,
-  edg_attr = NULL, leave_raw = FALSE)
+  edg_attr = NULL, leave_raw = FALSE, ignore_missing_names = TRUE)
 
 \method{print}{adj_matrix}(x)
 }
@@ -17,13 +17,19 @@ rep_as_adj_matrix(x, use_names = TRUE, vrt_attr = NULL,
 row and column names.}
 
 \item{vrt_attr}{\code{character} (default: \code{NULL}) indicating which vertex attribute to use
-in for row and column names. If provided, \code{vrt_attr} overrides \code{use_names}.`}
+for row and column names. If provided, \code{vrt_attr} overrides \code{use_names}.`}
 
-\item{sparse}{\code{logical} (default: \code{TRUE}) indicating whether to use
-\code{Matrix::sparseMatrix()} in constructing the adjacency matrix.}
+\item{edg_attr}{\code{character} (default: \code{NULL}) indicating which edge attribute to use
+to fill the matrix. If provided, missing edges will be filled with \code{NA}.}
+
+\item{leave_raw}{\code{logical} (default: \code{FALSE}) indicating whether to return a raw
+\code{matrix} instead of an \code{adj_matrix} object.}
+
+\item{ignore_missing_names}{\code{logical} (default: \code{TRUE}) whether to throw a warning if
+\code{use_names = TRUE} but  \code{x} does not contain valid vertex names.}
 }
 \value{
-An \code{adj_matrix} object.
+An \code{adj_matrix} or \code{matrix}.
 }
 \description{
 Construct a graph object's adjacency matrix representation.

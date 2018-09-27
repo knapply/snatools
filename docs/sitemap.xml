@@ -13,6 +13,9 @@
     <loc>https://knapply.github.io/snatools/reference/as_network.html</loc>
   </url>
   <url>
+    <loc>https://knapply.github.io/snatools/reference/calc_net_density.html</loc>
+  </url>
+  <url>
     <loc>https://knapply.github.io/snatools/reference/edg_attr_names.html</loc>
   </url>
   <url>
@@ -32,6 +35,9 @@
   </url>
   <url>
     <loc>https://knapply.github.io/snatools/reference/grapes-equals-grapes.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools/reference/net_as_undirected.html</loc>
   </url>
   <url>
     <loc>https://knapply.github.io/snatools/reference/net_attrs_to_list.html</loc>
@@ -68,6 +74,9 @@
   </url>
   <url>
     <loc>https://knapply.github.io/snatools/reference/pipe.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools/reference/reexports.html</loc>
   </url>
   <url>
     <loc>https://knapply.github.io/snatools/reference/rep_as_adj_matrix.html</loc>

@@ -7,6 +7,7 @@
 \alias{net_count_actors.bridge_net}
 \alias{net_count_actors.tbl_graph}
 \alias{net_count_actors.edgelist}
+\alias{net_count_actors.adj_matrix}
 \title{Count the number of vertices belonging to the actor mode of a bipartite graph object.}
 \usage{
 net_count_actors(x)
@@ -20,6 +21,8 @@ net_count_actors(x)
 \method{net_count_actors}{tbl_graph}(x)
 
 \method{net_count_actors}{edgelist}(x)
+
+\method{net_count_actors}{adj_matrix}(x)
 }
 \arguments{
 \item{x}{An \code{bridge_net}, \code{igraph}, \code{network}, \code{tbl_graph}, or \code{edgelist} object.}
@@ -56,6 +59,7 @@ net_count_actors(bridge_g)
 net_count_actors(tidy_g)
 
 net_count_actors(el)
+
 
 }
 \author{

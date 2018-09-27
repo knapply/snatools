@@ -140,6 +140,9 @@
 <span class='fu'>net_is_directed</span>(<span class='no'>x</span>)
 
 <span class='co'># S3 method for edgelist</span>
+<span class='fu'>net_is_directed</span>(<span class='no'>x</span>)
+
+<span class='co'># S3 method for adj_matrix</span>
 <span class='fu'>net_is_directed</span>(<span class='no'>x</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -179,11 +182,15 @@
 <span class='no'>el</span> <span class='kw'>&lt;-</span> <span class='no'>ig</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='rep_as_edgelist.html'>rep_as_edgelist</a></span>(<span class='kw'>use_names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
+<span class='no'>adj_mat</span> <span class='kw'>&lt;-</span> <span class='no'>ig</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='rep_as_adj_matrix.html'>rep_as_adj_matrix</a></span>()
+
 <span class='fu'>net_is_directed</span>(<span class='no'>bridge_g</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
 <span class='fu'>net_is_directed</span>(<span class='no'>ig</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
 <span class='fu'>net_is_directed</span>(<span class='no'>nw</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
 <span class='fu'>net_is_directed</span>(<span class='no'>tidy_g</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
 <span class='fu'>net_is_directed</span>(<span class='no'>el</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
+<span class='fu'>net_is_directed</span>(<span class='no'>adj_mat</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

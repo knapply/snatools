@@ -139,7 +139,7 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-bringing-closure-to-network-analysis-frameworks" class="hasAnchor"><a href="#section-bringing-closure-to-network-analysis-frameworks" class="anchor"></a>Bringing Closure to Network Analysis Frameworks</h2>
+          <h2 id="section-standardized-data-representation" class="hasAnchor"><a href="#section-standardized-data-representation" class="anchor"></a>Standardized Data Representation</h2>
           <p class="section-desc"><p>A graph data object that bridges the major frameworks of R’s network analysis ecosystem.</p></p>
         </th>
       </tr>
@@ -154,7 +154,7 @@
       <tr>
         <th colspan="2">
           <h2 id="section-class-conversion" class="hasAnchor"><a href="#section-class-conversion" class="anchor"></a>Class Conversion</h2>
-          <p class="section-desc"><p>Safely convert objects between common network classes.</p></p>
+          <p class="section-desc"><p>Safely convert objects between graph classes.</p></p>
         </th>
       </tr>
       <tr>
@@ -173,22 +173,8 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-metrics" class="hasAnchor"><a href="#section-metrics" class="anchor"></a>Metrics</h2>
-          <p class="section-desc"><p>Additional statistics equipped with methods for all objects.</p></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="ei_index.html">ei_index()</a></code> <code><a href="ei_index.html">print(<i>&lt;ei_index_global&gt;</i>)</a></code> <code><a href="ei_index.html">sna_plot(<i>&lt;ei_index_global&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>E-I Index</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-vertex-attributes" class="hasAnchor"><a href="#section-vertex-attributes" class="anchor"></a>Vertex Attributes</h2>
-          <p class="section-desc"><p>Operations targeting vertex attributes.</p></p>
+          <h2 id="section-vertices" class="hasAnchor"><a href="#section-vertices" class="anchor"></a>Vertices</h2>
+          <p class="section-desc"><p>Routines targeting vertices and their attributes.</p></p>
         </th>
       </tr>
       <tr>
@@ -225,8 +211,8 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-edge-attributes" class="hasAnchor"><a href="#section-edge-attributes" class="anchor"></a>Edge Attributes</h2>
-          <p class="section-desc"><p>Operations targeting edge attributes.</p></p>
+          <h2 id="section-edges" class="hasAnchor"><a href="#section-edges" class="anchor"></a>Edges</h2>
+          <p class="section-desc"><p>Routines targeting edges and their attributes.</p></p>
         </th>
       </tr>
       <tr>
@@ -264,7 +250,7 @@
       <tr>
         <th colspan="2">
           <h2 id="section-network-attributes" class="hasAnchor"><a href="#section-network-attributes" class="anchor"></a>Network Attributes</h2>
-          <p class="section-desc"></p>
+          <p class="section-desc"><p>Routines targeting non-structural network attributes.</p></p>
         </th>
       </tr>
       <tr>
@@ -290,7 +276,7 @@
       <tr>
         <th colspan="2">
           <h2 id="section-structural-metadata" class="hasAnchor"><a href="#section-structural-metadata" class="anchor"></a>Structural Metadata</h2>
-          <p class="section-desc"><p>Operations targeting graph-level attributes and metadata.</p></p>
+          <p class="section-desc"><p>Routines targeting structural graph metadata.</p></p>
         </th>
       </tr>
       <tr>
@@ -341,12 +327,18 @@
           <p><code><a href="net_has_isolates.html">net_has_isolates()</a></code> </p>
         </td>
         <td><p>Does a graph object contain isolates?</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="net_as_undirected.html">net_as_undirected()</a></code> </p>
+        </td>
+        <td><p>Convert a directed graph object to undirected.</p></td>
       </tr>
     </tbody><tbody>
       <tr>
         <th colspan="2">
           <h2 id="section-representations" class="hasAnchor"><a href="#section-representations" class="anchor"></a>Representations</h2>
-          <p class="section-desc"><p>Construct and test various network representations.</p></p>
+          <p class="section-desc"><p>Construct various network representations.</p></p>
         </th>
       </tr>
       <tr>
@@ -368,6 +360,34 @@
         </td>
         <td><p>Construct a graph object's mixing matrix.</p></td>
       </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-global-metrics" class="hasAnchor"><a href="#section-global-metrics" class="anchor"></a>Global Metrics</h2>
+          <p class="section-desc"><p>Routines calculating graph-level indices.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="calc_net_density.html">calc_net_density()</a></code> </p>
+        </td>
+        <td><p>Calculate a graph object's density.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-homophily" class="hasAnchor"><a href="#section-homophily" class="anchor"></a>Homophily</h2>
+          <p class="section-desc"><p>Routines calculating indices related to homophily and mixing patterns.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="ei_index.html">ei_index()</a></code> <code><a href="ei_index.html">print(<i>&lt;ei_global&gt;</i>)</a></code> <code><a href="ei_index.html">autoplot.ei_group()</a></code> </p>
+        </td>
+        <td><p>E-I Index</p></td>
+      </tr>
     </tbody>
     </table>
   </div>
@@ -376,14 +396,15 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#section-snatools">snatools</a></li>
-      <li><a href="#section-bringing-closure-to-network-analysis-frameworks">Bringing Closure to Network Analysis Frameworks</a></li>
+      <li><a href="#section-standardized-data-representation">Standardized Data Representation</a></li>
       <li><a href="#section-class-conversion">Class Conversion</a></li>
-      <li><a href="#section-metrics">Metrics</a></li>
-      <li><a href="#section-vertex-attributes">Vertex Attributes</a></li>
-      <li><a href="#section-edge-attributes">Edge Attributes</a></li>
+      <li><a href="#section-vertices">Vertices</a></li>
+      <li><a href="#section-edges">Edges</a></li>
       <li><a href="#section-network-attributes">Network Attributes</a></li>
       <li><a href="#section-structural-metadata">Structural Metadata</a></li>
       <li><a href="#section-representations">Representations</a></li>
+      <li><a href="#section-global-metrics">Global Metrics</a></li>
+      <li><a href="#section-homophily">Homophily</a></li>
     </ul>
   </div>
 </div>

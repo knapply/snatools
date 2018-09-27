@@ -82,7 +82,15 @@ vrt_attr_names.tbl_graph <- function(x) {
   vrt_attr_names(as_igraph(x))
 }
 
-
+#' @rdname vrt_attr_names
+#' 
+#' @examples 
+#' vrt_attr_names(tidy_g)
+#' 
+#' @export
+vrt_attr_names.adj_matrix <- function(x) {
+  rownames(x)
+}
 
 
 #' Extract a specific vertex attribute.

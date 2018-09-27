@@ -6,6 +6,7 @@
 \alias{vrt_attr_names.igraph}
 \alias{vrt_attr_names.network}
 \alias{vrt_attr_names.tbl_graph}
+\alias{vrt_attr_names.adj_matrix}
 \title{Extract a graph objects's vertex attribute names.}
 \usage{
 vrt_attr_names(x)
@@ -17,6 +18,8 @@ vrt_attr_names(x)
 \method{vrt_attr_names}{network}(x)
 
 \method{vrt_attr_names}{tbl_graph}(x)
+
+\method{vrt_attr_names}{adj_matrix}(x)
 }
 \arguments{
 \item{x}{A \code{bridge_net}, \code{igraph}, \code{network}, or \code{tbl_graph}.}
@@ -46,6 +49,8 @@ vrt_attr_names(sampson_monastery)
 vrt_attr_names(ig)
 
 vrt_attr_names(nw)
+
+vrt_attr_names(tidy_g)
 
 vrt_attr_names(tidy_g)
 
