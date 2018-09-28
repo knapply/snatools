@@ -7,6 +7,7 @@
 \alias{net_count_vertices.network}
 \alias{net_count_vertices.tbl_graph}
 \alias{net_count_vertices.edgelist}
+\alias{net_count_vertices.adj_matrix}
 \title{Count the number of vertices present in a graph object.}
 \usage{
 net_count_vertices(x)
@@ -20,6 +21,8 @@ net_count_vertices(x)
 \method{net_count_vertices}{tbl_graph}(x)
 
 \method{net_count_vertices}{edgelist}(x)
+
+\method{net_count_vertices}{adj_matrix}(x)
 }
 \arguments{
 \item{x}{An \code{bridge_net}, \code{igraph}, \code{network}, \code{tbl_graph}, or \code{edgelist} object.}

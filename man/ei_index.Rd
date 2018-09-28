@@ -2,16 +2,16 @@
 % Please edit documentation in R/ei_index.R
 \name{ei_index}
 \alias{ei_index}
-\alias{print.ei_index_global}
-\alias{sna_plot.ei_index_global}
+\alias{print.ei_global}
+\alias{autoplot.ei_group}
 \title{E-I Index}
 \usage{
 ei_index(x, vrt_attr, scope = c("global", "group", "vertex"),
-  drop_loops = FALSE)
+  drop_loops = TRUE)
 
-\method{print}{ei_index_global}(x, ...)
+\method{print}{ei_global}(x, ...)
 
-\method{sna_plot}{ei_index_global}(object, ...)
+autoplot.ei_group(object, ...)
 }
 \arguments{
 \item{x}{A \code{bridge_net}, \code{igraph}, \code{network}, or \code{tbl_graph}.}
@@ -20,8 +20,8 @@ ei_index(x, vrt_attr, scope = c("global", "group", "vertex"),
 
 \item{scope}{\code{character}. One of \code{"global"}, \code{"group"}, \code{"vertex"}, or \code{"full"}.}
 
-\item{drop_loops}{\code{logical}. Whether loops should be removed prior to calculations. \cr
-Default: \code{FALSE}}
+\item{drop_loops}{\code{logical} (default: \code{TRUE}) indicating whether loops should be
+removed prior to calculations.}
 }
 \description{
 Given a categorical vertex attribute describing mutually exclusive groups, the E-I
@@ -32,28 +32,18 @@ index represents a ratio of external to internal ties.
 }
 \examples{
 library(snatools)
+library(ggplot2)
 
 data(sampson_monastery)
 
 sampson_monastery \%>\% 
   edg_filter(time == 1) \%>\% 
-  ei_index(vrt_attr = "faction", scope = "global") \%>\% 
-  sna_plot()
-  
-sampson_monastery \%>\% 
-  as_igraph() \%>\% 
-  edg_filter(time == 2) \%>\% 
   ei_index(vrt_attr = "faction", scope = "global")
   
 sampson_monastery \%>\% 
-  as_network() \%>\% 
-  edg_filter(time == 3, relation == "liking") \%>\% 
-  ei_index(vrt_attr = "faction", scope = "global")
-  
-sampson_monastery \%>\% 
-  tidygraph::as_tbl_graph() \%>\% 
-  edg_filter(time == 3, relation == "disliking") \%>\% 
-  ei_index(vrt_attr = "faction", scope = "global")
+  edg_filter(time == 3, positive_relation) \%>\% 
+  ei_index(vrt_attr = "faction", scope = "group") \%>\% 
+  autoplot()
   
 }
 \references{

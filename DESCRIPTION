@@ -9,7 +9,6 @@ Description: A consistent toolkit that conveniently connects existing graph stru
 Depends: R (>= 3.4.0)
 Imports:
     igraph,
-    Matrix,
     magrittr,
     methods,
     network,
@@ -20,7 +19,6 @@ Suggests:
     data.table,
     dplyr,
     ergm,
-    grDevices,
     ggplot2,
     knitr,
     rmarkdown,

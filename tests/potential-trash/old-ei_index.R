@@ -347,7 +347,6 @@ ei_index_grp <- function(x, vrt_attr, drop_loops = FALSE) {
 #' 
 #' @export
 autoplot.ei_index_grp <- function(x) {
-  check_ggplot()
   out <- ggplot2::ggplot(x)
   out <- out + ggplot2::geom_segment(ggplot2::aes(x = 0, xend = ei_index, 
                                                   y = attribute, yend = attribute, 

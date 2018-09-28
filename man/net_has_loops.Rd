@@ -7,6 +7,7 @@
 \alias{net_has_loops.network}
 \alias{net_has_loops.tbl_graph}
 \alias{net_has_loops.edgelist}
+\alias{net_has_loops.adj_matrix}
 \title{Does a graph object contain loops?}
 \usage{
 net_has_loops(x)
@@ -20,6 +21,8 @@ net_has_loops(x)
 \method{net_has_loops}{tbl_graph}(x)
 
 \method{net_has_loops}{edgelist}(x)
+
+\method{net_has_loops}{adj_matrix}(x)
 }
 \arguments{
 \item{x}{An \code{bridge_net}, \code{igraph}, \code{network}, \code{tbl_graph}, or \code{edgelist} object.}

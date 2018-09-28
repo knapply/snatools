@@ -1,12 +1,13 @@
+#' @importFrom ggplot2 autoplot
+#' @export
+ggplot2::autoplot
+
 check_ggplot <- function() {
   if(!requireNamespace("ggplot2", quietly = TRUE)) {
     stop('The `ggplot2` package is required for this functionality. 
           Install it via `install.packages("ggplot2")`', call. = FALSE)
   }
 }
-#' @importFrom ggplot2 autoplot
-#' @export
-ggplot2::autoplot
 
 
 #' @export

@@ -17,24 +17,19 @@ reference:
     contents: 
     - snatools-package
   
-  - title: Bringing Closure to Network Analysis Frameworks
+  - title: Standardized Data Representation
     desc: A graph data object that bridges the major frameworks of R's network analysis ecosystem.
     contents:
     - as_bridge_net
 
   - title: Class Conversion
-    desc: Safely convert objects between common network classes.
+    desc: Safely convert objects between graph classes.
     contents:
     - as_igraph
     - as_network
-    
-  - title: Metrics
-    desc: Additional statistics equipped with methods for all objects.
-    contents: 
-    - ei_index
   
-  - title: Vertex Attributes
-    desc: Operations targeting vertex attributes.
+  - title: Vertices
+    desc: Routines targeting vertices and their attributes.
     contents:
     - vrt_attr_names
     - vrt_get_attr
@@ -42,8 +37,8 @@ reference:
     - vrt_delete_attr
     - vrt_filter
     
-  - title: Edge Attributes
-    desc: Operations targeting edge attributes.
+  - title: Edges
+    desc: Routines targeting edges and their attributes.
     contents:
     - edg_attr_names
     - edg_get_attr
@@ -52,14 +47,14 @@ reference:
     - edg_filter
 
   - title: Network Attributes
-    -desc: Operations targeting non-structural network attributes
+    desc: Routines targeting non-structural network attributes.
     contents:
     - net_attr_names
     - net_get_attr
     - net_attrs_to_list
     
   - title: Structural Metadata
-    desc: Operations targeting graph-level attributes and metadata.
+    desc: Routines targeting structural graph metadata.
     contents:
     - net_is_directed
     - net_is_multiplex
@@ -69,13 +64,24 @@ reference:
     - net_count_actors
     - net_has_loops
     - net_has_isolates
+    - net_as_undirected
 
   - title: Representations
-    desc: Construct and test various network representations.
+    desc: Construct various network representations.
     contents:
     - rep_as_edgelist
     - rep_as_adj_matrix
     - rep_as_mixing_matrix
+    
+  - title: Global Metrics
+    desc: Routines calculating graph-level indices.
+    contents:
+    - calc_net_density
+  
+  - title: Homophily
+    desc: Routines calculating indices related to homophily and mixing patterns.
+    contents: 
+    - ei_index
 
 navbar:
   right:

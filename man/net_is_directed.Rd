@@ -7,6 +7,7 @@
 \alias{net_is_directed.network}
 \alias{net_is_directed.tbl_graph}
 \alias{net_is_directed.edgelist}
+\alias{net_is_directed.adj_matrix}
 \title{Are a network's edges directed or undirected?}
 \usage{
 net_is_directed(x)
@@ -20,6 +21,8 @@ net_is_directed(x)
 \method{net_is_directed}{tbl_graph}(x)
 
 \method{net_is_directed}{edgelist}(x)
+
+\method{net_is_directed}{adj_matrix}(x)
 }
 \arguments{
 \item{x}{An \code{bridge_net}, \code{igraph}, \code{network}, \code{tbl_graph}, or \code{edgelist} object.}

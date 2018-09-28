@@ -11,9 +11,9 @@
 #' in the returned object. If provided, `vrt_attr` overrides `use_names`.
 #' @param weights `logical` (default: `FALSE`) indicating whether the parallel edges of 
 #' multiplex graph objects should be combined into a count column named `.weight`.
-#' @param leave_raw `logical` (default: `TRUE`) indicating whether to return an `edgelist`
-#' object instead of a `matrix` or `data.frame`.
-#' @param ignore_missing_names `logical` (default: `FALSE`) whether to throw a warning if 
+#' @param leave_raw `logical` (default: `FALSE`) indicating whether to return a `matrix` 
+#' (or `data.frame`) instead of an `edgelist` object.
+#' @param ignore_missing_names `logical` (default: `TRUE`) whether to throw a warning if 
 #' `use_names = TRUE` but  `x` does not contain valid vertex names.
 #' 
 #' @return `edgelist` object, `matrix`, or `data.frame`.
@@ -80,19 +80,42 @@
 #' ig %>% rep_as_edgelist(leave_raw = TRUE)
 #' 
 #' @export
-rep_as_edgelist <- function(x, use_names = TRUE, vrt_attr = NULL, weights = FALSE, 
-                            leave_raw = FALSE, ignore_missing_names = FALSE) {
+rep_as_edgelist <- function(x, ...) {
+  UseMethod("rep_as_edgelist")
+}
+
+#' @rdname rep_as_edgelist
+#' 
+#' @export
+rep_as_edgelist.default <- function(x, use_names = TRUE, vrt_attr = NULL, weights = FALSE, 
+                                    leave_raw = FALSE, ignore_missing_names = TRUE) {
   validate_graph(x)
   if (use_names && is.null(vrt_attr)) {
     vrt_attr <- get_vrt_names_attr(x)
-    if (!vrt_attr %in% vrt_attr_names(x) && !ignore_missing_names) {
-      warning("\n", patch("`x`'s vertices do not have a valid name attribute. For `%s` objects, 
-                    vertex names are expected to be stored in a vertex attributed called
-                    `%s`. Returning an edgelist using vertex indices instead.", 
-                    class(x)[[1L]], vrt_attr))
+    if (!is_valid_vrt_attr(x, vrt_attr)) {
+      if (!ignore_missing_names) {
+        cat("\n")
+        warning(patch("`x`'s vertices do not have a valid name attribute. For `%s` 
+                      objects, vertex names are expected to be stored in a vertex 
+                      attributed called `%s`. Returning an edgelist using vertex indices
+                      instead.", class(x)[[1L]], vrt_attr))
+      }
       vrt_attr <- NULL
+      el_type <- "vrt_indices"
+    } else {
+      el_type <- "vrt_names"
     }
   }
+  # if (use_names && is.null(vrt_attr)) {
+  #   vrt_attr <- get_vrt_names_attr(x)
+  #   if (!vrt_attr %in% vrt_attr_names(x) && !ignore_missing_names) {
+  #     warning("\n", patch("`x`'s vertices do not have a valid name attribute. For `%s` objects, 
+  #                   vertex names are expected to be stored in a vertex attributed called
+  #                   `%s`. Returning an edgelist using vertex indices instead.", 
+  #                   class(x)[[1L]], vrt_attr))
+  #     vrt_attr <- NULL
+  #   }
+  # }
   if (!is.null(vrt_attr)) {
     validate_vrt_attr(x, vrt_attr)
   }
@@ -104,6 +127,42 @@ rep_as_edgelist <- function(x, use_names = TRUE, vrt_attr = NULL, weights = FALS
     return(out)
   }
   out <- set_metadata_attr(out, graph = x)
+  out <- set_edgelist_class(out)
+  out
+}
+
+#' @rdname rep_as_edgelist
+#' 
+#' @export
+rep_as_edgelist.adj_matrix <- function(x, use_vrt_attr = TRUE, weights = FALSE, 
+                                       leave_raw = FALSE) {
+  out <- cbind(`dim<-`(row(x), NULL), `dim<-`(col(x), NULL), `dim<-`(x, NULL))
+  if (attr(x, "adj_mat_type") == "vrt_attrs") {
+    out <- out[!is.na(out[, 3]), 1:2]
+  }
+  
+  if (is.numeric(out)) {
+    out <- out[out[, 3L] == 1L, 1:2]
+  } else {
+    out[!is_empty(out[, 3L]), 1:2]
+  }
+  # rownames(x)[out]
+  if (use_vrt_attr && attr(x, "adj_mat_type") != "vrt_indices") {
+    out <- matrix(rownames(x)[out], ncol = 2L)
+  }
+  if (weights && any(duplicated.matrix(el))) {
+    el <- as_weighted_el(el, el_type)
+    attr(el, "is_weighted") <- "TRUE"
+  } else {
+    attr(el, "is_weighted") <- FALSE
+  }
+  if (leave_raw) {
+    return(out)
+  }
+  attr(out, "el_type") <- attr(x, "adj_mat_type")
+  if (attr(out, "el_type") == "vrt_attrs") {
+    attr(out, "vrt_attr_names") <- attr(x, "vrt_attr_names")
+  }
   out <- set_edgelist_class(out)
   out
 }
