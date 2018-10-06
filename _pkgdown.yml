@@ -16,11 +16,6 @@ reference:
   - title: snatools
     contents: 
     - snatools-package
-  
-  - title: Standardized Data Representation
-    desc: A graph data object that bridges the major frameworks of R's network analysis ecosystem.
-    contents:
-    - as_bridge_net
 
   - title: Class Conversion
     desc: Safely convert objects between graph classes.
@@ -31,27 +26,24 @@ reference:
   - title: Vertices
     desc: Routines targeting vertices and their attributes.
     contents:
+    - vrt_as_df
     - vrt_attr_names
     - vrt_get_attr
-    - vrt_to_df
-    - vrt_delete_attr
-    - vrt_filter
+    - vrt_get_names
     
   - title: Edges
     desc: Routines targeting edges and their attributes.
     contents:
+    - edg_as_df
     - edg_attr_names
     - edg_get_attr
-    - edg_to_df
-    - edg_delete_attr
-    - edg_filter
 
-  - title: Network Attributes
-    desc: Routines targeting non-structural network attributes.
-    contents:
-    - net_attr_names
-    - net_get_attr
-    - net_attrs_to_list
+#  - title: Network Attributes
+#    desc: Routines targeting non-structural network attributes.
+#    contents:
+#    - net_attr_names
+#    - net_get_attr
+#    - net_attrs_to_list
     
   - title: Structural Metadata
     desc: Routines targeting structural graph metadata.
@@ -64,24 +56,23 @@ reference:
     - net_count_actors
     - net_has_loops
     - net_has_isolates
-    - net_as_undirected
 
   - title: Representations
     desc: Construct various network representations.
     contents:
     - rep_as_edgelist
-    - rep_as_adj_matrix
-    - rep_as_mixing_matrix
+#    - rep_as_adj_matrix
+#    - rep_as_mixing_matrix
     
-  - title: Global Metrics
-    desc: Routines calculating graph-level indices.
-    contents:
-    - calc_net_density
+#  - title: Global Metrics
+#    desc: Routines calculating graph-level indices.
+#    contents:
+#    - calc_net_density
   
-  - title: Homophily
-    desc: Routines calculating indices related to homophily and mixing patterns.
-    contents: 
-    - ei_index
+#  - title: Homophily
+#    desc: Routines calculating indices related to homophily and mixing patterns.
+#    contents: 
+#    - ei_index
 
 navbar:
   right:

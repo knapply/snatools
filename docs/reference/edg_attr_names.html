@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Extract a graph objects's edge attribute names. — edg_attr_names • snatools</title>
+<title>Get Edge Attribute Names — edg_attr_names • snatools</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Extract a graph objects's edge attribute names. — edg_attr_names" />
+<meta property="og:title" content="Get Edge Attribute Names — edg_attr_names" />
 
-<meta property="og:description" content="Extract a graph objects's edge attribute names." />
+<meta property="og:description" content="Get Edge Attribute Names" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -114,21 +114,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Extract a graph objects's edge attribute names.</h1>
+    <h1>Get Edge Attribute Names</h1>
     <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/edge-attributes.R'><code>R/edge-attributes.R</code></a></small>
     <div class="hidden name"><code>edg_attr_names.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Extract a graph objects's edge attribute names.</p>
+    <p>Get Edge Attribute Names</p>
     
     </div>
 
     <pre class="usage"><span class='fu'>edg_attr_names</span>(<span class='no'>x</span>)
-
-<span class='co'># S3 method for bridge_net</span>
-<span class='fu'>edg_attr_names</span>(<span class='no'>x</span>)
 
 <span class='co'># S3 method for igraph</span>
 <span class='fu'>edg_attr_names</span>(<span class='no'>x</span>)
@@ -144,45 +141,21 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A <code>bridge_net</code>, <code>igraph</code>, <code>network</code>, or <code>tbl_graph</code>.</p></td>
+      <td><p>An <code>igraph</code>, <code>network</code>, or <code>tbl_graph</code>.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>character</code> <code>vector</code> listing the names of <code>x</code>'s edge attributes.</p>
+    <p><code>character</code> <code>vector</code> of <code>x</code>'s vertex attribute names or <code>NULL</code> if
+no edge attributes exist.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='edg_get_attr.html'>edg_get_attr()</a></code>, <code><a href='edg_to_df.html'>edg_to_df()</a></code>, <code><a href='http://www.rdocumentation.org/packages/igraph/topics/edge_attr_names'>igraph::edge_attr_names()</a></code>,
-<code><a href='http://www.rdocumentation.org/packages/network/topics/attribute.methods'>network::list.edge.attributes()</a></code></p>
-<p><code><a href='http://www.rdocumentation.org/packages/igraph/topics/edge_attr_names'>igraph::edge_attr_names()</a></code></p>
+    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/igraph/topics/edge_attr_names'>igraph::edge_attr_names()</a></code></p>
 <p><code><a href='http://www.rdocumentation.org/packages/network/topics/attribute.methods'>network::list.edge.attributes()</a></code></p></div>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>snatools</span>)
-
-<span class='fu'>data</span>(<span class='no'>sampson_monastery</span>)
-
-<span class='no'>ig</span> <span class='kw'>&lt;-</span> <span class='no'>sampson_monastery</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='as_igraph.html'>as_igraph</a></span>()
-
-<span class='no'>nw</span> <span class='kw'>&lt;-</span> <span class='no'>sampson_monastery</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='as_network.html'>as_network</a></span>()
-
-<span class='no'>tidy_g</span> <span class='kw'>&lt;-</span> <span class='no'>ig</span> <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>tidygraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/tidygraph/topics/tbl_graph'>as_tbl_graph</a></span>()
-
-<span class='fu'>edg_attr_names</span>(<span class='no'>sampson_monastery</span>)</div><div class='output co'>#&gt; [1] "weight"            "relation"          "time"             
-#&gt; [4] "positive_relation"</div><div class='input'>
-<span class='fu'>edg_attr_names</span>(<span class='no'>ig</span>)</div><div class='output co'>#&gt; [1] "weight"            "relation"          "time"             
-#&gt; [4] "positive_relation"</div><div class='input'>
-<span class='fu'>edg_attr_names</span>(<span class='no'>nw</span>)</div><div class='output co'>#&gt; [1] "weight"            "relation"          "time"             
-#&gt; [4] "positive_relation"</div><div class='input'>
-<span class='fu'>edg_attr_names</span>(<span class='no'>tidy_g</span>)</div><div class='output co'>#&gt; [1] "weight"            "relation"          "time"             
-#&gt; [4] "positive_relation"</div><div class='input'>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -192,9 +165,7 @@
       <li><a href="#value">Value</a></li>
 
       <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+          </ul>
 
     <h2>Author</h2>
     

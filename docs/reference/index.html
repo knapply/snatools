@@ -139,20 +139,6 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-standardized-data-representation" class="hasAnchor"><a href="#section-standardized-data-representation" class="anchor"></a>Standardized Data Representation</h2>
-          <p class="section-desc"><p>A graph data object that bridges the major frameworks of R’s network analysis ecosystem.</p></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="as_bridge_net.html">as_bridge_net()</a></code> <code><a href="as_bridge_net.html">print(<i>&lt;bridge_net&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>A data structure that effectively bridges <code>igraph</code> and <code>network</code> objects.</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
           <h2 id="section-class-conversion" class="hasAnchor"><a href="#section-class-conversion" class="anchor"></a>Class Conversion</h2>
           <p class="section-desc"><p>Safely convert objects between graph classes.</p></p>
         </th>
@@ -160,13 +146,13 @@
       <tr>
         
         <td>
-          <p><code><a href="as_igraph.html">as_igraph()</a></code> <code><a href="as_igraph.html">as.igraph.bridge_net()</a></code> <code><a href="as_igraph.html">as.igraph.network()</a></code> </p>
+          <p><code><a href="as_igraph.html">as_igraph()</a></code> <code><a href="as_igraph.html">as.igraph(<i>&lt;network&gt;</i>)</a></code> </p>
         </td>
         <td><p>Conversion to <code>igraph</code> objects.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="as_network.html">as_network()</a></code> <code><a href="as_network.html">as.network.bridge_net()</a></code> <code><a href="as_network.html">as.network.igraph()</a></code> </p>
+          <p><code><a href="as_network.html">as_network()</a></code> <code><a href="as_network.html">as.network(<i>&lt;igraph&gt;</i>)</a></code> </p>
         </td>
         <td><p>Conversion to <code>network</code> objects.</p></td>
       </tr>
@@ -180,33 +166,27 @@
       <tr>
         
         <td>
+          <p><code><a href="vrt_as_df.html">vrt_as_df()</a></code> </p>
+        </td>
+        <td><p>Extract vertex attributes as a data frame.</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="vrt_attr_names.html">vrt_attr_names()</a></code> </p>
         </td>
-        <td><p>Extract a graph objects's vertex attribute names.</p></td>
+        <td><p>Get Vertex Attribute Names</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="vrt_get_attr.html">vrt_get_attr()</a></code> <code><a href="vrt_get_attr.html">vrt_get_names()</a></code> </p>
+          <p><code><a href="vrt_get_attr.html">vrt_get_attr()</a></code> </p>
         </td>
-        <td><p>Extract a specific vertex attribute.</p></td>
+        <td><p>Get a Vertex Attribute</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="vrt_to_df.html">vrt_to_df()</a></code> </p>
+          <p><code><a href="vrt_get_names.html">vrt_get_names()</a></code> </p>
         </td>
-        <td><p>Extract all vertex attributes as a data frame.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="vrt_delete_attr.html">vrt_delete_attr()</a></code> </p>
-        </td>
-        <td><p>Delete Vertex Attributes</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="vrt_filter.html">vrt_filter()</a></code> <code><a href="vrt_filter.html">vrt_filter_se()</a></code> </p>
-        </td>
-        <td><p>Filter vertices by their attributes.</p></td>
+        <td><p>Get Vertex Names</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -218,59 +198,21 @@
       <tr>
         
         <td>
+          <p><code><a href="edg_as_df.html">edg_as_df()</a></code> </p>
+        </td>
+        <td><p>Extract edge attributes as a data frame.</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="edg_attr_names.html">edg_attr_names()</a></code> </p>
         </td>
-        <td><p>Extract a graph objects's edge attribute names.</p></td>
+        <td><p>Get Edge Attribute Names</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="edg_get_attr.html">edg_get_attr()</a></code> </p>
         </td>
-        <td><p>Extract a specific edge attribute.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="edg_to_df.html">edg_to_df()</a></code> <code><a href="edg_to_df.html">print(<i>&lt;edge_data_frame&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Extract all edge attributes as a data frame.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="edg_delete_attr.html">edg_delete_attr()</a></code> </p>
-        </td>
-        <td><p>Delete Edge Attributes</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="edg_filter.html">edg_filter()</a></code> <code><a href="edg_filter.html">edg_filter_se()</a></code> </p>
-        </td>
-        <td><p>Filter edges by their attributes.</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-network-attributes" class="hasAnchor"><a href="#section-network-attributes" class="anchor"></a>Network Attributes</h2>
-          <p class="section-desc"><p>Routines targeting non-structural network attributes.</p></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="net_attr_names.html">net_attr_names()</a></code> </p>
-        </td>
-        <td><p>Extract non-structural network attribute names.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="net_get_attr.html">net_get_attr()</a></code> </p>
-        </td>
-        <td><p>Extract a specific, non-strucural network attribute.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="net_attrs_to_list.html">net_attrs_to_list()</a></code> </p>
-        </td>
-        <td><p>Extract all non-structural network attributes as a named <code>list</code>.</p></td>
+        <td><p>Get a Specific Edge Attribute</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -284,55 +226,49 @@
         <td>
           <p><code><a href="net_is_directed.html">net_is_directed()</a></code> </p>
         </td>
-        <td><p>Are a network's edges directed or undirected?</p></td>
+        <td><p>Is a Graph Directed?</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="net_is_multiplex.html">net_is_multiplex()</a></code> </p>
         </td>
-        <td><p>Is a graph object multiplex?</p></td>
+        <td><p>Is a Graph Multiplex?</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="net_is_bipartite.html">net_is_bipartite()</a></code> </p>
         </td>
-        <td><p>Is a graph object bipartite?</p></td>
+        <td><p>Is a Graph Bipartite?</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="net_count_vertices.html">net_count_vertices()</a></code> </p>
         </td>
-        <td><p>Count the number of vertices present in a graph object.</p></td>
+        <td><p>How Many Vertices Does a Graph Have?</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="net_count_edges.html">net_count_edges()</a></code> </p>
         </td>
-        <td><p>Count the number of edges present in a graph object.</p></td>
+        <td><p>How Many Edges Does a Graph Have?</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="net_count_actors.html">net_count_actors()</a></code> </p>
         </td>
-        <td><p>Count the number of vertices belonging to the actor mode of a bipartite graph object.</p></td>
+        <td><p>How Many Vertices Belong to a Bipartite Graph's Actor Mode?</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="net_has_loops.html">net_has_loops()</a></code> </p>
         </td>
-        <td><p>Does a graph object contain loops?</p></td>
+        <td><p>Does a Graph Have Loops?</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="net_has_isolates.html">net_has_isolates()</a></code> </p>
         </td>
-        <td><p>Does a graph object contain isolates?</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="net_as_undirected.html">net_as_undirected()</a></code> </p>
-        </td>
-        <td><p>Convert a directed graph object to undirected.</p></td>
+        <td><p>Does a Graph Have Isolates?</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -344,49 +280,9 @@
       <tr>
         
         <td>
-          <p><code><a href="rep_as_edgelist.html">rep_as_edgelist()</a></code> <code><a href="rep_as_edgelist.html">is_edgelist()</a></code> <code><a href="rep_as_edgelist.html">print(<i>&lt;edgelist&gt;</i>)</a></code> <code><a href="rep_as_edgelist.html">as.matrix(<i>&lt;edgelist&gt;</i>)</a></code> <code><a href="rep_as_edgelist.html">as.data.frame(<i>&lt;edgelist&gt;</i>)</a></code> </p>
+          <p><code><a href="rep_as_edgelist.html">rep_as_edgelist()</a></code> </p>
         </td>
-        <td><p>Construct a graph object's edgelist representation</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rep_as_adj_matrix.html">rep_as_adj_matrix()</a></code> <code><a href="rep_as_adj_matrix.html">print(<i>&lt;adj_matrix&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Construct a graph object's adjacency matrix representation.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rep_as_mixing_matrix.html">rep_as_mixing_matrix()</a></code> <code><a href="rep_as_mixing_matrix.html">is_mixing_matrix()</a></code> <code><a href="rep_as_mixing_matrix.html">print(<i>&lt;mixing_matrix&gt;</i>)</a></code> <code><a href="rep_as_mixing_matrix.html">as.matrix(<i>&lt;mixing_matrix&gt;</i>)</a></code> <code><a href="rep_as_mixing_matrix.html">as.data.frame(<i>&lt;mixing_matrix&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Construct a graph object's mixing matrix.</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-global-metrics" class="hasAnchor"><a href="#section-global-metrics" class="anchor"></a>Global Metrics</h2>
-          <p class="section-desc"><p>Routines calculating graph-level indices.</p></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="calc_net_density.html">calc_net_density()</a></code> </p>
-        </td>
-        <td><p>Calculate a graph object's density.</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-homophily" class="hasAnchor"><a href="#section-homophily" class="anchor"></a>Homophily</h2>
-          <p class="section-desc"><p>Routines calculating indices related to homophily and mixing patterns.</p></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="ei_index.html">ei_index()</a></code> <code><a href="ei_index.html">print(<i>&lt;ei_global&gt;</i>)</a></code> <code><a href="ei_index.html">autoplot.ei_group()</a></code> </p>
-        </td>
-        <td><p>E-I Index</p></td>
+        <td><p>Construct a graph object's edgelist representation.</p></td>
       </tr>
     </tbody>
     </table>
@@ -396,15 +292,11 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#section-snatools">snatools</a></li>
-      <li><a href="#section-standardized-data-representation">Standardized Data Representation</a></li>
       <li><a href="#section-class-conversion">Class Conversion</a></li>
       <li><a href="#section-vertices">Vertices</a></li>
       <li><a href="#section-edges">Edges</a></li>
-      <li><a href="#section-network-attributes">Network Attributes</a></li>
       <li><a href="#section-structural-metadata">Structural Metadata</a></li>
       <li><a href="#section-representations">Representations</a></li>
-      <li><a href="#section-global-metrics">Global Metrics</a></li>
-      <li><a href="#section-homophily">Homophily</a></li>
     </ul>
   </div>
 </div>

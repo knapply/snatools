@@ -8,16 +8,16 @@ Description: A consistent toolkit that conveniently connects existing graph stru
     metrics missing from R's network analysis ecosystem.
 Depends: R (>= 3.4.0)
 Imports:
+    glue,
     igraph,
     magrittr,
     methods,
     network,
     stats,
+    tibble,
     utils
 Suggests:
     covr,
-    data.table,
-    dplyr,
     ergm,
     ggplot2,
     knitr,

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Construct a graph object's edgelist representation — rep_as_edgelist • snatools</title>
+<title>Construct a graph object's edgelist representation. — rep_as_edgelist • snatools</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,11 +30,9 @@
 
 
 
-<meta property="og:title" content="Construct a graph object's edgelist representation — rep_as_edgelist" />
+<meta property="og:title" content="Construct a graph object's edgelist representation. — rep_as_edgelist" />
 
-<meta property="og:description" content="rep_as_edgelist() standardizes edgelist representations across supported classes in
-that edge sources (.ego) and targets (.alter) are sorted row-wise for undirected
-graphs and parallel edges are never dropped from multiplex graphs." />
+<meta property="og:description" content="Construct a graph object's edgelist representation." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -116,198 +114,48 @@ graphs and parallel edges are never dropped from multiplex graphs." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Construct a graph object's edgelist representation</h1>
+    <h1>Construct a graph object's edgelist representation.</h1>
     <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/edgelist.R'><code>R/edgelist.R</code></a></small>
     <div class="hidden name"><code>rep_as_edgelist.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>rep_as_edgelist()</code> standardizes edgelist representations across supported classes in
-that edge sources (<code>.ego</code>) and targets (<code>.alter</code>) are sorted row-wise for undirected
-graphs and parallel edges are never dropped from multiplex graphs.</p>
+    <p>Construct a graph object's edgelist representation.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>rep_as_edgelist</span>(<span class='no'>x</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for default</span>
-<span class='fu'>rep_as_edgelist</span>(<span class='no'>x</span>, <span class='kw'>use_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>leave_raw</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>ignore_missing_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
-<span class='co'># S3 method for adj_matrix</span>
-<span class='fu'>rep_as_edgelist</span>(<span class='no'>x</span>, <span class='kw'>use_vrt_attr</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>leave_raw</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-
-<span class='fu'>is_edgelist</span>(<span class='no'>x</span>)
-
-<span class='co'># S3 method for edgelist</span>
-<span class='fu'>print</span>(<span class='no'>x</span>, <span class='kw'>.nrow</span> <span class='kw'>=</span> <span class='fl'>10L</span>)
-
-<span class='co'># S3 method for edgelist</span>
-<span class='fu'>as.matrix</span>(<span class='no'>x</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for edgelist</span>
-<span class='fu'>as.data.frame</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>rep_as_edgelist</span>(<span class='no'>x</span>, <span class='kw'>use_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>An <code>bridge_net</code>, <code>igraph</code>, <code>network</code>, <code>tbl_graph</code>, or <code>edgelist</code> object.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Arguments passed on to <code>as.data.frame()</code>.</p></td>
+      <td><p>An <code>igraph</code>, <code>network</code>, or <code>tbl_graph</code>.</p></td>
     </tr>
     <tr>
       <th>use_names</th>
-      <td><p><code>logical</code> (default: <code>TRUE</code>) indicating whether to use vertex names in
-the returned object. If <code>FALSE</code>, the returned object uses vertex indices.</p></td>
+      <td><p><code>logical</code> (default: <code>TRUE</code>) indicating whether to use vertex names as
+the values filling the returned object. If <code>FALSE</code>, or a relevant attribute does not
+exist, the returned object uses vertex indices.</p></td>
     </tr>
     <tr>
       <th>vrt_attr</th>
       <td><p><code>character</code> (default: <code>NULL</code>) indicating which vertex attribute to use
 in the returned object. If provided, <code>vrt_attr</code> overrides <code>use_names</code>.</p></td>
     </tr>
-    <tr>
-      <th>weights</th>
-      <td><p><code>logical</code> (default: <code>FALSE</code>) indicating whether the parallel edges of
-multiplex graph objects should be combined into a count column named <code>.weight</code>.</p></td>
-    </tr>
-    <tr>
-      <th>leave_raw</th>
-      <td><p><code>logical</code> (default: <code>FALSE</code>) indicating whether to return a <code>matrix</code>
-(or <code>data.frame</code>) instead of an <code>edgelist</code> object.</p></td>
-    </tr>
-    <tr>
-      <th>ignore_missing_names</th>
-      <td><p><code>logical</code> (default: <code>TRUE</code>) whether to throw a warning if
-<code>use_names = TRUE</code> but  <code>x</code> does not contain valid vertex names.</p></td>
-    </tr>
-    <tr>
-      <th>.nrow</th>
-      <td><p>Maximum number of rows to print.</p></td>
-    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>edgelist</code> object, <code>matrix</code>, or <code>data.frame</code>.</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>The returned object contains minimally 2 columns (<code>.ego</code> and <code>.alter</code>) stored as a
-<code>matrix</code>.</p><ul>
-<li><p><code>use_names</code></p><ul>
-<li><p>If <code>use_names</code> is <code>TRUE</code> (the default), <code>rep_as_edgelist()</code> checks whether <code>x</code>
-contains a valid vertex attribute for vertex names. If available, this attribute is
-used. If not available, the returned object uses vertex indices and a warning is
-thrown (unless <code>ignore_missing_names = TRUE</code>).</p></li>
-<li><p>Each class uses a different attribute for valid vertex names:</p><ul>
-<li><p><code>igraph</code> and <code>tbl_graph</code> objects use a vertex attribute called <code>name</code></p></li>
-<li><p><code>network</code> objects use a vertex attribute called <code>vertex.names</code></p></li>
-<li><p><code>bridge_net</code> objects use a vertex attribute called <code>.name</code></p></li>
-</ul></li>
-</ul></li>
-<li><p><code>weights</code></p><ul>
-<li><p>If <code>weights</code> is <code>TRUE</code>, <code>rep_as_edgelist()</code> combines parallel edges to create a
-third column (<code>.weight</code>).</p><ul>
-<li><p>In order to handle potentially heterogeneous data types, <code>rep_as_edgelist()</code>
-stores edges in a <code>data.frame</code> instead of a <code>matrix</code>.</p></li>
-</ul></li>
-<li><p>Ignored if <code><a href='net_is_multiplex.html'>net_is_multiplex()</a></code> returns <code>FALSE</code>.</p></li>
-</ul></li>
-<li><p><code>leave_raw</code></p><ul>
-<li><p>If <code>leave_raw</code> is <code>FALSE</code> (the default), <code>rep_as_edgelist()</code> will return an
-<code>edgelist</code> object.</p></li>
-<li><p><code>edgelist</code> objects store metadata describing <code>x</code> in order to facilitate operations
-for which a traditional edgelist requires extra information.</p><ul>
-<li><p>These metadata are stored in the following <code>attributes()</code>:</p><ul>
-<li><p><code>is_directed</code></p></li>
-<li><p><code>is_bipartite</code></p></li>
-<li><p><code>is_multiplex</code></p></li>
-<li><p><code>n_vertices</code></p></li>
-<li><p><code>n_edges</code></p></li>
-<li><p><code>n_actors</code></p></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
-<ul>
-<li><p>If desired, an <code>edgelist</code> object can be converted using <code>as.data.frame()</code> or
-<code>as.matrix()</code> in order to strip additional <code>attributes()</code>.</p></li>
-</ul>
+    <p><code>matrix</code> with <code><a href='net_count_edges.html'>net_count_edges(x)</a></code> rows and 2 columns (<code>.ego</code> and <code>.alter</code>).</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/igraph/topics/as_edgelist'>igraph::as_edgelist()</a></code>, <code><a href='http://www.rdocumentation.org/packages/network/topics/as.matrix.network'>network::as.matrix.network.edgelist()</a></code></p></div>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>snatools</span>)
-
-<span class='no'>ig</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/erdos.renyi.game'>random.graph.game</a></span>(<span class='fl'>10</span>, <span class='fl'>0.1</span>) <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/set_vertex_attr'>set_vertex_attr</a></span>(<span class='st'>"name"</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fu'>seq_len</span>(<span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/gorder'>vcount</a></span>(<span class='no'>.</span>))]) <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/set_vertex_attr'>set_vertex_attr</a></span>(<span class='st'>"group"</span>, <span class='kw'>value</span> <span class='kw'>=</span> <span class='fu'>sample</span>(<span class='no'>LETTERS</span>[<span class='fl'>1</span>:<span class='fl'>3</span>], <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/gorder'>vcount</a></span>(<span class='no'>.</span>), <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>))
-
-<span class='no'>nw</span> <span class='kw'>&lt;-</span> <span class='no'>ig</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='as_network.html'>as_network</a></span>()
-
-<span class='no'>sna_g</span> <span class='kw'>&lt;-</span> <span class='no'>ig</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='as_bridge_net.html'>as_bridge_net</a></span>()
-
-<span class='no'>tidy_g</span> <span class='kw'>&lt;-</span> <span class='no'>ig</span> <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>tidygraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/tidygraph/topics/tbl_graph'>as_tbl_graph</a></span>()
-
-<span class='no'>ig</span> <span class='kw'>%&gt;%</span> <span class='fu'>rep_as_edgelist</span>()</div><div class='output co'>#&gt; # An undirected edgelist with 9 edges.*
-#&gt;   .ego .alter
-#&gt; 1 a    d     
-#&gt; 2 c    d     
-#&gt; 3 c    f     
-#&gt; 4 c    h     
-#&gt; 5 e    h     
-#&gt; 6 a    i     
-#&gt; 7 f    i     
-#&gt; 8 d    j     
-#&gt; 9 e    j     
-#&gt; # * Values correspond to vertex names.</div><div class='input'>
-<span class='no'>nw</span> <span class='kw'>%&gt;%</span> <span class='fu'>rep_as_edgelist</span>(<span class='kw'>use_names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; # An undirected edgelist with 9 edges.*
-#&gt;   .ego .alter
-#&gt; 1    1      4
-#&gt; 2    3      4
-#&gt; 3    3      6
-#&gt; 4    3      8
-#&gt; 5    5      8
-#&gt; 6    1      9
-#&gt; 7    6      9
-#&gt; 8    4     10
-#&gt; 9    5     10
-#&gt; # * Values correspond to vertex indices.</div><div class='input'>
-<span class='no'>tidy_g</span> <span class='kw'>%&gt;%</span> <span class='fu'>rep_as_edgelist</span>(<span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='st'>"group"</span>)</div><div class='output co'>#&gt; # An undirected edgelist with 9 edges.*
-#&gt;   .ego .alter
-#&gt; 1 C    C     
-#&gt; 2 B    C     
-#&gt; 3 B    A     
-#&gt; 4 B    A     
-#&gt; 5 A    A     
-#&gt; 6 C    C     
-#&gt; 7 A    C     
-#&gt; 8 C    B     
-#&gt; 9 A    B     
-#&gt; # * Values correspond to a vertex attribute ('group').</div><div class='input'>
-<span class='no'>ig</span> <span class='kw'>%&gt;%</span> <span class='fu'>rep_as_edgelist</span>(<span class='kw'>leave_raw</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;       .ego .alter
-#&gt;  [1,] "a"  "d"   
-#&gt;  [2,] "c"  "d"   
-#&gt;  [3,] "c"  "f"   
-#&gt;  [4,] "c"  "h"   
-#&gt;  [5,] "e"  "h"   
-#&gt;  [6,] "a"  "i"   
-#&gt;  [7,] "f"  "i"   
-#&gt;  [8,] "d"  "j"   
-#&gt;  [9,] "e"  "j"   </div><div class='input'>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -316,12 +164,8 @@ for which a traditional edgelist requires extra information.</p><ul>
       
       <li><a href="#value">Value</a></li>
 
-      <li><a href="#details">Details</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+          </ul>
 
     <h2>Author</h2>
     

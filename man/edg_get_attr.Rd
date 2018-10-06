@@ -2,15 +2,12 @@
 % Please edit documentation in R/edge-attributes.R
 \name{edg_get_attr}
 \alias{edg_get_attr}
-\alias{edg_get_attr.bridge_net}
 \alias{edg_get_attr.igraph}
 \alias{edg_get_attr.network}
 \alias{edg_get_attr.tbl_graph}
-\title{Extract a specific edge attribute.}
+\title{Get a Specific Edge Attribute}
 \usage{
 edg_get_attr(x, edg_attr)
-
-\method{edg_get_attr}{bridge_net}(x, edg_attr)
 
 \method{edg_get_attr}{igraph}(x, edg_attr)
 
@@ -19,43 +16,17 @@ edg_get_attr(x, edg_attr)
 \method{edg_get_attr}{tbl_graph}(x, edg_attr)
 }
 \arguments{
-\item{x}{A \code{bridge_net}, \code{igraph}, \code{network}, or \code{tbl_graph}.}
+\item{x}{An \code{igraph}, \code{network}, or \code{tbl_graph}.}
 
 \item{edg_attr}{\code{character} specifying the target edge attribute.}
 }
 \value{
-\code{vector} of edge attribute values.
+\code{vector} containing the vertex attributes specified by \code{vrt_attr}.
 }
 \description{
-Extract a specific edge attribute.
-}
-\examples{
-library(snatools)
-
-data(sampson_monastery)
-
-ig <- sampson_monastery \%>\% 
-  as_igraph()
-  
-nw <- sampson_monastery \%>\% 
-  as_network()
-  
-tidy_g <- ig \%>\% 
-  tidygraph::as_tbl_graph()
-
-edg_get_attr(sampson_monastery, "relation") \%>\% unique()
-
-edg_get_attr(ig, "relation") \%>\% unique()
-
-edg_get_attr(nw, "relation") \%>\% unique()
-
-edg_get_attr(tidy_g, "relation") \%>\% unique()
-
+Get a Specific Edge Attribute
 }
 \seealso{
-\code{\link[=edg_attr_names]{edg_attr_names()}}, \code{\link[=edg_to_df]{edg_to_df()}}, \code{\link[igraph:edge_attr]{igraph::edge_attr()}},
-\code{\link[network:get.edge.attribute]{network::get.edge.attribute()}}
-
 \code{\link[igraph:edge_attr]{igraph::edge_attr()}}
 }
 \author{

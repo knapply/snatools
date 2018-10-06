@@ -7,7 +7,6 @@
 \alias{as_igraph.igraph}
 \alias{as_igraph.network}
 \alias{as_igraph.tbl_graph}
-\alias{as.igraph.bridge_net}
 \alias{as.igraph.network}
 \alias{reexports}
 \alias{as.igraph}
@@ -23,12 +22,10 @@ as_igraph(x)
 
 \method{as_igraph}{tbl_graph}(x)
 
-\method{as.igraph}{bridge_net}(x)
-
 \method{as.igraph}{network}(x)
 }
 \arguments{
-\item{x}{\code{bridge_net} or \code{\link[network:network]{network::network}} object.}
+\item{x}{\code{\link[network:network]{network::network}} (or \code{\link[tidygraph:tbl_graph]{tidygraph::tbl_graph}}) object.}
 }
 \value{
 An \code{igraph} (\code{\link[igraph:graph]{igraph::graph}}) object.
@@ -41,69 +38,8 @@ Accurately map foreign graph data to \code{igraph} objects.
 mapping metadata, edges, vertices, and attributes (edge, vertex, and graph-level)
 to a new, valid \code{igraph} object. \cr
 }
-\examples{
-library(snatools)
-suppressPackageStartupMessages(library(network))
-color_pal <- colorRampPalette(c("red", "green", "blue"))
-
-# simple, 1-mode network to igraph conversion =========================================
-n_vertices <- 10L
-adjacency_matrix <- rbinom(n_vertices, 1L, prob = 0.1) \%>\%
-  replicate(n = n_vertices, expr = .) \%>\% 
-  apply(2L, sample) \%>\% 
-  t()
-
-nw1 <- network(adjacency_matrix, directed = TRUE)
-
-nw1 \%v\% "color" <- color_pal(network.size(nw1))
-nw1 \%e\% "lab" <- seq_len(sum(adjacency_matrix))
-nw1
-
-ig1 <- as_igraph(nw1)
-ig1
-
-# manually comparing original and converted networks ==================================
-nw1 \%>\% vrt_to_df()
-ig1 \%>\% vrt_to_df()
-
-identical(vrt_to_df(nw1), vrt_to_df(ig1))
-
-nw1 \%>\% edg_to_df()
-ig1 \%>\% edg_to_df()
-
-identical(edg_to_df(nw1), edg_to_df(ig1))
-
-# converting bipartite network to bipartite igraph ====================================
-n_actors <- 5L
-n_events <- 3L
-affiliation_matrix <- rbinom(n_events, 1L, prob = 0.2) \%>\%
-  replicate(n = n_actors, expr = .) \%>\% 
-  apply(2L, sample) \%>\% 
-  t()
-  
-nw2 <- as.network.matrix(affiliation_matrix, matrix.type = "adjacency", 
-                         bipartite = n_actors)
-nw2 \%v\% "color" <- c(rep("red", n_actors), rep("blue", n_events))
-nw2 \%e\% "lab" <- seq_len(sum(affiliation_matrix))
-nw2
-
-ig2 <- as_igraph(nw2)
-ig2
-
-# comparing objects ===================================================================
-nw2 \%>\% vrt_to_df()
-ig2 \%>\% vrt_to_df()
-
-identical(vrt_to_df(nw2), vrt_to_df(ig2))
-
-nw2 \%>\% edg_to_df()
-ig2 \%>\% edg_to_df()
-
-identical(edg_to_df(nw2), edg_to_df(ig2))
-
-}
 \seealso{
-\code{\link[=as_bridge_net]{as_bridge_net()}}, \code{\link[=as_network]{as_network()}}, \code{\link[intergraph:asIgraph]{intergraph::asIgraph()}}
+\code{\link[=as_network]{as_network()}}, \code{\link[intergraph:asIgraph]{intergraph::asIgraph()}}
 }
 \author{
 Brendan Knapp \email{brendan.g.knapp@gmail.com}

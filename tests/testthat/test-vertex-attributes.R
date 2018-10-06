@@ -1,60 +1,98 @@
-# ig_dir <- function() snatools:::build_test_graph("ig", isolate = TRUE)
-# ig_undir <- function() snatools:::build_test_graph("ig", directed = FALSE, isolate = TRUE)
-# ig_bip <- function() snatools:::build_test_graph("ig", directed = FALSE, bipartite = TRUE)
-# 
-# nw_dir <- function() snatools:::build_test_graph("nw", isolate = TRUE)
-# nw_undir <- function() snatools:::build_test_graph("nw", directed = FALSE, isolate = TRUE)
-# nw_bip <- function() snatools:::build_test_graph("nw", directed = FALSE, bipartite = TRUE)
-# 
-# bridge_net_dir <- function() as_bridge_net(ig_dir())
-# bridge_net_undir <- function() as_bridge_net(ig_undir())
-# bridge_net_bip <- function() as_bridge_net(ig_bip())
-# 
-# # vrt_get_attr ====
-# context("vrt_get_attr")
-# #* directed ====
-# test_that("ig_dir vs nw_dir)", {
-#   expect_identical(vrt_get_attr(ig_dir(), "node_dbl"), vrt_get_attr(nw_dir(), "node_dbl"))
-#   })
-# test_that("ig_dir vs bridge_net_dir)", {
-#   expect_identical(vrt_get_attr(ig_dir(), "node_dbl"), vrt_get_attr(bridge_net_dir(), "node_dbl"))
-#   })
-# #* undirected ====
-# test_that("ig_undir vs nw_undir)", {
-#   expect_identical(vrt_get_attr(ig_undir(), "node_chr"), vrt_get_attr(nw_undir(), "node_chr"))
-#   })
-# test_that("ig_undir vs bridge_net_undir)", {
-#   expect_identical(vrt_get_attr(ig_undir(), "node_chr"),
-#                    vrt_get_attr(bridge_net_undir(), "node_chr"))
-#   })
-# #* bipartite ====
-# test_that("ig_bip vs nw_bip)", {
-#   expect_identical(vrt_get_attr(ig_bip(), "name"), vrt_get_attr(nw_bip(), "vertex.names"))
-#   })
-# test_that("ig_bip vs bridge_net_bip)", {
-#   expect_identical(vrt_get_attr(ig_bip(), "node_dbl"), vrt_get_attr(bridge_net_bip(), "node_dbl"))
-#   })
-# 
-# # vrt_to_df() ====
-# context("vrt_to_df")
-# #* directed ====
-# test_that("ig_dir vs nw_dir)", {
-#   expect_identical(vrt_to_df(ig_dir()), vrt_to_df(nw_dir()))
-#   })
-# test_that("ig_dir vs bridge_net_dir)", {
-#   expect_identical(vrt_to_df(ig_dir()), vrt_to_df(bridge_net_dir()))
-#   })
-# #* undirected ====
-# test_that("ig_undir vs nw_undir)", {
-#   expect_identical(vrt_to_df(ig_undir()), vrt_to_df(nw_undir()))
-#   })
-# test_that("ig_dir vs sna_net_dir)", {
-#   expect_equal(vrt_to_df(ig_undir()), vrt_to_df(bridge_net_undir()))
-#   })
-# #* bipartite ====
-# test_that("ig_bip vs nw_bip)", {
-#   expect_identical(vrt_to_df(ig_bip()), vrt_to_df(nw_bip()))
-# })
-# test_that("ig_dir vs sna_net_dir)", {
-#   expect_identical(vrt_to_df(ig_bip()), vrt_to_df(bridge_net_bip()))
-#   })
+context("vertex attributes")
+
+ig_vert_attrs <- tibble::tibble(name = letters[1:10],
+                                foo = LETTERS[1:10],
+                                bar = rep(c(TRUE, FALSE), 5))
+
+edge_attrs <- tibble::tibble(.ego = c(5, 9, 10, 10, 10, 10, 5, 3, 6,
+                                      3, 2, 2, 3, 1, 6, 3, 2, 1, 6, 6),
+                             .alter = c(2, 5, 8, 7, 10, 1, 4, 3, 3, 3, 2,
+                                        6, 10, 10, 3, 7, 10, 9, 8, 2),
+                             foo = LETTERS[1:20],
+                             bar = rep(c(TRUE, FALSE), 10))
+ig <- igraph::graph_from_edgelist(cbind(edge_attrs$.ego, edge_attrs$.alter))
+igraph::vertex_attr(ig) <- ig_vert_attrs
+igraph::edge_attr(ig) <- edge_attrs
+
+nw_vert_attrs <- ig_vert_attrs
+names(nw_vert_attrs)[names(nw_vert_attrs) == "name"] <- "vertex.names"
+
+nw <- network::as.network.matrix(cbind(edge_attrs$.ego, edge_attrs$.alter))
+network::set.vertex.attribute(nw, colnames(nw_vert_attrs), nw_vert_attrs)
+network::set.edge.attribute(nw, colnames(edge_attrs), edge_attrs)
+
+# vrt_attr_names() ====
+test_that("attribute name extraction works", {
+# igraph
+  expect_identical(
+    vrt_attr_names(ig),
+    colnames(ig_vert_attrs)
+  )
+# network
+  expect_identical(
+    vrt_attr_names(nw),
+    colnames(nw_vert_attrs)
+  )
+})
+
+# vrt_get_attr() ====
+test_that("specific attribute extraction works", {
+# igraph
+  expect_identical(
+    vrt_get_attr(ig, "foo"),
+    ig_vert_attrs$foo
+  )
+  expect_error(
+    vrt_get_attr(ig, "fake attr name")
+  )
+# network
+  expect_identical(
+    vrt_get_attr(nw, "bar"),
+    nw_vert_attrs$bar
+  )
+  expect_error(
+    vrt_get_attr(nw, "fake attr name")
+  )
+})
+
+# vrt_get_names() ====
+test_that("vertex name extraction works", {
+# igraph
+  expect_identical(
+    vrt_get_names(ig),
+    ig_vert_attrs$name
+  )
+# network
+  expect_identical(
+    vrt_get_names(nw),
+    nw_vert_attrs$vertex.names
+  )
+})
+
+ig_nulls <- igraph::graph_from_edgelist(cbind(edge_attrs$.ego,
+                                              edge_attrs$.alter))
+# network should never have NULL attributes... but it still happens
+nw_nulls <- network::as.network.matrix(cbind(edge_attrs$.ego,
+                                             edge_attrs$.alter),
+                                       matrix.type = "edgelist")
+network::delete.vertex.attribute(nw_nulls, "vertex.names")
+
+# test empty attributes =====
+test_that("empty attributes return NULL", {
+# igraph
+  expect_null(
+    vrt_attr_names(ig_nulls)
+    )
+  expect_identical(
+    vrt_get_names(ig_nulls),
+    seq_len(igraph::vcount(ig_nulls))
+  )
+# network
+  expect_null(
+    vrt_attr_names(nw_nulls)
+    )
+  expect_identical(
+    vrt_get_names(nw_nulls),
+    seq_len(nw_nulls[["gal"]][["n"]])
+  )
+})

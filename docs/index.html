@@ -123,240 +123,93 @@
 <a class="sourceLine" id="cb1-7" data-line-number="7"></a>
 <a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co"># Load {snatools}.</span></a>
 <a class="sourceLine" id="cb1-9" data-line-number="9"><span class="kw">library</span>(snatools)</a></code></pre></div>
-</div>
-<div id="features" class="section level2">
-<h2 class="hasAnchor">
-<a href="#features" class="anchor"></a>Features</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">data</span>(<span class="st">"sampson_monastery"</span>)</a></code></pre></div>
-<div id="bridge_net" class="section level3">
-<h3 class="hasAnchor">
-<a href="#bridge_net" class="anchor"></a><code>bridge_net</code>
-</h3>
-<p>The <code>bridge_net</code> object provides an intermediate graph structure that can effectively map data to both <code>igraph</code> and <code>network</code> objects.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">sampson_monastery</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt; # A directed, multiplex, 1-mode `bridge_net`.</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; # - Contains 0 loops and 0 isolates.</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; $edges # first 3 of 510</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt;    .ego    .alter  weight relation time  positive_relation</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt;    &lt;.name&gt; &lt;.name&gt; &lt;dbl&gt;  &lt;chr&gt;    &lt;int&gt; &lt;lgl&gt;            </span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt;  | Romauld Ambrose 2      liking   1     TRUE             </span></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt;  | Romauld Peter   3      liking   1     TRUE             </span></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt;  | Romauld Albert  1      liking   1     TRUE             </span></a>
-<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt; $vertices # first 3 of 18</span></a>
-<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt;    .name       faction  cloisterville status  </span></a>
-<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt;    &lt;.name&gt;     &lt;chr&gt;    &lt;lgl&gt;         &lt;chr&gt;   </span></a>
-<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt;  | Romauld     Waverers FALSE         Remained</span></a>
-<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt;  | Bonaventure Loyal     TRUE         Remained</span></a>
-<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt;  | Ambrose     Loyal    FALSE         Remained</span></a></code></pre></div>
-</div>
-<div id="conversion" class="section level3">
-<h3 class="hasAnchor">
-<a href="#conversion" class="anchor"></a>Conversion</h3>
-<p>Through <code>bridge_net</code> objects, <code>igraph</code> and <code>network</code> objects can play together easier than ever.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">ig &lt;-<span class="st"> </span><span class="kw"><a href="reference/as_igraph.html">as_igraph</a></span>(sampson_monastery)</a></code></pre></div>
-<pre><code>#&gt; IGRAPH 128dfea DNW- 18 510 -- 
-#&gt; + attr: network_name (g/c), author (g/c), name (v/c), faction
-#&gt; | (v/c), cloisterville (v/l), status (v/c), weight (e/n), relation
-#&gt; | (e/c), time (e/n), positive_relation (e/l)
-#&gt; + edges from 128dfea (vertex names):
-#&gt;  [1] Romauld    -&gt;Ambrose     Romauld    -&gt;Peter      
-#&gt;  [3] Romauld    -&gt;Albert      Bonaventure-&gt;Romauld    
-#&gt;  [5] Bonaventure-&gt;Victor      Bonaventure-&gt;Albert     
-#&gt;  [7] Ambrose    -&gt;Romauld     Ambrose    -&gt;Bonaventure
-#&gt;  [9] Ambrose    -&gt;Elias       Berthold   -&gt;Peter      
-#&gt; [11] Berthold   -&gt;Louis       Berthold   -&gt;Gregory    
-#&gt; + ... omitted several edges</code></pre>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">nw &lt;-<span class="st"> </span><span class="kw"><a href="reference/as_network.html">as_network</a></span>(sampson_monastery)</a></code></pre></div>
-<pre><code>#&gt;  Network attributes:
-#&gt;   vertices = 18 
-#&gt;   directed = TRUE 
-#&gt;   hyper = FALSE 
-#&gt;   loops = FALSE 
-#&gt;   multiple = TRUE 
-#&gt;   bipartite = FALSE 
-#&gt;   network_name = Crisis in the Cloister 
-#&gt;   author = Samuel F. Sampson 
-#&gt;   total edges= 510 
-#&gt;     missing edges= 0 
-#&gt;     non-missing edges= 510 
-#&gt; 
-#&gt;  Vertex attribute names: 
-#&gt;     cloisterville faction status vertex.names 
-#&gt; 
-#&gt;  Edge attribute names: 
-#&gt;     positive_relation relation time weight</code></pre>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="reference/as_network.html">as_network</a></span>(ig)</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt;  Network attributes:</span></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt;   vertices = 18 </span></a>
-<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt;   directed = TRUE </span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt;   hyper = FALSE </span></a>
-<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt;   loops = FALSE </span></a>
-<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt;   multiple = TRUE </span></a>
-<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt;   bipartite = FALSE </span></a>
-<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt;   network_name = Crisis in the Cloister </span></a>
-<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt;   author = Samuel F. Sampson </span></a>
-<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt;   total edges= 510 </span></a>
-<a class="sourceLine" id="cb8-12" data-line-number="12"><span class="co">#&gt;     missing edges= 0 </span></a>
-<a class="sourceLine" id="cb8-13" data-line-number="13"><span class="co">#&gt;     non-missing edges= 510 </span></a>
-<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb8-15" data-line-number="15"><span class="co">#&gt;  Vertex attribute names: </span></a>
-<a class="sourceLine" id="cb8-16" data-line-number="16"><span class="co">#&gt;     cloisterville faction status vertex.names </span></a>
-<a class="sourceLine" id="cb8-17" data-line-number="17"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb8-18" data-line-number="18"><span class="co">#&gt;  Edge attribute names: </span></a>
-<a class="sourceLine" id="cb8-19" data-line-number="19"><span class="co">#&gt;     positive_relation relation time weight</span></a></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="reference/as_igraph.html">as_igraph</a></span>(nw)</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; IGRAPH 12b7d88 DNW- 18 510 -- </span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt; + attr: network_name (g/c), author (g/c), name (v/c), faction</span></a>
-<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt; | (v/c), cloisterville (v/l), status (v/c), weight (e/n), relation</span></a>
-<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; | (e/c), time (e/n), positive_relation (e/l)</span></a>
-<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt; + edges from 12b7d88 (vertex names):</span></a>
-<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt;  [1] Romauld    -&gt;Ambrose     Romauld    -&gt;Peter      </span></a>
-<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt;  [3] Romauld    -&gt;Albert      Bonaventure-&gt;Romauld    </span></a>
-<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt;  [5] Bonaventure-&gt;Victor      Bonaventure-&gt;Albert     </span></a>
-<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="co">#&gt;  [7] Ambrose    -&gt;Romauld     Ambrose    -&gt;Bonaventure</span></a>
-<a class="sourceLine" id="cb9-11" data-line-number="11"><span class="co">#&gt;  [9] Ambrose    -&gt;Elias       Berthold   -&gt;Peter      </span></a>
-<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co">#&gt; [11] Berthold   -&gt;Louis       Berthold   -&gt;Gregory    </span></a>
-<a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co">#&gt; + ... omitted several edges</span></a></code></pre></div>
-<div id="section" class="section level4">
-<h4 class="hasAnchor">
-<a href="#section" class="anchor"></a><code>%==%</code>
-</h4>
-<p>Since <code>bridge_net</code>s are intermediate structures, comparing them is easy. <code>%==%</code> streamlines the process to make successful conversion confirmation as simple as possible.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">all</span>(ig <span class="op">%==%</span><span class="st"> </span>nw,</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2">    ig <span class="op">%==%</span><span class="st"> </span>sampson_monastery,</a>
-<a class="sourceLine" id="cb10-3" data-line-number="3">    nw <span class="op">%==%</span><span class="st"> </span>sampson_monastery)</a>
-<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">#&gt; [1] TRUE</span></a></code></pre></div>
-<p>The only data that are not compared by <code>%==%</code> are non-structural attributes as <code>igraph</code> and <code>network</code> do not handle them in compatible ways.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">ig <span class="op">%&gt;%</span><span class="st"> </span>igraph<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/igraph/topics/graph_attr_names">graph_attr_names</a></span>()</a>
-<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="co">#&gt; [1] "network_name" "author"</span></a>
-<a class="sourceLine" id="cb11-3" data-line-number="3">nw <span class="op">%&gt;%</span><span class="st"> </span>network<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/network/topics/attribute.methods">list.network.attributes</a></span>()</a>
-<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="co">#&gt; [1] "author"       "bipartite"    "directed"     "hyper"       </span></a>
-<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="co">#&gt; [5] "loops"        "mnext"        "multiple"     "n"           </span></a>
-<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="co">#&gt; [9] "network_name"</span></a></code></pre></div>
-</div>
-</div>
-<div id="standardized-data-extraction" class="section level3">
-<h3 class="hasAnchor">
-<a href="#standardized-data-extraction" class="anchor"></a>Standardized Data Extraction</h3>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">ig <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/vrt_to_df.html">vrt_to_df</a></span>()</a>
-<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="co">#&gt;          .name     faction cloisterville           status</span></a>
-<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="co">#&gt; 1      Romauld    Waverers         FALSE         Remained</span></a>
-<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="co">#&gt; 2  Bonaventure       Loyal          TRUE         Remained</span></a>
-<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="co">#&gt; 3      Ambrose       Loyal         FALSE         Remained</span></a>
-<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="co">#&gt; 4     Berthold       Loyal         FALSE         Remained</span></a>
-<a class="sourceLine" id="cb12-7" data-line-number="7"><span class="co">#&gt; 5        Peter       Loyal          TRUE         Remained</span></a>
-<a class="sourceLine" id="cb12-8" data-line-number="8"><span class="co">#&gt; 6        Louis       Loyal         FALSE         Remained</span></a>
-<a class="sourceLine" id="cb12-9" data-line-number="9"><span class="co">#&gt; 7       Victor    Waverers         FALSE         Remained</span></a>
-<a class="sourceLine" id="cb12-10" data-line-number="10"><span class="co">#&gt; 8      Winfrid Young Turks         FALSE         Remained</span></a>
-<a class="sourceLine" id="cb12-11" data-line-number="11"><span class="co">#&gt; 9   John Bosco Young Turks          TRUE Left Voluntarily</span></a>
-<a class="sourceLine" id="cb12-12" data-line-number="12"><span class="co">#&gt; 10     Gregory Young Turks          TRUE         Expelled</span></a>
-<a class="sourceLine" id="cb12-13" data-line-number="13"><span class="co">#&gt; 11        Hugh Young Turks         FALSE Left Voluntarily</span></a>
-<a class="sourceLine" id="cb12-14" data-line-number="14"><span class="co">#&gt; 12    Boniface Young Turks         FALSE Left Voluntarily</span></a>
-<a class="sourceLine" id="cb12-15" data-line-number="15"><span class="co">#&gt; 13        Mark Young Turks          TRUE Left Voluntarily</span></a>
-<a class="sourceLine" id="cb12-16" data-line-number="16"><span class="co">#&gt; 14      Albert Young Turks         FALSE Left Voluntarily</span></a>
-<a class="sourceLine" id="cb12-17" data-line-number="17"><span class="co">#&gt; 15       Amand    Waverers         FALSE         Remained</span></a>
-<a class="sourceLine" id="cb12-18" data-line-number="18"><span class="co">#&gt; 16       Basil    Outcasts          TRUE         Expelled</span></a>
-<a class="sourceLine" id="cb12-19" data-line-number="19"><span class="co">#&gt; 17       Elias    Outcasts         FALSE         Expelled</span></a>
-<a class="sourceLine" id="cb12-20" data-line-number="20"><span class="co">#&gt; 18  Simplicius    Outcasts         FALSE         Expelled</span></a></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">nw <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/edg_to_df.html">edg_to_df</a></span>()</a>
-<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="co">#&gt; # edge_data_frame: 510 x 6</span></a>
-<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="co">#&gt;             .ego      .alter weight relation time positive_relation</span></a>
-<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="co">#&gt;   1      Romauld     Ambrose      2   liking    1              TRUE</span></a>
-<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">#&gt;   2      Romauld       Peter      3   liking    1              TRUE</span></a>
-<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co">#&gt;   3      Romauld      Albert      1   liking    1              TRUE</span></a>
-<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co">#&gt;   4  Bonaventure     Romauld      3   liking    1              TRUE</span></a>
-<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="co">#&gt;   5  Bonaventure      Victor      2   liking    1              TRUE</span></a>
-<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="co">#&gt;   6  Bonaventure      Albert      1   liking    1              TRUE</span></a>
-<a class="sourceLine" id="cb13-10" data-line-number="10"><span class="co">#&gt;   7      Ambrose     Romauld      2   liking    1              TRUE</span></a>
-<a class="sourceLine" id="cb13-11" data-line-number="11"><span class="co">#&gt;   8      Ambrose Bonaventure      3   liking    1              TRUE</span></a>
-<a class="sourceLine" id="cb13-12" data-line-number="12"><span class="co">#&gt;   9      Ambrose       Elias      1   liking    1              TRUE</span></a>
-<a class="sourceLine" id="cb13-13" data-line-number="13"><span class="co">#&gt;   10    Berthold       Peter      3   liking    1              TRUE</span></a>
-<a class="sourceLine" id="cb13-14" data-line-number="14"><span class="co">#&gt;   # ... with 500 additional rows.</span></a></code></pre></div>
-</div>
-<div id="standardized-representations" class="section level3">
-<h3 class="hasAnchor">
-<a href="#standardized-representations" class="anchor"></a>Standardized Representations</h3>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">ig <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/rep_as_edgelist.html">rep_as_edgelist</a></span>()</a>
-<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="co">#&gt; # A directed edgelist with 510 edges.*</span></a>
-<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="co">#&gt;    .ego        .alter     </span></a>
-<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="co">#&gt; 1  Romauld     Ambrose    </span></a>
-<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="co">#&gt; 2  Romauld     Peter      </span></a>
-<a class="sourceLine" id="cb14-6" data-line-number="6"><span class="co">#&gt; 3  Romauld     Albert     </span></a>
-<a class="sourceLine" id="cb14-7" data-line-number="7"><span class="co">#&gt; 4  Bonaventure Romauld    </span></a>
-<a class="sourceLine" id="cb14-8" data-line-number="8"><span class="co">#&gt; 5  Bonaventure Victor     </span></a>
-<a class="sourceLine" id="cb14-9" data-line-number="9"><span class="co">#&gt; 6  Bonaventure Albert     </span></a>
-<a class="sourceLine" id="cb14-10" data-line-number="10"><span class="co">#&gt; 7  Ambrose     Romauld    </span></a>
-<a class="sourceLine" id="cb14-11" data-line-number="11"><span class="co">#&gt; 8  Ambrose     Bonaventure</span></a>
-<a class="sourceLine" id="cb14-12" data-line-number="12"><span class="co">#&gt; 9  Ambrose     Elias      </span></a>
-<a class="sourceLine" id="cb14-13" data-line-number="13"><span class="co">#&gt; 10 Berthold    Peter      </span></a>
-<a class="sourceLine" id="cb14-14" data-line-number="14"><span class="co">#&gt; # ... and 500 more row(s).</span></a>
-<a class="sourceLine" id="cb14-15" data-line-number="15"><span class="co">#&gt; # * Values correspond to vertex names.</span></a></code></pre></div>
-</div>
-<div id="additional-tools" class="section level3">
-<h3 class="hasAnchor">
-<a href="#additional-tools" class="anchor"></a>Additional Tools</h3>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">nw <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/rep_as_mixing_matrix.html">rep_as_mixing_matrix</a></span>(<span class="dt">vrt_attr =</span> <span class="st">"faction"</span>)</a>
-<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="co">#&gt; # A mixing_matrix with 4 attribute categories.</span></a>
-<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="co">#&gt;                .alter</span></a>
-<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="co">#&gt; .ego             Loyal Outcasts Waverers Young Turks     Incoming Ties</span></a>
-<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="co">#&gt;   Loyal          40    32       21       46            | 139          </span></a>
-<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="co">#&gt;   Outcasts       31    18       18       18            | 85           </span></a>
-<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="co">#&gt;   Waverers       30    12       5        23            | 70           </span></a>
-<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="co">#&gt;   Young Turks    54    41       32       89            | 216          </span></a>
-<a class="sourceLine" id="cb15-9" data-line-number="9"><span class="co">#&gt;                  -     -        -        -                            </span></a>
-<a class="sourceLine" id="cb15-10" data-line-number="10"><span class="co">#&gt;   Outgoing Ties  155   103      76       176</span></a></code></pre></div>
-</div>
-<div id="easy-integeration-with-modern-workflows" class="section level3">
-<h3 class="hasAnchor">
-<a href="#easy-integeration-with-modern-workflows" class="anchor"></a>Easy Integeration with Modern Workflows</h3>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">library</span>(tidygraph, <span class="dt">warn.conflicts =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="kw">library</span>(ggraph, <span class="dt">quietly =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb16-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb16-4" data-line-number="4">nw <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="reference/as_igraph.html">as_igraph</a></span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb16-6" data-line-number="6"><span class="st">  </span><span class="kw">as_tbl_graph</span>() <span class="op">%E&gt;%</span></a>
-<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="st">  </span><span class="kw">select</span>(time, relation) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb16-8" data-line-number="8"><span class="st">  </span><span class="kw">filter</span>(time <span class="op">==</span><span class="st"> </span><span class="dv">3</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb16-9" data-line-number="9"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">relation =</span> <span class="kw">factor</span>(relation, </a>
-<a class="sourceLine" id="cb16-10" data-line-number="10">                           <span class="kw">c</span>(<span class="st">"liking"</span>, <span class="st">"praise"</span>, <span class="st">"esteem"</span>, <span class="st">"positive influence"</span>,</a>
-<a class="sourceLine" id="cb16-11" data-line-number="11">                             <span class="st">"disliking"</span>, <span class="st">"blame"</span>, <span class="st">"disesteem"</span>, <span class="st">"negative influence"</span>))</a>
-<a class="sourceLine" id="cb16-12" data-line-number="12">        ) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb16-13" data-line-number="13"><span class="st">  </span><span class="kw">ggraph</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb16-14" data-line-number="14"><span class="st">  </span><span class="kw">geom_edge_fan</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> relation), <span class="dt">width =</span> <span class="fl">0.5</span>, <span class="dt">show.legend =</span> <span class="ot">FALSE</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb16-15" data-line-number="15"><span class="st">  </span><span class="kw">geom_node_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> faction)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb16-16" data-line-number="16"><span class="st">  </span><span class="kw">guides</span>(<span class="dt">edge_colour =</span> <span class="kw">guide_legend</span>(<span class="dt">title =</span> <span class="ot">NULL</span>),</a>
-<a class="sourceLine" id="cb16-17" data-line-number="17">         <span class="dt">colour =</span> <span class="kw">guide_legend</span>(<span class="dt">title =</span> <span class="ot">NULL</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb16-18" data-line-number="18"><span class="st">  </span><span class="kw">facet_edges</span>(<span class="op">~</span><span class="st"> </span>relation, <span class="dt">ncol =</span> <span class="dv">4</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb16-19" data-line-number="19"><span class="st">  </span><span class="kw">theme_void</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb16-20" data-line-number="20"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">strip.text =</span> <span class="kw">element_text</span>(<span class="dt">face =</span> <span class="st">"bold"</span>, <span class="dt">vjust =</span> <span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb16-21" data-line-number="21">        <span class="dt">panel.border =</span> <span class="kw">element_rect</span>(<span class="dt">fill =</span> <span class="ot">NA</span>, <span class="dt">color =</span> <span class="st">"lightgray"</span>),</a>
-<a class="sourceLine" id="cb16-22" data-line-number="22">        <span class="dt">legend.position =</span> <span class="st">"bottom"</span>)</a></code></pre></div>
-<p><img src="reference/figures/unnamed-chunk-18-1.png" width="700" style="display: block; margin: auto;"></p>
+<!-- ## Features -->
+<!-- ```{r} -->
+<!-- data("sampson_monastery") -->
+<!-- ``` -->
+<!-- ### `bridge_net` -->
+<!-- The `bridge_net` object provides an intermediate graph structure that can effectively map data to both `igraph` and `network` objects. -->
+<!-- ```{r} -->
+<!-- sampson_monastery -->
+<!-- ``` -->
+<!-- ### Conversion -->
+<!-- Through `bridge_net` objects, `igraph` and `network` objects can play together easier than ever. -->
+<!-- ```{r} -->
+<!-- ig <- as_igraph(sampson_monastery) -->
+<!-- ``` -->
+<!-- ```{r, echo=FALSE} -->
+<!-- ig -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- nw <- as_network(sampson_monastery) -->
+<!-- ``` -->
+<!-- ```{r, echo=FALSE} -->
+<!-- nw -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- as_network(ig) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- as_igraph(nw) -->
+<!-- ``` -->
+<!-- #### `%==%` -->
+<!-- Since `bridge_net`s are intermediate structures, comparing them is easy. `%==%` streamlines the process to make successful conversion confirmation as simple as possible. -->
+<!-- ```{r} -->
+<!-- all(ig %==% nw, -->
+<!--     ig %==% sampson_monastery, -->
+<!--     nw %==% sampson_monastery) -->
+<!-- ``` -->
+<!-- The only data that are not compared by `%==%` are non-structural attributes as `igraph` and `network` do not handle them in compatible ways. -->
+<!-- ```{r} -->
+<!-- ig %>% igraph::graph_attr_names() -->
+<!-- nw %>% network::list.network.attributes() -->
+<!-- ``` -->
+<!-- ### Standardized Data Extraction -->
+<!-- ```{r} -->
+<!-- ig %>% vrt_to_df() -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- nw %>% edg_to_df() -->
+<!-- ``` -->
+<!-- ### Standardized Representations -->
+<!-- ```{r} -->
+<!-- ig %>% rep_as_edgelist() -->
+<!-- ``` -->
+<!-- ### Additional Tools -->
+<!-- ```{r} -->
+<!-- nw %>% rep_as_mixing_matrix(vrt_attr = "faction") -->
+<!-- ``` -->
+<!-- ### Easy Integeration with Modern Workflows -->
+<!-- ```{r, message=FALSE} -->
+<!-- library(tidygraph, warn.conflicts = FALSE) -->
+<!-- library(ggraph, quietly = TRUE) -->
+<!-- nw %>%  -->
+<!--   as_igraph() %>%  -->
+<!--   as_tbl_graph() %E>% -->
+<!--   select(time, relation) %>%  -->
+<!--   filter(time == 3) %>% -->
+<!--   mutate(relation = factor(relation,  -->
+<!--                            c("liking", "praise", "esteem", "positive influence", -->
+<!--                              "disliking", "blame", "disesteem", "negative influence")) -->
+<!--         ) %>%  -->
+<!--   ggraph() + -->
+<!--   geom_edge_fan(aes(colour = relation), width = 0.5, show.legend = FALSE) + -->
+<!--   geom_node_point(aes(colour = faction)) + -->
+<!--   guides(edge_colour = guide_legend(title = NULL), -->
+<!--          colour = guide_legend(title = NULL)) + -->
+<!--   facet_edges(~ relation, ncol = 4) + -->
+<!--   theme_void() + -->
+<!--   theme(strip.text = element_text(face = "bold", vjust = 1), -->
+<!--         panel.border = element_rect(fill = NA, color = "lightgray"), -->
+<!--         legend.position = "bottom") -->
+<!-- ``` -->
 <!-- # Development Tests -->
 <!-- ```{r, message=FALSE} -->
 <!-- # devtools::test() -->
 <!-- ``` -->
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">covr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/covr/topics/package_coverage">package_coverage</a></span>()</a>
-<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="co">#&gt; snatools Coverage: 54.22%</span></a>
-<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="co">#&gt; R/adjacency-matrix.R: 0.00%</span></a>
-<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="co">#&gt; R/ei_index.R: 0.00%</span></a>
-<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="co">#&gt; R/ggplot.R: 0.00%</span></a>
-<a class="sourceLine" id="cb17-6" data-line-number="6"><span class="co">#&gt; R/global-metrics.R: 0.00%</span></a>
-<a class="sourceLine" id="cb17-7" data-line-number="7"><span class="co">#&gt; R/mixing-matrix.R: 0.00%</span></a>
-<a class="sourceLine" id="cb17-8" data-line-number="8"><span class="co">#&gt; R/txt_.R: 20.00%</span></a>
-<a class="sourceLine" id="cb17-9" data-line-number="9"><span class="co">#&gt; R/as_bridge_net.R: 29.17%</span></a>
-<a class="sourceLine" id="cb17-10" data-line-number="10"><span class="co">#&gt; R/utils.R: 32.58%</span></a>
-<a class="sourceLine" id="cb17-11" data-line-number="11"><span class="co">#&gt; R/edgelist.R: 43.42%</span></a>
-<a class="sourceLine" id="cb17-12" data-line-number="12"><span class="co">#&gt; R/network-metadata.R: 54.55%</span></a>
-<a class="sourceLine" id="cb17-13" data-line-number="13"><span class="co">#&gt; R/utils-attributes.R: 62.50%</span></a>
-<a class="sourceLine" id="cb17-14" data-line-number="14"><span class="co">#&gt; R/operators.R: 63.64%</span></a>
-<a class="sourceLine" id="cb17-15" data-line-number="15"><span class="co">#&gt; R/vertex-attributes.R: 72.77%</span></a>
-<a class="sourceLine" id="cb17-16" data-line-number="16"><span class="co">#&gt; R/as_network.R: 76.19%</span></a>
-<a class="sourceLine" id="cb17-17" data-line-number="17"><span class="co">#&gt; R/edge-attributes.R: 76.51%</span></a>
-<a class="sourceLine" id="cb17-18" data-line-number="18"><span class="co">#&gt; R/as_igraph.R: 81.25%</span></a>
-<a class="sourceLine" id="cb17-19" data-line-number="19"><span class="co">#&gt; R/network-attributes.R: 84.85%</span></a>
-<a class="sourceLine" id="cb17-20" data-line-number="20"><span class="co">#&gt; R/build_test_graph.R: 90.68%</span></a></code></pre></div>
-</div>
+<!-- ```{r} -->
+<!-- covr::package_coverage() -->
+<!-- ``` -->
 </div>
 </div>
   </div>

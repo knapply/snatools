@@ -7,7 +7,6 @@
 \alias{as_network.igraph}
 \alias{as_network.network}
 \alias{as_network.tbl_graph}
-\alias{as.network.bridge_net}
 \alias{as.network.igraph}
 \alias{reexports}
 \alias{as.network}
@@ -21,122 +20,18 @@ as_network(x, ...)
 
 \method{as_network}{network}(x, ...)
 
-\method{as_network}{tbl_graph}(x, .actor = TRUE, ...)
-
-\method{as.network}{bridge_net}(x, ...)
+\method{as_network}{tbl_graph}(x)
 
 \method{as.network}{igraph}(x, ...)
 }
 \arguments{
-\item{x}{\code{bridge_net}, \code{igraph} (\code{\link[igraph:graph]{igraph::graph}}), or \code{\link[tidygraph:tbl_graph]{tidygraph::tbl_graph}}.}
-
-\item{...}{Named arguments passed on to other methods. Currently \code{.actor}}
-
-\item{.actor}{\code{logical}, defaults \code{TRUE}. Whether to retain the \code{.actor} vertex attribute
-of converted bipartite graphs.}
+\item{x}{\code{igraph} (\code{\link[igraph:graph]{igraph::graph}}) or \code{\link[tidygraph:tbl_graph]{tidygraph::tbl_graph}} object.}
 }
 \value{
 A \code{\link[network:network]{network::network}} object.
 }
-\description{
-Accurately map foreign graph data to \code{network} objects.
-}
-\details{
-\code{as_network()} converts \code{x} to an intermediate \code{bridge_net} object that is capable of
-mapping metadata, edges, vertices, and attributes (edge, vertex, and graph-level)
-to a new, valid \code{network} object. \cr
-
-A note regarding bipartite graph conversion: \cr
-\itemize{
-\item \code{network} represents bipartite graphs differently than \code{igraph}, and thus \code{tidygraph}.
-\itemize{
-\item \code{network} tracks a graph's bipartiteness via the internal indices of each vertex.
-\itemize{
-\item Vertices designated as belonging to a graph's "actor" class come before
-non-"actor" vertices (events, locations, etc.), with "actors" cooresponding
-to the rows of a graph's affiliation matrix representation.
-}
-\item \code{igraph} tracks a graph's bipartiteness via a \code{logical} vertex attribute named
-\code{type}, with \code{FALSE} and \code{TRUE} representing a graph's first and second modes
-respectively.
-\item The consequence of these very different representations is that converting
-bipartite \code{igraph}s to \code{networks} in a way that results in truly \emph{identical}
-objects is only possible when an \code{igraph}'s vertices are already sorted by their
-`type`` attribute.
-}
-\item To handle this discrepency, intermediate \code{bridge_net} objects treat vertices whose
-\code{type} attributes are \code{TRUE} as "actors", meaning the \code{igraph}'s vertices are
-sorted during conversion to ensure that \code{TRUE} vertices are first (via
-\code{\link[igraph:permute]{igraph::permute()}}).
-\itemize{
-\item The intention of using \code{TRUE} vertices is to allow a user to think of an \code{igraph}'s
-vertices' \code{type} attribute as indicating whether a vertex is an "actor".
-}
-\item In order to standardize representations, returned bipartite \code{network} objects
-intentionally retain the intermediate \code{bridge_net}'s \code{.actor} vertex attribute (a
-\code{logical} \code{vector}).
-\itemize{
-\item \code{.actor} corresponds to an \code{igraph}'s \code{type} vertex attributes, i.e.
-\code{V(x_igraph)$type} and \code{x_network \%v\% ".actor"} will \emph{always} match.
-\item If desired, this can be disabled via \code{as_network()}'s \code{.actor} parameter, i.e.
-\code{as_network(igraph, .actor = FALSE)}.
-}
-}
-}
-\examples{
-library(snatools)
-library(igraph, warn.conflicts = FALSE, quietly = TRUE)
-color_pal <- colorRampPalette(c("red", "green", "blue"))
-
-# simple, 1-mode igraph to network conversion =========================================
-ig1 <- random.graph.game(10L, p.or.m = 0.15, directed = TRUE)
-
-V(ig1)$name <- seq_along(V(ig1))
-V(ig1)$color <- color_pal(vcount(ig1))
-E(ig1)$lab <- seq_along(E(ig1))
-ig1
-
-nw1 <- as_network(ig1)
-nw1
-
-# manually comparing original and converted networks ==================================
-nw1 \%>\% vrt_to_df()
-ig1 \%>\% vrt_to_df()
-
-identical(vrt_to_df(nw1), vrt_to_df(ig1))
-
-nw1 \%>\% edg_to_df()
-ig1 \%>\% edg_to_df()
-
-identical(edg_to_df(nw1), edg_to_df(ig1))
-
-# converting bipartite igraph to bipartite network ====================================
-ig2 <- bipartite.random.game(3, 5, "gnp", 0.4)
-V(ig2)$name <- seq_along(V(ig2))
-V(ig2)$color <- ifelse(V(ig2)$type, "red", "blue")
-E(ig2)$lab <- sample(seq_len(ecount(ig2)))
-ig2
-
-nw2 <- as_network(ig2)
-nw2
-
-# discarding `.actor` vertex attribute from bipartite graphs ==========================
-as_network(ig2, .actor = FALSE)
-
-# comparing objects ===================================================================
-nw2 \%>\% vrt_to_df()
-ig2 \%>\% vrt_to_df()
-
-identical(vrt_to_df(nw2), vrt_to_df(ig2))
-
-nw2 \%>\% edg_to_df()
-ig2 \%>\% edg_to_df()
-
-identical(edg_to_df(nw2), edg_to_df(ig2))
-
-}
 \seealso{
-\code{\link[=as_bridge_net]{as_bridge_net()}}, \code{\link[=as_igraph]{as_igraph()}}, \code{\link[intergraph:asNetwork]{intergraph::asNetwork()}}
+\code{\link[=as_igraph]{as_igraph()}}, \code{\link[intergraph:asNetwork]{intergraph::asNetwork()}}
 }
 \author{
 Brendan Knapp \email{brendan.g.knapp@gmail.com}

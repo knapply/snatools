@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Count the number of edges present in a graph object. — net_count_edges • snatools</title>
+<title>How Many Edges Does a Graph Have? — net_count_edges • snatools</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Count the number of edges present in a graph object. — net_count_edges" />
+<meta property="og:title" content="How Many Edges Does a Graph Have? — net_count_edges" />
 
-<meta property="og:description" content="Count the number of edges present in a graph object." />
+<meta property="og:description" content="How Many Edges Does a Graph Have?" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -114,21 +114,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Count the number of edges present in a graph object.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/network-metadata.R'><code>R/network-metadata.R</code></a></small>
+    <h1>How Many Edges Does a Graph Have?</h1>
+    <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/metadata.R'><code>R/metadata.R</code></a></small>
     <div class="hidden name"><code>net_count_edges.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Count the number of edges present in a graph object.</p>
+    <p>How Many Edges Does a Graph Have?</p>
     
     </div>
 
     <pre class="usage"><span class='fu'>net_count_edges</span>(<span class='no'>x</span>)
-
-<span class='co'># S3 method for bridge_net</span>
-<span class='fu'>net_count_edges</span>(<span class='no'>x</span>)
 
 <span class='co'># S3 method for igraph</span>
 <span class='fu'>net_count_edges</span>(<span class='no'>x</span>)
@@ -137,12 +134,6 @@
 <span class='fu'>net_count_edges</span>(<span class='no'>x</span>)
 
 <span class='co'># S3 method for tbl_graph</span>
-<span class='fu'>net_count_edges</span>(<span class='no'>x</span>)
-
-<span class='co'># S3 method for edgelist</span>
-<span class='fu'>net_count_edges</span>(<span class='no'>x</span>)
-
-<span class='co'># S3 method for adj_matrix</span>
 <span class='fu'>net_count_edges</span>(<span class='no'>x</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -150,43 +141,21 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>An <code>bridge_net</code>, <code>igraph</code>, <code>network</code>, <code>tbl_graph</code>, or <code>edgelist</code> object.</p></td>
+      <td><p>An <code>igraph</code>, <code>network</code>, or <code>tbl_graph</code>.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>integer</code> indicating the number of edges in <code>x</code>.</p>
+    <p><code>integer</code> indicating the total number of <code>x</code>'s edges.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/igraph/topics/gsize'>igraph::ecount()</a></code></p>
-<p><code><a href='http://www.rdocumentation.org/packages/network/topics/network.edgecount'>network::network.edgecount()</a></code></p></div>
+<p><code><a href='http://www.rdocumentation.org/packages/network/topics/network.edgecount'>network::network.edgecount()</a></code></p>
+<p><code><a href='http://www.rdocumentation.org/packages/tidygraph/topics/graph_measures'>tidygraph::graph_size()</a></code></p></div>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>snatools</span>)
-
-<span class='no'>ig</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>igraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/erdos.renyi.game'>random.graph.game</a></span>(<span class='fl'>10</span>, <span class='fl'>0.25</span>, <span class='kw'>directed</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
-<span class='no'>nw</span> <span class='kw'>&lt;-</span> <span class='no'>ig</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='as_network.html'>as_network</a></span>()
-
-<span class='no'>bridge_g</span> <span class='kw'>&lt;-</span> <span class='no'>ig</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='as_bridge_net.html'>as_bridge_net</a></span>()
-
-<span class='no'>tidy_g</span> <span class='kw'>&lt;-</span> <span class='no'>ig</span> <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>tidygraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/tidygraph/topics/tbl_graph'>as_tbl_graph</a></span>()
-
-<span class='no'>el</span> <span class='kw'>&lt;-</span> <span class='no'>ig</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='rep_as_edgelist.html'>rep_as_edgelist</a></span>(<span class='kw'>use_names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-
-<span class='fu'>net_count_edges</span>(<span class='no'>bridge_g</span>)</div><div class='output co'>#&gt; [1] 23</div><div class='input'>
-<span class='fu'>net_count_edges</span>(<span class='no'>ig</span>)</div><div class='output co'>#&gt; [1] 23</div><div class='input'>
-<span class='fu'>net_count_edges</span>(<span class='no'>nw</span>)</div><div class='output co'>#&gt; [1] 23</div><div class='input'>
-<span class='fu'>net_count_edges</span>(<span class='no'>tidy_g</span>)</div><div class='output co'>#&gt; [1] 23</div><div class='input'>
-<span class='fu'>net_count_edges</span>(<span class='no'>el</span>)</div><div class='output co'>#&gt; [1] 23</div><div class='input'>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -196,9 +165,7 @@
       <li><a href="#value">Value</a></li>
 
       <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+          </ul>
 
     <h2>Author</h2>
     
