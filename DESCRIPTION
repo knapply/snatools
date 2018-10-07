@@ -20,6 +20,7 @@ Suggests:
     covr,
     ergm,
     ggplot2,
+    igraphdata,
     knitr,
     networkDynamic,
     rmarkdown,
