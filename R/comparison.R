@@ -49,10 +49,10 @@ are_same_graphs <- function(x, y) {
   if (inherits(y, "igraph") && net_is_bipartite(y)) {
     y <- prep_bipartite_igraph(y)
   }
-  tests <-c(have_same_metadata = have_same_metadata(x, y),
-            have_same_edgelists = have_same_edgelists(x, y),
-            have_same_edge_attrs = have_same_edge_attrs(x, y),
-            have_same_vert_attrs = have_same_vert_attrs(x, y))
+  tests <- c(have_same_metadata = have_same_metadata(x, y),
+             have_same_edgelists = have_same_edgelists(x, y),
+             have_same_edge_attrs = have_same_edge_attrs(x, y),
+             have_same_vert_attrs = have_same_vert_attrs(x, y))
   if (all(tests)) {
     return(TRUE)
   }
@@ -60,10 +60,3 @@ are_same_graphs <- function(x, y) {
   glue_message("The following tests failed:\n{fails}")
   FALSE
 }
-
-# vrt_as_df(ig_bip)
-# vrt_as_df(as_network(ig_bip))
-# x <- ig_bip
-# y <- as_network(ig_bip)
-# have_same_vert_attrs(ig_bip, as_network(ig_bip))
-# are_same_graphs(x, y)

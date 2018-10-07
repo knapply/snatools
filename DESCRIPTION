@@ -21,6 +21,7 @@ Suggests:
     ergm,
     ggplot2,
     knitr,
+    networkDynamic,
     rmarkdown,
     testthat,
     tidygraph

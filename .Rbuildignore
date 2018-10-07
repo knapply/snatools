@@ -12,3 +12,4 @@
 ^\.github$
 ^tests/potential-trash$
 ^man-roxygen$
+^datasets$

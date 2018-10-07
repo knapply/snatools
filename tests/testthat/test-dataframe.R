@@ -357,3 +357,18 @@ test_that("handling 0 optional edge columns works as expected", {
     edg_no_opts_control_tibble
   )
 })
+
+test_that("nested attributes and networkDynamic objects work", {
+  iso_envir1 <- new.env()
+  data("windsurfers", package = "networkDynamic", envir = iso_envir1)
+  expect_s3_class(vrt_as_df(iso_envir1$windsurfers), "tbl_df")
+  
+  iso_envir2 <- new.env()
+  data(nd_test_nets, package = "networkDynamic", envir = iso_envir2)
+  for (i in seq_along(iso_envir2$nd_test_nets[1:10])) {
+    # print(class(iso_envir2$nd_test_nets[[i]]))
+    print(i)
+    expect_s3_class(vrt_as_df(iso_envir2$nd_test_nets[[2]]), "tbl_df")
+  }
+})
+

@@ -13,6 +13,9 @@ vrt_as_df <- function(x, vertex_df = TRUE) {
 #' @importFrom tibble as_tibble
 #' @export
 vrt_as_df.igraph <- function(x) {
+  if (net_count_vertices.igraph(x) < 1L) {
+    return(tibble())
+  }
   if (!"name" %in% vertex_attr_names(x)) {
     vertex_attr(x, "name") <- seq_len(vcount(x))
   }
@@ -34,16 +37,31 @@ vrt_as_df.igraph <- function(x) {
 
 #' @rdname vrt_as_df
 #' 
-#' @importFrom tibble as_tibble
+#' @importFrom tibble as_tibble tibble
 #' @export
 vrt_as_df.network <- function(x, vertex_df = TRUE) {
+  if (net_count_vertices.network(x) < 1L) {
+    return(tibble())
+  }
   attr_names <- unique(unlist(lapply(x[["val"]], names)))
   out <- lapply(attr_names, function(attr) {
-    unlist(lapply(lapply(x[["val"]], `[[`, attr), `%||%`, NA))
+    lapply(x[["val"]], `[[`, attr)
     })
   names(out) <- attr_names
   out[["na"]] <- NULL
-  out <- as.data.frame(out, stringsAsFactors = FALSE)
+  nest_test <- unlist(lapply(out, function(x) {
+    any(vapply(x, function(y) length(y) != 1L, logical(1L)))
+    }))
+  to_unlist <- names(nest_test[!nest_test])
+  for (i in to_unlist) {
+    out[[i]] <- unlist(lapply(out[[i]], `%||%`, NA))
+  }
+  # TODO consider going with something like this if {purrr} ever imported
+  # vrt_df(x) %>%
+  #   as_tibble() %>% 
+  #   mutate_if(~ all(map_lgl(., ~ length(.x) == 1)),
+  #             ~ unlist(.))
+  out <- as_tibble(out, stringsAsFactors = FALSE)
   out[[".vrt_name"]] <- out[["vertex.names"]]
   out[["vertex.names"]] <- NULL
   
@@ -53,8 +71,7 @@ vrt_as_df.network <- function(x, vertex_df = TRUE) {
                          rep(FALSE, times = x[["gal"]][["n"]] - bipartite))
   }
   out <- standardize_vrt_cols(out, bipartite = is.numeric(bipartite))
-  
-  as_tibble(out)
+  out
 }
 
 #* ====
@@ -96,6 +113,9 @@ edg_as_df <- function(x) {
 #' @importFrom tibble as_tibble
 #' @export
 edg_as_df.igraph <- function(x) {
+  if (net_count_edges.igraph(x) < 1L) {
+    return(tibble())
+  }
   el <- get_el.igraph(x)
   colnames(el) <- c(".ego", ".alter")
   out <- as_data_frame(x, what = "edges")
@@ -109,9 +129,12 @@ edg_as_df.igraph <- function(x) {
 
 #' @rdname edg_as_df
 #' 
-#' @importFrom tibble as_tibble
+#' @importFrom tibble as_tibble tibble
 #' @export
 edg_as_df.network <- function(x) {
+  if (net_count_edges.network(x) < 1L) {
+    return(tibble())
+  }
   el <- get_el.network(x)
   colnames(el) <- c(".ego", ".alter")
   
@@ -144,5 +167,3 @@ standardize_edg_cols <- function(x) {
   }
   `rownames<-`(x, NULL)
 }
-
-
