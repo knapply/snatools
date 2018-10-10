@@ -2,15 +2,12 @@
 % Please edit documentation in R/edge-attributes.R
 \name{edg_attr_names}
 \alias{edg_attr_names}
-\alias{edg_attr_names.bridge_net}
 \alias{edg_attr_names.igraph}
 \alias{edg_attr_names.network}
 \alias{edg_attr_names.tbl_graph}
-\title{Extract a graph objects's edge attribute names.}
+\title{Get Edge Attribute Names}
 \usage{
 edg_attr_names(x)
-
-\method{edg_attr_names}{bridge_net}(x)
 
 \method{edg_attr_names}{igraph}(x)
 
@@ -19,41 +16,16 @@ edg_attr_names(x)
 \method{edg_attr_names}{tbl_graph}(x)
 }
 \arguments{
-\item{x}{A \code{bridge_net}, \code{igraph}, \code{network}, or \code{tbl_graph}.}
+\item{x}{An \code{igraph}, \code{network}, or \code{tbl_graph}.}
 }
 \value{
-\code{character} \code{vector} listing the names of \code{x}'s edge attributes.
+\code{character} \code{vector} of \code{x}'s vertex attribute names or \code{NULL} if
+no edge attributes exist.
 }
 \description{
-Extract a graph objects's edge attribute names.
-}
-\examples{
-library(snatools)
-
-data(sampson_monastery)
-
-ig <- sampson_monastery \%>\% 
-  as_igraph()
-  
-nw <- sampson_monastery \%>\% 
-  as_network()
-  
-tidy_g <- ig \%>\% 
-  tidygraph::as_tbl_graph()
-
-edg_attr_names(sampson_monastery)
-
-edg_attr_names(ig)
-
-edg_attr_names(nw)
-
-edg_attr_names(tidy_g)
-
+Get Edge Attribute Names
 }
 \seealso{
-\code{\link[=edg_get_attr]{edg_get_attr()}}, \code{\link[=edg_to_df]{edg_to_df()}}, \code{\link[igraph:edge_attr_names]{igraph::edge_attr_names()}},
-\code{\link[network:list.edge.attributes]{network::list.edge.attributes()}}
-
 \code{\link[igraph:edge_attr_names]{igraph::edge_attr_names()}}
 
 \code{\link[network:list.edge.attributes]{network::list.edge.attributes()}}

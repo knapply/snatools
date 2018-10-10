@@ -2,63 +2,30 @@
 % Please edit documentation in R/vertex-attributes.R
 \name{vrt_attr_names}
 \alias{vrt_attr_names}
-\alias{vrt_attr_names.bridge_net}
 \alias{vrt_attr_names.igraph}
 \alias{vrt_attr_names.network}
 \alias{vrt_attr_names.tbl_graph}
-\alias{vrt_attr_names.adj_matrix}
-\title{Extract a graph objects's vertex attribute names.}
+\title{Get Vertex Attribute Names}
 \usage{
 vrt_attr_names(x)
-
-\method{vrt_attr_names}{bridge_net}(x)
 
 \method{vrt_attr_names}{igraph}(x)
 
 \method{vrt_attr_names}{network}(x)
 
 \method{vrt_attr_names}{tbl_graph}(x)
-
-\method{vrt_attr_names}{adj_matrix}(x)
 }
 \arguments{
-\item{x}{A \code{bridge_net}, \code{igraph}, \code{network}, or \code{tbl_graph}.}
+\item{x}{An \code{igraph}, \code{network}, or \code{tbl_graph}.}
 }
 \value{
-\code{character} \code{vector} listing the names of \code{x}'s vertex attributes.
+\code{character} \code{vector} of \code{x}'s vertex attribute names or  \code{NULL} if
+no vertex attributes exist.
 }
 \description{
-Extract a graph objects's vertex attribute names.
-}
-\examples{
-library(snatools)
-
-data(sampson_monastery)
-
-ig <- sampson_monastery \%>\% 
-  as_igraph()
-  
-nw <- sampson_monastery \%>\% 
-  as_network()
-
-tidy_g <- ig \%>\% 
-  tidygraph::as_tbl_graph()
-
-vrt_attr_names(sampson_monastery)
-
-vrt_attr_names(ig)
-
-vrt_attr_names(nw)
-
-vrt_attr_names(tidy_g)
-
-vrt_attr_names(tidy_g)
-
+Get Vertex Attribute Names
 }
 \seealso{
-\code{\link[=vrt_get_attr]{vrt_get_attr()}}, \code{\link[=vrt_to_df]{vrt_to_df()}}, \code{\link[igraph:vertex_attr_names]{igraph::vertex_attr_names()}},
-\code{\link[network:list.vertex.attributes]{network::list.vertex.attributes()}}
-
 \code{\link[igraph:vertex_attr_names]{igraph::vertex_attr_names()}}
 
 \code{\link[network:list.vertex.attributes]{network::list.vertex.attributes()}}

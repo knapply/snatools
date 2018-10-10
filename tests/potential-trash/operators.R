@@ -1,76 +1,33 @@
-#' Strict object comparison.
+#' Confirm `bridge_net`s, `igraph`s, and `network`s are `identical()`.
+#'
+#' @param lhs A `bridge_net`, `igraph`, `network`, or `tbl_graph`.
+#' @param rhs A `bridge_net`, `igraph`, `network`, or `tbl_graph`.
 #' 
-#' * This infix operator
-#'     + provides stricter comparisons than `==`.
-#'     + prevents silent type conversions.
-#'     + offers a method to easily compare `igraph` objects.
-#' 
-#' @param lhs left-hand side
-#' @param rhs right-hand side
-#' 
-#' @return `logical` Whether `lhs` and `rhs` are identical.
-#' 
-#' @name %==%
-#' 
-#' @rdname strict-compare
-#' 
-#' @seealso [`base::identical()`]
-#' 
-#' @author Brendan Knapp \email{brendan.g.knapp@@gmail.com}
-#' 
-#' @examples 
-#' 
-#' TRUE == 1
-#' TRUE %==% 1
-#' 
-#' NA == NA_character_
-#' NA %==% NA_character_
-#' 
-#' NULL == NA_integer_
-#' NULL %==% NA_integer_
-#' 
-#' NA == "NA"
-#' NA %==% "NA"
-#' 
-#' igraph::graph("Zachary") %==% igraph::graph("Zachary")
+#' @return `logical` indicating whether `lhs` and `rhs` are `identical()`, excluding
+#' non-structural network attributes.
 #' 
 #' @export
 `%==%` <- function(lhs, rhs) {
-  UseMethod("%==%")
-}
-
-#' @rdname %==%
-#' 
-#' @export
-`%==%.default` <- function(lhs, rhs) {
-  identical(lhs, rhs)
-}
-
-#' @rdname %==%
-#' 
-#' @export
-`%==%.igraph` <- function(lhs, rhs) {
+  if (!class(lhs)[[1]] %in% c("bridge_net", "igraph", "network", "tbl_graph")) {
+    # return(lhs_name)
+    terminate(patch("`%s` is not a `bridge_net`, `igraph`, `network`, or `tbl_graph`.",
+                    deparse(substitute(lhs))))
+  }
+  if (!class(rhs)[[1]] %in% c("bridge_net", "igraph", "network", "tbl_graph")) {
+    terminate(patch("`%s` is not a `bridge_net`, `igraph`, `network`, or `tbl_graph`.",
+                    deparse(substitute(rhs))))
+  }
   lhs <- as_bridge_net(lhs)
-  lhs[["graph_attributes"]] <- NULL
+  lhs[["net_attrs"]] <- NULL
+  
   rhs <- as_bridge_net(rhs)
-  rhs[["graph_attributes"]] <- NULL
+  rhs[["net_attrs"]] <- NULL
+  
+  # if (identical(lhs[["metadata"]], rhs[["metadata"]]) &&
+  #     identical(lhs[["vertices"]], rhs[["vertices"]]) &&
+  #     identical(table(lhs[["edges"]]), table(lhs[["edges"]]))) {
+  #   return(TRUE)
+  # }
+  # FALSE
   identical(lhs, rhs)
-}
-
-#' @rdname %==%
-#' 
-#' @export
-`%==%.network` <- function(lhs, rhs) {
-  lhs <- as_bridge_net(lhs)
-  lhs[["graph_attributes"]] <- NULL
-  rhs <- as_bridge_net(rhs)
-  rhs[["graph_attributes"]] <- NULL
-  identical(lhs, rhs)
-}
-
-#' @rdname %==%
-#' 
-#' @export
-`%==%.tbl_graph` <- function(lhs, rhs) {
-  identical(as_bridge_net(lhs), as_bridge_net(rhs))
 }

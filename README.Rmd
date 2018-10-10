@@ -70,113 +70,115 @@ library(snatools)
 library(snatools)
 ```
 
-## Features
 
-```{r}
-data("sampson_monastery")
-```
 
-### `bridge_net`
+<!-- ## Features -->
 
-The `bridge_net` object provides an intermediate graph structure that can effectively map data to both `igraph` and `network` objects.
+<!-- ```{r} -->
+<!-- data("sampson_monastery") -->
+<!-- ``` -->
 
-```{r}
-sampson_monastery
-```
+<!-- ### `bridge_net` -->
 
-### Conversion
+<!-- The `bridge_net` object provides an intermediate graph structure that can effectively map data to both `igraph` and `network` objects. -->
 
-Through `bridge_net` objects, `igraph` and `network` objects can play together easier than ever.
+<!-- ```{r} -->
+<!-- sampson_monastery -->
+<!-- ``` -->
 
-```{r}
-ig <- as_igraph(sampson_monastery)
-```
+<!-- ### Conversion -->
 
-```{r, echo=FALSE}
-ig
-```
+<!-- Through `bridge_net` objects, `igraph` and `network` objects can play together easier than ever. -->
 
-```{r}
-nw <- as_network(sampson_monastery)
-```
+<!-- ```{r} -->
+<!-- ig <- as_igraph(sampson_monastery) -->
+<!-- ``` -->
 
-```{r, echo=FALSE}
-nw
-```
+<!-- ```{r, echo=FALSE} -->
+<!-- ig -->
+<!-- ``` -->
 
-```{r}
-as_network(ig)
-```
+<!-- ```{r} -->
+<!-- nw <- as_network(sampson_monastery) -->
+<!-- ``` -->
 
-```{r}
-as_igraph(nw)
-```
+<!-- ```{r, echo=FALSE} -->
+<!-- nw -->
+<!-- ``` -->
 
-#### `%==%`
+<!-- ```{r} -->
+<!-- as_network(ig) -->
+<!-- ``` -->
 
-Since `bridge_net`s are intermediate structures, comparing them is easy. `%==%` streamlines the process to make successful conversion confirmation as simple as possible.
+<!-- ```{r} -->
+<!-- as_igraph(nw) -->
+<!-- ``` -->
 
-```{r}
-all(ig %==% nw,
-    ig %==% sampson_monastery,
-    nw %==% sampson_monastery)
-```
+<!-- #### `%==%` -->
 
-The only data that are not compared by `%==%` are non-structural attributes as `igraph` and `network` do not handle them in compatible ways.
+<!-- Since `bridge_net`s are intermediate structures, comparing them is easy. `%==%` streamlines the process to make successful conversion confirmation as simple as possible. -->
 
-```{r}
-ig %>% igraph::graph_attr_names()
-nw %>% network::list.network.attributes()
-```
+<!-- ```{r} -->
+<!-- all(ig %==% nw, -->
+<!--     ig %==% sampson_monastery, -->
+<!--     nw %==% sampson_monastery) -->
+<!-- ``` -->
 
-### Standardized Data Extraction
+<!-- The only data that are not compared by `%==%` are non-structural attributes as `igraph` and `network` do not handle them in compatible ways. -->
 
-```{r}
-ig %>% vrt_to_df()
-```
+<!-- ```{r} -->
+<!-- ig %>% igraph::graph_attr_names() -->
+<!-- nw %>% network::list.network.attributes() -->
+<!-- ``` -->
 
-```{r}
-nw %>% edg_to_df()
-```
+<!-- ### Standardized Data Extraction -->
 
-### Standardized Representations
+<!-- ```{r} -->
+<!-- ig %>% vrt_to_df() -->
+<!-- ``` -->
 
-```{r}
-ig %>% rep_as_edgelist()
-```
+<!-- ```{r} -->
+<!-- nw %>% edg_to_df() -->
+<!-- ``` -->
 
-### Additional Tools
+<!-- ### Standardized Representations -->
 
-```{r}
-nw %>% rep_as_mixing_matrix(vrt_attr = "faction")
-```
+<!-- ```{r} -->
+<!-- ig %>% rep_as_edgelist() -->
+<!-- ``` -->
 
-### Easy Integeration with Modern Workflows
+<!-- ### Additional Tools -->
 
-```{r, message=FALSE}
-library(tidygraph, warn.conflicts = FALSE)
-library(ggraph, quietly = TRUE)
+<!-- ```{r} -->
+<!-- nw %>% rep_as_mixing_matrix(vrt_attr = "faction") -->
+<!-- ``` -->
 
-nw %>% 
-  as_igraph() %>% 
-  as_tbl_graph() %E>%
-  select(time, relation) %>% 
-  filter(time == 3) %>%
-  mutate(relation = factor(relation, 
-                           c("liking", "praise", "esteem", "positive influence",
-                             "disliking", "blame", "disesteem", "negative influence"))
-        ) %>% 
-  ggraph() +
-  geom_edge_fan(aes(colour = relation), width = 0.5, show.legend = FALSE) +
-  geom_node_point(aes(colour = faction)) +
-  guides(edge_colour = guide_legend(title = NULL),
-         colour = guide_legend(title = NULL)) +
-  facet_edges(~ relation, ncol = 4) +
-  theme_void() +
-  theme(strip.text = element_text(face = "bold", vjust = 1),
-        panel.border = element_rect(fill = NA, color = "lightgray"),
-        legend.position = "bottom")
-```
+<!-- ### Easy Integeration with Modern Workflows -->
+
+<!-- ```{r, message=FALSE} -->
+<!-- library(tidygraph, warn.conflicts = FALSE) -->
+<!-- library(ggraph, quietly = TRUE) -->
+
+<!-- nw %>%  -->
+<!--   as_igraph() %>%  -->
+<!--   as_tbl_graph() %E>% -->
+<!--   select(time, relation) %>%  -->
+<!--   filter(time == 3) %>% -->
+<!--   mutate(relation = factor(relation,  -->
+<!--                            c("liking", "praise", "esteem", "positive influence", -->
+<!--                              "disliking", "blame", "disesteem", "negative influence")) -->
+<!--         ) %>%  -->
+<!--   ggraph() + -->
+<!--   geom_edge_fan(aes(colour = relation), width = 0.5, show.legend = FALSE) + -->
+<!--   geom_node_point(aes(colour = faction)) + -->
+<!--   guides(edge_colour = guide_legend(title = NULL), -->
+<!--          colour = guide_legend(title = NULL)) + -->
+<!--   facet_edges(~ relation, ncol = 4) + -->
+<!--   theme_void() + -->
+<!--   theme(strip.text = element_text(face = "bold", vjust = 1), -->
+<!--         panel.border = element_rect(fill = NA, color = "lightgray"), -->
+<!--         legend.position = "bottom") -->
+<!-- ``` -->
 
 <!-- # Development Tests -->
 
@@ -185,7 +187,7 @@ nw %>%
 <!-- ``` -->
 
 
-```{r}
-covr::package_coverage()
-```
+<!-- ```{r} -->
+<!-- covr::package_coverage() -->
+<!-- ``` -->
 

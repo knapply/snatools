@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Extract a specific vertex attribute. — vrt_get_attr • snatools</title>
+<title>Get a Vertex Attribute — vrt_get_attr • snatools</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Extract a specific vertex attribute. — vrt_get_attr" />
+<meta property="og:title" content="Get a Vertex Attribute — vrt_get_attr" />
 
-<meta property="og:description" content="Extract a specific vertex attribute." />
+<meta property="og:description" content="Get a Vertex Attribute" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -114,22 +114,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Extract a specific vertex attribute.</h1>
+    <h1>Get a Vertex Attribute</h1>
     <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/vertex-attributes.R'><code>R/vertex-attributes.R</code></a></small>
     <div class="hidden name"><code>vrt_get_attr.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Extract a specific vertex attribute.</p>
+    <p>Get a Vertex Attribute</p>
     
     </div>
 
     <pre class="usage"><span class='fu'>vrt_get_attr</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>)
 
-<span class='co'># S3 method for bridge_net</span>
-<span class='fu'>vrt_get_attr</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>)
-
 <span class='co'># S3 method for igraph</span>
 <span class='fu'>vrt_get_attr</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>)
 
@@ -137,28 +134,14 @@
 <span class='fu'>vrt_get_attr</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>)
 
 <span class='co'># S3 method for tbl_graph</span>
-<span class='fu'>vrt_get_attr</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>)
-
-<span class='fu'>vrt_get_names</span>(<span class='no'>x</span>)
-
-<span class='co'># S3 method for bridge_net</span>
-<span class='fu'>vrt_get_names</span>(<span class='no'>x</span>)
-
-<span class='co'># S3 method for igraph</span>
-<span class='fu'>vrt_get_names</span>(<span class='no'>x</span>)
-
-<span class='co'># S3 method for network</span>
-<span class='fu'>vrt_get_names</span>(<span class='no'>x</span>)
-
-<span class='co'># S3 method for tbl_graph</span>
-<span class='fu'>vrt_get_names</span>(<span class='no'>x</span>)</pre>
+<span class='fu'>vrt_get_attr</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A <code>bridge_net</code>, <code>igraph</code>, <code>network</code>, or <code>tbl_graph</code>.</p></td>
+      <td><p>An <code>igraph</code>, <code>network</code>, or <code>tbl_graph</code>.</p></td>
     </tr>
     <tr>
       <th>vrt_attr</th>
@@ -168,85 +151,9 @@
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>vector</code> of vertex attribute values. May be of any type supported by <code>x</code>'s
-object class.</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <ul>
-<li><p><code>vrt_get_attr()</code> allows for the extraction of any <code>vrt_attr</code> in <code>x</code>.</p><ul>
-<li><p>If <code>vrt_attr</code> is not found, <code>vrt_get_attr()</code> considers it to be invalid and throws
-an error.</p><ul>
-<li><p>The error message will include details on which vertex attributes are valid.</p></li>
-</ul></li>
-</ul></li>
-<li><p><code>vrt_get_names()</code> is a convenience function that extracts the vertex attribute
-corresponding to each class' vertex name attribute convention.</p><ul>
-<li><p>Since <code>igraph</code>, <code>network</code>, and <code>tbl_graph</code> objects do not require that vertices
-have names, <code>vrt_get_names()</code> returns an <code>integer</code> <code>vector</code> corresponding to
-vertex indices if the appropriate attribute is not found.</p></li>
-<li><p>For reference, each object class uses the following conventions for vertex names:</p><ul>
-<li><p><code>igraph</code>: <code>name</code></p></li>
-<li><p><code>network</code>: <code>vertex.names</code></p></li>
-<li><p><code>bridge_net</code>: <code>.name</code></p></li>
-<li><p><code>tbl_graph</code>: <code>name</code></p></li>
-</ul></li>
-</ul></li>
-</ul>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='vrt_attr_names.html'>vrt_attr_names()</a></code>, <code><a href='vrt_to_df.html'>vrt_to_df()</a></code>, <code><a href='http://www.rdocumentation.org/packages/igraph/topics/vertex_attr'>igraph::vertex_attr()</a></code>,
-<code><a href='http://www.rdocumentation.org/packages/network/topics/attribute.methods'>network::get.vertex.attribute()</a></code></p></div>
+    <p><code>vector</code> containing the vertex attributes specified by <code>vrt_attr</code>.</p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>snatools</span>)
-
-<span class='fu'>data</span>(<span class='no'>sampson_monastery</span>)
-
-<span class='no'>ig</span> <span class='kw'>&lt;-</span> <span class='no'>sampson_monastery</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='as_igraph.html'>as_igraph</a></span>()
-
-<span class='no'>nw</span> <span class='kw'>&lt;-</span> <span class='no'>sampson_monastery</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='as_network.html'>as_network</a></span>()
-
-<span class='no'>tidy_g</span> <span class='kw'>&lt;-</span> <span class='no'>ig</span> <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>tidygraph</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/tidygraph/topics/tbl_graph'>as_tbl_graph</a></span>()
-
-<span class='fu'>vrt_get_attr</span>(<span class='no'>sampson_monastery</span>, <span class='st'>"faction"</span>)</div><div class='output co'>#&gt;  [1] "Waverers"    "Loyal"       "Loyal"       "Loyal"       "Loyal"      
-#&gt;  [6] "Loyal"       "Waverers"    "Young Turks" "Young Turks" "Young Turks"
-#&gt; [11] "Young Turks" "Young Turks" "Young Turks" "Young Turks" "Waverers"   
-#&gt; [16] "Outcasts"    "Outcasts"    "Outcasts"   </div><div class='input'>
-<span class='fu'>vrt_get_attr</span>(<span class='no'>ig</span>, <span class='st'>"faction"</span>)</div><div class='output co'>#&gt;  [1] "Waverers"    "Loyal"       "Loyal"       "Loyal"       "Loyal"      
-#&gt;  [6] "Loyal"       "Waverers"    "Young Turks" "Young Turks" "Young Turks"
-#&gt; [11] "Young Turks" "Young Turks" "Young Turks" "Young Turks" "Waverers"   
-#&gt; [16] "Outcasts"    "Outcasts"    "Outcasts"   </div><div class='input'>
-<span class='fu'>vrt_get_attr</span>(<span class='no'>nw</span>, <span class='st'>"faction"</span>)</div><div class='output co'>#&gt;  [1] "Waverers"    "Loyal"       "Loyal"       "Loyal"       "Loyal"      
-#&gt;  [6] "Loyal"       "Waverers"    "Young Turks" "Young Turks" "Young Turks"
-#&gt; [11] "Young Turks" "Young Turks" "Young Turks" "Young Turks" "Waverers"   
-#&gt; [16] "Outcasts"    "Outcasts"    "Outcasts"   </div><div class='input'>
-<span class='fu'>vrt_get_attr</span>(<span class='no'>tidy_g</span>, <span class='st'>"faction"</span>)</div><div class='output co'>#&gt;  [1] "Waverers"    "Loyal"       "Loyal"       "Loyal"       "Loyal"      
-#&gt;  [6] "Loyal"       "Waverers"    "Young Turks" "Young Turks" "Young Turks"
-#&gt; [11] "Young Turks" "Young Turks" "Young Turks" "Young Turks" "Waverers"   
-#&gt; [16] "Outcasts"    "Outcasts"    "Outcasts"   </div><div class='input'>
-<span class='fu'>vrt_get_names</span>(<span class='no'>sampson_monastery</span>)</div><div class='output co'>#&gt;  [1] "Romauld"     "Bonaventure" "Ambrose"     "Berthold"    "Peter"      
-#&gt;  [6] "Louis"       "Victor"      "Winfrid"     "John Bosco"  "Gregory"    
-#&gt; [11] "Hugh"        "Boniface"    "Mark"        "Albert"      "Amand"      
-#&gt; [16] "Basil"       "Elias"       "Simplicius" </div><div class='input'>
-<span class='fu'>vrt_get_names</span>(<span class='no'>ig</span>)</div><div class='output co'>#&gt;  [1] "Romauld"     "Bonaventure" "Ambrose"     "Berthold"    "Peter"      
-#&gt;  [6] "Louis"       "Victor"      "Winfrid"     "John Bosco"  "Gregory"    
-#&gt; [11] "Hugh"        "Boniface"    "Mark"        "Albert"      "Amand"      
-#&gt; [16] "Basil"       "Elias"       "Simplicius" </div><div class='input'>
-<span class='fu'>vrt_get_names</span>(<span class='no'>nw</span>)</div><div class='output co'>#&gt;  [1] "Romauld"     "Bonaventure" "Ambrose"     "Berthold"    "Peter"      
-#&gt;  [6] "Louis"       "Victor"      "Winfrid"     "John Bosco"  "Gregory"    
-#&gt; [11] "Hugh"        "Boniface"    "Mark"        "Albert"      "Amand"      
-#&gt; [16] "Basil"       "Elias"       "Simplicius" </div><div class='input'>
-<span class='fu'>vrt_get_names</span>(<span class='no'>tidy_g</span>)</div><div class='output co'>#&gt;  [1] "Romauld"     "Bonaventure" "Ambrose"     "Berthold"    "Peter"      
-#&gt;  [6] "Louis"       "Victor"      "Winfrid"     "John Bosco"  "Gregory"    
-#&gt; [11] "Hugh"        "Boniface"    "Mark"        "Albert"      "Amand"      
-#&gt; [16] "Basil"       "Elias"       "Simplicius" </div><div class='input'>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -254,13 +161,7 @@ vertex indices if the appropriate attribute is not found.</p></li>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+          </ul>
 
     <h2>Author</h2>
     
