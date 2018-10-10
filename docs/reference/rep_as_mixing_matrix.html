@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Construct a graph object's edgelist representation. — rep_as_edgelist • snatools</title>
+<title>Construct a graph object's mixing matrix. — rep_as_mixing_matrix • snatools</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,10 @@
 
 
 
-<meta property="og:title" content="Construct a graph object's edgelist representation. — rep_as_edgelist" />
+<meta property="og:title" content="Construct a graph object's mixing matrix. — rep_as_mixing_matrix" />
 
-<meta property="og:description" content="Construct a graph object's edgelist representation." />
+<meta property="og:description" content="Using a categorical vertex attribute, construct a matrix depicting network mixing
+patterns." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -114,18 +115,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Construct a graph object's edgelist representation.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/edgelist.R'><code>R/edgelist.R</code></a></small>
-    <div class="hidden name"><code>rep_as_edgelist.Rd</code></div>
+    <h1>Construct a graph object's mixing matrix.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/mix_matrix.R'><code>R/mix_matrix.R</code></a></small>
+    <div class="hidden name"><code>rep_as_mixing_matrix.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Construct a graph object's edgelist representation.</p>
+    <p>Using a categorical vertex attribute, construct a matrix depicting network mixing
+patterns.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>rep_as_edgelist</span>(<span class='no'>x</span>, <span class='kw'>use_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>rep_as_mixing_matrix</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -135,25 +137,10 @@
       <td><p>An <code>igraph</code>, <code>network</code>, or <code>tbl_graph</code>.</p></td>
     </tr>
     <tr>
-      <th>use_names</th>
-      <td><p><code>logical</code> (default: <code>TRUE</code>) indicating whether to use vertex names as
-the values filling the returned object. If <code>FALSE</code>, or a relevant attribute does not
-exist, the returned object uses vertex indices.</p></td>
-    </tr>
-    <tr>
       <th>vrt_attr</th>
-      <td><p><code>character</code> (default: <code>NULL</code>) indicating which vertex attribute to use
-as fill values in the returned object. If provided, <code>vrt_attr</code> overrides <code>use_names</code>.</p></td>
+      <td><p><code>character</code> specifying the target vertex attribute.</p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p><code>matrix</code> with <code><a href='net_count_edges.html'>net_count_edges(x)</a></code> rows and 2 columns (<code>.ego</code> and <code>.alter</code>).</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/igraph/topics/as_edgelist'>igraph::as_edgelist()</a></code>, <code><a href='http://www.rdocumentation.org/packages/network/topics/as.matrix.network'>network::as.matrix.network.edgelist()</a></code></p></div>
     
 
   </div>
@@ -161,11 +148,7 @@ as fill values in the returned object. If provided, <code>vrt_attr</code> overri
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-          </ul>
+                </ul>
 
     <h2>Author</h2>
     

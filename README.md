@@ -52,14 +52,9 @@ conflicts.
 ## Installation
 
 ``` r
-# Install {devtools} if you haven't already.
 # install.packages("devtools")
-requireNamespace(devtools)
-
-# Install {snatools} from GitHub.
 devtools::install_github("knapply/snatools")
 
-# Load {snatools}.
 library(snatools)
 ```
 

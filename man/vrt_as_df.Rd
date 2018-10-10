@@ -4,7 +4,7 @@
 \alias{vrt_as_df}
 \alias{vrt_as_df.igraph}
 \alias{vrt_as_df.network}
-\title{Extract vertex attributes as a data frame.}
+\title{Extract all vertex attributes as a data frame.}
 \usage{
 vrt_as_df(x)
 
@@ -16,5 +16,8 @@ vrt_as_df(x)
 \item{x}{An \code{igraph}, \code{network}, or \code{tbl_graph}.}
 }
 \description{
-Extract vertex attributes as a data frame.
+Extract all vertex attributes as a data frame.
+}
+\author{
+Brendan Knapp \email{brendan.g.knapp@gmail.com}
 }
