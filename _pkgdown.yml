@@ -61,18 +61,19 @@ reference:
     desc: Construct various network representations.
     contents:
     - rep_as_edgelist
-#    - rep_as_adj_matrix
-#    - rep_as_mixing_matrix
+    - rep_as_adj_matrix
+    - rep_as_adj_list
+    - rep_as_mixing_matrix
     
 #  - title: Global Metrics
 #    desc: Routines calculating graph-level indices.
 #    contents:
 #    - calc_net_density
   
-#  - title: Homophily
-#    desc: Routines calculating indices related to homophily and mixing patterns.
-#    contents: 
-#    - ei_index
+  - title: Homophily
+    desc: Routines calculating indices related to homophily and mixing patterns.
+    contents: 
+    - ei_index
 
 navbar:
   right:

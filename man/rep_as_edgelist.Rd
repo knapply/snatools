@@ -14,7 +14,7 @@ the values filling the returned object. If \code{FALSE}, or a relevant attribute
 exist, the returned object uses vertex indices.}
 
 \item{vrt_attr}{\code{character} (default: \code{NULL}) indicating which vertex attribute to use
-in the returned object. If provided, \code{vrt_attr} overrides \code{use_names}.}
+as fill values in the returned object. If provided, \code{vrt_attr} overrides \code{use_names}.}
 }
 \value{
 \code{matrix} with \code{net_count_edges(x)} rows and 2 columns (\code{.ego} and \code{.alter}).

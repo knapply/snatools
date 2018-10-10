@@ -1,8 +1,10 @@
 #* ====
 
-#' Extract vertex attributes as a data frame.
+#' Extract all vertex attributes as a data frame.
 #' 
 #' @template graph-param
+#' 
+#' @template bknapp-author
 #' 
 #' @export
 vrt_as_df <- function(x) {
