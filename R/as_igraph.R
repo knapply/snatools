@@ -68,18 +68,3 @@ as_igraph.tbl_graph <- function(x) {
   x
 }
 
-
-#' @rdname as_igraph
-#' 
-#' @importFrom igraph as.igraph
-#' @export
-as.igraph.network <- function(x) {
-  as_igraph.network(x)
-}
-
-#' @rdname as_igraph
-#' 
-#' @export
-igraph::as.igraph
-
-

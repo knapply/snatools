@@ -9,7 +9,7 @@
 #' @template bknapp-author
 #' 
 #' @export
-as_network <- function(x, ...) {
+as_network <- function(x) {
   UseMethod("as_network")
 }
 
@@ -18,7 +18,7 @@ as_network <- function(x, ...) {
 #' @importFrom network add.edges.network network.initialize set.edge.attribute 
 #'             set.network.attribute set.vertex.attribute
 #' @export
-as_network.bridge_net <- function(x, .actor = TRUE, ...) {
+as_network.bridge_net <- function(x) {
   metadata <- x[["metadata"]]
   if (metadata[["is_bipartite"]]) {
     bipartite_arg <- metadata[["n_actors"]]
@@ -36,12 +36,13 @@ as_network.bridge_net <- function(x, .actor = TRUE, ...) {
                            head = x[["edges"]][[".alter"]])
   x[["edges"]][[".ego"]] <- NULL
   x[["edges"]][[".alter"]] <- NULL
-  if (length(x[["net_attrs"]])) {
-    for (g in names(x[["net_attrs"]])) {
-      set.network.attribute(out, attrname = g,
-                            value = x[["net_attrs"]][[g]])
-    }
-  }
+  # TODO decide if non-structural graph-attributes even be considered?
+  # if (length(x[["net_attrs"]])) {
+  #   for (g in names(x[["net_attrs"]])) {
+  #     set.network.attribute(out, attrname = g,
+  #                           value = x[["net_attrs"]][[g]])
+  #   }
+  # }
   if (ncol(x[["edges"]])) {
     for (e in colnames(x[["edges"]])) {
       set.edge.attribute(out, attrname = e, value = x[["edges"]][[e]])
@@ -61,14 +62,14 @@ as_network.bridge_net <- function(x, .actor = TRUE, ...) {
 #' 
 #' @importFrom igraph is_bipartite
 #' @export
-as_network.igraph <- function(x, .actor = TRUE, ...) {
-  as_network(as_bridge_net(x, ...), .actor = .actor)
+as_network.igraph <- function(x) {
+  as_network.bridge_net(as_bridge_net(x))
 }
 
 #' @rdname as_network
 #' 
 #' @export
-as_network.network <- function(x, ...) {
+as_network.network <- function(x) {
   x
 }
 
@@ -76,20 +77,6 @@ as_network.network <- function(x, ...) {
 #' 
 #' @export
 as_network.tbl_graph <- function(x) {
-  as_network.bridge_net(as_bridge_net.igraph(as_igraph.tbl_graph(x)))
+  as_network.bridge_net(as_bridge_net(as_igraph.tbl_graph(x)))
 }
-
-#' @rdname as_network
-#' 
-#' @importFrom network as.network
-#' @export
-as.network.igraph <- function(x, ...) {
-  as_network.igraph(x, ...)
-}
-
-#' @rdname as_network
-#' 
-#' @export
-network::as.network
-
 

@@ -6,11 +6,14 @@
 \alias{vrt_as_df.network}
 \title{Extract vertex attributes as a data frame.}
 \usage{
-vrt_as_df(x, vertex_df = TRUE)
+vrt_as_df(x)
 
 \method{vrt_as_df}{igraph}(x)
 
-\method{vrt_as_df}{network}(x, vertex_df = TRUE)
+\method{vrt_as_df}{network}(x)
+}
+\arguments{
+\item{x}{An \code{igraph}, \code{network}, or \code{tbl_graph}.}
 }
 \description{
 Extract vertex attributes as a data frame.

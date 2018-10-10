@@ -5,7 +5,7 @@ have_same_edgelists <- function(x, y) {
     x_el <- sort_el_cols_by_row(x_el)
   }
   y_el <- get_el(y)
-  if (inherits(x, "network") && !x[["gal"]][["directed"]]) {
+  if (inherits(y, "network") && !y[["gal"]][["directed"]]) {
     y_el <- sort_el_cols_by_row(y_el)
   }
   if (all(dim(x_el) == dim(y_el))) {

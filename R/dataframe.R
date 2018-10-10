@@ -2,8 +2,10 @@
 
 #' Extract vertex attributes as a data frame.
 #' 
+#' @template graph-param
+#' 
 #' @export
-vrt_as_df <- function(x, vertex_df = TRUE) {
+vrt_as_df <- function(x) {
   UseMethod("vrt_as_df")
 }
 
@@ -39,7 +41,7 @@ vrt_as_df.igraph <- function(x) {
 #' 
 #' @importFrom tibble as_tibble tibble
 #' @export
-vrt_as_df.network <- function(x, vertex_df = TRUE) {
+vrt_as_df.network <- function(x) {
   if (net_count_vertices.network(x) < 1L) {
     return(tibble())
   }
@@ -61,7 +63,7 @@ vrt_as_df.network <- function(x, vertex_df = TRUE) {
   #   as_tibble() %>% 
   #   mutate_if(~ all(map_lgl(., ~ length(.x) == 1)),
   #             ~ unlist(.))
-  out <- as_tibble(out, stringsAsFactors = FALSE)
+  out <- as_tibble(out)
   out[[".vrt_name"]] <- out[["vertex.names"]]
   out[["vertex.names"]] <- NULL
   
@@ -101,6 +103,8 @@ standardize_vrt_cols <- function(x, bipartite) {
 
 #' Extract edge attributes as a data frame.
 #' 
+#' @template graph-param
+#' 
 #' @export
 edg_as_df <- function(x) {
   UseMethod("edg_as_df")
@@ -137,20 +141,43 @@ edg_as_df.network <- function(x) {
   }
   el <- get_el.network(x)
   colnames(el) <- c(".ego", ".alter")
-  
   peeled_attrs <- lapply(x[["mel"]], `[[`, "atl")
   attr_names <- unique(unlist(lapply(peeled_attrs, names)))
-  pre_df <- lapply(attr_names, function(attr) {
-    res <- unlist(lapply(lapply(peeled_attrs, `[[`, attr), `%||%`, NA))
+  ### old
+  # peeled_attrs <- lapply(x[["mel"]], `[[`, "atl")
+  # attr_names <- unique(unlist(lapply(peeled_attrs, names)))
+  # pre_df <- lapply(attr_names, function(attr) {
+  #   res <- unlist(lapply(lapply(peeled_attrs, `[[`, attr), `%||%`, NA))
+  #   res[!is.na(res)]
+  #   })
+  # names(pre_df) <- attr_names
+  # df <- as.data.frame(pre_df, stringsAsFactors = FALSE)
+  # 
+  # out <- cbind.data.frame(el, df, stringsAsFactors = FALSE)
+  # out[["na"]] <- NULL
+  # out <- standardize_edg_cols(out)
+  ###
+  ### new
+  out <- lapply(attr_names, function(attr) {
+    res <- lapply(lapply(peeled_attrs, `[[`, attr), `%||%`, NA)
     res[!is.na(res)]
     })
-  names(pre_df) <- attr_names
-  df <- as.data.frame(pre_df, stringsAsFactors = FALSE)
-  
-  out <- cbind.data.frame(el, df, stringsAsFactors = FALSE)
+  names(out) <- attr_names
   out[["na"]] <- NULL
+  if (is_empty(out)) {
+    return(standardize_edg_cols(tibble::as_tibble(el)))
+  }
+  nest_test <- unlist(lapply(out, function(x) {
+    any(vapply(x, function(y) length(y) != 1L, logical(1L)))
+    }))
+  to_unlist <- names(nest_test[!nest_test])
+  for (i in to_unlist) {
+    out[[i]] <- unlist(lapply(out[[i]], `%||%`, NA))
+  }
+  ###
+  out <- as_tibble(out)
+  out <- cbind.data.frame(el, out, stringsAsFactors = FALSE)
   out <- standardize_edg_cols(out)
-  
   as_tibble(out)
 }
 

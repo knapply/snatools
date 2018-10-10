@@ -137,125 +137,129 @@ test_that("edge data frame construction works", {
 
 # # bipartite graph data ====
 # # 2-mode matrix
-# n_actors <- 6
-# n_events <- 3
-# affil_matrix <- matrix(c(1, 0, 1 ,0, 1, 0,
-#                          0, 1, 0, 1, 0, 1,
-#                          1, 1, 1, 1, 1, 1),
-#                        nrow = n_events, byrow = TRUE)
-# # vertex attributes
-# ig_bip_attrs <- data.frame(name = c(paste0("actor", seq_len(n_actors)),
-#                                     paste0("event", seq_len(n_events))),
-#                            # type = c(rep(TRUE, ncol(affil_matrix)),
-#                            #          rep(FALSE, nrow(affil_matrix))),
-#                            type = c(rep(FALSE, ncol(affil_matrix)),
-#                                     rep(TRUE, nrow(affil_matrix))),
-#                            foo = LETTERS[seq_len(ncol(affil_matrix) + nrow(affil_matrix))],
-#                            stringsAsFactors = FALSE)
-# # decorate matrix
-# rownames(affil_matrix) <- seq_len(n_events)
-# colnames(affil_matrix) <- seq(n_events + 1, n_actors + n_events)
-# # edge attributes
-# ig_bip_edges <- data.frame(lab = letters[seq_len(sum(affil_matrix))],
-#                            foo = LETTERS[seq_len(sum(affil_matrix))],
-#                            stringsAsFactors = FALSE)
-# # bipartite igraph
-# ig_bip <- igraph::graph_from_incidence_matrix(affil_matrix ,directed = FALSE)
-# # sort vertices (TRUE 'type' vertices come first)
-# ig_bip <- prep_bipartite_igraph(ig_bip)
-# 
-# # decorate igraph
-# igraph::vertex_attr(ig_bip) <- ig_bip_attrs
-# igraph::edge_attr(ig_bip) <- ig_bip_edges
-# 
-# ig_bip_attrs <- igraph::as_data_frame(ig_bip, "vertices")
-# rownames(ig_bip_attrs) <- NULL
-# 
-# # create tidygraph
-# tg_bip <- tidygraph::as_tbl_graph(ig_bip)
-# 
-# # get edgelist
-# el_bip <- igraph::as_edgelist(ig_bip, names = FALSE)
-# 
-# type_el_bip <- matrix(igraph::vertex_attr(ig_bip, name = "type")[el_bip],
-#                       ncol = 2)
-# 
-# # network vertex attributes
-# nw_bip_attrs <- ig_bip_attrs
-# names(nw_bip_attrs)[names(nw_bip_attrs) == "name"] <- "vertex.names"
-# nw_bip_attrs$type <- NULL
-# 
-# # network edges
-# nw_bip_edges <- ig_bip_edges
-# nw_bip_edges$from <- NULL
-# nw_bip_edges$to <- NULL
-# 
-# # create network
-# nw_bip <- network::network.initialize(n_actors + n_events, directed = FALSE,
-#                                       bipartite = n_actors)
-# network::add.edges(nw_bip, tail = el_bip[, 1], head = el_bip[, 2])
-# # decorate network
-# network::set.vertex.attribute(nw_bip, names(nw_bip_attrs), # breaks if list/df of length 1 !!
-#                               value = nw_bip_attrs)
-# 
-# network::set.edge.attribute(nw_bip, names(nw_bip_edges), nw_bip_edges)
-# 
-# bip_vrt_control_tibble <- tibble::tibble(.vrt_id = seq_len(nrow(ig_bip_attrs)),
-#                                          .vrt_name = ig_bip_attrs$name,
-#                                          .actor = !ig_bip_attrs$type,
-#                                          foo = ig_bip_attrs$foo)
-# bip_edg_control_tibble <- tibble::tibble(.edg_id = seq_len(nrow(ig_bip_edges)),
-#                                          .ego = el_bip[, 1],
-#                                          .alter = el_bip[, 2],
-#                                          lab = ig_bip_edges$lab,
-#                                          foo = ig_bip_edges$foo)
-# bip_edg_control_tibble$.ego <- as.integer(bip_edg_control_tibble$.ego)
-# bip_edg_control_tibble$.alter <- as.integer(bip_edg_control_tibble$.alter)
+n_actors <- 6
+n_events <- 3
+affil_matrix <- matrix(c(1, 0, 1 ,0, 1, 0,
+                         0, 1, 0, 1, 0, 1,
+                         1, 1, 1, 1, 1, 1),
+                       nrow = n_events, byrow = TRUE)
+# vertex attributes
+ig_bip_attrs <- data.frame(name = c(paste0("actor", seq_len(n_actors)),
+                                    paste0("event", seq_len(n_events))),
+                           # type = c(rep(TRUE, ncol(affil_matrix)),
+                           #          rep(FALSE, nrow(affil_matrix))),
+                           type = c(rep(FALSE, ncol(affil_matrix)),
+                                    rep(TRUE, nrow(affil_matrix))),
+                           foo = LETTERS[seq_len(ncol(affil_matrix) + nrow(affil_matrix))],
+                           stringsAsFactors = FALSE)
+# decorate matrix
+rownames(affil_matrix) <- seq_len(n_events)
+colnames(affil_matrix) <- seq(n_events + 1, n_actors + n_events)
+# edge attributes
+ig_bip_edges <- data.frame(lab = letters[seq_len(sum(affil_matrix))],
+                           foo = LETTERS[seq_len(sum(affil_matrix))],
+                           stringsAsFactors = FALSE)
+# bipartite igraph
+ig_bip <- igraph::graph_from_incidence_matrix(affil_matrix ,directed = FALSE)
+# sort vertices (TRUE 'type' vertices come first)
+ig_bip <- prep_bipartite_igraph(ig_bip)
+
+# decorate igraph
+igraph::vertex_attr(ig_bip) <- ig_bip_attrs
+igraph::edge_attr(ig_bip) <- ig_bip_edges
+
+ig_bip_attrs <- igraph::as_data_frame(ig_bip, "vertices")
+rownames(ig_bip_attrs) <- NULL
+
+# create tidygraph
+tg_bip <- tidygraph::as_tbl_graph(ig_bip)
+
+# get edgelist
+el_bip <- igraph::as_edgelist(ig_bip, names = FALSE)
+
+type_el_bip <- matrix(igraph::vertex_attr(ig_bip, name = "type")[el_bip],
+                      ncol = 2)
+
+# network vertex attributes
+nw_bip_attrs <- ig_bip_attrs
+names(nw_bip_attrs)[names(nw_bip_attrs) == "name"] <- "vertex.names"
+nw_bip_attrs$type <- NULL
+
+# network edges
+nw_bip_edges <- ig_bip_edges
+nw_bip_edges$from <- NULL
+nw_bip_edges$to <- NULL
+
+# create network
+nw_bip <- network::network.initialize(n_actors + n_events, directed = FALSE,
+                                      bipartite = n_actors)
+network::add.edges(nw_bip, tail = el_bip[, 1], head = el_bip[, 2])
+# decorate network
+network::set.vertex.attribute(nw_bip, names(nw_bip_attrs), # breaks if list/df of length 1 !!
+                              value = nw_bip_attrs)
+
+network::set.edge.attribute(nw_bip, names(nw_bip_edges), nw_bip_edges)
+
+ig_bip_vrt_control_tibble <- tibble::tibble(.vrt_id = seq_len(nrow(ig_bip_attrs)),
+                                            .vrt_name = ig_bip_attrs$name,
+                                            .actor = ig_bip_attrs$type,
+                                            foo = ig_bip_attrs$foo)
+nw_bip_vrt_control_tibble <- tibble::tibble(.vrt_id = seq_len(nrow(ig_bip_attrs)),
+                                            .vrt_name = ig_bip_attrs$name,
+                                            .actor = !ig_bip_attrs$type,
+                                            foo = ig_bip_attrs$foo)
+bip_edg_control_tibble <- tibble::tibble(.edg_id = seq_len(nrow(ig_bip_edges)),
+                                         .ego = el_bip[, 1],
+                                         .alter = el_bip[, 2],
+                                         lab = ig_bip_edges$lab,
+                                         foo = ig_bip_edges$foo)
+bip_edg_control_tibble$.ego <- as.integer(bip_edg_control_tibble$.ego)
+bip_edg_control_tibble$.alter <- as.integer(bip_edg_control_tibble$.alter)
+
+# #* vertex data frames ====
+test_that("bipartite vertex data frame construction works", {
+# igraph
+  # directed
+  expect_identical(
+    vrt_as_df(ig_bip),
+    ig_bip_vrt_control_tibble
+    )
+  # undirected
+  expect_identical(
+    vrt_as_df(ig_bip),
+    ig_bip_vrt_control_tibble
+    )
+# tidygraph
+  # directed
+  expect_identical(
+    vrt_as_df(tg_bip),
+    ig_bip_vrt_control_tibble
+    )
+# network
+  expect_identical(
+    vrt_as_df(nw_bip),
+    nw_bip_vrt_control_tibble
+    )
+})
 # 
 # #* vertex data frames ====
-# test_that("bipartite vertex data frame construction works", {
-# # igraph
-#   # directed
-#   expect_identical(
-#     vrt_as_df(ig_bip), 
-#     bip_vrt_control_tibble
-#     )
-#   # undirected
-#   expect_identical(
-#     vrt_as_df(ig_bip),
-#     bip_vrt_control_tibble
-#     )
-# # tidygraph
-#   # directed
-#   expect_identical(
-#     vrt_as_df(tg_bip),
-#     bip_vrt_control_tibble
-#     )
-# # network
-#   expect_identical(
-#     vrt_as_df(nw_bip),
-#     bip_vrt_control_tibble
-#     )
-# })
-# 
-# #* vertex data frames ====
-# test_that("bipartite edge data frame construction works", {
-# # igraph
-#   expect_identical(
-#     edg_as_df(ig_bip), 
-#     bip_edg_control_tibble
-#     )
-# # tidygraph
-#   expect_identical(
-#     edg_as_df(tg_bip),
-#     bip_edg_control_tibble
-#     )
-# # network
-#   expect_identical(
-#     edg_as_df(nw_bip),
-#     bip_edg_control_tibble
-#     )
-# })
+test_that("bipartite edge data frame construction works", {
+# igraph
+  expect_identical(
+    edg_as_df(ig_bip),
+    bip_edg_control_tibble
+    )
+# tidygraph
+  expect_identical(
+    edg_as_df(tg_bip),
+    bip_edg_control_tibble
+    )
+# network
+  expect_identical(
+    edg_as_df(nw_bip),
+    bip_edg_control_tibble
+    )
+})
 
 
 # delete optional vertex attributes
@@ -358,6 +362,7 @@ test_that("handling 0 optional edge columns works as expected", {
   )
 })
 
+# networks w/ nested attributes ====
 test_that("nested attributes and networkDynamic objects work", {
   iso_envir1 <- new.env()
   data("windsurfers", package = "networkDynamic", envir = iso_envir1)
@@ -371,4 +376,36 @@ test_that("nested attributes and networkDynamic objects work", {
     expect_s3_class(vrt_as_df(iso_envir2$nd_test_nets[[2]]), "tbl_df")
   }
 })
+
+# empty graphs ====
+test_that("empty graphs works", {
+# network
+  nw_empty <- network::network.initialize(n = 0)
+  
+  expect_s3_class(vrt_as_df(nw_empty), "tbl_df")
+  expect_true(is_empty(vrt_as_df(nw_empty)))
+  expect_identical(nrow(vrt_as_df(nw_empty)), 0L)
+  expect_identical(ncol(vrt_as_df(nw_empty)), 0L)
+  
+  expect_s3_class(edg_as_df(nw_empty), "tbl_df")
+  expect_true(is_empty(edg_as_df(nw_empty)))
+  expect_identical(nrow(edg_as_df(nw_empty)), 0L)
+  expect_identical(ncol(edg_as_df(nw_empty)), 0L)
+
+# igraph
+  ig_empty <- igraph::make_empty_graph(n = 0)
+  
+  expect_s3_class(vrt_as_df(ig_empty), "tbl_df")
+  expect_true(is_empty(vrt_as_df(ig_empty)))
+  expect_identical(nrow(vrt_as_df(ig_empty)), 0L)
+  expect_identical(ncol(vrt_as_df(ig_empty)), 0L)
+  
+  expect_s3_class(edg_as_df(ig_empty), "tbl_df")
+  expect_true(is_empty(edg_as_df(ig_empty)))
+  expect_identical(nrow(edg_as_df(ig_empty)), 0L)
+  expect_identical(ncol(edg_as_df(ig_empty)), 0L)
+  
+})
+
+
 

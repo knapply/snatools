@@ -27,9 +27,9 @@ is_empty <- function(x) {
   length(x) == 0L
 }
 
-is_null <- function(x) {
-  identical(x, NULL)
-}
+# is_null <- function(x) {
+  # identical(x, NULL)
+# }
 
 is_scalar <- function(x) {
   is.atomic(x) && length(x) == 1L
@@ -42,13 +42,13 @@ is_true <- function(x) {
 
 is_named <- function(x) {
   le_names <- names(x)
-  if (is_null(le_names)) {
+  if (is.null(le_names) || all(is.na(le_names))) {
     return(FALSE)
   }
-  if (is_scalar(x)) {
-    return(le_names == "" || is.na(x))
+  if(any(nchar(le_names) == 0L)) {
+    return(FALSE)
   }
-  all(le_names == "")|| all(is.na(x))
+  TRUE
 }
 
 # bipartite handling ====
@@ -112,13 +112,14 @@ validate_args <- function(x, vrt_attr = NULL, edg_attr = NULL, net_attr = NULL,
     bad_attr <- edg_attr
     valid_attrs <- paste0('"', edg_attr_names(x), '"', collapse = ", ")
     attr_type <- "edge"
-  } else if (!is.null(net_attr) && !is_valid_edg_attr(x, net_attr)) {
-    throw_error <- TRUE
-    bad_arg <- "net_attr"
-    bad_attr <- net_attr
-    valid_attrs <- paste0('"', net_attr_names(x), '"', collapse = ", ")
-    attr_type <- "net"
-  }
+  } 
+  # else if (!is.null(net_attr) && !is_valid_edg_attr(x, net_attr)) {
+  #   throw_error <- TRUE
+  #   bad_arg <- "net_attr"
+  #   bad_attr <- net_attr
+  #   valid_attrs <- paste0('"', net_attr_names(x), '"', collapse = ", ")
+  #   attr_type <- "net"
+  # }
   if (throw_error) {
     if (!txt_detect(valid_attrs, "\\w")) {
       valid_attrs <- glue::glue("- No {attr_type} attributes present.")
@@ -174,7 +175,7 @@ glue_wrap <- function(..., .sep = "", .envir = parent.frame(), initial = "",
 }
 
 glue_cat <- function(..., .sep = "", .envir = parent.frame(), initial = "", prefix = "") {
-  cat(glue_wrap(text, .envir = .envir, initial = initial))
+  cat(glue_wrap(..., .envir = .envir, initial = initial))
 }
 
 # messages ====

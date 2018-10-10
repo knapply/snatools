@@ -38,10 +38,6 @@ test_that("network objects convert to igraph correctly", {
     have_same_vert_attrs(nw_bip, as_igraph(nw_bip))
   )
   
- expect_true(
-    have_same_vert_attrs(nw_bip, as.igraph(nw_bip))
-  )
-  
   expect_false(
     are_same_graphs(iso_env$emon$Wichita, as_igraph(iso_env$emon$Cheyenne))
   )
@@ -94,17 +90,24 @@ test_that("igraph objects convert to network correctly", {
     are_same_graphs(iso_env$UKfaculty, as_network(iso_env$UKfaculty))
   )
   expect_true(
-    are_same_graphs(ig_bip, tg_bip)
+    are_same_graphs(tg_bip, as_network(tg_bip))
   )
   expect_true(
     are_same_graphs(ig_bip, as_network(ig_bip))
   )
   
-  expect_true(
-    are_same_graphs(ig_bip, as.network(tg_bip))
-  )
   
   expect_identical(ig_bip, as_igraph(ig_bip))
 })
+
+# networks w/ nested attributes ====
+test_that("nested attributes and networkDynamic objects work", {
+  iso_envir1 <- new.env()
+  data("windsurfers", package = "networkDynamic", envir = iso_envir1)
+  expect_true(
+    are_same_graphs(iso_envir1$windsurfers, as_igraph(iso_envir1$windsurfers))
+  )
+})
+
 
 

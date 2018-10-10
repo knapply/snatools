@@ -12,6 +12,9 @@ edg_as_df(x)
 
 \method{edg_as_df}{network}(x)
 }
+\arguments{
+\item{x}{An \code{igraph}, \code{network}, or \code{tbl_graph}.}
+}
 \description{
 Extract edge attributes as a data frame.
 }
