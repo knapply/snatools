@@ -15,6 +15,15 @@ rep_as_mixing_matrix(x, vrt_attr)
 Using a categorical vertex attribute, construct a matrix depicting network mixing
 patterns.
 }
+\examples{
+library(snatools)
+
+data(samplk, package = "ergm")
+
+samplk1 \%>\% 
+  rep_as_mixing_matrix(vrt_attr = "group")
+
+}
 \author{
 Brendan Knapp \email{brendan.g.knapp@gmail.com}
 }

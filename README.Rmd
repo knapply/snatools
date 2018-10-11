@@ -8,7 +8,7 @@ output:
 
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
+  # collapse = TRUE,
   fig.align = "center",
   comment = "#>",
   fig.path = "man/figures/"
@@ -29,15 +29,13 @@ knitr::opts_chunk$set(
 `snatools` is still _very_ experimental; the current API and dependencies are subject to change.
 
 
-`snatools` has four immediate goals:
+`snatools` has four immediate goals meant to increase analyst efficiency and reduce the cognitive load of network newcomers (and those instructing them):
 
 1. Accurately bridge existing graph frameworks (i.e. `igraph` and `network`).
 2. Streamline network analytic workflows by making common tasks as intuitive (and stable) as possible.
-    + Increase analyst efficiency.
-    + Reduce the cognitive load of network newcomers and those instructing them.
 3. Implement metrics that are missing from R's network ecosystem.
     + Reimplement those that _should_ be made more accessible, efficient, or robust.
-4. Standardize fundamental tasks with methods that bypass the longstanding issues of `igraph` vs `network` namespace conflicts.
+4. Standardize fundamental tasks with methods that bypass the issues of `igraph` vs `network` namespace conflicts.
 
 
 <!-- Additionally, `snatools` seeks to prepare for the future by establishing the foundation (or a set of lessons-learned) for an enhanced network framework that: -->
@@ -65,124 +63,107 @@ library(snatools)
 library(snatools)
 ```
 
+## Features
+
+### Simple, Accurate Conversion Between Frameworks
+
+`snatools` allows `igraph` and `network` to play together better than ever.
+
+`igraph` objects can be easily converted to `network` objects...
+
+```{r}
+crisis_in_cloister %>% # an igraph object
+  as_network()
+```
+
+... and back again.
+
+```{r}
+crisis_in_cloister %>% 
+  as_network() %>% 
+  as_igraph()
+```
+
+The same goes for bipartite graphs.
+
+```{r}
+southern_women %>% # igraph to network
+  as_network()
+```
 
 
-<!-- ## Features -->
+Additionally, everything in `snatools` was designed from the ground-up to work with both `igraph` and `network` objects.
 
-<!-- ```{r} -->
-<!-- data("sampson_monastery") -->
-<!-- ``` -->
+## Modern Subsetting
 
-<!-- ### `bridge_net` -->
-
-<!-- The `bridge_net` object provides an intermediate graph structure that can effectively map data to both `igraph` and `network` objects. -->
-
-<!-- ```{r} -->
-<!-- sampson_monastery -->
-<!-- ``` -->
-
-<!-- ### Conversion -->
-
-<!-- Through `bridge_net` objects, `igraph` and `network` objects can play together easier than ever. -->
-
-<!-- ```{r} -->
-<!-- ig <- as_igraph(sampson_monastery) -->
-<!-- ``` -->
-
-<!-- ```{r, echo=FALSE} -->
-<!-- ig -->
-<!-- ``` -->
-
-<!-- ```{r} -->
-<!-- nw <- as_network(sampson_monastery) -->
-<!-- ``` -->
-
-<!-- ```{r, echo=FALSE} -->
-<!-- nw -->
-<!-- ``` -->
-
-<!-- ```{r} -->
-<!-- as_network(ig) -->
-<!-- ``` -->
-
-<!-- ```{r} -->
-<!-- as_igraph(nw) -->
-<!-- ``` -->
-
-<!-- #### `%==%` -->
-
-<!-- Since `bridge_net`s are intermediate structures, comparing them is easy. `%==%` streamlines the process to make successful conversion confirmation as simple as possible. -->
-
-<!-- ```{r} -->
-<!-- all(ig %==% nw, -->
-<!--     ig %==% sampson_monastery, -->
-<!--     nw %==% sampson_monastery) -->
-<!-- ``` -->
-
-<!-- The only data that are not compared by `%==%` are non-structural attributes as `igraph` and `network` do not handle them in compatible ways. -->
-
-<!-- ```{r} -->
-<!-- ig %>% igraph::graph_attr_names() -->
-<!-- nw %>% network::list.network.attributes() -->
-<!-- ``` -->
-
-<!-- ### Standardized Data Extraction -->
-
-<!-- ```{r} -->
-<!-- ig %>% vrt_to_df() -->
-<!-- ``` -->
-
-<!-- ```{r} -->
-<!-- nw %>% edg_to_df() -->
-<!-- ``` -->
-
-<!-- ### Standardized Representations -->
-
-<!-- ```{r} -->
-<!-- ig %>% rep_as_edgelist() -->
-<!-- ``` -->
-
-<!-- ### Additional Tools -->
-
-<!-- ```{r} -->
-<!-- nw %>% rep_as_mixing_matrix(vrt_attr = "faction") -->
-<!-- ``` -->
-
-<!-- ### Easy Integeration with Modern Workflows -->
-
-<!-- ```{r, message=FALSE} -->
-<!-- library(tidygraph, warn.conflicts = FALSE) -->
-<!-- library(ggraph, quietly = TRUE) -->
-
-<!-- nw %>%  -->
-<!--   as_igraph() %>%  -->
-<!--   as_tbl_graph() %E>% -->
-<!--   select(time, relation) %>%  -->
-<!--   filter(time == 3) %>% -->
-<!--   mutate(relation = factor(relation,  -->
-<!--                            c("liking", "praise", "esteem", "positive influence", -->
-<!--                              "disliking", "blame", "disesteem", "negative influence")) -->
-<!--         ) %>%  -->
-<!--   ggraph() + -->
-<!--   geom_edge_fan(aes(colour = relation), width = 0.5, show.legend = FALSE) + -->
-<!--   geom_node_point(aes(colour = faction)) + -->
-<!--   guides(edge_colour = guide_legend(title = NULL), -->
-<!--          colour = guide_legend(title = NULL)) + -->
-<!--   facet_edges(~ relation, ncol = 4) + -->
-<!--   theme_void() + -->
-<!--   theme(strip.text = element_text(face = "bold", vjust = 1), -->
-<!--         panel.border = element_rect(fill = NA, color = "lightgray"), -->
-<!--         legend.position = "bottom") -->
-<!-- ``` -->
-
-<!-- # Development Tests -->
-
-<!-- ```{r, message=FALSE} -->
-<!-- # devtools::test() -->
-<!-- ``` -->
+```{r}
+crisis_in_cloister %>% 
+  edg_subset(time == 3 & affect > 0) %>% 
+  vrt_subset(cloisterville)
+```
 
 
-<!-- ```{r} -->
-<!-- covr::package_coverage() -->
-<!-- ``` -->
+## Standardized Representations
+
+The essential graph `rep_`resentations are all available.
+
+* Adjacency Lists
+
+```{r}
+florence %>% 
+  edg_subset(relation == "marriage") %>% 
+  rep_as_adj_list()
+```
+
+* Edge Lists
+
+```{r}
+jemmah_islamiyah %>% 
+  rep_as_edgelist() %>% 
+  head()
+```
+
+* Adjacency Matrices
+
+```{r}
+crisis_in_cloister %>%
+  edg_subset(time == 2) %>% 
+  rep_as_adj_matrix(edg_attr = "affect") %>% 
+  `colnames<-`(rep("", ncol(.)))
+```
+
+Along with others that are less common.
+
+* Mixing Matrices
+
+```{r}
+data("samplk", package = "ergm")
+
+samplk1 %>%
+  rep_as_mixing_matrix(vrt_attr = "group")
+```
+
+## Data Frame Methods
+
+Modern R is all about data frames, so using them in network analysis should be easy.
+
+`tibble`s are the focus as the `statnet` suite has already begun importing the `tidyverse`.
+
+```{r}
+crisis_in_cloister %>% 
+  vrt_as_df()
+
+crisis_in_cloister %>% 
+  edg_as_df()
+```
+
+## More Metrics
+
+```{r}
+library(ggplot2)
+
+samplk1 %>% 
+  ei_index(vrt_attr = "group", scope = "vertex") %>% 
+  autoplot()
+```
 

@@ -26,6 +26,13 @@ edg_get_attr(x, edg_attr)
 \description{
 Get a Specific Edge Attribute
 }
+\examples{
+library(snatools)
+
+florence \%>\% 
+  edg_get_attr("relation")
+
+}
 \seealso{
 \code{\link[igraph:edge_attr]{igraph::edge_attr()}}
 }

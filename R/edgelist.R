@@ -8,6 +8,21 @@
 #' 
 #' @author Brendan Knapp \email{brendan.g.knapp@@gmail.com}
 #' 
+#' @examples 
+#' library(snatools)
+#' 
+#' crisis_in_cloister %>% 
+#'   rep_as_edgelist() %>% 
+#'   head()
+#'   
+#' crisis_in_cloister %>% 
+#'   rep_as_edgelist(use_names = FALSE) %>% 
+#'   head()
+#'   
+#' crisis_in_cloister %>% 
+#'   rep_as_edgelist(vrt_attr = "cloisterville") %>% 
+#'   head()
+#' 
 #' @seealso [igraph::as_edgelist()], [network::as.matrix.network.edgelist()]
 #' 
 #' @export

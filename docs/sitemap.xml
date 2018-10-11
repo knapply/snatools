@@ -10,6 +10,9 @@
     <loc>https://knapply.github.io/snatools/reference/as_network.html</loc>
   </url>
   <url>
+    <loc>https://knapply.github.io/snatools/reference/crisis_in_cloister.html</loc>
+  </url>
+  <url>
     <loc>https://knapply.github.io/snatools/reference/edg_as_df.html</loc>
   </url>
   <url>
@@ -19,7 +22,16 @@
     <loc>https://knapply.github.io/snatools/reference/edg_get_attr.html</loc>
   </url>
   <url>
+    <loc>https://knapply.github.io/snatools/reference/edg_subset.html</loc>
+  </url>
+  <url>
     <loc>https://knapply.github.io/snatools/reference/ei_index.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools/reference/florence.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools/reference/jemmah_islamiyah.html</loc>
   </url>
   <url>
     <loc>https://knapply.github.io/snatools/reference/net_count_actors.html</loc>
@@ -64,6 +76,9 @@
     <loc>https://knapply.github.io/snatools/reference/snatools.html</loc>
   </url>
   <url>
+    <loc>https://knapply.github.io/snatools/reference/southern_women.html</loc>
+  </url>
+  <url>
     <loc>https://knapply.github.io/snatools/reference/vrt_as_df.html</loc>
   </url>
   <url>
@@ -74,5 +89,8 @@
   </url>
   <url>
     <loc>https://knapply.github.io/snatools/reference/vrt_get_names.html</loc>
+  </url>
+  <url>
+    <loc>https://knapply.github.io/snatools/reference/vrt_subset.html</loc>
   </url>
 </urlset>

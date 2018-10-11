@@ -2,21 +2,45 @@
 % Please edit documentation in R/ei_index.R
 \name{ei_index}
 \alias{ei_index}
+\alias{autoplot.ei_index}
 \title{E-I Index}
 \usage{
 ei_index(x, vrt_attr, scope = c("global", "group", "vertex"))
+
+autoplot.ei_index(x, xlim = c(-1, 1))
 }
 \arguments{
 \item{x}{An \code{igraph}, \code{network}, or \code{tbl_graph}.}
 
 \item{vrt_attr}{\code{character} specifying the target vertex attribute.}
 
-\item{scope}{\code{character} (default: \code{"global"}) indicating the target scope.
-Choices: \code{"global"}, \code{"group"}, or \code{"vertex"}.}
+\item{scope}{\code{character} indicating the target scope. Choices: \code{"global"}, \code{"group"},
+or \code{"vertex"}.}
+
+\item{xlim}{\code{numeric} \code{vector} specifying lower and upper limits of
+\code{autoplot.ei_index}'s x-axis.}
 }
 \description{
 Given a categorical vertex attribute describing mutually exclusive groups, the E-I
 index represents a ratio of external to internal ties.
+}
+\examples{
+library(snatools)
+library(ggplot2)
+
+data(samplk, package = "ergm")
+
+samplk1 \%>\% 
+  ei_index(vrt_attr = "group", scope = "global")
+
+samplk1 \%>\% 
+  ei_index(vrt_attr = "group", scope = "group") \%>\% 
+  autoplot()
+  
+samplk1 \%>\% 
+  ei_index(vrt_attr = "group", scope = "vertex") \%>\% 
+  autoplot()
+
 }
 \author{
 Brendan Knapp \email{brendan.g.knapp@gmail.com}

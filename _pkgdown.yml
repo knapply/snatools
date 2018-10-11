@@ -30,6 +30,7 @@ reference:
     - vrt_attr_names
     - vrt_get_attr
     - vrt_get_names
+    - vrt_subset
     
   - title: Edges
     desc: Routines targeting edges and their attributes.
@@ -37,6 +38,7 @@ reference:
     - edg_as_df
     - edg_attr_names
     - edg_get_attr
+    - edg_subset
 
 #  - title: Network Attributes
 #    desc: Routines targeting non-structural network attributes.
@@ -70,10 +72,18 @@ reference:
 #    contents:
 #    - calc_net_density
   
-  - title: Homophily
-    desc: Routines calculating indices related to homophily and mixing patterns.
+  - title: Metrics
+    desc: Routines calculating various indices.
     contents: 
     - ei_index
+    
+  - title: Data
+    desc: Datasets included in the package.
+    contents:
+    - crisis_in_cloister
+    - florence
+    - southern_women
+    - jemmah_islamiyah
 
 navbar:
   right:

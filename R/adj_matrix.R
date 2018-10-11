@@ -11,6 +11,24 @@
 #' 
 #' @seealso [igraph::as_adjacency_matrix()], [network::as.matrix.network.adjacency()]
 #' 
+#' @examples 
+#' library(snatools)
+#' 
+#' florence %>% 
+#'   edg_subset(relation == "marriage") %>% 
+#'   rep_as_adj_matrix() %>% 
+#'   `colnames<-`(rep("", ncol(.)))
+#'   
+#' crisis_in_cloister %>% 
+#'   edg_subset(time == 1 & affect == 3) %>% 
+#'   rep_as_adj_matrix() %>% 
+#'   `colnames<-`(rep("", ncol(.)))
+#'   
+#' florence %>% 
+#'   rep_as_adj_matrix(edg_attr = "relation") %>% 
+#'   `colnames<-`(rep("", ncol(.)))
+#' 
+#' @importFrom methods as
 #' @export
 rep_as_adj_matrix <- function(x, use_names = TRUE, vrt_attr = NULL, edg_attr = NULL) {
   validate_args(x = x, validate_graph = TRUE)
@@ -27,13 +45,18 @@ rep_as_adj_matrix <- function(x, use_names = TRUE, vrt_attr = NULL, edg_attr = N
     fill <- 1L
   }
   n_vertices <- net_count_vertices(x)
-  init <- vector(typeof(fill), n_vertices * n_vertices)
+  out <- matrix(rep(as(NA, typeof(fill)), n_vertices * n_vertices),
+                nrow = n_vertices, ncol = n_vertices)
   el <- get_el(x)
-  if (net_is_multiplex(x)) {
-    warning("`x` is multiplex. Duplicate edges will be discarded")
+  if (is.null(edg_attr) & net_is_multiplex(x)) {
+    warning("`x` is multiplex with no `edg_attr` specified. Duplicate edges will be discarded")
     el <- unique.matrix(el)
   }
   out[el] <- fill
+  if (is.numeric(out)) {
+    st_mode <- storage.mode(out)
+    out[is.na(out)] <- as(0, st_mode)
+  }
   if (is.null(dim_names)) {
     return(out)
   }

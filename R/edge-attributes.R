@@ -7,6 +7,12 @@
 #' 
 #' @template bknapp-author
 #' 
+#' @examples 
+#' library(snatools)
+#' 
+#' florence %>% 
+#'   edg_attr_names()
+#' 
 #' @export
 edg_attr_names <- function(x) {
   UseMethod("edg_attr_names")
@@ -57,6 +63,12 @@ edg_attr_names.tbl_graph <- function(x) {
 #' @return `vector` containing the vertex attributes specified by `vrt_attr`.
 #' 
 #' @template bknapp-author
+#' 
+#' @examples 
+#' library(snatools)
+#' 
+#' florence %>% 
+#'   edg_get_attr("relation")
 #' 
 #' @export
 edg_get_attr <- function(x, edg_attr) {

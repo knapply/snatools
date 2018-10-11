@@ -6,6 +6,15 @@
 #' 
 #' @template bknapp-author
 #' 
+#' @examples
+#' library(snatools)
+#' 
+#' crisis_in_cloister %>% 
+#'   vrt_as_df()
+
+#' florence %>% 
+#'   vrt_as_df()
+#' 
 #' @export
 vrt_as_df <- function(x) {
   UseMethod("vrt_as_df")
@@ -106,6 +115,17 @@ standardize_vrt_cols <- function(x, bipartite) {
 #' Extract edge attributes as a data frame.
 #' 
 #' @template graph-param
+#' 
+#' @template bknapp-author
+#' 
+#' @examples
+#' library(snatools)
+#' 
+#' crisis_in_cloister %>% 
+#'   edg_as_df()
+#'   
+#' florence %>% 
+#'   edg_as_df()
 #' 
 #' @export
 edg_as_df <- function(x) {

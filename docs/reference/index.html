@@ -8,6 +8,8 @@
 
 <title>Function reference • snatools</title>
 
+<link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
@@ -35,7 +37,7 @@
 
 
 <!-- mathjax -->
-<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -187,6 +189,12 @@
           <p><code><a href="vrt_get_names.html">vrt_get_names()</a></code> </p>
         </td>
         <td><p>Get Vertex Names</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="vrt_subset.html">vrt_subset()</a></code> </p>
+        </td>
+        <td><p>Subset by Vertices</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -213,6 +221,12 @@
           <p><code><a href="edg_get_attr.html">edg_get_attr()</a></code> </p>
         </td>
         <td><p>Get a Specific Edge Attribute</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="edg_subset.html">edg_subset()</a></code> </p>
+        </td>
+        <td><p>Subset by Edges</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -305,16 +319,48 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-homophily" class="hasAnchor"><a href="#section-homophily" class="anchor"></a>Homophily</h2>
-          <p class="section-desc"><p>Routines calculating indices related to homophily and mixing patterns.</p></p>
+          <h2 id="section-metrics" class="hasAnchor"><a href="#section-metrics" class="anchor"></a>Metrics</h2>
+          <p class="section-desc"><p>Routines calculating various indices.</p></p>
         </th>
       </tr>
       <tr>
         
         <td>
-          <p><code><a href="ei_index.html">ei_index()</a></code> </p>
+          <p><code><a href="ei_index.html">ei_index()</a></code> <code><a href="ei_index.html">autoplot.ei_index()</a></code> </p>
         </td>
         <td><p>E-I Index</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-data" class="hasAnchor"><a href="#section-data" class="anchor"></a>Data</h2>
+          <p class="section-desc"><p>Datasets included in the package.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="crisis_in_cloister.html">crisis_in_cloister</a></code> </p>
+        </td>
+        <td><p>Sampson's Monastery</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="florence.html">florence</a></code> </p>
+        </td>
+        <td><p>Padgett's Florentine Families</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="southern_women.html">southern_women</a></code> </p>
+        </td>
+        <td><p>Davis' Southern Women (Deep South)</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="jemmah_islamiyah.html">jemmah_islamiyah</a></code> </p>
+        </td>
+        <td><p>Koschade's Jemaah Islamiyah (2002 Bali Bombings)</p></td>
       </tr>
     </tbody>
     </table>
@@ -329,7 +375,8 @@
       <li><a href="#section-edges">Edges</a></li>
       <li><a href="#section-structural-metadata">Structural Metadata</a></li>
       <li><a href="#section-representations">Representations</a></li>
-      <li><a href="#section-homophily">Homophily</a></li>
+      <li><a href="#section-metrics">Metrics</a></li>
+      <li><a href="#section-data">Data</a></li>
     </ul>
   </div>
 </div>
