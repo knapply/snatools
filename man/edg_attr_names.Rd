@@ -25,6 +25,13 @@ no edge attributes exist.
 \description{
 Get Edge Attribute Names
 }
+\examples{
+library(snatools)
+
+florence \%>\% 
+  edg_attr_names()
+
+}
 \seealso{
 \code{\link[igraph:edge_attr_names]{igraph::edge_attr_names()}}
 

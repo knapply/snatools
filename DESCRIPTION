@@ -13,6 +13,7 @@ Imports:
     magrittr,
     methods,
     network,
+    rlang,
     stats,
     tibble,
     utils

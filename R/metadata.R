@@ -39,6 +39,10 @@ net_is_directed.tbl_graph <- function(x) {
   net_is_directed.igraph(as_igraph.tbl_graph(x))
 }
 
+net_is_directed.bridge_net <- function(x) {
+  x[["metadata"]][["is_directed"]]
+}
+
 #* ====
 
 #' @title Is a Graph Bipartite?
@@ -80,6 +84,10 @@ net_is_bipartite.network <- function(x) {
 #' @export
 net_is_bipartite.tbl_graph <- function(x) {
   net_is_bipartite.igraph(as_igraph.tbl_graph(x))
+}
+
+net_is_bipartite.bridge_net <- function(x) {
+  x[["metadata"]][["is_bipartite"]]
 }
 
 #* ====
@@ -127,6 +135,12 @@ net_count_actors.tbl_graph <- function(x) {
   net_count_actors.igraph(as_igraph.tbl_graph(x))
 }
 
+net_count_actors.bridge_net <- function(x) {
+  if (x[["metadata"]][["bipartite"]]) {
+    return(x[["metadata"]][["n_actors"]])
+  }
+  NULL
+}
 
 #* ====
 
@@ -171,6 +185,10 @@ net_count_vertices.tbl_graph <- function(x) {
   net_count_vertices.igraph(as_igraph.tbl_graph(x))
 }
 
+net_count_vertices.bridge_net <- function(x) {
+  nrow(x[["vertices"]])
+}
+
 #* ====
 
 #' @title How Many Edges Does a Graph Have?
@@ -213,6 +231,10 @@ net_count_edges.network <- function(x) {
 #' @export
 net_count_edges.tbl_graph <- function(x) {
   net_count_edges.igraph(as_igraph.tbl_graph(x))
+}
+
+net_count_edges.bridge_net <- function(x) {
+  nrow(x[["edges"]])
 }
 
 #* ====
@@ -262,6 +284,17 @@ net_is_multiplex.tbl_graph <- function(x) {
   net_is_multiplex.igraph(as_igraph.tbl_graph(x))
 }
 
+net_is_multiplex.bridge_net <- function(x) {
+  el <- cbind(x[["edges"]][[".ego"]],
+              x[["edges"]][[".alter"]])
+  if (x[["metadata"]][["directed"]]) {
+    return(
+      nrow(unique.matrix(sort_el_cols_by_row(el))) < nrow(el)
+    )
+  }
+  nrow(unique.matrix(el)) < nrow(el)
+}
+
 #* ====
 
 #' @title Does a Graph Have Loops?
@@ -306,6 +339,12 @@ net_has_loops.tbl_graph <- function(x) {
   net_has_loops.igraph(as_igraph.tbl_graph(x))
 }
 
+net_has_loops.bridge_net <- function(x) {
+  el <- cbind(x[["edges"]][[".ego"]],
+              x[["edges"]][[".alter"]])
+  any(el[, 1L] == el[, 2L])
+}
+
 #* ====
 
 #' @title Does a Graph Have Isolates?
@@ -345,19 +384,25 @@ net_has_isolates.tbl_graph <- function(x) {
   net_has_isolates.igraph(as_igraph.tbl_graph(x))
 }
 
+net_has_isolates.bridge_net <- function(x) {
+  any(!x[["vertices"]][[".vrt_id"]] %in%
+        unique(c(x[["edges"]][[".ego"]],
+                 x[["edges"]][[".alter"]])))
+}
+
 #* ====
 
-# get_metadata <- function(x) {
-#   out <- list(n_vertices = net_count_vertices(x),
-#               n_edges = net_count_edges(x),
-#               is_directed = net_is_directed(x),
-#               is_bipartite = net_is_bipartite(x),
-#               n_actors = NULL)
-#   if (net_is_bipartite(x)) {
-#     out[["n_actors"]] <- net_count_actors(x)
-#   }
-#   drop_nulls(out)
-# }
+get_metadata <- function(x) {
+  out <- list(n_vertices = net_count_vertices(x),
+              n_edges = net_count_edges(x),
+              is_directed = net_is_directed(x),
+              is_bipartite = net_is_bipartite(x),
+              n_actors = NULL)
+  if (net_is_bipartite(x)) {
+    out[["n_actors"]] <- net_count_actors(x)
+  }
+  drop_nulls(out)
+}
 # 
 # set_metadata_attr <- function(x, graph) {
 #   metadata <- get_metadata(graph)

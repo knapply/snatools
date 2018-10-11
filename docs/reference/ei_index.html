@@ -8,6 +8,8 @@
 
 <title>E-I Index — ei_index • snatools</title>
 
+<link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
@@ -39,7 +41,7 @@ index represents a ratio of external to internal ties." />
 
 
 <!-- mathjax -->
-<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -127,7 +129,9 @@ index represents a ratio of external to internal ties.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>ei_index</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>, <span class='kw'>scope</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"global"</span>, <span class='st'>"group"</span>, <span class='st'>"vertex"</span>))</pre>
+    <pre class="usage"><span class='fu'>ei_index</span>(<span class='no'>x</span>, <span class='no'>vrt_attr</span>, <span class='kw'>scope</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"global"</span>, <span class='st'>"group"</span>, <span class='st'>"vertex"</span>))
+
+<span class='fu'>autoplot.ei_index</span>(<span class='no'>x</span>, <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='fu'>c</span>(-<span class='fl'>1</span>, <span class='fl'>1</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -142,18 +146,40 @@ index represents a ratio of external to internal ties.</p>
     </tr>
     <tr>
       <th>scope</th>
-      <td><p><code>character</code> (default: <code>"global"</code>) indicating the target scope.
-Choices: <code>"global"</code>, <code>"group"</code>, or <code>"vertex"</code>.</p></td>
+      <td><p><code>character</code> indicating the target scope. Choices: <code>"global"</code>, <code>"group"</code>,
+or <code>"vertex"</code>.</p></td>
+    </tr>
+    <tr>
+      <th>xlim</th>
+      <td><p><code>numeric</code> <code>vector</code> specifying lower and upper limits of
+<code>autoplot.ei_index</code>'s x-axis.</p></td>
     </tr>
     </table>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>snatools</span>)
+<span class='fu'>library</span>(<span class='no'>ggplot2</span>)
+
+<span class='fu'>data</span>(<span class='no'>samplk</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"ergm"</span>)
+
+<span class='no'>samplk1</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>ei_index</span>(<span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='st'>"group"</span>, <span class='kw'>scope</span> <span class='kw'>=</span> <span class='st'>"global"</span>)</div><div class='output co'>#&gt; [1] -0.09090909</div><div class='input'>
+<span class='no'>samplk1</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>ei_index</span>(<span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='st'>"group"</span>, <span class='kw'>scope</span> <span class='kw'>=</span> <span class='st'>"group"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>()</div><div class='img'><img src='ei_index-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='no'>samplk1</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>ei_index</span>(<span class='kw'>vrt_attr</span> <span class='kw'>=</span> <span class='st'>"group"</span>, <span class='kw'>scope</span> <span class='kw'>=</span> <span class='st'>"vertex"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/autoplot'>autoplot</a></span>()</div><div class='img'><img src='ei_index-2.png' alt='' width='700' height='433' /></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+            
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
     <h2>Author</h2>
     

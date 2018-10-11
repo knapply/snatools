@@ -18,6 +18,15 @@ vrt_as_df(x)
 \description{
 Extract all vertex attributes as a data frame.
 }
+\examples{
+library(snatools)
+
+crisis_in_cloister \%>\% 
+  vrt_as_df()
+florence \%>\% 
+  vrt_as_df()
+
+}
 \author{
 Brendan Knapp \email{brendan.g.knapp@gmail.com}
 }

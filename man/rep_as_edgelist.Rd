@@ -22,6 +22,22 @@ as fill values in the returned object. If provided, \code{vrt_attr} overrides \c
 \description{
 Construct a graph object's edgelist representation.
 }
+\examples{
+library(snatools)
+
+crisis_in_cloister \%>\% 
+  rep_as_edgelist() \%>\% 
+  head()
+  
+crisis_in_cloister \%>\% 
+  rep_as_edgelist(use_names = FALSE) \%>\% 
+  head()
+  
+crisis_in_cloister \%>\% 
+  rep_as_edgelist(vrt_attr = "cloisterville") \%>\% 
+  head()
+
+}
 \seealso{
 \code{\link[igraph:as_edgelist]{igraph::as_edgelist()}}, \code{\link[network:as.matrix.network.edgelist]{network::as.matrix.network.edgelist()}}
 }

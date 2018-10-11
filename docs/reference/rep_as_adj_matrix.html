@@ -8,6 +8,8 @@
 
 <title>Construct a graph object's edgelist representation. — rep_as_adj_matrix • snatools</title>
 
+<link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
@@ -38,7 +40,7 @@
 
 
 <!-- mathjax -->
-<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -161,6 +163,112 @@ as fill values in the returned object.</p></td>
     <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/igraph/topics/as_adjacency_matrix'>igraph::as_adjacency_matrix()</a></code>, <code><a href='http://www.rdocumentation.org/packages/network/topics/as.matrix.network'>network::as.matrix.network.adjacency()</a></code></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>snatools</span>)
+
+<span class='no'>florence</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='edg_subset.html'>edg_subset</a></span>(<span class='no'>relation</span> <span class='kw'>==</span> <span class='st'>"marriage"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>rep_as_adj_matrix</span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'>`colnames&lt;-`</span>(<span class='fu'>rep</span>(<span class='st'>""</span>, <span class='fu'>ncol</span>(<span class='no'>.</span>)))</div><div class='output co'>#&gt;                                             
+#&gt; Acciaiuoli   0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0
+#&gt; Albizzi      0 0 0 0 0 1 1 0 1 0 0 0 0 0 0 0
+#&gt; Barbadori    0 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0
+#&gt; Bischeri     0 0 0 0 0 0 1 0 0 0 1 0 0 0 1 0
+#&gt; Castellani   0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 0
+#&gt; Ginori       0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Guadagni     0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1
+#&gt; Lamberteschi 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Medici       0 0 0 0 0 0 0 0 0 0 0 0 1 1 0 1
+#&gt; Pazzi        0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0
+#&gt; Peruzzi      0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0
+#&gt; Pucci        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Ridolfi      0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1
+#&gt; Salviati     0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Strozzi      0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Tornabuoni   0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</div><div class='input'>
+<span class='no'>crisis_in_cloister</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='edg_subset.html'>edg_subset</a></span>(<span class='no'>time</span> <span class='kw'>==</span> <span class='fl'>1</span> <span class='kw'>&amp;</span> <span class='no'>affect</span> <span class='kw'>==</span> <span class='fl'>3</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>rep_as_adj_matrix</span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'>`colnames&lt;-`</span>(<span class='fu'>rep</span>(<span class='st'>""</span>, <span class='fu'>ncol</span>(<span class='no'>.</span>)))</div><div class='output co'>#&gt;                                                              
+#&gt; Leo         0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0
+#&gt; Arsenius    0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Bruno       0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Thomas      0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0
+#&gt; Bartholomew 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; John Bosco  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Gregory     0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Basil       0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Martin      0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Peter       0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Bonaventure 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Berthold    0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Mark        1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Brocard     1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Victor      0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Ambrose     0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Ramuald     0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Louis       0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Winfrid     0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Amand       0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Hugh        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Boniface    0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Albert      0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Elias       0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+#&gt; Simplicius  0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</div><div class='input'>
+<span class='no'>florence</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>rep_as_adj_matrix</span>(<span class='kw'>edg_attr</span> <span class='kw'>=</span> <span class='st'>"relation"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>`colnames&lt;-`</span>(<span class='fu'>rep</span>(<span class='st'>""</span>, <span class='fu'>ncol</span>(<span class='no'>.</span>)))</div><div class='output co'>#&gt;                                                                                
+#&gt; Acciaiuoli   NA NA NA NA NA         NA         NA         NA         "marriage"
+#&gt; Albizzi      NA NA NA NA NA         "marriage" "marriage" NA         "marriage"
+#&gt; Barbadori    NA NA NA NA "marriage" "business" NA         NA         "marriage"
+#&gt; Bischeri     NA NA NA NA NA         NA         "marriage" "business" NA        
+#&gt; Castellani   NA NA NA NA NA         NA         NA         "business" NA        
+#&gt; Ginori       NA NA NA NA NA         NA         NA         NA         "business"
+#&gt; Guadagni     NA NA NA NA NA         NA         NA         "marriage" NA        
+#&gt; Lamberteschi NA NA NA NA NA         NA         NA         NA         NA        
+#&gt; Medici       NA NA NA NA NA         NA         NA         NA         NA        
+#&gt; Pazzi        NA NA NA NA NA         NA         NA         NA         NA        
+#&gt; Peruzzi      NA NA NA NA NA         NA         NA         NA         NA        
+#&gt; Pucci        NA NA NA NA NA         NA         NA         NA         NA        
+#&gt; Ridolfi      NA NA NA NA NA         NA         NA         NA         NA        
+#&gt; Salviati     NA NA NA NA NA         NA         NA         NA         NA        
+#&gt; Strozzi      NA NA NA NA NA         NA         NA         NA         NA        
+#&gt; Tornabuoni   NA NA NA NA NA         NA         NA         NA         NA        
+#&gt;                                                                       
+#&gt; Acciaiuoli   NA         NA         NA NA         NA         NA        
+#&gt; Albizzi      NA         NA         NA NA         NA         NA        
+#&gt; Barbadori    NA         "business" NA NA         NA         NA        
+#&gt; Bischeri     NA         "marriage" NA NA         NA         "marriage"
+#&gt; Castellani   NA         "marriage" NA NA         NA         "marriage"
+#&gt; Ginori       NA         NA         NA NA         NA         NA        
+#&gt; Guadagni     NA         NA         NA NA         NA         NA        
+#&gt; Lamberteschi NA         "business" NA NA         NA         NA        
+#&gt; Medici       "business" NA         NA "marriage" "marriage" NA        
+#&gt; Pazzi        NA         NA         NA NA         "marriage" NA        
+#&gt; Peruzzi      NA         NA         NA NA         NA         "marriage"
+#&gt; Pucci        NA         NA         NA NA         NA         NA        
+#&gt; Ridolfi      NA         NA         NA NA         NA         "marriage"
+#&gt; Salviati     NA         NA         NA NA         NA         NA        
+#&gt; Strozzi      NA         NA         NA NA         NA         NA        
+#&gt; Tornabuoni   NA         NA         NA NA         NA         NA        
+#&gt;                        
+#&gt; Acciaiuoli   NA        
+#&gt; Albizzi      NA        
+#&gt; Barbadori    NA        
+#&gt; Bischeri     NA        
+#&gt; Castellani   NA        
+#&gt; Ginori       NA        
+#&gt; Guadagni     "marriage"
+#&gt; Lamberteschi NA        
+#&gt; Medici       "marriage"
+#&gt; Pazzi        NA        
+#&gt; Peruzzi      NA        
+#&gt; Pucci        NA        
+#&gt; Ridolfi      "marriage"
+#&gt; Salviati     NA        
+#&gt; Strozzi      NA        
+#&gt; Tornabuoni   NA        </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -170,7 +278,9 @@ as fill values in the returned object.</p></td>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
     <h2>Author</h2>
     

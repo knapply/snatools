@@ -21,4 +21,8 @@ devtools::install(".", dependencies = FALSE, upgrade_dependencies = FALSE)
 rmarkdown::render("README.Rmd", output_format = "github_document",
                   envir = new.env())
 
+# covrpage::covrpage(vignette = TRUE)
+
+# library(tidyverse)
+
 pkgdown::build_site(lazy = FALSE, seed = 831)

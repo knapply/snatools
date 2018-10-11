@@ -22,6 +22,16 @@ or attributes, depending on arguments provided.
 \description{
 Construct a graph object's adjacency list representation.
 }
+\examples{
+library(snatools)
+
+jemmah_islamiyah \%>\% 
+  rep_as_adj_list()
+  
+jemmah_islamiyah \%>\% 
+  rep_as_adj_list(use_names = FALSE)
+
+}
 \seealso{
 \code{\link[igraph:as_adj_list]{igraph::as_adj_list()}}
 }

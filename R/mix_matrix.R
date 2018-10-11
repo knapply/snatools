@@ -8,6 +8,14 @@
 #' 
 #' @template bknapp-author
 #' 
+#' @examples 
+#' library(snatools)
+#' 
+#' data(samplk, package = "ergm")
+#' 
+#' samplk1 %>% 
+#'   rep_as_mixing_matrix(vrt_attr = "group")
+#' 
 #' @export
 rep_as_mixing_matrix <- function(x, vrt_attr) {
   attrs <- vrt_get_attr(x, vrt_attr)

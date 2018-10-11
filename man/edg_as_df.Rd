@@ -18,3 +18,16 @@ edg_as_df(x)
 \description{
 Extract edge attributes as a data frame.
 }
+\examples{
+library(snatools)
+
+crisis_in_cloister \%>\% 
+  edg_as_df()
+  
+florence \%>\% 
+  edg_as_df()
+
+}
+\author{
+Brendan Knapp \email{brendan.g.knapp@gmail.com}
+}

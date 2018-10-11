@@ -79,6 +79,7 @@ edges <- bind_rows(business, marriage) %>%
   distinct()
 
 florence <- igraph::graph_from_data_frame(edges, directed = FALSE, vertices = verts) %>% 
-  snatools:::as_bridge_net()
+  snatools:::as_bridge_net() %>% 
+  snatools:::as_igraph.bridge_net()
 
 usethis::use_data(florence)

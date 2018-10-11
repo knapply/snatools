@@ -25,6 +25,24 @@ as fill values in the returned object.}
 \description{
 Construct a graph object's edgelist representation.
 }
+\examples{
+library(snatools)
+
+florence \%>\% 
+  edg_subset(relation == "marriage") \%>\% 
+  rep_as_adj_matrix() \%>\% 
+  `colnames<-`(rep("", ncol(.)))
+  
+crisis_in_cloister \%>\% 
+  edg_subset(time == 1 & affect == 3) \%>\% 
+  rep_as_adj_matrix() \%>\% 
+  `colnames<-`(rep("", ncol(.)))
+  
+florence \%>\% 
+  rep_as_adj_matrix(edg_attr = "relation") \%>\% 
+  `colnames<-`(rep("", ncol(.)))
+
+}
 \seealso{
 \code{\link[igraph:as_adjacency_matrix]{igraph::as_adjacency_matrix()}}, \code{\link[network:as.matrix.network.adjacency]{network::as.matrix.network.adjacency()}}
 }

@@ -8,6 +8,8 @@
 
 <title>Extract all vertex attributes as a data frame. — vrt_as_df • snatools</title>
 
+<link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
@@ -38,7 +40,7 @@
 
 
 <!-- mathjax -->
-<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -143,12 +145,52 @@
     </table>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>snatools</span>)
+
+<span class='no'>crisis_in_cloister</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>vrt_as_df</span>()</div><div class='output co'>#&gt; [90m# A tibble: 25 x 3[39m
+#&gt;    .vrt_id .vrt_name   cloisterville
+#&gt;      [3m[90m&lt;int&gt;[39m[23m [3m[90m&lt;chr&gt;[39m[23m       [3m[90m&lt;lgl&gt;[39m[23m        
+#&gt; [90m 1[39m       1 Leo         TRUE         
+#&gt; [90m 2[39m       2 Arsenius    TRUE         
+#&gt; [90m 3[39m       3 Bruno       TRUE         
+#&gt; [90m 4[39m       4 Thomas      TRUE         
+#&gt; [90m 5[39m       5 Bartholomew TRUE         
+#&gt; [90m 6[39m       6 John Bosco  FALSE        
+#&gt; [90m 7[39m       7 Gregory     FALSE        
+#&gt; [90m 8[39m       8 Basil       FALSE        
+#&gt; [90m 9[39m       9 Martin      TRUE         
+#&gt; [90m10[39m      10 Peter       TRUE         
+#&gt; [90m# ... with 15 more rows[39m</div><div class='input'><span class='no'>florence</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>vrt_as_df</span>()</div><div class='output co'>#&gt; [90m# A tibble: 16 x 4[39m
+#&gt;    .vrt_id .vrt_name    wealth priorate_seats
+#&gt;      [3m[90m&lt;int&gt;[39m[23m [3m[90m&lt;chr&gt;[39m[23m         [3m[90m&lt;int&gt;[39m[23m          [3m[90m&lt;int&gt;[39m[23m
+#&gt; [90m 1[39m       1 Acciaiuoli       10             53
+#&gt; [90m 2[39m       2 Albizzi          36             65
+#&gt; [90m 3[39m       3 Barbadori        55             [31mNA[39m
+#&gt; [90m 4[39m       4 Bischeri         44             12
+#&gt; [90m 5[39m       5 Castellani       20             22
+#&gt; [90m 6[39m       6 Ginori           32             [31mNA[39m
+#&gt; [90m 7[39m       7 Guadagni          8             21
+#&gt; [90m 8[39m       8 Lamberteschi     42              0
+#&gt; [90m 9[39m       9 Medici          103             53
+#&gt; [90m10[39m      10 Pazzi            48             [31mNA[39m
+#&gt; [90m11[39m      11 Peruzzi          49             42
+#&gt; [90m12[39m      12 Pucci             3              0
+#&gt; [90m13[39m      13 Ridolfi          27             38
+#&gt; [90m14[39m      14 Salviati         10             35
+#&gt; [90m15[39m      15 Strozzi         146             74
+#&gt; [90m16[39m      16 Tornabuoni       48             [31mNA[39m</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+            
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
     <h2>Author</h2>
     
