@@ -1,4 +1,4 @@
-#' E-I Index
+#' Krackhardt's E-I Index
 #' 
 #' Given a categorical vertex attribute describing mutually exclusive groups, the E-I 
 #' index represents a ratio of external to internal ties.
@@ -9,6 +9,13 @@
 #' or `"vertex"`.
 #' @param xlim `numeric` `vector` specifying lower and upper limits of 
 #' `autoplot.ei_index`'s x-axis.
+#' 
+#' @details
+#' \deqn{E\mbox{-}I~Index = \frac{EL-IL}{EL+IL}}
+#' 
+#' @references Krackhardt, David, and Robert N. Stern. "Informal Networks and 
+#' Organizational Crises: An Experimental Simulation." Social Psychology Quarterly 51, no.
+#'  2 (1988): 123-40. \url{http://www.jstor.org/stable/2786835}.
 #' 
 #' @template bknapp-author
 #' 

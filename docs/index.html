@@ -157,10 +157,10 @@
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">crisis_in_cloister <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="reference/as_network.html">as_network</a></span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb4-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="reference/as_igraph.html">as_igraph</a></span>()</a></code></pre></div>
-<pre><code>#&gt; IGRAPH 67d8835 DN-- 25 401 -- 
+<pre><code>#&gt; IGRAPH a5333d6 DN-- 25 401 -- 
 #&gt; + attr: .vrt_id (v/n), name (v/c), cloisterville (v/l), .edg_id
 #&gt; | (e/n), affect (e/n), time (e/n)
-#&gt; + edges from 67d8835 (vertex names):
+#&gt; + edges from a5333d6 (vertex names):
 #&gt;  [1] John Bosco-&gt;Gregory     John Bosco-&gt;Gregory    
 #&gt;  [3] John Bosco-&gt;Basil       John Bosco-&gt;Basil      
 #&gt;  [5] John Bosco-&gt;Peter       John Bosco-&gt;Bonaventure
@@ -197,10 +197,10 @@
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">crisis_in_cloister <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="reference/edg_subset.html">edg_subset</a></span>(time <span class="op">==</span><span class="st"> </span><span class="dv">3</span> <span class="op">&amp;</span><span class="st"> </span>affect <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb8-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="reference/vrt_subset.html">vrt_subset</a></span>(cloisterville)</a></code></pre></div>
-<pre><code>#&gt; IGRAPH 67e60e8 DN-- 6 6 -- 
+<pre><code>#&gt; IGRAPH a541648 DN-- 6 6 -- 
 #&gt; + attr: .vrt_id (v/n), name (v/c), cloisterville (v/l), .edg_id
 #&gt; | (e/n), affect (e/n), time (e/n)
-#&gt; + edges from 67e60e8 (vertex names):
+#&gt; + edges from a541648 (vertex names):
 #&gt; [1] Peter  -&gt;Berthold    Victor -&gt;Peter       Victor -&gt;Berthold   
 #&gt; [4] Victor -&gt;Ramuald     Ambrose-&gt;Bonaventure Ramuald-&gt;Bonaventure</code></pre>
 </div>
@@ -281,59 +281,34 @@
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">crisis_in_cloister <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb14-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="reference/edg_subset.html">edg_subset</a></span>(time <span class="op">==</span><span class="st"> </span><span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb14-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="reference/rep_as_adj_matrix.html">rep_as_adj_matrix</a></span>(<span class="dt">edg_attr =</span> <span class="st">"affect"</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="st">  `</span><span class="dt">colnames&lt;-</span><span class="st">`</span>(<span class="kw">rep</span>(<span class="st">""</span>, <span class="kw">ncol</span>(.)))</a></code></pre></div>
-<pre><code>#&gt;                                                                           
-#&gt; Leo         0 0 0 0 0 0  0  0 0  0  0  0  0 0  0  0  0  0  0  0  0 0  0  0
-#&gt; Arsenius    0 0 0 0 0 0  0  0 0  0  0  0  0 0  0  0  0  0  0  0  0 0  0  0
-#&gt; Bruno       0 0 0 0 0 0  0  0 0  0  0  0  0 0  0  0  0  0  0  0  0 0  0  0
-#&gt; Thomas      0 0 0 0 0 0  0  0 0  0  0  0  0 0  0  0  0  0  0  0  0 0  0  0
-#&gt; Bartholomew 0 0 0 0 0 0  0  0 0  0  0  0  0 0  0  0  0  0  0  0  0 0  0  0
-#&gt; John Bosco  0 0 0 0 0 0  0  2 0  0  3 -2 -1 0  0  0 -3  0  0  0  1 0  0  0
-#&gt; Gregory     0 0 0 0 0 3  0  0 0  0  0  0  2 0  0  0 -1  0  0 -3  1 0  0 -2
-#&gt; Basil       0 0 0 0 0 2  3  0 0 -1  0  0  0 0 -3 -2  0  0  0  0  0 0  0  1
-#&gt; Martin      0 0 0 0 0 0  0  0 0  0  0  0  0 0  0  0  0  0  0  0  0 0  0  0
-#&gt; Peter       0 0 0 0 0 0  0 -2 0  0  3  1 -3 0  0  0  2  0  0  0  0 0  0  0
-#&gt; Bonaventure 0 0 0 0 0 0  0  0 0  3  0  0  0 0  0  0  0  2  0  1  0 0  0  0
-#&gt; Berthold    0 0 0 0 0 1  0  0 0  3  0  0 -3 0 -1  2  0  0 -2  0  0 0  0  0
-#&gt; Mark        0 0 0 0 0 0  2  0 0 -3 -1 -2  0 0  1  0  0  0  0  0  0 0  3  0
-#&gt; Brocard     0 0 0 0 0 0  0  0 0  0  0  0  0 0  0  0  0  0  0  0  0 0  0  0
-#&gt; Victor      0 0 0 0 0 3  2 -3 0  0  0  0  0 0  0  1  0  0  0  0 -2 0  0 -1
-#&gt; Ambrose     0 0 0 0 0 0  0 -3 0  0  2  0  0 0  3  0  0  0  0  0  0 0  1 -2
-#&gt; Ramuald     0 0 0 0 0 0  0  0 0  3  0  0  0 0  1  0  0  0  0  0  2 0  0  0
-#&gt; Louis       0 0 0 0 0 0  0 -1 0  0  3  0  0 0  1  0  0  0  0 -3  2 0  0 -2
-#&gt; Winfrid     0 0 0 0 0 3  2 -1 0 -3  0  0  0 0  0  0  0 -2  0  0  1 0  0  0
-#&gt; Amand       0 0 0 0 0 0 -3  0 0  0  2 -2  1 0  0  0  0  0 -1  0  0 0  0  0
-#&gt; Hugh        0 0 0 0 0 3  0  0 0  0  0  0  0 0 -2  0  0  1  2 -3  0 2  0 -1
-#&gt; Boniface    0 0 0 0 0 3  2 -2 0  0  0  0  0 0  0  0  0  0  0 -3  1 0  0 -1
-#&gt; Albert      0 0 0 0 0 1  2  0 0  0  0  0  3 0  0  0  0  0  0 -1  0 0  0 -3
-#&gt; Elias       0 0 0 0 0 0  0  3 0 -3 -2  0  0 0  0  0  0 -1  0  2  0 0  0  0
-#&gt; Simplicius  0 0 0 0 0 2  3  0 0 -3  0 -2  1 0  0  0  0  0  0  0  0 0 -1  0
-#&gt;               
-#&gt; Leo          0
-#&gt; Arsenius     0
-#&gt; Bruno        0
-#&gt; Thomas       0
-#&gt; Bartholomew  0
-#&gt; John Bosco   0
-#&gt; Gregory      0
-#&gt; Basil        0
-#&gt; Martin       0
-#&gt; Peter       -1
-#&gt; Bonaventure  0
-#&gt; Berthold     0
-#&gt; Mark         0
-#&gt; Brocard      0
-#&gt; Victor       0
-#&gt; Ambrose     -1
-#&gt; Ramuald      0
-#&gt; Louis        0
-#&gt; Winfrid      0
-#&gt; Amand        3
-#&gt; Hugh         0
-#&gt; Boniface    -1
-#&gt; Albert      -2
-#&gt; Elias        1
-#&gt; Simplicius   0</code></pre>
+<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="st">  `</span><span class="dt">rownames&lt;-</span><span class="st">`</span>(<span class="kw">regmatches</span>(<span class="kw">rownames</span>(.), <span class="kw">regexpr</span>(<span class="st">"^</span><span class="ch">\\</span><span class="st">w{,4}"</span>, <span class="kw">rownames</span>(.)))) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="st">  `</span><span class="dt">colnames&lt;-</span><span class="st">`</span>(<span class="kw">rep</span>(<span class="st">""</span>, <span class="kw">ncol</span>(.)))</a></code></pre></div>
+<pre><code>#&gt;                                                                        
+#&gt; Leo   0 0 0 0 0 0  0  0 0  0  0  0  0 0  0  0  0  0  0  0  0 0  0  0  0
+#&gt; Arsen 0 0 0 0 0 0  0  0 0  0  0  0  0 0  0  0  0  0  0  0  0 0  0  0  0
+#&gt; Bruno 0 0 0 0 0 0  0  0 0  0  0  0  0 0  0  0  0  0  0  0  0 0  0  0  0
+#&gt; Thoma 0 0 0 0 0 0  0  0 0  0  0  0  0 0  0  0  0  0  0  0  0 0  0  0  0
+#&gt; Barth 0 0 0 0 0 0  0  0 0  0  0  0  0 0  0  0  0  0  0  0  0 0  0  0  0
+#&gt; John  0 0 0 0 0 0  0  2 0  0  3 -2 -1 0  0  0 -3  0  0  0  1 0  0  0  0
+#&gt; Grego 0 0 0 0 0 3  0  0 0  0  0  0  2 0  0  0 -1  0  0 -3  1 0  0 -2  0
+#&gt; Basil 0 0 0 0 0 2  3  0 0 -1  0  0  0 0 -3 -2  0  0  0  0  0 0  0  1  0
+#&gt; Marti 0 0 0 0 0 0  0  0 0  0  0  0  0 0  0  0  0  0  0  0  0 0  0  0  0
+#&gt; Peter 0 0 0 0 0 0  0 -2 0  0  3  1 -3 0  0  0  2  0  0  0  0 0  0  0 -1
+#&gt; Bonav 0 0 0 0 0 0  0  0 0  3  0  0  0 0  0  0  0  2  0  1  0 0  0  0  0
+#&gt; Berth 0 0 0 0 0 1  0  0 0  3  0  0 -3 0 -1  2  0  0 -2  0  0 0  0  0  0
+#&gt; Mark  0 0 0 0 0 0  2  0 0 -3 -1 -2  0 0  1  0  0  0  0  0  0 0  3  0  0
+#&gt; Broca 0 0 0 0 0 0  0  0 0  0  0  0  0 0  0  0  0  0  0  0  0 0  0  0  0
+#&gt; Victo 0 0 0 0 0 3  2 -3 0  0  0  0  0 0  0  1  0  0  0  0 -2 0  0 -1  0
+#&gt; Ambro 0 0 0 0 0 0  0 -3 0  0  2  0  0 0  3  0  0  0  0  0  0 0  1 -2 -1
+#&gt; Ramua 0 0 0 0 0 0  0  0 0  3  0  0  0 0  1  0  0  0  0  0  2 0  0  0  0
+#&gt; Louis 0 0 0 0 0 0  0 -1 0  0  3  0  0 0  1  0  0  0  0 -3  2 0  0 -2  0
+#&gt; Winfr 0 0 0 0 0 3  2 -1 0 -3  0  0  0 0  0  0  0 -2  0  0  1 0  0  0  0
+#&gt; Amand 0 0 0 0 0 0 -3  0 0  0  2 -2  1 0  0  0  0  0 -1  0  0 0  0  0  3
+#&gt; Hugh  0 0 0 0 0 3  0  0 0  0  0  0  0 0 -2  0  0  1  2 -3  0 2  0 -1  0
+#&gt; Bonif 0 0 0 0 0 3  2 -2 0  0  0  0  0 0  0  0  0  0  0 -3  1 0  0 -1 -1
+#&gt; Alber 0 0 0 0 0 1  2  0 0  0  0  0  3 0  0  0  0  0  0 -1  0 0  0 -3 -2
+#&gt; Elias 0 0 0 0 0 0  0  3 0 -3 -2  0  0 0  0  0  0 -1  0  2  0 0  0  0  1
+#&gt; Simpl 0 0 0 0 0 2  3  0 0 -3  0 -2  1 0  0  0  0  0  0  0  0 0 -1  0  0</code></pre>
 <p>Along with others that are less common.</p>
 <ul>
 <li>Mixing Matrices</li>
@@ -353,7 +328,7 @@
 <h2 class="hasAnchor">
 <a href="#data-frame-methods" class="anchor"></a>Data Frame Methods</h2>
 <p>Modern R is all about data frames, so using them in network analysis should be easy.</p>
-<p><code>tibble</code>s are the focus as the <code>statnet</code> suite has already begun importing the <code>tidyverse</code>.</p>
+<p><code>tibble</code>s are the focus as the <code>statnet</code> suite already imports <code>tidyverse</code> packages.</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">crisis_in_cloister <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb18-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="reference/vrt_as_df.html">vrt_as_df</a></span>()</a></code></pre></div>
 <pre><code>#&gt; # A tibble: 25 x 3
@@ -432,7 +407,7 @@
 <li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle"></a></li>
 <li><a href="https://travis-ci.org/knapply/snatools"><img src="https://travis-ci.org/knapply/snatools.svg?branch=master" alt="Travis-CI Build Status"></a></li>
 <li><a href="https://codecov.io/gh/knapply/snatools"><img src="https://codecov.io/gh/knapply/snatools/branch/master/graph/badge.svg" alt="codecov"></a></li>
-<li><a href="https://www.r-project.org/"><img src="https://img.shields.io/badge/Depends-GNU_R%20%3E=%203.2-blue.svg" alt="Depends"></a></li>
+<li><a href="https://www.r-project.org/"><img src="https://img.shields.io/badge/Depends-GNU_R%3E=3.2-blue.svg" alt="Depends"></a></li>
 </ul>
 </div>
 </div>

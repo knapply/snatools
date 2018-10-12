@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 [![Lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![Travis-CI Build Status](https://travis-ci.org/knapply/snatools.svg?branch=master)](https://travis-ci.org/knapply/snatools)
 [![codecov](https://codecov.io/gh/knapply/snatools/branch/master/graph/badge.svg)](https://codecov.io/gh/knapply/snatools)
-[![Depends](https://img.shields.io/badge/Depends-GNU_R%20>=%203.2-blue.svg)](https://www.r-project.org/)
+[![Depends](https://img.shields.io/badge/Depends-GNU_R>=3.2-blue.svg)](https://www.r-project.org/)
 
 <!-- [![GitHub Downloads](https://img.shields.io/github/downloads/knapply/snatools/total.svg)](https://github.com/knapply/snatools) -->
 
@@ -130,6 +130,7 @@ jemmah_islamiyah %>%
 crisis_in_cloister %>%
   edg_subset(time == 2) %>% 
   rep_as_adj_matrix(edg_attr = "affect") %>% 
+  `rownames<-`(regmatches(rownames(.), regexpr("^\\w{,4}", rownames(.)))) %>% 
   `colnames<-`(rep("", ncol(.)))
 ```
 
@@ -148,7 +149,7 @@ samplk1 %>%
 
 Modern R is all about data frames, so using them in network analysis should be easy.
 
-`tibble`s are the focus as the `statnet` suite has already begun importing the `tidyverse`.
+`tibble`s are the focus as the `statnet` suite already imports `tidyverse` packages.
 
 ```{r}
 crisis_in_cloister %>% 

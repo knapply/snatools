@@ -54,7 +54,7 @@
 #'   as_igraph()
 #'   
 #' # networkDynamic to igraph ================================================================
-#' data("windsurfers", package="networkDynamic")
+#' data("windsurfers", package = "networkDynamic")
 #' 
 #' windsurfers
 #' 
