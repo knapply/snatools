@@ -97,10 +97,10 @@ crisis_in_cloister %>%
   as_igraph()
 ```
 
-    #> IGRAPH 540041f DN-- 25 401 -- 
+    #> IGRAPH b4653c6 DN-- 25 401 -- 
     #> + attr: .vrt_id (v/n), name (v/c), cloisterville (v/l), .edg_id
     #> | (e/n), affect (e/n), time (e/n)
-    #> + edges from 540041f (vertex names):
+    #> + edges from b4653c6 (vertex names):
     #>  [1] John Bosco->Gregory     John Bosco->Gregory    
     #>  [3] John Bosco->Basil       John Bosco->Basil      
     #>  [5] John Bosco->Peter       John Bosco->Bonaventure
@@ -145,10 +145,10 @@ crisis_in_cloister %>%
   vrt_subset(cloisterville)
 ```
 
-    #> IGRAPH 540cbc9 DN-- 6 6 -- 
+    #> IGRAPH b477587 DN-- 6 6 -- 
     #> + attr: .vrt_id (v/n), name (v/c), cloisterville (v/l), .edg_id
     #> | (e/n), affect (e/n), time (e/n)
-    #> + edges from 540cbc9 (vertex names):
+    #> + edges from b477587 (vertex names):
     #> [1] Peter  ->Berthold    Victor ->Peter       Victor ->Berthold   
     #> [4] Victor ->Ramuald     Ambrose->Bonaventure Ramuald->Bonaventure
 

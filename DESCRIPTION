@@ -6,7 +6,7 @@ Authors@R: person("Brendan", "Knapp", email = "brendan.g.knapp@gmail.com", role 
 Description: A consistent toolkit that conveniently connects existing graph structures 
     (i.e. igraph and network), makes network workflows more intuitive, and provides 
     metrics missing from R's network analysis ecosystem.
-Depends: R (>= 3.4.0)
+Depends: R (>= 3.1.0)
 Imports:
     glue,
     igraph,
