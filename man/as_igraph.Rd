@@ -19,21 +19,68 @@ as_igraph(x)
 \method{as_igraph}{tbl_graph}(x)
 }
 \arguments{
-\item{x}{\code{\link[network:network]{network::network}} (or \code{\link[tidygraph:tbl_graph]{tidygraph::tbl_graph}}) object.}
+\item{x}{\code{\link[network:network]{network::network}} object.}
 }
 \value{
 An \code{igraph} (\code{\link[igraph:graph]{igraph::graph}}) object.
 }
 \description{
-Accurately map foreign graph data to \code{igraph} objects.
+Convert objects of class \code{network} to \code{igraph} objects.
 }
-\details{
-\code{as_igraph()} converts \code{x} to an intermediate \code{bridge_net} object that is capable of
-mapping metadata, edges, vertices, and attributes (edge, vertex, and graph-level)
-to a new, valid \code{igraph} object. \cr
+\examples{
+library(snatools)
+
+data("sampson", package = "ergm")
+
+samplike
+
+samplike \%>\% 
+  as_igraph()
+  
+# bipartite network to igraph =============================================================
+southern_women_matrix <- c(
+  1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 
+  1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+  0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1,
+  0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1,
+  1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0,
+  1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0,
+  1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1,
+  1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0,
+  1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
+  1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0
+  ) \%>\% 
+  matrix(nrow = 18, ncol = 14) \%>\% 
+  `rownames<-`(c("EVELYN", "LAURA", "THERESA", "BRENDA", "CHARLOTTE", "FRANCES", 
+                 "ELEANOR", "PEARL", "RUTH", "VERNE", "MYRNA", "KATHERINE", "SYLVIA", 
+                 "NORA", "HELEN", "DOROTHY", "OLIVIA", "FLORA"))
+
+sw_nw <- network::as.network.matrix(southern_women_matrix)
+
+sw_nw
+
+sw_nw \%>\% 
+  as_igraph()
+  
+# networkDynamic to igraph ================================================================
+data("windsurfers", package="networkDynamic")
+
+windsurfers
+
+windsurfers \%>\% 
+  as_igraph()
+
 }
 \seealso{
-\code{\link[=as_network]{as_network()}}, \code{\link[intergraph:asIgraph]{intergraph::asIgraph()}}
+\code{\link[=as_network]{as_network()}}
 }
 \author{
 Brendan Knapp \email{brendan.g.knapp@gmail.com}

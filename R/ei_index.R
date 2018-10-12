@@ -128,7 +128,7 @@ autoplot.ei_index <- function(x, xlim = c(-1, 1)) {
 
 #' @importFrom tibble as_tibble
 print.ei_index <- function(x, ...) {
-  print(tibble::as_tibble(x), ...)
+  print(as_tibble(x), ...)
 }
 
 

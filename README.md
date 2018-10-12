@@ -7,6 +7,7 @@
 [![Travis-CI Build
 Status](https://travis-ci.org/knapply/snatools.svg?branch=master)](https://travis-ci.org/knapply/snatools)
 [![codecov](https://codecov.io/gh/knapply/snatools/branch/master/graph/badge.svg)](https://codecov.io/gh/knapply/snatools)
+[![Depends](https://img.shields.io/badge/Depends-R%20%3E=%203.1-blue.svg)](https://www.r-project.org/)
 
 <!-- [![GitHub Downloads](https://img.shields.io/github/downloads/knapply/snatools/total.svg)](https://github.com/knapply/snatools) -->
 
@@ -96,10 +97,10 @@ crisis_in_cloister %>%
   as_igraph()
 ```
 
-    #> IGRAPH fc71c77 DN-- 25 401 -- 
+    #> IGRAPH 540041f DN-- 25 401 -- 
     #> + attr: .vrt_id (v/n), name (v/c), cloisterville (v/l), .edg_id
     #> | (e/n), affect (e/n), time (e/n)
-    #> + edges from fc71c77 (vertex names):
+    #> + edges from 540041f (vertex names):
     #>  [1] John Bosco->Gregory     John Bosco->Gregory    
     #>  [3] John Bosco->Basil       John Bosco->Basil      
     #>  [5] John Bosco->Peter       John Bosco->Bonaventure
@@ -144,10 +145,10 @@ crisis_in_cloister %>%
   vrt_subset(cloisterville)
 ```
 
-    #> IGRAPH fc7cbc7 DN-- 6 6 -- 
+    #> IGRAPH 540cbc9 DN-- 6 6 -- 
     #> + attr: .vrt_id (v/n), name (v/c), cloisterville (v/l), .edg_id
     #> | (e/n), affect (e/n), time (e/n)
-    #> + edges from fc7cbc7 (vertex names):
+    #> + edges from 540cbc9 (vertex names):
     #> [1] Peter  ->Berthold    Victor ->Peter       Victor ->Berthold   
     #> [4] Victor ->Ramuald     Ambrose->Bonaventure Ramuald->Bonaventure
 
