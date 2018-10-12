@@ -21,7 +21,7 @@ devtools::install(".", dependencies = TRUE, upgrade_dependencies = TRUE)
 rmarkdown::render("README.Rmd", output_format = "github_document",
                   envir = new.env())
 
-# covrpage::covrpage(vignette = TRUE)
+covrpage::covrpage(preview = FALSE, vignette = TRUE)
 
 # library(tibble);library(pillar);library(crayon)
 
