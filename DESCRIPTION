@@ -6,7 +6,7 @@ Authors@R: person("Brendan", "Knapp", email = "brendan.g.knapp@gmail.com", role 
 Description: A consistent toolkit that conveniently connects existing graph structures 
     (i.e. igraph and network), makes network workflows more intuitive, and provides 
     metrics missing from R's network analysis ecosystem.
-Depends: R (>= 3.4.0)
+Depends: R (>= 3.3.0)
 Imports:
     glue,
     igraph,
@@ -14,9 +14,7 @@ Imports:
     methods,
     network,
     rlang,
-    stats,
-    tibble,
-    utils
+    tibble
 Suggests:
     covr,
     ergm,
@@ -26,7 +24,8 @@ Suggests:
     networkDynamic,
     rmarkdown,
     testthat,
-    tidygraph
+    tidygraph,
+    utils
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
 URL: https://github.com/knapply/snatools, https://knapply.github.io/snatools

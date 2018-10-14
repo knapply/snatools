@@ -7,6 +7,7 @@
 [![Travis-CI Build
 Status](https://travis-ci.org/knapply/snatools.svg?branch=master)](https://travis-ci.org/knapply/snatools)
 [![codecov](https://codecov.io/gh/knapply/snatools/branch/master/graph/badge.svg)](https://codecov.io/gh/knapply/snatools)
+[![Depends](https://img.shields.io/badge/Depends-GNU_R%3E=3.2-blue.svg)](https://www.r-project.org/)
 
 <!-- [![GitHub Downloads](https://img.shields.io/github/downloads/knapply/snatools/total.svg)](https://github.com/knapply/snatools) -->
 
@@ -96,10 +97,10 @@ crisis_in_cloister %>%
   as_igraph()
 ```
 
-    #> IGRAPH fc71c77 DN-- 25 401 -- 
+    #> IGRAPH 975695a DN-- 25 401 -- 
     #> + attr: .vrt_id (v/n), name (v/c), cloisterville (v/l), .edg_id
     #> | (e/n), affect (e/n), time (e/n)
-    #> + edges from fc71c77 (vertex names):
+    #> + edges from 975695a (vertex names):
     #>  [1] John Bosco->Gregory     John Bosco->Gregory    
     #>  [3] John Bosco->Basil       John Bosco->Basil      
     #>  [5] John Bosco->Peter       John Bosco->Bonaventure
@@ -144,10 +145,10 @@ crisis_in_cloister %>%
   vrt_subset(cloisterville)
 ```
 
-    #> IGRAPH fc7cbc7 DN-- 6 6 -- 
+    #> IGRAPH 9762267 DN-- 6 6 -- 
     #> + attr: .vrt_id (v/n), name (v/c), cloisterville (v/l), .edg_id
     #> | (e/n), affect (e/n), time (e/n)
-    #> + edges from fc7cbc7 (vertex names):
+    #> + edges from 9762267 (vertex names):
     #> [1] Peter  ->Berthold    Victor ->Peter       Victor ->Berthold   
     #> [4] Victor ->Ramuald     Ambrose->Bonaventure Ramuald->Bonaventure
 
@@ -240,61 +241,36 @@ jemmah_islamiyah %>%
 crisis_in_cloister %>%
   edg_subset(time == 2) %>% 
   rep_as_adj_matrix(edg_attr = "affect") %>% 
+  `rownames<-`(regmatches(rownames(.), regexpr("^\\w{,4}", rownames(.)))) %>% 
   `colnames<-`(rep("", ncol(.)))
 ```
 
-    #>                                                                           
-    #> Leo         0 0 0 0 0 0  0  0 0  0  0  0  0 0  0  0  0  0  0  0  0 0  0  0
-    #> Arsenius    0 0 0 0 0 0  0  0 0  0  0  0  0 0  0  0  0  0  0  0  0 0  0  0
-    #> Bruno       0 0 0 0 0 0  0  0 0  0  0  0  0 0  0  0  0  0  0  0  0 0  0  0
-    #> Thomas      0 0 0 0 0 0  0  0 0  0  0  0  0 0  0  0  0  0  0  0  0 0  0  0
-    #> Bartholomew 0 0 0 0 0 0  0  0 0  0  0  0  0 0  0  0  0  0  0  0  0 0  0  0
-    #> John Bosco  0 0 0 0 0 0  0  2 0  0  3 -2 -1 0  0  0 -3  0  0  0  1 0  0  0
-    #> Gregory     0 0 0 0 0 3  0  0 0  0  0  0  2 0  0  0 -1  0  0 -3  1 0  0 -2
-    #> Basil       0 0 0 0 0 2  3  0 0 -1  0  0  0 0 -3 -2  0  0  0  0  0 0  0  1
-    #> Martin      0 0 0 0 0 0  0  0 0  0  0  0  0 0  0  0  0  0  0  0  0 0  0  0
-    #> Peter       0 0 0 0 0 0  0 -2 0  0  3  1 -3 0  0  0  2  0  0  0  0 0  0  0
-    #> Bonaventure 0 0 0 0 0 0  0  0 0  3  0  0  0 0  0  0  0  2  0  1  0 0  0  0
-    #> Berthold    0 0 0 0 0 1  0  0 0  3  0  0 -3 0 -1  2  0  0 -2  0  0 0  0  0
-    #> Mark        0 0 0 0 0 0  2  0 0 -3 -1 -2  0 0  1  0  0  0  0  0  0 0  3  0
-    #> Brocard     0 0 0 0 0 0  0  0 0  0  0  0  0 0  0  0  0  0  0  0  0 0  0  0
-    #> Victor      0 0 0 0 0 3  2 -3 0  0  0  0  0 0  0  1  0  0  0  0 -2 0  0 -1
-    #> Ambrose     0 0 0 0 0 0  0 -3 0  0  2  0  0 0  3  0  0  0  0  0  0 0  1 -2
-    #> Ramuald     0 0 0 0 0 0  0  0 0  3  0  0  0 0  1  0  0  0  0  0  2 0  0  0
-    #> Louis       0 0 0 0 0 0  0 -1 0  0  3  0  0 0  1  0  0  0  0 -3  2 0  0 -2
-    #> Winfrid     0 0 0 0 0 3  2 -1 0 -3  0  0  0 0  0  0  0 -2  0  0  1 0  0  0
-    #> Amand       0 0 0 0 0 0 -3  0 0  0  2 -2  1 0  0  0  0  0 -1  0  0 0  0  0
-    #> Hugh        0 0 0 0 0 3  0  0 0  0  0  0  0 0 -2  0  0  1  2 -3  0 2  0 -1
-    #> Boniface    0 0 0 0 0 3  2 -2 0  0  0  0  0 0  0  0  0  0  0 -3  1 0  0 -1
-    #> Albert      0 0 0 0 0 1  2  0 0  0  0  0  3 0  0  0  0  0  0 -1  0 0  0 -3
-    #> Elias       0 0 0 0 0 0  0  3 0 -3 -2  0  0 0  0  0  0 -1  0  2  0 0  0  0
-    #> Simplicius  0 0 0 0 0 2  3  0 0 -3  0 -2  1 0  0  0  0  0  0  0  0 0 -1  0
-    #>               
-    #> Leo          0
-    #> Arsenius     0
-    #> Bruno        0
-    #> Thomas       0
-    #> Bartholomew  0
-    #> John Bosco   0
-    #> Gregory      0
-    #> Basil        0
-    #> Martin       0
-    #> Peter       -1
-    #> Bonaventure  0
-    #> Berthold     0
-    #> Mark         0
-    #> Brocard      0
-    #> Victor       0
-    #> Ambrose     -1
-    #> Ramuald      0
-    #> Louis        0
-    #> Winfrid      0
-    #> Amand        3
-    #> Hugh         0
-    #> Boniface    -1
-    #> Albert      -2
-    #> Elias        1
-    #> Simplicius   0
+    #>                                                                        
+    #> Leo   0 0 0 0 0 0  0  0 0  0  0  0  0 0  0  0  0  0  0  0  0 0  0  0  0
+    #> Arsen 0 0 0 0 0 0  0  0 0  0  0  0  0 0  0  0  0  0  0  0  0 0  0  0  0
+    #> Bruno 0 0 0 0 0 0  0  0 0  0  0  0  0 0  0  0  0  0  0  0  0 0  0  0  0
+    #> Thoma 0 0 0 0 0 0  0  0 0  0  0  0  0 0  0  0  0  0  0  0  0 0  0  0  0
+    #> Barth 0 0 0 0 0 0  0  0 0  0  0  0  0 0  0  0  0  0  0  0  0 0  0  0  0
+    #> John  0 0 0 0 0 0  0  2 0  0  3 -2 -1 0  0  0 -3  0  0  0  1 0  0  0  0
+    #> Grego 0 0 0 0 0 3  0  0 0  0  0  0  2 0  0  0 -1  0  0 -3  1 0  0 -2  0
+    #> Basil 0 0 0 0 0 2  3  0 0 -1  0  0  0 0 -3 -2  0  0  0  0  0 0  0  1  0
+    #> Marti 0 0 0 0 0 0  0  0 0  0  0  0  0 0  0  0  0  0  0  0  0 0  0  0  0
+    #> Peter 0 0 0 0 0 0  0 -2 0  0  3  1 -3 0  0  0  2  0  0  0  0 0  0  0 -1
+    #> Bonav 0 0 0 0 0 0  0  0 0  3  0  0  0 0  0  0  0  2  0  1  0 0  0  0  0
+    #> Berth 0 0 0 0 0 1  0  0 0  3  0  0 -3 0 -1  2  0  0 -2  0  0 0  0  0  0
+    #> Mark  0 0 0 0 0 0  2  0 0 -3 -1 -2  0 0  1  0  0  0  0  0  0 0  3  0  0
+    #> Broca 0 0 0 0 0 0  0  0 0  0  0  0  0 0  0  0  0  0  0  0  0 0  0  0  0
+    #> Victo 0 0 0 0 0 3  2 -3 0  0  0  0  0 0  0  1  0  0  0  0 -2 0  0 -1  0
+    #> Ambro 0 0 0 0 0 0  0 -3 0  0  2  0  0 0  3  0  0  0  0  0  0 0  1 -2 -1
+    #> Ramua 0 0 0 0 0 0  0  0 0  3  0  0  0 0  1  0  0  0  0  0  2 0  0  0  0
+    #> Louis 0 0 0 0 0 0  0 -1 0  0  3  0  0 0  1  0  0  0  0 -3  2 0  0 -2  0
+    #> Winfr 0 0 0 0 0 3  2 -1 0 -3  0  0  0 0  0  0  0 -2  0  0  1 0  0  0  0
+    #> Amand 0 0 0 0 0 0 -3  0 0  0  2 -2  1 0  0  0  0  0 -1  0  0 0  0  0  3
+    #> Hugh  0 0 0 0 0 3  0  0 0  0  0  0  0 0 -2  0  0  1  2 -3  0 2  0 -1  0
+    #> Bonif 0 0 0 0 0 3  2 -2 0  0  0  0  0 0  0  0  0  0  0 -3  1 0  0 -1 -1
+    #> Alber 0 0 0 0 0 1  2  0 0  0  0  0  3 0  0  0  0  0  0 -1  0 0  0 -3 -2
+    #> Elias 0 0 0 0 0 0  0  3 0 -3 -2  0  0 0  0  0  0 -1  0  2  0 0  0  0  1
+    #> Simpl 0 0 0 0 0 2  3  0 0 -3  0 -2  1 0  0  0  0  0  0  0  0 0 -1  0  0
 
 Along with others that are less common.
 
@@ -321,8 +297,8 @@ samplk1 %>%
 Modern R is all about data frames, so using them in network analysis
 should be easy.
 
-`tibble`s are the focus as the `statnet` suite has already begun
-importing the `tidyverse`.
+`tibble`s are the focus as the `statnet` suite already imports
+`tidyverse` packages.
 
 ``` r
 crisis_in_cloister %>% 

@@ -13,7 +13,7 @@ if (dir.exists("man")) {
 
 devtools::document(".")
 
-devtools::install(".", dependencies = FALSE, upgrade_dependencies = FALSE)
+devtools::install(".", dependencies = TRUE, upgrade_dependencies = TRUE)
 
 # system("Rscript inst/logo.R", ignore.stdout = TRUE, wait = TRUE, 
 #        show.output.on.console = FALSE) # rlang update killed it
@@ -21,8 +21,8 @@ devtools::install(".", dependencies = FALSE, upgrade_dependencies = FALSE)
 rmarkdown::render("README.Rmd", output_format = "github_document",
                   envir = new.env())
 
-# covrpage::covrpage(vignette = TRUE)
+covrpage::covrpage(preview = FALSE, vignette = TRUE)
 
-# library(tidyverse)
+# library(tibble);library(pillar);library(crayon)
 
 pkgdown::build_site(lazy = FALSE, seed = 831)

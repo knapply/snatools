@@ -1,12 +1,44 @@
 #' Conversion to `network` objects.
 #' 
+#' Convert objects of class `igraph` to `network` objects.
+#' 
 #' @param x `igraph` ([`igraph::graph`]) or [`tidygraph::tbl_graph`] object.
 #' 
 #' @return A [`network::network`] object.
 #' 
-#' @seealso [as_igraph()], [intergraph::asNetwork()]
+#' @seealso [as_igraph()]
 #' 
 #' @template bknapp-author
+#' 
+#' @examples 
+#' library(snatools)
+#' 
+#' crisis_in_cloister
+#' 
+#' crisis_in_cloister %>% 
+#'   as_network()
+#'   
+#' florence
+#' 
+#' florence %>% 
+#'   as_network()
+#'   
+#' # bipartite igraph to network =============================================================
+#' southern_women
+#' 
+#' southern_women %>% 
+#'   as_network()
+#' 
+#' # tidygraph to network ====================================================================
+#' suppressPackageStartupMessages(library(tidygraph))
+#' 
+#' tg <- crisis_in_cloister %>% 
+#'   as_tbl_graph()
+#'   
+#' tg
+#' 
+#' tg %>% 
+#'   as_network()
 #' 
 #' @export
 as_network <- function(x) {
@@ -51,16 +83,12 @@ as_network.bridge_net <- function(x) {
   if (!is.null(x[["vertices"]]) && nrow(x[["vertices"]])) {
     names(x[["vertices"]])[names(x[["vertices"]]) == ".vrt_name"] <- "vertex.names"
     set.vertex.attribute(out, names(x[["vertices"]]), value = x[["vertices"]])
-    # for (v in colnames(x[["vertices"]])) {
-      # set.vertex.attribute(out, attrname = v, value = x[["vertices"]][[v]])
-    # }
   }
   out
 }
 
 #' @rdname as_network
 #' 
-#' @importFrom igraph is_bipartite
 #' @export
 as_network.igraph <- function(x) {
   as_network.bridge_net(as_bridge_net(x))

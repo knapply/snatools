@@ -25,10 +25,41 @@ as_network(x)
 A \code{\link[network:network]{network::network}} object.
 }
 \description{
-Conversion to \code{network} objects.
+Convert objects of class \code{igraph} to \code{network} objects.
+}
+\examples{
+library(snatools)
+
+crisis_in_cloister
+
+crisis_in_cloister \%>\% 
+  as_network()
+  
+florence
+
+florence \%>\% 
+  as_network()
+  
+# bipartite igraph to network =============================================================
+southern_women
+
+southern_women \%>\% 
+  as_network()
+
+# tidygraph to network ====================================================================
+suppressPackageStartupMessages(library(tidygraph))
+
+tg <- crisis_in_cloister \%>\% 
+  as_tbl_graph()
+  
+tg
+
+tg \%>\% 
+  as_network()
+
 }
 \seealso{
-\code{\link[=as_igraph]{as_igraph()}}, \code{\link[intergraph:asNetwork]{intergraph::asNetwork()}}
+\code{\link[=as_igraph]{as_igraph()}}
 }
 \author{
 Brendan Knapp \email{brendan.g.knapp@gmail.com}

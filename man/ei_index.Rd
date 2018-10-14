@@ -3,7 +3,7 @@
 \name{ei_index}
 \alias{ei_index}
 \alias{autoplot.ei_index}
-\title{E-I Index}
+\title{Krackhardt's E-I Index}
 \usage{
 ei_index(x, vrt_attr, scope = c("global", "group", "vertex"))
 
@@ -24,6 +24,9 @@ or \code{"vertex"}.}
 Given a categorical vertex attribute describing mutually exclusive groups, the E-I
 index represents a ratio of external to internal ties.
 }
+\details{
+\deqn{E\mbox{-}I~Index = \frac{EL-IL}{EL+IL}}
+}
 \examples{
 library(snatools)
 library(ggplot2)
@@ -41,6 +44,11 @@ samplk1 \%>\%
   ei_index(vrt_attr = "group", scope = "vertex") \%>\% 
   autoplot()
 
+}
+\references{
+Krackhardt, David, and Robert N. Stern. "Informal Networks and
+Organizational Crises: An Experimental Simulation." Social Psychology Quarterly 51, no.
+2 (1988): 123-40. \url{http://www.jstor.org/stable/2786835}.
 }
 \author{
 Brendan Knapp \email{brendan.g.knapp@gmail.com}

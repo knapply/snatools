@@ -89,6 +89,18 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/tests_and_coverage.html">Tests and Coverage</a>
+    </li>
+  </ul>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -152,10 +164,10 @@ subset.</p></td>
     <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>snatools</span>)
 
 <span class='no'>florence</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>edg_subset</span>(<span class='no'>relation</span> <span class='kw'>==</span> <span class='st'>"business"</span>)</div><div class='output co'>#&gt; IGRAPH 0760811 UN-- 16 15 -- 
+  <span class='fu'>edg_subset</span>(<span class='no'>relation</span> <span class='kw'>==</span> <span class='st'>"business"</span>)</div><div class='output co'>#&gt; IGRAPH ab9139f UN-- 16 15 -- 
 #&gt; + attr: .vrt_id (v/n), name (v/c), wealth (v/n), priorate_seats (v/n),
 #&gt; | .edg_id (e/n), relation (e/c)
-#&gt; + edges from 0760811 (vertex names):
+#&gt; + edges from ab9139f (vertex names):
 #&gt;  [1] Barbadori   --Castellani   Barbadori   --Ginori      
 #&gt;  [3] Barbadori   --Medici       Barbadori   --Peruzzi     
 #&gt;  [5] Bischeri    --Guadagni     Bischeri    --Lamberteschi
@@ -165,10 +177,10 @@ subset.</p></td>
 #&gt; [13] Medici      --Pazzi        Medici      --Salviati    
 #&gt; + ... omitted several edges</div><div class='input'>
 <span class='no'>crisis_in_cloister</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>edg_subset</span>(<span class='no'>time</span> <span class='kw'>==</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; IGRAPH 07692db DN-- 25 76 -- 
+  <span class='fu'>edg_subset</span>(<span class='no'>time</span> <span class='kw'>==</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; IGRAPH ab95cab DN-- 25 76 -- 
 #&gt; + attr: .vrt_id (v/n), name (v/c), cloisterville (v/l), .edg_id (e/n),
 #&gt; | affect (e/n), time (e/n)
-#&gt; + edges from 07692db (vertex names):
+#&gt; + edges from ab95cab (vertex names):
 #&gt;  [1] Peter      -&gt;Bonaventure Peter      -&gt;Mark        Peter      -&gt;Victor     
 #&gt;  [4] Peter      -&gt;Leo         Peter      -&gt;Bartholomew Peter      -&gt;Brocard    
 #&gt;  [7] Bonaventure-&gt;Peter       Bonaventure-&gt;Mark        Bonaventure-&gt;Ambrose    
@@ -194,10 +206,10 @@ subset.</p></td>
 #&gt;  Edge attribute names: 
 #&gt;     .edg_id affect time </div><div class='input'>
 <span class='no'>crisis_in_cloister</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'>edg_subset</span>(<span class='no'>time</span> <span class='kw'>==</span> <span class='fl'>3</span> <span class='kw'>&amp;</span> <span class='no'>affect</span> <span class='kw'>&lt;</span> <span class='fl'>0</span>, <span class='kw'>drop_isolates</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; IGRAPH 0773fbc DN-- 16 37 -- 
+  <span class='fu'>edg_subset</span>(<span class='no'>time</span> <span class='kw'>==</span> <span class='fl'>3</span> <span class='kw'>&amp;</span> <span class='no'>affect</span> <span class='kw'>&lt;</span> <span class='fl'>0</span>, <span class='kw'>drop_isolates</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; IGRAPH ab9eec3 DN-- 16 37 -- 
 #&gt; + attr: .vrt_id (v/n), name (v/c), cloisterville (v/l), .edg_id (e/n),
 #&gt; | affect (e/n), time (e/n)
-#&gt; + edges from 0773fbc (vertex names):
+#&gt; + edges from ab9eec3 (vertex names):
 #&gt;  [1] John Bosco-&gt;Peter      John Bosco-&gt;Ramuald    John Bosco-&gt;Louis     
 #&gt;  [4] Gregory   -&gt;Peter      Gregory   -&gt;Victor     Gregory   -&gt;Amand     
 #&gt;  [7] Basil     -&gt;Gregory    Basil     -&gt;Berthold   Basil     -&gt;Victor    

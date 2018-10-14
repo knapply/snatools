@@ -34,7 +34,7 @@
 
 <meta property="og:title" content="Conversion to <code>igraph</code> objects. — as_igraph" />
 
-<meta property="og:description" content="Accurately map foreign graph data to igraph objects." />
+<meta property="og:description" content="Convert objects of class network to igraph objects." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -89,6 +89,18 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/tests_and_coverage.html">Tests and Coverage</a>
+    </li>
+  </ul>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -123,7 +135,7 @@
 
     <div class="ref-description">
     
-    <p>Accurately map foreign graph data to <code>igraph</code> objects.</p>
+    <p>Convert objects of class <code>network</code> to <code>igraph</code> objects.</p>
     
     </div>
 
@@ -146,7 +158,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p><code><a href='http://www.rdocumentation.org/packages/network/topics/network'>network::network</a></code> (or <code><a href='http://www.rdocumentation.org/packages/tidygraph/topics/tbl_graph'>tidygraph::tbl_graph</a></code>) object.</p></td>
+      <td><p><code><a href='http://www.rdocumentation.org/packages/network/topics/network'>network::network</a></code> object.</p></td>
     </tr>
     </table>
     
@@ -154,17 +166,140 @@
 
     <p>An <code>igraph</code> (<code><a href='http://www.rdocumentation.org/packages/igraph/topics/make_graph'>igraph::graph</a></code>) object.</p>
     
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p><code>as_igraph()</code> converts <code>x</code> to an intermediate <code>bridge_net</code> object that is capable of
-mapping metadata, edges, vertices, and attributes (edge, vertex, and graph-level)
-to a new, valid <code>igraph</code> object. <br /></p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='as_network.html'>as_network()</a></code>, <code><a href='http://www.rdocumentation.org/packages/intergraph/topics/asIgraph'>intergraph::asIgraph()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='as_network.html'>as_network()</a></code></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>snatools</span>)
+
+<span class='fu'>data</span>(<span class='st'>"sampson"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"ergm"</span>)
+
+<span class='no'>samplike</span></div><div class='output co'>#&gt;  Network attributes:
+#&gt;   vertices = 18 
+#&gt;   directed = TRUE 
+#&gt;   hyper = FALSE 
+#&gt;   loops = FALSE 
+#&gt;   multiple = FALSE 
+#&gt;   total edges= 88 
+#&gt;     missing edges= 0 
+#&gt;     non-missing edges= 88 
+#&gt; 
+#&gt;  Vertex attribute names: 
+#&gt;     cloisterville group vertex.names 
+#&gt; 
+#&gt;  Edge attribute names: 
+#&gt;     nominations </div><div class='input'>
+<span class='no'>samplike</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>as_igraph</span>()</div><div class='output co'>#&gt; IGRAPH a994459 DN-- 18 88 -- 
+#&gt; + attr: .vrt_id (v/n), name (v/c), group (v/c), cloisterville (v/l),
+#&gt; | .edg_id (e/n), nominations (e/n)
+#&gt; + edges from a994459 (vertex names):
+#&gt;  [1] Bonaventure-&gt;John Bosco  Mark       -&gt;John Bosco  John Bosco -&gt;Gregory    
+#&gt;  [4] Basil      -&gt;Gregory     Winfrid    -&gt;Gregory     Boniface   -&gt;Gregory    
+#&gt;  [7] John Bosco -&gt;Basil       Bonaventure-&gt;Peter       John Bosco -&gt;Bonaventure
+#&gt; [10] Peter      -&gt;Bonaventure Berthold   -&gt;Bonaventure Amand      -&gt;Mark       
+#&gt; [13] Ambrose    -&gt;Victor      Romauld    -&gt;Victor      Louis      -&gt;Victor     
+#&gt; [16] Victor     -&gt;Ambrose     Romauld    -&gt;Ambrose     Victor     -&gt;Romauld    
+#&gt; [19] Hugh       -&gt;Winfrid     Romauld    -&gt;Amand       Simplicius -&gt;Amand      
+#&gt; + ... omitted several edges</div><div class='input'>
+<span class='co'># bipartite network to igraph =============================================================</span>
+<span class='no'>southern_women_matrix</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(
+  <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>,
+  <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>,
+  <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>,
+  <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0</span>,
+  <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>,
+  <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>,
+  <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>,
+  <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>,
+  <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>,
+  <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0</span>,
+  <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>,
+  <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>,
+  <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>,
+  <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0</span>,
+  <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>,
+  <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>,
+  <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>,
+  <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>1</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>
+  ) <span class='kw'>%&gt;%</span>
+  <span class='fu'>matrix</span>(<span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>18</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>14</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>`rownames&lt;-`</span>(<span class='fu'>c</span>(<span class='st'>"EVELYN"</span>, <span class='st'>"LAURA"</span>, <span class='st'>"THERESA"</span>, <span class='st'>"BRENDA"</span>, <span class='st'>"CHARLOTTE"</span>, <span class='st'>"FRANCES"</span>,
+                 <span class='st'>"ELEANOR"</span>, <span class='st'>"PEARL"</span>, <span class='st'>"RUTH"</span>, <span class='st'>"VERNE"</span>, <span class='st'>"MYRNA"</span>, <span class='st'>"KATHERINE"</span>, <span class='st'>"SYLVIA"</span>,
+                 <span class='st'>"NORA"</span>, <span class='st'>"HELEN"</span>, <span class='st'>"DOROTHY"</span>, <span class='st'>"OLIVIA"</span>, <span class='st'>"FLORA"</span>))
+
+<span class='no'>sw_nw</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>network</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/network/topics/as.network.matrix'>as.network.matrix</a></span>(<span class='no'>southern_women_matrix</span>)
+
+<span class='no'>sw_nw</span></div><div class='output co'>#&gt;  Network attributes:
+#&gt;   vertices = 32 
+#&gt;   directed = FALSE 
+#&gt;   hyper = FALSE 
+#&gt;   loops = FALSE 
+#&gt;   multiple = FALSE 
+#&gt;   bipartite = 18 
+#&gt;   total edges= 89 
+#&gt;     missing edges= 0 
+#&gt;     non-missing edges= 89 
+#&gt; 
+#&gt;  Vertex attribute names: 
+#&gt;     vertex.names 
+#&gt; 
+#&gt; No edge attributes</div><div class='input'>
+<span class='no'>sw_nw</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>as_igraph</span>()</div><div class='output co'>#&gt; IGRAPH a9a0e71 UN-B 32 89 -- 
+#&gt; + attr: .vrt_id (v/n), name (v/c), .actor (v/l), type (v/l), .edg_id
+#&gt; | (e/n)
+#&gt; + edges from a9a0e71 (vertex names):
+#&gt;  [1] EVELYN   --19 EVELYN   --20 EVELYN   --21 EVELYN   --22 EVELYN   --23
+#&gt;  [6] EVELYN   --24 EVELYN   --26 EVELYN   --27 LAURA    --19 LAURA    --20
+#&gt; [11] LAURA    --21 LAURA    --23 LAURA    --24 LAURA    --25 LAURA    --26
+#&gt; [16] THERESA  --20 THERESA  --21 THERESA  --22 THERESA  --23 THERESA  --24
+#&gt; [21] THERESA  --25 THERESA  --26 THERESA  --27 BRENDA   --19 BRENDA   --21
+#&gt; [26] BRENDA   --22 BRENDA   --23 BRENDA   --24 BRENDA   --25 BRENDA   --26
+#&gt; [31] CHARLOTTE--21 CHARLOTTE--22 CHARLOTTE--23 CHARLOTTE--25 FRANCES  --21
+#&gt; + ... omitted several edges</div><div class='input'>
+<span class='co'># networkDynamic to igraph ================================================================</span>
+<span class='fu'>data</span>(<span class='st'>"windsurfers"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"networkDynamic"</span>)
+
+<span class='no'>windsurfers</span></div><div class='output co'>#&gt;  Network attributes:
+#&gt;   vertices = 95 
+#&gt;   directed = FALSE 
+#&gt;   hyper = FALSE 
+#&gt;   loops = FALSE 
+#&gt;   multiple = FALSE 
+#&gt;   bipartite = FALSE 
+#&gt;   atmp.active: (not shown)
+#&gt;   day.active: (not shown)
+#&gt;   cord.active: (not shown)
+#&gt;   gst.active: (not shown)
+#&gt;   week.active: (not shown)
+#&gt;   wspd.active: (not shown)
+#&gt;   wvht.active: (not shown)
+#&gt;   total edges= 556 
+#&gt;     missing edges= 0 
+#&gt;     non-missing edges= 556 
+#&gt; 
+#&gt;  Vertex attribute names: 
+#&gt;     active group1 group2 regular vertex.names 
+#&gt; 
+#&gt;  Edge attribute names: 
+#&gt;     active </div><div class='input'>
+<span class='no'>windsurfers</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>as_igraph</span>()</div><div class='output co'>#&gt; IGRAPH a9a4b4a UN-- 95 556 -- 
+#&gt; + attr: .vrt_id (v/n), name (v/n), active (v/x), group1 (v/n), group2
+#&gt; | (v/n), regular (v/n), .edg_id (e/n), active (e/x)
+#&gt; + edges from a9a4b4a (vertex names):
+#&gt;  [1]  1-- 4  1-- 5  1-- 6  1-- 8  1-- 9  1--11  2-- 4  2-- 5  2-- 7  4-- 5
+#&gt; [11]  4--11  5--11  6-- 8  6-- 9  8-- 9  1-- 2  1-- 3  1--12  1--18  1--19
+#&gt; [21]  2-- 3  2--12  2--18  2--19  2--20  5--18 12--17 12--19 13--14 13--15
+#&gt; [31] 13--20 14--15 14--18 14--20 15--18 15--20 18--20  1--30 21--23 12--21
+#&gt; [41] 21--24 21--25 21--28 12--23 23--24 23--25 15--23 23--28  3-- 4  3--30
+#&gt; [51]  4--29  4--30 12--24 12--25 12--15 12--28 24--25 24--28 25--28 15--31
+#&gt; [61] 15--32 15--33 15--36 26--27 26--28 26--31 27--28 27--31 28--31 31--32
+#&gt; + ... omitted several edges</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -173,10 +308,10 @@ to a new, valid <code>igraph</code> object. <br /></p>
       
       <li><a href="#value">Value</a></li>
 
-      <li><a href="#details">Details</a></li>
-
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
     <h2>Author</h2>
     
