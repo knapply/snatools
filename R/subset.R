@@ -25,12 +25,15 @@
 #' 
 #' @importFrom rlang !! enquo eval_tidy quo
 #' @export
-edg_subset <- function(x, .predicate, drop_isolates = FALSE) {
+edg_subset <- function(x, .predicate, .drop_isolates = FALSE) {
   validate_args(x, validate_graph = TRUE)
   bn <- as_bridge_net(x)
   bn[["edges"]] <- eval_tidy(quo(bn[["edges"]][!!enquo(.predicate), , drop = FALSE]),
                              data = bn[["edges"]])
-  if (drop_isolates) {
+  
+  bn[["edges"]] <- na.omit(bn[["edges"]])
+  
+  if (.drop_isolates) {
     .remaining <- unique(c(bn[["edges"]][[".ego"]], bn[["edges"]][[".alter"]]))
     bn[["vertices"]] <- bn[["vertices"]][bn[["vertices"]][[".vrt_id"]] %in% 
                                            .remaining, , drop = FALSE]
@@ -96,3 +99,6 @@ vrt_subset <- function(x, .predicate) {
          igraph = as_igraph.bridge_net(bn),
          network = as_network.bridge_net(bn))
 }
+
+
+

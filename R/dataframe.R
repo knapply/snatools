@@ -61,7 +61,6 @@ standardize_vrt_cols <- function(x, .class, .bipartite) {
 }
 
 standardize_edg_cols <- function(x) {
-  # x[[".edg_id"]] <- seq_len(nrow(x))
   col_names <- colnames(x)
   optional_cols <- col_names[!col_names %in% c(".edg_id", ".ego", ".alter")]
   if (!is_empty(optional_cols)) {
@@ -72,7 +71,6 @@ standardize_edg_cols <- function(x) {
   `rownames<-`(x, NULL)
 }
 
-# * new data frames * ====
 as.data.frame.network <- function(x, .unit = c("edges", "vertices")) {
   .unit <- match.arg(.unit, c("edges", "vertices"))
   if (.unit == "edges") {
@@ -91,7 +89,7 @@ as.data.frame.network <- function(x, .unit = c("edges", "vertices")) {
                                stringsAsFactors = FALSE)
     }
     attr_names <- edg_attr_names(x)
-    if (is.null(attr_names)) {
+    if (is.null(attr_names) | identical(attr_names, ".edg_id")) {
       return(standardize_edg_cols(first_cols))
     }
     out <- lapply(attr_names, function(e_attr) {
@@ -147,9 +145,10 @@ as.data.frame.igraph <- function(x, .unit = c("edges", "vertices")) {
     el <- rep_as_edgelist(x, use_names = FALSE)
     first_cols <- data.frame(.edg_id = seq_len(nrow(el)),
                              .ego = el[, 1L],
-                             .alter = el[, 2L])
+                             .alter = el[, 2L],
+                             stringsAsFactors = FALSE)
     attr_names <- edg_attr_names(x)
-    if (is.null(attr_names)) {
+    if (is.null(attr_names) | identical(attr_names, ".edg_id")) {
       return(standardize_edg_cols(first_cols))
     }
     out <- lapply(attr_names, function(e_attr) {
