@@ -59,7 +59,7 @@ vrt_attr_names.tbl_graph <- function(x) {
 #' @template bknapp-author
 #' 
 #' @export
-vrt_get_attr <- function(x, vrt_attr) {
+vrt_get_attr <- function(x, vrt_attr, .simplify = TRUE, .null_as_na = FALSE) {
   UseMethod("vrt_get_attr")
 }
 
@@ -67,25 +67,40 @@ vrt_get_attr <- function(x, vrt_attr) {
 #' 
 #' @importFrom igraph vertex_attr
 #' @export
-vrt_get_attr.igraph <- function(x, vrt_attr) {
+vrt_get_attr.igraph <- function(x, vrt_attr, .simplify = TRUE, .null_as_na = FALSE) {
   validate_args(x = x, vrt_attr = vrt_attr)
-  vertex_attr(x, vrt_attr)
+  out <- vertex_attr(x, name = vrt_attr)
+  if (.null_as_na) {
+    out <- lapply(out, function(i) if (is.null(i)) NA else i)
+  }
+  if (.simplify && is_simplifiable(out)) {
+    out <- unlist(out)
+  }
+  out
 }
 
 #' @rdname vrt_get_attr
 #' 
 #' @export
-vrt_get_attr.network <- function(x, vrt_attr) {
+vrt_get_attr.network <- function(x, vrt_attr, .simplify = TRUE, .null_as_na = FALSE) {
   validate_args(x = x, vrt_attr = vrt_attr)
-  unlist(lapply(lapply(x[["val"]], `[[`, vrt_attr), `%||%`, NA))
+  out <- lapply(lapply(x[["val"]], `[[`, vrt_attr), `%||%`, NA)
+  if (.null_as_na) {
+    out <- lapply(out, function(i) if (is.null(i)) NA else i)
+  }
+  if (.simplify && is_simplifiable(out)) {
+    out <- unlist(out)
+  }
+  out
 }
 
 #' @rdname vrt_get_attr
 #' 
 #' @export
-vrt_get_attr.tbl_graph <- function(x, vrt_attr) {
+vrt_get_attr.tbl_graph <- function(x, vrt_attr, .simplify = TRUE, .null_as_na = FALSE) {
   validate_args(x = x, vrt_attr = vrt_attr)
-  vrt_get_attr.igraph(as_igraph.tbl_graph(x), vrt_attr)
+  vrt_get_attr.igraph(as_igraph.tbl_graph(x), vrt_attr, 
+                      .simplify = .simplify, .null_as_na = .null_as_na)
 }
 
 #* ====

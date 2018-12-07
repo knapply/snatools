@@ -13,10 +13,10 @@ Imports:
     magrittr,
     methods,
     network,
-    rlang,
-    tibble
+    rlang
 Suggests:
     covr,
+    data.table,
     ergm,
     ggplot2,
     igraphdata,
@@ -24,6 +24,7 @@ Suggests:
     networkDynamic,
     rmarkdown,
     testthat,
+    tibble,
     tidygraph,
     utils
 License: GPL-3 + file LICENSE

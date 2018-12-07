@@ -71,7 +71,7 @@ edg_attr_names.tbl_graph <- function(x) {
 #'   edg_get_attr("relation")
 #' 
 #' @export
-edg_get_attr <- function(x, edg_attr) {
+edg_get_attr <- function(x, edg_attr, .simplify = TRUE, .null_as_na = FALSE) {
   UseMethod("edg_get_attr")
 }
 
@@ -81,24 +81,39 @@ edg_get_attr <- function(x, edg_attr) {
 #' 
 #' @importFrom igraph edge_attr
 #' @export
-edg_get_attr.igraph <- function(x, edg_attr) {
+edg_get_attr.igraph <- function(x, edg_attr, .simplify = TRUE, .null_as_na = FALSE) {
   validate_args(x = x, edg_attr = edg_attr)
-  edge_attr(x, edg_attr)
+  out <- edge_attr(x, edg_attr)
+  if (.null_as_na) {
+    out <- lapply(out, function(i) if (is.null(i)) NA else i)
+  }
+  if (.simplify && is_simplifiable(out)) {
+    out <- unlist(out)
+  }
+  out
 }
 
 #' @rdname edg_get_attr
 #' 
 #' @export
-edg_get_attr.network <- function(x, edg_attr) {
+edg_get_attr.network <- function(x, edg_attr, .simplify = TRUE, .null_as_na = FALSE) {
   validate_args(x = x, edg_attr = edg_attr)
-  unlist(lapply(lapply(x[["mel"]], `[[`, "atl"), `[[`, edg_attr %||% NA))
+  out <- lapply(lapply(x[["mel"]], `[[`, "atl"), `[[`, edg_attr %||% NA)
+  if (.null_as_na) {
+    out <- lapply(out, function(i) if (is.null(i)) NA else i)
+  }
+  if (.simplify && is_simplifiable(out)) {
+    out <- unlist(out)
+  }
+  out
 }
 
 #' @rdname edg_get_attr
 #' 
 #' @export
-edg_get_attr.tbl_graph <- function(x, edg_attr) {
-  edg_get_attr.igraph(as_igraph.tbl_graph(x), edg_attr)
+edg_get_attr.tbl_graph <- function(x, edg_attr, .simplify = TRUE, .null_as_na = FALSE) {
+  edg_get_attr.igraph(as_igraph.tbl_graph(x), edg_attr, .simplify = .simplify, 
+                      .null_as_na = .null_as_na)
 }
 
 

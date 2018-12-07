@@ -14,8 +14,8 @@ as_bridge_net <- function(x) {
                     is_multiplex = net_is_multiplex(x),
                     has_loops = net_has_loops(x),
                     has_isolates = net_has_isolates(x)),
-    edges = edg_as_df(x),
-    vertices = vrt_as_df(x)
+    edges = as.data.frame(x, .unit = "edges"),
+    vertices = as.data.frame(x, .unit = "vertices")
     )
   class(out) <- "bridge_net"
   out

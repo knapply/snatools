@@ -15,9 +15,9 @@ have_same_edgelists <- function(x, y) {
 }
 
 have_same_edge_attrs <- function(x, y) {
-  x_attrs <- edg_as_df(x)
+  x_attrs <- as.data.frame(x)
   x_attrs[, c(".ego", ".alter")] <- NULL
-  y_attrs <- edg_as_df(y)
+  y_attrs <- as.data.frame(y)
   y_attrs[, c(".ego", ".alter")] <- NULL
   if (all(dim(x_attrs) == dim(y_attrs))) {
     return(identical(x_attrs, y_attrs))
@@ -25,13 +25,9 @@ have_same_edge_attrs <- function(x, y) {
   FALSE
 }
 
-have_same_vert_attrs <- function(x, y) {
-  x_attrs <- vrt_as_df(x)
-  y_attrs <- vrt_as_df(y)
-  if (all(dim(x_attrs) == dim(y_attrs))) {
-    return(identical(x_attrs, y_attrs))
-  }
-  FALSE
+have_same_vertices <- function(x, y) {
+  identical(as.data.frame(x, .unit = "vertices"), 
+            as.data.frame(y, .unit = "vertices"))
 }
 
 have_same_metadata <- function(x, y) {
@@ -39,10 +35,7 @@ have_same_metadata <- function(x, y) {
       net_is_directed(x) == net_is_directed(y))
 }
 
-
 are_same_graphs <- function(x, y) {
-  # validate_args(x = x, validate_graph = TRUE)
-  # validate_args(x = y, validate_graph = TRUE)
   if (inherits(x, "igraph") && net_is_bipartite(x)) {
     x <- prep_bipartite_igraph(x)
   }
@@ -52,7 +45,7 @@ are_same_graphs <- function(x, y) {
   tests <- c(have_same_metadata = have_same_metadata(x, y),
              have_same_edgelists = have_same_edgelists(x, y),
              have_same_edge_attrs = have_same_edge_attrs(x, y),
-             have_same_vert_attrs = have_same_vert_attrs(x, y))
+             have_same_vertices = have_same_vertices(x, y))
   if (all(tests)) {
     return(TRUE)
   }
@@ -60,3 +53,15 @@ are_same_graphs <- function(x, y) {
   glue_message("The following tests failed:\n{fails}")
   FALSE
 }
+
+# data("sampson", package = "ergm")
+# tibble::as_tibble(samplike)
+# g <- network::network.initialize(n = 0)
+# as.data.frame(g)
+# as.data.frame(g, .unit = "vertices")
+# have_same_edgelists(iso_envir1$windsurfers, as_igraph(iso_envir1$windsurfers))
+# are_same_graphs(iso_envir1$windsurfers, as_igraph(iso_envir1$windsurfers))
+# all.equal(
+# head(as.data.frame(iso_envir1$windsurfers)),
+# head(as.data.frame(as_igraph(iso_envir1$windsurfers)))
+# )

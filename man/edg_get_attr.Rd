@@ -7,13 +7,16 @@
 \alias{edg_get_attr.tbl_graph}
 \title{Get a Specific Edge Attribute}
 \usage{
-edg_get_attr(x, edg_attr)
+edg_get_attr(x, edg_attr, .simplify = TRUE, .null_as_na = FALSE)
 
-\method{edg_get_attr}{igraph}(x, edg_attr)
+\method{edg_get_attr}{igraph}(x, edg_attr, .simplify = TRUE,
+  .null_as_na = FALSE)
 
-\method{edg_get_attr}{network}(x, edg_attr)
+\method{edg_get_attr}{network}(x, edg_attr, .simplify = TRUE,
+  .null_as_na = FALSE)
 
-\method{edg_get_attr}{tbl_graph}(x, edg_attr)
+\method{edg_get_attr}{tbl_graph}(x, edg_attr, .simplify = TRUE,
+  .null_as_na = FALSE)
 }
 \arguments{
 \item{x}{An \code{igraph}, \code{network}, or \code{tbl_graph}.}

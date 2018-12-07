@@ -55,22 +55,23 @@ ei_global <- function(x, vrt_attr) {
   (external - internal) / n_edges
 }
 
-#' @importFrom tibble tibble
+
 ei_group <- function(x, vrt_attr) {
   mix_mat <- rep_as_mixing_matrix(x, vrt_attr)
   internal <- diag(mix_mat)
   diag(mix_mat) <- NA_integer_
   external <- `storage.mode<-`(rowSums(mix_mat, na.rm = TRUE), "integer")
   ei <- (external - internal) / (external + internal)
-  out <- tibble(attribute = rownames(mix_mat),
+  out <- data.frame(attribute = rownames(mix_mat),
                 external_ties = external,
                 internal_ties = internal,
-                ei_index = ei)
+                ei_index = ei,
+                stringsAsFactors = FALSE)
   
-  `class<-`(out, c("ei_index", "tibble", "data.frame"))
+  `class<-`(out, c("ei_index", "data.frame"))
 }
 
-#' @importFrom tibble as_tibble tibble
+
 ei_vertex <- function(x, vrt_attr) {
   vrt_names <- vrt_get_names(x)
   adj_list <- rep_as_adj_list(x, vrt_attr = vrt_attr)
@@ -91,7 +92,7 @@ ei_vertex <- function(x, vrt_attr) {
                           do.call(rbind.data.frame, 
                                   c(init_df, stringsAsFactors = FALSE)),
                           stringsAsFactors = FALSE)
-  `class<-`(as_tibble(out), c("ei_index", "tibble", "data.frame"))
+  `class<-`(out, c("ei_index", "data.frame"))
 }
 
 #' @rdname ei_index
@@ -132,10 +133,4 @@ autoplot.ei_index <- function(x, xlim = c(-1, 1)) {
   }
   out
 }
-
-#' @importFrom tibble as_tibble
-print.ei_index <- function(x, ...) {
-  print(as_tibble(x), ...)
-}
-
 

@@ -7,13 +7,16 @@
 \alias{vrt_get_attr.tbl_graph}
 \title{Get a Vertex Attribute}
 \usage{
-vrt_get_attr(x, vrt_attr)
+vrt_get_attr(x, vrt_attr, .simplify = TRUE, .null_as_na = FALSE)
 
-\method{vrt_get_attr}{igraph}(x, vrt_attr)
+\method{vrt_get_attr}{igraph}(x, vrt_attr, .simplify = TRUE,
+  .null_as_na = FALSE)
 
-\method{vrt_get_attr}{network}(x, vrt_attr)
+\method{vrt_get_attr}{network}(x, vrt_attr, .simplify = TRUE,
+  .null_as_na = FALSE)
 
-\method{vrt_get_attr}{tbl_graph}(x, vrt_attr)
+\method{vrt_get_attr}{tbl_graph}(x, vrt_attr, .simplify = TRUE,
+  .null_as_na = FALSE)
 }
 \arguments{
 \item{x}{An \code{igraph}, \code{network}, or \code{tbl_graph}.}

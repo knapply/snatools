@@ -27,6 +27,10 @@ is_empty <- function(x) {
   length(x) == 0L
 }
 
+is_simplifiable <- function(x) {
+  all(vapply(x, function(attr) length(attr) < 2L, logical(1L)))
+}
+
 # is_null <- function(x) {
   # identical(x, NULL)
 # }

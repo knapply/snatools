@@ -49,16 +49,18 @@ network::set.edge.attribute(nw_dir, names(edge_attrs), value = edge_attrs)
 network::set.vertex.attribute(nw_undir, attrname = names(nw_attrs), value = nw_attrs)
 network::set.edge.attribute(nw_undir, names(edge_attrs), value = edge_attrs)
 
-vrt_control_tibble <- tibble::tibble(.vrt_id = seq_len(nrow(ig_attrs)),
-                                     .vrt_name = ig_attrs$name,
-                                     lab = ig_attrs$lab,
-                                     foo = ig_attrs$foo)
+vrt_control_df <- data.frame(.vrt_id = seq_len(nrow(ig_attrs)),
+                             .vrt_name = ig_attrs$name,
+                             lab = ig_attrs$lab,
+                             foo = ig_attrs$foo,
+                             stringsAsFactors = FALSE)
 
-edg_control_tibble <- tibble::tibble(.edg_id = seq_len(nrow(el)),
-                                     .ego = el[, 1],
-                                     .alter = el[, 2],
-                                     elab = edge_attrs$elab,
-                                     efoo = edge_attrs$efoo)
+edg_control_df <- data.frame(.edg_id = seq_len(nrow(el)),
+                             .ego = el[, 1],
+                             .alter = el[, 2],
+                             elab = edge_attrs$elab,
+                             efoo = edge_attrs$efoo,
+                             stringsAsFactors = FALSE)
 
 #* vertex data frames ====
 test_that("vertex data frame construction works", {
@@ -66,34 +68,34 @@ test_that("vertex data frame construction works", {
   # directed
   expect_identical(
     vrt_as_df(ig_dir), 
-    vrt_control_tibble
+    vrt_control_df
     )
   # undirected
   expect_identical(
     vrt_as_df(ig_undir),
-    vrt_control_tibble
+    vrt_control_df
     )
 # tidygraph
   # directed
   expect_identical(
     vrt_as_df(tg_dir),
-    vrt_control_tibble
+    vrt_control_df
     )
   # undirected
   expect_identical(
     vrt_as_df(tg_undir),
-    vrt_control_tibble
+    vrt_control_df
     )
 # network
   # directed
   expect_identical(
     vrt_as_df(nw_dir),
-    vrt_control_tibble
+    vrt_control_df
     )
   # undirected
   expect_identical(
     vrt_as_df(nw_undir),
-    vrt_control_tibble
+    vrt_control_df
     )
 })
 
@@ -103,34 +105,34 @@ test_that("edge data frame construction works", {
   # directed
   expect_identical(
     edg_as_df(ig_dir), 
-    edg_control_tibble
+    edg_control_df
     )
   # undirected
   expect_identical(
     edg_as_df(ig_undir),
-    edg_control_tibble
+    edg_control_df
     )
 # tidygraph
   # directed
   expect_identical(
     edg_as_df(tg_dir),
-    edg_control_tibble
+    edg_control_df
     )
   # undirected
   expect_identical(
     edg_as_df(tg_undir),
-    edg_control_tibble
+    edg_control_df
     )
 # network
   # directed
   expect_identical(
     edg_as_df(nw_dir),
-    edg_control_tibble
+    edg_control_df
     )
   # undirected
   expect_identical(
     edg_as_df(nw_undir),
-    edg_control_tibble
+    edg_control_df
     )
 })
 
@@ -200,21 +202,27 @@ network::set.vertex.attribute(nw_bip, names(nw_bip_attrs), # breaks if list/df o
 
 network::set.edge.attribute(nw_bip, names(nw_bip_edges), nw_bip_edges)
 
-ig_bip_vrt_control_tibble <- tibble::tibble(.vrt_id = seq_len(nrow(ig_bip_attrs)),
-                                            .vrt_name = ig_bip_attrs$name,
-                                            .actor = ig_bip_attrs$type,
-                                            foo = ig_bip_attrs$foo)
-nw_bip_vrt_control_tibble <- tibble::tibble(.vrt_id = seq_len(nrow(ig_bip_attrs)),
-                                            .vrt_name = ig_bip_attrs$name,
-                                            .actor = !ig_bip_attrs$type,
-                                            foo = ig_bip_attrs$foo)
-bip_edg_control_tibble <- tibble::tibble(.edg_id = seq_len(nrow(ig_bip_edges)),
-                                         .ego = el_bip[, 1],
-                                         .alter = el_bip[, 2],
-                                         lab = ig_bip_edges$lab,
-                                         foo = ig_bip_edges$foo)
-bip_edg_control_tibble$.ego <- as.integer(bip_edg_control_tibble$.ego)
-bip_edg_control_tibble$.alter <- as.integer(bip_edg_control_tibble$.alter)
+ig_bip_vrt_control_df <- data.frame(.vrt_id = seq_len(nrow(ig_bip_attrs)),
+                                    .vrt_name = ig_bip_attrs$name,
+                                    .actor = ig_bip_attrs$type,
+                                    foo = ig_bip_attrs$foo,
+                                    stringsAsFactors = FALSE)
+
+nw_bip_vrt_control_df <- data.frame(.vrt_id = seq_len(nrow(ig_bip_attrs)),
+                                    .vrt_name = ig_bip_attrs$name,
+                                    .actor = !ig_bip_attrs$type,
+                                    foo = ig_bip_attrs$foo,
+                                    stringsAsFactors = FALSE)
+
+bip_edg_control_df <- data.frame(.edg_id = seq_len(nrow(ig_bip_edges)),
+                                 .ego = el_bip[, 1],
+                                 .alter = el_bip[, 2],
+                                 lab = ig_bip_edges$lab,
+                                 foo = ig_bip_edges$foo,
+                                 stringsAsFactors = FALSE)
+
+bip_edg_control_df$.ego <- as.integer(bip_edg_control_df$.ego)
+bip_edg_control_df$.alter <- as.integer(bip_edg_control_df$.alter)
 
 # #* vertex data frames ====
 test_that("bipartite vertex data frame construction works", {
@@ -222,23 +230,23 @@ test_that("bipartite vertex data frame construction works", {
   # directed
   expect_identical(
     vrt_as_df(ig_bip),
-    ig_bip_vrt_control_tibble
+    ig_bip_vrt_control_df
     )
   # undirected
   expect_identical(
     vrt_as_df(ig_bip),
-    ig_bip_vrt_control_tibble
+    ig_bip_vrt_control_df
     )
 # tidygraph
   # directed
   expect_identical(
     vrt_as_df(tg_bip),
-    ig_bip_vrt_control_tibble
+    ig_bip_vrt_control_df
     )
 # network
   expect_identical(
     vrt_as_df(nw_bip),
-    nw_bip_vrt_control_tibble
+    nw_bip_vrt_control_df
     )
 })
 # 
@@ -247,17 +255,17 @@ test_that("bipartite edge data frame construction works", {
 # igraph
   expect_identical(
     edg_as_df(ig_bip),
-    bip_edg_control_tibble
+    bip_edg_control_df
     )
 # tidygraph
   expect_identical(
     edg_as_df(tg_bip),
-    bip_edg_control_tibble
+    bip_edg_control_df
     )
 # network
   expect_identical(
     edg_as_df(nw_bip),
-    bip_edg_control_tibble
+    bip_edg_control_df
     )
 })
 
@@ -273,7 +281,7 @@ network::delete.vertex.attribute(nw_dir, "lab")
 network::delete.vertex.attribute(nw_undir, "foo")
 network::delete.vertex.attribute(nw_undir, "lab")
 
-vrt_no_opts_control_tibble <- vrt_control_tibble[, c(".vrt_id", ".vrt_name")]
+vrt_no_opts_control_df <- vrt_control_df[, c(".vrt_id", ".vrt_name")]
 
 # optional vertex column handling ====
 test_that("handling 0 optional vertex columns works as expected", {
@@ -281,23 +289,23 @@ test_that("handling 0 optional vertex columns works as expected", {
   # directed
   expect_identical(
     vrt_as_df(ig_dir),
-    vrt_no_opts_control_tibble
+    vrt_no_opts_control_df
   )
   # undirected
   expect_identical(
     vrt_as_df(ig_undir),
-    vrt_no_opts_control_tibble
+    vrt_no_opts_control_df
   )
 # network
   # directed
   expect_identical(
     vrt_as_df(nw_dir),
-    vrt_no_opts_control_tibble
+    vrt_no_opts_control_df
   )
   # undirected
   expect_identical(
     vrt_as_df(nw_undir),
-    vrt_no_opts_control_tibble
+    vrt_no_opts_control_df
   )
 })
 
@@ -305,19 +313,19 @@ test_that("handling 0 optional vertex columns works as expected", {
 ig_dir <- igraph::delete_vertex_attr(ig_dir, "name")
 ig_undir <- igraph::delete_vertex_attr(ig_undir, "name")
 
-vrt_no_opts_control_tibble[[".vrt_name"]] <- seq_len(nrow(vrt_no_opts_control_tibble))
+vrt_no_opts_control_df[[".vrt_name"]] <- seq_len(nrow(vrt_no_opts_control_df))
 
 
 test_that("vrt_dfs from igraphs missing names work as expected", {
   # directed
   expect_identical(
     vrt_as_df(ig_dir),
-    vrt_no_opts_control_tibble
+    vrt_no_opts_control_df
   )
   # undirected
   expect_identical(
     vrt_as_df(ig_undir),
-    vrt_no_opts_control_tibble
+    vrt_no_opts_control_df
   )
 })
 
@@ -334,7 +342,7 @@ network::delete.edge.attribute(nw_dir, "elab")
 network::delete.edge.attribute(nw_undir, "efoo")
 network::delete.edge.attribute(nw_undir, "elab")
 
-edg_no_opts_control_tibble <- edg_control_tibble[, c(".edg_id", ".ego", ".alter")]
+edg_no_opts_control_df <- edg_control_df[, c(".edg_id", ".ego", ".alter")]
 
 # optional edge column handling ====
 test_that("handling 0 optional edge columns works as expected", {
@@ -342,23 +350,23 @@ test_that("handling 0 optional edge columns works as expected", {
   # directed
   expect_identical(
     edg_as_df(ig_dir),
-    edg_no_opts_control_tibble
+    edg_no_opts_control_df
   )
   # undirected
   expect_identical(
     edg_as_df(ig_undir),
-    edg_no_opts_control_tibble
+    edg_no_opts_control_df
   )
 # network
   # directed
   expect_identical(
     edg_as_df(nw_dir),
-    edg_no_opts_control_tibble
+    edg_no_opts_control_df
   )
   # undirected
   expect_identical(
     edg_as_df(nw_undir),
-    edg_no_opts_control_tibble
+    edg_no_opts_control_df
   )
 })
 
@@ -366,14 +374,12 @@ test_that("handling 0 optional edge columns works as expected", {
 test_that("nested attributes and networkDynamic objects work", {
   iso_envir1 <- new.env()
   data("windsurfers", package = "networkDynamic", envir = iso_envir1)
-  expect_s3_class(vrt_as_df(iso_envir1$windsurfers), "tbl_df")
+  expect_s3_class(vrt_as_df(iso_envir1$windsurfers), "data.frame")
   
   iso_envir2 <- new.env()
   data(nd_test_nets, package = "networkDynamic", envir = iso_envir2)
   for (i in seq_along(iso_envir2$nd_test_nets[1:10])) {
-    # print(class(iso_envir2$nd_test_nets[[i]]))
-    print(i)
-    expect_s3_class(vrt_as_df(iso_envir2$nd_test_nets[[2]]), "tbl_df")
+    expect_s3_class(vrt_as_df(iso_envir2$nd_test_nets[[2]]), "data.frame")
   }
 })
 
@@ -382,30 +388,36 @@ test_that("empty graphs works", {
 # network
   nw_empty <- network::network.initialize(n = 0)
   
-  expect_s3_class(vrt_as_df(nw_empty), "tbl_df")
-  expect_true(is_empty(vrt_as_df(nw_empty)))
+  expect_s3_class(vrt_as_df(nw_empty), "data.frame")
   expect_identical(nrow(vrt_as_df(nw_empty)), 0L)
-  expect_identical(ncol(vrt_as_df(nw_empty)), 0L)
+  expect_identical(ncol(vrt_as_df(nw_empty)), 2L)
   
-  expect_s3_class(edg_as_df(nw_empty), "tbl_df")
-  expect_true(is_empty(edg_as_df(nw_empty)))
+  expect_s3_class(edg_as_df(nw_empty), "data.frame")
   expect_identical(nrow(edg_as_df(nw_empty)), 0L)
-  expect_identical(ncol(edg_as_df(nw_empty)), 0L)
+  expect_identical(ncol(edg_as_df(nw_empty)), 3L)
 
 # igraph
   ig_empty <- igraph::make_empty_graph(n = 0)
   
-  expect_s3_class(vrt_as_df(ig_empty), "tbl_df")
-  expect_true(is_empty(vrt_as_df(ig_empty)))
+  expect_s3_class(vrt_as_df(ig_empty), "data.frame")
   expect_identical(nrow(vrt_as_df(ig_empty)), 0L)
-  expect_identical(ncol(vrt_as_df(ig_empty)), 0L)
+  expect_identical(ncol(vrt_as_df(ig_empty)), 2L)
   
-  expect_s3_class(edg_as_df(ig_empty), "tbl_df")
-  expect_true(is_empty(edg_as_df(ig_empty)))
+  expect_s3_class(edg_as_df(ig_empty), "data.frame")
   expect_identical(nrow(edg_as_df(ig_empty)), 0L)
-  expect_identical(ncol(edg_as_df(ig_empty)), 0L)
+  expect_identical(ncol(edg_as_df(ig_empty)), 3L)
   
 })
 
+test_that("tibbles and data.tables work", {
+# network
+  nw_empty <- network::network.initialize(n = 0)
+  expect_s3_class(as_tibble.network(nw_empty), "tbl_df")
+  expect_s3_class(as.data.table.network(nw_empty), "data.table")
+# igraph  
+  ig_empty <- igraph::make_empty_graph(n = 0)
+  expect_s3_class(as_tibble.igraph(ig_empty), "tbl_df")
+  expect_s3_class(as.data.table.igraph(ig_empty), "data.table")
+})
 
 

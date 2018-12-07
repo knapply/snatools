@@ -1,98 +1,48 @@
-#* ====
+# 
+# 
+# #* ====
+# #' Extract all vertex attributes as a data frame.
+# #' 
+# #' @template graph-param
+# #' 
+# #' @template bknapp-author
+# #' 
+# #' @examples
+# #' library(snatools)
+# #' 
+# #' crisis_in_cloister %>% 
+# #'   vrt_as_df()
+# 
+# #' florence %>% 
+# #'   vrt_as_df()
+# #' 
+# #' @export
+# vrt_as_df <- function(x) {
+#   UseMethod("vrt_as_df")
+# }
+# 
 
-#' Extract all vertex attributes as a data frame.
-#' 
-#' @template graph-param
-#' 
-#' @template bknapp-author
-#' 
-#' @examples
-#' library(snatools)
-#' 
-#' crisis_in_cloister %>% 
-#'   vrt_as_df()
 
-#' florence %>% 
-#'   vrt_as_df()
-#' 
-#' @export
-vrt_as_df <- function(x) {
-  UseMethod("vrt_as_df")
-}
-
-#' @rdname vrt_as_df
-#' 
-#' @importFrom igraph as_data_frame is_bipartite vcount vertex_attr<- vertex_attr_names
-#' @importFrom tibble as_tibble
-#' @export
-vrt_as_df.igraph <- function(x) {
-  if (net_count_vertices.igraph(x) < 1L) {
-    return(tibble())
-  }
-  if (!"name" %in% vertex_attr_names(x)) {
-    vertex_attr(x, "name") <- seq_len(vcount(x))
-  }
-  out <- as_data_frame(x, what = "vertices")
-  rownames(out) <- NULL
-  out[[".vrt_name"]] <- out[["name"]]
-  out[["name"]] <- NULL
-  bipartite <- is_bipartite(x)
-  if (bipartite) {
-    if (!".actor" %in% colnames(out)) {
-      out[[".actor"]] <- out[["type"]]
+# * new col standardizers * ====
+standardize_vrt_cols <- function(x, .class, .bipartite) {
+  if (.class == "igraph") {
+    if (!"name" %in% colnames(x)) {
+      x[[".vrt_name"]] <- x[[".vrt_id"]]
+    } else {
+      x[[".vrt_name"]] <- x[["name"]]
+      x[["name"]] <- NULL
     }
-    out[["type"]] <- NULL
   }
-  out <- standardize_vrt_cols(out, bipartite = bipartite)
-  
-  as_tibble(out)
-}
-
-#' @rdname vrt_as_df
-#' 
-#' @importFrom tibble as_tibble tibble
-#' @export
-vrt_as_df.network <- function(x) {
-  if (net_count_vertices.network(x) < 1L) {
-    return(tibble())
+  if (.class == "network") {
+    if (!"vertex.names" %in% colnames(x)) {
+      x[[".vrt_name"]] <- x[[".vrt_id"]]
+    } else {
+      x[[".vrt_name"]] <- x[["vertex.names"]]
+      x[["vertex.names"]] <- NULL
+    }
   }
-  attr_names <- unique(unlist(lapply(x[["val"]], names)))
-  out <- lapply(attr_names, function(attr) {
-    lapply(x[["val"]], `[[`, attr)
-    })
-  names(out) <- attr_names
-  out[["na"]] <- NULL
-  nest_test <- unlist(lapply(out, function(x) {
-    any(vapply(x, function(y) length(y) != 1L, logical(1L)))
-    }))
-  to_unlist <- names(nest_test[!nest_test])
-  for (i in to_unlist) {
-    out[[i]] <- unlist(lapply(out[[i]], `%||%`, NA))
-  }
-  # TODO consider going with something like this if {purrr} ever imported
-  # vrt_df(x) %>%
-  #   as_tibble() %>% 
-  #   mutate_if(~ all(map_lgl(., ~ length(.x) == 1)),
-  #             ~ unlist(.))
-  out <- as_tibble(out)
-  out[[".vrt_name"]] <- out[["vertex.names"]]
-  out[["vertex.names"]] <- NULL
-  
-  bipartite <- x[["gal"]][["bipartite"]]
-  if (is.numeric(bipartite)) {
-    out[[".actor"]] <- c(rep(TRUE, times = bipartite), 
-                         rep(FALSE, times = x[["gal"]][["n"]] - bipartite))
-  }
-  out <- standardize_vrt_cols(out, bipartite = is.numeric(bipartite))
-  out
-}
-
-#* ====
-
-standardize_vrt_cols <- function(x, bipartite) {
-  x[[".vrt_id"]] <- seq_len(nrow(x))
   col_names <- colnames(x)
-  if (bipartite) {
+  if (.bipartite) {
     optional_cols <- col_names[!col_names %in% c(".vrt_id", ".vrt_name", ".actor")]
     if (!is_empty(optional_cols)) {
       x <- x[, c(".vrt_id", ".vrt_name", ".actor", optional_cols)]
@@ -110,103 +60,8 @@ standardize_vrt_cols <- function(x, bipartite) {
   `rownames<-`(x, NULL)
 }
 
-#* ====
-
-#' Extract edge attributes as a data frame.
-#' 
-#' @template graph-param
-#' 
-#' @template bknapp-author
-#' 
-#' @examples
-#' library(snatools)
-#' 
-#' crisis_in_cloister %>% 
-#'   edg_as_df()
-#'   
-#' florence %>% 
-#'   edg_as_df()
-#' 
-#' @export
-edg_as_df <- function(x) {
-  UseMethod("edg_as_df")
-}
-
-
-#' @rdname edg_as_df
-#' 
-#' @importFrom igraph as_data_frame is_bipartite edge_attr
-#' @importFrom tibble as_tibble
-#' @export
-edg_as_df.igraph <- function(x) {
-  if (net_count_edges.igraph(x) < 1L) {
-    return(tibble())
-  }
-  el <- get_el.igraph(x)
-  colnames(el) <- c(".ego", ".alter")
-  out <- as_data_frame(x, what = "edges")
-  out <- cbind.data.frame(el, out, stringsAsFactors = FALSE)
-  out[["from"]] <- NULL
-  out[["to"]] <- NULL 
-  out <- standardize_edg_cols(out)
-  
-  as_tibble(out)
-}
-
-#' @rdname edg_as_df
-#' 
-#' @importFrom tibble as_tibble tibble
-#' @export
-edg_as_df.network <- function(x) {
-  if (net_count_edges.network(x) < 1L) {
-    return(tibble())
-  }
-  el <- get_el.network(x)
-  colnames(el) <- c(".ego", ".alter")
-  peeled_attrs <- lapply(x[["mel"]], `[[`, "atl")
-  attr_names <- unique(unlist(lapply(peeled_attrs, names)))
-  ### old
-  # peeled_attrs <- lapply(x[["mel"]], `[[`, "atl")
-  # attr_names <- unique(unlist(lapply(peeled_attrs, names)))
-  # pre_df <- lapply(attr_names, function(attr) {
-  #   res <- unlist(lapply(lapply(peeled_attrs, `[[`, attr), `%||%`, NA))
-  #   res[!is.na(res)]
-  #   })
-  # names(pre_df) <- attr_names
-  # df <- as.data.frame(pre_df, stringsAsFactors = FALSE)
-  # 
-  # out <- cbind.data.frame(el, df, stringsAsFactors = FALSE)
-  # out[["na"]] <- NULL
-  # out <- standardize_edg_cols(out)
-  ###
-  ### new
-  out <- lapply(attr_names, function(attr) {
-    res <- lapply(lapply(peeled_attrs, `[[`, attr), `%||%`, NA)
-    res[!is.na(res)]
-    })
-  names(out) <- attr_names
-  out[["na"]] <- NULL
-  if (is_empty(out)) {
-    return(standardize_edg_cols(tibble::as_tibble(el)))
-  }
-  nest_test <- unlist(lapply(out, function(x) {
-    any(vapply(x, function(y) length(y) != 1L, logical(1L)))
-    }))
-  to_unlist <- names(nest_test[!nest_test])
-  for (i in to_unlist) {
-    out[[i]] <- unlist(lapply(out[[i]], `%||%`, NA))
-  }
-  ###
-  out <- as_tibble(out)
-  out <- cbind.data.frame(el, out, stringsAsFactors = FALSE)
-  out <- standardize_edg_cols(out)
-  as_tibble(out)
-}
-
-#* ====
-
 standardize_edg_cols <- function(x) {
-  x[[".edg_id"]] <- seq_len(nrow(x))
+  # x[[".edg_id"]] <- seq_len(nrow(x))
   col_names <- colnames(x)
   optional_cols <- col_names[!col_names %in% c(".edg_id", ".ego", ".alter")]
   if (!is_empty(optional_cols)) {
@@ -216,3 +71,184 @@ standardize_edg_cols <- function(x) {
   }
   `rownames<-`(x, NULL)
 }
+
+# * new data frames * ====
+as.data.frame.network <- function(x, .unit = c("edges", "vertices")) {
+  .unit <- match.arg(.unit, c("edges", "vertices"))
+  if (.unit == "edges") {
+    edge_ids <- which(!vapply(x[["mel"]], is.null, logical(1L))) 
+    egos <- lapply(x[["mel"]], `[[`, "outl")[edge_ids]
+    alters <- lapply(x[["mel"]], `[[`, "inl")[edge_ids]
+    if (x[["gal"]][["hyper"]]) {
+      first_cols <- data.frame(.edg_id = edge_ids,
+                               .ego = egos,
+                               .alter = alters,
+                               stringsAsFactors = FALSE)
+    } else {
+      first_cols <- data.frame(.edg_id = edge_ids,
+                               .ego = as.integer(unlist(egos)),
+                               .alter = as.integer(unlist(alters)),
+                               stringsAsFactors = FALSE)
+    }
+    attr_names <- edg_attr_names(x)
+    if (is.null(attr_names)) {
+      return(standardize_edg_cols(first_cols))
+    }
+    out <- lapply(attr_names, function(e_attr) {
+      edg_get_attr(x, e_attr)[edge_ids]
+    })
+    names(out) <- attr_names
+    if (".edg_id" %in% attr_names) {
+      first_cols[[".edg_id"]] <- out[[".edg_id"]]
+      out[[".edg_id"]] <- NULL
+    }
+  }
+  if (.unit == "vertices") {
+    first_cols <- data.frame(.vrt_id = which(!vapply(x[["val"]], is.null, logical(1L))))
+    attr_names <- vrt_attr_names(x)
+    if (is.null(attr_names)) {
+      return(standardize_vrt_cols(first_cols, .class = "network", 
+                                  .bipartite = net_is_bipartite(x)))
+    }
+    out <- lapply(attr_names, function(v_attr) {
+      vrt_get_attr(x, v_attr)
+    })
+    names(out) <- attr_names
+    if (".vrt_id" %in% attr_names) {
+      first_cols[[".vrt_id"]] <- out[[".vrt_id"]]
+      out[[".vrt_id"]] <- NULL
+    }
+    bipartite <- x[["gal"]][["bipartite"]]
+    if (is.numeric(bipartite)) {
+      out[[".actor"]] <- c(rep(TRUE, times = bipartite), 
+                           rep(FALSE, times = x[["gal"]][["n"]] - bipartite))
+    }
+  }
+  
+  list_col_index <- !vapply(out, is_simplifiable, logical(1L))
+  out[list_col_index] <- lapply(out[list_col_index], I)
+  atomic_col_names <- names(list_col_index[!list_col_index])
+  out[atomic_col_names] <- lapply(out[atomic_col_names], unlist)
+
+  out <- as.data.frame(out, stringsAsFactors = FALSE)
+  out[list_col_index] <- lapply(out[list_col_index], `class<-`, "list")
+  out <- cbind.data.frame(first_cols, out, stringsAsFactors = FALSE)
+
+  switch(.unit,
+         vertices = standardize_vrt_cols(out, .class = "network", 
+                                         .bipartite = net_is_bipartite(x)),
+         edges = standardize_edg_cols(out))
+}
+
+
+as.data.frame.igraph <- function(x, .unit = c("edges", "vertices")) {
+  .unit <- match.arg(.unit, c("edges", "vertices"))
+  if (.unit == "edges") {
+    el <- rep_as_edgelist(x, use_names = FALSE)
+    first_cols <- data.frame(.edg_id = seq_len(nrow(el)),
+                             .ego = el[, 1L],
+                             .alter = el[, 2L])
+    attr_names <- edg_attr_names(x)
+    if (is.null(attr_names)) {
+      return(standardize_edg_cols(first_cols))
+    }
+    out <- lapply(attr_names, function(e_attr) {
+      edg_get_attr(x, e_attr)
+    })
+    names(out) <- attr_names
+    if (".edg_id" %in% attr_names) {
+      first_cols[[".edg_id"]] <- out[[".edg_id"]]
+      out[[".edg_id"]] <- NULL
+    }
+  }
+  if (.unit == "vertices") {
+    first_cols <- data.frame(.vrt_id = seq_len(net_count_vertices(x)))
+    attr_names <- vrt_attr_names(x)
+    if (is.null(attr_names)) {
+      return(standardize_vrt_cols(first_cols, .class = "igraph",
+                                  .bipartite = net_is_bipartite(x)))
+    }
+    out <- lapply(attr_names, function(v_attr) {
+      vrt_get_attr(x, v_attr)
+    })
+    names(out) <- attr_names
+    if (".vrt_id" %in% attr_names) {
+      first_cols[[".vrt_id"]] <- out[[".vrt_id"]]
+      out[[".vrt_id"]] <- NULL
+    }
+    
+    if (net_is_bipartite(x)) {
+      if (!".actor" %in% colnames(out)) {
+        out[[".actor"]] <- out[["type"]]
+      }
+      out[["type"]] <- NULL
+    }
+  }
+  list_col_index <- !vapply(out, is_simplifiable, logical(1L))
+  out[list_col_index] <- lapply(out[list_col_index], I)
+  atomic_col_names <- names(list_col_index[!list_col_index])
+  out[atomic_col_names] <- lapply(out[atomic_col_names], unlist)
+
+  out <- as.data.frame(out, stringsAsFactors = FALSE)
+  out[list_col_index] <- lapply(out[list_col_index], `class<-`, "list")
+  out <- cbind.data.frame(first_cols, out, stringsAsFactors = FALSE)
+
+  switch(.unit,
+         vertices = standardize_vrt_cols(out, .class = "igraph", 
+                                         .bipartite = net_is_bipartite(x)),
+         edges = standardize_edg_cols(out))
+}
+
+as.data.frame.tbl_graph <- function(x, .unit = c("edges", "vertices")) {
+  as.data.frame(as_igraph(x), .unit = .unit)
+}
+
+# * new tibbles and data.tables * ====
+as_tibble.network <- function(x, .unit = c("edges", "vertices")) {
+  if (!requireNamespace("tibble", quietly = TRUE)) {
+    glue_stop('`tibble` package is required for this operation.
+              Get it with `install.packages("tibble")`.')
+  }
+  tibble::as_tibble(as.data.frame.network(x, .unit = .unit))
+}
+
+as.data.table.network <- function(x, .unit = c("edges", "vertices")) {
+  if (!requireNamespace("data.table", quietly = TRUE)) {
+    glue_stop('`data.table` package is required for this operation.
+              Get it with `install.packages("data.table")`.')
+  }
+  data.table::as.data.table(as.data.frame.network(x, .unit = .unit))
+}
+
+as_tibble.igraph <- function(x, .unit = c("edges", "vertices")) {
+  if (!requireNamespace("tibble", quietly = TRUE)) {
+    glue_stop('`tibble` package is required for this operation.
+              Get it with `install.packages("tibble")`.')
+  }
+  tibble::as_tibble(as.data.frame.igraph(x, .unit = .unit))
+}
+
+as.data.table.igraph <- function(x, .unit = c("edges", "vertices")) {
+  if (!requireNamespace("data.table", quietly = TRUE)) {
+    glue_stop('`data.table` package is required for this operation.
+              Get it with `install.packages("data.table")`.')
+  }
+  data.table::as.data.table(as.data.frame.igraph(x, .unit = .unit))
+}
+
+
+vrt_as_df <- function(x) {
+  as.data.frame(x, .unit = "vertices")
+}
+
+edg_as_df <- function(x) {
+  as.data.frame(x, .unit = "edges")
+}
+
+
+
+
+
+
+
+

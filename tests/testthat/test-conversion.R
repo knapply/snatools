@@ -35,7 +35,7 @@ test_that("network objects convert to igraph correctly", {
   )
   
   expect_true(
-    have_same_vert_attrs(nw_bip, as_igraph(nw_bip))
+    have_same_vertices(nw_bip, as_igraph(nw_bip))
   )
   
   expect_false(
@@ -94,6 +94,9 @@ test_that("igraph objects convert to network correctly", {
   )
   expect_true(
     are_same_graphs(ig_bip, as_network(ig_bip))
+  )
+  expect_true(
+    are_same_graphs(as_network(ig_bip), ig_bip)
   )
   
   
