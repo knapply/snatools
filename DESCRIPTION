@@ -31,6 +31,6 @@ Encoding: UTF-8
 URL: https://github.com/knapply/snatools, https://knapply.github.io/snatools
 BugReports: https://github.com/knapply/snatools/issues
 LazyData: yes
-RoxygenNote: 6.1.0.9000
+RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr

@@ -1,9 +1,9 @@
 Tests and Coverage
 ================
-12 October, 2018 10:16:45
+10 January, 2019 09:25:01
 
 This output is created by
-[covrpage](https://github.com/yonicd/covrpage).
+[covrpage](https://github.com/metrumresearchgroup/covrpage).
 
 ## Coverage
 
@@ -38,58 +38,58 @@ Unit Test summary is created using the
 [testthat](https://github.com/r-lib/testthat)
 package.
 
-| file                                                          |  n | time | error | failed | skipped | warning |
-| :------------------------------------------------------------ | -: | ---: | ----: | -----: | ------: | ------: |
-| [test-conversion.R](testthat/test-conversion.R)               | 15 | 0.49 |     0 |      0 |       0 |       0 |
-| [test-dataframe.R](testthat/test-dataframe.R)                 | 56 | 0.11 |     0 |      0 |       0 |       0 |
-| [test-edge-attributes.R](testthat/test-edge-attributes.R)     | 12 | 0.03 |     0 |      0 |       0 |       0 |
-| [test-edgelist.R](testthat/test-edgelist.R)                   | 27 | 0.05 |     0 |      0 |       0 |       0 |
-| [test-metadata.R](testthat/test-metadata.R)                   | 78 | 0.10 |     0 |      0 |       0 |       0 |
-| [test-subset.R](testthat/test-subset.R)                       |  6 | 0.06 |     0 |      0 |       0 |       0 |
-| [test-utils.R](testthat/test-utils.R)                         |  9 | 0.01 |     0 |      0 |       0 |       0 |
-| [test-vertex-attributes.R](testthat/test-vertex-attributes.R) | 12 | 0.04 |     0 |      0 |       0 |       0 |
+| file                                                          |  n |  time | error | failed | skipped | warning |
+| :------------------------------------------------------------ | -: | ----: | ----: | -----: | ------: | ------: |
+| [test-conversion.R](testthat/test-conversion.R)               | 15 | 0.347 |     0 |      0 |       0 |       0 |
+| [test-dataframe.R](testthat/test-dataframe.R)                 | 56 | 0.148 |     0 |      0 |       0 |       0 |
+| [test-edge-attributes.R](testthat/test-edge-attributes.R)     | 12 | 0.013 |     0 |      0 |       0 |       0 |
+| [test-edgelist.R](testthat/test-edgelist.R)                   | 27 | 0.032 |     0 |      0 |       0 |       0 |
+| [test-metadata.R](testthat/test-metadata.R)                   | 78 | 0.111 |     0 |      0 |       0 |       0 |
+| [test-subset.R](testthat/test-subset.R)                       |  6 | 0.043 |     0 |      0 |       0 |       0 |
+| [test-utils.R](testthat/test-utils.R)                         |  9 | 0.013 |     0 |      0 |       0 |       0 |
+| [test-vertex-attributes.R](testthat/test-vertex-attributes.R) | 12 | 0.017 |     0 |      0 |       0 |       0 |
 
 <details closed>
 
 <summary> Show Detailed Test Results
 </summary>
 
-| file                                                                  | context                                   | test                                                 | status |  n | time |
-| :-------------------------------------------------------------------- | :---------------------------------------- | :--------------------------------------------------- | :----- | -: | ---: |
-| [test-conversion.R](testthat/test-conversion.R#L15_L17)               | graph conversion                          | network objects convert to igraph correctly          | PASS   | 10 | 0.28 |
-| [test-conversion.R](testthat/test-conversion.R#L89_L91)               | graph conversion                          | igraph objects convert to network correctly          | PASS   |  4 | 0.18 |
-| [test-conversion.R](testthat/test-conversion.R#L107_L109)             | graph conversion                          | nested attributes and networkDynamic objects work    | PASS   |  1 | 0.03 |
-| [test-dataframe.R](testthat/test-dataframe.R#L67_L70)                 | vertex/edge data frame construction works | vertex data frame construction works                 | PASS   |  6 | 0.00 |
-| [test-dataframe.R](testthat/test-dataframe.R#L104_L107)               | vertex/edge data frame construction works | edge data frame construction works                   | PASS   |  6 | 0.01 |
-| [test-dataframe.R](testthat/test-dataframe.R#L223_L226)               | vertex/edge data frame construction works | bipartite vertex data frame construction works       | PASS   |  4 | 0.00 |
-| [test-dataframe.R](testthat/test-dataframe.R#L248_L251)               | vertex/edge data frame construction works | bipartite edge data frame construction works         | PASS   |  3 | 0.02 |
-| [test-dataframe.R](testthat/test-dataframe.R#L282_L285)               | vertex/edge data frame construction works | handling 0 optional vertex columns works as expected | PASS   |  4 | 0.00 |
-| [test-dataframe.R](testthat/test-dataframe.R#L313_L316)               | vertex/edge data frame construction works | vrt\_dfs from igraphs missing names work as expected | PASS   |  2 | 0.02 |
-| [test-dataframe.R](testthat/test-dataframe.R#L343_L346)               | vertex/edge data frame construction works | handling 0 optional edge columns works as expected   | PASS   |  4 | 0.00 |
-| [test-dataframe.R](testthat/test-dataframe.R#L369)                    | vertex/edge data frame construction works | nested attributes and networkDynamic objects work    | PASS   | 11 | 0.03 |
-| [test-dataframe.R](testthat/test-dataframe.R#L385)                    | vertex/edge data frame construction works | empty graphs works                                   | PASS   | 16 | 0.03 |
-| [test-edge-attributes.R](testthat/test-edge-attributes.R#L29_L32)     | edge attributes                           | attribute name extraction works                      | PASS   |  3 | 0.00 |
-| [test-edge-attributes.R](testthat/test-edge-attributes.R#L48_L51)     | edge attributes                           | specific attribute extraction works                  | PASS   |  6 | 0.03 |
-| [test-edge-attributes.R](testthat/test-edge-attributes.R#L85_L87)     | edge attributes                           | empty attributes return NULL                         | PASS   |  3 | 0.00 |
-| [test-edgelist.R](testthat/test-edgelist.R#L92_L95)                   | edgelist construction works               | raw edgelists build properly                         | PASS   | 12 | 0.03 |
-| [test-edgelist.R](testthat/test-edgelist.R#L153_L156)                 | edgelist construction works               | edgelist objects: use\_names = TRUE                  | PASS   |  6 | 0.00 |
-| [test-edgelist.R](testthat/test-edgelist.R#L190_L193)                 | edgelist construction works               | edgelist objects: vrt\_attr = ‘foo’                  | PASS   |  6 | 0.02 |
-| [test-edgelist.R](testthat/test-edgelist.R#L285_L288)                 | edgelist construction works               | raw bipartite edgelists build properly               | PASS   |  3 | 0.00 |
-| [test-metadata.R](testthat/test-metadata.R#L58_L60)                   | metadata queries                          | net\_is\_directed is correct                         | PASS   |  6 | 0.00 |
-| [test-metadata.R](testthat/test-metadata.R#L89_L91)                   | metadata queries                          | net\_is\_multiplex is correct                        | PASS   | 12 | 0.02 |
-| [test-metadata.R](testthat/test-metadata.R#L140_L142)                 | metadata queries                          | net\_has\_loops is correct                           | PASS   | 12 | 0.01 |
-| [test-metadata.R](testthat/test-metadata.R#L191_L193)                 | metadata queries                          | net\_has\_isolates is correct                        | PASS   | 12 | 0.02 |
-| [test-metadata.R](testthat/test-metadata.R#L250_L253)                 | metadata queries                          | net\_count\_vertices is correct                      | PASS   | 12 | 0.01 |
-| [test-metadata.R](testthat/test-metadata.R#L315_L318)                 | metadata queries                          | net\_count\_edges is correct                         | PASS   | 12 | 0.02 |
-| [test-metadata.R](testthat/test-metadata.R#L389_L391)                 | metadata queries                          | net\_is\_bipartite works                             | PASS   |  6 | 0.00 |
-| [test-metadata.R](testthat/test-metadata.R#L415_L418)                 | metadata queries                          | net\_count\_actors works                             | PASS   |  6 | 0.02 |
-| [test-subset.R](testthat/test-subset.R#L18_L20)                       | subsetting edges and vertices             | edg\_subset() works                                  | PASS   |  4 | 0.04 |
-| [test-subset.R](testthat/test-subset.R#L60_L62)                       | subsetting edges and vertices             | vrt\_subset() works                                  | PASS   |  2 | 0.02 |
-| [test-utils.R](testthat/test-utils.R#L4_L6)                           | internal utility functions                | utils work as expected                               | PASS   |  9 | 0.01 |
-| [test-vertex-attributes.R](testthat/test-vertex-attributes.R#L27_L30) | vertex attributes                         | attribute name extraction works                      | PASS   |  2 | 0.00 |
-| [test-vertex-attributes.R](testthat/test-vertex-attributes.R#L41_L44) | vertex attributes                         | specific attribute extraction works                  | PASS   |  4 | 0.02 |
-| [test-vertex-attributes.R](testthat/test-vertex-attributes.R#L61_L64) | vertex attributes                         | vertex name extraction works                         | PASS   |  2 | 0.00 |
-| [test-vertex-attributes.R](testthat/test-vertex-attributes.R#L83_L85) | vertex attributes                         | empty attributes return NULL                         | PASS   |  4 | 0.02 |
+| file                                                                  | context                                   | test                                                 | status |  n |  time |
+| :-------------------------------------------------------------------- | :---------------------------------------- | :--------------------------------------------------- | :----- | -: | ----: |
+| [test-conversion.R](testthat/test-conversion.R#L15_L17)               | graph conversion                          | network objects convert to igraph correctly          | PASS   | 10 | 0.183 |
+| [test-conversion.R](testthat/test-conversion.R#L89_L91)               | graph conversion                          | igraph objects convert to network correctly          | PASS   |  4 | 0.123 |
+| [test-conversion.R](testthat/test-conversion.R#L107_L109)             | graph conversion                          | nested attributes and networkDynamic objects work    | PASS   |  1 | 0.041 |
+| [test-dataframe.R](testthat/test-dataframe.R#L67_L70)                 | vertex/edge data frame construction works | vertex data frame construction works                 | PASS   |  6 | 0.018 |
+| [test-dataframe.R](testthat/test-dataframe.R#L104_L107)               | vertex/edge data frame construction works | edge data frame construction works                   | PASS   |  6 | 0.035 |
+| [test-dataframe.R](testthat/test-dataframe.R#L223_L226)               | vertex/edge data frame construction works | bipartite vertex data frame construction works       | PASS   |  4 | 0.009 |
+| [test-dataframe.R](testthat/test-dataframe.R#L248_L251)               | vertex/edge data frame construction works | bipartite edge data frame construction works         | PASS   |  3 | 0.007 |
+| [test-dataframe.R](testthat/test-dataframe.R#L282_L285)               | vertex/edge data frame construction works | handling 0 optional vertex columns works as expected | PASS   |  4 | 0.007 |
+| [test-dataframe.R](testthat/test-dataframe.R#L313_L316)               | vertex/edge data frame construction works | vrt\_dfs from igraphs missing names work as expected | PASS   |  2 | 0.005 |
+| [test-dataframe.R](testthat/test-dataframe.R#L343_L346)               | vertex/edge data frame construction works | handling 0 optional edge columns works as expected   | PASS   |  4 | 0.007 |
+| [test-dataframe.R](testthat/test-dataframe.R#L369)                    | vertex/edge data frame construction works | nested attributes and networkDynamic objects work    | PASS   | 11 | 0.036 |
+| [test-dataframe.R](testthat/test-dataframe.R#L385)                    | vertex/edge data frame construction works | empty graphs works                                   | PASS   | 16 | 0.024 |
+| [test-edge-attributes.R](testthat/test-edge-attributes.R#L29_L32)     | edge attributes                           | attribute name extraction works                      | PASS   |  3 | 0.002 |
+| [test-edge-attributes.R](testthat/test-edge-attributes.R#L48_L51)     | edge attributes                           | specific attribute extraction works                  | PASS   |  6 | 0.009 |
+| [test-edge-attributes.R](testthat/test-edge-attributes.R#L85_L87)     | edge attributes                           | empty attributes return NULL                         | PASS   |  3 | 0.002 |
+| [test-edgelist.R](testthat/test-edgelist.R#L92_L95)                   | edgelist construction works               | raw edgelists build properly                         | PASS   | 12 | 0.016 |
+| [test-edgelist.R](testthat/test-edgelist.R#L153_L156)                 | edgelist construction works               | edgelist objects: use\_names = TRUE                  | PASS   |  6 | 0.007 |
+| [test-edgelist.R](testthat/test-edgelist.R#L190_L193)                 | edgelist construction works               | edgelist objects: vrt\_attr = ‘foo’                  | PASS   |  6 | 0.006 |
+| [test-edgelist.R](testthat/test-edgelist.R#L285_L288)                 | edgelist construction works               | raw bipartite edgelists build properly               | PASS   |  3 | 0.003 |
+| [test-metadata.R](testthat/test-metadata.R#L58_L60)                   | metadata queries                          | net\_is\_directed is correct                         | PASS   |  6 | 0.005 |
+| [test-metadata.R](testthat/test-metadata.R#L89_L91)                   | metadata queries                          | net\_is\_multiplex is correct                        | PASS   | 12 | 0.015 |
+| [test-metadata.R](testthat/test-metadata.R#L140_L142)                 | metadata queries                          | net\_has\_loops is correct                           | PASS   | 12 | 0.011 |
+| [test-metadata.R](testthat/test-metadata.R#L191_L193)                 | metadata queries                          | net\_has\_isolates is correct                        | PASS   | 12 | 0.011 |
+| [test-metadata.R](testthat/test-metadata.R#L250_L253)                 | metadata queries                          | net\_count\_vertices is correct                      | PASS   | 12 | 0.011 |
+| [test-metadata.R](testthat/test-metadata.R#L315_L318)                 | metadata queries                          | net\_count\_edges is correct                         | PASS   | 12 | 0.011 |
+| [test-metadata.R](testthat/test-metadata.R#L389_L391)                 | metadata queries                          | net\_is\_bipartite works                             | PASS   |  6 | 0.039 |
+| [test-metadata.R](testthat/test-metadata.R#L415_L418)                 | metadata queries                          | net\_count\_actors works                             | PASS   |  6 | 0.008 |
+| [test-subset.R](testthat/test-subset.R#L18_L20)                       | subsetting edges and vertices             | edg\_subset() works                                  | PASS   |  4 | 0.028 |
+| [test-subset.R](testthat/test-subset.R#L60_L62)                       | subsetting edges and vertices             | vrt\_subset() works                                  | PASS   |  2 | 0.015 |
+| [test-utils.R](testthat/test-utils.R#L4_L6)                           | internal utility functions                | utils work as expected                               | PASS   |  9 | 0.013 |
+| [test-vertex-attributes.R](testthat/test-vertex-attributes.R#L27_L30) | vertex attributes                         | attribute name extraction works                      | PASS   |  2 | 0.002 |
+| [test-vertex-attributes.R](testthat/test-vertex-attributes.R#L41_L44) | vertex attributes                         | specific attribute extraction works                  | PASS   |  4 | 0.007 |
+| [test-vertex-attributes.R](testthat/test-vertex-attributes.R#L61_L64) | vertex attributes                         | vertex name extraction works                         | PASS   |  2 | 0.002 |
+| [test-vertex-attributes.R](testthat/test-vertex-attributes.R#L83_L85) | vertex attributes                         | empty attributes return NULL                         | PASS   |  4 | 0.006 |
 
 </details>
 
@@ -97,19 +97,19 @@ package.
 
 <summary> Session Info </summary>
 
-| Field    | Value                            |
-| :------- | :------------------------------- |
-| Version  | R version 3.5.1 (2018-07-02)     |
-| Platform | x86\_64-w64-mingw32/x64 (64-bit) |
-| Running  | Windows \>= 8 x64 (build 9200)   |
-| Language | English\_United States           |
-| Timezone | America/Los\_Angeles             |
+| Field    | Value                         |
+| :------- | :---------------------------- |
+| Version  | R version 3.5.2 (2018-12-20)  |
+| Platform | x86\_64-pc-linux-gnu (64-bit) |
+| Running  | Ubuntu 18.04.1 LTS            |
+| Language | en\_US                        |
+| Timezone | America/Los\_Angeles          |
 
 | Package  | Version |
 | :------- | :------ |
-| testthat | 2.0.0   |
-| covr     | 3.1.0   |
-| covrpage | 0.0.60  |
+| testthat | 2.0.1   |
+| covr     | 3.2.1   |
+| covrpage | 0.0.69  |
 
 </details>
 

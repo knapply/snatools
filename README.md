@@ -97,10 +97,10 @@ crisis_in_cloister %>%
   as_igraph()
 ```
 
-    #> IGRAPH 975695a DN-- 25 401 -- 
+    #> IGRAPH aa4e692 DN-- 25 401 -- 
     #> + attr: .vrt_id (v/n), name (v/c), cloisterville (v/l), .edg_id
     #> | (e/n), affect (e/n), time (e/n)
-    #> + edges from 975695a (vertex names):
+    #> + edges from aa4e692 (vertex names):
     #>  [1] John Bosco->Gregory     John Bosco->Gregory    
     #>  [3] John Bosco->Basil       John Bosco->Basil      
     #>  [5] John Bosco->Peter       John Bosco->Bonaventure
@@ -145,10 +145,10 @@ crisis_in_cloister %>%
   vrt_subset(cloisterville)
 ```
 
-    #> IGRAPH 9762267 DN-- 6 6 -- 
+    #> IGRAPH 92b6a22 DN-- 6 6 -- 
     #> + attr: .vrt_id (v/n), name (v/c), cloisterville (v/l), .edg_id
     #> | (e/n), affect (e/n), time (e/n)
-    #> + edges from 9762267 (vertex names):
+    #> + edges from 92b6a22 (vertex names):
     #> [1] Peter  ->Berthold    Victor ->Peter       Victor ->Berthold   
     #> [4] Victor ->Ramuald     Ambrose->Bonaventure Ramuald->Bonaventure
 
@@ -318,7 +318,7 @@ crisis_in_cloister %>%
     #>  8       8 Basil       FALSE        
     #>  9       9 Martin      TRUE         
     #> 10      10 Peter       TRUE         
-    #> # ... with 15 more rows
+    #> # … with 15 more rows
 
 ``` r
 crisis_in_cloister %>% 
@@ -338,7 +338,7 @@ crisis_in_cloister %>%
     #>  8       8     6     12     -2     2
     #>  9       9     6     13     -1     2
     #> 10      10     6     13     -3     4
-    #> # ... with 391 more rows
+    #> # … with 391 more rows
 
 ## More Metrics
 
