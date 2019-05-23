@@ -1,11 +1,9 @@
-Package: snatools
+Package: COREsna
 Title: A Toolkit to Bridge Graph Frameworks and Streamline Network Analysis
 Version: 0.0.0.9000
 Authors@R: person("Brendan", "Knapp", email = "brendan.g.knapp@gmail.com", role = c("aut", "cre"),
                   comment = c(ORCID = "0000-0003-3284-4972"))
-Description: A consistent toolkit that conveniently connects existing graph structures 
-    (i.e. igraph and network), makes network workflows more intuitive, and provides 
-    metrics missing from R's network analysis ecosystem.
+Description: A Network Toolkit
 Depends: R (>= 3.3.0)
 Imports:
     glue,
