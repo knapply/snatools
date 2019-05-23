@@ -1,0 +1,14 @@
+url: https://NPSCORELAB.github.io/COREsna
+
+authors:
+  Brendan Knapp:
+    href: https://twitter.com/knapply_
+
+template:
+  params:
+    bootswatch: cosmo
+    #ganalytics: UA
+
+development:
+  mode: unreleased
+
