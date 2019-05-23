@@ -6,23 +6,12 @@ Authors@R: person("Brendan", "Knapp", email = "brendan.g.knapp@gmail.com", role 
 Description: A Network Toolkit
 Depends: R (>= 3.3.0)
 Imports:
-    glue,
-    igraph,
-    magrittr,
-    methods,
-    network,
-    rlang,
-    tibble
+    igraph
 Suggests:
     covr,
-    ergm,
-    ggplot2,
-    igraphdata,
     knitr,
-    networkDynamic,
     rmarkdown,
     testthat,
-    tidygraph,
     utils
 License: GPL-3 + file LICENSE
 Encoding: UTF-8

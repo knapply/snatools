@@ -7,23 +7,14 @@ cache: packages
  
 jobs:
   include:
+  - r: 3.1
+  - r: 3.2
   - r: 3.3
-#    warnings_are_errors: false
   - r: 3.4
-#    warnings_are_errors: false
+  - r: 3.5
   - r: release
-#    warnings_are_errors: false
   - r: devel
-#    warnings_are_errors: false
   
-# env:
-#  global:
-#  - _R_CHECK_FORCE_SUGGESTS_=false
-
-r_github_packages:
-  - r-lib/covr
-  - r-lib/rlang
-#  - thomasp85/ggraph # fails from CRAN and github
 
 after_success:
   - Rscript -e 'covr::codecov()'
