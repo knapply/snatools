@@ -12,12 +12,13 @@ Authors@R: c(person("Brendan", "Knapp",
 Description: Social Network Analysis
 Depends: R (>= 3.2.0)
 Imports:
-    igraph
+    igraph,
+    magrittr
 Suggests:
     covr,
     knitr,
     rmarkdown,
-    testthat,
+    testthat (>= 2.1.0),
     utils
 License: GPL-3 + file LICENSE
 Encoding: UTF-8

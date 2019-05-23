@@ -7,7 +7,7 @@
 [![Travis-CI Build
 Status](https://travis-ci.org/NPSCORELAB/COREsna.svg?branch=master)](https://travis-ci.org/NPSCORELAB/COREsna)
 [![codecov](https://codecov.io/gh/NPSCORELAB/COREsna/branch/master/graph/badge.svg)](https://codecov.io/gh/NPSCORELAB/COREsna)
-[![Depends](https://img.shields.io/badge/Depends-GNU_R%3E=3.1-blue.svg)](https://www.r-project.org/)
+[![Depends](https://img.shields.io/badge/Depends-GNU_R%3E=3.2-blue.svg)](https://www.r-project.org/)
 
 # Overview
 
