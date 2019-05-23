@@ -31,9 +31,25 @@ test_that('"default"ers work', {
   expect_false(
     NA %{NA}% FALSE
   )
+  # `%{T}%` ===========================================================================
+  expect_false(
+    TRUE %{T}% FALSE
+  )
+  expect_false(
+    FALSE %{T}% TRUE
+  )
+  # `%{F}%` ===========================================================================
+  expect_true(
+    FALSE %{F}% TRUE
+  )
+  expect_true(
+    TRUE %{F}% FALSE
+  )
+  
+  
 })
 
-test_that('`is_*()` work', {
+test_that('`is_*()`/`are_*()` work', {
   # `is_empty()` =======================================================================
   expect_true(
     is_empty(NULL)
