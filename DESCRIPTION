@@ -10,7 +10,7 @@ Authors@R: c(person("Brendan", "Knapp",
                     role = c("aut")),
             person("NPS CORE Lab", role = "aut"))
 Description: Social Network Analysis
-Depends: R (>= 3.1.0)
+Depends: R (>= 3.2.0)
 Imports:
     igraph
 Suggests:
