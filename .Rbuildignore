@@ -14,3 +14,4 @@ man-roxygen
 ^\.github$
 ^\.Rproj\.user$
 ^_pkgdown\.yml$
+snatools

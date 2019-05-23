@@ -1,18 +1,35 @@
 # "default"ers =========================================================================
 
-
 #' @name defaulters
 #' 
-#' Default Returns
+#' @title Conditionally replace objects with default values.
 #' 
 #' @param .lhs Object to test.
 #' @param .rhs Object to return if test returns `FALSE` for `.lhs`.
 #' 
+#' @return `.lhs` or `.rhs`
+#' 
+#' @template author-bk
+#' 
 #' @details 
-#' * Tests:
-#'    + `%||%`: `is.null(.lhs)`
-#'    + `%{}%`: `length(.lhs) == 0L`
-#'    + `%{NA}%`: `is.na(.lhs)`
+#' * If `.lhs` is...
+#'   + `%||%`: `NULL`
+#'   + `%{}%`: empty (`length(.lhs) == 0L`)
+#'   + `%{NA}%`: `NA`
+#' * ... returns `.rhs`.
+#'   + Returns `.lhs` otherwise.
+#' 
+#' @examples 
+#' NULL %||% 1
+#' 1 %||% NULL
+#' 
+#' integer(length = 0L) %{}% NA
+#' 1 %{}% NA
+#' 
+#' NA %{NA}% 1
+#' 1 %{NA}% NA
+
+#' @rdname defaulters
 #' 
 #' @export
 `%||%` <- function(.lhs, .rhs) {
@@ -30,21 +47,12 @@
 #' 
 #' @export
 `%{NA}%` <- function(.lhs, .rhs) {
-  if (is.na(.lhs)) .rhs else .lhs
+  if (isTRUE(is.na(.lhs))) .rhs else .lhs
 }
 
 
 # `is_*()` =============================================================================
-#' @name tests
-#' Testers
-#' 
-#' @param .x Object to test
-#' 
-#' @details 
-#' * Tests:
-#'   + `is_empty()`: `length(.x) == 0L`
-#'   
-#' @export
+
 is_empty <- function(.x) {
   length(.x) == 0L
 }

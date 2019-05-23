@@ -7,3 +7,8 @@ template:
 development:
   mode: unreleased
 
+reference:
+  - title: "Utilities"
+    contents:
+      - starts_with("%")
+

@@ -9,7 +9,7 @@ Authors@R: c(person("Brendan", "Knapp",
                     email = "cjcallag@@nps.edu", 
                     role = c("aut")),
             person("NPS CORE Lab", role = "aut"))
-Description: Social Network Analysis
+Description: A Toolkit for Social Network Analysis.
 Depends: R (>= 3.2.0)
 Imports:
     igraph,

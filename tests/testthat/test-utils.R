@@ -25,8 +25,8 @@ test_that('"default"ers work', {
     1
   )
   # `%{NA}%` ===========================================================================
-  expect_true(
-    TRUE %{NA}% FALSE
+  expect_null(
+    NULL %{NA}% FALSE
   )
   expect_false(
     NA %{NA}% FALSE
