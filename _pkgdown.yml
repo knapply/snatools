@@ -7,10 +7,3 @@ template:
 development:
   mode: unreleased
 
-reference:
-  - title: "Hello, World!"
-    desc: >
-      Hello, World!
-    contents:
-      - hello_world
-
