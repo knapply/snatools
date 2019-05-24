@@ -74,40 +74,70 @@
 
 
 # `is_*()`/`all_*()` ====================================================================
-
-all_equal <- function(...) {
-  objs <- list(...)
-  stopifnot(length(objs) > 1L)
-
-  all(
-    vapply(objs[2L:length(objs)], function(x) {
-      isTRUE(all.equal(objs[[1L]], x))
-    }, logical(1L))
-  )
-}
-
-all_identical <- function(...) {
-  objs <- list(...)
-  stopifnot(length(objs) > 1L)
-  
-  all(
-    vapply(objs[2L:length(objs)], function(x) {
-      identical(objs[[1L]], x)
-    }, logical(1L))
-  )
-}
-
-
-is_empty <- function(.x) {
-  length(.x) == 0L
-}
-
-is_symmetric <- function(.x) {
-  stopifnot(is.matrix(.x))
-  all(upper.tri(.x) == lower.tri(.x))
-}
-
 .isFALSE <- function(x) { 
   # `isFALSE()` apparely didn't show up until R 3.5
   is.logical(x) && length(x) == 1L && !is.na(x) && !x
 }
+
+# `%==%` <- function(.lhs, .rhs) {
+#   isTRUE(all.equal(.lhs, .rhs))
+# }
+# 
+# `%!=%` <- function(.lhs, .rhs) {
+#   !isTRUE(all.equal(.lhs, .rhs))
+# }
+
+.all_equal <- function(...) {
+  objs <- list(...)
+  stopifnot(length(objs) > 1L)
+  
+  if (length(objs) == 2L) {
+    return(isTRUE(all.equal(objs[[1L]], objs[[2L]])))
+  }
+  
+  for (i in seq_along(objs[2L:length(objs)])) {
+    if (!isTRUE(all.equal(objs[[1L]], objs[[i]]))) {
+      return(FALSE)
+    }
+  }
+  TRUE
+}
+
+.all_identical <- function(...) {
+  objs <- list(...)
+  stopifnot(length(objs) > 1L)
+  
+  if (length(objs) == 2L) {
+    return(identical(objs[[1L]], objs[[2L]]))
+  }
+  
+  for (i in seq_along(objs[2L:length(objs)])) {
+    if (!identical(objs[[1L]], objs[[i]])) {
+      return(FALSE)
+    }
+  }
+  TRUE
+}
+
+.tri_upper <- function(.x, .diag = FALSE) {
+  stopifnot(is.matrix(.x))
+  .x[upper.tri(.x, diag = .diag)]
+}
+
+.tri_lower <- function(.x, .diag = FALSE) {
+  stopifnot(is.matrix(.x))
+  .x[lower.tri(.x, diag = .diag)]
+}
+
+.is_empty <- function(.x) {
+  length(.x) == 0L
+}
+
+.is_symmetric <- function(.x, .diag = FALSE) {
+  stopifnot(is.matrix(.x))
+  all(
+    .tri_upper(.x, .diag = .diag) == .tri_lower(.x, .diag = .diag)
+  )
+}
+
+

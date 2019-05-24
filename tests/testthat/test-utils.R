@@ -49,38 +49,66 @@ test_that('"default"ers work', {
   
 })
 
-test_that('`is_*()`/`are_*()` work', {
+test_that('`.all_equal()`/`all_identical()', {
   # `all_equal()` =======================================================================
   expect_true(
-    all_equal(1, 1L, 1.0, as.integer(TRUE))
+    .all_equal(1, 1L, 1.0, as.integer(TRUE))
   )
   expect_true(
-    all_equal(NULL, NULL)
+    .all_equal(NULL, NULL)
   )
   expect_false(
-    all_equal(NULL, NA)
+    .all_equal(NULL, NA)
   )
   # `all_identical()` =======================================================================
   expect_true(
-    all_identical(1L, 1L, as.integer(TRUE))
+    .all_identical(1L, 1L, as.integer(TRUE))
   )
   expect_true(
-    all_identical(NULL, NULL)
+    .all_identical(NULL, NULL)
   )
   expect_false(
-   all_identical(NULL, NA)
-  )
-  # `is_empty()` ========================================================================
-  expect_true(
-    is_empty(NULL)
-  )
-  expect_true(
-    is_empty(integer())
-  )
-  expect_true(
-    is_empty(list())
-  )
-  expect_false(
-    is_empty(list(NULL))
+    .all_identical(NULL, NA)
   )
 })
+
+test_that('`.is_empty()` works', {
+  # `is_empty()` ========================================================================
+  expect_true(
+    .is_empty(NULL)
+  )
+  expect_true(
+    .is_empty(integer())
+  )
+  expect_true(
+    .is_empty(list())
+  )
+  expect_false(
+    .is_empty(list(NULL))
+  )
+})
+
+
+test_that('`.is_symmetric()` works', {
+  sym_target <- matrix(
+    c(1, 1, 1,
+      1, 0, 1,
+      1, 1 ,1), 
+    nrow = 3L, ncol = 3L, byrow = TRUE)
+  
+  asym_target <- matrix(
+    c(1, 1, 1,
+      1, 0, 1,
+      0, 1 ,0), 
+    nrow = 3L, ncol = 3L, byrow = TRUE)
+  
+  expect_true(
+    .is_symmetric(sym_target)
+  )
+  
+  expect_false(
+    .is_symmetric(asym_target)
+  )
+})
+
+
