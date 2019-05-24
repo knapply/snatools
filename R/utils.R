@@ -69,7 +69,7 @@
 #' 
 #' @export
 `%{F}%` <- function(.lhs, .rhs) {
-  if (isFALSE(.lhs)) .rhs else .lhs
+  if (.isFALSE(.lhs)) .rhs else .lhs
 }
 
 
@@ -107,12 +107,7 @@ is_symmetric <- function(.x) {
   all(upper.tri(.x) == lower.tri(.x))
 }
 
-
-
-Reduce(function(x, y) isTRUE(all.equal(x, y)), NULL, NA)
-
-Reduce(function(x, y) identical, c(NULL, NA))
-
-identical(NULL, NA)
-
-
+.isFALSE <- function(x) { 
+  # `isFALSE()` apparely didn't show up until R 3.5
+  is.logical(x) && length(x) == 1L && !is.na(x) && !x
+}
