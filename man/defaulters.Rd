@@ -5,6 +5,8 @@
 \alias{\%||\%}
 \alias{\%{}\%}
 \alias{\%{NA}\%}
+\alias{\%{T}\%}
+\alias{\%{F}\%}
 \title{Conditionally replace objects with default values.}
 \usage{
 .lhs \%||\% .rhs
@@ -12,6 +14,10 @@
 .lhs \%{}\% .rhs
 
 .lhs \%{NA}\% .rhs
+
+.lhs \%{T}\% .rhs
+
+.lhs \%{F}\% .rhs
 }
 \arguments{
 \item{.lhs}{Object to test.}
@@ -31,6 +37,8 @@ Conditionally replace objects with default values.
 \item \code{\%||\%}: \code{NULL}
 \item \code{\%{}\%}: empty (\code{length(.lhs) == 0L})
 \item \code{\%{NA}\%}: \code{NA}
+\item \code{\%{T}\%}: \code{TRUE}
+\item \code{\%{F}\%}: \code{FALSE}
 }
 \item ... returns \code{.rhs}.
 \itemize{
@@ -47,6 +55,12 @@ integer(length = 0L) \%{}\% NA
 
 NA \%{NA}\% 1
 1 \%{NA}\% NA
+
+TRUE \%{T}\% FALSE
+FALSE \%{T}\% TRUE
+
+TRUE \%{F}\% FALSE
+FALSE \%{F}\% TRUE
 }
 \author{
 Brendan Knapp \email{brendan.knapp@nps.edu}

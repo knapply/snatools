@@ -7,8 +7,7 @@ Authors@R: c(person("Brendan", "Knapp",
                     comment = c(ORCID = "0000-0003-3284-4972")),
             person("Christopher", "Callaghan", 
                     email = "cjcallag@@nps.edu", 
-                    role = c("aut")),
-            person("NPS CORE Lab", role = "aut"))
+                    role = c("aut")))
 Description: A Toolkit for Social Network Analysis.
 Depends: R (>= 3.2.0)
 Imports:

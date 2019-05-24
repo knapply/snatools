@@ -75,21 +75,3 @@ get_test_ig <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE,
 # get_test_mat(.directed = TRUE, .bipartite = TRUE, .weighted = TRUE) %>%
 #   # igraph::graph_from_incidence_matrix()
 #   Matrix::isSymmetric()
-
-
-
-# if (.node_attrs) {
-#   if (.bipartite) {
-#     attrs <- list(attr_1 = letters[sum(dim(out))])
-#     
-#   } else {
-#     attrs <- list(attr_1 = letters[sum(dim(out))])
-#     
-#   }
-#   
-#   out <- list(
-#     mat = out,
-#     node_attrs = list(node_attr_1 = letters[nrow(out)],
-#                       node_attr_2 = 1:ncol(out))
-#   )
-# }

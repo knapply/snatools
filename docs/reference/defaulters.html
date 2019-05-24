@@ -114,7 +114,11 @@
 
 <span class='no'>.lhs</span> <span class='kw'>%{}%</span> <span class='no'>.rhs</span>
 
-<span class='no'>.lhs</span> <span class='kw'>%{NA}%</span> <span class='no'>.rhs</span></pre>
+<span class='no'>.lhs</span> <span class='kw'>%{NA}%</span> <span class='no'>.rhs</span>
+
+<span class='no'>.lhs</span> <span class='kw'>%{T}%</span> <span class='no'>.rhs</span>
+
+<span class='no'>.lhs</span> <span class='kw'>%{F}%</span> <span class='no'>.rhs</span></pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -140,6 +144,8 @@
 <li><p><code>%||%</code>: <code>NULL</code></p></li>
 <li><p><code>%{}%</code>: empty (<code>length(.lhs) == 0L</code>)</p></li>
 <li><p><code>%{NA}%</code>: <code>NA</code></p></li>
+<li><p><code>%{T}%</code>: <code>TRUE</code></p></li>
+<li><p><code>%{F}%</code>: <code>FALSE</code></p></li>
 </ul></li>
 <li><p>... returns <code>.rhs</code>.</p><ul>
 <li><p>Returns <code>.lhs</code> otherwise.</p></li>
@@ -150,7 +156,9 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>NULL</span> <span class='kw'>%||%</span> <span class='fl'>1</span></div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='fl'>1</span> <span class='kw'>%||%</span> <span class='kw'>NULL</span></div><div class='output co'>#&gt; [1] 1</div><div class='input'>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/integer'>integer</a></span>(<span class='kw'>length</span> <span class='kw'>=</span> <span class='fl'>0L</span>) <span class='kw'>%{}%</span> <span class='fl'>NA</span></div><div class='output co'>#&gt; [1] NA</div><div class='input'><span class='fl'>1</span> <span class='kw'>%{}%</span> <span class='fl'>NA</span></div><div class='output co'>#&gt; [1] 1</div><div class='input'>
-<span class='fl'>NA</span> <span class='kw'>%{NA}%</span> <span class='fl'>1</span></div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='fl'>1</span> <span class='kw'>%{NA}%</span> <span class='fl'>NA</span></div><div class='output co'>#&gt; [1] 1</div></pre>
+<span class='fl'>NA</span> <span class='kw'>%{NA}%</span> <span class='fl'>1</span></div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='fl'>1</span> <span class='kw'>%{NA}%</span> <span class='fl'>NA</span></div><div class='output co'>#&gt; [1] 1</div><div class='input'>
+<span class='fl'>TRUE</span> <span class='kw'>%{T}%</span> <span class='fl'>FALSE</span></div><div class='output co'>#&gt; [1] FALSE</div><div class='input'><span class='fl'>FALSE</span> <span class='kw'>%{T}%</span> <span class='fl'>TRUE</span></div><div class='output co'>#&gt; [1] FALSE</div><div class='input'>
+<span class='fl'>TRUE</span> <span class='kw'>%{F}%</span> <span class='fl'>FALSE</span></div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='fl'>FALSE</span> <span class='kw'>%{F}%</span> <span class='fl'>TRUE</span></div><div class='output co'>#&gt; [1] TRUE</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -171,7 +179,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Brendan Knapp, Christopher Callaghan, NPS CORE Lab.</p>
+  <p>Developed by Brendan Knapp, Christopher Callaghan.</p>
 </div>
 
 <div class="pkgdown">

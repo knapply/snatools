@@ -50,7 +50,27 @@ test_that('"default"ers work', {
 })
 
 test_that('`is_*()`/`are_*()` work', {
-  # `is_empty()` =======================================================================
+  # `all_equal()` =======================================================================
+  expect_true(
+    all_equal(1, 1L, 1.0, as.integer(TRUE))
+  )
+  expect_true(
+    all_equal(NULL, NULL)
+  )
+  expect_false(
+    all_equal(NULL, NA)
+  )
+  # `all_identical()` =======================================================================
+  expect_true(
+    all_identical(1L, 1L, as.integer(TRUE))
+  )
+  expect_true(
+    all_identical(NULL, NULL)
+  )
+  expect_false(
+   all_identical(NULL, NA)
+  )
+  # `is_empty()` ========================================================================
   expect_true(
     is_empty(NULL)
   )

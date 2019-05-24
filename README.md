@@ -1,7 +1,9 @@
 
 <!-- README.Rmd generates README.md. -->
 
-# COREsna <a href=""> <img src="man/figures/corelogo.png" align="right"  height="27%" width="27%" href="https://github.com/NPSCORELAB/COREsna"/> </a>
+# COREsna
+
+<!-- <a href=""> <img src="man/figures/corelogo.png" align="right"  height="27%" width="27%" href="https://github.com/NPSCORELAB/COREsna"/> </a> -->
 
 [![Lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![Travis-CI Build

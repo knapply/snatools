@@ -17,7 +17,9 @@ knitr::opts_chunk$set(
 
 
 
-# COREsna <a href=""> <img src="man/figures/corelogo.png" align="right"  height="27%" width="27%" href="https://github.com/NPSCORELAB/COREsna"/> </a>
+# COREsna 
+
+<!-- <a href=""> <img src="man/figures/corelogo.png" align="right"  height="27%" width="27%" href="https://github.com/NPSCORELAB/COREsna"/> </a> -->
 
 [![Lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![Travis-CI Build Status](https://travis-ci.org/NPSCORELAB/COREsna.svg?branch=master)](https://travis-ci.org/NPSCORELAB/COREsna)

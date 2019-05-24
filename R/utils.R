@@ -86,6 +86,18 @@ all_equal <- function(...) {
   )
 }
 
+all_identical <- function(...) {
+  objs <- list(...)
+  stopifnot(length(objs) > 1L)
+  
+  all(
+    vapply(objs[2L:length(objs)], function(x) {
+      identical(objs[[1L]], x)
+    }, logical(1L))
+  )
+}
+
+
 is_empty <- function(.x) {
   length(.x) == 0L
 }
@@ -94,5 +106,13 @@ is_symmetric <- function(.x) {
   stopifnot(is.matrix(.x))
   all(upper.tri(.x) == lower.tri(.x))
 }
+
+
+
+Reduce(function(x, y) isTRUE(all.equal(x, y)), NULL, NA)
+
+Reduce(function(x, y) identical, c(NULL, NA))
+
+identical(NULL, NA)
 
 
