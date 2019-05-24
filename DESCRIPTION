@@ -12,7 +12,8 @@ Description: A Toolkit for Social Network Analysis.
 Depends: R (>= 3.2.0)
 Imports:
     igraph,
-    magrittr
+    magrittr,
+    network
 Suggests:
     covr,
     knitr,
