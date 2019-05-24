@@ -60,6 +60,9 @@ test_that('`.all_equal()`/`all_identical()', {
   expect_false(
     .all_equal(NULL, NA)
   )
+  expect_false(
+    .all_equal(NULL, NA, matrix())
+  )
   # `all_identical()` =======================================================================
   expect_true(
     .all_identical(1L, 1L, as.integer(TRUE))
@@ -69,6 +72,9 @@ test_that('`.all_equal()`/`all_identical()', {
   )
   expect_false(
     .all_identical(NULL, NA)
+  )
+  expect_false(
+    .all_identical(NULL, NA, matrix())
   )
 })
 
