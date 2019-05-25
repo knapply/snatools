@@ -10,3 +10,8 @@ net_is_directed.igraph <- function(.net) {
 net_is_directed.network <- function(.net) {
   isTRUE(.net[["gal"]][["directed"]])
 }
+
+net_is_weighted <- function(.net) {
+  "weight" %in% edge_get_attr_names(.net)
+}
+

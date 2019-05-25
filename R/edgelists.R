@@ -1,54 +1,40 @@
-#' Get the edge list representation of a graph as a matrix.
-#' 
-# @template param-net
-# @template param-node_attr
-# @template param-use_node_names
-# @template bknapp-author
-#' 
-#' @export
-# fetch_edgelist <- function(.net, .use_node_names = TRUE, .node_attr = NULL, ...) {
-#   stopifnot(is.logical(.use_node_names))
-#   stopifnot(.is_null(.node_attr) || is.character(.node_attr))
-#   
-#   if (!.is_null(.node_attr)) {
-#     fill <- get_vert_attr(.g, .node_attr)
-#   } else if (.use_node_names) {
-#     fill <- get_vert_names(.net)
-#   } else {
-#     fill <- NULL
-#   }
-#   
-#   out <- get_el(.net)
-#   
-#   if (.is_null(fill)) {
-#     return(out)
-#   }
-#   
-#   matrix(fill[out], ncol = 2L)
-# }
-# 
-# 
-# 
-.fetch_edgelist <- function(.g) {
+
+fetch_edgelist <- function(.net, .node_names = TRUE, .node_attr = NULL, ...) {
+  stopifnot(is.logical(.node_names))
+
+  if (!is.null(.node_attr)) {
+    fill <- node_get_attr(.net, .node_attr)
+  } else if (.node_names) {
+    fill <- node_get_names(.net)
+  } else {
+    fill <- NULL
+  }
+
+  out <- .fetch_edgelist(.net)
+
+  if (is.null(fill)) {
+    return(out)
+  }
+
+  matrix(fill[out], ncol = 2L)
+}
+
+
+
+.fetch_edgelist <- function(.net, .weighted = FALSE) {
   UseMethod(".fetch_edgelist")
 }
 
 #' @importFrom igraph as_edgelist
-.fetch_edgelist.igraph <- function(.net) {
+.fetch_edgelist.igraph <- function(.net, .weighted = FALSE) {
   as_edgelist(graph = .net, names = FALSE)
 }
 
-.fetch_edgelist.network <- function(.net) {
-  out <- cbind(.map_num(.net[["mel"]], `[[`, "outl"),
-               .map_num(.net[["mel"]], `[[`, "inl"), 
-               deparse.level = 0)
-  
-  if (net_is_directed(.net)) {
-    return(out)
-  }
-  .sort_edge_indices(out)
+.fetch_edgelist.network <- function(.net, .weighted = FALSE) {
+  out <- network::as.matrix.network.edgelist(.net)
+  attr(out, "n") <- NULL
+  attr(out, "vnames") <- NULL
+
+  out
 }
 
-
-
-# network::as.matrix.network.edgelist

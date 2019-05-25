@@ -50,7 +50,8 @@ get_test_mat <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE
   }
   
   if (!.directed) {
-    out[] <- 0.5 * (out + t(out))
+    # out[] <- 0.5 * (out + t(out))
+    out[] <- (out + t(out)) %/% 2
     # out[lower.tri(out)] <- 0L
   }
 
@@ -80,9 +81,11 @@ get_test_el <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE,
                           .weighted = .weighted, .diag = .diag)
   out <- el_from_adj_mat(adj_mat, .weighted = .weighted, ...)
   
-  # out[ , 1L:2L] <- cbind(
-  #   pmin.int(out[, 1L], out[, 2L]), pmax.int(out[, 1L], out[, 2L])
-  # )
+  
+  
+  out[ , 1L:2L] <- cbind(
+    pmin.int(out[, 1L], out[, 2L]), pmax.int(out[, 1L], out[, 2L])
+  )
   
   out
 }
@@ -103,18 +106,16 @@ get_test_ig <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE,
   
   out <- igraph::make_empty_graph(n = n_nodes, directed = .directed)
   
+  out <- igraph::add_edges(out, edges = t(el[ , 1L:2L]))
+  
   if (.weighted) {
-    out <- igraph::add_edges(out, edges = t(el[ , 1L:2L]), 
-                             attr = list(weight = el[ , 3L]))
-  } else {
-    out <- igraph::add_edges(out, edges = t(el[ , 1L:2L]))
-  }
+    igraph::E(out)$weight <- el[ , 3L]
+  } 
   
   if (.bipartite) {
-    out <- igraph::set_vertex_attr(
-      out, name = "type", value = c(rep(TRUE, n_nodes %/% 2), rep(FALSE, n_nodes %/%  2))
-    )
+    igraph::V(out)$type <- c(rep(TRUE, n_nodes %/% 2), rep(FALSE, n_nodes %/%  2))
   }
+  
   out
 }
 
@@ -122,6 +123,7 @@ get_test_nw <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE,
                         .diag = FALSE, ...) {
   el <- get_test_el(.directed = .directed, .bipartite = .bipartite, 
                     .weighted = .weighted, .diag = .diag)
+  
   n_nodes <- length(unique(as.vector(el[ , 1L:2L])))
 
   if (.bipartite) {
@@ -129,18 +131,24 @@ get_test_nw <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE,
     .directed <- FALSE
     .bipartite <- n_nodes %/% 2
   } else {
-    .bipartite <- NULL
+    .bipartite <- FALSE
   }
 
   out <- network::network.initialize(
     n = n_nodes,  directed = .directed, loops = .diag,
     hyper = FALSE, multiple = FALSE, bipartite = .bipartite
   )
+  
+  network::network.edgelist(
+    x = el, g = out
+  )
 
-  out <- network::add.edges.network(out,  head = el[ , 1L], tail = el[ , 2L])
-
+  # network::add.edges.network(
+  #   out, head = as.list(el[ , 1L]), tail = as.list(el[ , 2L])
+  # )
+  # 
   if (.weighted) {
-    out <- network::set.edge.attribute(out, attrname = "weight", value = el[ , 3L])
+    network::set.edge.attribute(out, attrname = "weight", value = el[ , 3L])
   }
 
   out
@@ -169,33 +177,61 @@ build_test_args <- function() {
   apply(out, 1L, as.list)
 }
 
-# .rep_as_edgelist <- function(.x) {
-#   UseMethod(".rep_as_edgelist")
-# }
-# .rep_as_edgelist.igraph <- function(.x) {
-#   igraph::as_edgelist(.x)
-# }
-# 
-# .rep_as_edgelist.network <- function(.x) {
-#   network::as_edgelist(.x)
-# }
-
-el <- do.call(get_test_ig, test_args[[1]]) %>% igraph::as_edgelist()
-
-.sort_el <- function(.el) {
-  .el[order(.el[ , 1L], .el[ , 2L ]) , ]
+get_test_el_ig <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE,
+                           .diag = FALSE, .storage = c("int", "dbl")) {
+  .fetch_edgelist(get_test_ig(.directed = .directed, .bipartite = .bipartite,
+                              .weighted = .weighted, .diag = .diag))
 }
 
+get_test_el_nw <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE,
+                           .diag = FALSE, .storage = c("int", "dbl")) {
+  g <- get_test_nw(.directed = .directed, .bipartite = .bipartite,
+                   .weighted = .weighted, .diag = .diag)
+  out <- network::as.matrix.network.edgelist(g)
+  
+  attr(out, "n") <- NULL
+  attr(out, "vnames") <- NULL
+  
+  out
+}
+
+test_edgelists <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE,
+                                .diag = FALSE, .storage = c("int", "dbl")) {
+  target_el <- get_test_el(.directed = .directed, .bipartite = .bipartite,
+                           .weighted = .weighted, .diag = .diag)
+  
+  return(target_el)
+  test_el_nw <- .fetch_edgelist(get_test_ig(.directed = .directed, .bipartite = .bipartite,
+                                              .weighted = .weighted, .diag = .diag))
+  test_el_ig <- .fetch_edgelist(get_test_nw(.directed = .directed, .bipartite = .bipartite,
+                                              .weighted = .weighted, .diag = .diag))
+  
+  res <- .all_equal(target_el, test_el_ig, test_el_nw)
+  if (res) {
+    return(res)
+  }
+  
+  if (!.all_equal(target_el, test_el_nw)) {
+    return("network failed")
+  }
+  
+  if (!.all_equal(target_el, test_el_ig)) {
+    return("igraph failed")
+  }
+}
 
 test_all <- function() {
   test_args <- build_test_args()
-  # failures <- list()
   
   for (i in seq_along(test_args)) {
+    target_el <- do.call(get_test_el, test_args[[i]])
+    test_ig <- .fetch_edgelist(do.call(get_test_ig, test_args[[i]]))
+    test_nw <- .fetch_edgelist(do.call(get_test_nw, test_args[[i]]))
+    
     res <- .all_equal(
-      .sort_el(.fetch_edgelist(do.call(get_test_ig, test_args[[i]]))),
-      .sort_el(.fetch_edgelist(do.call(get_test_nw, test_args[[i]])))
+      target_el, test_ig, test_nw
     )
+    
     if (!res) {
       return(test_args[[i]])
     }

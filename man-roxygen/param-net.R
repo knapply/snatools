@@ -1,1 +1,1 @@
-#' @param .net network (`igraph`, `network`)
+#' @param .net network of class `igraph` or `network`.

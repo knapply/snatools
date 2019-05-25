@@ -2,7 +2,7 @@
 ^.*\.Rproj$
 ^\.travis\.yml$
 .Rprofile
-man-roxygen
+^man-roxygen$
 ^README\.Rmd$
 ^revdep$
 ^codecov\.yml$
@@ -14,4 +14,5 @@ man-roxygen
 ^\.github$
 ^\.Rproj\.user$
 ^_pkgdown\.yml$
-snatools
+^snatools$
+^playground$

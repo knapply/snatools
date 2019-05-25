@@ -11,6 +11,7 @@ Authors@R: c(person("Brendan", "Knapp",
 Description: A Toolkit for Social Network Analysis.
 Depends: R (>= 3.2.0)
 Imports:
+    glue,
     igraph,
     magrittr,
     network

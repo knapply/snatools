@@ -8,6 +8,19 @@ development:
   mode: unreleased
 
 reference:
+  - title: "Nodes"
+    contents:
+    - node_count
+    - node_get_attr
+    - node_get_names
+    - node_attr_exists
+    - node_get_attr_names
+  - title: "Edges"
+    contents:
+    - edge_count
+    - edge_get_attr
+    - edge_attr_exists
+    - edge_get_attr_names
   - title: "Utilities"
     contents:
       - starts_with("%")
