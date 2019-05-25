@@ -119,6 +119,7 @@
   TRUE
 }
 
+# matrices ==============================================================================
 .tri_upper <- function(.x, .diag = FALSE) {
   stopifnot(is.matrix(.x))
   .x[upper.tri(.x, diag = .diag)]
@@ -139,5 +140,36 @@
     .tri_upper(.x, .diag = .diag) == .tri_lower(.x, .diag = .diag)
   )
 }
+
+# mappers ===============================================================================
+.map <- function(.x, .f, ...) {
+  lapply(.x, .f, ...)
+}
+
+.map_num <- function(.x, .f, ...) {
+  vapply(X = .x, FUN = .f, FUN.VALUE = numeric(1L), ...)
+}
+
+.map_lgl <- function(.x, .f, ...) {
+  vapply(X = .x, FUN = .f, FUN.VALUE = logical(1L), ...)
+}
+
+# .map_dbl <- function(.x, .f, ...) {
+#   vapply(X = .x, FUN = .f, FUN.VALUE = double(1L), ...)
+# }
+# 
+# .map_int <- function(.x, .f, ...) {
+#   vapply(X = .x, FUN = .f, FUN.VALUE = integer(1L), ...)
+# }
+# 
+
+# 
+# .map_chr <- function(.x, .f, ...) {
+#   vapply(X = .x, FUN = .f, FUN.VALUE = character(1L), ...)
+# }
+
+
+
+
 
 

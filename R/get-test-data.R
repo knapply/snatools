@@ -7,6 +7,9 @@ get_test_mat <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE
   )
   
   if (.bipartite) {
+    .diag <- FALSE
+    .directed <- FALSE
+    
     out <- structure(
       c(1L, 1L, 0L, 1L, 0L, 1L,
         1L, 0L, 2L, 0L, 0L, 1L, 
@@ -38,7 +41,7 @@ get_test_mat <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE
 
   }
   
-  if (!.bipartite && !.diag) {
+  if (!.diag) {
     diag(out) <- 0L
   }
   
@@ -48,6 +51,7 @@ get_test_mat <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE
   
   if (!.directed) {
     out[] <- 0.5 * (out + t(out))
+    # out[lower.tri(out)] <- 0L
   }
 
   if (typeof(out) != .storage) {
@@ -57,129 +61,146 @@ get_test_mat <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE
   out
 }
 
-#' @importFrom igraph graph_from_adjacency_matrix graph_from_incidence_matrix
+el_from_adj_mat <- function(.adj_mat, .weighted = FALSE, ...) {
+  n_cols <- ifelse(.weighted, 3L, 2L)
+  
+  melted <- matrix(c(row(.adj_mat), col(.adj_mat), as.vector(.adj_mat)), ncol = 3L)
+  
+  melted[melted[, 3L] != 0, seq_len(n_cols)]
+}
+
+get_test_el <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE,
+                        .diag = FALSE, .storage = c("int", "dbl"), ...) {
+  if (.bipartite) {
+    .diag <- FALSE
+    .directed <- FALSE
+  }
+  
+  adj_mat <- get_test_mat(.directed = .directed, .bipartite = .bipartite,
+                          .weighted = .weighted, .diag = .diag)
+  out <- el_from_adj_mat(adj_mat, .weighted = .weighted, ...)
+  
+  # out[ , 1L:2L] <- cbind(
+  #   pmin.int(out[, 1L], out[, 2L]), pmax.int(out[, 1L], out[, 2L])
+  # )
+  
+  out
+}
+
+
+
+
 get_test_ig <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE, 
                         .diag = FALSE, ...) {
-  mat <- get_test_mat(.directed = .directed, .bipartite = .bipartite,
-                      .weighted = .weighted, .diag = .diag, ...)
-  .weighted <- .weighted %{F}% NULL
+  if (.bipartite) {
+    .diag <- FALSE
+    .directed <- FALSE
+  }
+  
+  el <- get_test_el(.directed = .directed, .bipartite = .bipartite, 
+                    .weighted = .weighted, .diag = .diag)
+  n_nodes <- length(unique(as.vector(el[ , 1L:2L])))
+  
+  out <- igraph::make_empty_graph(n = n_nodes, directed = .directed)
+  
+  if (.weighted) {
+    out <- igraph::add_edges(out, edges = t(el[ , 1L:2L]), 
+                             attr = list(weight = el[ , 3L]))
+  } else {
+    out <- igraph::add_edges(out, edges = t(el[ , 1L:2L]))
+  }
+  
+  if (.bipartite) {
+    out <- igraph::set_vertex_attr(
+      out, name = "type", value = c(rep(TRUE, n_nodes %/% 2), rep(FALSE, n_nodes %/%  2))
+    )
+  }
+  out
+}
+
+get_test_nw <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE, 
+                        .diag = FALSE, ...) {
+  el <- get_test_el(.directed = .directed, .bipartite = .bipartite, 
+                    .weighted = .weighted, .diag = .diag)
+  n_nodes <- length(unique(as.vector(el[ , 1L:2L])))
 
   if (.bipartite) {
-    graph_from_incidence_matrix(mat, directed = .directed, weighted = .weighted)
+    .diag <- FALSE
+    .directed <- FALSE
+    .bipartite <- n_nodes %/% 2
   } else {
-    graph_from_adjacency_matrix(mat, weighted = .weighted, diag = .diag)
+    .bipartite <- NULL
   }
+
+  out <- network::network.initialize(
+    n = n_nodes,  directed = .directed, loops = .diag,
+    hyper = FALSE, multiple = FALSE, bipartite = .bipartite
+  )
+
+  out <- network::add.edges.network(out,  head = el[ , 1L], tail = el[ , 2L])
+
+  if (.weighted) {
+    out <- network::set.edge.attribute(out, attrname = "weight", value = el[ , 3L])
+  }
+
+  out
 }
 
-get_test_nw <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE,
-                        .diag = FALSE, ...) {
-  mat <- get_test_mat(.directed = .directed, .bipartite = .bipartite,
-                      .weighted = .weighted, .diag = .diag, ...)
-  
-  bipartite_arg <- ifelse(.bipartite, ncol(mat), NULL)
-  loops_arg <- ifelse(.diag, TRUE, FALSE)
-  
-  out <- network::as.network.matrix(mat, directed = .directed, weighted = .weighted,
-                             bipartite = bipartite_arg, loops = loops_arg, 
-                             names.eval = "weight")
-  
-  # if (.weighted) {
-    # edge_weights <- 
-  # }
-  
-  # if (.bipartite) {
-  #   network::as.network.matrix(mat, directed = .directed, weighted = .weighted,
-  #                              bipartite = ncol(mat), loops = FALSE, 
-  #                              names.eval = "weight")
-  # } else {
-  #   network::as.network.matrix(mat, directed = .directed, loops = .diag)
-  # }
+
+
+
+.sort_edge_indices <- function(.x) {
+  cbind(
+    pmin(.x[, 1L], .x[, 2L]), pmax(.x[, 1L], .x[, 2L])
+  )
 }
 
-# big_mat <- igraph::random.graph.game(n = 1000, p.or.m = 0.15) %>% 
-#   igraph::as_adjacency_matrix()
-# 
-# 
-# el_from_adj_mat <- function(.adj_mat, .weighted = FALSE, .col_major = TRUE, ...) {
-#   if (!.weighted) {
-#     n_cols <- 2L
-#   } else {
-#     if (any(!.adj_mat %in% 0:1)) {
-#       n_cols <- 2L
-#     } else {
-#       n_cols <- 3L
-#     }
-#   }
-#   if (.col_major) {
-#     melted <- matrix(c(col(.adj_mat), row(.adj_mat), as.vector(.adj_mat)), ncol = 3L)
-#     
-#   } else {
-#     melted <- matrix(c(row(.adj_mat), col(.adj_mat), as.vector(.adj_mat)), ncol = 3L)
-#   }
-#   
-#   melted[melted[, 3L] != 0, seq_len(n_cols)]
+
+build_test_args <- function() {
+  init <- list(
+    list(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE, .diag = FALSE), 
+    list(.directed = FALSE, .bipartite = TRUE, .weighted = TRUE, .diag = TRUE)
+  )
+
+  out <- expand.grid(
+    do.call(rbind.data.frame, init)
+  )
+
+  apply(out, 1L, as.list)
+}
+
+# .rep_as_edgelist <- function(.x) {
+#   UseMethod(".rep_as_edgelist")
+# }
+# .rep_as_edgelist.igraph <- function(.x) {
+#   igraph::as_edgelist(.x)
 # }
 # 
-# microbenchmark::microbenchmark(
-#   el_from_adj_mat(big_mat),
-#   el_from_adj_mat(big_mat, .col_major = FALSE),
-#   times = 5
-#   # el_from_adj_mat(get_test_mat(.weighted = TRUE)),
-#   # el_from_adj_mat(get_test_mat(.weighted = TRUE), .col_major = FALSE)
-# )
-# 
-# el_from_adj_mat(get_test_mat(.weighted = TRUE))
-# 
-# get_test_nw(.bipartite = TRUE, .weighted = TRUE)
-#  
-# adj_mat <- get_test_mat(.weighted = TRUE)
-# 
-# edge_weights
-# 
-# nw <- adj_mat %>% 
-#   network::as.network.matrix(directed = TRUE)
-# 
-# nw_el <- nw %>% 
-#   network::as.matrix.network.edgelist() %>% 
-#   .[ order(.[ , 1], .[ , 2] ) , ] %>% 
-#   cbind(network::get.edge.attribute())
-# %>% 
-#   `attr<-`("vnames", NULL) %>% 
-#   `attr<-`("n", NULL)
-# 
-# ig_el <- adj_mat %>% 
-#   t() %>%
-#   igraph::graph_from_adjacency_matrix(weighted = TRUE, mode = "directed") %>% 
-#   igraph::as_data_frame() %>%
-#   as.matrix() %>%
-#   `dimnames<-`(NULL) %>% 
-#   .[ order(.[ , 1], .[ , 2] ) , ]
-# 
-# ig_el %>% head()
-# 
-# # ig_el[ order(ig_el[ , 1], ig_el[ , 2] ) , ] %>% head()
-# 
-# melted <- matrix(c(col(adj_mat), row(adj_mat), as.vector(adj_mat)), ncol = 3)
-# el <- melted[melted[, 3L] != 0, ]
-# el %>% head()
-# 
-# all.equal(ig_el, el)
-# 
-# # 
-# # nw_mat <- network::as.network.matrix(
-# #   get_test_mat(.bipartite = TRUE), bipartite = TRUE, names.eval = "weight"
-# # ) %>% 
-# #   network::as.matrix.network(attrname = "weight")
-# # 
-# # ig_mat <- get_test_ig(.bipartite = TRUE) %>% 
-# #   igraph::as_incidence_matrix(attr = NULL)
-# # 
-# # all.equal(nw_mat, ig_mat)
-#   # igraph::graph_from_incidence_matrix()
-# #   Matrix::isSymmetric()
+# .rep_as_edgelist.network <- function(.x) {
+#   network::as_edgelist(.x)
+# }
+
+el <- do.call(get_test_ig, test_args[[1]]) %>% igraph::as_edgelist()
+
+.sort_el <- function(.el) {
+  .el[order(.el[ , 1L], .el[ , 2L ]) , ]
+}
 
 
-
-
+test_all <- function() {
+  test_args <- build_test_args()
+  # failures <- list()
+  
+  for (i in seq_along(test_args)) {
+    res <- .all_equal(
+      .sort_el(.fetch_edgelist(do.call(get_test_ig, test_args[[i]]))),
+      .sort_el(.fetch_edgelist(do.call(get_test_nw, test_args[[i]])))
+    )
+    if (!res) {
+      return(test_args[[i]])
+    }
+  }
+  TRUE
+}
 
 
