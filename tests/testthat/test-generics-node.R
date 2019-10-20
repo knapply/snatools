@@ -86,4 +86,10 @@ test_that("node_attr_names() works", {
 })
 
 
-
+test_that("node_count() catches malformed <network>s", {
+  expect_error(
+    node_count(
+      network::delete.network.attribute(example_network(), "n")
+    )
+  )
+})
