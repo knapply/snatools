@@ -19,8 +19,8 @@ Suggests:
     pkgnet,
     testthat (>= 2.1.0),
     rmarkdown
-URL: https://github.com/knapply/snatoolbox, https://knapply.github.io/snatoolbox
-BugReports: https://github.com/knapply/snatoolbox/issues
+URL: https://github.com/knapply/snatools, https://knapply.github.io/snatools
+BugReports: https://github.com/knapply/snatools/issues
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
