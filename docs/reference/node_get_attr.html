@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pipe operator — %&gt;% • snatools</title>
+<title>Get Node Attributes — node_get_attr • snatools</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Pipe operator — %&gt;%" />
-<meta property="og:description" content="See magrittr::%&amp;gt;% for details." />
+<meta property="og:title" content="Get Node Attributes — node_get_attr" />
+<meta property="og:description" content="Get Node Attributes" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -115,23 +115,67 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Pipe operator</h1>
-    <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/utils-pipe.R'><code>R/utils-pipe.R</code></a></small>
-    <div class="hidden name"><code>pipe.Rd</code></div>
+    <h1>Get Node Attributes</h1>
+    <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/generics-node.R'><code>R/generics-node.R</code></a></small>
+    <div class="hidden name"><code>node_get_attr.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>See <code>magrittr::%&gt;%</code> for details.</p>
+    <p>Get Node Attributes</p>
     </div>
 
-    <pre class="usage"><span class='no'>lhs</span> <span class='kw'>%&gt;%</span> <span class='no'>rhs</span></pre>
+    <pre class="usage"><span class='fu'>node_get_attr</span>(<span class='no'>x</span>, <span class='no'>attr_name</span>, <span class='kw'>which_nodes</span> <span class='kw'>=</span> <span class='fu'><a href='seq_nodes.html'>seq_nodes</a></span>(<span class='no'>x</span>), <span class='no'>...</span>)
 
+<span class='co'># S3 method for igraph</span>
+<span class='fu'>node_get_attr</span>(<span class='no'>x</span>, <span class='no'>attr_name</span>, <span class='kw'>which_nodes</span> <span class='kw'>=</span> <span class='fu'><a href='seq_nodes.html'>seq_nodes</a></span>(<span class='no'>x</span>),
+  <span class='no'>...</span>)
 
+<span class='co'># S3 method for network</span>
+<span class='fu'>node_get_attr</span>(<span class='no'>x</span>, <span class='no'>attr_name</span>, <span class='kw'>which_nodes</span> <span class='kw'>=</span> <span class='fu'><a href='seq_nodes.html'>seq_nodes</a></span>(<span class='no'>x</span>),
+  <span class='kw'>auto_unlist</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p><code>&lt;igraph&gt;</code> or <code>&lt;network&gt;</code></p></td>
+    </tr>
+    <tr>
+      <th>attr_name</th>
+      <td><p><code>&lt;character&gt;</code> (scalar)</p></td>
+    </tr>
+    <tr>
+      <th>which_nodes</th>
+      <td><p><code>&lt;numeric&gt;</code> or <code>&lt;logical&gt;</code></p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Arguments passed to or from other methods.</p></td>
+    </tr>
+    <tr>
+      <th>auto_unlist</th>
+      <td><p>If possible, safely flatten the result to an atomic vector.</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p><code>atomic</code> <code>vector</code> or <code>&lt;list&gt;</code></p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>ig</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='example_igraph.html'>example_igraph</a></span>()
+<span class='fu'><a href='node_count.html'>node_count</a></span>(<span class='no'>ig</span>)</div><div class='output co'>#&gt; [1] 5</div><div class='input'>
+<span class='no'>nw</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='example_network.html'>example_network</a></span>()
+<span class='fu'><a href='node_count.html'>node_count</a></span>(<span class='no'>nw</span>)</div><div class='output co'>#&gt; [1] 5</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

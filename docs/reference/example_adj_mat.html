@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pipe operator — %&gt;% • snatools</title>
+<title>Build an Example Adjacency Matrix — example_adj_mat • snatools</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Pipe operator — %&gt;%" />
-<meta property="og:description" content="See magrittr::%&amp;gt;% for details." />
+<meta property="og:title" content="Build an Example Adjacency Matrix — example_adj_mat" />
+<meta property="og:description" content="Build an Example Adjacency Matrix" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -115,25 +115,67 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Pipe operator</h1>
-    <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/utils-pipe.R'><code>R/utils-pipe.R</code></a></small>
-    <div class="hidden name"><code>pipe.Rd</code></div>
+    <h1>Build an Example Adjacency Matrix</h1>
+    <small class="dont-index">Source: <a href='https://github.com/knapply/snatools/blob/master/R/example-structures.R'><code>R/example-structures.R</code></a></small>
+    <div class="hidden name"><code>example_adj_mat.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>See <code>magrittr::%&gt;%</code> for details.</p>
+    <p>Build an Example Adjacency Matrix</p>
     </div>
 
-    <pre class="usage"><span class='no'>lhs</span> <span class='kw'>%&gt;%</span> <span class='no'>rhs</span></pre>
+    <pre class="usage"><span class='fu'>example_adj_mat</span>(<span class='kw'>directed</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>loops</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>directed</th>
+      <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1L)</a></code>, default: <code>FALSE</code></p></td>
+    </tr>
+    <tr>
+      <th>loops</th>
+      <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1L)</a></code>, default: <code>FALSE</code></p></td>
+    </tr>
+    </table>
 
 
-
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>example_adj_mat</span>()</div><div class='output co'>#&gt;      [,1] [,2] [,3] [,4] [,5]
+#&gt; [1,]    0    0    1    0    1
+#&gt; [2,]    0    0    0    0    0
+#&gt; [3,]    1    0    0    1    1
+#&gt; [4,]    0    0    1    0    0
+#&gt; [5,]    1    0    1    0    0</div><div class='input'>
+<span class='fu'>example_adj_mat</span>(<span class='kw'>directed</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;      [,1] [,2] [,3] [,4] [,5]
+#&gt; [1,]    0    0    1    1    1
+#&gt; [2,]    0    0    1    1    0
+#&gt; [3,]    1    0    0    1    1
+#&gt; [4,]    0    0    1    0    0
+#&gt; [5,]    1    1    1    0    0</div><div class='input'>
+<span class='fu'>example_adj_mat</span>(<span class='kw'>loops</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;      [,1] [,2] [,3] [,4] [,5]
+#&gt; [1,]    1    0    1    0    1
+#&gt; [2,]    0    1    0    0    0
+#&gt; [3,]    1    0    1    1    1
+#&gt; [4,]    0    0    1    1    0
+#&gt; [5,]    1    0    1    0    1</div><div class='input'>
+<span class='fu'>example_adj_mat</span>(<span class='kw'>directed</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>loops</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt;      [,1] [,2] [,3] [,4] [,5]
+#&gt; [1,]    1    0    1    1    1
+#&gt; [2,]    0    1    1    1    0
+#&gt; [3,]    1    0    1    1    1
+#&gt; [4,]    0    0    1    1    0
+#&gt; [5,]    1    1    1    0    1</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
+    <h2>Author</h2>
+    <p>Brendan Knapp <a href='mailto:brendan.g.knapp@gmail.com'>brendan.g.knapp@gmail.com</a></p>
   </div>
 </div>
 

@@ -1,7 +1,12 @@
 ---
-output: 
+output:
   github_document:
-    html_preview: false
+    html_preview: true
+  html_document:
+    keep_md: yes
+always_allow_html: yes
+editor_options: 
+  chunk_output_type: console
 ---
 
 <!-- README.Rmd generates README.md. -->
@@ -11,162 +16,41 @@ knitr::opts_chunk$set(
   # collapse = TRUE,
   fig.align = "center",
   comment = "#>",
-  fig.path = "man/figures/"
+  fig.path = "man/figures/",
+  message = FALSE,
+  warning = FALSE
 )
+
+# options(width = 400)
 ```
 
 
+# `{snatools}`
 
-# snatools <a href="http://res.cloudinary.com/syknapptic/image/upload/v1537658876/logo_bnrvvg.png"> <img src="http://res.cloudinary.com/syknapptic/image/upload/v1537658876/logo_bnrvvg.png" align="right" height="24%" width="24%" href="http://res.cloudinary.com/syknapptic/image/upload/v1537658876/logo_bnrvvg.png"/> </a>
-
+<!-- badges: start -->
 [![Lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![GitHub last commit](https://img.shields.io/github/last-commit/knapply/snatools.svg)](https://github.com/knapply/snatools/commits/master)
+[![Codecov test coverage](https://codecov.io/gh/knapply/snatools/branch/master/graph/badge.svg)](https://codecov.io/gh/knapply/snatools?branch=master)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/knapply/snatools?branch=master&svg=true)](https://ci.appveyor.com/project/knapply/snatools)
 [![Travis-CI Build Status](https://travis-ci.org/knapply/snatools.svg?branch=master)](https://travis-ci.org/knapply/snatools)
-[![codecov](https://codecov.io/gh/knapply/snatools/branch/master/graph/badge.svg)](https://codecov.io/gh/knapply/snatools)
-[![Depends](https://img.shields.io/badge/Depends-GNU_R>=3.2-blue.svg)](https://www.r-project.org/)
-
-<!-- [![GitHub Downloads](https://img.shields.io/github/downloads/knapply/snatools/total.svg)](https://github.com/knapply/snatools) -->
-
-## Overview
-
-`snatools` is still _very_ experimental; the current API and dependencies are subject to change.
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Depends](https://img.shields.io/badge/Depends-GNU_R>=3.5-blue.svg)](https://www.r-project.org/)
+[![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/knapply/snatools.svg)](https://github.com/knapply/snatools)
+[![HitCount](http://hits.dwyl.io/knapply/snatools.svg)](http://hits.dwyl.io/knapply/snatools)
+<!-- badges: end -->
 
 
-`snatools` has four immediate goals meant to increase analyst efficiency and reduce the cognitive load of network newcomers (and those instructing them):
 
-1. Accurately bridge existing graph frameworks (i.e. `igraph` and `network`).
-2. Streamline network analytic workflows by making common tasks as intuitive (and stable) as possible.
-3. Implement metrics that are missing from R's network ecosystem.
-    + Reimplement those that _should_ be made more accessible, efficient, or robust.
-4. Standardize fundamental tasks with methods that bypass the issues of `igraph` vs `network` namespace conflicts.
-
-
-<!-- Additionally, `snatools` seeks to prepare for the future by establishing the foundation (or a set of lessons-learned) for an enhanced network framework that: -->
-
-<!-- 1. continues to be compatible with legacy frameworks. -->
-<!-- 2. can be extended to take advantage of modern and future R's ecosystem . -->
-<!--     + Optimization? `Rcpp`, C++'s Boost Graph Library, Python's graph-tool (heavily C++), CUDA -->
-<!--     + Data Frame Efficiency? `data.table` -->
-<!--     + Spatial Vector Data? `sf` -->
-<!--     + Intuitive Code? `tidyverse`  -->
-<!--         + `tidygraph` and `ggraph` may still be maturing, but they've rendered many legacy workflows for graph manipulation and plotting obsolete. -->
-<!--     + Next Generation Tools? [Apache Arrow](https://arrow.apache.org/) is coming. -->
-
-
-## Installation
+# Installation
 
 ```{r, eval=FALSE}
-# install.packages("devtools")
-devtools::install_github("knapply/snatools")
-
-library(snatools)
+# install.packages("remotes")
+remotes::install_github("knapply/snatools")
 ```
 
-```{r, echo=FALSE}
-library(snatools)
-```
+If you happened to use the old (before 20 October 2019) version, you can still install it like so:
 
-## Features
-
-### Simple, Accurate Conversion Between Frameworks
-
-`snatools` allows `igraph` and `network` to play together better than ever.
-
-`igraph` objects can be easily converted to `network` objects...
-
-```{r}
-crisis_in_cloister %>% # an igraph object
-  as_network()
-```
-
-... and back again.
-
-```{r}
-crisis_in_cloister %>% 
-  as_network() %>% 
-  as_igraph()
-```
-
-The same goes for bipartite graphs.
-
-```{r}
-southern_women %>% # igraph to network
-  as_network()
-```
-
-
-Additionally, everything in `snatools` was designed from the ground-up to work with both `igraph` and `network` objects.
-
-## Modern Subsetting
-
-```{r}
-crisis_in_cloister %>% 
-  edg_subset(time == 3 & affect > 0) %>% 
-  vrt_subset(cloisterville)
-```
-
-
-## Standardized Representations
-
-The essential graph `rep_`resentations are all available.
-
-* Adjacency Lists
-
-```{r}
-florence %>% 
-  edg_subset(relation == "marriage") %>% 
-  rep_as_adj_list()
-```
-
-* Edge Lists
-
-```{r}
-jemmah_islamiyah %>% 
-  rep_as_edgelist() %>% 
-  head()
-```
-
-* Adjacency Matrices
-
-```{r}
-crisis_in_cloister %>%
-  edg_subset(time == 2) %>% 
-  rep_as_adj_matrix(edg_attr = "affect") %>% 
-  `rownames<-`(regmatches(rownames(.), regexpr("^\\w{,4}", rownames(.)))) %>% 
-  `colnames<-`(rep("", ncol(.)))
-```
-
-Along with others that are less common.
-
-* Mixing Matrices
-
-```{r}
-data("samplk", package = "ergm")
-
-samplk1 %>%
-  rep_as_mixing_matrix(vrt_attr = "group")
-```
-
-## Data Frame Methods
-
-Modern R is all about data frames, so using them in network analysis should be easy.
-
-`tibble`s are the focus as the `statnet` suite already imports `tidyverse` packages.
-
-```{r}
-crisis_in_cloister %>% 
-  vrt_as_df()
-
-crisis_in_cloister %>% 
-  edg_as_df()
-```
-
-## More Metrics
-
-```{r}
-library(ggplot2)
-
-samplk1 %>% 
-  ei_index(vrt_attr = "group", scope = "vertex") %>% 
-  autoplot()
+```{r, eval=FALSE}
+remotes::install_github("knapply/snatools@OLD")
 ```
 
