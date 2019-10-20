@@ -28,3 +28,10 @@ bytes](https://img.shields.io/github/languages/code-size/knapply/snatools.svg)](
 # install.packages("remotes")
 remotes::install_github("knapply/snatools")
 ```
+
+If you happened to use the old (before 20 October 2019) version, you can
+still install it like so:
+
+``` r
+remotes::install_github("knapply/snatools@OLD")
+```
