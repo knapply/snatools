@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pipe operator — %&gt;% • snatools</title>
+<title>How Many Nodes Are There? — node_count • snatools</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Pipe operator — %&gt;%" />
-<meta property="og:description" content="See magrittr::%&amp;gt;% for details." />
+<meta property="og:title" content="How Many Nodes Are There? — node_count" />
+<meta property="og:description" content="How Many Nodes Are There?" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -115,25 +115,53 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Pipe operator</h1>
-    <small class="dont-index">Source: <a href='https://github.com/knapply/snatoolbox/blob/master/R/utils-pipe.R'><code>R/utils-pipe.R</code></a></small>
-    <div class="hidden name"><code>pipe.Rd</code></div>
+    <h1>How Many Nodes Are There?</h1>
+    <small class="dont-index">Source: <a href='https://github.com/knapply/snatoolbox/blob/master/R/generics-node.R'><code>R/generics-node.R</code></a></small>
+    <div class="hidden name"><code>node_count.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>See <code>magrittr::%&gt;%</code> for details.</p>
+    <p>How Many Nodes Are There?</p>
     </div>
 
-    <pre class="usage"><span class='no'>lhs</span> <span class='kw'>%&gt;%</span> <span class='no'>rhs</span></pre>
+    <pre class="usage"><span class='fu'>node_count</span>(<span class='no'>x</span>)
 
+<span class='co'># S3 method for igraph</span>
+<span class='fu'>node_count</span>(<span class='no'>x</span>)
 
+<span class='co'># S3 method for network</span>
+<span class='fu'>node_count</span>(<span class='no'>x</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p><code>&lt;igraph&gt;</code> or <code>&lt;network&gt;</code></p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p><code>&lt;integer&gt;</code></p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>ig</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='example_igraph.html'>example_igraph</a></span>()
+<span class='fu'>node_count</span>(<span class='no'>ig</span>)</div><div class='output co'>#&gt; [1] 5</div><div class='input'>
+<span class='no'>nw</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='example_network.html'>example_network</a></span>()
+<span class='fu'>node_count</span>(<span class='no'>nw</span>)</div><div class='output co'>#&gt; [1] 5</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
+    <h2>Author</h2>
+    <p>Brendan Knapp <a href='mailto:brendan.g.knapp@gmail.com'>brendan.g.knapp@gmail.com</a></p>
   </div>
 </div>
 

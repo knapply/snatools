@@ -1,94 +1,9 @@
-url: https://knapply.github.io/snatools
-
-authors:
-  Brendan Knapp:
-    href: https://syknapptic.netlify.com
-    
-template:
-  params:
-    bootswatch: cosmo
-    ganalytics: UA-115043043-6
+destination: docs
 
 development:
   mode: unreleased
 
-reference:
-  - title: snatools
-    contents: 
-    - snatools-package
-
-  - title: Class Conversion
-    desc: Safely convert objects between graph classes.
-    contents:
-    - as_igraph
-    - as_network
-  
-  - title: Vertices
-    desc: Routines targeting vertices and their attributes.
-    contents:
-    - vrt_as_df
-    - vrt_attr_names
-    - vrt_get_attr
-    - vrt_get_names
-    - vrt_subset
-    
-  - title: Edges
-    desc: Routines targeting edges and their attributes.
-    contents:
-    - edg_as_df
-    - edg_attr_names
-    - edg_get_attr
-    - edg_subset
-
-#  - title: Network Attributes
-#    desc: Routines targeting non-structural network attributes.
-#    contents:
-#    - net_attr_names
-#    - net_get_attr
-#    - net_attrs_to_list
-    
-  - title: Structural Metadata
-    desc: Routines targeting structural graph metadata.
-    contents:
-    - net_is_directed
-    - net_is_multiplex
-    - net_is_bipartite
-    - net_count_vertices
-    - net_count_edges
-    - net_count_actors
-    - net_has_loops
-    - net_has_isolates
-
-  - title: Representations
-    desc: Construct various network representations.
-    contents:
-    - rep_as_edgelist
-    - rep_as_adj_matrix
-    - rep_as_adj_list
-    - rep_as_mixing_matrix
-    
-#  - title: Global Metrics
-#    desc: Routines calculating graph-level indices.
-#    contents:
-#    - calc_net_density
-  
-  - title: Metrics
-    desc: Routines calculating various indices.
-    contents: 
-    - ei_index
-    
-  - title: Data
-    desc: Datasets included in the package.
-    contents:
-    - crisis_in_cloister
-    - florence
-    - southern_women
-    - jemmah_islamiyah
-
-navbar:
-  right:
-    - icon: fa-twitter
-      href: https://twitter.com/knapply_
-    - icon: fa-github fa-lg
-      href: https://github.com/knapply/snatools
-  
+template:
+  params:
+    bootswatch: cerulean
+    ganalytics: UA-115043043-6

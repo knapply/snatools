@@ -1,36 +1,28 @@
 Package: snatools
-Title: A Toolkit to Bridge Graph Frameworks and Streamline Network Analysis
+Title: Tools for Social Network Analysis
 Version: 0.0.0.9000
-Authors@R: person("Brendan", "Knapp", email = "brendan.g.knapp@gmail.com", role = c("aut", "cre"),
-                  comment = c(ORCID = "0000-0003-3284-4972"))
-Description: A consistent toolkit that conveniently connects existing graph structures 
-    (i.e. igraph and network), makes network workflows more intuitive, and provides 
-    metrics missing from R's network analysis ecosystem.
-Depends: R (>= 3.3.0)
+Authors@R:
+    person("Brendan", "Knapp",
+           email = "brendan.g.knapp@gmail.com",
+           role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0003-3284-4972"))
+Description: A collection of generic tools for Social Network Analysis.
+License: GPL-3 + file LICENSE
+Depends: R (>= 3.3)
 Imports:
-    glue,
+    data.table,
     igraph,
-    magrittr,
-    methods,
-    network,
-    rlang,
-    tibble
+    network
 Suggests:
     covr,
-    ergm,
-    ggplot2,
-    igraphdata,
     knitr,
-    networkDynamic,
-    rmarkdown,
-    testthat,
-    tidygraph,
-    utils
-License: GPL-3 + file LICENSE
+    pkgnet,
+    testthat (>= 2.1.0),
+    rmarkdown
+URL: https://github.com/knapply/snatoolbox, https://knapply.github.io/snatoolbox
+BugReports: https://github.com/knapply/snatoolbox/issues
 Encoding: UTF-8
-URL: https://github.com/knapply/snatools, https://knapply.github.io/snatools
-BugReports: https://github.com/knapply/snatools/issues
-LazyData: yes
+LazyData: true
 RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr

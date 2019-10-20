@@ -8,21 +8,25 @@
 
 <title>Function reference • snatools</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,7 +34,9 @@
 
 
 
+
 <meta property="og:title" content="Function reference" />
+
 
 
 
@@ -53,6 +59,7 @@
 
   gtag('config', 'UA-115043043-6');
 </script>
+
 
   </head>
 
@@ -78,37 +85,18 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/tests_and_coverage.html">Tests and Coverage</a>
-    </li>
-  </ul>
-</li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://twitter.com/knapply_">
-    <span class="fa fa-twitter"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="https://github.com/knapply/snatools">
-    <span class="fa fa-github fa-lg"></span>
+  <a href="https://github.com/knapply/snatoolbox">
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -119,6 +107,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -138,240 +127,58 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-snatools" class="hasAnchor"><a href="#section-snatools" class="anchor"></a>snatools</h2>
+          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
       <tr>
         
         <td>
-          <p><code><a href="snatools.html">snatools</a></code> </p>
+          <p><code><a href="example_adj_mat.html">example_adj_mat()</a></code> </p>
         </td>
-        <td><p>snatools: An R toolkit to bridge graph classes and streamline network analytic workflows.</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-class-conversion" class="hasAnchor"><a href="#section-class-conversion" class="anchor"></a>Class Conversion</h2>
-          <p class="section-desc"><p>Safely convert objects between graph classes.</p></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="as_igraph.html">as_igraph()</a></code> </p>
-        </td>
-        <td><p>Conversion to <code>igraph</code> objects.</p></td>
+        <td><p>Build an Example Adjacency Matrix</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="as_network.html">as_network()</a></code> </p>
+          <p><code><a href="example_igraph.html">example_igraph()</a></code> </p>
         </td>
-        <td><p>Conversion to <code>network</code> objects.</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-vertices" class="hasAnchor"><a href="#section-vertices" class="anchor"></a>Vertices</h2>
-          <p class="section-desc"><p>Routines targeting vertices and their attributes.</p></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="vrt_as_df.html">vrt_as_df()</a></code> </p>
-        </td>
-        <td><p>Extract all vertex attributes as a data frame.</p></td>
+        <td><p>Build an Example <code>&lt;igraph&gt;</code></p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="vrt_attr_names.html">vrt_attr_names()</a></code> </p>
+          <p><code><a href="example_network.html">example_network()</a></code> </p>
         </td>
-        <td><p>Get Vertex Attribute Names</p></td>
+        <td><p>Build an Example <code>&lt;network&gt;</code></p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="vrt_get_attr.html">vrt_get_attr()</a></code> </p>
+          <p><code><a href="node_attr_names.html">node_attr_names()</a></code> </p>
         </td>
-        <td><p>Get a Vertex Attribute</p></td>
+        <td><p>Get the Names of Node Attributes</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="vrt_get_names.html">vrt_get_names()</a></code> </p>
+          <p><code><a href="node_count.html">node_count()</a></code> </p>
         </td>
-        <td><p>Get Vertex Names</p></td>
+        <td><p>How Many Nodes Are There?</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="vrt_subset.html">vrt_subset()</a></code> </p>
+          <p><code><a href="node_get_attr.html">node_get_attr()</a></code> </p>
         </td>
-        <td><p>Subset by Vertices</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-edges" class="hasAnchor"><a href="#section-edges" class="anchor"></a>Edges</h2>
-          <p class="section-desc"><p>Routines targeting edges and their attributes.</p></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="edg_as_df.html">edg_as_df()</a></code> </p>
-        </td>
-        <td><p>Extract edge attributes as a data frame.</p></td>
+        <td><p>Get Node Attributes</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="edg_attr_names.html">edg_attr_names()</a></code> </p>
+          <p><code><a href="node_get_names.html">node_get_names()</a></code> </p>
         </td>
-        <td><p>Get Edge Attribute Names</p></td>
+        <td><p>Get Node Names</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="edg_get_attr.html">edg_get_attr()</a></code> </p>
+          <p><code><a href="seq_nodes.html">seq_nodes()</a></code> </p>
         </td>
-        <td><p>Get a Specific Edge Attribute</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="edg_subset.html">edg_subset()</a></code> </p>
-        </td>
-        <td><p>Subset by Edges</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-structural-metadata" class="hasAnchor"><a href="#section-structural-metadata" class="anchor"></a>Structural Metadata</h2>
-          <p class="section-desc"><p>Routines targeting structural graph metadata.</p></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="net_is_directed.html">net_is_directed()</a></code> </p>
-        </td>
-        <td><p>Is a Graph Directed?</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="net_is_multiplex.html">net_is_multiplex()</a></code> </p>
-        </td>
-        <td><p>Is a Graph Multiplex?</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="net_is_bipartite.html">net_is_bipartite()</a></code> </p>
-        </td>
-        <td><p>Is a Graph Bipartite?</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="net_count_vertices.html">net_count_vertices()</a></code> </p>
-        </td>
-        <td><p>How Many Vertices Does a Graph Have?</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="net_count_edges.html">net_count_edges()</a></code> </p>
-        </td>
-        <td><p>How Many Edges Does a Graph Have?</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="net_count_actors.html">net_count_actors()</a></code> </p>
-        </td>
-        <td><p>How Many Vertices Belong to a Bipartite Graph's Actor Mode?</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="net_has_loops.html">net_has_loops()</a></code> </p>
-        </td>
-        <td><p>Does a Graph Have Loops?</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="net_has_isolates.html">net_has_isolates()</a></code> </p>
-        </td>
-        <td><p>Does a Graph Have Isolates?</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-representations" class="hasAnchor"><a href="#section-representations" class="anchor"></a>Representations</h2>
-          <p class="section-desc"><p>Construct various network representations.</p></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="rep_as_edgelist.html">rep_as_edgelist()</a></code> </p>
-        </td>
-        <td><p>Construct a graph object's edgelist representation.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rep_as_adj_matrix.html">rep_as_adj_matrix()</a></code> </p>
-        </td>
-        <td><p>Construct a graph object's edgelist representation.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rep_as_adj_list.html">rep_as_adj_list()</a></code> </p>
-        </td>
-        <td><p>Construct a graph object's adjacency list representation.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rep_as_mixing_matrix.html">rep_as_mixing_matrix()</a></code> </p>
-        </td>
-        <td><p>Construct a graph object's mixing matrix.</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-metrics" class="hasAnchor"><a href="#section-metrics" class="anchor"></a>Metrics</h2>
-          <p class="section-desc"><p>Routines calculating various indices.</p></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="ei_index.html">ei_index()</a></code> <code><a href="ei_index.html">autoplot.ei_index()</a></code> </p>
-        </td>
-        <td><p>Krackhardt's E-I Index</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-data" class="hasAnchor"><a href="#section-data" class="anchor"></a>Data</h2>
-          <p class="section-desc"><p>Datasets included in the package.</p></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="crisis_in_cloister.html">crisis_in_cloister</a></code> </p>
-        </td>
-        <td><p>Sampson's Monastery</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="florence.html">florence</a></code> </p>
-        </td>
-        <td><p>Padgett's Florentine Families</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="southern_women.html">southern_women</a></code> </p>
-        </td>
-        <td><p>Davis' Southern Women (Deep South)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="jemmah_islamiyah.html">jemmah_islamiyah</a></code> </p>
-        </td>
-        <td><p>Koschade's Jemaah Islamiyah (2002 Bali Bombings)</p></td>
+        <td><p>Get a Sequence of Nodes for Indexing</p></td>
       </tr>
     </tbody>
     </table>
@@ -380,31 +187,28 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-snatools">snatools</a></li>
-      <li><a href="#section-class-conversion">Class Conversion</a></li>
-      <li><a href="#section-vertices">Vertices</a></li>
-      <li><a href="#section-edges">Edges</a></li>
-      <li><a href="#section-structural-metadata">Structural Metadata</a></li>
-      <li><a href="#section-representations">Representations</a></li>
-      <li><a href="#section-metrics">Metrics</a></li>
-      <li><a href="#section-data">Data</a></li>
+      <li><a href="#section-all-functions">All functions</a></li>
     </ul>
   </div>
 </div>
 
+
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='https://syknapptic.netlify.com'>Brendan Knapp</a>.</p>
+  <p>Developed by Brendan Knapp.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

@@ -1,15 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^man-roxygen$
 ^_pkgdown\.yml$
 ^docs$
-^\.build-all\.R$
-^README\.Rmd$
-^README\.md$
-^codecov\.yml$
-^LICENSE\.md$
-^data-raw$
-^\.travis\.yml$
-^\.github$
-^tests/potential-trash$
-^man-roxygen$
-^datasets$
+^pkgdown$
