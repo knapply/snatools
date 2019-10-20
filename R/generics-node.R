@@ -96,7 +96,7 @@ node_get_attr.igraph <- function(x, attr_name, which_nodes = seq_nodes(x), ...) 
 #' @export
 node_get_attr.network <- function(x, attr_name, which_nodes = seq_nodes(x),
                                   auto_unlist = TRUE, ...) {
-  if (!is.logical(auto_unlist)) {
+  if (!auto_unlist %in% c(TRUE, FALSE)) {
     stop("`auto_unlist` must be either `TRUE` or `FALSE`.", call. = FALSE)
   }
 
