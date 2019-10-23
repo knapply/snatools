@@ -13,9 +13,9 @@
 .nap_int <- function(.x, .f, ..., nm = TRUE) {
   vapply(.x, .f, FUN.VALUE = integer(1L), ..., USE.NAMES = nm)
 }
-# .nap_dbl <- function(.x, .f, ..., nm = TRUE) {
-#   vapply(.x, .f, FUN.VALUE = double(1L), ..., USE.NAMES = nm)
-# }
+.nap_dbl <- function(.x, .f, ..., nm = TRUE) {
+  vapply(.x, .f, FUN.VALUE = double(1L), ..., USE.NAMES = nm)
+}
 .nap_chr <- function(.x, .f, ..., nm = TRUE) {
   vapply(.x, .f, FUN.VALUE = character(1L), ..., USE.NAMES = nm)
 }
@@ -35,3 +35,16 @@
 #   stopifnot(is.atomic(.x))
 #   length(.x[!duplicated(.x)]) == 1L
 # }
+
+.stop <- function(...) {
+  stop(..., call. = FALSE)
+}
+
+.apply_rows <- function(.x, .f, ...)  {
+  t(apply(.x, MARGIN = 1L, .f, ...))
+}
+
+.is_empty <- function(.x) {
+  length(.x) == 0L
+}
+

@@ -20,6 +20,14 @@ node_get_names(x, ...)
 \description{
 Get Node Names
 }
+\examples{
+ig <- example_igraph()
+node_get_names(ig)
+
+nw <- example_network()
+node_get_names(nw)
+
+}
 \author{
 Brendan Knapp \email{brendan.g.knapp@gmail.com}
 }

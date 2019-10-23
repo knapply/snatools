@@ -4,7 +4,8 @@
 \alias{example_igraph}
 \title{Build an Example \code{<igraph>}}
 \usage{
-example_igraph(directed = FALSE, loops = FALSE)
+example_igraph(directed = FALSE, loops = FALSE,
+  initial_rep = c("adj_mat", "el"))
 }
 \arguments{
 \item{directed}{\code{logical(1L)}, default: \code{FALSE}}

@@ -16,16 +16,49 @@
 #'
 #' @export
 example_adj_mat <- function(directed = FALSE, loops = FALSE) {
-  init <- structure(c(0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1,
+  out <- structure(c(0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1,
                       1, 0, 0, 1, 0, 1, 0, 0), .Dim = c(5L, 5L))
   if (loops) {
-    diag(init) <- 1
+    diag(out) <- 1
   }
   if (directed) {
-    return(init)
+    return(out)
   }
-  init[] <- init + t(init)
-  init %/% 2
+  out[] <- out + t(out)
+  out %/% 2
+}
+
+#' Build an Example Edge List
+#'
+#' @template param-directed
+#' @template param-loops
+#'
+#' @template author-bk
+#'
+#' @examples
+#' example_el()
+#'
+#' example_el(directed = TRUE)
+#'
+#' example_el(loops = TRUE)
+#'
+#' example_el(directed = TRUE, loops = TRUE)
+#'
+#' @export
+example_el <- function(directed = FALSE, loops = FALSE) {
+  if (directed && !loops) {
+    structure(c(3, 5, 5, 1, 2, 4, 5, 1, 2, 3, 1, 3, 1, 1, 2, 3, 3,
+                3, 3, 4, 4, 4, 5, 5), .Dim = c(12L, 2L))
+  } else if (directed && loops) {
+    structure(c(1, 3, 5, 2, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 1, 3, 5,
+                1, 1, 1, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5),
+              .Dim = c(17L, 2L))
+  } else if (!directed && !loops) {
+    structure(c(1, 1, 3, 3, 3, 5, 4, 5), .Dim = c(4L, 2L))
+  } else if (!directed && loops) {
+    structure(c(1, 1, 1, 2, 3, 3, 3, 4, 5, 1, 3, 5, 2, 3, 4, 5, 4,
+                5), .Dim = c(9L, 2L))
+  }
 }
 
 
@@ -43,13 +76,27 @@ example_adj_mat <- function(directed = FALSE, loops = FALSE) {
 #'
 #' example_igraph(directed = TRUE, loops = TRUE)
 #'
-#' @importFrom igraph ecount edge_attr<- graph_from_adjacency_matrix vertex_attr<-
+#' @importFrom igraph ecount edge_attr<- graph_from_adjacency_matrix
+#' @importFrom igraph graph_from_edgelist vertex_attr<-
 #' @export
-example_igraph <- function(directed = FALSE, loops = FALSE) {
-  out <- graph_from_adjacency_matrix(
-    adjmatrix = example_adj_mat(directed, loops),
-    mode = if (directed) "directed" else "undirected"
+example_igraph <- function(directed = FALSE, loops = FALSE,
+                           initial_rep = c("adj_mat", "el")) {
+  initial_rep <- match.arg(initial_rep, c("adj_mat", "el"))
+
+  out <- switch (initial_rep,
+    "adj_mat" = graph_from_adjacency_matrix(
+                  adjmatrix = example_adj_mat(directed, loops),
+                  mode = if (directed) "directed" else "undirected"
+                )
+    ,
+    "el" = graph_from_edgelist(
+            el = example_el(directed = directed, loops = loops),
+            directed = directed
+            )
+    ,
+    stop("Unknown `initial_rep`.", call. = FALSE)
   )
+
   vertex_attr(out, "color") <- c(
     "red", "yellow", "green", "lightblue", "salmon"
   )
@@ -89,14 +136,35 @@ example_igraph <- function(directed = FALSE, loops = FALSE) {
 #' @importFrom network as.network.matrix network.edgecount network.size
 #' @importFrom network set.edge.attribute set.vertex.attribute
 #' @export
-example_network <- function(directed = FALSE, loops = FALSE) {
-  out <- as.network.matrix(
-    x = example_adj_mat(directed, loops),
-    matrix.type = "adjacency",
-    directed = directed,
-    loops = loops,
-    hyper = FALSE,
-    multiple = FALSE
+example_network <- function(directed = FALSE, loops = FALSE,
+                            initial_rep = c("adj_mat", "el")) {
+  initial_rep = match.arg(initial_rep, c("adj_mat", "el"))
+
+  out <- switch (initial_rep,
+    # "adj_mat" = as.network.matrix(
+    #               x = example_adj_mat(directed, loops),
+    #               matrix.type = "adjacency",
+    #               directed = directed,
+    #               loops = loops,
+    #               hyper = FALSE,
+    #               multiple = FALSE
+    #             )
+    "adj_mat" = adj_mat_as_network(
+                  x = example_adj_mat(directed, loops),
+                  directed = directed
+                )
+    ,
+    "el" = as.network.matrix(
+            x = example_adj_mat(directed, loops),
+            # TODO why does matrix.type="edgelist" fail with ...
+                    # Error in add.edges.network(g, as.list(x[, 1]), as.list(x[, 2]), edge.check = edge.check) :
+                      # (edge check) Illegal vertex reference in addEdges_R.  Exiting.
+            # matrix.type = "edgelist",
+            directed = directed,
+            loops = loops,
+            hyper = FALSE,
+            multiple = FALSE
+          )
   )
 
   set.vertex.attribute(

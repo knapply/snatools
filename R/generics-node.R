@@ -150,6 +150,10 @@ node_get_names <- function(x, ...) {
 
 #' @rdname node_get_names
 #'
+#' @examples
+#' ig <- example_igraph()
+#' node_get_names(ig)
+#'
 #' @importFrom igraph vertex_attr
 #'
 #' @export
@@ -163,7 +167,9 @@ node_get_names.igraph <- function(x, ...) {
 
 #' @rdname node_get_names
 #'
-#' @importFrom igraph vertex_attr
+#' @examples
+#' nw <- example_network()
+#' node_get_names(nw)
 #'
 #' @export
 node_get_names.network <- function(x, ...) {

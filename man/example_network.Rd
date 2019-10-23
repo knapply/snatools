@@ -4,7 +4,8 @@
 \alias{example_network}
 \title{Build an Example \code{<network>}}
 \usage{
-example_network(directed = FALSE, loops = FALSE)
+example_network(directed = FALSE, loops = FALSE,
+  initial_rep = c("adj_mat", "el"))
 }
 \arguments{
 \item{directed}{\code{logical(1L)}, default: \code{FALSE}}
